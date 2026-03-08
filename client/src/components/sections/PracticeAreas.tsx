@@ -35,36 +35,42 @@ function PracticeCard({
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.4) }}
       data-testid={`practice-card-${index}`}
-      className="group relative p-7 lg:p-8 hover:bg-white/[0.05] transition-all duration-300 overflow-hidden cursor-pointer flex flex-col"
+      className="group relative overflow-hidden cursor-pointer"
       style={{ gridArea: area }}
     >
-      <BorderTrace />
-
       <img
         src={cardImages[index]}
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 w-full h-full object-cover opacity-[0.10] group-hover:opacity-[0.18] transition-opacity duration-500 mix-blend-luminosity"
+        alt={title}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
       />
 
-      <span className="relative text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium block mb-5">
+      <div className="absolute inset-0 bg-gradient-to-t from-[#000A3D]/95 via-[#001070]/55 to-[#001489]/20" />
+
+      <BorderTrace />
+
+      <span className="absolute top-6 left-7 text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium">
         {String(index + 1).padStart(2, "0")}
       </span>
-      <h3 className="relative font-heading text-white font-semibold tracking-tight text-base leading-snug mb-3 pr-[15%]">
-        {title}
-      </h3>
-      <div className="relative max-h-0 overflow-hidden group-hover:max-h-24 transition-[max-height] duration-300 pr-[15%]">
-        <p className="text-white/45 text-sm leading-relaxed pt-3">
-          {description}
-        </p>
-      </div>
-      <div className="relative flex items-center gap-2 mt-auto pt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase">
-          {learnMore}
-        </span>
-        <svg className="w-3 h-3 text-[#D4AF36]" fill="none" viewBox="0 0 12 12">
-          <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
-        </svg>
+
+      <div className="absolute inset-x-0 bottom-0 px-7 pb-7 flex flex-col">
+        <h3 className="font-heading text-white font-semibold tracking-tight text-base leading-snug pr-[10%]">
+          {title}
+        </h3>
+
+        <div className="max-h-0 overflow-hidden group-hover:max-h-20 transition-[max-height] duration-400 pr-[10%]">
+          <p className="text-white/65 text-sm leading-relaxed pt-2">
+            {description}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 pt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
+          <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase font-medium">
+            {learnMore}
+          </span>
+          <svg className="w-3 h-3 text-[#D4AF36]" fill="none" viewBox="0 0 12 12">
+            <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
+          </svg>
+        </div>
       </div>
     </motion.div>
   );
@@ -118,7 +124,7 @@ export function PracticeAreas() {
 
 function BorderTrace() {
   return (
-    <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+    <span className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
       <span className="absolute top-0 left-0 right-0 h-px bg-[#D4AF36] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
       <span className="absolute top-0 right-0 bottom-0 w-px bg-[#D4AF36] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
       <span className="absolute bottom-0 left-0 right-0 h-px bg-[#D4AF36] origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" />
