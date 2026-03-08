@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 
 const floatingSquares = [
-  { size: 320, x: "68%", y: "8%",  rotate: 15,  duration: 22, opacity: 0.045 },
-  { size: 200, x: "82%", y: "52%", rotate: -28, duration: 26, opacity: 0.055 },
-  { size: 130, x: "58%", y: "18%", rotate: 42,  duration: 18, opacity: 0.05  },
-  { size: 460, x: "60%", y: "30%", rotate: 6,   duration: 32, opacity: 0.02  },
-  { size: 100, x: "86%", y: "28%", rotate: 65,  duration: 15, opacity: 0.065 },
-  { size: 240, x: "4%",  y: "58%", rotate: -12, duration: 24, opacity: 0.03  },
-  { size: 160, x: "14%", y: "16%", rotate: 32,  duration: 29, opacity: 0.035 },
+  { size: 320, x: "68%", y: "8%",  rotate: 15,  duration: 22, opacity: 0.06,  color: "#001489" },
+  { size: 200, x: "82%", y: "52%", rotate: -28, duration: 26, opacity: 0.07,  color: "#D4AF36" },
+  { size: 130, x: "58%", y: "18%", rotate: 42,  duration: 18, opacity: 0.065, color: "#ffffff" },
+  { size: 460, x: "60%", y: "30%", rotate: 6,   duration: 32, opacity: 0.025, color: "#001489" },
+  { size: 100, x: "86%", y: "28%", rotate: 65,  duration: 15, opacity: 0.08,  color: "#8099FF" },
+  { size: 240, x: "4%",  y: "58%", rotate: -12, duration: 24, opacity: 0.04,  color: "#001489" },
+  { size: 160, x: "14%", y: "16%", rotate: 32,  duration: 29, opacity: 0.045, color: "#ffffff" },
 ];
 
 export function Hero() {
@@ -20,14 +20,14 @@ export function Hero() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen bg-[#060B1F] flex items-center overflow-hidden"
+      className="relative min-h-screen bg-[#141414] flex items-center overflow-hidden"
     >
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)
+            linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px)
           `,
           backgroundSize: "80px 80px",
         }}
@@ -37,14 +37,15 @@ export function Hero() {
         {floatingSquares.map((sq, i) => (
           <motion.div
             key={i}
-            className="absolute border border-white"
+            className="absolute border"
             style={{
-              width: sq.size,
-              height: sq.size,
-              left: sq.x,
-              top: sq.y,
+              width:   sq.size,
+              height:  sq.size,
+              left:    sq.x,
+              top:     sq.y,
               opacity: sq.opacity,
-              rotate: sq.rotate,
+              rotate:  sq.rotate,
+              borderColor: sq.color,
             }}
             animate={{ rotate: [sq.rotate, sq.rotate + 360] }}
             transition={{ duration: sq.duration, repeat: Infinity, ease: "linear" }}
@@ -56,7 +57,7 @@ export function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 55% 90% at 15% 50%, rgba(6,11,31,0) 0%, #060B1F 65%)",
+            "radial-gradient(ellipse 55% 90% at 15% 50%, rgba(20,20,20,0) 0%, #141414 65%)",
         }}
       />
 
@@ -71,7 +72,7 @@ export function Hero() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-[#C9A84C] text-xs tracking-[0.3em] uppercase font-medium mb-8"
+            className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-8"
             data-testid="hero-eyebrow"
           >
             {h.eyebrow}
@@ -81,7 +82,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-white font-semibold text-[clamp(3rem,6vw,5.5rem)] leading-[1.05] tracking-tight mb-8"
+            className="font-heading text-white font-semibold text-[clamp(3rem,6vw,5.5rem)] leading-[1.05] tracking-tight mb-8"
             data-testid="hero-headline"
           >
             {h.headline.map((line, i) => (
@@ -93,7 +94,7 @@ export function Hero() {
             initial={{ width: 0 }}
             animate={{ width: "72px" }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="h-px bg-[#C9A84C] mb-8"
+            className="h-px bg-[#D4AF36] mb-8"
           />
 
           <motion.p
@@ -158,7 +159,7 @@ function TracingButton({
       data-testid={testId}
       className={`relative group inline-flex items-center px-8 py-[14px] text-xs font-semibold tracking-[0.18em] uppercase transition-colors duration-300 ${
         variant === "solid"
-          ? "bg-[#C9A84C] text-[#060B1F] hover:bg-[#debb66]"
+          ? "bg-[#001489] text-white hover:bg-[#0A24C4]"
           : "border border-white/25 text-white/80 hover:border-white/50 hover:text-white"
       }`}
     >

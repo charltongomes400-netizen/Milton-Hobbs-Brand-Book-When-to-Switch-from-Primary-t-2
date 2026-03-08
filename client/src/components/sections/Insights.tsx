@@ -21,13 +21,13 @@ function ArticleCard({
     >
       <BorderTrace />
       <div className="flex items-start justify-between mb-7 gap-3">
-        <span className="text-[#C9A84C] text-[10px] tracking-[0.2em] uppercase font-medium border border-[#C9A84C]/25 px-3 py-1 whitespace-nowrap">
+        <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase font-medium border border-[#D4AF36]/30 px-3 py-1 whitespace-nowrap">
           {article.category}
         </span>
         <span className="text-white/25 text-[11px] whitespace-nowrap mt-0.5">{article.date}</span>
       </div>
 
-      <h3 className="text-white text-base font-semibold leading-snug tracking-tight mb-4 pr-[15%] group-hover:text-white/90 transition-colors flex-1">
+      <h3 className="font-heading text-white text-base font-semibold leading-snug tracking-tight mb-4 pr-[15%] group-hover:text-white/90 transition-colors flex-1">
         {article.title}
       </h3>
 
@@ -37,7 +37,7 @@ function ArticleCard({
 
       <div className="flex items-center justify-between mt-7 pt-5 border-t border-white/8">
         <span className="text-white/25 text-xs">{article.readTime}</span>
-        <div className="flex items-center gap-2 text-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="flex items-center gap-2 text-[#D4AF36] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <span className="text-[10px] tracking-[0.2em] uppercase">{readLabel}</span>
           <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
             <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
@@ -56,7 +56,7 @@ export function Insights() {
     <section
       id="insights"
       data-testid="insights-section"
-      className="bg-[#0A0F2E] py-28 px-8"
+      className="bg-[#0D0D0D] py-28 px-8"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -67,10 +67,10 @@ export function Insights() {
           className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6"
         >
           <div>
-            <p className="text-[#C9A84C] text-xs tracking-[0.3em] uppercase font-medium mb-4">
+            <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-4">
               {ins.eyebrow}
             </p>
-            <h2 className="text-white text-[clamp(1.8rem,3vw,2.8rem)] font-semibold tracking-tight">
+            <h2 className="font-heading text-white text-[clamp(1.8rem,3vw,2.8rem)] font-semibold tracking-tight">
               {ins.headline}
             </h2>
           </div>
@@ -105,10 +105,10 @@ export function Insights() {
 function BorderTrace() {
   return (
     <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-      <span className="absolute top-0 left-0 right-0 h-px bg-[#C9A84C] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-      <span className="absolute top-0 right-0 bottom-0 w-px bg-[#C9A84C] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
-      <span className="absolute bottom-0 left-0 right-0 h-px bg-[#C9A84C] origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" />
-      <span className="absolute top-0 left-0 bottom-0 w-px bg-[#C9A84C] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-300" />
+      <span className="absolute top-0 left-0 right-0 h-px bg-[#D4AF36] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+      <span className="absolute top-0 right-0 bottom-0 w-px bg-[#D4AF36] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
+      <span className="absolute bottom-0 left-0 right-0 h-px bg-[#D4AF36] origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" />
+      <span className="absolute top-0 left-0 bottom-0 w-px bg-[#D4AF36] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-300" />
     </span>
   );
 }

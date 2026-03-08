@@ -33,7 +33,7 @@ export function Differentiators() {
     <section
       id="firm"
       data-testid="differentiators-section"
-      className="bg-[#0A0F2E] py-28 px-8"
+      className="bg-[#0D0D0D] py-28 px-8"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -43,10 +43,10 @@ export function Differentiators() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <p className="text-[#C9A84C] text-xs tracking-[0.3em] uppercase font-medium mb-4">
+          <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-4">
             {d.eyebrow}
           </p>
-          <h2 className="text-white text-[clamp(1.8rem,3vw,2.8rem)] font-semibold tracking-tight">
+          <h2 className="font-heading text-white text-[clamp(1.8rem,3vw,2.8rem)] font-semibold tracking-tight">
             {d.headline}
           </h2>
         </motion.div>
@@ -67,8 +67,8 @@ export function Differentiators() {
               }`}
             >
               <BorderTrace />
-              <div className="text-[#C9A84C] mb-7">{icons[i]}</div>
-              <h3 className="text-white text-sm font-semibold tracking-[0.1em] uppercase mb-4 pr-[20%]">
+              <div className="text-[#D4AF36] mb-7">{icons[i]}</div>
+              <h3 className="font-heading text-white text-sm font-semibold tracking-[0.1em] uppercase mb-4 pr-[20%]">
                 {card.title}
               </h3>
               <p className="text-white/45 text-sm leading-relaxed pr-[20%]">
@@ -85,10 +85,10 @@ export function Differentiators() {
 function BorderTrace() {
   return (
     <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-      <span className="absolute top-0 left-0 right-0 h-px bg-[#C9A84C] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-      <span className="absolute top-0 right-0 bottom-0 w-px bg-[#C9A84C] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
-      <span className="absolute bottom-0 left-0 right-0 h-px bg-[#C9A84C] origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" />
-      <span className="absolute top-0 left-0 bottom-0 w-px bg-[#C9A84C] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-300" />
+      <span className="absolute top-0 left-0 right-0 h-px bg-[#D4AF36] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+      <span className="absolute top-0 right-0 bottom-0 w-px bg-[#D4AF36] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
+      <span className="absolute bottom-0 left-0 right-0 h-px bg-[#D4AF36] origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" />
+      <span className="absolute top-0 left-0 bottom-0 w-px bg-[#D4AF36] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-300" />
     </span>
   );
 }

@@ -4,45 +4,43 @@
 
 @layer base {
   :root {
-    --mh-navy: #0A0F2E;
-    --mh-dark: #060B1F;
-    --mh-gold: #C9A84C;
-    --mh-gold-light: #E8C77A;
+    --mh-blue:       #001489;
+    --mh-dark:       #141414;
+    --mh-black:      #0D0D0D;
+    --mh-gold:       #D4AF36;
+    --mh-gold-light: #E8C97E;
+    --mh-burgundy:   #6B1D3D;
+    --mh-periwinkle: #8099FF;
 
-    --background: 220 70% 5%;
+    --background: 0 0% 8%;
     --foreground: 0 0% 100%;
 
-    --muted: 220 40% 12%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 55%;
 
-    --popover: 220 70% 5%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 100%;
 
-    --border: 220 30% 15%;
-    --input: 220 30% 15%;
+    --border: 0 0% 18%;
+    --input:  0 0% 18%;
 
-    --card: 220 60% 7%;
+    --card: 0 0% 9%;
     --card-foreground: 0 0% 100%;
 
-    --primary: 43 55% 54%;
-    --primary-foreground: 220 70% 5%;
+    --primary: 227 100% 26%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 40% 12%;
+    --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 100%;
 
-    --accent: 43 55% 54%;
-    --accent-foreground: 220 70% 5%;
+    --accent: 43 68% 52%;
+    --accent-foreground: 0 0% 8%;
 
-    --destructive: 0 100% 50%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --ring: 43 55% 54%;
+    --ring: 227 100% 26%;
     --radius: 0rem;
-
-    --blue-1: rgba(231, 234, 255, 1);
-    --blue-5: rgba(50, 77, 221, 1);
-    --contentalpha-80: rgba(255, 255, 255, 0.8);
-    --neutral-colorswhite: rgba(255, 255, 255, 1);
   }
 }
 
@@ -57,11 +55,15 @@
   }
 
   body {
-    @apply bg-[#060B1F] text-white;
-    font-family: 'Inter', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    @apply bg-[#141414] text-white;
+    font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Satoshi', 'Plus Jakarta Sans', ui-sans-serif, sans-serif;
   }
 }
 
@@ -71,16 +73,6 @@
   }
 }
 
-@keyframes accordion-down {
-  from { height: 0; }
-  to { height: var(--radix-accordion-content-height); }
-}
-
-@keyframes accordion-up {
-  from { height: var(--radix-accordion-content-height); }
-  to { height: 0; }
-}
-
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -88,7 +80,7 @@
 
 .bento-grid > * {
   min-height: 180px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 @media (min-width: 1024px) {
@@ -101,4 +93,14 @@
       "employ banking tax    immig"
       "ip     ip     tech    tech";
   }
+}
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
 }

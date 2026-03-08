@@ -5,20 +5,20 @@ export function Footer() {
   const { t } = useLang();
   const f = t.footer;
   const navEntries = [
-    { label: t.nav.home, href: "#home" },
-    { label: t.nav.firm, href: "#firm" },
+    { label: t.nav.home,      href: "#home" },
+    { label: t.nav.firm,      href: "#firm" },
     { label: t.nav.expertise, href: "#expertise" },
-    { label: t.nav.insights, href: "#insights" },
-    { label: t.nav.careers, href: "#careers" },
-    { label: t.nav.contact, href: "#contact" },
+    { label: t.nav.insights,  href: "#insights" },
+    { label: t.nav.careers,   href: "#careers" },
+    { label: t.nav.contact,   href: "#contact" },
   ];
 
   return (
-    <footer id="contact" data-testid="footer" className="bg-[#060B1F] border-t border-white/8">
+    <footer id="contact" data-testid="footer" className="bg-[#0D0D0D] border-t border-white/8">
       <div className="max-w-[1400px] mx-auto px-8">
         <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 border-b border-white/8">
           <div className="lg:col-span-5 lg:pr-16">
-            <p className="text-white font-semibold text-lg tracking-[0.18em] uppercase mb-5">
+            <p className="font-heading text-white font-semibold text-lg tracking-[0.18em] uppercase mb-5">
               Milton Hobbs
             </p>
             <p className="text-white/40 text-sm leading-relaxed max-w-xs mb-8 pr-[20%]">
@@ -28,7 +28,7 @@ export function Footer() {
               <a
                 href={`mailto:${f.email}`}
                 data-testid="footer-email"
-                className="block text-[#C9A84C] text-sm hover:text-[#debb66] transition-colors"
+                className="block text-[#D4AF36] text-sm hover:text-[#E8C97E] transition-colors"
               >
                 {f.email}
               </a>

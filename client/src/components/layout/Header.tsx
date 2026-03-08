@@ -14,12 +14,12 @@ export function Header() {
   }, []);
 
   const navLinks = [
-    { label: t.nav.home, href: "#home" },
-    { label: t.nav.firm, href: "#firm" },
+    { label: t.nav.home,      href: "#home" },
+    { label: t.nav.firm,      href: "#firm" },
     { label: t.nav.expertise, href: "#expertise" },
-    { label: t.nav.insights, href: "#insights" },
-    { label: t.nav.careers, href: "#careers" },
-    { label: t.nav.contact, href: "#contact" },
+    { label: t.nav.insights,  href: "#insights" },
+    { label: t.nav.careers,   href: "#careers" },
+    { label: t.nav.contact,   href: "#contact" },
   ];
 
   return (
@@ -30,7 +30,7 @@ export function Header() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#060B1F]/95 backdrop-blur-sm border-b border-white/5"
+          ? "bg-[#141414]/95 backdrop-blur-sm border-b border-white/5"
           : "bg-transparent"
       }`}
     >
@@ -38,7 +38,7 @@ export function Header() {
         <a
           href="#home"
           data-testid="logo"
-          className="text-white font-semibold text-lg tracking-[0.18em] uppercase shrink-0"
+          className="font-heading text-white font-semibold text-lg tracking-[0.18em] uppercase shrink-0"
         >
           Milton Hobbs
         </a>
@@ -52,7 +52,7 @@ export function Header() {
               key={link.href}
               href={link.href}
               data-testid={`nav-link-${link.href.replace("#", "")}`}
-              className="text-white/50 hover:text-white text-xs tracking-[0.12em] transition-colors duration-200 uppercase font-medium whitespace-nowrap"
+              className="text-white/50 hover:text-[#8099FF] text-xs tracking-[0.12em] transition-colors duration-200 uppercase font-medium whitespace-nowrap"
             >
               {link.label}
             </a>
@@ -69,7 +69,7 @@ export function Header() {
               data-testid="lang-en"
               className={`px-4 py-2 transition-all duration-200 ${
                 lang === "EN"
-                  ? "bg-[#C9A84C] text-[#060B1F] font-semibold"
+                  ? "bg-[#001489] text-white font-semibold"
                   : "text-white/40 hover:text-white/70"
               }`}
             >
@@ -80,7 +80,7 @@ export function Header() {
               data-testid="lang-fr"
               className={`px-4 py-2 transition-all duration-200 ${
                 lang === "FR"
-                  ? "bg-[#C9A84C] text-[#060B1F] font-semibold"
+                  ? "bg-[#001489] text-white font-semibold"
                   : "text-white/40 hover:text-white/70"
               }`}
             >
@@ -123,7 +123,7 @@ export function Header() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden bg-[#060B1F] border-t border-white/5"
+            className="lg:hidden overflow-hidden bg-[#141414] border-t border-white/5"
           >
             <div className="px-8 py-8 flex flex-col gap-6">
               {navLinks.map((link) => (
@@ -142,7 +142,7 @@ export function Header() {
                   data-testid="mobile-lang-en"
                   className={`text-xs tracking-widest px-4 py-2 transition-all duration-200 ${
                     lang === "EN"
-                      ? "bg-[#C9A84C] text-[#060B1F] font-semibold"
+                      ? "bg-[#001489] text-white font-semibold"
                       : "text-white/40 hover:text-white/70"
                   }`}
                 >
@@ -153,7 +153,7 @@ export function Header() {
                   data-testid="mobile-lang-fr"
                   className={`text-xs tracking-widest px-4 py-2 transition-all duration-200 ${
                     lang === "FR"
-                      ? "bg-[#C9A84C] text-[#060B1F] font-semibold"
+                      ? "bg-[#001489] text-white font-semibold"
                       : "text-white/40 hover:text-white/70"
                   }`}
                 >
