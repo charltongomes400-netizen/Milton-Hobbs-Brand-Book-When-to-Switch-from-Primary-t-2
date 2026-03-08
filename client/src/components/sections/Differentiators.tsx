@@ -25,6 +25,19 @@ const icons = [
   </svg>,
 ];
 
+function LearnMoreLink({ label }: { label: string }) {
+  return (
+    <div className="flex items-center gap-2 mt-6">
+      <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase font-medium">
+        {label}
+      </span>
+      <svg className="w-3 h-3 text-[#D4AF36]" fill="none" viewBox="0 0 12 12">
+        <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
+      </svg>
+    </div>
+  );
+}
+
 export function Differentiators() {
   const { t } = useLang();
   const d = t.diff;
@@ -74,6 +87,7 @@ export function Differentiators() {
               <p className="text-white/55 text-sm leading-relaxed pr-[20%]">
                 {card.description}
               </p>
+              <LearnMoreLink label={d.learnMore} />
             </motion.div>
           ))}
         </div>

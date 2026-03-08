@@ -38,7 +38,7 @@ function PracticeCard({
           {description}
         </p>
       </div>
-      <div className="flex items-center gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
+      <div className="flex items-center gap-2 mt-4 transition-opacity duration-300">
         <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase">
           {learnMore}
         </span>

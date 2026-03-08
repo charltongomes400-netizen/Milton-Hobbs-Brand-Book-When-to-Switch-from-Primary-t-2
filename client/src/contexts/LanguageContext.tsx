@@ -24,6 +24,7 @@ const translations = {
     diff: {
       eyebrow: "Why Milton Hobbs",
       headline: "Counsel built for complexity.",
+      learnMore: "Learn more",
       cards: [
         {
           title: "Boutique Model",
@@ -149,6 +150,7 @@ const translations = {
     diff: {
       eyebrow: "Pourquoi Milton Hobbs",
       headline: "Des conseils taillés pour la complexité.",
+      learnMore: "En savoir plus",
       cards: [
         {
           title: "Modèle Boutique",
