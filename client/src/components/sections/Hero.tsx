@@ -2,18 +2,15 @@ import { type ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 
-const squares = [
-  { size: 56,  x: "8%",   y: "18%", dx: 320,  dy: -180, rotate: 25,  dur: 20, delay: 0,   opacity: 0.55, color: "#051FA7" },
-  { size: 36,  x: "72%",  y: "62%", dx: -240, dy: 130,  rotate: -18, dur: 24, delay: 1.5, opacity: 0.6,  color: "#000335" },
-  { size: 96,  x: "18%",  y: "72%", dx: 380,  dy: -220, rotate: 42,  dur: 28, delay: 0.8, opacity: 0.35, color: "#000335" },
-  { size: 48,  x: "62%",  y: "8%",  dx: -280, dy: 260,  rotate: -35, dur: 22, delay: 3,   opacity: 0.5,  color: "#051FA7" },
-  { size: 72,  x: "82%",  y: "28%", dx: -350, dy: 120,  rotate: 58,  dur: 30, delay: 0.4, opacity: 0.3,  color: "#000335" },
-  { size: 28,  x: "38%",  y: "82%", dx: 220,  dy: -310, rotate: -50, dur: 16, delay: 4,   opacity: 0.65, color: "#051FA7" },
-  { size: 110, x: "4%",   y: "44%", dx: 460,  dy: -90,  rotate: 18,  dur: 35, delay: 1.2, opacity: 0.22, color: "#000335" },
-  { size: 42,  x: "88%",  y: "72%", dx: -300, dy: -210, rotate: 72,  dur: 21, delay: 2.2, opacity: 0.48, color: "#051FA7" },
-  { size: 64,  x: "52%",  y: "38%", dx: 180,  dy: 200,  rotate: -22, dur: 26, delay: 3.5, opacity: 0.28, color: "#000335" },
-  { size: 20,  x: "25%",  y: "12%", dx: -160, dy: 340,  rotate: 85,  dur: 18, delay: 0.6, opacity: 0.7,  color: "#051FA7" },
-];
+const COLS = 16;
+const ROWS = 10;
+
+const tiles = Array.from({ length: COLS * ROWS }, (_, i) => ({
+  color:      i % 2 === 0 ? "#051FA7" : "#000335",
+  delay:      parseFloat(((i * 0.41 + (i % 7) * 0.29) % 9).toFixed(2)),
+  duration:   parseFloat((2.5 + (i * 0.17 + (i % 5) * 0.33) % 4.5).toFixed(2)),
+  maxOpacity: parseFloat((0.08 + (i * 0.09 + (i % 11) * 0.06) % 0.52).toFixed(2)),
+}));
 
 export function Hero() {
   const { t } = useLang();
@@ -25,54 +22,48 @@ export function Hero() {
       data-testid="hero-section"
       className="relative min-h-screen bg-[#001489] flex items-center overflow-hidden"
     >
-      {/* Subtle grid */}
+      {/* Symmetric tile grid — fades in/out randomly per cell */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
+          display:               "grid",
+          gridTemplateColumns:   `repeat(${COLS}, 1fr)`,
+          gridTemplateRows:      `repeat(${ROWS}, 1fr)`,
         }}
-      />
-
-      {/* Travelling squares */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {squares.map((sq, i) => (
+      >
+        {tiles.map((tile, i) => (
           <motion.div
             key={i}
-            className="absolute"
-            style={{
-              width:           sq.size,
-              height:          sq.size,
-              left:            sq.x,
-              top:             sq.y,
-              opacity:         sq.opacity,
-              backgroundColor: sq.color,
-            }}
-            animate={{
-              x:      [0, sq.dx, 0],
-              y:      [0, sq.dy, 0],
-              rotate: [sq.rotate, sq.rotate + 180, sq.rotate],
-            }}
+            style={{ backgroundColor: tile.color }}
+            animate={{ opacity: [0, tile.maxOpacity, 0] }}
             transition={{
-              duration:   sq.dur,
-              delay:      sq.delay,
+              duration:   tile.duration,
+              delay:      tile.delay,
               repeat:     Infinity,
-              repeatType: "mirror",
               ease:       "easeInOut",
             }}
           />
         ))}
       </div>
 
-      {/* Left-side content fade */}
+      {/* Subtle grid lines over the tiles */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)
+          `,
+          backgroundSize: `calc(100% / ${COLS}) calc(100% / ${ROWS})`,
+        }}
+      />
+
+      {/* Left-side vignette to keep text readable */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 65% 100% at 12% 55%, rgba(0,20,137,0.85) 0%, rgba(0,20,137,0.4) 55%, transparent 80%)",
+            "radial-gradient(ellipse 70% 110% at 10% 55%, rgba(0,20,137,0.88) 0%, rgba(0,20,137,0.55) 45%, rgba(0,20,137,0.1) 75%, transparent 100%)",
         }}
       />
 
