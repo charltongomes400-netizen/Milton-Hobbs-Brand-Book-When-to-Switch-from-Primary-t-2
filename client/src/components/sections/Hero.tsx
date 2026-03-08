@@ -2,14 +2,14 @@ import { type ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 
-const COLS = 14;
-const ROWS = 8;
+const COLS = 16;
+const ROWS = 10;
 
 const tiles = Array.from({ length: COLS * ROWS }, (_, i) => ({
   color:      i % 2 === 0 ? "#051FA7" : "#000335",
-  delay:      parseFloat(((i * 0.73 + (i % 11) * 0.41) % 14).toFixed(2)),
-  duration:   parseFloat((5 + (i * 0.19 + (i % 7) * 0.53) % 6).toFixed(2)),
-  maxOpacity: parseFloat((0.04 + (i * 0.05 + (i % 13) * 0.03) % 0.18).toFixed(2)),
+  delay:      parseFloat(((i * 0.41 + (i % 7) * 0.29) % 9).toFixed(2)),
+  duration:   parseFloat((2.5 + (i * 0.17 + (i % 5) * 0.33) % 4.5).toFixed(2)),
+  maxOpacity: parseFloat((0.08 + (i * 0.09 + (i % 11) * 0.06) % 0.52).toFixed(2)),
 }));
 
 export function Hero() {
@@ -45,6 +45,18 @@ export function Hero() {
           />
         ))}
       </div>
+
+      {/* Subtle grid lines over the tiles */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)
+          `,
+          backgroundSize: `calc(100% / ${COLS}) calc(100% / ${ROWS})`,
+        }}
+      />
 
       {/* Left-side vignette to keep text readable */}
       <div
