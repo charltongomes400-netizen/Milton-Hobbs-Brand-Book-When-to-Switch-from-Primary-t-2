@@ -33,7 +33,7 @@ export function Differentiators() {
     <section
       id="firm"
       data-testid="differentiators-section"
-      className="bg-[#0D0D0D] py-28 px-8"
+      className="bg-[#001489] py-28 px-8"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -60,7 +60,7 @@ export function Differentiators() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               data-testid={`diff-card-${i}`}
-              className={`group relative p-10 hover:bg-white/[0.025] transition-colors duration-400 overflow-hidden ${
+              className={`group relative p-10 hover:bg-white/[0.05] transition-colors duration-400 overflow-hidden ${
                 i < d.cards.length - 1 ? "lg:border-r border-white/10" : ""
               } ${i % 2 === 0 && i < d.cards.length - 1 ? "sm:border-r sm:border-white/10 lg:border-r-0" : ""} ${
                 i % 2 === 0 ? "lg:border-r border-white/10" : ""
@@ -71,7 +71,7 @@ export function Differentiators() {
               <h3 className="font-heading text-white text-sm font-semibold tracking-[0.1em] uppercase mb-4 pr-[20%]">
                 {card.title}
               </h3>
-              <p className="text-white/45 text-sm leading-relaxed pr-[20%]">
+              <p className="text-white/55 text-sm leading-relaxed pr-[20%]">
                 {card.description}
               </p>
             </motion.div>

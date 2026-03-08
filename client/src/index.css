@@ -5,32 +5,31 @@
 @layer base {
   :root {
     --mh-blue:       #001489;
-    --mh-dark:       #141414;
-    --mh-black:      #0D0D0D;
+    --mh-burgundy:   #001489;
+    --mh-burgundy-dk:#000A4F;
     --mh-gold:       #D4AF36;
     --mh-gold-light: #E8C97E;
-    --mh-burgundy:   #6B1D3D;
     --mh-periwinkle: #8099FF;
 
-    --background: 0 0% 8%;
+    --background: 333 58% 26%;
     --foreground: 0 0% 100%;
 
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 55%;
+    --muted: 333 40% 20%;
+    --muted-foreground: 0 0% 65%;
 
-    --popover: 0 0% 8%;
+    --popover: 333 58% 26%;
     --popover-foreground: 0 0% 100%;
 
-    --border: 0 0% 18%;
-    --input:  0 0% 18%;
+    --border: 333 30% 35%;
+    --input:  333 30% 35%;
 
-    --card: 0 0% 9%;
+    --card: 333 50% 22%;
     --card-foreground: 0 0% 100%;
 
     --primary: 227 100% 26%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 15%;
+    --secondary: 333 45% 18%;
     --secondary-foreground: 0 0% 100%;
 
     --accent: 43 68% 52%;
@@ -55,7 +54,7 @@
   }
 
   body {
-    @apply bg-[#141414] text-white;
+    @apply bg-[#001489] text-white;
     font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
@@ -80,7 +79,7 @@
 
 .bento-grid > * {
   min-height: 180px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 @media (min-width: 1024px) {

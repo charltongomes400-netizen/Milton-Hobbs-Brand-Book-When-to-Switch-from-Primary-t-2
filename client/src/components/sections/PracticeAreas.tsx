@@ -23,7 +23,7 @@ function PracticeCard({
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.4) }}
       data-testid={`practice-card-${index}`}
-      className="group relative p-7 lg:p-8 hover:bg-white/[0.025] transition-all duration-300 overflow-hidden cursor-pointer flex flex-col"
+      className="group relative p-7 lg:p-8 hover:bg-white/[0.05] transition-all duration-300 overflow-hidden cursor-pointer flex flex-col"
       style={{ gridArea: area }}
     >
       <BorderTrace />
@@ -34,7 +34,7 @@ function PracticeCard({
         <h3 className="font-heading text-white font-semibold tracking-tight text-base leading-snug mb-3 pr-[15%]">
           {title}
         </h3>
-        <p className="text-white/35 text-sm leading-relaxed mt-auto pt-4 pr-[15%] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <p className="text-white/45 text-sm leading-relaxed mt-auto pt-4 pr-[15%] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           {description}
         </p>
       </div>
@@ -58,7 +58,7 @@ export function PracticeAreas() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="bg-[#141414] py-28 px-8"
+      className="bg-[#001070] py-28 px-8"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -76,7 +76,7 @@ export function PracticeAreas() {
               {p.headline}
             </h2>
           </div>
-          <p className="text-white/35 text-sm max-w-xs leading-relaxed">{p.subtext}</p>
+          <p className="text-white/45 text-sm max-w-xs leading-relaxed">{p.subtext}</p>
         </motion.div>
 
         <div className="bento-grid">

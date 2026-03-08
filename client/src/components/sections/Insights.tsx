@@ -17,26 +17,26 @@ function ArticleCard({
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       data-testid={`insight-card-${index}`}
-      className="group relative p-8 hover:bg-white/[0.025] transition-colors duration-300 overflow-hidden flex flex-col"
+      className="group relative p-8 hover:bg-white/[0.05] transition-colors duration-300 overflow-hidden flex flex-col"
     >
       <BorderTrace />
       <div className="flex items-start justify-between mb-7 gap-3">
         <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase font-medium border border-[#D4AF36]/30 px-3 py-1 whitespace-nowrap">
           {article.category}
         </span>
-        <span className="text-white/25 text-[11px] whitespace-nowrap mt-0.5">{article.date}</span>
+        <span className="text-white/30 text-[11px] whitespace-nowrap mt-0.5">{article.date}</span>
       </div>
 
       <h3 className="font-heading text-white text-base font-semibold leading-snug tracking-tight mb-4 pr-[15%] group-hover:text-white/90 transition-colors flex-1">
         {article.title}
       </h3>
 
-      <p className="text-white/35 text-sm leading-relaxed pr-[15%] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <p className="text-white/45 text-sm leading-relaxed pr-[15%] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         {article.excerpt}
       </p>
 
-      <div className="flex items-center justify-between mt-7 pt-5 border-t border-white/8">
-        <span className="text-white/25 text-xs">{article.readTime}</span>
+      <div className="flex items-center justify-between mt-7 pt-5 border-t border-white/10">
+        <span className="text-white/30 text-xs">{article.readTime}</span>
         <div className="flex items-center gap-2 text-[#D4AF36] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <span className="text-[10px] tracking-[0.2em] uppercase">{readLabel}</span>
           <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
@@ -56,7 +56,7 @@ export function Insights() {
     <section
       id="insights"
       data-testid="insights-section"
-      className="bg-[#0D0D0D] py-28 px-8"
+      className="bg-[#001489] py-28 px-8"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -77,7 +77,7 @@ export function Insights() {
           <a
             href="#insights"
             data-testid="view-all-insights"
-            className="group flex items-center gap-3 text-white/35 hover:text-white text-xs tracking-[0.2em] uppercase transition-colors"
+            className="group flex items-center gap-3 text-white/40 hover:text-white text-xs tracking-[0.2em] uppercase transition-colors"
           >
             <span>{ins.viewAll}</span>
             <svg
