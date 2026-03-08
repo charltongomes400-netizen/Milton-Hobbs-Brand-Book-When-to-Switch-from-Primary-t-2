@@ -27,18 +27,18 @@ function PracticeCard({
       style={{ gridArea: area }}
     >
       <BorderTrace />
-      <div className="flex-1 flex flex-col">
-        <span className="text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium block mb-5">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <h3 className="font-heading text-white font-semibold tracking-tight text-base leading-snug mb-3 pr-[15%]">
-          {title}
-        </h3>
-        <p className="text-white/45 text-sm leading-relaxed mt-auto pt-4 pr-[15%] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <span className="text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium block mb-5">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <h3 className="font-heading text-white font-semibold tracking-tight text-base leading-snug mb-3 pr-[15%]">
+        {title}
+      </h3>
+      <div className="max-h-0 overflow-hidden group-hover:max-h-24 transition-[max-height] duration-300 pr-[15%]">
+        <p className="text-white/45 text-sm leading-relaxed pt-3">
           {description}
         </p>
       </div>
-      <div className="flex items-center gap-2 mt-4 transition-opacity duration-300">
+      <div className="flex items-center gap-2 mt-auto pt-4">
         <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase">
           {learnMore}
         </span>
