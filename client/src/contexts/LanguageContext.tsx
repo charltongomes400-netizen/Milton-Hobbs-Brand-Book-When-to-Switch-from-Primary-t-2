@@ -65,6 +65,12 @@ const translations = {
         { title: "Technology & Startups", description: "Startup formation, term sheet negotiation, data privacy, and tech transactions." },
       ],
     },
+    publications: {
+      eyebrow: "Publications & Insights",
+      headline: "Latest Thinking from Our Lawyers",
+      viewAll: "View All Publications",
+      readArticle: "Read Article",
+    },
     insights: {
       eyebrow: "Publications & Insights",
       headline: "Thought leadership.",
@@ -183,6 +189,12 @@ const translations = {
         { title: "Propriété Intellectuelle", description: "Protection des marques, licences et stratégie PI sur les marchés du CCG et européens." },
         { title: "Technologie & Startups", description: "Constitution de startups, négociation de term sheets, protection des données et transactions tech." },
       ],
+    },
+    publications: {
+      eyebrow: "Publications & Perspectives",
+      headline: "Les Dernières Réflexions de Nos Avocats",
+      viewAll: "Voir Toutes les Publications",
+      readArticle: "Lire l'Article",
     },
     insights: {
       eyebrow: "Publications & Perspectives",
