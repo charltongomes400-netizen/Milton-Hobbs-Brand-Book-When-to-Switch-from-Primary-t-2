@@ -79,7 +79,7 @@
 
 .bento-grid > * {
   min-height: 180px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1.5px rgba(212, 175, 54, 0.45);
 }
 
 @media (min-width: 1024px) {
