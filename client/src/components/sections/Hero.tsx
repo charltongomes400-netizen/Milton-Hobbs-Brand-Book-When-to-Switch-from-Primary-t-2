@@ -1,19 +1,21 @@
 import { type ReactNode } from "react";
 import { motion } from "framer-motion";
+import { useLang } from "@/contexts/LanguageContext";
 
 const floatingSquares = [
-  { size: 280, x: "75%", y: "10%", rotate: 15, duration: 20, opacity: 0.04 },
-  { size: 180, x: "80%", y: "55%", rotate: -25, duration: 25, opacity: 0.06 },
-  { size: 120, x: "60%", y: "20%", rotate: 40, duration: 18, opacity: 0.05 },
-  { size: 400, x: "65%", y: "35%", rotate: 8, duration: 30, opacity: 0.025 },
-  { size: 90, x: "88%", y: "30%", rotate: 60, duration: 15, opacity: 0.07 },
-  { size: 220, x: "5%", y: "60%", rotate: -10, duration: 22, opacity: 0.03 },
-  { size: 140, x: "15%", y: "20%", rotate: 30, duration: 28, opacity: 0.04 },
+  { size: 320, x: "68%", y: "8%",  rotate: 15,  duration: 22, opacity: 0.045 },
+  { size: 200, x: "82%", y: "52%", rotate: -28, duration: 26, opacity: 0.055 },
+  { size: 130, x: "58%", y: "18%", rotate: 42,  duration: 18, opacity: 0.05  },
+  { size: 460, x: "60%", y: "30%", rotate: 6,   duration: 32, opacity: 0.02  },
+  { size: 100, x: "86%", y: "28%", rotate: 65,  duration: 15, opacity: 0.065 },
+  { size: 240, x: "4%",  y: "58%", rotate: -12, duration: 24, opacity: 0.03  },
+  { size: 160, x: "14%", y: "16%", rotate: 32,  duration: 29, opacity: 0.035 },
 ];
 
-const gridLines = Array.from({ length: 8 });
-
 export function Hero() {
+  const { t } = useLang();
+  const h = t.hero;
+
   return (
     <section
       id="home"
@@ -24,8 +26,8 @@ export function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
+            linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)
           `,
           backgroundSize: "80px 80px",
         }}
@@ -53,16 +55,17 @@ export function Hero() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 60% 80% at 20% 50%, rgba(10,15,46,0) 0%, #060B1F 70%)",
+          background:
+            "radial-gradient(ellipse 55% 90% at 15% 50%, rgba(6,11,31,0) 0%, #060B1F 65%)",
         }}
       />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-8 pt-32 pb-24">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-8 pt-32 pb-24 w-full">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
-          className="max-w-[700px]"
+          className="max-w-[680px]"
         >
           <motion.p
             initial={{ opacity: 0, x: -20 }}
@@ -71,7 +74,7 @@ export function Hero() {
             className="text-[#C9A84C] text-xs tracking-[0.3em] uppercase font-medium mb-8"
             data-testid="hero-eyebrow"
           >
-            Boutique Corporate Law
+            {h.eyebrow}
           </motion.p>
 
           <motion.h1
@@ -81,16 +84,14 @@ export function Hero() {
             className="text-white font-semibold text-[clamp(3rem,6vw,5.5rem)] leading-[1.05] tracking-tight mb-8"
             data-testid="hero-headline"
           >
-            Reason.
-            <br />
-            Rigor.
-            <br />
-            Resolution.
+            {h.headline.map((line, i) => (
+              <span key={i} className="block">{line}</span>
+            ))}
           </motion.h1>
 
           <motion.div
             initial={{ width: 0 }}
-            animate={{ width: "80px" }}
+            animate={{ width: "72px" }}
             transition={{ duration: 0.8, delay: 0.7 }}
             className="h-px bg-[#C9A84C] mb-8"
           />
@@ -99,11 +100,10 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.8 }}
-            className="text-white/60 text-[clamp(1rem,1.5vw,1.15rem)] leading-relaxed max-w-[560px] mb-12 px-[calc(0px+5%)] pl-0"
+            className="text-white/55 text-base leading-relaxed max-w-[560px] mb-12"
             data-testid="hero-subheadline"
           >
-            Milton Hobbs is a boutique corporate law firm delivering clear,
-            composed, and commercially astute counsel. Bridging Europe and the GCC.
+            {h.subheadline}
           </motion.p>
 
           <motion.div
@@ -113,28 +113,30 @@ export function Hero() {
             className="flex flex-wrap gap-4"
           >
             <TracingButton href="#contact" variant="solid" data-testid="cta-book">
-              Book a Consultation
+              {h.cta1}
             </TracingButton>
             <TracingButton href="#contact" variant="outline" data-testid="cta-contact">
-              Contact Us
+              {h.cta2}
             </TracingButton>
           </motion.div>
         </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="absolute bottom-12 left-8 flex items-center gap-3"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent"
-          />
-          <span className="text-white/30 text-xs tracking-widest uppercase">Scroll</span>
-        </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.5 }}
+        className="absolute bottom-10 left-8 flex items-center gap-3"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent"
+        />
+        <span className="text-white/25 text-[10px] tracking-[0.25em] uppercase">
+          {t.hero.scroll}
+        </span>
+      </motion.div>
     </section>
   );
 }
@@ -154,14 +156,13 @@ function TracingButton({
     <a
       href={href}
       data-testid={testId}
-      className={`relative group inline-flex items-center px-8 py-4 text-sm font-medium tracking-widest uppercase transition-colors duration-300 overflow-hidden ${
+      className={`relative group inline-flex items-center px-8 py-[14px] text-xs font-semibold tracking-[0.18em] uppercase transition-colors duration-300 ${
         variant === "solid"
-          ? "bg-[#C9A84C] text-[#060B1F] hover:bg-[#E8C77A]"
-          : "border border-white/30 text-white hover:border-white/60"
+          ? "bg-[#C9A84C] text-[#060B1F] hover:bg-[#debb66]"
+          : "border border-white/25 text-white/80 hover:border-white/50 hover:text-white"
       }`}
     >
-      <span className="relative z-10">{children}</span>
-      <span className="absolute inset-0 border border-[#C9A84C] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {children}
     </a>
   );
 }

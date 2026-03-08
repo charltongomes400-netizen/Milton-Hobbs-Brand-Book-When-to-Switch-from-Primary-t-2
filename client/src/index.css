@@ -80,3 +80,25 @@
   from { height: var(--radix-accordion-content-height); }
   to { height: 0; }
 }
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.bento-grid > * {
+  min-height: 180px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 200px);
+    grid-template-areas:
+      "corp   corp   estate  litig"
+      "corp   corp   estate  arb"
+      "employ banking tax    immig"
+      "ip     ip     tech    tech";
+  }
+}
