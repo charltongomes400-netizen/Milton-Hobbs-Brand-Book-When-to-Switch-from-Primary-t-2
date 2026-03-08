@@ -11,14 +11,11 @@ export function Header() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
-      const lightSections = ["insights", "expertise"];
-      const isOverLight = lightSections.some((id) => {
-        const el = document.getElementById(id);
-        if (!el) return false;
-        const rect = el.getBoundingClientRect();
-        return rect.top < 80 && rect.bottom > 0;
-      });
-      setOverLight(isOverLight);
+      const lightEl = document.getElementById("insights");
+      if (lightEl) {
+        const rect = lightEl.getBoundingClientRect();
+        setOverLight(rect.top < 80 && rect.bottom > 0);
+      }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);

@@ -23,7 +23,7 @@ function PracticeCard({
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.4) }}
       data-testid={`practice-card-${index}`}
-      className="group relative p-7 lg:p-8 bg-[#001489] hover:bg-[#001BA5] transition-all duration-300 overflow-hidden cursor-pointer flex flex-col"
+      className="group relative p-7 lg:p-8 hover:bg-white/[0.05] transition-all duration-300 overflow-hidden cursor-pointer flex flex-col"
       style={{ gridArea: area }}
     >
       <BorderTrace />
@@ -34,7 +34,7 @@ function PracticeCard({
         {title}
       </h3>
       <div className="max-h-0 overflow-hidden group-hover:max-h-24 transition-[max-height] duration-300 pr-[15%]">
-        <p className="text-white/55 text-sm leading-relaxed pt-3">
+        <p className="text-white/45 text-sm leading-relaxed pt-3">
           {description}
         </p>
       </div>
@@ -58,7 +58,7 @@ export function PracticeAreas() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="bg-white py-28 px-8"
+      className="bg-[#001070] py-28 px-8"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -72,11 +72,11 @@ export function PracticeAreas() {
             <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-4">
               {p.eyebrow}
             </p>
-            <h2 className="font-heading text-[#001489] text-[clamp(1.8rem,3vw,2.8rem)] font-semibold tracking-tight">
+            <h2 className="font-heading text-white text-[clamp(1.8rem,3vw,2.8rem)] font-semibold tracking-tight">
               {p.headline}
             </h2>
           </div>
-          <p className="text-[#001489]/50 text-sm max-w-xs leading-relaxed">{p.subtext}</p>
+          <p className="text-white/45 text-sm max-w-xs leading-relaxed">{p.subtext}</p>
         </motion.div>
 
         <div className="bento-grid">
