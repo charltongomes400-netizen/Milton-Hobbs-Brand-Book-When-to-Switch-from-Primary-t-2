@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 
 const icons = [
@@ -25,34 +24,6 @@ const icons = [
     <path d="M18 14h4M26 18v4" stroke="currentColor" strokeWidth="1" />
   </svg>,
 ];
-
-function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const rawX = useMotionValue(0);
-  const rawY = useMotionValue(0);
-  const rotateX = useSpring(useTransform(rawY, [-0.5, 0.5], [6, -6]), { stiffness: 200, damping: 25 });
-  const rotateY = useSpring(useTransform(rawX, [-0.5, 0.5], [-6, 6]), { stiffness: 200, damping: 25 });
-
-  const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-    rawX.set((e.clientX - rect.left) / rect.width - 0.5);
-    rawY.set((e.clientY - rect.top)  / rect.height - 0.5);
-  };
-  const handleLeave = () => { rawX.set(0); rawY.set(0); };
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouse}
-      onMouseLeave={handleLeave}
-      style={{ rotateX, rotateY, transformPerspective: 900, transformStyle: "preserve-3d" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 export function Differentiators() {
   const { t } = useLang();
@@ -80,7 +51,7 @@ export function Differentiators() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 divide-white/10 border border-white/10">
           {d.cards.map((card, i) => (
             <motion.div
               key={i}
@@ -89,17 +60,20 @@ export function Differentiators() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               data-testid={`diff-card-${i}`}
+              className={`group relative p-10 hover:bg-white/[0.05] transition-colors duration-400 overflow-hidden ${
+                i < d.cards.length - 1 ? "lg:border-r border-white/10" : ""
+              } ${i % 2 === 0 && i < d.cards.length - 1 ? "sm:border-r sm:border-white/10 lg:border-r-0" : ""} ${
+                i % 2 === 0 ? "lg:border-r border-white/10" : ""
+              }`}
             >
-              <TiltCard className="group relative h-full p-10 bg-[#001489] hover:bg-[#001070] transition-colors duration-400 overflow-hidden">
-                <BorderTrace />
-                <div className="text-[#D4AF36] mb-7">{icons[i]}</div>
-                <h3 className="font-heading text-white text-sm font-semibold tracking-[0.1em] uppercase mb-4 pr-[20%]">
-                  {card.title}
-                </h3>
-                <p className="text-white/55 text-sm leading-relaxed pr-[20%]">
-                  {card.description}
-                </p>
-              </TiltCard>
+              <BorderTrace />
+              <div className="text-[#D4AF36] mb-7">{icons[i]}</div>
+              <h3 className="font-heading text-white text-sm font-semibold tracking-[0.1em] uppercase mb-4 pr-[20%]">
+                {card.title}
+              </h3>
+              <p className="text-white/55 text-sm leading-relaxed pr-[20%]">
+                {card.description}
+              </p>
             </motion.div>
           ))}
         </div>

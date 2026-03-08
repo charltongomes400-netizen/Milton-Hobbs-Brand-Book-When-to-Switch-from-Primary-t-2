@@ -1,47 +1,26 @@
-import { useRef, type ReactNode } from "react";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { type ReactNode } from "react";
+import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 
 const floatingSquares = [
-  { size: 320, x: "68%", y: "8%",  rotate: 15,  duration: 22, opacity: 0.07,  color: "#001489", depth: 18 },
-  { size: 200, x: "82%", y: "52%", rotate: -28, duration: 26, opacity: 0.08,  color: "#001489", depth: 32 },
-  { size: 130, x: "58%", y: "18%", rotate: 42,  duration: 18, opacity: 0.06,  color: "#D4AF36", depth: 10 },
-  { size: 460, x: "60%", y: "30%", rotate: 6,   duration: 32, opacity: 0.03,  color: "#001489", depth: 5  },
-  { size: 100, x: "86%", y: "28%", rotate: 65,  duration: 15, opacity: 0.09,  color: "#001489", depth: 42 },
-  { size: 240, x: "4%",  y: "58%", rotate: -12, duration: 24, opacity: 0.045, color: "#001489", depth: 22 },
-  { size: 160, x: "14%", y: "16%", rotate: 32,  duration: 29, opacity: 0.05,  color: "#D4AF36", depth: 14 },
+  { size: 320, x: "68%", y: "8%",  rotate: 15,  duration: 22, opacity: 0.07,  color: "#001489" },
+  { size: 200, x: "82%", y: "52%", rotate: -28, duration: 26, opacity: 0.08,  color: "#001489" },
+  { size: 130, x: "58%", y: "18%", rotate: 42,  duration: 18, opacity: 0.06,  color: "#D4AF36" },
+  { size: 460, x: "60%", y: "30%", rotate: 6,   duration: 32, opacity: 0.03,  color: "#001489" },
+  { size: 100, x: "86%", y: "28%", rotate: 65,  duration: 15, opacity: 0.09,  color: "#001489" },
+  { size: 240, x: "4%",  y: "58%", rotate: -12, duration: 24, opacity: 0.045, color: "#001489" },
+  { size: 160, x: "14%", y: "16%", rotate: 32,  duration: 29, opacity: 0.05,  color: "#D4AF36" },
 ];
 
 export function Hero() {
   const { t } = useLang();
   const h = t.hero;
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const rawX = useMotionValue(0);
-  const rawY = useMotionValue(0);
-  const springX = useSpring(rawX, { stiffness: 60, damping: 20 });
-  const springY = useSpring(rawY, { stiffness: 60, damping: 20 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = sectionRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    rawX.set(((e.clientX - rect.left) / rect.width - 0.5) * 2);
-    rawY.set(((e.clientY - rect.top)  / rect.height - 0.5) * 2);
-  };
-
-  const handleMouseLeave = () => {
-    rawX.set(0);
-    rawY.set(0);
-  };
 
   return (
     <section
       id="home"
-      ref={sectionRef}
       data-testid="hero-section"
       className="relative min-h-screen bg-white flex items-center overflow-hidden"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
     >
       <div
         className="absolute inset-0 pointer-events-none"
@@ -55,28 +34,23 @@ export function Hero() {
       />
 
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {floatingSquares.map((sq, i) => {
-          const px = useTransform(springX, [-1, 1], [-sq.depth, sq.depth]);
-          const py = useTransform(springY, [-1, 1], [-sq.depth, sq.depth]);
-          return (
-            <motion.div
-              key={i}
-              className="absolute border"
-              style={{
-                width:       sq.size,
-                height:      sq.size,
-                left:        sq.x,
-                top:         sq.y,
-                opacity:     sq.opacity,
-                borderColor: sq.color,
-                x: px,
-                y: py,
-              }}
-              animate={{ rotate: [sq.rotate, sq.rotate + 360] }}
-              transition={{ duration: sq.duration, repeat: Infinity, ease: "linear" }}
-            />
-          );
-        })}
+        {floatingSquares.map((sq, i) => (
+          <motion.div
+            key={i}
+            className="absolute border"
+            style={{
+              width:       sq.size,
+              height:      sq.size,
+              left:        sq.x,
+              top:         sq.y,
+              opacity:     sq.opacity,
+              rotate:      sq.rotate,
+              borderColor: sq.color,
+            }}
+            animate={{ rotate: [sq.rotate, sq.rotate + 360] }}
+            transition={{ duration: sq.duration, repeat: Infinity, ease: "linear" }}
+          />
+        ))}
       </div>
 
       <div
@@ -111,15 +85,7 @@ export function Hero() {
             data-testid="hero-headline"
           >
             {h.headline.map((line, i) => (
-              <motion.span
-                key={i}
-                className="block overflow-hidden"
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.7, delay: 0.5 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {line}
-              </motion.span>
+              <span key={i} className="block">{line}</span>
             ))}
           </motion.h1>
 

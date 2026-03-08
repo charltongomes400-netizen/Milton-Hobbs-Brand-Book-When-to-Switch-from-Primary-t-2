@@ -1,34 +1,5 @@
-import { useRef } from "react";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
-
-function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const rawX = useMotionValue(0);
-  const rawY = useMotionValue(0);
-  const rotateX = useSpring(useTransform(rawY, [-0.5, 0.5], [5, -5]), { stiffness: 200, damping: 25 });
-  const rotateY = useSpring(useTransform(rawX, [-0.5, 0.5], [-5, 5]), { stiffness: 200, damping: 25 });
-
-  const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-    rawX.set((e.clientX - rect.left) / rect.width - 0.5);
-    rawY.set((e.clientY - rect.top)  / rect.height - 0.5);
-  };
-  const handleLeave = () => { rawX.set(0); rawY.set(0); };
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouse}
-      onMouseLeave={handleLeave}
-      style={{ rotateX, rotateY, transformPerspective: 900, transformStyle: "preserve-3d" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 function ArticleCard({
   article,
@@ -46,34 +17,33 @@ function ArticleCard({
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       data-testid={`insight-card-${index}`}
+      className="group relative p-8 hover:bg-white/[0.05] transition-colors duration-300 overflow-hidden flex flex-col"
     >
-      <TiltCard className="group relative h-full p-8 bg-[#001489] hover:bg-[#001070] transition-colors duration-300 overflow-hidden flex flex-col">
-        <BorderTrace />
-        <div className="flex items-start justify-between mb-7 gap-3">
-          <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase font-medium border border-[#D4AF36]/30 px-3 py-1 whitespace-nowrap">
-            {article.category}
-          </span>
-          <span className="text-white/30 text-[11px] whitespace-nowrap mt-0.5">{article.date}</span>
+      <BorderTrace />
+      <div className="flex items-start justify-between mb-7 gap-3">
+        <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase font-medium border border-[#D4AF36]/30 px-3 py-1 whitespace-nowrap">
+          {article.category}
+        </span>
+        <span className="text-white/30 text-[11px] whitespace-nowrap mt-0.5">{article.date}</span>
+      </div>
+
+      <h3 className="font-heading text-white text-base font-semibold leading-snug tracking-tight mb-4 pr-[15%] group-hover:text-white/90 transition-colors flex-1">
+        {article.title}
+      </h3>
+
+      <p className="text-white/45 text-sm leading-relaxed pr-[15%] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {article.excerpt}
+      </p>
+
+      <div className="flex items-center justify-between mt-7 pt-5 border-t border-white/10">
+        <span className="text-white/30 text-xs">{article.readTime}</span>
+        <div className="flex items-center gap-2 text-[#D4AF36] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span className="text-[10px] tracking-[0.2em] uppercase">{readLabel}</span>
+          <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+            <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
+          </svg>
         </div>
-
-        <h3 className="font-heading text-white text-base font-semibold leading-snug tracking-tight mb-4 pr-[15%] group-hover:text-white/90 transition-colors flex-1">
-          {article.title}
-        </h3>
-
-        <p className="text-white/45 text-sm leading-relaxed pr-[15%] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {article.excerpt}
-        </p>
-
-        <div className="flex items-center justify-between mt-7 pt-5 border-t border-white/10">
-          <span className="text-white/30 text-xs">{article.readTime}</span>
-          <div className="flex items-center gap-2 text-[#D4AF36] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-[10px] tracking-[0.2em] uppercase">{readLabel}</span>
-            <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
-              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
-            </svg>
-          </div>
-        </div>
-      </TiltCard>
+      </div>
     </motion.article>
   );
 }
@@ -120,9 +90,11 @@ export function Insights() {
           </a>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-white/10 divide-y sm:divide-y-0 divide-white/10">
           {ins.articles.map((article, i) => (
-            <ArticleCard key={i} article={article} index={i} readLabel={ins.read} />
+            <div key={i} className={i < ins.articles.length - 1 ? "lg:border-r border-white/10" : ""}>
+              <ArticleCard article={article} index={i} readLabel={ins.read} />
+            </div>
           ))}
         </div>
       </div>
