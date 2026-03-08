@@ -3,16 +3,16 @@ import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 
 const squares = [
-  { size: 56,  x: "8%",   y: "18%", dx: 320,  dy: -180, rotate: 25,  dur: 20, delay: 0,   opacity: 0.55, color: "#092AC7" },
-  { size: 36,  x: "72%",  y: "62%", dx: -240, dy: 130,  rotate: -18, dur: 24, delay: 1.5, opacity: 0.6,  color: "#031B9C" },
-  { size: 96,  x: "18%",  y: "72%", dx: 380,  dy: -220, rotate: 42,  dur: 28, delay: 0.8, opacity: 0.35, color: "#031B9C" },
-  { size: 48,  x: "62%",  y: "8%",  dx: -280, dy: 260,  rotate: -35, dur: 22, delay: 3,   opacity: 0.5,  color: "#092AC7" },
-  { size: 72,  x: "82%",  y: "28%", dx: -350, dy: 120,  rotate: 58,  dur: 30, delay: 0.4, opacity: 0.3,  color: "#031B9C" },
-  { size: 28,  x: "38%",  y: "82%", dx: 220,  dy: -310, rotate: -50, dur: 16, delay: 4,   opacity: 0.65, color: "#092AC7" },
-  { size: 110, x: "4%",   y: "44%", dx: 460,  dy: -90,  rotate: 18,  dur: 35, delay: 1.2, opacity: 0.22, color: "#031B9C" },
-  { size: 42,  x: "88%",  y: "72%", dx: -300, dy: -210, rotate: 72,  dur: 21, delay: 2.2, opacity: 0.48, color: "#092AC7" },
-  { size: 64,  x: "52%",  y: "38%", dx: 180,  dy: 200,  rotate: -22, dur: 26, delay: 3.5, opacity: 0.28, color: "#031B9C" },
-  { size: 20,  x: "25%",  y: "12%", dx: -160, dy: 340,  rotate: 85,  dur: 18, delay: 0.6, opacity: 0.7,  color: "#092AC7" },
+  { size: 56,  x: "8%",   y: "18%", dx: 320,  dy: -180, rotate: 25,  dur: 20, delay: 0,   opacity: 0.55, color: "#051FA7" },
+  { size: 36,  x: "72%",  y: "62%", dx: -240, dy: 130,  rotate: -18, dur: 24, delay: 1.5, opacity: 0.6,  color: "#000335" },
+  { size: 96,  x: "18%",  y: "72%", dx: 380,  dy: -220, rotate: 42,  dur: 28, delay: 0.8, opacity: 0.35, color: "#000335" },
+  { size: 48,  x: "62%",  y: "8%",  dx: -280, dy: 260,  rotate: -35, dur: 22, delay: 3,   opacity: 0.5,  color: "#051FA7" },
+  { size: 72,  x: "82%",  y: "28%", dx: -350, dy: 120,  rotate: 58,  dur: 30, delay: 0.4, opacity: 0.3,  color: "#000335" },
+  { size: 28,  x: "38%",  y: "82%", dx: 220,  dy: -310, rotate: -50, dur: 16, delay: 4,   opacity: 0.65, color: "#051FA7" },
+  { size: 110, x: "4%",   y: "44%", dx: 460,  dy: -90,  rotate: 18,  dur: 35, delay: 1.2, opacity: 0.22, color: "#000335" },
+  { size: 42,  x: "88%",  y: "72%", dx: -300, dy: -210, rotate: 72,  dur: 21, delay: 2.2, opacity: 0.48, color: "#051FA7" },
+  { size: 64,  x: "52%",  y: "38%", dx: 180,  dy: 200,  rotate: -22, dur: 26, delay: 3.5, opacity: 0.28, color: "#000335" },
+  { size: 20,  x: "25%",  y: "12%", dx: -160, dy: 340,  rotate: 85,  dur: 18, delay: 0.6, opacity: 0.7,  color: "#051FA7" },
 ];
 
 export function Hero() {
