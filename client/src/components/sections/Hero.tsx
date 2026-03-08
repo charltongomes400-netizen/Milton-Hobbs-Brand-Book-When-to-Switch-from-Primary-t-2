@@ -2,14 +2,17 @@ import { type ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 
-const floatingSquares = [
-  { size: 320, x: "68%", y: "8%",  rotate: 15,  duration: 22, opacity: 0.07,  color: "#001489" },
-  { size: 200, x: "82%", y: "52%", rotate: -28, duration: 26, opacity: 0.08,  color: "#001489" },
-  { size: 130, x: "58%", y: "18%", rotate: 42,  duration: 18, opacity: 0.06,  color: "#D4AF36" },
-  { size: 460, x: "60%", y: "30%", rotate: 6,   duration: 32, opacity: 0.03,  color: "#001489" },
-  { size: 100, x: "86%", y: "28%", rotate: 65,  duration: 15, opacity: 0.09,  color: "#001489" },
-  { size: 240, x: "4%",  y: "58%", rotate: -12, duration: 24, opacity: 0.045, color: "#001489" },
-  { size: 160, x: "14%", y: "16%", rotate: 32,  duration: 29, opacity: 0.05,  color: "#D4AF36" },
+const squares = [
+  { size: 56,  x: "8%",   y: "18%", dx: 320,  dy: -180, rotate: 25,  dur: 20, delay: 0,   opacity: 0.55 },
+  { size: 36,  x: "72%",  y: "62%", dx: -240, dy: 130,  rotate: -18, dur: 24, delay: 1.5, opacity: 0.6  },
+  { size: 96,  x: "18%",  y: "72%", dx: 380,  dy: -220, rotate: 42,  dur: 28, delay: 0.8, opacity: 0.35 },
+  { size: 48,  x: "62%",  y: "8%",  dx: -280, dy: 260,  rotate: -35, dur: 22, delay: 3,   opacity: 0.5  },
+  { size: 72,  x: "82%",  y: "28%", dx: -350, dy: 120,  rotate: 58,  dur: 30, delay: 0.4, opacity: 0.3  },
+  { size: 28,  x: "38%",  y: "82%", dx: 220,  dy: -310, rotate: -50, dur: 16, delay: 4,   opacity: 0.65 },
+  { size: 110, x: "4%",   y: "44%", dx: 460,  dy: -90,  rotate: 18,  dur: 35, delay: 1.2, opacity: 0.22 },
+  { size: 42,  x: "88%",  y: "72%", dx: -300, dy: -210, rotate: 72,  dur: 21, delay: 2.2, opacity: 0.48 },
+  { size: 64,  x: "52%",  y: "38%", dx: 180,  dy: 200,  rotate: -22, dur: 26, delay: 3.5, opacity: 0.28 },
+  { size: 20,  x: "25%",  y: "12%", dx: -160, dy: 340,  rotate: 85,  dur: 18, delay: 0.6, opacity: 0.7  },
 ];
 
 export function Hero() {
@@ -20,46 +23,60 @@ export function Hero() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen bg-white flex items-center overflow-hidden"
+      className="relative min-h-screen bg-[#001489] flex items-center overflow-hidden"
     >
+      {/* Subtle grid */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(0,20,137,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,20,137,0.04) 1px, transparent 1px)
+            linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)
           `,
           backgroundSize: "80px 80px",
         }}
       />
 
+      {/* Travelling squares */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {floatingSquares.map((sq, i) => (
+        {squares.map((sq, i) => (
           <motion.div
             key={i}
-            className="absolute border"
+            className="absolute"
             style={{
-              width:       sq.size,
-              height:      sq.size,
-              left:        sq.x,
-              top:         sq.y,
-              opacity:     sq.opacity,
-              rotate:      sq.rotate,
-              borderColor: sq.color,
+              width:           sq.size,
+              height:          sq.size,
+              left:            sq.x,
+              top:             sq.y,
+              opacity:         sq.opacity,
+              backgroundColor: "#092AC7",
             }}
-            animate={{ rotate: [sq.rotate, sq.rotate + 360] }}
-            transition={{ duration: sq.duration, repeat: Infinity, ease: "linear" }}
+            animate={{
+              x:      [0, sq.dx, 0],
+              y:      [0, sq.dy, 0],
+              rotate: [sq.rotate, sq.rotate + 180, sq.rotate],
+            }}
+            transition={{
+              duration:   sq.dur,
+              delay:      sq.delay,
+              repeat:     Infinity,
+              repeatType: "mirror",
+              ease:       "easeInOut",
+            }}
           />
         ))}
       </div>
 
+      {/* Left-side content fade */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 60% 100% at 10% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 70%)",
+          background:
+            "radial-gradient(ellipse 65% 100% at 12% 55%, rgba(0,20,137,0.85) 0%, rgba(0,20,137,0.4) 55%, transparent 80%)",
         }}
       />
 
+      {/* Content */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-8 pt-36 pb-24 w-full">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -81,7 +98,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-heading text-[#001489] font-bold text-[clamp(3rem,6vw,5.5rem)] leading-[1.05] tracking-tight mb-8"
+            className="font-heading text-white font-bold text-[clamp(3rem,6vw,5.5rem)] leading-[1.05] tracking-tight mb-8"
             data-testid="hero-headline"
           >
             {h.headline.map((line, i) => (
@@ -100,7 +117,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.8 }}
-            className="text-[#141414]/60 text-base leading-relaxed max-w-[560px] mb-12"
+            className="text-white/60 text-base leading-relaxed max-w-[560px] mb-12"
             data-testid="hero-subheadline"
           >
             {h.subheadline}
@@ -122,6 +139,7 @@ export function Hero() {
         </motion.div>
       </div>
 
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -131,9 +149,9 @@ export function Hero() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-px h-10 bg-gradient-to-b from-[#001489]/40 to-transparent"
+          className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent"
         />
-        <span className="text-[#001489]/40 text-[10px] tracking-[0.25em] uppercase">
+        <span className="text-white/35 text-[10px] tracking-[0.25em] uppercase">
           {t.hero.scroll}
         </span>
       </motion.div>
@@ -158,8 +176,8 @@ function TracingButton({
       data-testid={testId}
       className={`relative group inline-flex items-center px-8 py-[14px] text-xs font-semibold tracking-[0.18em] uppercase transition-colors duration-300 ${
         variant === "solid"
-          ? "bg-[#001489] text-white hover:bg-[#0A24C4]"
-          : "border border-[#001489]/30 text-[#001489] hover:border-[#001489] hover:bg-[#001489]/5"
+          ? "bg-white text-[#001489] hover:bg-[#D4AF36] hover:text-white"
+          : "border border-white/30 text-white hover:border-white hover:bg-white/10"
       }`}
     >
       {children}
