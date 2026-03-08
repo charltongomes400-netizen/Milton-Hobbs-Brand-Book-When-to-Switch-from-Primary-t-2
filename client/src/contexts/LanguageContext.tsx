@@ -74,9 +74,9 @@ const translations = {
     },
     insights: {
       eyebrow: "Publications & Insights",
-      headline: "Thought leadership.",
-      viewAll: "View all",
-      read: "Read",
+      headline: "Latest Thinking from Our Lawyers",
+      viewAll: "View All Publications",
+      read: "Read Article",
       articles: [
         {
           category: "Compliance",
@@ -230,9 +230,9 @@ const translations = {
     },
     insights: {
       eyebrow: "Publications & Perspectives",
-      headline: "Réflexions d'experts.",
-      viewAll: "Tout voir",
-      read: "Lire",
+      headline: "Les Dernières Réflexions de Nos Avocats",
+      viewAll: "Voir Toutes les Publications",
+      read: "Lire l'Article",
       articles: [
         {
           category: "Conformité",
