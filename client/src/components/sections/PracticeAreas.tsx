@@ -1,7 +1,36 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 
 const gridAreas = ["corp", "estate", "litig", "arb", "employ", "banking", "tax", "immig", "ip", "tech"];
+
+function TiltCard({ children, className, style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const rawX = useMotionValue(0);
+  const rawY = useMotionValue(0);
+  const rotateX = useSpring(useTransform(rawY, [-0.5, 0.5], [5, -5]), { stiffness: 200, damping: 25 });
+  const rotateY = useSpring(useTransform(rawX, [-0.5, 0.5], [-5, 5]), { stiffness: 200, damping: 25 });
+
+  const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    rawX.set((e.clientX - rect.left) / rect.width - 0.5);
+    rawY.set((e.clientY - rect.top)  / rect.height - 0.5);
+  };
+  const handleLeave = () => { rawX.set(0); rawY.set(0); };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouse}
+      onMouseLeave={handleLeave}
+      style={{ rotateX, rotateY, transformPerspective: 900, transformStyle: "preserve-3d", ...style }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 function PracticeCard({
   title,
@@ -23,29 +52,32 @@ function PracticeCard({
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.4) }}
       data-testid={`practice-card-${index}`}
-      className="group relative p-7 lg:p-8 hover:bg-white/[0.05] transition-all duration-300 overflow-hidden cursor-pointer flex flex-col"
       style={{ gridArea: area }}
     >
-      <BorderTrace />
-      <div className="flex-1 flex flex-col">
-        <span className="text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium block mb-5">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <h3 className="font-heading text-white font-semibold tracking-tight text-base leading-snug mb-3 pr-[15%]">
-          {title}
-        </h3>
-        <p className="text-white/45 text-sm leading-relaxed mt-auto pt-4 pr-[15%] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {description}
-        </p>
-      </div>
-      <div className="flex items-center gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
-        <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase">
-          {learnMore}
-        </span>
-        <svg className="w-3 h-3 text-[#D4AF36]" fill="none" viewBox="0 0 12 12">
-          <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
-        </svg>
-      </div>
+      <TiltCard
+        className="group relative w-full h-full p-7 lg:p-8 bg-[#001070] hover:bg-[#001260] transition-all duration-300 overflow-hidden cursor-pointer flex flex-col"
+      >
+        <BorderTrace />
+        <div className="flex-1 flex flex-col">
+          <span className="text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium block mb-5">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h3 className="font-heading text-white font-semibold tracking-tight text-base leading-snug mb-3 pr-[15%]">
+            {title}
+          </h3>
+          <p className="text-white/45 text-sm leading-relaxed mt-auto pt-4 pr-[15%] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            {description}
+          </p>
+        </div>
+        <div className="flex items-center gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
+          <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase">
+            {learnMore}
+          </span>
+          <svg className="w-3 h-3 text-[#D4AF36]" fill="none" viewBox="0 0 12 12">
+            <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
+          </svg>
+        </div>
+      </TiltCard>
     </motion.div>
   );
 }

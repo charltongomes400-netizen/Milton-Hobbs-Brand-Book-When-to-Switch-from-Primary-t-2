@@ -21,6 +21,15 @@ const translations = {
       cta2: "Contact Us",
       scroll: "Scroll",
     },
+    stats: {
+      label: "The Firm in Numbers",
+      items: [
+        { value: 4,   suffix: "",  label: "Languages Spoken" },
+        { value: 200, suffix: "+", label: "Matters Handled" },
+        { value: 3,   suffix: "",  label: "Global Offices" },
+        { value: 25,  suffix: "+", label: "Years Combined Experience" },
+      ],
+    },
     diff: {
       eyebrow: "Why Milton Hobbs",
       headline: "Counsel built for complexity.",
@@ -139,6 +148,15 @@ const translations = {
       cta1: "Prendre Rendez-vous",
       cta2: "Nous Contacter",
       scroll: "Défiler",
+    },
+    stats: {
+      label: "Le Cabinet en Chiffres",
+      items: [
+        { value: 4,   suffix: "",  label: "Langues Parlées" },
+        { value: 200, suffix: "+", label: "Dossiers Traités" },
+        { value: 3,   suffix: "",  label: "Bureaux Mondiaux" },
+        { value: 25,  suffix: "+", label: "Ans d'Expérience" },
+      ],
     },
     diff: {
       eyebrow: "Pourquoi Milton Hobbs",
