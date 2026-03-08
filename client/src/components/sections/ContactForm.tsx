@@ -27,7 +27,7 @@ export function ContactForm() {
     <section
       id="contact"
       data-testid="contact-section"
-      className="bg-[#001489] py-28 px-8"
+      className="bg-white py-28 px-8"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -40,7 +40,7 @@ export function ContactForm() {
           <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-4">
             {c.eyebrow}
           </p>
-          <h2 className="font-heading text-white text-[clamp(1.8rem,3vw,2.8rem)] font-semibold tracking-tight">
+          <h2 className="font-heading text-[#001489] text-[clamp(1.8rem,3vw,2.8rem)] font-semibold tracking-tight">
             {c.headline}
           </h2>
         </motion.div>
@@ -53,7 +53,7 @@ export function ContactForm() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex flex-col gap-10"
           >
-            <p className="text-white/55 text-sm leading-relaxed">{c.subtext}</p>
+            <p className="text-[#001489]/60 text-sm leading-relaxed">{c.subtext}</p>
 
             <div>
               <p className="text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium mb-5">
@@ -61,15 +61,15 @@ export function ContactForm() {
               </p>
               <div className="flex flex-col gap-6">
                 <div>
-                  <p className="text-white text-sm font-semibold mb-1">{c.dubaiLabel}</p>
+                  <p className="text-[#001489] text-sm font-semibold mb-1">{c.dubaiLabel}</p>
                   {f.dubaiAddr.map((line, i) => (
-                    <p key={i} className="text-white/45 text-xs leading-relaxed">{line}</p>
+                    <p key={i} className="text-[#001489]/50 text-xs leading-relaxed">{line}</p>
                   ))}
                 </div>
                 <div>
-                  <p className="text-white text-sm font-semibold mb-1">{c.parisLabel}</p>
+                  <p className="text-[#001489] text-sm font-semibold mb-1">{c.parisLabel}</p>
                   {f.parisAddr.map((line, i) => (
-                    <p key={i} className="text-white/45 text-xs leading-relaxed">{line}</p>
+                    <p key={i} className="text-[#001489]/50 text-xs leading-relaxed">{line}</p>
                   ))}
                 </div>
               </div>
@@ -79,14 +79,14 @@ export function ContactForm() {
               <a
                 href={`mailto:${f.email}`}
                 data-testid="contact-email"
-                className="text-white/55 hover:text-[#D4AF36] text-sm transition-colors"
+                className="text-[#001489]/60 hover:text-[#D4AF36] text-sm transition-colors"
               >
                 {f.email}
               </a>
               <a
                 href={`tel:${f.phone}`}
                 data-testid="contact-phone"
-                className="text-white/55 hover:text-[#D4AF36] text-sm transition-colors"
+                className="text-[#001489]/60 hover:text-[#D4AF36] text-sm transition-colors"
               >
                 {f.phone}
               </a>
@@ -102,15 +102,15 @@ export function ContactForm() {
             {submitted ? (
               <div
                 data-testid="contact-success"
-                className="border border-[#D4AF36]/30 p-10 flex flex-col gap-4 h-full justify-center"
+                className="border border-[#D4AF36]/40 p-10 flex flex-col gap-4 h-full justify-center"
               >
                 <div className="flex items-center gap-3 mb-2">
                   <svg className="w-5 h-5 text-[#D4AF36]" fill="none" viewBox="0 0 20 20">
                     <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <h3 className="font-heading text-white text-lg font-semibold">{c.successTitle}</h3>
+                  <h3 className="font-heading text-[#001489] text-lg font-semibold">{c.successTitle}</h3>
                 </div>
-                <p className="text-white/55 text-sm leading-relaxed">{c.successText}</p>
+                <p className="text-[#001489]/60 text-sm leading-relaxed">{c.successText}</p>
               </div>
             ) : (
               <form
@@ -127,7 +127,7 @@ export function ContactForm() {
                     onChange={handleChange}
                     placeholder={c.namePlaceholder}
                     data-testid="input-name"
-                    className="bg-white/[0.05] border border-white/10 text-white placeholder-white/25 text-sm px-4 py-3.5 outline-none focus:border-[#D4AF36]/50 transition-colors"
+                    className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#D4AF36]/60 transition-colors"
                   />
                   <input
                     type="email"
@@ -137,7 +137,7 @@ export function ContactForm() {
                     onChange={handleChange}
                     placeholder={c.emailPlaceholder}
                     data-testid="input-email"
-                    className="bg-white/[0.05] border border-white/10 text-white placeholder-white/25 text-sm px-4 py-3.5 outline-none focus:border-[#D4AF36]/50 transition-colors"
+                    className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#D4AF36]/60 transition-colors"
                   />
                 </div>
 
@@ -148,8 +148,8 @@ export function ContactForm() {
                     value={form.subject}
                     onChange={handleChange}
                     data-testid="select-subject"
-                    className="w-full bg-white/[0.05] border border-white/10 text-sm px-4 py-3.5 outline-none focus:border-[#D4AF36]/50 transition-colors appearance-none cursor-pointer"
-                    style={{ color: form.subject ? "white" : "rgba(255,255,255,0.25)" }}
+                    className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3.5 outline-none focus:border-[#D4AF36]/60 transition-colors appearance-none cursor-pointer"
+                    style={{ color: form.subject ? "#001489" : "rgba(0,20,137,0.3)" }}
                   >
                     <option value="" disabled hidden>{c.subjectPlaceholder}</option>
                     {c.subjectOptions.map((opt, i) => (
@@ -159,7 +159,7 @@ export function ContactForm() {
                     ))}
                   </select>
                   <svg
-                    className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-white/30"
+                    className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-[#001489]/30"
                     fill="none"
                     viewBox="0 0 12 12"
                   >
@@ -175,7 +175,7 @@ export function ContactForm() {
                   onChange={handleChange}
                   placeholder={c.messagePlaceholder}
                   data-testid="input-message"
-                  className="bg-white/[0.05] border border-white/10 text-white placeholder-white/25 text-sm px-4 py-3.5 outline-none focus:border-[#D4AF36]/50 transition-colors resize-none"
+                  className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#D4AF36]/60 transition-colors resize-none"
                 />
 
                 <button
