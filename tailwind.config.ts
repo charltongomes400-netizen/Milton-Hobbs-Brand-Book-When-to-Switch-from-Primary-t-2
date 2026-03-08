@@ -1,15 +1,17 @@
 module.exports = {
-  content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}",
-    "./src/**/*.{html,js,ts,jsx,tsx}",
-    "app/**/*.{ts,tsx}",
-    "components/**/*.{ts,tsx}",
+  content: [
+    "./client/index.html",
+    "./client/src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
       colors: {
+        "mh-navy": "#0A0F2E",
+        "mh-dark": "#060B1F",
+        "mh-gold": "#C9A84C",
+        "mh-gold-light": "#E8C77A",
         "blue-1": "var(--blue-1)",
         "blue-5": "var(--blue-5)",
-        "contentalpha-80": "var(--contentalpha-80)",
         "neutral-colorswhite": "var(--neutral-colorswhite)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -46,19 +48,18 @@ module.exports = {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "0px",
+        md: "0px",
+        sm: "0px",
+        DEFAULT: "0px",
       },
       fontFamily: {
         sans: [
+          "Inter",
+          "Plus Jakarta Sans",
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-          '"Noto Color Emoji"',
         ],
       },
       keyframes: {

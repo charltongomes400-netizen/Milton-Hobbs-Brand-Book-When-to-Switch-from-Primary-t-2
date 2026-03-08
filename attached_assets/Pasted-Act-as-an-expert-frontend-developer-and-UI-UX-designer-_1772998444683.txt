@@ -1,0 +1,81 @@
+Act as an expert frontend developer and UI/UX designer. Build the highly responsive, premium Home Page for a boutique corporate law firm named "Milton Hobbs". Use Next.js, Tailwind CSS, and Framer Motion for smooth, modern animations.
+
+1. Global Design System & Rules
+
+Aesthetic: Global authority meets boutique exclusivity. Premium, formal, and highly modern.
+
+Strict Ban: Absolutely NO cliché legal imagery (no gavels, scales of justice, law books, or pillars).
+
+Colors: Deep, authoritative corporate background (Navy or Dark Forest Green) with crisp white text. Use a sophisticated accent color (subtle gold or lime) for interactive states.
+
+Typography: Clean, geometric sans-serif (e.g., Inter, Roobert, or similar).
+
+Language Support: Build the layout with 20% extra padding in all text containers to safely accommodate French text expansion later. Include a non-functional but styled EN/FR toggle in the header.
+
+2. Animation & Interaction Directives
+
+The firm's tagline is "Reason. Rigor. Resolution." To reflect this, use sharp, clean lines and square/geometric elements.
+
+Hover States: Implement square border-tracing animations. When hovering over cards or buttons, a crisp, 1px accent-colored line should smoothly animate around the square perimeter.
+
+3. Home Page Structure (Top to Bottom)
+
+A. Header (Fixed/Sticky)
+
+Left: Clean text logo "Milton Hobbs".
+
+Center: Navigation links (Home, Our Firm, Our Expertise, Publications & Insights, Careers, Contact).
+
+Right: Language toggle (EN | FR).
+
+B. Hero Section
+
+Background: A dark, slow-moving, abstract 3D geometric grid or rotating glass-like square structures using Framer Motion or Three.js.
+
+Headline (H1): "Reason. Rigor. Resolution."
+
+Sub-headline: "Milton Hobbs is a boutique corporate law firm delivering clear, composed, and commercially astute counsel. Bridging Europe and the GCC."
+
+CTAs: Two sharp, square-edged buttons. Primary: "Book a consultation" (Solid accent fill). Secondary: "Contact us" (Outline style).
+
+C. Differentiators (4-Column Grid)
+
+A clean, minimalist section featuring 4 premium, outline-style icons with short text:
+
+Boutique model → direct partner access
+
+Trilingual fluency (English, French, Arabic)
+
+Cross-border structuring expertise (UAE ↔ France)
+
+European savoir-faire + Gulf market understanding
+
+D. Practice Areas (Bento Box Layout)
+
+Display the firm's services using an asymmetrical, interactive masonry/Bento-box grid.
+
+Include these exactly: Corporate & Commercial, Real Estate & Property, Litigation & Dispute Resolution, Arbitration & Mediation, Employment & Labour, Banking & Finance, Tax, Intellectual Property, Technology / Startups, Immigration.
+
+Interaction: Use the square border-tracing animation on hover for each bento card.
+
+E. Insights & Thought Leadership
+
+A sleek editorial section displaying 4 modern article cards (to establish authority in place of case studies).
+
+Card Titles:
+
+Navigating Cross-Border Compliance in the Gulf
+
+The Future of Family Business Succession in the UAE
+
+Digital Transformation & Data Privacy in the GCC
+
+Strategic M&A Structuring for 2026
+
+F. Footer
+
+Locations Grid: Two distinct columns. Left: "Dubai, UAE - Level 2, The Offices 1, One Central, Dubai World Trade Centre". Right: "Paris, France - 11, Boulevard Sébastopol, 75001".
+
+Contact details: contact@miltonhobbs.com | +971 4 523 2421.
+
+Bottom Bar: Copyright, Privacy Policy, Cookie Notice, and a strict "Not legal advice / No attorney-client relationship" disclaimer text.
