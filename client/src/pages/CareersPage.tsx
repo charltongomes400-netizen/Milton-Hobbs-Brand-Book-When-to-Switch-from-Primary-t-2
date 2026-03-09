@@ -330,17 +330,13 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
 }
 
 function JobCard({ job, onApply }: { job: Job; onApply: (job: Job) => void }) {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className={`group relative border-b border-gray-100 transition-all duration-200 ${hovered ? "bg-[#000A4F]" : "bg-white"}`}
+      className="relative border-b border-gray-100 bg-white"
       data-testid={`job-card-${job.id}`}
     >
       <div className="max-w-[1400px] mx-auto px-8 py-7 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
@@ -349,43 +345,36 @@ function JobCard({ job, onApply }: { job: Job; onApply: (job: Job) => void }) {
           <div className="flex flex-wrap items-center gap-2.5 mb-2">
             <span
               className="text-[9px] tracking-[0.28em] uppercase font-bold px-2.5 py-1"
-              style={{
-                background: hovered ? "rgba(212,175,54,0.15)" : "#F0F4FF",
-                color: hovered ? "#D4AF36" : "#001489",
-              }}
+              style={{ background: "#F0F4FF", color: "#001489" }}
             >
               {job.department}
             </span>
-            <span className={`flex items-center gap-1.5 text-[11px] font-medium tracking-wide ${hovered ? "text-white/50" : "text-gray-400"}`}>
+            <span className="flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-gray-400">
               {LOCATION_ICONS[job.location]}
               {job.location}
             </span>
           </div>
 
-          <h3 className={`font-heading text-xl font-bold tracking-tight leading-snug transition-colors duration-200 ${hovered ? "text-white" : "text-[#000A4F]"}`}>
+          <h3 className="font-heading text-xl font-bold tracking-tight leading-snug text-[#000A4F]">
             {job.title}
           </h3>
 
-          <p className={`text-sm mt-2 leading-relaxed line-clamp-2 transition-colors duration-200 ${hovered ? "text-white/55" : "text-gray-500"}`}>
+          <p className="text-sm mt-2 leading-relaxed line-clamp-2 text-gray-500">
             {job.summary}
           </p>
         </div>
 
         {/* Middle — meta */}
         <div className="flex md:flex-col gap-3 md:gap-1.5 md:min-w-[140px] md:text-right">
-          <span className={`text-xs tracking-wide transition-colors ${hovered ? "text-white/50" : "text-gray-400"}`}>{job.type}</span>
-          <span className={`text-xs tracking-wide transition-colors ${hovered ? "text-white/50" : "text-gray-400"}`}>{job.level}</span>
+          <span className="text-xs tracking-wide text-gray-400">{job.type}</span>
+          <span className="text-xs tracking-wide text-gray-400">{job.level}</span>
         </div>
 
         {/* Right — CTA */}
         <div className="flex-shrink-0">
           <button
             onClick={() => onApply(job)}
-            className={`text-xs tracking-[0.2em] uppercase font-semibold px-6 py-3 border transition-all duration-200 flex items-center gap-2.5 ${
-              hovered
-                ? "border-[#D4AF36] text-[#D4AF36] hover:bg-[#D4AF36] hover:text-[#000A4F]"
-                : "border-[#001489] text-[#001489] hover:bg-[#001489] hover:text-white"
-            }`}
+            className="text-xs tracking-[0.2em] uppercase font-semibold px-6 py-3 border border-[#001489] text-[#001489] hover:bg-[#001489] hover:text-white transition-all duration-200 flex items-center gap-2.5"
             data-testid={`button-apply-${job.id}`}
           >
             Apply Now
