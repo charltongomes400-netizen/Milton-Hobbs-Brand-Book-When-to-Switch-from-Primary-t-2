@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
+import { articles } from "@/data/articles";
 
 const categoryColors: Record<string, string> = {
   Compliance:          "text-[#0096C7]",
@@ -36,15 +37,18 @@ function ArticleCard({
   article,
   index,
   readLabel,
+  slug,
 }: {
   article: { category: string; title: string; excerpt: string; readTime: string; date: string };
   index: number;
   readLabel: string;
+  slug: string;
 }) {
   const colorClass = categoryColors[article.category] ?? "text-[#6B7280]";
 
   return (
-    <motion.article
+    <motion.a
+      href={`/insights/${slug}`}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -82,7 +86,7 @@ function ArticleCard({
           </div>
         </div>
       </div>
-    </motion.article>
+    </motion.a>
   );
 }
 
@@ -130,7 +134,7 @@ export function Insights() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {ins.articles.map((article, i) => (
-            <ArticleCard key={i} article={article} index={i} readLabel={ins.read} />
+            <ArticleCard key={i} article={article} index={i} readLabel={ins.read} slug={articles[i]?.slug ?? ""} />
           ))}
         </div>
       </div>
