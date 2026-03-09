@@ -5,6 +5,17 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
 import { getArticleBySlug, getRelatedArticles, type ArticleData, type ArticleSection } from "@/data/articles";
+import imgCompliance from "@assets/generated_images/insight-compliance.png";
+import imgFamilyBusiness from "@assets/generated_images/insight-family-business.png";
+import imgDigitalPrivacy from "@assets/generated_images/insight-digital-privacy.png";
+import imgMA from "@assets/generated_images/insight-ma-structuring.png";
+
+const slugImageMap: Record<string, string> = {
+  "navigating-cross-border-compliance-gulf": imgCompliance,
+  "family-business-succession-uae": imgFamilyBusiness,
+  "digital-transformation-data-privacy-gcc": imgDigitalPrivacy,
+  "strategic-ma-structuring-2026": imgMA,
+};
 
 const PRACTICE_AREAS = [
   "Corporate & Commercial",
@@ -49,7 +60,7 @@ export default function ArticlePage() {
     <LanguageProvider>
       <div className="bg-white min-h-screen">
         <Header />
-        <ArticleHero article={article} />
+        <ArticleHero article={article} heroImg={slugImageMap[article.slug]} />
         <ArticleContent article={article} onContact={() => setModalOpen(true)} />
         <ArticleCTA onContact={() => setModalOpen(true)} />
         <RelatedArticles slug={article.slug} />
@@ -252,9 +263,22 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
   );
 }
 
-function ArticleHero({ article }: { article: ArticleData }) {
+function ArticleHero({ article, heroImg }: { article: ArticleData; heroImg?: string }) {
   return (
     <section className="bg-[#001489] pt-36 pb-24 px-8 relative overflow-hidden">
+      {heroImg && (
+        <motion.img
+          src={heroImg}
+          alt=""
+          aria-hidden="true"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ opacity: 0.12, mixBlendMode: "luminosity" }}
+        />
+      )}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#001489] via-[#001489]/85 to-[#001489]/60" />
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.04]"
         style={{
