@@ -77,17 +77,17 @@ function PrecisionVisual() {
           const [tx, ty] = POSITIONS[idx % POSITIONS.length];
           idx++;
           await Promise.all([
-            animate(rx, tx, { duration: 0.28, ease: "easeInOut" }),
-            animate(ry, ty, { duration: 0.28, ease: "easeInOut" }),
+            animate(rx, tx, { duration: 1.0, ease: "easeInOut" }),
+            animate(ry, ty, { duration: 1.0, ease: "easeInOut" }),
           ]);
-          await new Promise(r => setTimeout(r, 60));
+          await new Promise(r => setTimeout(r, 400));
         }
 
         if (!running.current) return;
 
         await Promise.all([
-          animate(rx, 0, { duration: 0.22, ease: [0.22, 1, 0.36, 1] }),
-          animate(ry, 0, { duration: 0.22, ease: [0.22, 1, 0.36, 1] }),
+          animate(rx, 0, { duration: 0.8, ease: [0.22, 1, 0.36, 1] }),
+          animate(ry, 0, { duration: 0.8, ease: [0.22, 1, 0.36, 1] }),
         ]);
 
         setLocked(true);
