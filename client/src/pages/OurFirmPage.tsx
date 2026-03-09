@@ -1002,32 +1002,36 @@ export default function OurFirmPage() {
                   While their philosophies diverged, together they represent the necessary balance between justice and control, between empathy and authority. At Milton Hobbs, we embrace this duality — true clarity lies not in choosing one over the other, but in navigating the tension between them with purpose.
                 </motion.p>
 
-                <div className="space-y-6">
+                <div className="grid grid-cols-2 gap-px bg-white/8">
                   {[
-                    { year: "2020", event: "Founded in Dubai", detail: "Milton Hobbs opens its first office in Dubai, UAE — establishing a corporate law practice focused on GCC-bound capital and regulatory work." },
-                    { year: "2022", event: "Paris Expansion", detail: "We open our second office on Boulevard Sébastopol, Paris — extending our reach to European transactions, French law, and continental Europe." },
-                    { year: "2024", event: "Cross-Border Integration", detail: "Both offices now operate as a unified, bilingual team — providing seamless counsel across French and UAE law simultaneously." },
-                    { year: "2026", event: "Expanding Practice Areas", detail: "Ten practice areas now active. A growing team of international lawyers serving clients across four continents." },
-                  ].map((item, i) => (
+                    {
+                      label: "Strategic",
+                      body: "Every engagement is approached with long-term commercial logic. We think three moves ahead — so you are never caught off guard.",
+                    },
+                    {
+                      label: "Approachable",
+                      body: "Elite counsel should not feel distant. We communicate with clarity and warmth, treating every client as a genuine partner.",
+                    },
+                    {
+                      label: "Client-Centric",
+                      body: "Your objectives shape everything we do. Our model is built around your matter, your timeline, and your preferred outcome.",
+                    },
+                    {
+                      label: "Principled",
+                      body: "We do not cut corners or compromise on ethics. Our integrity is the foundation every piece of advice is built upon.",
+                    },
+                  ].map((v, i) => (
                     <motion.div
                       key={i}
-                      data-testid={`timeline-item-${i}`}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={missionInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ duration: 0.6, delay: 0.3 + i * 0.12 }}
-                      className="flex gap-6 group"
+                      data-testid={`brand-value-${i}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={missionInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }}
+                      className="bg-[#001489] p-7 group hover:bg-[#000A4F] transition-colors duration-300"
                     >
-                      <div className="flex flex-col items-center">
-                        <div className="w-2 h-2 bg-[#D4AF36] rounded-full mt-1.5 flex-shrink-0" />
-                        {i < 3 && <div className="w-px flex-1 bg-white/10 mt-2 mb-0 min-h-[40px]" />}
-                      </div>
-                      <div className="pb-4">
-                        <div className="flex items-baseline gap-3 mb-1">
-                          <span className="text-[#D4AF36] text-xs tracking-[0.3em] font-bold">{item.year}</span>
-                          <span className="text-white font-heading font-semibold text-base tracking-tight">{item.event}</span>
-                        </div>
-                        <p className="text-white/50 text-sm leading-relaxed">{item.detail}</p>
-                      </div>
+                      <div className="w-6 h-px bg-[#D4AF36] mb-4 group-hover:w-10 transition-all duration-300" />
+                      <p className="font-heading text-white font-bold text-base tracking-tight mb-2">{v.label}</p>
+                      <p className="text-white/45 text-xs leading-relaxed">{v.body}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -1100,7 +1104,7 @@ export default function OurFirmPage() {
                 transition={{ duration: 0.7, delay: 0.2 }}
                 className="text-[#000A4F]/55 text-base leading-relaxed max-w-xl self-end"
               >
-                This brand embodies trust, professionalism, and sophistication. With a confident yet approachable tone, it reflects a deep commitment to integrity, clarity, and strategic thinking — reinforcing a sense of authority and discretion in every engagement.
+                We are strategic in our thinking, approachable in our manner, client-centric in our model, and principled in everything we do. These are not aspirations — they are the standards we hold ourselves to on every instruction, for every client.
               </motion.p>
             </div>
 
