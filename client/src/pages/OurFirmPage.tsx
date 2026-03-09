@@ -1052,18 +1052,6 @@ export default function OurFirmPage() {
                     </div>
                   </div>
                 </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={missionInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.7 }}
-                  className="mt-8 p-8 border border-white/10"
-                >
-                  <p className="text-[#D4AF36] text-[10px] tracking-[0.35em] uppercase font-bold mb-4">Our Promise</p>
-                  <p className="font-heading text-white font-semibold text-lg leading-snug tracking-tight">
-                    To Bring Precision to Complexity, Composure to Challenge, and a Client-First Mindset to Every Engagement.
-                  </p>
-                </motion.div>
               </div>
             </div>
           </div>
