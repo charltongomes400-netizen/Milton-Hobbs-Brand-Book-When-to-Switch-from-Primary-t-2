@@ -483,63 +483,6 @@ function CareersPageInner() {
         </div>
       </section>
 
-      {/* ── WHY JOIN US ── */}
-      <section className="border-b border-gray-100" data-header-theme="light">
-        <div className="max-w-[1400px] mx-auto px-8 py-16 grid grid-cols-2 lg:grid-cols-4 gap-0">
-          {[
-            {
-              icon: (
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
-                </svg>
-              ),
-              title: "Excellence First",
-              desc: "We hold ourselves to the highest professional standards in every engagement.",
-            },
-            {
-              icon: (
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.4" />
-                  <path d="M2 12h4m12 0h4M12 2v4m0 12v4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" opacity="0.5" />
-                  <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.3" />
-                </svg>
-              ),
-              title: "Global Reach",
-              desc: "Dubai and Paris offices — serving clients across MENA, Europe, and beyond.",
-            },
-            {
-              icon: (
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-                  <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="1.4" />
-                  <path d="M23 21v-2a4 4 0 00-3-3.87" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-                  <path d="M16 3.13a4 4 0 010 7.75" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-                </svg>
-              ),
-              title: "Boutique Culture",
-              desc: "You will be known by name — not a number. Real responsibility from day one.",
-            },
-            {
-              icon: (
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24">
-                  <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              ),
-              title: "Meaningful Work",
-              desc: "Complex mandates. Sophisticated clients. Problems that require real legal thinking.",
-            },
-          ].map(({ icon, title, desc }) => (
-            <div key={title} className="flex flex-col gap-4 px-8 py-10 border-l first:border-l-0 border-gray-100">
-              <div className="text-[#001489]">{icon}</div>
-              <div>
-                <h3 className="font-heading text-[#000A4F] font-bold text-base tracking-tight mb-2">{title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ── POSITIONS ── */}
       <section data-header-theme="light" className="pb-24">
         {/* Sticky filter bar */}
