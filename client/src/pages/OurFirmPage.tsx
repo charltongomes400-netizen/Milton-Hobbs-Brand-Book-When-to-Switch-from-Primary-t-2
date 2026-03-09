@@ -731,7 +731,7 @@ export default function OurFirmPage() {
                   transition={{ duration: 0.7, delay: 0.8 }}
                   className="text-white/55 text-base leading-relaxed max-w-md mb-12"
                 >
-                  Milton Hobbs is a boutique corporate law firm established to serve an elite clientele across the Gulf and Europe. We combine the focus of a boutique with the reach of an international practice.
+                  At Milton Hobbs, we are committed to delivering legal counsel that is clear, composed, and commercially astute. In a fast-moving and increasingly complex environment, our clients rely on us to provide not only sound legal advice, but strategic perspective that empowers action.
                 </motion.p>
 
                 <motion.div
@@ -868,7 +868,15 @@ export default function OurFirmPage() {
                   transition={{ duration: 0.7, delay: 0.5 }}
                   className="text-[#000A4F]/60 text-base leading-relaxed mb-6"
                 >
-                  Milton Hobbs was founded on a simple conviction: that elite corporate legal counsel should be direct, efficient, and partner-led. In a world of sprawling law firms, we built something different.
+                  At Milton Hobbs, we are committed to delivering legal counsel that is clear, composed, and commercially astute. In a fast-moving and increasingly complex environment, our clients rely on us to provide not only sound legal advice, but strategic perspective that empowers action.
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.7, delay: 0.55 }}
+                  className="text-[#000A4F]/60 text-base leading-relaxed mb-6"
+                >
+                  We operate with intention — every word, every argument, and every interaction is considered and purposeful. Our approach is marked by discretion, clarity, and quiet confidence, offering clients a seamless experience across multiple legal systems and cultural contexts.
                 </motion.p>
                 <motion.p
                   initial={{ opacity: 0, y: 16 }}
@@ -876,7 +884,7 @@ export default function OurFirmPage() {
                   transition={{ duration: 0.7, delay: 0.6 }}
                   className="text-[#000A4F]/60 text-base leading-relaxed"
                 >
-                  We exist to serve clients who require not just legal knowledge, but strategic judgment — clients who operate across borders, who cannot afford ambiguity, and who expect their counsel to be as commercially minded as they are.
+                  As a boutique firm, we prioritise depth over volume. Our model ensures direct access to experienced counsel, fluent in English, French, and Arabic, with deep knowledge of the regulatory frameworks that shape the UAE, France, and the broader Gulf region.
                 </motion.p>
               </div>
 
@@ -898,10 +906,11 @@ export default function OurFirmPage() {
                     className="absolute bottom-0 left-0 right-0 bg-[#001489] p-8"
                   >
                     <div className="w-8 h-px bg-[#D4AF36] mb-5" />
+                    <p className="text-[#D4AF36]/70 text-[9px] tracking-[0.35em] uppercase font-bold mb-3">This is Our Promise</p>
                     <p className="font-heading text-white font-semibold text-lg leading-snug tracking-tight mb-4">
-                      "We do not seek to be the largest. We seek to be the best for the clients we serve."
+                      To Bring Precision to Complexity, Composure to Challenge, and a Client-First Mindset to Every Engagement.
                     </p>
-                    <p className="text-[#D4AF36] text-[10px] tracking-[0.35em] uppercase font-bold">Milton Hobbs — Founding Philosophy</p>
+                    <p className="text-[#D4AF36] text-[10px] tracking-[0.35em] uppercase font-bold">Milton Hobbs — Brand Promise</p>
                   </motion.blockquote>
                 </div>
               </div>
@@ -957,9 +966,41 @@ export default function OurFirmPage() {
                   className="font-heading text-white font-bold leading-tight tracking-tight mb-8"
                   style={{ fontSize: "clamp(1.9rem, 3vw, 2.8rem)" }}
                 >
-                  A firm built at the<br />
-                  <span className="text-[#D4AF36]">intersection of two worlds.</span>
+                  The name behind<br />
+                  <span className="text-[#D4AF36]">the firm.</span>
                 </motion.h2>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={missionInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.7, delay: 0.3 }}
+                  className="text-white/60 text-sm leading-relaxed mb-5"
+                >
+                  At Milton Hobbs, we believe the strongest ideas are the simplest ones — delivered with clarity, grounded in purpose, and designed to endure. The name brings together two powerful intellectual legacies:
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={missionInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.7, delay: 0.38 }}
+                  className="space-y-3 mb-6 pl-4 border-l border-[#D4AF36]/30"
+                >
+                  <p className="text-white/80 text-sm leading-relaxed">
+                    <span className="text-[#D4AF36] font-semibold">John Milton</span> — the voice of liberty, human dignity, and moral conviction.
+                  </p>
+                  <p className="text-white/80 text-sm leading-relaxed">
+                    <span className="text-[#D4AF36] font-semibold">Thomas Hobbes</span> — the architect of legal order, realism, and rational governance.
+                  </p>
+                </motion.div>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={missionInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.7, delay: 0.45 }}
+                  className="text-white/60 text-sm leading-relaxed mb-10"
+                >
+                  While their philosophies diverged, together they represent the necessary balance between justice and control, between empathy and authority. At Milton Hobbs, we embrace this duality — true clarity lies not in choosing one over the other, but in navigating the tension between them with purpose.
+                </motion.p>
 
                 <div className="space-y-6">
                   {[
@@ -1014,9 +1055,9 @@ export default function OurFirmPage() {
                   transition={{ duration: 0.7, delay: 0.7 }}
                   className="mt-8 p-8 border border-white/10"
                 >
-                  <p className="text-[#D4AF36] text-[10px] tracking-[0.35em] uppercase font-bold mb-4">Our Mission</p>
+                  <p className="text-[#D4AF36] text-[10px] tracking-[0.35em] uppercase font-bold mb-4">Our Promise</p>
                   <p className="font-heading text-white font-semibold text-lg leading-snug tracking-tight">
-                    To be the most trusted boutique corporate law firm for clients navigating the intersection of European and Gulf commerce.
+                    To Bring Precision to Complexity, Composure to Challenge, and a Client-First Mindset to Every Engagement.
                   </p>
                 </motion.div>
               </div>
@@ -1059,7 +1100,7 @@ export default function OurFirmPage() {
                 transition={{ duration: 0.7, delay: 0.2 }}
                 className="text-[#000A4F]/55 text-base leading-relaxed max-w-xl self-end"
               >
-                Our values are not aspirational statements — they are operational standards that shape how we recruit, how we advise, and how we measure success for our clients.
+                This brand embodies trust, professionalism, and sophistication. With a confident yet approachable tone, it reflects a deep commitment to integrity, clarity, and strategic thinking — reinforcing a sense of authority and discretion in every engagement.
               </motion.p>
             </div>
 
@@ -1116,7 +1157,7 @@ export default function OurFirmPage() {
                   transition={{ duration: 0.7, delay: 0.2 }}
                   className="text-white/55 text-base leading-relaxed mb-10 max-w-md"
                 >
-                  Whether you are structuring a transaction, entering a new market, or resolving a dispute — our partners are available across our Dubai and Paris offices.
+                  Whether you need immediate counsel or are planning ahead, our partners are ready to assist you. We offer direct access to experienced advisors, fluent in English, French, and Arabic, across our Dubai and Paris offices.
                 </motion.p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex items-center gap-3">
