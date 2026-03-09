@@ -26,6 +26,7 @@ export function ContactForm() {
   return (
     <section
       id="contact"
+      data-header-theme="light"
       data-testid="contact-section"
       className="bg-white py-28 px-8"
     >

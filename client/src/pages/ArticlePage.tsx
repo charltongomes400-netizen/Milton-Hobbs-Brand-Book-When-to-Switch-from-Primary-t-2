@@ -369,7 +369,7 @@ function ArticleContent({ article, onContact }: { article: ArticleData; onContac
   }, [article.slug]);
 
   return (
-    <section className="bg-white px-8 py-20">
+    <section className="bg-white px-8 py-20" data-header-theme="light">
       <div className="max-w-[1400px] mx-auto">
         <div className="flex gap-16 xl:gap-24">
 
@@ -509,7 +509,7 @@ function ArticleCTA({ onContact }: { onContact: () => void }) {
 function RelatedArticles({ slug }: { slug: string }) {
   const related = getRelatedArticles(slug, 3);
   return (
-    <section className="bg-white py-20 px-8 border-t border-[#001489]/[0.06]">
+    <section className="bg-white py-20 px-8 border-t border-[#001489]/[0.06]" data-header-theme="light">
       <div className="max-w-[1400px] mx-auto">
         <p className="text-[#8099FF] text-[10px] tracking-[0.3em] uppercase font-semibold mb-3">Continue Reading</p>
         <h3 className="font-heading text-[#001489] text-[1.5rem] font-bold tracking-tight mb-10">Related Publications</h3>

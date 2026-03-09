@@ -92,6 +92,7 @@ export function Insights() {
   return (
     <section
       id="insights"
+      data-header-theme="light"
       data-testid="insights-section"
       className="bg-white py-24 px-8 relative z-0"
     >
