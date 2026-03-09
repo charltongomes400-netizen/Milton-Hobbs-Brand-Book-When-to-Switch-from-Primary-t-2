@@ -24,27 +24,27 @@ const translations = {
     diff: {
       eyebrow: "Why Milton Hobbs",
       headline: "Counsel built for complexity.",
-      learnMore: "Learn more",
+      learnMore: "Speak to us",
       cards: [
         {
-          title: "Boutique Model",
+          title: "Founder-Led Advisory",
           description:
-            "Direct partner access on every matter. No handoffs. No junior associates leading your file.",
+            "Every mandate is directly overseen by senior leadership. You work with the people who built the firm — not delegated down.",
         },
         {
-          title: "Trilingual Fluency",
+          title: "Strategic Precision",
           description:
-            "Seamless counsel in English, French, and Arabic — across jurisdictions and cultures.",
+            "Clear, commercially driven legal execution. We cut through complexity to deliver decisions that move transactions forward.",
         },
         {
-          title: "Cross-Border Expertise",
+          title: "Cross-Border Capability",
           description:
-            "Specialist structuring for UAE ↔ France transactions, investments, and regulatory matters.",
+            "Seamless handling of multi-jurisdictional matters across Europe and the GCC — built for clients operating without borders.",
         },
         {
-          title: "European Savoir-Faire",
+          title: "Discretion & Trust",
           description:
-            "French legal rigour combined with deep Gulf market understanding and commercial pragmatism.",
+            "Built for confidential and high-impact engagements. Our clients trust us with their most sensitive matters for a reason.",
         },
       ],
     },
@@ -180,27 +180,27 @@ const translations = {
     diff: {
       eyebrow: "Pourquoi Milton Hobbs",
       headline: "Des conseils taillés pour la complexité.",
-      learnMore: "En savoir plus",
+      learnMore: "Nous contacter",
       cards: [
         {
-          title: "Modèle Boutique",
+          title: "Conseil Fondateur",
           description:
-            "Accès direct aux associés sur chaque dossier. Pas de sous-traitance. Pas de collaborateurs juniors à la tête de votre affaire.",
+            "Chaque mandat est directement supervisé par la direction du cabinet. Vous travaillez avec ceux qui ont fondé la structure — sans délégation.",
         },
         {
-          title: "Maîtrise Trilingue",
+          title: "Précision Stratégique",
           description:
-            "Un conseil fluide en anglais, français et arabe — à travers les juridictions et les cultures.",
+            "Une exécution juridique claire et commercialement orientée. Nous dépassons la complexité pour accélérer vos décisions et transactions.",
         },
         {
-          title: "Expertise Transfrontalière",
+          title: "Capacité Transfrontalière",
           description:
-            "Structuration spécialisée pour les transactions, investissements et dossiers réglementaires UAE ↔ France.",
+            "Gestion fluide des affaires multijuridictionnelles entre l'Europe et le CCG — pensé pour les clients sans frontières.",
         },
         {
-          title: "Savoir-Faire Européen",
+          title: "Discrétion & Confiance",
           description:
-            "La rigueur juridique française alliée à une compréhension approfondie du marché du Golfe et à un pragmatisme commercial.",
+            "Conçu pour les mandats confidentiels à fort enjeu. Nos clients nous confient leurs affaires les plus sensibles pour de bonnes raisons.",
         },
       ],
     },
