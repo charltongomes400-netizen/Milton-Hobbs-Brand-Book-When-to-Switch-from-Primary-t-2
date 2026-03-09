@@ -167,7 +167,7 @@ export function Header() {
   const prefix = isHome ? "" : "/";
   const navLinks = [
     { label: t.nav.home,     href: `${prefix}#home`,      isMega: false },
-    { label: t.nav.firm,     href: `${prefix}#firm`,      isMega: false },
+    { label: t.nav.firm,     href: "/firm",               isMega: false },
     { label: t.nav.expertise, href: `${prefix}#expertise`, isMega: true },
     { label: t.nav.insights, href: `${prefix}#insights`,  isMega: false },
     { label: t.nav.careers,  href: `${prefix}#careers`,   isMega: false },
