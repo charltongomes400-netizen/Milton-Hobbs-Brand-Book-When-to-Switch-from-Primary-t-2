@@ -1,16 +1,36 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "wouter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
 import { getArticleBySlug, getRelatedArticles, type ArticleData, type ArticleSection } from "@/data/articles";
 
+const PRACTICE_AREAS = [
+  "Corporate & Commercial",
+  "Real Estate & Property",
+  "Litigation & Dispute Resolution",
+  "Arbitration & Mediation",
+  "Employment & Labour",
+  "Banking & Finance",
+  "Tax",
+  "Immigration",
+  "Intellectual Property",
+  "Technology & Startups",
+  "Other",
+];
+
 export default function ArticlePage() {
   const { slug } = useParams<{ slug: string }>();
   const article = getArticleBySlug(slug ?? "");
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
+
+  useEffect(() => {
+    document.body.style.overflow = modalOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [modalOpen]);
 
   if (!article) {
     return (
@@ -30,12 +50,205 @@ export default function ArticlePage() {
       <div className="bg-white min-h-screen">
         <Header />
         <ArticleHero article={article} />
-        <ArticleContent article={article} />
-        <ArticleCTA />
+        <ArticleContent article={article} onContact={() => setModalOpen(true)} />
+        <ArticleCTA onContact={() => setModalOpen(true)} />
         <RelatedArticles slug={article.slug} />
         <Footer />
+        <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} articleTitle={article.title} />
       </div>
     </LanguageProvider>
+  );
+}
+
+function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose: () => void; articleTitle: string }) {
+  const [form, setForm] = useState({ name: "", email: "", area: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  const handleClose = () => {
+    onClose();
+    setTimeout(() => setSubmitted(false), 400);
+  };
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          <motion.div
+            key="backdrop"
+            className="fixed inset-0 z-50 bg-[#000A4F]/80 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={handleClose}
+          />
+
+          <motion.div
+            key="modal"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
+          >
+            <motion.div
+              className="relative w-full max-w-[560px] bg-white pointer-events-auto overflow-hidden"
+              initial={{ opacity: 0, y: 32, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              onClick={e => e.stopPropagation()}
+              data-testid="contact-modal"
+            >
+              <div className="bg-[#001489] px-8 py-7">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[#D4AF36] text-[9px] tracking-[0.3em] uppercase font-bold mb-1.5">
+                      Milton Hobbs
+                    </p>
+                    <h3 className="font-heading text-white text-lg font-bold tracking-tight">
+                      Speak to a Partner
+                    </h3>
+                    <p className="text-white/40 text-xs mt-1 leading-snug max-w-xs">
+                      Re: {articleTitle}
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleClose}
+                    data-testid="modal-close"
+                    className="text-white/40 hover:text-white transition-colors mt-0.5 flex-shrink-0"
+                    aria-label="Close"
+                  >
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 20 20">
+                      <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div className="px-8 py-8">
+                <AnimatePresence mode="wait">
+                  {submitted ? (
+                    <motion.div
+                      key="success"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="flex flex-col items-start gap-4 py-6"
+                      data-testid="modal-success"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="w-8 h-8 bg-[#D4AF36]/15 flex items-center justify-center flex-shrink-0">
+                          <svg className="w-4 h-4 text-[#D4AF36]" fill="none" viewBox="0 0 16 16">
+                            <path d="M2 8l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </span>
+                        <h4 className="font-heading text-[#001489] font-bold text-base">Message received</h4>
+                      </div>
+                      <p className="text-[#001489]/60 text-sm leading-relaxed">
+                        Thank you for reaching out. One of our partners will be in touch within one business day.
+                      </p>
+                      <button
+                        onClick={handleClose}
+                        className="mt-2 text-[#001489] text-xs tracking-[0.15em] uppercase font-semibold hover:text-[#D4AF36] transition-colors"
+                      >
+                        Close
+                      </button>
+                    </motion.div>
+                  ) : (
+                    <motion.form
+                      key="form"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      onSubmit={handleSubmit}
+                      data-testid="modal-form"
+                      className="flex flex-col gap-4"
+                    >
+                      <div className="grid grid-cols-2 gap-4">
+                        <input
+                          type="text"
+                          name="name"
+                          required
+                          value={form.name}
+                          onChange={handleChange}
+                          placeholder="Full Name"
+                          data-testid="modal-input-name"
+                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors"
+                        />
+                        <input
+                          type="email"
+                          name="email"
+                          required
+                          value={form.email}
+                          onChange={handleChange}
+                          placeholder="Email Address"
+                          data-testid="modal-input-email"
+                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors"
+                        />
+                      </div>
+
+                      <div className="relative">
+                        <select
+                          name="area"
+                          required
+                          value={form.area}
+                          onChange={handleChange}
+                          data-testid="modal-select-area"
+                          className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors appearance-none cursor-pointer"
+                          style={{ color: form.area ? "#001489" : "rgba(0,20,137,0.3)" }}
+                        >
+                          <option value="" disabled hidden>Practice Area</option>
+                          {PRACTICE_AREAS.map(a => (
+                            <option key={a} value={a} style={{ color: "#001489", background: "#fff" }}>{a}</option>
+                          ))}
+                        </select>
+                        <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-[#001489]/30" fill="none" viewBox="0 0 12 12">
+                          <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                        </svg>
+                      </div>
+
+                      <textarea
+                        name="message"
+                        required
+                        rows={4}
+                        value={form.message}
+                        onChange={handleChange}
+                        placeholder="Briefly describe your matter"
+                        data-testid="modal-input-message"
+                        className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors resize-none"
+                      />
+
+                      <button
+                        type="submit"
+                        data-testid="modal-submit"
+                        className="w-full bg-[#D4AF36] text-[#001489] text-xs tracking-[0.18em] uppercase font-bold py-4 hover:bg-[#C4A030] transition-colors flex items-center justify-center gap-2.5"
+                      >
+                        <span>Send Message</span>
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+                          <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                        </svg>
+                      </button>
+
+                      <p className="text-[#001489]/30 text-[10px] text-center leading-relaxed">
+                        All enquiries are treated in strict confidence.
+                      </p>
+                    </motion.form>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -108,13 +321,13 @@ function ArticleHero({ article }: { article: ArticleData }) {
   );
 }
 
-function ArticleContent({ article }: { article: ArticleData }) {
+function ArticleContent({ article, onContact }: { article: ArticleData; onContact: () => void }) {
   const headings = article.body.filter(s => s.type === "heading") as { type: "heading"; id: string; text: string }[];
   const [activeId, setActiveId] = useState(headings[0]?.id ?? "");
-  const observerRefs = useRef<IntersectionObserver | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    observerRefs.current?.disconnect();
+    observerRef.current?.disconnect();
     const observer = new IntersectionObserver(
       entries => {
         for (const entry of entries) {
@@ -127,7 +340,7 @@ function ArticleContent({ article }: { article: ArticleData }) {
       const el = document.getElementById(h.id);
       if (el) observer.observe(el);
     });
-    observerRefs.current = observer;
+    observerRef.current = observer;
     return () => observer.disconnect();
   }, [article.slug]);
 
@@ -165,8 +378,8 @@ function ArticleContent({ article }: { article: ArticleData }) {
                 <p className="text-[#001489]/50 text-xs leading-relaxed mb-5">
                   Our partners are available for a confidential discussion.
                 </p>
-                <a
-                  href="/#contact"
+                <button
+                  onClick={onContact}
                   data-testid="sidebar-cta"
                   className="inline-flex items-center gap-2 bg-[#001489] text-white text-[10px] tracking-[0.18em] uppercase font-semibold px-5 py-3 hover:bg-[#0028B8] transition-colors"
                 >
@@ -174,7 +387,7 @@ function ArticleContent({ article }: { article: ArticleData }) {
                   <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12">
                     <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
                   </svg>
-                </a>
+                </button>
               </div>
             </div>
           </aside>
@@ -206,42 +419,27 @@ function SectionBlock({ section }: { section: ArticleSection }) {
       </p>
     );
   }
-
   if (section.type === "heading") {
     return (
-      <h2
-        id={section.id}
-        className="font-heading text-[#001489] text-[1.35rem] font-bold tracking-tight mt-12 mb-5 scroll-mt-32"
-      >
+      <h2 id={section.id} className="font-heading text-[#001489] text-[1.35rem] font-bold tracking-tight mt-12 mb-5 scroll-mt-32">
         {section.text}
       </h2>
     );
   }
-
   if (section.type === "paragraph") {
-    return (
-      <p className="text-[#3D4D6A] text-base leading-[1.85] mb-6">
-        {section.text}
-      </p>
-    );
+    return <p className="text-[#3D4D6A] text-base leading-[1.85] mb-6">{section.text}</p>;
   }
-
   if (section.type === "quote") {
     return (
       <blockquote className="my-10 pl-8 border-l-[3px] border-[#D4AF36]">
-        <p className="text-[#001489] text-xl font-heading font-medium leading-snug italic tracking-tight">
-          "{section.text}"
-        </p>
+        <p className="text-[#001489] text-xl font-heading font-medium leading-snug italic tracking-tight">"{section.text}"</p>
       </blockquote>
     );
   }
-
   if (section.type === "keypoints") {
     return (
       <div className="my-10 bg-[#F5F7FF] p-8">
-        <p className="text-[#D4AF36] text-[9px] tracking-[0.3em] uppercase font-bold mb-5">
-          {section.title}
-        </p>
+        <p className="text-[#D4AF36] text-[9px] tracking-[0.3em] uppercase font-bold mb-5">{section.title}</p>
         <ul className="flex flex-col gap-3.5">
           {section.points.map((point, i) => (
             <li key={i} className="flex items-start gap-4">
@@ -253,18 +451,15 @@ function SectionBlock({ section }: { section: ArticleSection }) {
       </div>
     );
   }
-
   return null;
 }
 
-function ArticleCTA() {
+function ArticleCTA({ onContact }: { onContact: () => void }) {
   return (
     <section className="bg-[#001489] py-20 px-8">
       <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         <div>
-          <p className="text-[#D4AF36] text-[10px] tracking-[0.3em] uppercase font-medium mb-3">
-            Expert Counsel
-          </p>
+          <p className="text-[#D4AF36] text-[10px] tracking-[0.3em] uppercase font-medium mb-3">Expert Counsel</p>
           <h3 className="font-heading text-white text-[clamp(1.4rem,2.5vw,2rem)] font-bold tracking-tight max-w-lg leading-snug">
             Need expert counsel on this matter?
           </h3>
@@ -272,8 +467,8 @@ function ArticleCTA() {
             Our partners are available for a confidential discussion across our Dubai and Paris offices.
           </p>
         </div>
-        <a
-          href="/#contact"
+        <button
+          onClick={onContact}
           data-testid="article-cta"
           className="flex-shrink-0 inline-flex items-center gap-3 bg-[#D4AF36] text-[#001489] text-xs tracking-[0.18em] uppercase font-bold px-8 py-4 hover:bg-[#C4A030] transition-colors"
         >
@@ -281,7 +476,7 @@ function ArticleCTA() {
           <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
             <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
           </svg>
-        </a>
+        </button>
       </div>
     </section>
   );
@@ -292,12 +487,8 @@ function RelatedArticles({ slug }: { slug: string }) {
   return (
     <section className="bg-white py-20 px-8 border-t border-[#001489]/[0.06]">
       <div className="max-w-[1400px] mx-auto">
-        <p className="text-[#8099FF] text-[10px] tracking-[0.3em] uppercase font-semibold mb-3">
-          Continue Reading
-        </p>
-        <h3 className="font-heading text-[#001489] text-[1.5rem] font-bold tracking-tight mb-10">
-          Related Publications
-        </h3>
+        <p className="text-[#8099FF] text-[10px] tracking-[0.3em] uppercase font-semibold mb-3">Continue Reading</p>
+        <h3 className="font-heading text-[#001489] text-[1.5rem] font-bold tracking-tight mb-10">Related Publications</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {related.map((a, i) => (
             <motion.a
@@ -321,14 +512,10 @@ function RelatedArticles({ slug }: { slug: string }) {
               </div>
               <div className="p-6 flex flex-col gap-3 flex-1">
                 <div className="flex items-center gap-3">
-                  <span className="text-[9px] font-bold tracking-[0.18em] uppercase" style={{ color: a.categoryColor }}>
-                    {a.category}
-                  </span>
+                  <span className="text-[9px] font-bold tracking-[0.18em] uppercase" style={{ color: a.categoryColor }}>{a.category}</span>
                   <span className="text-[#9CA3AF] text-[11px]">{a.readTime}</span>
                 </div>
-                <h4 className="font-heading text-[#001489] text-sm font-bold leading-snug group-hover:text-[#0028B8] transition-colors">
-                  {a.title}
-                </h4>
+                <h4 className="font-heading text-[#001489] text-sm font-bold leading-snug group-hover:text-[#0028B8] transition-colors">{a.title}</h4>
                 <div className="mt-auto pt-3 border-t border-[#F0F4FB] flex items-center justify-between">
                   <span className="text-[#9CA3AF] text-[11px]">{a.date}</span>
                   <div className="flex items-center gap-1.5 text-[#001489] group-hover:text-[#D4AF36] transition-colors">
