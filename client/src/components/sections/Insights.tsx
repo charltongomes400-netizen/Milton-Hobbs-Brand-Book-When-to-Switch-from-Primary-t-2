@@ -1,6 +1,12 @@
 import { motion } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 import { articles } from "@/data/articles";
+import imgCompliance from "@assets/generated_images/insight-compliance.png";
+import imgFamilyBusiness from "@assets/generated_images/insight-family-business.png";
+import imgDigitalPrivacy from "@assets/generated_images/insight-digital-privacy.png";
+import imgMA from "@assets/generated_images/insight-ma-structuring.png";
+
+const articleImages = [imgCompliance, imgFamilyBusiness, imgDigitalPrivacy, imgMA];
 
 const categoryColors: Record<string, string> = {
   Compliance:          "text-[#0096C7]",
@@ -12,26 +18,6 @@ const categoryColors: Record<string, string> = {
   Technologie:         "text-[#2D9D6E]",
   "Fusions & Acquisitions": "text-[#C05621]",
 };
-
-function ScalesIcon() {
-  return (
-    <svg
-      className="w-10 h-10 text-[#8099FF]/60"
-      fill="none"
-      viewBox="0 0 48 48"
-      stroke="currentColor"
-      strokeWidth="1.4"
-    >
-      <line x1="24" y1="6" x2="24" y2="42" strokeLinecap="round" />
-      <line x1="14" y1="42" x2="34" y2="42" strokeLinecap="round" />
-      <line x1="8" y1="14" x2="40" y2="14" strokeLinecap="round" />
-      <circle cx="8" cy="14" r="1.5" fill="currentColor" stroke="none" />
-      <circle cx="40" cy="14" r="1.5" fill="currentColor" stroke="none" />
-      <path d="M4 24 Q8 30 12 24" strokeLinecap="round" />
-      <path d="M36 24 Q40 30 44 24" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 function ArticleCard({
   article,
@@ -45,6 +31,7 @@ function ArticleCard({
   slug: string;
 }) {
   const colorClass = categoryColors[article.category] ?? "text-[#6B7280]";
+  const img = articleImages[index];
 
   return (
     <motion.a
@@ -56,8 +43,16 @@ function ArticleCard({
       data-testid={`insight-card-${index}`}
       className="group flex flex-col rounded-sm overflow-hidden border border-[#E5EAF4] bg-white hover:shadow-lg transition-shadow duration-300 cursor-pointer"
     >
-      <div className="bg-[#EEF2FB] flex items-center justify-center h-44 flex-shrink-0">
-        <ScalesIcon />
+      <div className="relative h-44 flex-shrink-0 overflow-hidden bg-[#EEF2FB]">
+        {img ? (
+          <img
+            src={img}
+            alt={article.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            data-testid={`insight-card-img-${index}`}
+          />
+        ) : null}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#001489]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
       <div className="flex flex-col flex-1 p-6 gap-3">
