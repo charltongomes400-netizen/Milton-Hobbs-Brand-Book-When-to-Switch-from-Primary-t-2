@@ -72,17 +72,15 @@ function PrecisionVisual() {
       while (running.current) {
         setLocked(false);
 
-        const steps = 5 + Math.floor(Math.random() * 4);
-        for (let s = 0; s < steps; s++) {
+        for (let s = 0; s < 4; s++) {
           if (!running.current) return;
           const [tx, ty] = POSITIONS[idx % POSITIONS.length];
           idx++;
-          const dur = 0.3 + Math.random() * 0.35;
           await Promise.all([
-            animate(rx, tx, { duration: dur, ease: "easeInOut" }),
-            animate(ry, ty, { duration: dur, ease: "easeInOut" }),
+            animate(rx, tx, { duration: 0.28, ease: "easeInOut" }),
+            animate(ry, ty, { duration: 0.28, ease: "easeInOut" }),
           ]);
-          await new Promise(r => setTimeout(r, 80 + Math.random() * 140));
+          await new Promise(r => setTimeout(r, 60));
         }
 
         if (!running.current) return;
