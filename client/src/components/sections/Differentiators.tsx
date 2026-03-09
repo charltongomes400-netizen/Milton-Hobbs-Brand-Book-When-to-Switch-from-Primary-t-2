@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, animate } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 
-const CYCLE_MS = 7000;
+const CYCLE_MS = 8500;
 
 function FounderVisual() {
   const spokes = 8;
