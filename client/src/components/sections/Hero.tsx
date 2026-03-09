@@ -42,9 +42,9 @@ export function Hero() {
               opacity: [0, tile.maxOpacity, 0],
               ...(tile.goldBorder ? {
                 boxShadow: [
-                  "inset 0 0 0 1px rgba(195,169,65,0)",
-                  "inset 0 0 0 1px rgba(195,169,65,0.65)",
-                  "inset 0 0 0 1px rgba(195,169,65,0)",
+                  "inset 0 0 0 2px rgba(195,169,65,0)",
+                  "inset 0 0 0 2px rgba(195,169,65,1)",
+                  "inset 0 0 0 2px rgba(195,169,65,0)",
                 ],
               } : {}),
             }}
