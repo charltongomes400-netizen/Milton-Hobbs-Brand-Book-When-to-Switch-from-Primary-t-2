@@ -1,5 +1,5 @@
 import { type ReactNode, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 
 const COLS = 16;
@@ -20,10 +20,11 @@ export function Hero() {
   const h = t.hero;
 
   const [hovering, setHovering] = useState(false);
-  const rawX = useMotionValue(0);
-  const rawY = useMotionValue(0);
-  const spotX = useSpring(rawX, { stiffness: 80, damping: 18 });
-  const spotY = useSpring(rawY, { stiffness: 80, damping: 18 });
+  const rawX = useMotionValue(-9999);
+  const rawY = useMotionValue(-9999);
+  const spotX = useSpring(rawX, { stiffness: 90, damping: 20 });
+  const spotY = useSpring(rawY, { stiffness: 90, damping: 20 });
+  const clipPath = useMotionTemplate`circle(180px at ${spotX}px ${spotY}px)`;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -71,22 +72,32 @@ export function Hero() {
         ))}
       </div>
 
-      {/* Mouse spotlight — follows cursor over hero section */}
+      {/* Bright tile layer — clipped to a circle that follows the cursor */}
       <motion.div
-        className="absolute pointer-events-none z-[1]"
+        className="absolute inset-0 pointer-events-none z-[1]"
         style={{
-          left: spotX,
-          top: spotY,
-          x: "-50%",
-          y: "-50%",
-          width: 520,
-          height: 520,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(195,169,65,0.18) 0%, rgba(128,153,255,0.07) 45%, transparent 70%)",
+          clipPath,
+          display:             "grid",
+          gridTemplateColumns: `repeat(${COLS}, 1fr)`,
+          gridTemplateRows:    `repeat(${ROWS}, 1fr)`,
         }}
         animate={{ opacity: hovering ? 1 : 0 }}
-        transition={{ duration: 0.5 }}
-      />
+        transition={{ duration: 0.35 }}
+      >
+        {tiles.map((tile, i) => (
+          <motion.div
+            key={i}
+            style={{ backgroundColor: tile.goldBorder ? "#C3A941" : "#4466DD" }}
+            animate={{ opacity: [0.05, tile.maxOpacity * 3, 0.05] }}
+            transition={{
+              duration: tile.duration * 0.75,
+              delay:    tile.delay,
+              repeat:   Infinity,
+              ease:     "easeInOut",
+            }}
+          />
+        ))}
+      </motion.div>
 
       {/* Subtle grid lines over the tiles */}
       <div
