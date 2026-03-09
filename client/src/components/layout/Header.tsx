@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from "wouter";
 import { useLang } from "@/contexts/LanguageContext";
 
 export function Header() {
@@ -7,6 +8,8 @@ export function Header() {
   const [overLight, setOverLight] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { lang, setLang, t } = useLang();
+  const [location] = useLocation();
+  const isHome = location === "/";
 
   useEffect(() => {
     const HEADER_H = 80;
@@ -33,13 +36,14 @@ export function Header() {
     return () => window.removeEventListener("scroll", check);
   }, []);
 
+  const prefix = isHome ? "" : "/";
   const navLinks = [
-    { label: t.nav.home,      href: "#home" },
-    { label: t.nav.firm,      href: "#firm" },
-    { label: t.nav.expertise, href: "#expertise" },
-    { label: t.nav.insights,  href: "#insights" },
-    { label: t.nav.careers,   href: "#careers" },
-    { label: t.nav.contact,   href: "#contact" },
+    { label: t.nav.home,      href: `${prefix}#home` },
+    { label: t.nav.firm,      href: `${prefix}#firm` },
+    { label: t.nav.expertise, href: `${prefix}#expertise` },
+    { label: t.nav.insights,  href: `${prefix}#insights` },
+    { label: t.nav.careers,   href: `${prefix}#careers` },
+    { label: t.nav.contact,   href: `${prefix}#contact` },
   ];
 
   const isLight = scrolled && overLight;
@@ -67,7 +71,7 @@ export function Header() {
     >
       <div className="max-w-[1400px] mx-auto px-8 h-20 flex items-center justify-between">
         <a
-          href="#home"
+          href={`${prefix}#home`}
           data-testid="logo"
           className={`font-heading font-semibold text-lg tracking-[0.18em] uppercase shrink-0 transition-colors duration-300 ${logoColor}`}
         >
