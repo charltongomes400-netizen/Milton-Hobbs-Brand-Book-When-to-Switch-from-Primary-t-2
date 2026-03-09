@@ -15,7 +15,7 @@ export function Footer() {
   return (
     <footer id="contact" data-testid="footer" className="bg-[#000A4F] border-t border-white/8">
       <div className="max-w-[1400px] mx-auto px-8">
-        <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 border-b border-white/8">
+        <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 border-b border-[#C4A030]/40">
           <div className="lg:col-span-5 lg:pr-16">
             <p className="font-heading text-white font-semibold text-lg tracking-[0.18em] uppercase mb-5">
               Milton Hobbs
