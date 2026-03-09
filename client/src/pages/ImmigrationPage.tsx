@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { motion, AnimatePresence, useInView, useMotionValue, useSpring } from "framer-motion";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
@@ -324,8 +324,222 @@ const jurisdictions = [
   },
 ];
 
+const IMMIGRATION_AREAS = [
+  "Visa Applications (UAE)",
+  "Golden Visa / Investor Residency",
+  "Talent & Skills Visa",
+  "Family Reunification",
+  "Free Zone Work Permits",
+  "Immigration Appeal",
+  "French Talent Passport",
+  "EU Blue Card",
+  "Employer Sponsorship",
+  "Other",
+];
+
+function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [form, setForm] = useState({ name: "", email: "", area: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  const handleClose = () => {
+    onClose();
+    setTimeout(() => setSubmitted(false), 400);
+  };
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          <motion.div
+            key="backdrop"
+            className="fixed inset-0 z-[60] bg-[#000A4F]/85 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={handleClose}
+            data-testid="modal-backdrop"
+          />
+
+          <motion.div
+            key="modal-wrap"
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 pointer-events-none"
+          >
+            <motion.div
+              className="relative w-full max-w-[560px] bg-white pointer-events-auto overflow-hidden"
+              initial={{ opacity: 0, y: 32, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              data-testid="contact-modal"
+            >
+              <div className="bg-[#001489] px-8 py-7">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[#D4AF36] text-[9px] tracking-[0.35em] uppercase font-bold mb-1.5">
+                      Immigration Law
+                    </p>
+                    <h3 className="font-heading text-white text-xl font-bold tracking-tight">
+                      Speak to a Partner
+                    </h3>
+                    <p className="text-white/40 text-xs mt-1 leading-snug">
+                      Confidential consultation — Dubai & Paris offices
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleClose}
+                    data-testid="modal-close"
+                    className="text-white/40 hover:text-white transition-colors mt-0.5 flex-shrink-0"
+                    aria-label="Close"
+                  >
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 20 20">
+                      <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div className="px-8 py-8">
+                <AnimatePresence mode="wait">
+                  {submitted ? (
+                    <motion.div
+                      key="success"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="flex flex-col items-start gap-4 py-6"
+                      data-testid="modal-success"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="w-9 h-9 bg-[#D4AF36]/15 flex items-center justify-center flex-shrink-0">
+                          <svg className="w-4 h-4 text-[#D4AF36]" fill="none" viewBox="0 0 16 16">
+                            <path d="M2 8l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </span>
+                        <h4 className="font-heading text-[#001489] font-bold text-base">Message received</h4>
+                      </div>
+                      <p className="text-[#001489]/60 text-sm leading-relaxed">
+                        Thank you for reaching out. One of our immigration partners will be in touch within one business day.
+                      </p>
+                      <button
+                        onClick={handleClose}
+                        className="mt-2 text-[#001489] text-xs tracking-[0.15em] uppercase font-semibold hover:text-[#D4AF36] transition-colors"
+                      >
+                        Close
+                      </button>
+                    </motion.div>
+                  ) : (
+                    <motion.form
+                      key="form"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      onSubmit={handleSubmit}
+                      data-testid="modal-form"
+                      className="flex flex-col gap-4"
+                    >
+                      <div className="grid grid-cols-2 gap-4">
+                        <input
+                          type="text"
+                          name="name"
+                          required
+                          value={form.name}
+                          onChange={handleChange}
+                          placeholder="Full Name"
+                          data-testid="modal-input-name"
+                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors"
+                        />
+                        <input
+                          type="email"
+                          name="email"
+                          required
+                          value={form.email}
+                          onChange={handleChange}
+                          placeholder="Email Address"
+                          data-testid="modal-input-email"
+                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors"
+                        />
+                      </div>
+
+                      <div className="relative">
+                        <select
+                          name="area"
+                          required
+                          value={form.area}
+                          onChange={handleChange}
+                          data-testid="modal-select-area"
+                          className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors appearance-none cursor-pointer"
+                          style={{ color: form.area ? "#001489" : "rgba(0,20,137,0.3)" }}
+                        >
+                          <option value="" disabled hidden>Immigration Service</option>
+                          {IMMIGRATION_AREAS.map((a) => (
+                            <option key={a} value={a} style={{ color: "#001489", background: "#fff" }}>{a}</option>
+                          ))}
+                        </select>
+                        <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-[#001489]/30" fill="none" viewBox="0 0 12 12">
+                          <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                        </svg>
+                      </div>
+
+                      <textarea
+                        name="message"
+                        required
+                        rows={4}
+                        value={form.message}
+                        onChange={handleChange}
+                        placeholder="Briefly describe your immigration matter"
+                        data-testid="modal-input-message"
+                        className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors resize-none"
+                      />
+
+                      <button
+                        type="submit"
+                        data-testid="modal-submit"
+                        className="w-full bg-[#D4AF36] text-[#001489] text-xs tracking-[0.18em] uppercase font-bold py-4 hover:bg-[#C4A030] transition-colors flex items-center justify-center gap-2.5"
+                      >
+                        <span>Send Enquiry</span>
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+                          <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                        </svg>
+                      </button>
+
+                      <p className="text-[#001489]/30 text-[10px] text-center leading-relaxed">
+                        All enquiries are treated in strict confidence.
+                      </p>
+                    </motion.form>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
 export default function ImmigrationPage() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+
   useEffect(() => { window.scrollTo(0, 0); }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = modalOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [modalOpen]);
 
   return (
     <LanguageProvider>
@@ -417,8 +631,8 @@ export default function ImmigrationPage() {
                   transition={{ delay: 1.1 }}
                   className="flex flex-wrap gap-4 mb-14"
                 >
-                  <a
-                    href="/#contact"
+                  <button
+                    onClick={openModal}
                     data-testid="immigration-cta-primary"
                     className="inline-flex items-center gap-3 bg-[#D4AF36] text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-[#C4A030] transition-colors"
                   >
@@ -426,7 +640,7 @@ export default function ImmigrationPage() {
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
                       <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
                     </svg>
-                  </a>
+                  </button>
                   <a
                     href="#services"
                     data-testid="immigration-cta-secondary"
@@ -524,6 +738,7 @@ export default function ImmigrationPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.55, delay: i * 0.1 }}
                   data-testid={`service-card-${i}`}
+                  onClick={openModal}
                   className="group bg-white p-8 flex flex-col hover:bg-[#F5F7FF] transition-colors duration-300 cursor-pointer"
                 >
                   <div className="w-10 h-10 mb-6">{svc.icon}</div>
@@ -687,15 +902,16 @@ export default function ImmigrationPage() {
                 <p className="text-[#4A5568] text-base leading-relaxed mb-10">
                   Your file is managed by a senior lawyer, not a paralegal. You receive direct communication, clear timelines, and complete transparency throughout.
                 </p>
-                <a
-                  href="/#contact"
+                <button
+                  onClick={openModal}
+                  data-testid="immigration-speak-partner"
                   className="inline-flex items-center gap-3 bg-[#001489] text-white text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-[#0028B8] transition-colors"
                 >
                   <span>Speak to a Partner</span>
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
                     <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
                   </svg>
-                </a>
+                </button>
               </motion.div>
 
               <motion.div
@@ -755,8 +971,8 @@ export default function ImmigrationPage() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-4 flex-shrink-0">
-                <a
-                  href="/#contact"
+                <button
+                  onClick={openModal}
                   data-testid="immigration-final-cta"
                   className="inline-flex items-center gap-3 bg-[#D4AF36] text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-[#C4A030] transition-colors"
                 >
@@ -764,7 +980,7 @@ export default function ImmigrationPage() {
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
                     <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
                   </svg>
-                </a>
+                </button>
                 <a
                   href="/#expertise"
                   className="inline-flex items-center gap-3 border border-white/25 text-white text-xs font-semibold tracking-[0.18em] uppercase px-8 py-4 hover:border-white/50 transition-colors"
@@ -777,6 +993,8 @@ export default function ImmigrationPage() {
         </section>
 
         <Footer />
+
+        <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
       </div>
     </LanguageProvider>
   );
