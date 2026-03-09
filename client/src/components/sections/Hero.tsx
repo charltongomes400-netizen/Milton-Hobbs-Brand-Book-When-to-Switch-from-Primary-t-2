@@ -6,10 +6,13 @@ const COLS = 16;
 const ROWS = 10;
 
 const tiles = Array.from({ length: COLS * ROWS }, (_, i) => ({
-  color:      i % 2 === 0 ? "#051FA7" : "#000335",
-  delay:      parseFloat(((i * 0.41 + (i % 7) * 0.29) % 9).toFixed(2)),
-  duration:   parseFloat((2.5 + (i * 0.17 + (i % 5) * 0.33) % 4.5).toFixed(2)),
-  maxOpacity: parseFloat((0.08 + (i * 0.09 + (i % 11) * 0.06) % 0.52).toFixed(2)),
+  color:        i % 2 === 0 ? "#051FA7" : "#000335",
+  delay:        parseFloat(((i * 0.41 + (i % 7) * 0.29) % 9).toFixed(2)),
+  duration:     parseFloat((2.5 + (i * 0.17 + (i % 5) * 0.33) % 4.5).toFixed(2)),
+  maxOpacity:   parseFloat((0.08 + (i * 0.09 + (i % 11) * 0.06) % 0.52).toFixed(2)),
+  goldBorder:   i % 11 === 0 || i % 19 === 7,
+  borderDelay:  parseFloat(((i * 0.63 + (i % 13) * 0.41) % 7).toFixed(2)),
+  borderDur:    parseFloat((4 + (i * 0.23 + (i % 7) * 0.51) % 4).toFixed(2)),
 }));
 
 export function Hero() {
@@ -35,12 +38,19 @@ export function Hero() {
           <motion.div
             key={i}
             style={{ backgroundColor: tile.color }}
-            animate={{ opacity: [0, tile.maxOpacity, 0] }}
+            animate={{
+              opacity: [0, tile.maxOpacity, 0],
+              ...(tile.goldBorder ? {
+                boxShadow: [
+                  "inset 0 0 0 1px rgba(195,169,65,0)",
+                  "inset 0 0 0 1px rgba(195,169,65,0.65)",
+                  "inset 0 0 0 1px rgba(195,169,65,0)",
+                ],
+              } : {}),
+            }}
             transition={{
-              duration:   tile.duration,
-              delay:      tile.delay,
-              repeat:     Infinity,
-              ease:       "easeInOut",
+              opacity:    { duration: tile.duration,    delay: tile.delay,        repeat: Infinity, ease: "easeInOut" },
+              boxShadow:  { duration: tile.borderDur,   delay: tile.borderDelay,  repeat: Infinity, ease: "easeInOut" },
             }}
           />
         ))}
