@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type CSSProperties } from "react";
-import { motion, AnimatePresence, useInView, useMotionValue, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useInView, useMotionValue, useSpring, useAnimationFrame } from "framer-motion";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
@@ -218,160 +218,115 @@ function PhilosophyVisual() {
   );
 }
 
-function ConnectionMap() {
-  // SVG viewBox 0 0 420 300
-  // Lon -15→75 (90°), Lat 10→65 (55°)
-  // x = (lon + 15) / 90 * 420,  y = (65 - lat) / 55 * 300
-  // Paris: lon=2.3, lat=48.9  → x=80, y=88
-  // Dubai: lon=55.3, lat=25.2 → x=328, y=218
+function MissionOrbit() {
+  const CX = 210, CY = 150;
 
-  const PARIS = { x: 80, y: 88 };
-  const DUBAI = { x: 328, y: 218 };
-  // Quadratic bezier control point lifted high for arc effect
-  const arcD = `M ${PARIS.x} ${PARIS.y} Q 204 8 ${DUBAI.x} ${DUBAI.y}`;
+  const dot1 = useRef<SVGCircleElement>(null);
+  const dot2 = useRef<SVGCircleElement>(null);
+  const dot3 = useRef<SVGCircleElement>(null);
+  const lbl1 = useRef<SVGTextElement>(null);
+  const lbl2 = useRef<SVGTextElement>(null);
+  const lbl3 = useRef<SVGTextElement>(null);
+
+  const rings = [
+    { rx: 158, ry: 20,  speed: 0.24, phase: 0,            color: "#D4AF36", rRange: [2.5, 5.5], label: "PRECISION"    },
+    { rx: 112, ry: 46,  speed: 0.38, phase: Math.PI * 0.7, color: "#8099FF", rRange: [2,   4.5], label: "COMPOSURE"    },
+    { rx: 66,  ry: 61,  speed: 0.6,  phase: Math.PI,       color: "#D4AF36", rRange: [1.5, 3.5], label: "CLIENT·FIRST" },
+  ];
+
+  useAnimationFrame((t) => {
+    const dots = [dot1, dot2, dot3];
+    const lbls = [lbl1, lbl2, lbl3];
+    rings.forEach((o, i) => {
+      const angle = (t / 1000) * o.speed + o.phase;
+      const x = CX + o.rx * Math.cos(angle);
+      const y = CY + o.ry * Math.sin(angle);
+      const depth = Math.sin(angle); // -1 far, +1 near
+      const r = o.rRange[0] + (o.rRange[1] - o.rRange[0]) * ((depth + 1) / 2);
+      const opacity = (0.15 + 0.85 * ((depth + 1) / 2)).toFixed(2);
+
+      const d = dots[i].current;
+      if (d) {
+        d.setAttribute("cx", x.toFixed(1));
+        d.setAttribute("cy", y.toFixed(1));
+        d.setAttribute("r",  r.toFixed(1));
+        d.setAttribute("opacity", opacity);
+      }
+
+      const l = lbls[i].current;
+      if (l) {
+        l.setAttribute("x", x.toFixed(1));
+        l.setAttribute("y", (y - r - 5).toFixed(1));
+        l.setAttribute("opacity", depth > 0.5 ? ((depth - 0.5) * 1.6).toFixed(2) : "0");
+      }
+    });
+  });
 
   return (
     <svg viewBox="0 0 420 300" fill="none" className="w-full h-full">
       <defs>
-        <radialGradient id="mapGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#001489" stopOpacity="0.5" />
+        <radialGradient id="orbitGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#D4AF36" stopOpacity="0.1" />
           <stop offset="100%" stopColor="#000A4F" stopOpacity="0" />
         </radialGradient>
-        <filter id="pinGlow" x="-100%" y="-100%" width="300%" height="300%">
-          <feGaussianBlur stdDeviation="3" result="blur" />
-          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-        </filter>
       </defs>
 
-      {/* Subtle graticule grid */}
-      {[0, 60, 120, 180, 240, 300, 360, 420].map((x, i) => (
-        <line key={`v${i}`} x1={x} y1={0} x2={x} y2={300} stroke="#8099FF" strokeOpacity={0.07} strokeWidth={0.5} />
+      {/* Ambient glow behind centre */}
+      <ellipse cx={CX} cy={CY} rx={185} ry={130} fill="url(#orbitGlow)" />
+
+      {/* Subtle background cross-hair */}
+      <line x1={CX} y1={20} x2={CX} y2={280} stroke="#8099FF" strokeOpacity={0.06} strokeWidth={0.6} />
+      <line x1={20} y1={CY} x2={400} y2={CY} stroke="#8099FF" strokeOpacity={0.06} strokeWidth={0.6} />
+
+      {/* === ORBIT RINGS — back half dimmer, front half brighter === */}
+      {rings.map((o, i) => (
+        <g key={i}>
+          {/* back arc (top of ellipse — further from viewer) */}
+          <path
+            d={`M ${CX - o.rx} ${CY} A ${o.rx} ${o.ry} 0 0 1 ${CX + o.rx} ${CY}`}
+            stroke={o.color}
+            strokeOpacity={0.1}
+            strokeWidth={0.7}
+          />
+          {/* front arc (bottom of ellipse — closer to viewer) */}
+          <path
+            d={`M ${CX + o.rx} ${CY} A ${o.rx} ${o.ry} 0 0 1 ${CX - o.rx} ${CY}`}
+            stroke={o.color}
+            strokeOpacity={0.3}
+            strokeWidth={1}
+          />
+        </g>
       ))}
-      {[0, 60, 120, 180, 240, 300].map((y, i) => (
-        <line key={`h${i}`} x1={0} y1={y} x2={420} y2={y} stroke="#8099FF" strokeOpacity={0.07} strokeWidth={0.5} />
-      ))}
 
-      {/* === EUROPE landmass === */}
-      <polygon
-        points="
-          25,148 20,125 22,110 28,100 47,90 51,90
-          61,105 65,100 72,88 80,80 93,71 108,62
-          117,55 135,50 154,52 170,46 192,30 210,26
-          218,55 215,80 210,98 205,112 200,118 195,126
-          185,130 175,132 168,128 165,143 172,155
-          181,148 188,138 210,126 228,118 243,132
-          258,140 268,155 258,162 248,168 240,160
-          232,186 220,186 212,176 200,160 185,155
-          165,158 148,152 140,132 120,120 100,125
-          82,110 61,108 47,90 36,100 28,110 25,148
-        "
-        fill="#001489"
-        fillOpacity={0.45}
-        stroke="#8099FF"
-        strokeOpacity={0.18}
-        strokeWidth={0.8}
-      />
+      {/* === TRAVELING DOTS (driven by useAnimationFrame) === */}
+      <circle ref={dot1} cx={CX + 158} cy={CY} r={4} fill="#D4AF36" />
+      <circle ref={dot2} cx={CX + 112} cy={CY} r={3} fill="#8099FF" />
+      <circle ref={dot3} cx={CX + 66}  cy={CY} r={3} fill="#D4AF36" />
 
-      {/* Italy peninsula */}
-      <polygon
-        points="105,118 118,110 136,108 142,128 150,140 145,150 138,152 130,148 125,138 112,128 105,118"
-        fill="#001489"
-        fillOpacity={0.45}
-        stroke="#8099FF"
-        strokeOpacity={0.12}
-        strokeWidth={0.6}
-      />
+      {/* === FLOATING LABELS (appear as dot nears viewer) === */}
+      <text ref={lbl1} fontSize="6.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.3em" fill="#D4AF36" opacity="0">PRECISION</text>
+      <text ref={lbl2} fontSize="6.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.3em" fill="#8099FF" opacity="0">COMPOSURE</text>
+      <text ref={lbl3} fontSize="6.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.3em" fill="#D4AF36" opacity="0">CLIENT·FIRST</text>
 
-      {/* === NORTH AFRICA strip === */}
-      <polygon
-        points="
-          0,162 25,155 47,160 61,158 84,155 105,150
-          121,155 140,158 165,160 190,165 220,190
-          229,186 235,192 220,200 200,205 180,210
-          155,215 120,222 90,228 60,235 30,240
-          0,245 0,162
-        "
-        fill="#001489"
-        fillOpacity={0.35}
-        stroke="#8099FF"
-        strokeOpacity={0.12}
-        strokeWidth={0.7}
+      {/* === CENTRE CORE === */}
+      <motion.circle
+        cx={CX} cy={CY} r={32}
+        stroke="#D4AF36" strokeWidth={0.8} strokeOpacity={0.35}
+        fill="#D4AF36" fillOpacity={0.04}
+        animate={{ scale: [1, 1.06, 1] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+        style={{ transformOrigin: `${CX}px ${CY}px` }}
       />
-
-      {/* === ARABIAN PENINSULA === */}
-      <polygon
-        points="
-          232,188 248,170 260,162 268,158 280,162
-          296,172 310,182 328,186 350,190 362,205
-          375,228 365,255 345,270 318,278 295,282
-          270,278 252,260 240,242 232,222 228,202 232,188
-        "
-        fill="#001489"
-        fillOpacity={0.42}
-        stroke="#8099FF"
-        strokeOpacity={0.15}
-        strokeWidth={0.7}
-      />
-
-      {/* === ANIMATED ARCH (draw-on effect, then loops) === */}
-      {/* Static faint trail */}
-      <path
-        d={arcD}
-        stroke="#D4AF36"
-        strokeOpacity={0.12}
-        strokeWidth={1}
-        strokeLinecap="round"
-      />
-      {/* Animated draw-on */}
-      <motion.path
-        d={arcD}
-        stroke="#D4AF36"
-        strokeWidth={1.8}
-        strokeLinecap="round"
+      <motion.circle
+        cx={CX} cy={CY} r={52}
+        stroke="#D4AF36" strokeWidth={0.5} strokeOpacity={0.1}
         fill="none"
-        strokeDasharray="520"
-        initial={{ strokeDashoffset: 520, opacity: 1 }}
-        animate={{ strokeDashoffset: [520, 0, 0, 520], opacity: [1, 1, 1, 1] }}
-        transition={{ duration: 5, times: [0, 0.45, 0.85, 1], ease: "easeInOut", repeat: Infinity, repeatDelay: 1 }}
+        animate={{ scale: [1, 1.55, 1], opacity: [0.4, 0, 0.4] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeOut" }}
+        style={{ transformOrigin: `${CX}px ${CY}px` }}
       />
-      {/* Moving dot along the arc */}
-      <motion.circle
-        r={3}
-        fill="#D4AF36"
-        filter="url(#pinGlow)"
-        style={{ offsetPath: `path('${arcD}')` } as CSSProperties}
-        animate={{ offsetDistance: ["0%", "100%"] }}
-        transition={{ duration: 2.2, ease: "easeInOut", repeat: Infinity, repeatDelay: 3.8 }}
-      />
-
-      {/* === PARIS PIN === */}
-      <motion.circle
-        cx={PARIS.x} cy={PARIS.y} r={14}
-        stroke="#D4AF36" strokeWidth={0.8} fill="none"
-        animate={{ scale: [1, 1.9, 1], opacity: [0.5, 0, 0.5] }}
-        transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
-        style={{ transformOrigin: `${PARIS.x}px ${PARIS.y}px` }}
-      />
-      <circle cx={PARIS.x} cy={PARIS.y} r={5} fill="#D4AF36" />
-      <circle cx={PARIS.x} cy={PARIS.y} r={2} fill="#001489" />
-      <text x={PARIS.x} y={PARIS.y - 18} fill="#D4AF36" fontSize="7.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.35em" fontWeight="700">PARIS</text>
-      <text x={PARIS.x} y={PARIS.y - 10} fill="rgba(255,255,255,0.3)" fontSize="6" textAnchor="middle" fontFamily="monospace" letterSpacing="0.2em">FRANCE</text>
-
-      {/* === DUBAI PIN === */}
-      <motion.circle
-        cx={DUBAI.x} cy={DUBAI.y} r={14}
-        stroke="#D4AF36" strokeWidth={0.8} fill="none"
-        animate={{ scale: [1, 1.9, 1], opacity: [0.5, 0, 0.5] }}
-        transition={{ duration: 2.2, delay: 0.8, repeat: Infinity, ease: "easeOut" }}
-        style={{ transformOrigin: `${DUBAI.x}px ${DUBAI.y}px` }}
-      />
-      <circle cx={DUBAI.x} cy={DUBAI.y} r={5} fill="#D4AF36" />
-      <circle cx={DUBAI.x} cy={DUBAI.y} r={2} fill="#001489" />
-      <text x={DUBAI.x} y={DUBAI.y + 22} fill="#D4AF36" fontSize="7.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.35em" fontWeight="700">DUBAI</text>
-      <text x={DUBAI.x} y={DUBAI.y + 30} fill="rgba(255,255,255,0.3)" fontSize="6" textAnchor="middle" fontFamily="monospace" letterSpacing="0.2em">UAE</text>
-
-      {/* Ambient centre glow */}
-      <ellipse cx={204} cy={150} rx={100} ry={60} fill="url(#mapGlow)" />
+      <text x={CX} y={CY + 5} fill="#D4AF36" fontSize="13" textAnchor="middle"
+        fontFamily="var(--font-heading)" fontWeight="800" letterSpacing="0.14em">M·H</text>
     </svg>
   );
 }
@@ -1134,7 +1089,7 @@ export default function OurFirmPage() {
                   transition={{ duration: 0.9, delay: 0.4 }}
                   className="relative bg-[#000A4F] h-[360px] overflow-hidden"
                 >
-                  <ConnectionMap />
+                  <MissionOrbit />
                 </motion.div>
               </div>
             </div>
