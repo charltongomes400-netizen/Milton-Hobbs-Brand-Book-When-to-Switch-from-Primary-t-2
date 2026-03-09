@@ -133,9 +133,6 @@ export function Hero() {
             <TracingButton href="#contact" variant="solid" data-testid="cta-book">
               {h.cta1}
             </TracingButton>
-            <TracingButton href="#contact" variant="outline" data-testid="cta-contact">
-              {h.cta2}
-            </TracingButton>
           </motion.div>
         </motion.div>
       </div>
