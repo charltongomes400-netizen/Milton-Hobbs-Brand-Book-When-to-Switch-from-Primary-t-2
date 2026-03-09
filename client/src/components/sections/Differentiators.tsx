@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useMotionValue, animate } from "framer-motion";
 import { useLang } from "@/contexts/LanguageContext";
 
 const CYCLE_MS = 4500;
@@ -52,41 +52,113 @@ function FounderVisual() {
 }
 
 function PrecisionVisual() {
-  const cx = 160, cy = 130;
-  const rings = [90, 65, 42, 20];
+  const CX = 160, CY = 130;
+  const rx = useMotionValue(0);
+  const ry = useMotionValue(0);
+  const [locked, setLocked] = useState(false);
+  const [flashKey, setFlashKey] = useState(0);
+  const running = useRef(true);
+
+  useEffect(() => {
+    running.current = true;
+    const POSITIONS: [number, number][] = [
+      [-60, -40], [50, -50], [-25, 45], [65, 30],
+      [-50, -15], [30, -55], [55, 40], [-40, 55],
+      [70, -20], [-65, 30], [20, 60], [-30, -55],
+    ];
+    let idx = 0;
+
+    async function loop() {
+      while (running.current) {
+        setLocked(false);
+
+        const steps = 5 + Math.floor(Math.random() * 4);
+        for (let s = 0; s < steps; s++) {
+          if (!running.current) return;
+          const [tx, ty] = POSITIONS[idx % POSITIONS.length];
+          idx++;
+          const dur = 0.3 + Math.random() * 0.35;
+          await Promise.all([
+            animate(rx, tx, { duration: dur, ease: "easeInOut" }),
+            animate(ry, ty, { duration: dur, ease: "easeInOut" }),
+          ]);
+          await new Promise(r => setTimeout(r, 80 + Math.random() * 140));
+        }
+
+        if (!running.current) return;
+
+        await Promise.all([
+          animate(rx, 0, { duration: 0.22, ease: [0.22, 1, 0.36, 1] }),
+          animate(ry, 0, { duration: 0.22, ease: [0.22, 1, 0.36, 1] }),
+        ]);
+
+        setLocked(true);
+        setFlashKey(k => k + 1);
+        await new Promise(r => setTimeout(r, 2400));
+      }
+    }
+
+    loop();
+    return () => { running.current = false; };
+  }, [rx, ry]);
+
   return (
     <svg viewBox="0 0 320 260" fill="none" className="w-full h-full">
-      {rings.map((r, i) => (
-        <motion.circle
-          key={i} cx={cx} cy={cy} r={r}
-          stroke={i === rings.length - 1 ? "#D4AF36" : "#8099FF"}
-          strokeOpacity={i === rings.length - 1 ? 0.6 : 0.12 + i * 0.08}
-          strokeWidth={i === rings.length - 1 ? 1.5 : 1} fill="none"
-          animate={{ strokeOpacity: i === rings.length - 1 ? [0.4, 0.8, 0.4] : [0.08 + i * 0.06, 0.2 + i * 0.08, 0.08 + i * 0.06] }}
-          transition={{ duration: 2.8, delay: i * 0.35, repeat: Infinity, ease: "easeInOut" }}
+      {[88, 64, 44].map((r, i) => (
+        <circle
+          key={i} cx={CX} cy={CY} r={r} fill="none"
+          stroke={locked ? "#D4AF36" : "#8099FF"}
+          strokeOpacity={locked ? 0.18 + i * 0.1 : 0.08 + i * 0.05}
+          strokeWidth={1}
+          style={{ transition: "stroke 0.4s, stroke-opacity 0.4s" }}
         />
       ))}
-      <motion.line x1={cx} y1={cy - 100} x2={cx} y2={cy - 24}
-        stroke="#8099FF" strokeOpacity={0.3} strokeWidth={1}
-        animate={{ strokeOpacity: [0.15, 0.45, 0.15] }}
-        transition={{ duration: 2, repeat: Infinity }}
+
+      <line x1={CX} y1={30} x2={CX} y2={230} stroke="#8099FF" strokeOpacity={0.12} strokeWidth={1} />
+      <line x1={40} y1={CY} x2={280} y2={CY} stroke="#8099FF" strokeOpacity={0.12} strokeWidth={1} />
+
+      <circle cx={CX} cy={CY} r={4}
+        fill={locked ? "#D4AF36" : "#8099FF"}
+        fillOpacity={locked ? 1 : 0.35}
+        style={{ transition: "fill 0.3s, fill-opacity 0.3s" }}
       />
-      <motion.line x1={cx} y1={cy + 24} x2={cx} y2={cy + 100}
-        stroke="#8099FF" strokeOpacity={0.3} strokeWidth={1}
-        animate={{ strokeOpacity: [0.15, 0.45, 0.15] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      />
-      <motion.line x1={cx - 100} y1={cy} x2={cx - 24} y2={cy}
-        stroke="#8099FF" strokeOpacity={0.3} strokeWidth={1}
-        animate={{ strokeOpacity: [0.15, 0.45, 0.15] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      />
-      <motion.line x1={cx + 24} y1={cy} x2={cx + 100} y2={cy}
-        stroke="#8099FF" strokeOpacity={0.3} strokeWidth={1}
-        animate={{ strokeOpacity: [0.15, 0.45, 0.15] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      />
-      <circle cx={cx} cy={cy} r={5} fill="#D4AF36" fillOpacity={0.95} />
+
+      {locked && (
+        <AnimatePresence>
+          <motion.circle
+            key={flashKey}
+            cx={CX} cy={CY} r={22}
+            stroke="#D4AF36" strokeWidth={2} fill="none"
+            initial={{ scale: 1, opacity: 0.9 }}
+            animate={{ scale: 2.2, opacity: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            style={{ transformOrigin: `${CX}px ${CY}px` }}
+          />
+        </AnimatePresence>
+      )}
+
+      <motion.g style={{ x: rx, y: ry }}>
+        <circle cx={CX} cy={CY} r={22}
+          stroke="#D4AF36" strokeWidth={1.5} fill="none" strokeOpacity={0.9}
+        />
+        <path d={`M${CX - 22} ${CY - 9} L${CX - 22} ${CY - 22} L${CX - 9} ${CY - 22}`} stroke="#D4AF36" strokeWidth={1.5} fill="none" />
+        <path d={`M${CX + 9} ${CY - 22} L${CX + 22} ${CY - 22} L${CX + 22} ${CY - 9}`} stroke="#D4AF36" strokeWidth={1.5} fill="none" />
+        <path d={`M${CX + 22} ${CY + 9} L${CX + 22} ${CY + 22} L${CX + 9} ${CY + 22}`} stroke="#D4AF36" strokeWidth={1.5} fill="none" />
+        <path d={`M${CX - 9} ${CY + 22} L${CX - 22} ${CY + 22} L${CX - 22} ${CY + 9}`} stroke="#D4AF36" strokeWidth={1.5} fill="none" />
+        <line x1={CX - 9} y1={CY} x2={CX + 9} y2={CY} stroke="#D4AF36" strokeWidth={1} strokeOpacity={0.7} />
+        <line x1={CX} y1={CY - 9} x2={CX} y2={CY + 9} stroke="#D4AF36" strokeWidth={1} strokeOpacity={0.7} />
+      </motion.g>
+
+      {locked && (
+        <motion.text
+          x={CX + 30} y={CY - 28}
+          fill="#D4AF36" fontSize="8" fontFamily="monospace" letterSpacing="0.15em"
+          initial={{ opacity: 0 }} animate={{ opacity: [0, 0.8, 0.8, 0] }}
+          transition={{ duration: 2.2, times: [0, 0.15, 0.85, 1] }}
+        >
+          LOCKED
+        </motion.text>
+      )}
     </svg>
   );
 }
