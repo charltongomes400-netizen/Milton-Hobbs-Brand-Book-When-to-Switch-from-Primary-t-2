@@ -15,75 +15,144 @@ function AnimatedNumber({ target, suffix = "" }: { target: number; suffix?: stri
   return <span ref={ref}>{display}{suffix}</span>;
 }
 
+const CUBE_FACES = [
+  {
+    transform: "translateZ(100px)",
+    label: "Milton Hobbs",
+    sub: "Est. 2020",
+    gold: true,
+    isBrand: true,
+  },
+  {
+    transform: "rotateY(90deg) translateZ(100px)",
+    label: "Founder-Led Advisory",
+    sub: "Senior-led on every mandate",
+    gold: false,
+    isBrand: false,
+  },
+  {
+    transform: "rotateY(180deg) translateZ(100px)",
+    label: "Strategic Precision",
+    sub: "Clarity through complexity",
+    gold: false,
+    isBrand: false,
+  },
+  {
+    transform: "rotateY(-90deg) translateZ(100px)",
+    label: "Cross-Border Capability",
+    sub: "Europe & GCC unified",
+    gold: false,
+    isBrand: false,
+  },
+  {
+    transform: "rotateX(90deg) translateZ(100px)",
+    label: "Discretion & Trust",
+    sub: "Confidential by design",
+    gold: false,
+    isBrand: false,
+  },
+  {
+    transform: "rotateX(-90deg) translateZ(100px)",
+    label: "Dubai · Paris",
+    sub: "Two offices. One firm.",
+    gold: true,
+    isBrand: false,
+  },
+];
+
 function FirmCrest3D() {
   return (
-    <div className="relative flex items-center justify-center w-full h-full" style={{ perspective: "1200px" }}>
+    <div
+      className="relative flex items-center justify-center w-full h-full"
+      style={{ perspective: "900px" }}
+    >
       <motion.div
         animate={{ rotateY: [0, 360] }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        style={{ transformStyle: "preserve-3d", width: 200, height: 200 }}
+        transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+        style={{
+          transformStyle: "preserve-3d",
+          width: 200,
+          height: 200,
+          rotateX: 18,
+        }}
         className="relative"
       >
-        {[0, 60, 120, 180, 240, 300].map((deg, i) => (
+        {CUBE_FACES.map((face, i) => (
           <div
             key={i}
-            className="absolute inset-0"
+            className="absolute inset-0 flex flex-col items-center justify-center px-5"
             style={{
-              transform: `rotateY(${deg}deg) translateZ(100px)`,
+              transform: face.transform,
               backfaceVisibility: "hidden",
-              background: i === 0
-                ? "linear-gradient(145deg, rgba(0,20,137,0.95) 0%, rgba(0,10,79,0.98) 100%)"
-                : "linear-gradient(135deg, rgba(0,10,79,0.85) 0%, rgba(0,20,137,0.9) 100%)",
-              border: `1px solid rgba(212,175,54,${i === 0 ? 0.6 : 0.2})`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              background: face.isBrand
+                ? "linear-gradient(145deg, rgba(0,20,137,0.97) 0%, rgba(0,10,79,1) 100%)"
+                : face.gold
+                ? "linear-gradient(145deg, rgba(0,10,79,0.97) 0%, rgba(0,20,80,0.98) 100%)"
+                : "linear-gradient(145deg, rgba(0,10,79,0.92) 0%, rgba(0,20,137,0.95) 100%)",
+              border: `1px solid rgba(212,175,54,${face.isBrand ? 0.65 : face.gold ? 0.45 : 0.18})`,
             }}
           >
-            {i === 0 ? (
-              <div className="text-center">
-                <div className="text-[#D4AF36] font-heading font-bold text-3xl tracking-widest">MH</div>
-                <div className="text-[#D4AF36]/40 text-[7px] tracking-[0.4em] uppercase mt-1">Est. 2020</div>
-              </div>
-            ) : i === 3 ? (
-              <div className="text-center">
-                <svg viewBox="0 0 60 60" fill="none" className="w-10 h-10">
-                  <circle cx="30" cy="30" r="20" stroke="#D4AF36" strokeWidth="0.8" strokeOpacity="0.5" />
-                  <ellipse cx="30" cy="30" rx="10" ry="20" stroke="#D4AF36" strokeWidth="0.8" strokeOpacity="0.5" />
-                  <line x1="10" y1="30" x2="50" y2="30" stroke="#D4AF36" strokeWidth="0.8" strokeOpacity="0.5" />
-                </svg>
-              </div>
-            ) : (
+            {face.isBrand && (
               <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  background: `repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(212,175,54,0.03) 8px, rgba(212,175,54,0.03) 9px)`,
-                }}
+                className="absolute inset-[8px] pointer-events-none"
+                style={{ border: "1px solid rgba(212,175,54,0.2)" }}
               />
+            )}
+            {face.isBrand ? (
+              <>
+                <div className="text-[#D4AF36] font-heading font-bold text-4xl tracking-widest mb-1">
+                  MH
+                </div>
+                <div className="text-[#D4AF36]/50 text-[7px] tracking-[0.5em] uppercase">
+                  Est. 2020
+                </div>
+              </>
+            ) : (
+              <div className="text-center">
+                <div
+                  className="w-4 h-px bg-[#D4AF36] mx-auto mb-3"
+                  style={{ opacity: face.gold ? 0.8 : 0.5 }}
+                />
+                <p
+                  className="font-heading font-bold leading-tight tracking-tight mb-2"
+                  style={{
+                    fontSize: "clamp(10px, 1.1vw, 13px)",
+                    color: face.gold ? "#D4AF36" : "#ffffff",
+                    opacity: face.gold ? 0.95 : 0.9,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {face.label}
+                </p>
+                <p
+                  className="text-[7px] tracking-[0.22em] uppercase"
+                  style={{ color: "rgba(212,175,54,0.55)" }}
+                >
+                  {face.sub}
+                </p>
+              </div>
             )}
           </div>
         ))}
       </motion.div>
 
-      {[140, 180, 220].map((r, i) => (
+      {[150, 196, 240].map((r, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full border border-[#8099FF]"
+          className="absolute rounded-full"
           style={{
             width: r,
             height: r,
-            borderOpacity: 0.1 + i * 0.05,
-            borderColor: i === 1 ? "rgba(212,175,54,0.25)" : "rgba(128,153,255,0.12)",
+            border: `1px solid ${i === 1 ? "rgba(212,175,54,0.22)" : "rgba(128,153,255,0.1)"}`,
           }}
           animate={{ rotate: i % 2 === 0 ? [0, 360] : [360, 0] }}
-          transition={{ duration: 20 + i * 8, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 22 + i * 9, repeat: Infinity, ease: "linear" }}
         >
           <div
             className="absolute w-2 h-2 rounded-full"
             style={{
               background: i === 1 ? "#D4AF36" : "#8099FF",
-              opacity: i === 1 ? 0.9 : 0.5,
+              opacity: i === 1 ? 0.85 : 0.45,
               top: 0,
               left: "50%",
               transform: "translate(-50%, -50%)",
@@ -94,14 +163,14 @@ function FirmCrest3D() {
 
       {Array.from({ length: 8 }).map((_, i) => {
         const angle = (i / 8) * Math.PI * 2;
-        const x = 50 + 48 * Math.cos(angle);
-        const y = 50 + 48 * Math.sin(angle);
+        const x = 50 + 49 * Math.cos(angle);
+        const y = 50 + 49 * Math.sin(angle);
         return (
           <motion.div
             key={i}
             className="absolute w-1 h-1 rounded-full bg-[#8099FF]"
             style={{ left: `${x}%`, top: `${y}%` }}
-            animate={{ opacity: [0.1, 0.6, 0.1], scale: [0.8, 1.4, 0.8] }}
+            animate={{ opacity: [0.1, 0.55, 0.1], scale: [0.8, 1.5, 0.8] }}
             transition={{ duration: 3, delay: i * 0.35, repeat: Infinity, ease: "easeInOut" }}
           />
         );
