@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type CSSProperties } from "react";
 import { motion, AnimatePresence, useInView, useMotionValue, useSpring } from "framer-motion";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
@@ -218,71 +218,130 @@ function PhilosophyVisual() {
   );
 }
 
-function MissionGlobe() {
-  const paths = [
-    { d: "M80 130 Q200 80 320 130", delay: 0 },
-    { d: "M80 180 Q200 230 320 180", delay: 0.8 },
-    { d: "M80 130 Q200 155 320 180", delay: 1.6 },
-    { d: "M80 180 Q200 155 320 130", delay: 2.4 },
-    { d: "M80 155 Q200 105 320 155", delay: 0.4 },
-    { d: "M80 155 Q200 205 320 155", delay: 1.2 },
-  ];
-  const nodes = [
-    { cx: 80, cy: 130, label: "Paris" },
-    { cx: 80, cy: 180, label: "Lyon" },
-    { cx: 200, cy: 100, label: "London" },
-    { cx: 200, cy: 155, label: "MH" },
-    { cx: 200, cy: 210, label: "Geneva" },
-    { cx: 320, cy: 130, label: "Dubai" },
-    { cx: 320, cy: 180, label: "Abu Dhabi" },
-  ];
+function PhilosophyDuality3D() {
+  const PW = 148;
+  const PH = 210;
+  const SW = 20;
+  const pageBase: CSSProperties = {
+    position: "absolute",
+    top: 0,
+    width: PW,
+    height: PH,
+    padding: 22,
+    boxSizing: "border-box",
+    backfaceVisibility: "hidden",
+  };
   return (
-    <svg viewBox="0 0 400 310" fill="none" className="w-full h-full">
-      <circle cx={200} cy={155} r={120} stroke="#8099FF" strokeOpacity={0.06} strokeWidth={1} fill="none" />
-      <circle cx={200} cy={155} r={80} stroke="#8099FF" strokeOpacity={0.04} strokeWidth={1} fill="none" />
-      {paths.map((p, i) => (
-        <motion.path
-          key={i} d={p.d}
-          stroke={i < 2 ? "#D4AF36" : "#8099FF"}
-          strokeOpacity={i < 2 ? 0.45 : 0.2}
-          strokeWidth={i < 2 ? 1.2 : 0.8}
-          strokeDasharray="300"
-          animate={{ strokeDashoffset: [300, 0, -300] }}
-          transition={{ duration: 4, delay: p.delay, repeat: Infinity, ease: "linear" }}
-          fill="none"
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div style={{ width: 340, height: 240, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(212,175,54,0.07) 0%, transparent 68%)" }} />
+      </div>
+      <div style={{ perspective: 1000, perspectiveOrigin: "50% 42%" }}>
+        <motion.div
+          style={{ width: PW * 2 + SW, height: PH, position: "relative", transformStyle: "preserve-3d" }}
+          initial={{ rotateX: -14, rotateY: 0 }}
+          animate={{ rotateX: -14, rotateY: [0, 20, 0, -20, 0] }}
+          transition={{ rotateY: { duration: 18, repeat: Infinity, ease: "easeInOut" }, rotateX: { duration: 0.01 } }}
+        >
+          {/* LEFT PAGE — John Milton */}
+          <div style={{
+            ...pageBase,
+            left: 0,
+            transformOrigin: "right center",
+            transform: "rotateY(32deg)",
+            background: "linear-gradient(150deg, #000d5a 0%, #000A4F 100%)",
+            border: "1px solid rgba(212,175,54,0.22)",
+            borderRight: "none",
+            boxShadow: "inset -6px 0 20px rgba(0,0,0,0.35)",
+          }}>
+            <div style={{ borderBottom: "1px solid rgba(212,175,54,0.28)", paddingBottom: 10, marginBottom: 14 }}>
+              <p style={{ color: "#D4AF36", fontSize: 8, letterSpacing: "0.38em", textTransform: "uppercase", fontWeight: 700, marginBottom: 3 }}>I.</p>
+              <p style={{ color: "white", fontSize: 12, fontWeight: 800, fontFamily: "var(--font-heading)", letterSpacing: "-0.01em", lineHeight: 1.25 }}>John Milton</p>
+            </div>
+            <p style={{ color: "rgba(255,255,255,0.3)", fontSize: 7.5, letterSpacing: "0.28em", textTransform: "uppercase", marginBottom: 10 }}>Intellectual Legacy</p>
+            {["Liberty", "Human Dignity", "Moral Conviction"].map((t, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 9 }}>
+                <div style={{ width: 3, height: 3, background: "#D4AF36", flexShrink: 0 }} />
+                <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 9.5, letterSpacing: "0.03em" }}>{t}</p>
+              </div>
+            ))}
+            <div style={{ position: "absolute", bottom: 18, left: 22, right: 22 }}>
+              <div style={{ height: 1, background: "rgba(212,175,54,0.15)", marginBottom: 8 }} />
+              <p style={{ color: "rgba(255,255,255,0.18)", fontSize: 7, letterSpacing: "0.28em", textTransform: "uppercase" }}>Strategic · Approachable</p>
+            </div>
+          </div>
+
+          {/* SPINE */}
+          <div style={{
+            position: "absolute",
+            left: PW,
+            top: 0,
+            width: SW,
+            height: PH,
+            background: "linear-gradient(180deg, #D4AF36 0%, #b8942a 100%)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 10,
+            transform: "translateZ(1px)",
+          }}>
+            <p style={{
+              writingMode: "vertical-lr",
+              transform: "rotate(180deg)",
+              color: "#001489",
+              fontSize: 10,
+              fontWeight: 900,
+              letterSpacing: "0.3em",
+              fontFamily: "var(--font-heading)",
+              userSelect: "none",
+            }}>M · H</p>
+          </div>
+
+          {/* RIGHT PAGE — Thomas Hobbes */}
+          <div style={{
+            ...pageBase,
+            left: PW + SW,
+            transformOrigin: "left center",
+            transform: "rotateY(-32deg)",
+            background: "linear-gradient(150deg, #000A4F 0%, #000d5a 100%)",
+            border: "1px solid rgba(212,175,54,0.22)",
+            borderLeft: "none",
+            boxShadow: "inset 6px 0 20px rgba(0,0,0,0.35)",
+          }}>
+            <div style={{ borderBottom: "1px solid rgba(212,175,54,0.28)", paddingBottom: 10, marginBottom: 14 }}>
+              <p style={{ color: "#D4AF36", fontSize: 8, letterSpacing: "0.38em", textTransform: "uppercase", fontWeight: 700, marginBottom: 3 }}>II.</p>
+              <p style={{ color: "white", fontSize: 12, fontWeight: 800, fontFamily: "var(--font-heading)", letterSpacing: "-0.01em", lineHeight: 1.25 }}>Thomas Hobbes</p>
+            </div>
+            <p style={{ color: "rgba(255,255,255,0.3)", fontSize: 7.5, letterSpacing: "0.28em", textTransform: "uppercase", marginBottom: 10 }}>Intellectual Legacy</p>
+            {["Legal Order", "Realism", "Rational Governance"].map((t, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 9 }}>
+                <div style={{ width: 3, height: 3, background: "#D4AF36", flexShrink: 0 }} />
+                <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 9.5, letterSpacing: "0.03em" }}>{t}</p>
+              </div>
+            ))}
+            <div style={{ position: "absolute", bottom: 18, left: 22, right: 22 }}>
+              <div style={{ height: 1, background: "rgba(212,175,54,0.15)", marginBottom: 8 }} />
+              <p style={{ color: "rgba(255,255,255,0.18)", fontSize: 7, letterSpacing: "0.28em", textTransform: "uppercase" }}>Client-Centric · Principled</p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* floating ambient particles */}
+      {[
+        { top: "18%", left: "12%", size: 3, delay: 0 },
+        { top: "72%", left: "8%", size: 2, delay: 1.2 },
+        { top: "25%", right: "10%", size: 2.5, delay: 0.6 },
+        { top: "65%", right: "14%", size: 2, delay: 1.8 },
+      ].map((p, i) => (
+        <motion.div
+          key={i}
+          style={{ position: "absolute", top: p.top, left: (p as any).left, right: (p as any).right, width: p.size, height: p.size, background: "#D4AF36", borderRadius: "50%" }}
+          animate={{ opacity: [0.2, 0.7, 0.2], scale: [0.8, 1.2, 0.8] }}
+          transition={{ duration: 3 + i * 0.5, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
         />
       ))}
-      {nodes.map((n, i) => (
-        <g key={i}>
-          <motion.circle
-            cx={n.cx} cy={n.cy} r={i === 4 ? 8 : 4}
-            fill={i === 4 ? "#D4AF36" : "#8099FF"}
-            fillOpacity={i === 4 ? 1 : 0.55}
-            animate={{ scale: i === 4 ? [1, 1.2, 1] : [0.9, 1.1, 0.9] }}
-            transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
-            style={{ transformOrigin: `${n.cx}px ${n.cy}px` }}
-          />
-          {i === 4 && (
-            <motion.circle
-              cx={n.cx} cy={n.cy} r={18}
-              stroke="#D4AF36" strokeWidth={1} fill="none"
-              animate={{ scale: [1, 1.8, 1], opacity: [0.5, 0, 0.5] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
-              style={{ transformOrigin: `${n.cx}px ${n.cy}px` }}
-            />
-          )}
-          <text
-            x={n.cx} y={n.cy + (i === 0 || i === 2 || i === 5 ? -10 : 18)}
-            fill={i === 4 ? "#D4AF36" : "#8099FF"}
-            fillOpacity={i === 4 ? 0.9 : 0.4}
-            fontSize={i === 4 ? "9" : "7.5"}
-            fontFamily="monospace"
-            textAnchor="middle"
-            letterSpacing="0.15em"
-          >{n.label}</text>
-        </g>
-      ))}
-    </svg>
+    </div>
   );
 }
 
@@ -1044,13 +1103,7 @@ export default function OurFirmPage() {
                   transition={{ duration: 0.9, delay: 0.4 }}
                   className="relative bg-[#000A4F] h-[360px] overflow-hidden"
                 >
-                  <MissionGlobe />
-                  <div className="absolute inset-0 flex items-end p-8">
-                    <div>
-                      <p className="text-[#D4AF36] text-[9px] tracking-[0.45em] uppercase font-bold mb-1">Operating Across</p>
-                      <p className="font-heading text-white font-bold text-2xl tracking-tight">Europe & GCC</p>
-                    </div>
-                  </div>
+                  <PhilosophyDuality3D />
                 </motion.div>
               </div>
             </div>
