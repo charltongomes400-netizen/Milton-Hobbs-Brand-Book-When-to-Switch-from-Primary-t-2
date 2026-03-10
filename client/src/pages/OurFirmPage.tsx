@@ -956,7 +956,7 @@ export default function OurFirmPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#001489]/8 mt-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#D4AF36]/40 mt-20">
               {[
                 { num: "01", title: "Boutique Precision", body: "No delegation chains. The partners who pitch the matter are the partners who execute it. Every mandate receives the firm's highest attention." },
                 { num: "02", title: "Dual-Jurisdiction DNA", body: "With offices in Dubai and Paris, we carry two legal traditions and two regulatory cultures — unified in one coherent approach for your matter." },
