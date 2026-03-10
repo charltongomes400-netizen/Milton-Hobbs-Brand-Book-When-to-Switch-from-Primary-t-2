@@ -76,5 +76,34 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     res.json({ success: true, id: application.id });
   });
 
+  app.post("/api/spontaneous-apply", upload.single("cv"), async (req, res) => {
+    if (!req.file) return res.status(400).json({ error: "CV file is required" });
+
+    const bodySchema = z.object({
+      name: z.string().min(2),
+      email: z.string().email(),
+      phone: z.string().min(5),
+      coverLetter: z.string().optional(),
+    });
+
+    const parsed = bodySchema.safeParse(req.body);
+    if (!parsed.success) {
+      fs.unlinkSync(req.file.path);
+      return res.status(400).json({ error: "Invalid form data", details: parsed.error.flatten() });
+    }
+
+    const application = await storage.createApplication({
+      jobId: null,
+      name: parsed.data.name,
+      email: parsed.data.email,
+      phone: parsed.data.phone,
+      coverLetter: parsed.data.coverLetter ?? null,
+      cvFilename: req.file.originalname,
+      cvPath: req.file.path,
+    });
+
+    res.json({ success: true, id: application.id });
+  });
+
   return httpServer;
 }

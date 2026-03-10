@@ -329,6 +329,247 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
   );
 }
 
+function SpontaneousApplyModal({ onClose }: { onClose: () => void }) {
+  const [form, setForm] = useState({ name: "", email: "", phone: "", coverLetter: "" });
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const fileRef = useRef<HTMLInputElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
+
+  const handleOverlay = (e: React.MouseEvent) => {
+    if (e.target === overlayRef.current) onClose();
+  };
+
+  const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] ?? null;
+    setCvFile(file);
+    setError("");
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    if (!cvFile) { setError("Please attach your CV (PDF or Word document)."); return; }
+    if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const fd = new FormData();
+      fd.append("name", form.name.trim());
+      fd.append("email", form.email.trim());
+      fd.append("phone", form.phone.trim());
+      fd.append("coverLetter", form.coverLetter.trim());
+      fd.append("cv", cvFile);
+
+      const res = await fetch("/api/spontaneous-apply", { method: "POST", body: fd });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || "Submission failed. Please try again.");
+      }
+      setSubmitted(true);
+    } catch (err: any) {
+      setError(err.message || "Submission failed. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div
+      ref={overlayRef}
+      onClick={handleOverlay}
+      className="fixed inset-0 z-[100] flex items-center justify-center"
+      style={{ background: "rgba(0,10,79,0.72)", backdropFilter: "blur(4px)" }}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 16 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="relative bg-white w-full max-w-xl shadow-2xl"
+      >
+        {submitted ? (
+          <div className="flex flex-col items-center justify-center text-center gap-5 p-14">
+            <div className="w-16 h-16 border-2 border-[#D4AF36] flex items-center justify-center">
+              <svg className="w-8 h-8 text-[#D4AF36]" fill="none" viewBox="0 0 24 24">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="font-heading text-[#000A4F] text-2xl font-bold tracking-tight mb-2">Profile Received</h3>
+              <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
+                Thank you for reaching out. Our team will review your profile and be in touch if there is a suitable opportunity.
+              </p>
+            </div>
+            <button
+              onClick={onClose}
+              className="mt-2 bg-[#001489] text-white text-xs tracking-[0.2em] uppercase px-8 py-3 hover:bg-[#000A4F] transition-colors"
+              data-testid="spontaneous-modal-close-success"
+            >
+              Close
+            </button>
+          </div>
+        ) : (
+          <div className="p-10">
+            <div className="flex items-start justify-between mb-7">
+              <div>
+                <p className="text-[#D4AF36] text-[10px] tracking-[0.35em] uppercase font-bold mb-1.5">General Application</p>
+                <h3 className="font-heading text-[#000A4F] text-2xl font-bold tracking-tight">Send Your Profile</h3>
+                <p className="text-gray-500 text-sm mt-1.5">All fields marked with * are required.</p>
+              </div>
+              <button
+                onClick={onClose}
+                className="text-gray-300 hover:text-gray-500 transition-colors mt-1"
+                data-testid="spontaneous-modal-close"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 20 20">
+                  <path d="M2 2l16 16M18 2L2 18" stroke="currentColor" strokeWidth="1.5" />
+                </svg>
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4" data-testid="spontaneous-apply-form">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[10px] tracking-[0.25em] uppercase font-bold text-[#001489]">Full Name *</label>
+                  <input
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Jane Smith"
+                    className="border border-gray-200 px-4 py-3 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-[#001489] transition-colors"
+                    data-testid="spontaneous-input-name"
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[10px] tracking-[0.25em] uppercase font-bold text-[#001489]">Phone *</label>
+                  <input
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    required
+                    placeholder="+971 50 000 0000"
+                    className="border border-gray-200 px-4 py-3 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-[#001489] transition-colors"
+                    data-testid="spontaneous-input-phone"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[10px] tracking-[0.25em] uppercase font-bold text-[#001489]">Email Address *</label>
+                <input
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="jane.smith@example.com"
+                  className="border border-gray-200 px-4 py-3 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-[#001489] transition-colors"
+                  data-testid="spontaneous-input-email"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[10px] tracking-[0.25em] uppercase font-bold text-[#001489]">Message</label>
+                <textarea
+                  name="coverLetter"
+                  value={form.coverLetter}
+                  onChange={handleChange}
+                  placeholder="Tell us about yourself, your experience, and what brings you to Milton Hobbs..."
+                  rows={4}
+                  className="border border-gray-200 px-4 py-3 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:border-[#001489] transition-colors resize-none"
+                  data-testid="spontaneous-input-message"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[10px] tracking-[0.25em] uppercase font-bold text-[#001489]">CV / Résumé *</label>
+                <div
+                  onClick={() => fileRef.current?.click()}
+                  className={`border-2 border-dashed px-5 py-5 flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors ${
+                    cvFile ? "border-[#001489] bg-[#001489]/4" : "border-gray-200 hover:border-[#001489]/40"
+                  }`}
+                  data-testid="spontaneous-cv-upload-zone"
+                >
+                  {cvFile ? (
+                    <>
+                      <svg className="w-5 h-5 text-[#001489]" fill="none" viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="currentColor" strokeWidth="1.5" />
+                        <polyline points="14,2 14,8 20,8" stroke="currentColor" strokeWidth="1.5" />
+                      </svg>
+                      <p className="text-[#001489] font-semibold text-sm">{cvFile.name}</p>
+                      <p className="text-gray-400 text-xs">{(cvFile.size / 1024 / 1024).toFixed(2)} MB · Click to change</p>
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-6 h-6 text-gray-300" fill="none" viewBox="0 0 24 24">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" strokeWidth="1.5" />
+                        <polyline points="17,8 12,3 7,8" stroke="currentColor" strokeWidth="1.5" />
+                        <line x1="12" y1="3" x2="12" y2="15" stroke="currentColor" strokeWidth="1.5" />
+                      </svg>
+                      <p className="text-gray-500 text-sm font-medium">Drop your CV here or <span className="text-[#001489] underline underline-offset-2">browse</span></p>
+                      <p className="text-gray-400 text-xs">PDF, DOC, DOCX — max 10 MB</p>
+                    </>
+                  )}
+                  <input
+                    ref={fileRef}
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFile}
+                    className="hidden"
+                    data-testid="spontaneous-input-cv"
+                  />
+                </div>
+              </div>
+
+              {error && (
+                <p className="text-red-600 text-xs tracking-wide border-l-2 border-red-500 pl-3 py-1">
+                  {error}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="bg-[#001489] text-white text-xs tracking-[0.22em] uppercase px-8 py-4 hover:bg-[#000A4F] disabled:opacity-50 disabled:cursor-not-allowed transition-all font-semibold flex items-center justify-center gap-3 mt-2"
+                data-testid="spontaneous-button-submit"
+              >
+                {submitting ? (
+                  <>
+                    <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" opacity="0.3" />
+                      <path d="M12 2a10 10 0 0110 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                    </svg>
+                    Submitting...
+                  </>
+                ) : (
+                  "Send Profile"
+                )}
+              </button>
+            </form>
+          </div>
+        )}
+      </motion.div>
+    </div>
+  );
+}
+
 function JobCard({ job, onApply }: { job: Job; onApply: (job: Job) => void }) {
   return (
     <motion.div
@@ -392,6 +633,7 @@ function CareersPageInner() {
   const [locationFilter, setLocationFilter] = useState("All Locations");
   const [departmentFilter, setDepartmentFilter] = useState("All Departments");
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [showSpontaneous, setShowSpontaneous] = useState(false);
 
   const { data: jobs = [], isLoading } = useQuery<Job[]>({ queryKey: ["/api/jobs"] });
 
@@ -584,17 +826,17 @@ function CareersPageInner() {
             </p>
           </div>
           <div className="flex-shrink-0">
-            <a
-              href="mailto:careers@miltonhobbs.com"
+            <button
+              onClick={() => setShowSpontaneous(true)}
               className="inline-flex items-center gap-3 bg-[#001489] text-white text-xs tracking-[0.25em] uppercase font-semibold px-8 py-4 hover:bg-[#000A4F] transition-colors"
-              data-testid="link-contact-careers"
+              data-testid="button-send-profile"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" strokeWidth="1.4" />
                 <polyline points="22,6 12,13 2,6" stroke="currentColor" strokeWidth="1.4" />
               </svg>
               Send Your Profile
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -607,6 +849,13 @@ function CareersPageInner() {
       <AnimatePresence>
         {selectedJob && (
           <ApplyModal key={selectedJob.id} job={selectedJob} onClose={() => setSelectedJob(null)} />
+        )}
+      </AnimatePresence>
+
+      {/* ── SPONTANEOUS MODAL ── */}
+      <AnimatePresence>
+        {showSpontaneous && (
+          <SpontaneousApplyModal key="spontaneous" onClose={() => setShowSpontaneous(false)} />
         )}
       </AnimatePresence>
     </div>
