@@ -174,42 +174,6 @@ function FirmCrest3D() {
   );
 }
 
-function PhilosophyVisual() {
-  const cx = 200, cy = 180;
-  return (
-    <svg viewBox="0 0 400 360" fill="none" className="w-full h-full">
-      {[120, 90, 60, 35].map((r, i) => (
-        <motion.circle
-          key={i}
-          cx={cx} cy={cy} r={r}
-          stroke={i < 2 ? "#001489" : "#D4AF36"}
-          strokeOpacity={0.08 + i * 0.06}
-          strokeWidth={1}
-          strokeDasharray={`${2 * Math.PI * r * 0.75} ${2 * Math.PI * r * 0.25}`}
-          fill="none"
-          animate={{ rotate: i % 2 === 0 ? [0, 360] : [360, 0] }}
-          transition={{ duration: 18 + i * 6, repeat: Infinity, ease: "linear" }}
-          style={{ transformOrigin: `${cx}px ${cy}px` }}
-        />
-      ))}
-      <motion.circle
-        cx={cx} cy={cy} r={12}
-        fill="#D4AF36"
-        animate={{ scale: [1, 1.15, 1] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.circle
-        cx={cx} cy={cy} r={28}
-        stroke="#D4AF36" strokeWidth={1} fill="none"
-        animate={{ scale: [1, 1.7, 1], opacity: [0.3, 0, 0.3] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeOut" }}
-        style={{ transformOrigin: `${cx}px ${cy}px` }}
-      />
-      <line x1={cx} y1={40} x2={cx} y2={320} stroke="#001489" strokeOpacity={0.06} strokeWidth={1} />
-      <line x1={60} y1={cy} x2={340} y2={cy} stroke="#001489" strokeOpacity={0.06} strokeWidth={1} />
-    </svg>
-  );
-}
 
 function MissionOrbit() {
   const CX = 210, CY = 150;
@@ -927,30 +891,19 @@ export default function OurFirmPage() {
               </div>
 
               <div>
-                <div className="relative">
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={philosophyInView ? { opacity: 1 } : {}}
-                    transition={{ duration: 1, delay: 0.3 }}
-                    className="h-[360px]"
-                  >
-                    <PhilosophyVisual />
-                  </motion.div>
-
-                  <motion.blockquote
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8, delay: 0.6 }}
-                    className="absolute bottom-0 left-0 right-0 bg-[#001489] p-8"
-                  >
-                    <div className="w-8 h-px bg-[#D4AF36] mb-5" />
-                    <p className="text-[#D4AF36]/70 text-[9px] tracking-[0.35em] uppercase font-bold mb-3">This is Our Promise</p>
-                    <p className="font-heading text-white font-semibold text-lg leading-snug tracking-tight mb-4">
-                      To Bring Precision to Complexity, Composure to Challenge, and a Client-First Mindset to Every Engagement.
-                    </p>
-                    <p className="text-[#D4AF36] text-[10px] tracking-[0.35em] uppercase font-bold">Milton Hobbs — Brand Promise</p>
-                  </motion.blockquote>
-                </div>
+                <motion.blockquote
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="bg-[#001489] p-8"
+                >
+                  <div className="w-8 h-px bg-[#D4AF36] mb-5" />
+                  <p className="text-[#D4AF36]/70 text-[9px] tracking-[0.35em] uppercase font-bold mb-3">This is Our Promise</p>
+                  <p className="font-heading text-white font-semibold text-lg leading-snug tracking-tight mb-4">
+                    To Bring Precision to Complexity, Composure to Challenge, and a Client-First Mindset to Every Engagement.
+                  </p>
+                  <p className="text-[#D4AF36] text-[10px] tracking-[0.35em] uppercase font-bold">Milton Hobbs — Brand Promise</p>
+                </motion.blockquote>
               </div>
             </div>
 
