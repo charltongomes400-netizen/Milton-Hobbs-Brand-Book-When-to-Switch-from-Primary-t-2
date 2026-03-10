@@ -18,10 +18,11 @@ function AnimatedNumber({ target, suffix = "" }: { target: number; suffix?: stri
 const CUBE_FACES = [
   {
     transform: "translateZ(100px)",
-    label: "Milton Hobbs",
-    sub: "Est. 2020",
+    label: "Dubai · Paris",
+    sub: "Two offices. One firm.",
     gold: true,
-    isBrand: true,
+    isBrand: false,
+    isEmpty: false,
   },
   {
     transform: "rotateY(90deg) translateZ(100px)",
@@ -29,6 +30,7 @@ const CUBE_FACES = [
     sub: "Senior-led on every mandate",
     gold: false,
     isBrand: false,
+    isEmpty: false,
   },
   {
     transform: "rotateY(180deg) translateZ(100px)",
@@ -36,6 +38,7 @@ const CUBE_FACES = [
     sub: "Clarity through complexity",
     gold: false,
     isBrand: false,
+    isEmpty: false,
   },
   {
     transform: "rotateY(-90deg) translateZ(100px)",
@@ -43,6 +46,7 @@ const CUBE_FACES = [
     sub: "Europe & GCC unified",
     gold: false,
     isBrand: false,
+    isEmpty: false,
   },
   {
     transform: "rotateX(90deg) translateZ(100px)",
@@ -50,13 +54,15 @@ const CUBE_FACES = [
     sub: "Confidential by design",
     gold: false,
     isBrand: false,
+    isEmpty: false,
   },
   {
     transform: "rotateX(-90deg) translateZ(100px)",
-    label: "Dubai · Paris",
-    sub: "Two offices. One firm.",
-    gold: true,
+    label: "",
+    sub: "",
+    gold: false,
     isBrand: false,
+    isEmpty: true,
   },
 ];
 
@@ -84,30 +90,19 @@ function FirmCrest3D() {
             style={{
               transform: face.transform,
               backfaceVisibility: "hidden",
-              background: face.isBrand
-                ? "linear-gradient(145deg, rgba(0,20,137,0.97) 0%, rgba(0,10,79,1) 100%)"
-                : face.gold
+              background: face.gold
                 ? "linear-gradient(145deg, rgba(0,10,79,0.97) 0%, rgba(0,20,80,0.98) 100%)"
                 : "linear-gradient(145deg, rgba(0,10,79,0.92) 0%, rgba(0,20,137,0.95) 100%)",
-              border: `1px solid rgba(212,175,54,${face.isBrand ? 0.65 : face.gold ? 0.45 : 0.18})`,
+              border: `1px solid rgba(212,175,54,${face.gold ? 0.45 : 0.18})`,
             }}
           >
-            {face.isBrand && (
+            {face.gold && (
               <div
                 className="absolute inset-[8px] pointer-events-none"
                 style={{ border: "1px solid rgba(212,175,54,0.2)" }}
               />
             )}
-            {face.isBrand ? (
-              <>
-                <div className="text-[#D4AF36] font-heading font-bold text-4xl tracking-widest mb-1">
-                  MH
-                </div>
-                <div className="text-[#D4AF36]/50 text-[7px] tracking-[0.5em] uppercase">
-                  Est. 2020
-                </div>
-              </>
-            ) : (
+            {!face.isEmpty && (
               <div className="text-center">
                 <div
                   className="w-4 h-px bg-[#D4AF36] mx-auto mb-3"
