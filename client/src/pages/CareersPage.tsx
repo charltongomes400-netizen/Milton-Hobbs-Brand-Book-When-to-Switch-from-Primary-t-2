@@ -702,7 +702,6 @@ function CareersPageInner() {
           >
             {[
               { num: "2", label: "Offices" },
-              { num: "3", label: "Languages" },
               { num: `${jobs.length}`, label: "Open Positions" },
             ].map(({ num, label }) => (
               <div key={label} className="flex flex-col">
