@@ -207,8 +207,6 @@ function PhilosophyVisual() {
       />
       <line x1={cx} y1={40} x2={cx} y2={320} stroke="#001489" strokeOpacity={0.06} strokeWidth={1} />
       <line x1={60} y1={cy} x2={340} y2={cy} stroke="#001489" strokeOpacity={0.06} strokeWidth={1} />
-      <text x={cx} y={cy - 145} fill="#001489" fillOpacity={0.25} fontSize="9" fontFamily="monospace" textAnchor="middle" letterSpacing="0.3em">DUBAI · UAE</text>
-      <text x={cx} y={cy + 155} fill="#001489" fillOpacity={0.25} fontSize="9" fontFamily="monospace" textAnchor="middle" letterSpacing="0.3em">PARIS · FRANCE</text>
     </svg>
   );
 }
