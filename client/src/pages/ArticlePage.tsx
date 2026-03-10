@@ -525,14 +525,22 @@ function RelatedArticles({ slug }: { slug: string }) {
               data-testid={`related-article-${i}`}
               className="group flex flex-col border border-[#E5EAF4] hover:shadow-md transition-shadow duration-300"
             >
-              <div className="bg-[#EEF2FB] h-36 flex items-center justify-center flex-shrink-0">
-                <svg className="w-8 h-8 text-[#8099FF]/50" fill="none" viewBox="0 0 48 48" stroke="currentColor" strokeWidth="1.4">
-                  <line x1="24" y1="6" x2="24" y2="42" strokeLinecap="round" />
-                  <line x1="14" y1="42" x2="34" y2="42" strokeLinecap="round" />
-                  <line x1="8" y1="14" x2="40" y2="14" strokeLinecap="round" />
-                  <path d="M4 24 Q8 30 12 24" strokeLinecap="round" />
-                  <path d="M36 24 Q40 30 44 24" strokeLinecap="round" />
-                </svg>
+              <div className="h-36 flex-shrink-0 overflow-hidden bg-[#EEF2FB]">
+                {slugImageMap[a.slug] ? (
+                  <img
+                    src={slugImageMap[a.slug]}
+                    alt={a.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <svg className="w-8 h-8 text-[#8099FF]/50" fill="none" viewBox="0 0 48 48" stroke="currentColor" strokeWidth="1.4">
+                      <line x1="24" y1="6" x2="24" y2="42" strokeLinecap="round" />
+                      <line x1="14" y1="42" x2="34" y2="42" strokeLinecap="round" />
+                      <line x1="8" y1="14" x2="40" y2="14" strokeLinecap="round" />
+                    </svg>
+                  </div>
+                )}
               </div>
               <div className="p-6 flex flex-col gap-3 flex-1">
                 <div className="flex items-center gap-3">
