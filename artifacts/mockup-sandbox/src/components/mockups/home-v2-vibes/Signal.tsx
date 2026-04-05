@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowRight, ArrowUpRight, Terminal, Globe, Maximize, Clock, Shield, Briefcase, ChevronRight, Database } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Terminal, Globe, Maximize, Clock, Shield, Briefcase, ChevronRight, ChevronDown, Database } from "lucide-react";
 
 export function Signal() {
   const [activeDiff, setActiveDiff] = useState(0);
