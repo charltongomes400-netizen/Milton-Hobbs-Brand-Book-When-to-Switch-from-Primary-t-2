@@ -228,11 +228,29 @@ const tiles = Array.from({ length: COLS * TILE_ROWS }, (_, i) => ({
   borderDur:   parseFloat((4 + (i * 0.23 + (i % 7) * 0.51) % 4).toFixed(2)),
 }));
 
+const HERO_CYCLE_MS = 6500;
+
 function HeroV12() {
   const { t } = useLang();
   const ins = t.insights;
-  const featuredArticle = ins.articles[0];
-  const featuredSlug = articles[0]?.slug ?? "";
+  const totalArticles = ins.articles.length;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [timerKey, setTimerKey] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex(prev => (prev + 1) % totalArticles);
+    }, HERO_CYCLE_MS);
+    return () => clearInterval(timer);
+  }, [timerKey, totalArticles]);
+
+  function goTo(i: number) {
+    setCurrentIndex(i);
+    setTimerKey(k => k + 1);
+  }
+
+  const featuredArticle = ins.articles[currentIndex];
+  const featuredSlug = articles[currentIndex]?.slug ?? "";
 
   return (
     <section
@@ -243,52 +261,47 @@ function HeroV12() {
       {/* ── LEFT PANEL: Editorial featured article ──────────────────────── */}
       <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20">
 
-        {/* Editorial content block */}
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
-          className="max-w-[440px]"
-        >
-          {/* Eyebrow — article category */}
-          <motion.p
-            initial={{ opacity: 0, x: -12 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="text-[#D4AF36] text-[11px] tracking-[0.22em] uppercase font-medium mb-5"
-            data-testid="hero-eyebrow"
-          >
-            {featuredArticle?.category}
-          </motion.p>
-
-          {/* Large article headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+        {/* Editorial content block — animates on article change */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.45 }}
-            className="font-heading text-[#001489] font-bold text-[clamp(2.2rem,4vw,4rem)] leading-[1.08] tracking-tight mb-8"
-            data-testid="hero-headline"
+            exit={{ opacity: 0, y: -18 }}
+            transition={{ duration: 0.55, ease: "easeInOut" }}
+            className="max-w-[440px]"
           >
-            {featuredArticle?.title}
-          </motion.h1>
+            {/* Eyebrow — article category */}
+            <p
+              className="text-[#D4AF36] text-[11px] tracking-[0.22em] uppercase font-medium mb-5"
+              data-testid="hero-eyebrow"
+            >
+              {featuredArticle?.category}
+            </p>
 
-          {/* Read link */}
-          <motion.a
-            href={`/insights/${featuredSlug}`}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.75 }}
-            data-testid="hero-read-link"
-            className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#D4AF36] transition-colors duration-300"
-          >
-            <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#D4AF36]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
-            <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
-              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-            </svg>
-          </motion.a>
-        </motion.div>
+            {/* Large article headline */}
+            <h1
+              className="font-heading text-[#001489] font-bold text-[clamp(2.2rem,4vw,4rem)] leading-[1.08] tracking-tight mb-8"
+              data-testid="hero-headline"
+            >
+              {featuredArticle?.title}
+            </h1>
 
-        {/* Decorative carousel dots — bottom-left */}
+            {/* Read link */}
+            <a
+              href={`/insights/${featuredSlug}`}
+              data-testid="hero-read-link"
+              className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#D4AF36] transition-colors duration-300"
+            >
+              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#D4AF36]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
+              <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
+                <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+              </svg>
+            </a>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Functional carousel dots — bottom-left */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -296,16 +309,19 @@ function HeroV12() {
           className="absolute bottom-10 left-12 xl:left-24 flex items-center gap-2.5"
           data-testid="hero-dots"
         >
-          {[0, 1, 2, 3].map((i) => (
-            <span
+          {ins.articles.map((_, i) => (
+            <button
               key={i}
-              className="block transition-all duration-300"
+              data-testid={`hero-dot-${i}`}
+              onClick={() => goTo(i)}
+              aria-label={`Article ${i + 1}`}
+              className="block focus:outline-none cursor-pointer transition-all duration-300"
               style={{
-                width:  i === 0 ? 20 : 7,
-                height: 7,
-                borderRadius: i === 0 ? 4 : "50%",
-                backgroundColor: i === 0 ? "#D4AF36" : "transparent",
-                border: i === 0 ? "none" : "1px solid rgba(0,20,137,0.22)",
+                width:           i === currentIndex ? 20 : 7,
+                height:          7,
+                borderRadius:    i === currentIndex ? 4 : "50%",
+                backgroundColor: i === currentIndex ? "#D4AF36" : "transparent",
+                border:          i === currentIndex ? "none" : "1px solid rgba(0,20,137,0.22)",
               }}
             />
           ))}
