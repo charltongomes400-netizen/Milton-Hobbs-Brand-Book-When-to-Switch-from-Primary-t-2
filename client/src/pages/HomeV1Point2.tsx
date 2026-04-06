@@ -255,7 +255,7 @@ function HeroV12() {
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.35 }}
-            className="text-black/40 text-[11px] tracking-[0.22em] uppercase font-medium mb-5"
+            className="text-[#D4AF36] text-[11px] tracking-[0.22em] uppercase font-medium mb-5"
             data-testid="hero-eyebrow"
           >
             {featuredArticle?.category}
@@ -266,7 +266,7 @@ function HeroV12() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, delay: 0.45 }}
-            className="font-heading text-[#001489] font-bold text-[clamp(2rem,3.8vw,3.6rem)] leading-[1.08] tracking-tight mb-8"
+            className="font-heading text-[#001489] font-bold text-[clamp(2.2rem,4vw,4rem)] leading-[1.08] tracking-tight mb-8"
             data-testid="hero-headline"
           >
             {featuredArticle?.title}
@@ -279,14 +279,12 @@ function HeroV12() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.75 }}
             data-testid="hero-read-link"
-            className="group inline-flex items-center gap-3 text-[#001489] hover:text-[#D4AF36] transition-colors duration-300"
+            className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#D4AF36] transition-colors duration-300"
           >
-            <span className="text-sm font-medium tracking-[0.06em]">{ins.read}</span>
-            <span className="flex items-center justify-center w-8 h-8 border border-[#001489]/20 group-hover:border-[#D4AF36]/50 transition-colors duration-300">
-              <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
-                <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-              </svg>
-            </span>
+            <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#D4AF36]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
+            <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
+              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+            </svg>
           </motion.a>
         </motion.div>
 
