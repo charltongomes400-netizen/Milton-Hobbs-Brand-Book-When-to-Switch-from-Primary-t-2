@@ -46,15 +46,36 @@ function HeaderV12() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#001489] ${
-        scrolled ? "shadow-[0_2px_24px_rgba(0,20,137,0.25)]" : ""
-      }`}
+      className="fixed top-0 left-0 right-0 z-50"
+      style={{
+        background: "rgba(0, 20, 137, 0.10)",
+        backdropFilter: "blur(28px) saturate(200%) brightness(1.08)",
+        WebkitBackdropFilter: "blur(28px) saturate(200%) brightness(1.08)",
+        boxShadow: [
+          "inset 0 1px 0 rgba(255,255,255,0.45)",
+          "inset 0 -1px 0 rgba(0,20,137,0.12)",
+          "inset 1px 0 0 rgba(255,255,255,0.15)",
+          "inset -1px 0 0 rgba(255,255,255,0.15)",
+          "0 8px 32px rgba(0,20,137,0.10)",
+          "0 1px 0 rgba(0,20,137,0.08)",
+        ].join(", "),
+        borderBottom: "1px solid rgba(0, 20, 137, 0.10)",
+      }}
     >
-      <div className="max-w-[1400px] mx-auto px-8 h-20 flex items-center justify-between">
+      {/* Specular gloss layer — catches the light along the top edge */}
+      <div
+        className="absolute inset-x-0 top-0 h-px pointer-events-none"
+        style={{
+          background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.7) 30%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.7) 70%, transparent 100%)",
+        }}
+      />
+
+      <div className="max-w-[1400px] mx-auto px-8 h-20 flex items-center justify-between relative">
         <a
           href="#home"
           data-testid="logo"
-          className="font-heading font-semibold text-lg tracking-[0.18em] uppercase shrink-0 text-white"
+          className="font-heading font-semibold text-lg tracking-[0.18em] uppercase shrink-0"
+          style={{ color: "#001489" }}
         >
           Milton Hobbs
         </a>
@@ -65,7 +86,10 @@ function HeaderV12() {
               key={link.href}
               href={link.href}
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
-              className="text-xs tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300 text-white/60 hover:text-white"
+              className="text-xs tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300"
+              style={{ color: "rgba(0,20,137,0.55)" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "#001489")}
+              onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,20,137,0.55)")}
             >
               {link.label}
             </a>
@@ -75,23 +99,32 @@ function HeaderV12() {
         <div className="flex items-center gap-5 shrink-0">
           <div
             data-testid="lang-toggle"
-            className="hidden lg:flex items-center border border-white/20 text-xs tracking-widest overflow-hidden"
+            className="hidden lg:flex items-center text-xs tracking-widest overflow-hidden"
+            style={{
+              border: "1px solid rgba(0,20,137,0.18)",
+              background: "rgba(255,255,255,0.30)",
+              backdropFilter: "blur(8px)",
+            }}
           >
             <button
               onClick={() => setLang("EN")}
               data-testid="lang-en"
-              className={`px-4 py-2 transition-all duration-200 ${
-                lang === "EN" ? "bg-[#D4AF36] text-[#000A4F] font-semibold" : "text-white/50 hover:text-white"
-              }`}
+              className="px-4 py-2 transition-all duration-200"
+              style={lang === "EN"
+                ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
+                : { color: "rgba(0,20,137,0.50)" }
+              }
             >
               EN
             </button>
             <button
               onClick={() => setLang("FR")}
               data-testid="lang-fr"
-              className={`px-4 py-2 transition-all duration-200 ${
-                lang === "FR" ? "bg-[#D4AF36] text-[#000A4F] font-semibold" : "text-white/50 hover:text-white"
-              }`}
+              className="px-4 py-2 transition-all duration-200"
+              style={lang === "FR"
+                ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
+                : { color: "rgba(0,20,137,0.50)" }
+              }
             >
               FR
             </button>
@@ -100,7 +133,8 @@ function HeaderV12() {
           <button
             data-testid="mobile-menu-toggle"
             aria-label="Toggle menu"
-            className="lg:hidden p-1 text-white/70 hover:text-white transition-colors"
+            className="lg:hidden p-1 transition-colors"
+            style={{ color: "rgba(0,20,137,0.65)" }}
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             <div className="flex flex-col gap-[5px] w-5">
@@ -120,7 +154,12 @@ function HeaderV12() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden bg-[#001070] border-t border-white/10"
+            className="lg:hidden overflow-hidden border-t"
+            style={{
+              borderColor: "rgba(0,20,137,0.10)",
+              background: "rgba(240,244,255,0.80)",
+              backdropFilter: "blur(28px)",
+            }}
           >
             <div className="px-8 py-8 flex flex-col gap-5">
               {navLinks.map((link) => (
@@ -128,23 +167,29 @@ function HeaderV12() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-white/70 hover:text-white text-sm tracking-[0.15em] uppercase transition-colors"
+                  className="text-sm tracking-[0.15em] uppercase transition-colors"
+                  style={{ color: "rgba(0,20,137,0.65)" }}
                 >
                   {link.label}
                 </a>
               ))}
-              <div className="flex items-center gap-0 mt-2 border border-white/20 w-fit">
+              <div className="flex items-center gap-0 mt-2 w-fit"
+                style={{ border: "1px solid rgba(0,20,137,0.18)" }}>
                 <button
                   onClick={() => setLang("EN")}
-                  className={`text-xs tracking-widest px-4 py-2 transition-all duration-200 ${
-                    lang === "EN" ? "bg-[#D4AF36] text-[#000A4F] font-semibold" : "text-white/50 hover:text-white"
-                  }`}
+                  className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
+                  style={lang === "EN"
+                    ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
+                    : { color: "rgba(0,20,137,0.50)" }
+                  }
                 >EN</button>
                 <button
                   onClick={() => setLang("FR")}
-                  className={`text-xs tracking-widest px-4 py-2 transition-all duration-200 ${
-                    lang === "FR" ? "bg-[#D4AF36] text-[#000A4F] font-semibold" : "text-white/50 hover:text-white"
-                  }`}
+                  className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
+                  style={lang === "FR"
+                    ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
+                    : { color: "rgba(0,20,137,0.50)" }
+                  }
                 >FR</button>
               </div>
             </div>
