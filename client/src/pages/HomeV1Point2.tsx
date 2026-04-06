@@ -215,8 +215,8 @@ function HeaderV12() {
 
 /* ─── HERO ─────────────────────────────────────────────────────────────── */
 
-const COLS = 12;
-const TILE_ROWS = 16;
+const COLS = 8;
+const TILE_ROWS = 15;
 
 const tiles = Array.from({ length: COLS * TILE_ROWS }, (_, i) => ({
   color:      i % 2 === 0 ? "#001489" : "#000A4F",
@@ -342,12 +342,14 @@ function HeroV12() {
           style={{
             display: "grid",
             gridTemplateColumns: `repeat(${COLS}, 1fr)`,
+            gridTemplateRows: `repeat(${TILE_ROWS}, calc(58vw / ${COLS}))`,
+            alignContent: "start",
           }}
         >
           {tiles.map((tile, i) => (
             <motion.div
               key={i}
-              style={{ backgroundColor: "rgba(255,255,255,1)", aspectRatio: "1" }}
+              style={{ backgroundColor: "rgba(255,255,255,1)" }}
               animate={{
                 opacity: [0, tile.maxOpacity * 0.55, 0],
                 ...(tile.goldBorder ? {
@@ -374,7 +376,7 @@ function HeroV12() {
               linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
               linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
             `,
-            backgroundSize: `calc(100% / ${COLS}) calc(100% / ${COLS})`,
+            backgroundSize: `calc(100% / ${COLS}) calc(58vw / ${COLS})`,
           }}
         />
 
