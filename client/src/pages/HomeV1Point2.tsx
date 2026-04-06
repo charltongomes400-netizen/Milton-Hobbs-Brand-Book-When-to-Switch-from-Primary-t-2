@@ -50,38 +50,33 @@ function HeaderV12() {
       style={{
         background: scrolled
           ? "rgba(255,255,255,0.98)"
-          : "rgba(0,20,137,0.10)",
+          : "rgba(255,255,255,0.68)",
         backdropFilter: scrolled
           ? "none"
-          : "blur(28px) saturate(200%) brightness(1.08)",
+          : "blur(24px) saturate(180%) brightness(1.06)",
         WebkitBackdropFilter: scrolled
           ? "none"
-          : "blur(28px) saturate(200%) brightness(1.08)",
+          : "blur(24px) saturate(180%) brightness(1.06)",
         boxShadow: scrolled
           ? "0 1px 0 rgba(0,20,137,0.08), 0 4px 24px rgba(0,20,137,0.06)"
           : [
-              "inset 0 1px 0 rgba(255,255,255,0.45)",
-              "inset 0 -1px 0 rgba(0,20,137,0.12)",
-              "inset 1px 0 0 rgba(255,255,255,0.15)",
-              "inset -1px 0 0 rgba(255,255,255,0.15)",
-              "0 8px 32px rgba(0,20,137,0.10)",
-              "0 1px 0 rgba(0,20,137,0.08)",
+              "inset 0 1px 0 rgba(255,255,255,0.95)",
+              "inset 0 -1px 0 rgba(0,20,137,0.07)",
+              "0 4px 28px rgba(0,20,137,0.07)",
             ].join(", "),
         borderBottom: scrolled
           ? "1px solid rgba(0,20,137,0.08)"
-          : "1px solid rgba(0,20,137,0.10)",
+          : "1px solid rgba(255,255,255,0.55)",
         transition: "background 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease",
       }}
     >
-      {/* Specular gloss layer — only visible in glass state */}
-      <div
-        className="absolute inset-x-0 top-0 h-px pointer-events-none"
-        style={{
-          background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.7) 30%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.7) 70%, transparent 100%)",
-          opacity: scrolled ? 0 : 1,
-          transition: "opacity 0.35s ease",
-        }}
-      />
+      {/* Specular gloss — top-edge bright line + upper-half sheen */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ opacity: scrolled ? 0 : 1, transition: "opacity 0.35s ease" }}>
+        {/* Upper-half white sheen */}
+        <div className="absolute inset-x-0 top-0 h-1/2" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%)" }} />
+        {/* Bright top-edge specular line */}
+        <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.95) 75%, transparent 100%)" }} />
+      </div>
 
       <div className="max-w-[1400px] mx-auto px-8 h-20 flex items-center justify-between relative">
         <a
@@ -100,9 +95,9 @@ function HeaderV12() {
               href={link.href}
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
               className="text-xs tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300"
-              style={{ color: "rgba(0,20,137,0.55)" }}
+              style={{ color: "rgba(0,20,137,0.70)" }}
               onMouseEnter={e => (e.currentTarget.style.color = "#001489")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,20,137,0.55)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,20,137,0.70)")}
             >
               {link.label}
             </a>
