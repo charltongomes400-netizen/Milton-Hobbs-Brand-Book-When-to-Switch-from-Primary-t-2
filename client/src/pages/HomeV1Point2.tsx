@@ -231,88 +231,38 @@ const tiles = Array.from({ length: COLS * ROWS }, (_, i) => ({
 function HeroV12() {
   const { t } = useLang();
   const h = t.hero;
+  const ins = t.insights;
 
   return (
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen bg-white flex items-center overflow-hidden"
+      className="relative min-h-screen bg-white flex overflow-hidden"
     >
-      {/* Animated blue tile grid */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-          gridTemplateRows: `repeat(${ROWS}, 1fr)`,
-        }}
-      >
-        {tiles.map((tile, i) => (
-          <motion.div
-            key={i}
-            style={{ backgroundColor: tile.color }}
-            animate={{
-              opacity: [0, tile.maxOpacity, 0],
-              ...(tile.goldBorder ? {
-                boxShadow: [
-                  "inset 0 0 0 2px rgba(212,175,54,0)",
-                  "inset 0 0 0 2px rgba(212,175,54,0.6)",
-                  "inset 0 0 0 2px rgba(212,175,54,0)",
-                ],
-              } : {}),
-            }}
-            transition={{
-              opacity:   { duration: tile.duration,   delay: tile.delay,       repeat: Infinity, ease: "easeInOut" },
-              boxShadow: { duration: tile.borderDur,  delay: tile.borderDelay, repeat: Infinity, ease: "easeInOut" },
-            }}
-          />
-        ))}
-      </div>
+      {/* ── LEFT PANEL: Hero text + article cards ──────────────────────── */}
+      <div className="relative z-10 w-[54%] flex flex-col justify-center px-10 xl:px-16 pt-28 pb-16">
 
-      {/* Subtle grid lines */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(0,20,137,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,20,137,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: `calc(100% / ${COLS}) calc(100% / ${ROWS})`,
-        }}
-      />
-
-      {/* Left vignette — white — keeps text readable over tile animation */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 110% at 10% 55%, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.82) 40%, rgba(255,255,255,0.30) 70%, transparent 100%)",
-        }}
-      />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-8 pt-36 pb-24 w-full">
+        {/* Hero copy */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
-          className="max-w-[700px]"
+          transition={{ duration: 0.85, ease: "easeOut", delay: 0.15 }}
         >
           <motion.p
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-semibold mb-8"
+            className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-semibold mb-7"
             data-testid="hero-eyebrow"
           >
             {h.eyebrow}
           </motion.p>
 
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-heading text-[#001489] font-bold text-[clamp(3rem,6vw,5.5rem)] leading-[1.05] tracking-tight mb-8"
+            className="font-heading text-[#001489] font-bold text-[clamp(2.6rem,4.5vw,4.5rem)] leading-[1.05] tracking-tight mb-7"
             data-testid="hero-headline"
           >
             {h.headline.map((line, i) => (
@@ -322,54 +272,156 @@ function HeroV12() {
 
           <motion.div
             initial={{ width: 0 }}
-            animate={{ width: "72px" }}
+            animate={{ width: "56px" }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="h-[2px] bg-[#D4AF36] mb-8"
+            className="h-[2px] bg-[#D4AF36] mb-7"
           />
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.8 }}
-            className="text-black/55 text-base leading-relaxed max-w-[560px] mb-12"
+            className="text-black/50 text-sm leading-relaxed max-w-[460px] mb-10"
             data-testid="hero-subheadline"
           >
             {h.subheadline}
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1 }}
-            className="flex flex-wrap gap-4"
           >
             <a
               href="#contact"
               data-testid="cta-book"
-              className="relative inline-flex items-center px-8 py-[14px] text-xs font-semibold tracking-[0.18em] uppercase bg-[#001489] text-white hover:bg-[#001070] transition-colors duration-300"
+              className="inline-flex items-center px-7 py-3.5 text-xs font-semibold tracking-[0.18em] uppercase bg-[#001489] text-white hover:bg-[#001070] transition-colors duration-300"
             >
               {h.cta1}
             </a>
           </motion.div>
         </motion.div>
+
+        {/* Article preview cards */}
+        <div className="mt-12 grid grid-cols-2 gap-4">
+          {ins.articles.slice(0, 4).map((article, i) => {
+            const img = articleImages[i];
+            return (
+              <motion.a
+                key={i}
+                href={`/insights/${articles[i]?.slug ?? ""}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 1.1 + i * 0.09 }}
+                data-testid={`hero-article-card-${i}`}
+                className="group flex flex-col overflow-hidden border border-[#E5EAF4] bg-white hover:shadow-md transition-shadow duration-300 cursor-pointer"
+              >
+                <div className="relative h-28 flex-shrink-0 overflow-hidden bg-[#EEF2FB]">
+                  {img && (
+                    <img
+                      src={img}
+                      alt={article.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#001489]/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+                <div className="flex flex-col flex-1 px-4 py-3 gap-1.5">
+                  <span className="text-[#D4AF36] text-[9px] tracking-[0.22em] uppercase font-semibold">
+                    {article.category}
+                  </span>
+                  <h3 className="font-heading text-[#001489] text-[0.78rem] font-semibold leading-snug tracking-tight line-clamp-2">
+                    {article.title}
+                  </h3>
+                  <div className="flex items-center gap-1 mt-auto pt-2 text-[#001489]/40 group-hover:text-[#D4AF36] transition-colors">
+                    <span className="text-[10px] font-medium tracking-wide">{ins.read}</span>
+                    <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12">
+                      <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                    </svg>
+                  </div>
+                </div>
+              </motion.a>
+            );
+          })}
+        </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.8 }}
+          className="absolute bottom-8 left-10 xl:left-16 flex items-center gap-3"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-px h-8 bg-gradient-to-b from-[#001489]/30 to-transparent"
+          />
+          <span className="text-[#001489]/30 text-[10px] tracking-[0.25em] uppercase">
+            {t.hero.scroll}
+          </span>
+        </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
-        className="absolute bottom-10 left-8 flex items-center gap-3"
+      {/* ── RIGHT PANEL: Animated tile grid (blue) ─────────────────────── */}
+      <div
+        className="absolute right-0 top-0 bottom-0 bg-[#001489]"
+        style={{
+          left: "46%",
+          clipPath: "polygon(9% 0, 100% 0, 100% 100%, 0% 100%)",
+        }}
       >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-px h-10 bg-gradient-to-b from-[#001489]/30 to-transparent"
+        {/* Tile shimmer — white at low opacity on the blue bg */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${COLS}, 1fr)`,
+            gridTemplateRows: `repeat(${ROWS}, 1fr)`,
+          }}
+        >
+          {tiles.map((tile, i) => (
+            <motion.div
+              key={i}
+              style={{ backgroundColor: "rgba(255,255,255,1)" }}
+              animate={{
+                opacity: [0, tile.maxOpacity * 0.55, 0],
+                ...(tile.goldBorder ? {
+                  boxShadow: [
+                    "inset 0 0 0 1px rgba(212,175,54,0)",
+                    "inset 0 0 0 1px rgba(212,175,54,0.5)",
+                    "inset 0 0 0 1px rgba(212,175,54,0)",
+                  ],
+                } : {}),
+              }}
+              transition={{
+                opacity:   { duration: tile.duration,   delay: tile.delay,       repeat: Infinity, ease: "easeInOut" },
+                boxShadow: { duration: tile.borderDur,  delay: tile.borderDelay, repeat: Infinity, ease: "easeInOut" },
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Subtle grid lines */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
+            `,
+            backgroundSize: `calc(100% / ${COLS}) calc(100% / ${ROWS})`,
+          }}
         />
-        <span className="text-[#001489]/35 text-[10px] tracking-[0.25em] uppercase">
-          {t.hero.scroll}
-        </span>
-      </motion.div>
+
+        {/* Soft vignette edges */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse 80% 80% at 70% 50%, transparent 40%, rgba(0,10,80,0.35) 100%)",
+          }}
+        />
+      </div>
     </section>
   );
 }
