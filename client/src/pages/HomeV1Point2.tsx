@@ -491,7 +491,7 @@ function FounderVisual() {
         return (
           <motion.line
             key={i} x1={x1} y1={y1} x2={x2} y2={y2}
-            stroke="#8099FF" strokeWidth={1}
+            stroke="#001489" strokeWidth={1}
             animate={{ strokeOpacity: [0.1, 0.5, 0.1] }}
             transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -504,13 +504,13 @@ function FounderVisual() {
         return (
           <motion.circle
             key={i} cx={x} cy={y} r={3}
-            fill="#8099FF" fillOpacity={0.5}
+            fill="#001489" fillOpacity={0.5}
             animate={{ fillOpacity: [0.2, 0.7, 0.2] }}
             transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
           />
         );
       })}
-      <circle cx={cx} cy={cy} r={outerR} stroke="#8099FF" strokeOpacity={0.1} strokeWidth={1} fill="none" />
+      <circle cx={cx} cy={cy} r={outerR} stroke="#001489" strokeOpacity={0.1} strokeWidth={1} fill="none" />
       <circle cx={cx} cy={cy} r={innerR} stroke="#D4AF36" strokeOpacity={0.4} strokeWidth={1} fill="none" />
       <circle cx={cx} cy={cy} r={8} fill="#D4AF36" fillOpacity={0.95} />
       <motion.circle
@@ -574,16 +574,16 @@ function PrecisionVisual() {
       {[88, 64, 44].map((r, i) => (
         <circle
           key={i} cx={CX} cy={CY} r={r} fill="none"
-          stroke={locked ? "#D4AF36" : "#8099FF"}
+          stroke={locked ? "#D4AF36" : "#001489"}
           strokeOpacity={locked ? 0.18 + i * 0.1 : 0.08 + i * 0.05}
           strokeWidth={1}
           style={{ transition: "stroke 0.4s, stroke-opacity 0.4s" }}
         />
       ))}
-      <line x1={CX} y1={30} x2={CX} y2={230} stroke="#8099FF" strokeOpacity={0.12} strokeWidth={1} />
-      <line x1={40} y1={CY} x2={280} y2={CY} stroke="#8099FF" strokeOpacity={0.12} strokeWidth={1} />
+      <line x1={CX} y1={30} x2={CX} y2={230} stroke="#001489" strokeOpacity={0.12} strokeWidth={1} />
+      <line x1={40} y1={CY} x2={280} y2={CY} stroke="#001489" strokeOpacity={0.12} strokeWidth={1} />
       <circle cx={CX} cy={CY} r={4}
-        fill={locked ? "#D4AF36" : "#8099FF"}
+        fill={locked ? "#D4AF36" : "#001489"}
         fillOpacity={locked ? 1 : 0.35}
         style={{ transition: "fill 0.3s, fill-opacity 0.3s" }}
       />
@@ -641,7 +641,7 @@ function CrossBorderVisual() {
       {paths.map((p, i) => (
         <motion.path
           key={i} d={p.d}
-          stroke={i < 2 ? "#D4AF36" : "#8099FF"}
+          stroke={i < 2 ? "#D4AF36" : "#001489"}
           strokeOpacity={i < 2 ? 0.5 : 0.25}
           strokeWidth={i < 2 ? 1.2 : 1}
           strokeDasharray="220"
@@ -651,9 +651,9 @@ function CrossBorderVisual() {
       ))}
       {nodes.map((n, i) => (
         <g key={i}>
-          <circle cx={n.cx} cy={n.cy} r={5} fill="#8099FF" fillOpacity={0.65} />
+          <circle cx={n.cx} cy={n.cy} r={5} fill="#001489" fillOpacity={0.65} />
           <text x={n.cx} y={n.cy + (i < 2 ? -12 : 18)}
-            fill="#8099FF" fillOpacity={0.45} fontSize="8"
+            fill="#001489" fillOpacity={0.45} fontSize="8"
             fontFamily="sans-serif" textAnchor="middle"
           >{n.label}</text>
         </g>
@@ -681,7 +681,7 @@ function DiscretionVisual() {
         return (
           <motion.circle
             key={i} cx={cx} cy={cy} r={r}
-            stroke={i === rings.length - 1 ? "#D4AF36" : "#8099FF"}
+            stroke={i === rings.length - 1 ? "#D4AF36" : "#001489"}
             strokeOpacity={i === rings.length - 1 ? 0.7 : 0.1 + i * 0.07}
             strokeWidth={1}
             strokeDasharray={`${circumference * (1 - gap)} ${circumference * gap}`}
@@ -789,7 +789,7 @@ function DifferentiatorsV12() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div className="relative bg-[#001489] w-full overflow-hidden" style={{ aspectRatio: "4/3" }}>
+            <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4/3" }}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -803,9 +803,9 @@ function DifferentiatorsV12() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="absolute bottom-0 left-0 right-0 h-px bg-[#001489]/20">
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-[#001489]/10">
                 <motion.div
-                  className="h-full bg-[#D4AF36]"
+                  className="h-full bg-[#001489]"
                   style={{ width: `${progress}%` }}
                   transition={{ ease: "linear" }}
                 />
