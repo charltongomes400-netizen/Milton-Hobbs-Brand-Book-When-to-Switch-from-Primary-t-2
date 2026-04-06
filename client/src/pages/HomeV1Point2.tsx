@@ -230,8 +230,9 @@ const tiles = Array.from({ length: COLS * ROWS }, (_, i) => ({
 
 function HeroV12() {
   const { t } = useLang();
-  const h = t.hero;
   const ins = t.insights;
+  const featuredArticle = ins.articles[0];
+  const featuredSlug = articles[0]?.slug ?? "";
 
   return (
     <section
@@ -239,107 +240,77 @@ function HeroV12() {
       data-testid="hero-section"
       className="relative min-h-screen bg-white flex overflow-hidden"
     >
-      {/* ── LEFT PANEL: Hero text + article cards ──────────────────────── */}
-      <div className="relative z-10 w-[54%] flex flex-col justify-center px-10 xl:px-16 pt-28 pb-16">
+      {/* ── LEFT PANEL: Editorial featured article ──────────────────────── */}
+      <div className="relative z-10 w-[54%] flex flex-col justify-center px-10 xl:px-20 pt-24 pb-20">
 
-        {/* Hero copy */}
+        {/* Editorial content block */}
         <motion.div
-          initial={{ opacity: 0, y: 32 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, ease: "easeOut", delay: 0.15 }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
+          className="max-w-[440px]"
         >
+          {/* Eyebrow — article category */}
           <motion.p
-            initial={{ opacity: 0, x: -16 }}
+            initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-semibold mb-7"
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="text-black/40 text-[11px] tracking-[0.22em] uppercase font-medium mb-5"
             data-testid="hero-eyebrow"
           >
-            {h.eyebrow}
+            {featuredArticle?.category}
           </motion.p>
 
+          {/* Large article headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-heading text-[#001489] font-bold text-[clamp(2.6rem,4.5vw,4.5rem)] leading-[1.05] tracking-tight mb-7"
+            transition={{ duration: 0.85, delay: 0.45 }}
+            className="font-heading text-[#001489] font-bold text-[clamp(2rem,3.8vw,3.6rem)] leading-[1.08] tracking-tight mb-8"
             data-testid="hero-headline"
           >
-            {h.headline.map((line, i) => (
-              <span key={i} className="block">{line}</span>
-            ))}
+            {featuredArticle?.title}
           </motion.h1>
 
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: "56px" }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="h-[2px] bg-[#D4AF36] mb-7"
-          />
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
+          {/* Read link */}
+          <motion.a
+            href={`/insights/${featuredSlug}`}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.8 }}
-            className="text-black/50 text-sm leading-relaxed max-w-[460px] mb-10"
-            data-testid="hero-subheadline"
+            transition={{ duration: 0.6, delay: 0.75 }}
+            data-testid="hero-read-link"
+            className="group inline-flex items-center gap-3 text-[#001489] hover:text-[#D4AF36] transition-colors duration-300"
           >
-            {h.subheadline}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1 }}
-          >
-            <a
-              href="#contact"
-              data-testid="cta-book"
-              className="inline-flex items-center px-7 py-3.5 text-xs font-semibold tracking-[0.18em] uppercase bg-[#001489] text-white hover:bg-[#001070] transition-colors duration-300"
-            >
-              {h.cta1}
-            </a>
-          </motion.div>
+            <span className="text-sm font-medium tracking-[0.06em]">{ins.read}</span>
+            <span className="flex items-center justify-center w-8 h-8 border border-[#001489]/20 group-hover:border-[#D4AF36]/50 transition-colors duration-300">
+              <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
+                <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+              </svg>
+            </span>
+          </motion.a>
         </motion.div>
 
-        {/* Featured article teaser card */}
-        <motion.a
-          href={`/insights/${articles[0]?.slug ?? ""}`}
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.15 }}
-          data-testid="hero-article-teaser"
-          className="group mt-14 inline-block max-w-[360px] border border-[#001489]/12 px-6 py-5 hover:border-[#001489]/25 transition-colors duration-300"
-        >
-          <p className="text-[#D4AF36] text-[9px] tracking-[0.28em] uppercase font-semibold mb-2">
-            {ins.articles[0]?.category}
-          </p>
-          <h3 className="font-heading text-[#001489] text-[0.95rem] font-semibold leading-snug tracking-tight mb-4">
-            {ins.articles[0]?.title}
-          </h3>
-          <div className="flex items-center gap-2 text-[#001489]/45 group-hover:text-[#D4AF36] transition-colors duration-300">
-            <span className="text-[11px] tracking-[0.12em] uppercase font-medium">{ins.read}</span>
-            <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 12 12">
-              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
-            </svg>
-          </div>
-        </motion.a>
-
-        {/* Scroll indicator */}
+        {/* Decorative carousel dots — bottom-left */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.8 }}
-          className="absolute bottom-8 left-10 xl:left-16 flex items-center gap-3"
+          transition={{ duration: 0.8, delay: 1.1 }}
+          className="absolute bottom-10 left-10 xl:left-20 flex items-center gap-2.5"
+          data-testid="hero-dots"
         >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-8 bg-gradient-to-b from-[#001489]/30 to-transparent"
-          />
-          <span className="text-[#001489]/30 text-[10px] tracking-[0.25em] uppercase">
-            {t.hero.scroll}
-          </span>
+          {[0, 1, 2, 3].map((i) => (
+            <span
+              key={i}
+              className="block transition-all duration-300"
+              style={{
+                width:  i === 0 ? 20 : 7,
+                height: 7,
+                borderRadius: i === 0 ? 4 : "50%",
+                backgroundColor: i === 0 ? "#D4AF36" : "transparent",
+                border: i === 0 ? "none" : "1px solid rgba(0,20,137,0.22)",
+              }}
+            />
+          ))}
         </motion.div>
       </div>
 
