@@ -48,25 +48,38 @@ function HeaderV12() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: "rgba(0, 20, 137, 0.10)",
-        backdropFilter: "blur(28px) saturate(200%) brightness(1.08)",
-        WebkitBackdropFilter: "blur(28px) saturate(200%) brightness(1.08)",
-        boxShadow: [
-          "inset 0 1px 0 rgba(255,255,255,0.45)",
-          "inset 0 -1px 0 rgba(0,20,137,0.12)",
-          "inset 1px 0 0 rgba(255,255,255,0.15)",
-          "inset -1px 0 0 rgba(255,255,255,0.15)",
-          "0 8px 32px rgba(0,20,137,0.10)",
-          "0 1px 0 rgba(0,20,137,0.08)",
-        ].join(", "),
-        borderBottom: "1px solid rgba(0, 20, 137, 0.10)",
+        background: scrolled
+          ? "rgba(255,255,255,0.98)"
+          : "rgba(0,20,137,0.10)",
+        backdropFilter: scrolled
+          ? "none"
+          : "blur(28px) saturate(200%) brightness(1.08)",
+        WebkitBackdropFilter: scrolled
+          ? "none"
+          : "blur(28px) saturate(200%) brightness(1.08)",
+        boxShadow: scrolled
+          ? "0 1px 0 rgba(0,20,137,0.08), 0 4px 24px rgba(0,20,137,0.06)"
+          : [
+              "inset 0 1px 0 rgba(255,255,255,0.45)",
+              "inset 0 -1px 0 rgba(0,20,137,0.12)",
+              "inset 1px 0 0 rgba(255,255,255,0.15)",
+              "inset -1px 0 0 rgba(255,255,255,0.15)",
+              "0 8px 32px rgba(0,20,137,0.10)",
+              "0 1px 0 rgba(0,20,137,0.08)",
+            ].join(", "),
+        borderBottom: scrolled
+          ? "1px solid rgba(0,20,137,0.08)"
+          : "1px solid rgba(0,20,137,0.10)",
+        transition: "background 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease",
       }}
     >
-      {/* Specular gloss layer — catches the light along the top edge */}
+      {/* Specular gloss layer — only visible in glass state */}
       <div
         className="absolute inset-x-0 top-0 h-px pointer-events-none"
         style={{
           background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.7) 30%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.7) 70%, transparent 100%)",
+          opacity: scrolled ? 0 : 1,
+          transition: "opacity 0.35s ease",
         }}
       />
 
