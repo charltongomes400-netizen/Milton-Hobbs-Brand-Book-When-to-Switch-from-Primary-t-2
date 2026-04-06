@@ -39,7 +39,7 @@ function Hero() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen bg-[#0A3020] flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden" style={{ backgroundColor: "#0A3020" }}
     >
       {/* Symmetric tile grid — fades in/out randomly per cell */}
       <div
@@ -127,7 +127,7 @@ function Hero() {
             initial={{ width: 0 }}
             animate={{ width: "72px" }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="h-[2px] bg-[#C8A84B] mb-8"
+            className="h-[2px] mb-8" style={{ backgroundColor: "#C8A84B" }}
           />
 
           <motion.p
@@ -478,7 +478,7 @@ function Differentiators() {
     <section
       id="firm"
       data-testid="differentiators-section"
-      className="bg-[#0A3020] py-28 px-8"
+      className="py-28 px-8" style={{ backgroundColor: "#0A3020" }}
     >
       <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
@@ -502,7 +502,7 @@ function Differentiators() {
                   className="group flex items-center gap-5 py-4 text-left border-b border-white/[0.07] last:border-b-0 focus:outline-none"
                 >
                   <motion.span
-                    className="w-0.5 flex-shrink-0 bg-[#C8A84B] origin-top"
+                    className="w-0.5 flex-shrink-0 origin-top" style={{ backgroundColor: "#C8A84B" }}
                     animate={{ height: i === active ? 32 : 12, opacity: i === active ? 1 : 0.2 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
                   />
@@ -525,7 +525,7 @@ function Differentiators() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div className="relative bg-[#050E09] w-full overflow-hidden" style={{ aspectRatio: "4/3" }}>
+            <div className="relative w-full overflow-hidden" style={{ backgroundColor: "#050E09", aspectRatio: "4/3" }}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -541,7 +541,7 @@ function Differentiators() {
 
               <div className="absolute bottom-0 left-0 right-0 h-px bg-white/10">
                 <motion.div
-                  className="h-full bg-[#C8A84B]"
+                  className="h-full" style={{ backgroundColor: "#C8A84B" }}
                   style={{ width: `${progress}%` }}
                   transition={{ ease: "linear" }}
                 />
@@ -657,7 +657,7 @@ function PracticeAreas() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="bg-[#071E14] py-28 px-8"
+      className="py-28 px-8" style={{ backgroundColor: "#071E14" }}
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -698,10 +698,10 @@ function PracticeAreas() {
 function BorderTrace() {
   return (
     <span className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-      <span className="absolute top-0 left-0 right-0 h-px bg-[#C8A84B] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-      <span className="absolute top-0 right-0 bottom-0 w-px bg-[#C8A84B] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
-      <span className="absolute bottom-0 left-0 right-0 h-px bg-[#C8A84B] origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" />
-      <span className="absolute top-0 left-0 bottom-0 w-px bg-[#C8A84B] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-300" />
+      <span className="absolute top-0 left-0 right-0 h-px origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" style={{ backgroundColor: "#C8A84B" }} />
+      <span className="absolute top-0 right-0 bottom-0 w-px origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" style={{ backgroundColor: "#C8A84B" }} />
+      <span className="absolute bottom-0 left-0 right-0 h-px origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" style={{ backgroundColor: "#C8A84B" }} />
+      <span className="absolute top-0 left-0 bottom-0 w-px origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-300" style={{ backgroundColor: "#C8A84B" }} />
     </span>
   );
 }
@@ -746,7 +746,7 @@ function ArticleCard({
       data-testid={`insight-card-${index}`}
       className="group flex flex-col rounded-sm overflow-hidden border border-[#E0EDE8] bg-white hover:shadow-lg transition-shadow duration-300 cursor-pointer"
     >
-      <div className="relative h-44 flex-shrink-0 overflow-hidden bg-[#EDF5F1]">
+      <div className="relative h-44 flex-shrink-0 overflow-hidden" style={{ backgroundColor: "#EDF5F1" }}>
         {img ? (
           <img
             src={img}
@@ -970,7 +970,7 @@ function ContactForm() {
                     onChange={handleChange}
                     placeholder={c.namePlaceholder}
                     data-testid="input-name"
-                    className="bg-[#0A3020]/[0.03] border border-[#0A3020]/15 text-[#0A3020] placeholder-[#0A3020]/30 text-sm px-4 py-3.5 outline-none focus:border-[#C8A84B]/60 transition-colors"
+                    className="/[0.03] border border-[#0A3020]/15 text-[#0A3020] placeholder-[#0A3020]/30 text-sm px-4 py-3.5 outline-none focus:border-[#C8A84B]/60 transition-colors" style={{ backgroundColor: "#0A3020" }}
                   />
                   <input
                     type="email"
@@ -980,7 +980,7 @@ function ContactForm() {
                     onChange={handleChange}
                     placeholder={c.emailPlaceholder}
                     data-testid="input-email"
-                    className="bg-[#0A3020]/[0.03] border border-[#0A3020]/15 text-[#0A3020] placeholder-[#0A3020]/30 text-sm px-4 py-3.5 outline-none focus:border-[#C8A84B]/60 transition-colors"
+                    className="/[0.03] border border-[#0A3020]/15 text-[#0A3020] placeholder-[#0A3020]/30 text-sm px-4 py-3.5 outline-none focus:border-[#C8A84B]/60 transition-colors" style={{ backgroundColor: "#0A3020" }}
                   />
                 </div>
 
@@ -991,7 +991,7 @@ function ContactForm() {
                     value={form.subject}
                     onChange={handleChange}
                     data-testid="select-subject"
-                    className="w-full bg-[#0A3020]/[0.03] border border-[#0A3020]/15 text-sm px-4 py-3.5 outline-none focus:border-[#C8A84B]/60 transition-colors appearance-none cursor-pointer"
+                    className="w-full /[0.03] border border-[#0A3020]/15 text-sm px-4 py-3.5 outline-none focus:border-[#C8A84B]/60 transition-colors appearance-none cursor-pointer" style={{ backgroundColor: "#0A3020" }}
                     style={{ color: form.subject ? "#0A3020" : "rgba(0,20,137,0.3)" }}
                   >
                     <option value="" disabled hidden>{c.subjectPlaceholder}</option>
@@ -1018,7 +1018,7 @@ function ContactForm() {
                   onChange={handleChange}
                   placeholder={c.messagePlaceholder}
                   data-testid="input-message"
-                  className="bg-[#0A3020]/[0.03] border border-[#0A3020]/15 text-[#0A3020] placeholder-[#0A3020]/30 text-sm px-4 py-3.5 outline-none focus:border-[#C8A84B]/60 transition-colors resize-none"
+                  className="/[0.03] border border-[#0A3020]/15 text-[#0A3020] placeholder-[#0A3020]/30 text-sm px-4 py-3.5 outline-none focus:border-[#C8A84B]/60 transition-colors resize-none" style={{ backgroundColor: "#0A3020" }}
                 />
 
                 <button
@@ -1054,7 +1054,7 @@ function Footer() {
   ];
 
   return (
-    <footer id="contact" data-testid="footer" className="bg-[#050E09] border-t border-white/8">
+    <footer id="contact" data-testid="footer" className="border-t border-white/8" style={{ backgroundColor: "#050E09" }}>
       <div className="max-w-[1400px] mx-auto px-8">
         <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 border-b border-[#B8943E]/40">
           <div className="lg:col-span-5 lg:pr-16">
