@@ -9,6 +9,7 @@ import HomeV1 from "@/pages/HomeV1";
 import HomeV2 from "@/pages/HomeV2";
 import HomeV3 from "@/pages/HomeV3";
 import HomeV4 from "@/pages/HomeV4";
+import HomeV1Point2 from "@/pages/HomeV1Point2";
 import HomeEmerald from "@/pages/HomeEmerald";
 import HomeObsidian from "@/pages/HomeObsidian";
 import HomeClaret from "@/pages/HomeClaret";
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/home-v2" component={HomeV2} />
       <Route path="/home-v3" component={HomeV3} />
       <Route path="/home-v4" component={HomeV4} />
+      <Route path="/home-v1.2" component={HomeV1Point2} />
       <Route path="/home-v5" component={HomeEmerald} />
       <Route path="/home-v6" component={HomeObsidian} />
       <Route path="/home-v7" component={HomeClaret} />
