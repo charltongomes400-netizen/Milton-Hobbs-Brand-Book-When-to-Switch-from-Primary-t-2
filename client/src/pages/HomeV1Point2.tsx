@@ -48,9 +48,9 @@ function HeaderV12() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: "rgba(0, 20, 137, 0.30)",
-        backdropFilter: "blur(32px) saturate(180%) brightness(1.05)",
-        WebkitBackdropFilter: "blur(32px) saturate(180%) brightness(1.05)",
+        background: "rgba(0, 20, 137, 0.10)",
+        backdropFilter: "blur(28px) saturate(200%) brightness(1.08)",
+        WebkitBackdropFilter: "blur(28px) saturate(200%) brightness(1.08)",
         boxShadow: [
           "inset 0 1px 0 rgba(255,255,255,0.45)",
           "inset 0 -1px 0 rgba(0,20,137,0.12)",
@@ -75,7 +75,7 @@ function HeaderV12() {
           href="#home"
           data-testid="logo"
           className="font-heading font-semibold text-lg tracking-[0.18em] uppercase shrink-0"
-          style={{ color: "rgba(255,255,255,0.95)" }}
+          style={{ color: "#001489" }}
         >
           Milton Hobbs
         </a>
@@ -87,9 +87,9 @@ function HeaderV12() {
               href={link.href}
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
               className="text-xs tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300"
-              style={{ color: "rgba(255,255,255,0.60)" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.95)")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.60)")}
+              style={{ color: "rgba(0,20,137,0.55)" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "#001489")}
+              onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,20,137,0.55)")}
             >
               {link.label}
             </a>
@@ -101,8 +101,8 @@ function HeaderV12() {
             data-testid="lang-toggle"
             className="hidden lg:flex items-center text-xs tracking-widest overflow-hidden"
             style={{
-              border: "1px solid rgba(255,255,255,0.25)",
-              background: "rgba(255,255,255,0.12)",
+              border: "1px solid rgba(0,20,137,0.18)",
+              background: "rgba(255,255,255,0.30)",
               backdropFilter: "blur(8px)",
             }}
           >
@@ -112,7 +112,7 @@ function HeaderV12() {
               className="px-4 py-2 transition-all duration-200"
               style={lang === "EN"
                 ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
-                : { color: "rgba(255,255,255,0.55)" }
+                : { color: "rgba(0,20,137,0.50)" }
               }
             >
               EN
@@ -123,7 +123,7 @@ function HeaderV12() {
               className="px-4 py-2 transition-all duration-200"
               style={lang === "FR"
                 ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
-                : { color: "rgba(255,255,255,0.55)" }
+                : { color: "rgba(0,20,137,0.50)" }
               }
             >
               FR
