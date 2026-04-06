@@ -302,48 +302,28 @@ function HeroV12() {
           </motion.div>
         </motion.div>
 
-        {/* Article preview cards */}
-        <div className="mt-12 grid grid-cols-2 gap-4">
-          {ins.articles.slice(0, 4).map((article, i) => {
-            const img = articleImages[i];
-            return (
-              <motion.a
-                key={i}
-                href={`/insights/${articles[i]?.slug ?? ""}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 1.1 + i * 0.09 }}
-                data-testid={`hero-article-card-${i}`}
-                className="group flex flex-col overflow-hidden border border-[#E5EAF4] bg-white hover:shadow-md transition-shadow duration-300 cursor-pointer"
-              >
-                <div className="relative h-28 flex-shrink-0 overflow-hidden bg-[#EEF2FB]">
-                  {img && (
-                    <img
-                      src={img}
-                      alt={article.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#001489]/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <div className="flex flex-col flex-1 px-4 py-3 gap-1.5">
-                  <span className="text-[#D4AF36] text-[9px] tracking-[0.22em] uppercase font-semibold">
-                    {article.category}
-                  </span>
-                  <h3 className="font-heading text-[#001489] text-[0.78rem] font-semibold leading-snug tracking-tight line-clamp-2">
-                    {article.title}
-                  </h3>
-                  <div className="flex items-center gap-1 mt-auto pt-2 text-[#001489]/40 group-hover:text-[#D4AF36] transition-colors">
-                    <span className="text-[10px] font-medium tracking-wide">{ins.read}</span>
-                    <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12">
-                      <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
-                    </svg>
-                  </div>
-                </div>
-              </motion.a>
-            );
-          })}
-        </div>
+        {/* Featured article teaser card */}
+        <motion.a
+          href={`/insights/${articles[0]?.slug ?? ""}`}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.15 }}
+          data-testid="hero-article-teaser"
+          className="group mt-14 inline-block max-w-[360px] border border-[#001489]/12 px-6 py-5 hover:border-[#001489]/25 transition-colors duration-300"
+        >
+          <p className="text-[#D4AF36] text-[9px] tracking-[0.28em] uppercase font-semibold mb-2">
+            {ins.articles[0]?.category}
+          </p>
+          <h3 className="font-heading text-[#001489] text-[0.95rem] font-semibold leading-snug tracking-tight mb-4">
+            {ins.articles[0]?.title}
+          </h3>
+          <div className="flex items-center gap-2 text-[#001489]/45 group-hover:text-[#D4AF36] transition-colors duration-300">
+            <span className="text-[11px] tracking-[0.12em] uppercase font-medium">{ins.read}</span>
+            <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 12 12">
+              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+            </svg>
+          </div>
+        </motion.a>
 
         {/* Scroll indicator */}
         <motion.div
