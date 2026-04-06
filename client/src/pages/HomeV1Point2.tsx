@@ -215,10 +215,10 @@ function HeaderV12() {
 
 /* ─── HERO ─────────────────────────────────────────────────────────────── */
 
-const COLS = 16;
-const ROWS = 10;
+const COLS = 12;
+const TILE_ROWS = 16;
 
-const tiles = Array.from({ length: COLS * ROWS }, (_, i) => ({
+const tiles = Array.from({ length: COLS * TILE_ROWS }, (_, i) => ({
   color:      i % 2 === 0 ? "#001489" : "#000A4F",
   delay:      parseFloat(((i * 0.41 + (i % 7) * 0.29) % 9).toFixed(2)),
   duration:   parseFloat((2.5 + (i * 0.17 + (i % 5) * 0.33) % 4.5).toFixed(2)),
@@ -241,7 +241,7 @@ function HeroV12() {
       className="relative min-h-screen bg-white flex overflow-hidden"
     >
       {/* ── LEFT PANEL: Editorial featured article ──────────────────────── */}
-      <div className="relative z-10 w-[54%] flex flex-col justify-center px-10 xl:px-20 pt-24 pb-20">
+      <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20">
 
         {/* Editorial content block */}
         <motion.div
@@ -293,7 +293,7 @@ function HeroV12() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.1 }}
-          className="absolute bottom-10 left-10 xl:left-20 flex items-center gap-2.5"
+          className="absolute bottom-10 left-12 xl:left-24 flex items-center gap-2.5"
           data-testid="hero-dots"
         >
           {[0, 1, 2, 3].map((i) => (
@@ -314,25 +314,24 @@ function HeroV12() {
 
       {/* ── RIGHT PANEL: Animated tile grid (blue) ─────────────────────── */}
       <div
-        className="absolute right-0 top-0 bottom-0 bg-[#001489]"
+        className="absolute right-0 top-0 bottom-0 bg-[#001489] overflow-hidden"
         style={{
-          left: "46%",
-          clipPath: "polygon(9% 0, 100% 0, 100% 100%, 0% 100%)",
+          left: "42%",
+          clipPath: "polygon(0% 0, 100% 0, 100% 100%, 14% 100%)",
         }}
       >
-        {/* Tile shimmer — white at low opacity on the blue bg */}
+        {/* Tile shimmer — square tiles, white at low opacity on the blue bg */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             display: "grid",
             gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-            gridTemplateRows: `repeat(${ROWS}, 1fr)`,
           }}
         >
           {tiles.map((tile, i) => (
             <motion.div
               key={i}
-              style={{ backgroundColor: "rgba(255,255,255,1)" }}
+              style={{ backgroundColor: "rgba(255,255,255,1)", aspectRatio: "1" }}
               animate={{
                 opacity: [0, tile.maxOpacity * 0.55, 0],
                 ...(tile.goldBorder ? {
@@ -359,7 +358,7 @@ function HeroV12() {
               linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
               linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
             `,
-            backgroundSize: `calc(100% / ${COLS}) calc(100% / ${ROWS})`,
+            backgroundSize: `calc(100% / ${COLS}) calc(100% / ${COLS})`,
           }}
         />
 
