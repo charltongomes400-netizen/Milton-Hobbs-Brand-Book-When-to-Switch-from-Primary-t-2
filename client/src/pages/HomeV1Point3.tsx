@@ -53,33 +53,30 @@ function HeaderV12() {
       className="fixed top-0 left-0 right-0 z-50"
       style={{
         background: scrolled
-          ? "rgba(255,255,255,0.98)"
-          : "rgba(255,255,255,0.68)",
+          ? "rgba(7,12,26,0.98)"
+          : "rgba(7,12,26,0.80)",
         backdropFilter: scrolled
           ? "none"
-          : "blur(24px) saturate(180%) brightness(1.06)",
+          : "blur(24px) saturate(180%) brightness(0.95)",
         WebkitBackdropFilter: scrolled
           ? "none"
-          : "blur(24px) saturate(180%) brightness(1.06)",
+          : "blur(24px) saturate(180%) brightness(0.95)",
         boxShadow: scrolled
-          ? "0 1px 0 rgba(0,20,137,0.08), 0 4px 24px rgba(0,20,137,0.06)"
+          ? "0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.4)"
           : [
-              "inset 0 1px 0 rgba(255,255,255,0.95)",
-              "inset 0 -1px 0 rgba(0,20,137,0.07)",
-              "0 4px 28px rgba(0,20,137,0.07)",
+              "inset 0 1px 0 rgba(255,255,255,0.08)",
+              "inset 0 -1px 0 rgba(255,255,255,0.04)",
+              "0 4px 28px rgba(0,0,0,0.35)",
             ].join(", "),
         borderBottom: scrolled
-          ? "1px solid rgba(0,20,137,0.08)"
-          : "1px solid rgba(255,255,255,0.55)",
+          ? "1px solid rgba(255,255,255,0.08)"
+          : "1px solid rgba(255,255,255,0.08)",
         transition: "background 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease",
       }}
     >
-      {/* Specular gloss — top-edge bright line + upper-half sheen */}
+      {/* Specular gloss — subtle bottom edge shimmer for dark header */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ opacity: scrolled ? 0 : 1, transition: "opacity 0.35s ease" }}>
-        {/* Upper-half white sheen */}
-        <div className="absolute inset-x-0 top-0 h-1/2" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%)" }} />
-        {/* Bright top-edge specular line */}
-        <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.95) 75%, transparent 100%)" }} />
+        <div className="absolute inset-x-0 bottom-0 h-px" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 25%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.12) 75%, transparent 100%)" }} />
       </div>
       <div className="max-w-[1400px] mx-auto px-8 h-20 flex items-center justify-between relative">
         <a
@@ -101,9 +98,9 @@ function HeaderV12() {
               href={link.href}
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
               className="text-[16px] tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300"
-              style={{ color: "#001489" }}
+              style={{ color: "rgba(255,255,255,0.85)" }}
               onMouseEnter={e => (e.currentTarget.style.color = "#D4AF36")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#001489")}
+              onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.85)")}
             >
               {link.label}
             </a>
@@ -115,8 +112,8 @@ function HeaderV12() {
             data-testid="lang-toggle"
             className="hidden lg:flex items-center text-xs tracking-widest overflow-hidden"
             style={{
-              border: "1px solid rgba(0,20,137,0.18)",
-              background: "rgba(255,255,255,0.30)",
+              border: "1px solid rgba(255,255,255,0.15)",
+              background: "rgba(255,255,255,0.06)",
               backdropFilter: "blur(8px)",
             }}
           >
@@ -126,7 +123,7 @@ function HeaderV12() {
               className="px-4 py-2 transition-all duration-200"
               style={lang === "EN"
                 ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
-                : { color: "rgba(0,20,137,0.50)" }
+                : { color: "rgba(255,255,255,0.45)" }
               }
             >
               EN
@@ -137,7 +134,7 @@ function HeaderV12() {
               className="px-4 py-2 transition-all duration-200"
               style={lang === "FR"
                 ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
-                : { color: "rgba(0,20,137,0.50)" }
+                : { color: "rgba(255,255,255,0.45)" }
               }
             >
               FR
@@ -148,7 +145,7 @@ function HeaderV12() {
             data-testid="mobile-menu-toggle"
             aria-label="Toggle menu"
             className="lg:hidden p-1 transition-colors"
-            style={{ color: "rgba(0,20,137,0.65)" }}
+            style={{ color: "rgba(255,255,255,0.75)" }}
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             <div className="flex flex-col gap-[5px] w-5">
@@ -169,8 +166,8 @@ function HeaderV12() {
             transition={{ duration: 0.3 }}
             className="lg:hidden overflow-hidden border-t"
             style={{
-              borderColor: "rgba(0,20,137,0.10)",
-              background: "rgba(240,244,255,0.80)",
+              borderColor: "rgba(255,255,255,0.10)",
+              background: "rgba(7,12,26,0.97)",
               backdropFilter: "blur(28px)",
             }}
           >
@@ -181,19 +178,19 @@ function HeaderV12() {
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   className="text-[16px] tracking-[0.15em] uppercase transition-colors"
-                  style={{ color: "#001489" }}
+                  style={{ color: "rgba(255,255,255,0.85)" }}
                 >
                   {link.label}
                 </a>
               ))}
               <div className="flex items-center gap-0 mt-2 w-fit"
-                style={{ border: "1px solid rgba(0,20,137,0.18)" }}>
+                style={{ border: "1px solid rgba(255,255,255,0.15)" }}>
                 <button
                   onClick={() => setLang("EN")}
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "EN"
                     ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
-                    : { color: "rgba(0,20,137,0.50)" }
+                    : { color: "rgba(255,255,255,0.45)" }
                   }
                 >EN</button>
                 <button
@@ -201,7 +198,7 @@ function HeaderV12() {
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "FR"
                     ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
-                    : { color: "rgba(0,20,137,0.50)" }
+                    : { color: "rgba(255,255,255,0.45)" }
                   }
                 >FR</button>
               </div>
@@ -270,7 +267,7 @@ function HeroV12() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen bg-[#FCFCFC] flex overflow-hidden"
+      className="relative min-h-screen bg-[#070C1A] flex overflow-hidden"
     >
       {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
       <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20">
@@ -302,7 +299,7 @@ function HeroV12() {
 
             {/* Large article headline */}
             <h1
-              className="font-heading text-[#001489] font-bold text-[clamp(1.125rem,4vw,3.4375rem)] mb-8"
+              className="font-heading text-white font-bold text-[clamp(1.125rem,4vw,3.4375rem)] mb-8"
               style={{ lineHeight: "clamp(1.5rem, 1.1em, 3.75rem)" }}
               data-testid="hero-headline"
             >
@@ -313,9 +310,9 @@ function HeroV12() {
             <a
               href={`/insights/${featuredSlug}`}
               data-testid="hero-read-link"
-              className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#D4AF36] transition-colors duration-300"
+              className="group inline-flex items-center gap-2 text-white/80 hover:text-[#D4AF36] transition-colors duration-300"
             >
-              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#D4AF36]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
+              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-white/25 group-hover:decoration-[#D4AF36]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
               <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
                 <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
               </svg>
@@ -343,7 +340,7 @@ function HeroV12() {
                 height:          7,
                 borderRadius:    i === currentIndex ? 4 : "50%",
                 backgroundColor: i === currentIndex ? "#D4AF36" : "transparent",
-                border:          i === currentIndex ? "none" : "1px solid rgba(0,20,137,0.22)",
+                border:          i === currentIndex ? "none" : "1px solid rgba(255,255,255,0.25)",
               }}
             />
           ))}
@@ -684,7 +681,7 @@ function DifferentiatorsV12() {
       id="firm"
       data-header-theme="light"
       data-testid="differentiators-section"
-      className="bg-[#FCFCFC] py-28 px-8 border-t border-[#E5EAF4]"
+      className="bg-[#070C1A] py-28 px-8 border-t border-white/[0.08]"
     >
       <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
@@ -697,7 +694,7 @@ function DifferentiatorsV12() {
             <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-10 text-[16px]">
               {d.eyebrow}
             </p>
-            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25]">
+            <h2 className="font-heading text-white text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25]">
               {d.headline}
             </h2>
             <div className="flex flex-col">
@@ -706,17 +703,17 @@ function DifferentiatorsV12() {
                   key={i}
                   data-testid={`diff-card-${i}`}
                   onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
-                  className="group flex items-center gap-5 py-4 text-left border-b border-[#001489]/[0.08] last:border-b-0 focus:outline-none"
+                  className="group flex items-center gap-5 py-4 text-left border-b border-white/[0.08] last:border-b-0 focus:outline-none"
                 >
                   <motion.span
-                    className="w-0.5 flex-shrink-0 bg-[#001489] origin-top"
+                    className="w-0.5 flex-shrink-0 bg-[#D4AF36] origin-top"
                     animate={{ height: i === active ? 32 : 12, opacity: i === active ? 1 : 0.2 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
                   />
                   <motion.span
                     className="font-heading font-semibold leading-tight"
                     animate={{
-                      color: i === active ? "#001489" : "rgba(0,20,137,0.28)",
+                      color: i === active ? "#FFFFFF" : "rgba(255,255,255,0.28)",
                       fontSize: i === active ? "clamp(1rem, 1.6vw, 1.375rem)" : "clamp(0.875rem, 1.2vw, 1.1rem)",
                     }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
@@ -747,9 +744,9 @@ function DifferentiatorsV12() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="absolute bottom-0 left-0 right-0 h-px bg-[#001489]/10">
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-white/10">
                 <motion.div
-                  className="h-full bg-[#001489]"
+                  className="h-full bg-[#D4AF36]"
                   style={{ width: `${progress}%` }}
                   transition={{ ease: "linear" }}
                 />
@@ -765,10 +762,10 @@ function DifferentiatorsV12() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="pt-8"
               >
-                <h3 className="font-heading text-[#001489] text-[1.125rem] font-semibold mb-3 leading-[1.3]">
+                <h3 className="font-heading text-white text-[1.125rem] font-semibold mb-3 leading-[1.3]">
                   {d.cards[active].title}
                 </h3>
-                <p className="text-black/55 text-sm leading-[1.4] mb-7 max-w-sm">
+                <p className="text-white/60 text-sm leading-[1.4] mb-7 max-w-sm">
                   {d.cards[active].description}
                 </p>
                 <a
@@ -814,7 +811,7 @@ function PracticeAreasV12() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="py-28 px-8 text-[#ffffff] bg-[#FCFCFC]"
+      className="py-28 px-8 text-[#ffffff] bg-[#070C1A]"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -828,11 +825,11 @@ function PracticeAreasV12() {
             <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
               {p.eyebrow}
             </p>
-            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
+            <h2 className="font-heading text-white text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
               {p.headline}
             </h2>
           </div>
-          <p className="text-black/45 text-sm max-w-xs leading-[1.4]">{p.subtext}</p>
+          <p className="text-white/45 text-sm max-w-xs leading-[1.4]">{p.subtext}</p>
         </motion.div>
 
         <div className="bento-grid">
@@ -906,7 +903,7 @@ function ContactFormV12() {
       id="contact"
       data-header-theme="light"
       data-testid="contact-section"
-      className="bg-[#FCFCFC] py-28 px-8 border-t border-[#E5EAF4]"
+      className="bg-[#070C1A] py-28 px-8 border-t border-white/[0.08]"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -919,7 +916,7 @@ function ContactFormV12() {
           <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
             {c.eyebrow}
           </p>
-          <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
+          <h2 className="font-heading text-white text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
             {c.headline}
           </h2>
         </motion.div>
@@ -932,7 +929,7 @@ function ContactFormV12() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex flex-col gap-5"
           >
-            <p className="text-black/55 text-sm leading-[1.4]">{c.subtext}</p>
+            <p className="text-white/60 text-sm leading-[1.4]">{c.subtext}</p>
 
             <div>
               <p className="text-[#D4AF36] tracking-[0.25em] uppercase font-medium mb-5 text-[12px]">
@@ -940,22 +937,22 @@ function ContactFormV12() {
               </p>
               <div className="flex flex-col gap-6">
                 <div>
-                  <p className="text-[#001489] text-sm font-semibold mb-1">{c.dubaiLabel}</p>
+                  <p className="text-white/80 text-sm font-semibold mb-1">{c.dubaiLabel}</p>
                   {f.dubaiAddr.map((line, i) => (
-                    <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
+                    <p key={i} className="text-white/45 text-xs leading-[1.5]">{line}</p>
                   ))}
                   <a href="tel:+97145232421" data-testid="contact-address-phone-dubai"
-                    className="text-black/45 text-xs hover:text-[#D4AF36] transition-colors">
+                    className="text-white/45 text-xs hover:text-[#D4AF36] transition-colors">
                     +971 4 523 2421
                   </a>
                 </div>
                 <div>
-                  <p className="text-[#001489] text-sm font-semibold mb-1">{c.parisLabel}</p>
+                  <p className="text-white/80 text-sm font-semibold mb-1">{c.parisLabel}</p>
                   {f.parisAddr.map((line, i) => (
-                    <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
+                    <p key={i} className="text-white/45 text-xs leading-[1.5]">{line}</p>
                   ))}
                   <a href="tel:+33180270067" data-testid="contact-address-phone-paris"
-                    className="text-black/45 text-xs hover:text-[#D4AF36] transition-colors">
+                    className="text-white/45 text-xs hover:text-[#D4AF36] transition-colors">
                     +33 1 80 27 00 67
                   </a>
                 </div>
@@ -967,7 +964,7 @@ function ContactFormV12() {
                 Email
               </p>
               <a href={`mailto:${f.email}`} data-testid="contact-email"
-                className="text-[#001489]/60 hover:text-[#D4AF36] text-sm transition-colors">
+                className="text-white/60 hover:text-[#D4AF36] text-sm transition-colors">
                 {f.email}
               </a>
             </div>
@@ -981,43 +978,43 @@ function ContactFormV12() {
           >
             {submitted ? (
               <div data-testid="contact-success"
-                className="border border-[#001489]/20 p-10 flex flex-col gap-4 h-full justify-center">
+                className="border border-white/20 p-10 flex flex-col gap-4 h-full justify-center">
                 <div className="flex items-center gap-3 mb-2">
-                  <svg className="w-5 h-5 text-[#001489]" fill="none" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-[#D4AF36]" fill="none" viewBox="0 0 20 20">
                     <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <h3 className="font-heading text-[#001489] text-lg font-semibold">{c.successTitle}</h3>
+                  <h3 className="font-heading text-white text-lg font-semibold">{c.successTitle}</h3>
                 </div>
-                <p className="text-black/55 text-sm leading-[1.4]">{c.successText}</p>
+                <p className="text-white/60 text-sm leading-[1.4]">{c.successText}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input type="text" name="name" required value={form.name} onChange={handleChange}
                     placeholder={c.namePlaceholder} data-testid="input-name"
-                    className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors" />
+                    className="bg-white/[0.05] border border-white/15 text-white placeholder-white/30 text-sm px-4 py-3.5 outline-none focus:border-white/40 transition-colors" />
                   <input type="email" name="email" required value={form.email} onChange={handleChange}
                     placeholder={c.emailPlaceholder} data-testid="input-email"
-                    className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors" />
+                    className="bg-white/[0.05] border border-white/15 text-white placeholder-white/30 text-sm px-4 py-3.5 outline-none focus:border-white/40 transition-colors" />
                 </div>
                 <div className="relative">
                   <select name="subject" required value={form.subject} onChange={handleChange}
                     data-testid="select-subject"
-                    className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors appearance-none cursor-pointer"
-                    style={{ color: form.subject ? "#001489" : "rgba(0,20,137,0.3)" }}>
-                    <option value="" disabled hidden>{c.subjectPlaceholder}</option>
+                    className="w-full bg-white/[0.05] border border-white/15 text-sm px-4 py-3.5 outline-none focus:border-white/40 transition-colors appearance-none cursor-pointer"
+                    style={{ color: form.subject ? "#FFFFFF" : "rgba(255,255,255,0.35)", background: "transparent" }}>
+                    <option value="" disabled hidden style={{ background: "#0D1527" }}>{c.subjectPlaceholder}</option>
                     {c.subjectOptions.map((opt, i) => (
                       <option key={i} value={opt} style={{ color: "#001489", background: "#fff" }}>{opt}</option>
                     ))}
                   </select>
-                  <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-[#001489]/30"
+                  <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-white/30"
                     fill="none" viewBox="0 0 12 12">
                     <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                   </svg>
                 </div>
                 <textarea name="message" required rows={5} value={form.message} onChange={handleChange}
                   placeholder={c.messagePlaceholder} data-testid="input-message"
-                  className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors resize-none" />
+                  className="bg-white/[0.05] border border-white/15 text-white placeholder-white/30 text-sm px-4 py-3.5 outline-none focus:border-white/40 transition-colors resize-none" />
                 <button type="submit" disabled={submitting} data-testid="button-submit"
                   className="self-start bg-[#001489] text-white text-xs tracking-[0.2em] uppercase font-semibold px-8 py-4 hover:bg-[#001070] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
                   {submitting ? c.submitting : c.submit}
@@ -1046,7 +1043,7 @@ function FooterV12() {
   ];
 
   return (
-    <footer id="footer" data-testid="footer" className="bg-[#001489] border-t border-white/10">
+    <footer id="footer" data-testid="footer" className="bg-[#030712] border-t border-white/10">
       <div className="max-w-[1400px] mx-auto px-8">
         <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 border-b border-white/10">
           <div className="lg:col-span-5 lg:pr-16">
@@ -1118,7 +1115,7 @@ function FooterV12() {
 
 function HomeV1Point3Inner() {
   return (
-    <div className="bg-[#FCFCFC] min-h-screen" data-testid="home-v1-2-page">
+    <div className="bg-[#070C1A] min-h-screen" data-testid="home-v1-3-page">
       <HeaderV12 />
       <main>
         <HeroV12 />
