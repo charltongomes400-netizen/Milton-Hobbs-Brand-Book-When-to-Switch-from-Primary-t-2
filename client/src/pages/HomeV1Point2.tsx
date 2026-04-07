@@ -81,7 +81,6 @@ function HeaderV12() {
         {/* Bright top-edge specular line */}
         <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.95) 75%, transparent 100%)" }} />
       </div>
-
       <div className="max-w-[1400px] mx-auto px-8 h-20 flex items-center justify-between relative">
         <a
           href="#home"
@@ -160,7 +159,6 @@ function HeaderV12() {
           </button>
         </div>
       </div>
-
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -817,7 +815,7 @@ function PracticeAreasV12() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="bg-[#F4F7FD] py-28 px-8 border-t border-[#E5EAF4]"
+      className="py-28 px-8 border-t border-[#E5EAF4] text-[#ffffff] bg-[#ffffff]"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
