@@ -265,7 +265,7 @@ function HeroV12() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -18 }}
             transition={{ duration: 0.55, ease: "easeInOut" }}
-            className="max-w-[440px]"
+            className="w-full"
           >
             {/* Gold accent line + Eyebrow */}
             <div className="flex items-center gap-3 mb-5">
