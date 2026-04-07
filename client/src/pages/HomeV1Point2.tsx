@@ -1060,8 +1060,14 @@ function FooterV12() {
                 className="block text-[#D4AF36] text-sm hover:text-[#E8C97E] transition-colors">
                 {f.email}
               </a>
-              <p className="text-white/40 text-sm">Dubai: {f.phone}</p>
-              <p className="text-white/40 text-sm">Paris: +33 1 80 27 00 67</p>
+              <a href={`tel:${f.phone}`} data-testid="footer-phone-dubai"
+                className="block text-white/40 text-sm hover:text-[#E8C97E] transition-colors">
+                Dubai: {f.phone}
+              </a>
+              <a href="tel:+33180270067" data-testid="footer-phone-paris"
+                className="block text-white/40 text-sm hover:text-[#E8C97E] transition-colors">
+                Paris: +33 1 80 27 00 67
+              </a>
             </div>
           </div>
           <div className="lg:col-span-3">
