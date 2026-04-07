@@ -230,17 +230,17 @@ const tiles = Array.from({ length: COLS * TILE_ROWS }, (_, i) => ({
   borderDur:   parseFloat((7 + (i * 0.23 + (i % 7) * 0.51) % 6).toFixed(2)),
 }));
 
-const HERO_CYCLE_MS = 6500;
+const HERO_CYCLE_MS = 12000;
 
 const ACCENT_SQUARES = [
-  { pos: { top: -20, left: "43%" },  size: 105, dur: 7,   delay: 0   },
-  { pos: { top:   8, right: "6%"  }, size:  78, dur: 9,   delay: 1.8 },
-  { pos: { top: "21%", left: "40%" }, size:  58, dur: 8,   delay: 3.2 },
-  { pos: { top: "16%", right: -18  }, size:  92, dur: 10,  delay: 0.6 },
-  { pos: { top: "44%", left: "50%" }, size: 118, dur: 11,  delay: 2.5 },
-  { pos: { bottom: "28%", right: "10%" }, size: 72, dur: 8,  delay: 1.4 },
-  { pos: { bottom: "10%", left: "55%" }, size:  88, dur: 9,  delay: 4.1 },
-  { pos: { bottom: -18, right: "16%" },  size:  98, dur: 7.5, delay: 2.9 },
+  { pos: { top: "4%",  left: "52%"  }, size: 90, dur: 18.0, delay: 0     },
+  { pos: { top: "2%",  right: "4%"  }, size: 90, dur: 23.5, delay: 7.2   },
+  { pos: { top: "22%", left: "46%"  }, size: 90, dur: 19.4, delay: 3.1   },
+  { pos: { top: "18%", right: "18%" }, size: 90, dur: 26.0, delay: 11.8  },
+  { pos: { top: "48%", left: "60%"  }, size: 90, dur: 17.2, delay: 5.0   },
+  { pos: { top: "60%", right: "6%"  }, size: 90, dur: 22.1, delay: 9.6   },
+  { pos: { top: "72%", left: "50%"  }, size: 90, dur: 24.4, delay: 2.3   },
+  { pos: { top: "82%", right: "24%" }, size: 90, dur: 20.3, delay: 14.0  },
 ];
 
 
@@ -250,7 +250,8 @@ function HeroV12() {
   const totalArticles = ins.articles.length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [timerKey, setTimerKey] = useState(0);
-  const [bgIndex, setBgIndex] = useState(0);
+
+  const bgIndex = currentIndex % HERO_BG_IMAGES.length;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -258,13 +259,6 @@ function HeroV12() {
     }, HERO_CYCLE_MS);
     return () => clearInterval(timer);
   }, [timerKey, totalArticles]);
-
-  useEffect(() => {
-    const bgTimer = setInterval(() => {
-      setBgIndex(prev => (prev + 1) % HERO_BG_IMAGES.length);
-    }, 7000);
-    return () => clearInterval(bgTimer);
-  }, []);
 
   function goTo(i: number) {
     setCurrentIndex(i);
@@ -290,7 +284,7 @@ function HeroV12() {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -18 }}
-            transition={{ duration: 0.55, ease: "easeInOut" }}
+            transition={{ duration: 1.1, ease: "easeInOut" }}
             className="w-full"
           >
             {/* Gold accent line + Eyebrow */}
@@ -371,19 +365,24 @@ function HeroV12() {
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.6 }}
+            animate={{ opacity: 0.72 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.8, ease: "easeInOut" }}
           />
         </AnimatePresence>
 
-        {/* Dark blue overlay — deepens the photo, keeps panel near-black */}
+        {/* Very dark base — makes the photo nearly invisible */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "rgba(0, 4, 22, 0.52)" }}
+          style={{ background: "rgba(0, 3, 18, 0.48)" }}
+        />
+        {/* Deep navy-blue tint layer */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "rgba(0, 15, 110, 0.48)" }}
         />
 
-        {/* Scattered solid blue accent squares */}
+        {/* Scattered vivid blue accent squares */}
         {ACCENT_SQUARES.map((sq, i) => (
           <motion.div
             key={i}
@@ -394,7 +393,7 @@ function HeroV12() {
               height: sq.size,
               backgroundColor: "#001489",
             }}
-            animate={{ opacity: [0.7, 0.95, 0.7] }}
+            animate={{ opacity: [0.05, 0.88, 0.05] }}
             transition={{ duration: sq.dur, delay: sq.delay, repeat: Infinity, ease: "easeInOut" }}
           />
         ))}
