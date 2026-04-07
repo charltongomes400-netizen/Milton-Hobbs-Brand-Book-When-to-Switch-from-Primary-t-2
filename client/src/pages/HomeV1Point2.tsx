@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, animate } from "framer-motion";
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { articles } from "@/data/articles";
+import miltonHobbsLogo from "@assets/Milton_hobbs_logo_1775554832004.png";
 import imgCorp    from "@assets/stock_images/corporate_commercial.jpg";
 import imgEstate  from "@assets/stock_images/real_estate.jpg";
 import imgLitig   from "@assets/stock_images/litigation.jpg";
@@ -78,10 +79,13 @@ function HeaderV12() {
         <a
           href="#home"
           data-testid="logo"
-          className="font-heading font-semibold text-lg tracking-[0.18em] uppercase shrink-0"
-          style={{ color: "#001489" }}
+          className="shrink-0"
         >
-          Milton Hobbs
+          <img
+            src={miltonHobbsLogo}
+            alt="Milton Hobbs"
+            className="h-10 w-auto block"
+          />
         </a>
 
         <nav data-testid="nav-desktop" className="hidden lg:flex items-center gap-7 xl:gap-9">
