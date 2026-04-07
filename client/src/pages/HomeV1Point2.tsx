@@ -389,47 +389,6 @@ function HeroV12() {
         />
       </div>
 
-      {/* ── GOLD DIAGONAL LINE along the panel boundary ─────────────────── */}
-      <svg
-        className="absolute inset-0 pointer-events-none"
-        style={{ zIndex: 15, width: "100%", height: "100%" }}
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        shapeRendering="geometricPrecision"
-      >
-        <defs>
-          <linearGradient id="glassGold" x1="42" y1="0" x2="58" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0%"   stopColor="rgba(255,252,210,0.95)" />
-            <stop offset="25%"  stopColor="rgba(220,185,70,0.72)" />
-            <stop offset="60%"  stopColor="rgba(212,175,54,0.45)" />
-            <stop offset="100%" stopColor="rgba(160,125,15,0.18)" />
-          </linearGradient>
-        </defs>
-        {/* Shadow/depth layer */}
-        <line
-          x1="42.6" y1="0" x2="58.6" y2="100"
-          stroke="rgba(80,55,0,0.18)"
-          strokeWidth="7"
-          vectorEffect="non-scaling-stroke"
-          strokeLinecap="square"
-        />
-        {/* Glass body */}
-        <line
-          x1="42" y1="0" x2="58" y2="100"
-          stroke="url(#glassGold)"
-          strokeWidth="7"
-          vectorEffect="non-scaling-stroke"
-          strokeLinecap="square"
-        />
-        {/* Specular highlight */}
-        <line
-          x1="41.8" y1="0" x2="57.8" y2="100"
-          stroke="rgba(255,253,220,0.55)"
-          strokeWidth="1.5"
-          vectorEffect="non-scaling-stroke"
-          strokeLinecap="square"
-        />
-      </svg>
     </section>
   );
 }
