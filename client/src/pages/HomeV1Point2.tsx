@@ -272,7 +272,7 @@ function HeroV12() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen bg-white flex overflow-hidden"
+      className="relative min-h-screen bg-[#FEFEFE] flex overflow-hidden"
     >
       {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
       <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20">
@@ -687,7 +687,7 @@ function DifferentiatorsV12() {
       id="firm"
       data-header-theme="light"
       data-testid="differentiators-section"
-      className="bg-white py-28 px-8 border-t border-[#E5EAF4]"
+      className="bg-[#FCFCFC] py-28 px-8 border-t border-[#E5EAF4]"
     >
       <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
@@ -909,7 +909,7 @@ function ContactFormV12() {
       id="contact"
       data-header-theme="light"
       data-testid="contact-section"
-      className="bg-white py-28 px-8 border-t border-[#E5EAF4]"
+      className="bg-[#FCFCFC] py-28 px-8 border-t border-[#E5EAF4]"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -1107,7 +1107,7 @@ function FooterV12() {
 
 function HomeV1Point2Inner() {
   return (
-    <div className="bg-white min-h-screen" data-testid="home-v1-2-page">
+    <div className="bg-[#FEFEFE] min-h-screen" data-testid="home-v1-2-page">
       <HeaderV12 />
       <main>
         <HeroV12 />
