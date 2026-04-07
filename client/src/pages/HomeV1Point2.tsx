@@ -304,7 +304,7 @@ function HeroV12() {
 
             {/* Large article headline */}
             <h1
-              className="font-heading text-[#001489] font-bold text-[clamp(2.2rem,4vw,4rem)] leading-[1.08] tracking-tight mb-8"
+              className="font-heading text-[#001489] font-bold text-[clamp(1.125rem,4vw,3.4375rem)] leading-[1.1] mb-8"
               data-testid="hero-headline"
             >
               {featuredArticle?.title}
@@ -700,7 +700,7 @@ function DifferentiatorsV12() {
             <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-10">
               {d.eyebrow}
             </p>
-            <h2 className="font-heading text-[#001489] text-[clamp(1.6rem,2.5vw,2.2rem)] font-semibold tracking-tight mb-10 leading-snug">
+            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.37]">
               {d.headline}
             </h2>
             <div className="flex flex-col">
@@ -717,10 +717,10 @@ function DifferentiatorsV12() {
                     transition={{ duration: 0.4, ease: "easeOut" }}
                   />
                   <motion.span
-                    className="font-heading font-semibold tracking-tight leading-tight"
+                    className="font-heading font-semibold leading-tight"
                     animate={{
                       color: i === active ? "#001489" : "rgba(0,20,137,0.28)",
-                      fontSize: i === active ? "clamp(1.35rem, 2vw, 1.85rem)" : "clamp(1.1rem, 1.6vw, 1.55rem)",
+                      fontSize: i === active ? "clamp(1rem, 1.6vw, 1.375rem)" : "clamp(0.875rem, 1.2vw, 1.1rem)",
                     }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
                   >
@@ -768,7 +768,7 @@ function DifferentiatorsV12() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="pt-8"
               >
-                <h3 className="font-heading text-[#001489] text-lg font-semibold mb-3 tracking-tight">
+                <h3 className="font-heading text-[#001489] text-[1.125rem] font-semibold mb-3 leading-[1.37]">
                   {d.cards[active].title}
                 </h3>
                 <p className="text-black/55 text-sm leading-relaxed mb-7 max-w-sm">
@@ -831,7 +831,7 @@ function PracticeAreasV12() {
             <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-4">
               {p.eyebrow}
             </p>
-            <h2 className="font-heading text-[#001489] text-[clamp(1.8rem,3vw,2.8rem)] font-semibold tracking-tight">
+            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.37]">
               {p.headline}
             </h2>
           </div>
@@ -861,7 +861,7 @@ function PracticeAreasV12() {
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className="absolute inset-x-0 bottom-0 px-7 pb-7 flex flex-col">
-                <h3 className="font-heading text-white font-semibold tracking-tight text-base leading-snug pr-[10%]">
+                <h3 className="font-heading text-white font-semibold text-[1rem] leading-snug pr-[10%]">
                   {item.title}
                 </h3>
                 <div className="max-h-0 overflow-hidden group-hover:max-h-20 transition-[max-height] duration-400 pr-[10%]">
@@ -922,7 +922,7 @@ function ContactFormV12() {
           <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-4">
             {c.eyebrow}
           </p>
-          <h2 className="font-heading text-[#001489] text-[clamp(1.8rem,3vw,2.8rem)] font-semibold tracking-tight">
+          <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.37]">
             {c.headline}
           </h2>
         </motion.div>
