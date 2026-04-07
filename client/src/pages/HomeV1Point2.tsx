@@ -935,7 +935,7 @@ function ContactFormV12() {
             <p className="text-black/55 text-sm leading-[1.4]">{c.subtext}</p>
 
             <div>
-              <p className="text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium mb-5">
+              <p className="text-[#D4AF36] tracking-[0.25em] uppercase font-medium mb-5 text-[12px]">
                 {c.officeLabel}
               </p>
               <div className="flex flex-col gap-6">
