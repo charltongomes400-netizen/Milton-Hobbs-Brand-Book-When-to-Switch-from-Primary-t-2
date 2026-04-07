@@ -210,8 +210,8 @@ function HeaderV12() {
 
 /* ─── HERO ─────────────────────────────────────────────────────────────── */
 
-const COLS = 8;
-const TILE_ROWS = 15;
+const COLS = 16;
+const TILE_ROWS = 18;
 
 const tiles = Array.from({ length: COLS * TILE_ROWS }, (_, i) => ({
   color:      i % 2 === 0 ? "#001489" : "#000A4F",
