@@ -13,6 +13,13 @@ import imgTax     from "@assets/stock_images/tax_planning.jpg";
 import imgImmig   from "@assets/stock_images/immigration.jpg";
 import imgIp      from "@assets/stock_images/intellectual_property.jpg";
 import imgTech    from "@assets/stock_images/technology_startups.jpg";
+import heroBg0 from "@assets/verne-ho-0LAJfSNa-xQ-unsplash_1775562755413.jpg";
+import heroBg1 from "@assets/tim-stief-dH6IjhWHNQQ-unsplash_1775562755413.jpg";
+import heroBg2 from "@assets/joakim-nadell-K67sBVqLLuw-unsplash_1775562755414.jpg";
+import heroBg3 from "@assets/maarten-deckers-T5nXYXCf50I-unsplash_1775562755414.jpg";
+import heroBg4 from "@assets/anders-jilden-Sc5RKXLBjGg-unsplash_1775562755415.jpg";
+
+const HERO_BG_IMAGES = [heroBg0, heroBg1, heroBg2, heroBg3, heroBg4];
 
 /* ─── HEADER ────────────────────────────────────────────────────────────── */
 
@@ -232,6 +239,7 @@ function HeroV12() {
   const totalArticles = ins.articles.length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [timerKey, setTimerKey] = useState(0);
+  const [bgIndex, setBgIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -239,6 +247,13 @@ function HeroV12() {
     }, HERO_CYCLE_MS);
     return () => clearInterval(timer);
   }, [timerKey, totalArticles]);
+
+  useEffect(() => {
+    const bgTimer = setInterval(() => {
+      setBgIndex(prev => (prev + 1) % HERO_BG_IMAGES.length);
+    }, 7000);
+    return () => clearInterval(bgTimer);
+  }, []);
 
   function goTo(i: number) {
     setCurrentIndex(i);
@@ -336,6 +351,21 @@ function HeroV12() {
         className="absolute inset-0 bg-[#001489] overflow-hidden"
         style={{ clipPath: "polygon(42% 0%, 100% 0%, 100% 100%, 58% 100%)" }}
       >
+        {/* Building photo background — slow crossfade, low opacity */}
+        <AnimatePresence>
+          <motion.img
+            key={bgIndex}
+            src={HERO_BG_IMAGES[bgIndex]}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.15 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.8, ease: "easeInOut" }}
+          />
+        </AnimatePresence>
+
         {/* Tile shimmer — square tiles, white at low opacity on the blue bg */}
         <div
           className="absolute inset-0 pointer-events-none"
