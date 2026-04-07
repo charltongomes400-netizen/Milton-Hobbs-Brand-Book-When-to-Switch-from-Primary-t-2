@@ -396,17 +396,6 @@ function HeroV12() {
           ))}
         </div>
 
-        {/* Subtle grid lines */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
-            `,
-            backgroundSize: `calc(100% / ${COLS}) calc(100vw / ${COLS})`,
-          }}
-        />
 
         {/* Soft vignette */}
         <div
