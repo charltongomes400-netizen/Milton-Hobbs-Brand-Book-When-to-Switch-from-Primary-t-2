@@ -270,7 +270,7 @@ function HeroV12() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen bg-[#FEFEFE] flex overflow-hidden"
+      className="relative min-h-screen bg-[#FCFCFC] flex overflow-hidden"
     >
       {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
       <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20">
@@ -1115,7 +1115,7 @@ function FooterV12() {
 
 function HomeV1Point2Inner() {
   return (
-    <div className="bg-[#FEFEFE] min-h-screen" data-testid="home-v1-2-page">
+    <div className="bg-[#FCFCFC] min-h-screen" data-testid="home-v1-2-page">
       <HeaderV12 />
       <main>
         <HeroV12 />
