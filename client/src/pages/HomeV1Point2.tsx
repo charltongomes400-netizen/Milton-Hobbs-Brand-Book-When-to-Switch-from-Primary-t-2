@@ -225,17 +225,6 @@ const tiles = Array.from({ length: COLS * TILE_ROWS }, (_, i) => ({
 
 const HERO_CYCLE_MS = 6500;
 
-const heroBlobs = [
-  { left: "8%",  top: "8%",  xR: [0, 70, 0] as number[],   yR: [0, 110, 0] as number[], size: 420, dur: 18, delay: 0  },
-  { left: "52%", top: "2%",  xR: [0, -80, 0] as number[],  yR: [0, 130, 0] as number[], size: 360, dur: 22, delay: 4  },
-  { left: "5%",  top: "55%", xR: [0, 100, 0] as number[],  yR: [0, -75, 0] as number[], size: 480, dur: 16, delay: 7  },
-  { left: "58%", top: "62%", xR: [0, -90, 0] as number[],  yR: [0, -85, 0] as number[], size: 320, dur: 20, delay: 10 },
-];
-
-const WA_BLUE = "M 50 0 C 75 200, 25 400, 65 500 C 85 600, 35 800, 50 1000 L 100 1000 L 100 0 Z";
-const WB_BLUE = "M 50 0 C 30 200, 70 400, 35 500 C 15 600, 65 800, 50 1000 L 100 1000 L 100 0 Z";
-const WA_PALE = "M 50 0 C 75 200, 25 400, 65 500 C 85 600, 35 800, 50 1000 L 0 1000 L 0 0 Z";
-const WB_PALE = "M 50 0 C 30 200, 70 400, 35 500 C 15 600, 65 800, 50 1000 L 0 1000 L 0 0 Z";
 
 function HeroV12() {
   const { t } = useLang();
@@ -263,95 +252,57 @@ function HeroV12() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen flex overflow-hidden"
-      style={{ background: "#F4F7FF" }}
+      className="relative min-h-screen bg-white flex overflow-hidden"
     >
-      {/* ── LEFT PANEL ──────────────────────────────────────────────────── */}
-      <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20 overflow-hidden">
-
-        {/* Dot-grid substrate */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: "radial-gradient(circle, rgba(0,20,137,1) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-            opacity: 0.035,
-          }}
-        />
-
-        {/* Ambient blobs — slow-drifting, blurred */}
-        {heroBlobs.map((blob, i) => (
-          <motion.div
-            key={i}
-            className="absolute pointer-events-none rounded-full"
-            style={{
-              left: blob.left,
-              top: blob.top,
-              width: blob.size,
-              height: blob.size,
-              background: "#001489",
-              filter: "blur(90px)",
-              opacity: 0.05,
-            }}
-            animate={{ x: blob.xR, y: blob.yR }}
-            transition={{
-              duration: blob.dur,
-              delay: blob.delay,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            }}
-          />
-        ))}
+      {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
+      <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20">
 
         {/* Editorial content block — animates on article change */}
-        <div className="relative">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -18 }}
-              transition={{ duration: 0.55, ease: "easeInOut" }}
-              className="max-w-[440px]"
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -18 }}
+            transition={{ duration: 0.55, ease: "easeInOut" }}
+            className="max-w-[440px]"
+          >
+            {/* Gold accent line + Eyebrow */}
+            <div className="flex items-center gap-3 mb-5">
+              <motion.div
+                style={{ width: 1, height: 32, background: "#D4AF36", flexShrink: 0 }}
+                animate={{ opacity: [0.3, 1, 0.3] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <p
+                className="text-[#D4AF36] text-[11px] tracking-[0.22em] uppercase font-medium"
+                data-testid="hero-eyebrow"
+              >
+                {featuredArticle?.category}
+              </p>
+            </div>
+
+            {/* Large article headline */}
+            <h1
+              className="font-heading text-[#001489] font-bold text-[clamp(2.2rem,4vw,4rem)] leading-[1.08] tracking-tight mb-8"
+              data-testid="hero-headline"
             >
-              {/* Gold accent pulse + Eyebrow */}
-              <div className="flex items-center gap-3 mb-5">
-                <motion.div
-                  style={{ width: 1, height: 32, background: "#D4AF36", flexShrink: 0 }}
-                  animate={{ opacity: [0.3, 1, 0.3] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                />
-                <p
-                  className="text-[#D4AF36] text-[11px] tracking-[0.22em] uppercase font-medium"
-                  data-testid="hero-eyebrow"
-                >
-                  {featuredArticle?.category}
-                </p>
-              </div>
+              {featuredArticle?.title}
+            </h1>
 
-              {/* Large article headline */}
-              <h1
-                className="font-heading text-[#001489] font-bold text-[clamp(2.2rem,4vw,4rem)] leading-[1.08] tracking-tight mb-8"
-                data-testid="hero-headline"
-              >
-                {featuredArticle?.title}
-              </h1>
-
-              {/* Read link */}
-              <a
-                href={`/insights/${featuredSlug}`}
-                data-testid="hero-read-link"
-                className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#D4AF36] transition-colors duration-300"
-              >
-                <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#D4AF36]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
-                <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
-                  <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-                </svg>
-              </a>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            {/* Read link */}
+            <a
+              href={`/insights/${featuredSlug}`}
+              data-testid="hero-read-link"
+              className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#D4AF36] transition-colors duration-300"
+            >
+              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#D4AF36]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
+              <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
+                <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+              </svg>
+            </a>
+          </motion.div>
+        </AnimatePresence>
 
         {/* Functional carousel dots — bottom-left */}
         <motion.div
@@ -380,33 +331,31 @@ function HeroV12() {
         </motion.div>
       </div>
 
-      {/* ── WAVE DIVIDER: Organic morphing SVG seam ─────────────────────── */}
-      <svg
-        className="absolute top-0 pointer-events-none"
-        style={{ left: "44%", width: "12%", height: "100%", zIndex: 8 }}
-        viewBox="0 0 100 1000"
-        preserveAspectRatio="none"
-      >
-        {/* Pale fill — blends SVG left edge into left panel */}
-        <motion.path
-          fill="#F4F7FF"
-          initial={{ d: WA_PALE }}
-          animate={{ d: [WA_PALE, WB_PALE, WA_PALE] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        {/* Blue fill — blends SVG right edge into right panel */}
-        <motion.path
-          fill="#001489"
-          initial={{ d: WA_BLUE }}
-          animate={{ d: [WA_BLUE, WB_BLUE, WA_BLUE] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </svg>
+      {/* ── GOLD DIAGONAL SHARDS ──────────────────────────────────────────── */}
+      {/* Secondary shard — thinner, behind, lower opacity */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          zIndex: 5,
+          background: "#D4AF36",
+          opacity: 0.22,
+          clipPath: "polygon(33% 0%, 38% 0%, 56% 100%, 51% 100%)",
+        }}
+      />
+      {/* Primary shard — bold, full-opacity gold */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          zIndex: 6,
+          background: "#D4AF36",
+          clipPath: "polygon(38% 0%, 48% 0%, 66% 100%, 56% 100%)",
+        }}
+      />
 
       {/* ── RIGHT PANEL: Animated tile grid (blue) ─────────────────────── */}
       <div
         className="absolute right-0 top-0 bottom-0 bg-[#001489] overflow-hidden"
-        style={{ left: "50%" }}
+        style={{ left: "45%" }}
       >
         {/* Tile shimmer — square tiles, white at low opacity on the blue bg */}
         <div
