@@ -232,6 +232,17 @@ const tiles = Array.from({ length: COLS * TILE_ROWS }, (_, i) => ({
 
 const HERO_CYCLE_MS = 6500;
 
+const ACCENT_SQUARES = [
+  { pos: { top: -20, left: "43%" },  size: 105, dur: 7,   delay: 0   },
+  { pos: { top:   8, right: "6%"  }, size:  78, dur: 9,   delay: 1.8 },
+  { pos: { top: "21%", left: "40%" }, size:  58, dur: 8,   delay: 3.2 },
+  { pos: { top: "16%", right: -18  }, size:  92, dur: 10,  delay: 0.6 },
+  { pos: { top: "44%", left: "50%" }, size: 118, dur: 11,  delay: 2.5 },
+  { pos: { bottom: "28%", right: "10%" }, size: 72, dur: 8,  delay: 1.4 },
+  { pos: { bottom: "10%", left: "55%" }, size:  88, dur: 9,  delay: 4.1 },
+  { pos: { bottom: -18, right: "16%" },  size:  98, dur: 7.5, delay: 2.9 },
+];
+
 
 function HeroV12() {
   const { t } = useLang();
@@ -346,12 +357,12 @@ function HeroV12() {
         </motion.div>
       </div>
 
-      {/* ── RIGHT PANEL: Animated tile grid (blue, diagonal left edge) ───── */}
+      {/* ── RIGHT PANEL: Dark architectural background ───────────────────── */}
       <div
-        className="absolute inset-0 bg-[#001489] overflow-hidden"
+        className="absolute inset-0 bg-[#00060E] overflow-hidden"
         style={{ clipPath: "polygon(42% 0%, 100% 0%, 100% 100%, 58% 100%)" }}
       >
-        {/* Building photo background — slow crossfade, low opacity */}
+        {/* Building photo — prominent, slow crossfade */}
         <AnimatePresence>
           <motion.img
             key={bgIndex}
@@ -360,63 +371,33 @@ function HeroV12() {
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.15 }}
+            animate={{ opacity: 0.6 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.8, ease: "easeInOut" }}
           />
         </AnimatePresence>
 
-        {/* Tile shimmer — square tiles, white at low opacity on the blue bg */}
+        {/* Dark blue overlay — deepens the photo, keeps panel near-black */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-            gridTemplateRows: `repeat(${TILE_ROWS}, calc(100vw / ${COLS}))`,
-            alignContent: "start",
-          }}
-        >
-          {tiles.map((tile, i) => (
-            <motion.div
-              key={i}
-              style={{ backgroundColor: "rgba(0, 30, 180, 1)" }}
-              animate={{
-                opacity: [0, tile.maxOpacity * 0.55, 0],
-                ...(tile.goldBorder ? {
-                  boxShadow: [
-                    "inset 0 0 0 1px rgba(212,175,54,0)",
-                    "inset 0 0 0 1px rgba(212,175,54,0.5)",
-                    "inset 0 0 0 1px rgba(212,175,54,0)",
-                  ],
-                } : {}),
-              }}
-              transition={{
-                opacity:   { duration: tile.duration,   delay: tile.delay,       repeat: Infinity, ease: "easeInOut" },
-                boxShadow: { duration: tile.borderDur,  delay: tile.borderDelay, repeat: Infinity, ease: "easeInOut" },
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Subtle grid lines */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
-            `,
-            backgroundSize: `calc(100% / ${COLS}) calc(100vw / ${COLS})`,
-          }}
+          style={{ background: "rgba(0, 4, 22, 0.52)" }}
         />
 
-        {/* Soft vignette edges */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse 80% 80% at 70% 50%, transparent 40%, rgba(0,10,80,0.35) 100%)",
-          }}
-        />
+        {/* Scattered solid blue accent squares */}
+        {ACCENT_SQUARES.map((sq, i) => (
+          <motion.div
+            key={i}
+            className="absolute pointer-events-none"
+            style={{
+              ...sq.pos,
+              width:  sq.size,
+              height: sq.size,
+              backgroundColor: "#001489",
+            }}
+            animate={{ opacity: [0.7, 0.95, 0.7] }}
+            transition={{ duration: sq.dur, delay: sq.delay, repeat: Infinity, ease: "easeInOut" }}
+          />
+        ))}
       </div>
 
     </section>
