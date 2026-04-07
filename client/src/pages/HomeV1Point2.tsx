@@ -100,7 +100,7 @@ function HeaderV12() {
               key={link.href}
               href={link.href}
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
-              className="tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300 text-[16px]"
+              className="text-xs tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300"
               style={{ color: "rgba(0,20,137,0.70)" }}
               onMouseEnter={e => (e.currentTarget.style.color = "#001489")}
               onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,20,137,0.70)")}
