@@ -351,12 +351,12 @@ function HeroV12() {
         </motion.div>
       </div>
 
-      {/* ── RIGHT PANEL: Dark architectural background ───────────────────── */}
+      {/* ── RIGHT PANEL: Tile shimmer (original design) ──────────────────── */}
       <div
-        className="absolute inset-0 bg-[#00060E] overflow-hidden"
+        className="absolute inset-0 bg-[#001489] overflow-hidden"
         style={{ clipPath: "polygon(42% 0%, 100% 0%, 100% 100%, 58% 100%)" }}
       >
-        {/* Building photo — prominent, slow crossfade */}
+        {/* Building photo — subtle background, slow crossfade */}
         <AnimatePresence>
           <motion.img
             key={bgIndex}
@@ -365,38 +365,56 @@ function HeroV12() {
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.72 }}
+            animate={{ opacity: 0.15 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.8, ease: "easeInOut" }}
           />
         </AnimatePresence>
 
-        {/* Very dark base — makes the photo nearly invisible */}
+        {/* Tile shimmer grid */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "rgba(0, 3, 18, 0.48)" }}
-        />
-        {/* Deep navy-blue tint layer */}
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${COLS}, 1fr)`,
+            gridTemplateRows: `repeat(${TILE_ROWS}, calc(100vw / ${COLS}))`,
+            alignContent: "start",
+          }}
+        >
+          {tiles.map((tile, i) => (
+            <motion.div
+              key={i}
+              style={{ backgroundColor: "rgba(0, 30, 180, 1)" }}
+              animate={{ opacity: [0, tile.maxOpacity * 0.55, 0] }}
+              transition={{
+                duration: tile.duration,
+                delay: tile.delay,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Subtle grid lines */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "rgba(0, 15, 110, 0.48)" }}
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
+            `,
+            backgroundSize: `calc(100% / ${COLS}) calc(100vw / ${COLS})`,
+          }}
         />
 
-        {/* Scattered vivid blue accent squares */}
-        {ACCENT_SQUARES.map((sq, i) => (
-          <motion.div
-            key={i}
-            className="absolute pointer-events-none"
-            style={{
-              ...sq.pos,
-              width:  sq.size,
-              height: sq.size,
-              backgroundColor: "#001489",
-            }}
-            animate={{ opacity: [sq.minOpacity, 0.90, sq.minOpacity] }}
-            transition={{ duration: sq.dur, delay: sq.delay, repeat: Infinity, ease: "easeInOut" }}
-          />
-        ))}
+        {/* Soft vignette */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse 80% 80% at 70% 50%, transparent 40%, rgba(0,10,80,0.35) 100%)",
+          }}
+        />
       </div>
 
     </section>
