@@ -944,7 +944,7 @@ function ContactFormV12() {
                 <div>
                   <p className="text-[#001489] text-sm font-semibold mb-1">{c.dubaiLabel}</p>
                   {f.dubaiAddr.map((line, i) => (
-                    <p key={i} className="text-black/45 text-xs leading-relaxed">{line}</p>
+                    <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
                   ))}
                   <a href="tel:+97145232421" data-testid="contact-address-phone-dubai"
                     className="text-black/45 text-xs hover:text-[#D4AF36] transition-colors">
@@ -954,7 +954,7 @@ function ContactFormV12() {
                 <div>
                   <p className="text-[#001489] text-sm font-semibold mb-1">{c.parisLabel}</p>
                   {f.parisAddr.map((line, i) => (
-                    <p key={i} className="text-black/45 text-xs leading-relaxed">{line}</p>
+                    <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
                   ))}
                 </div>
               </div>
@@ -1101,9 +1101,9 @@ function FooterV12() {
           </div>
         </div>
         <div className="py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-          <p className="text-white/25 text-xs shrink-0">{f.copyright}</p>
+          <p className="text-white/25 text-xs leading-[1.5] shrink-0">{f.copyright}</p>
           <p data-testid="footer-disclaimer"
-            className="text-white/20 text-[11px] max-w-lg sm:text-right leading-relaxed">
+            className="text-white/20 text-[11px] max-w-lg sm:text-right leading-[1.5]">
             {f.disclaimer}
           </p>
         </div>
