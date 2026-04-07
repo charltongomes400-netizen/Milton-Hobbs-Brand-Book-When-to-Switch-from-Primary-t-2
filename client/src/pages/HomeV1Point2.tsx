@@ -947,6 +947,10 @@ function ContactFormV12() {
                   {f.dubaiAddr.map((line, i) => (
                     <p key={i} className="text-black/45 text-xs leading-relaxed">{line}</p>
                   ))}
+                  <a href="tel:+97145232421" data-testid="contact-address-phone-dubai"
+                    className="text-black/45 text-xs hover:text-[#D4AF36] transition-colors">
+                    +971 4 523 2421
+                  </a>
                 </div>
                 <div>
                   <p className="text-[#001489] text-sm font-semibold mb-1">{c.parisLabel}</p>
