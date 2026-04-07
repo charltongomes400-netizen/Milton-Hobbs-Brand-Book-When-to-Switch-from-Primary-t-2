@@ -966,6 +966,10 @@ function ContactFormV12() {
                 className="text-[#001489]/60 hover:text-[#D4AF36] text-sm transition-colors">
                 {f.phone}
               </a>
+              <a href="tel:+33180270067" data-testid="contact-phone-paris"
+                className="text-[#001489]/60 hover:text-[#D4AF36] text-sm transition-colors">
+                +33 1 80 27 00 67
+              </a>
             </div>
           </motion.div>
 
