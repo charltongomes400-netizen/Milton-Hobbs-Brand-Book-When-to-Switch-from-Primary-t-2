@@ -391,13 +391,18 @@ function HeroV12() {
 
       {/* ── GOLD DIAGONAL LINE along the panel boundary ─────────────────── */}
       <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ zIndex: 15 }}
+        className="absolute inset-0 pointer-events-none"
+        style={{ zIndex: 15, width: "100%", height: "100%" }}
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        shapeRendering="geometricPrecision"
       >
         <line
-          x1="42%" y1="0%" x2="58%" y2="100%"
+          x1="42" y1="0" x2="58" y2="100"
           stroke="#D4AF36"
           strokeWidth="7"
+          vectorEffect="non-scaling-stroke"
+          strokeLinecap="square"
         />
       </svg>
     </section>
