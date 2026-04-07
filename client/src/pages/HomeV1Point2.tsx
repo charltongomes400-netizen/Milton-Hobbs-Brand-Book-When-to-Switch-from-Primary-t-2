@@ -342,7 +342,7 @@ function HeroV12() {
           style={{
             display: "grid",
             gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-            gridTemplateRows: `repeat(${TILE_ROWS}, calc(58vw / ${COLS}))`,
+            gridTemplateRows: `repeat(${TILE_ROWS}, calc(100vw / ${COLS}))`,
             alignContent: "start",
           }}
         >
@@ -376,7 +376,7 @@ function HeroV12() {
               linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
               linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
             `,
-            backgroundSize: `calc(100% / ${COLS}) calc(58vw / ${COLS})`,
+            backgroundSize: `calc(100% / ${COLS}) calc(100vw / ${COLS})`,
           }}
         />
 
