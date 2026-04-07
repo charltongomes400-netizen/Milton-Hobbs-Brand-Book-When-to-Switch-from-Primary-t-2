@@ -353,7 +353,7 @@ function HeroV12() {
 
       {/* ── RIGHT PANEL: Tile shimmer (original design) ──────────────────── */}
       <div
-        className="absolute inset-0 bg-[#001489] overflow-hidden"
+        className="absolute inset-0 bg-[#000A4F] overflow-hidden"
         style={{ clipPath: "polygon(42% 0%, 100% 0%, 100% 100%, 58% 100%)" }}
       >
         {/* Building photo — subtle background, slow crossfade */}
@@ -384,7 +384,7 @@ function HeroV12() {
           {tiles.map((tile, i) => (
             <motion.div
               key={i}
-              style={{ backgroundColor: "rgba(0, 30, 180, 1)" }}
+              style={{ backgroundColor: "#001489" }}
               animate={{ opacity: [0, tile.maxOpacity * 0.55, 0] }}
               transition={{
                 duration: tile.duration,
