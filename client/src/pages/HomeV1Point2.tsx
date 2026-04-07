@@ -815,7 +815,7 @@ function PracticeAreasV12() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="py-28 px-8 border-t border-[#E5EAF4] text-[#ffffff] bg-[#ffffff]"
+      className="py-28 px-8 border-t border-[#E5EAF4] text-[#ffffff] bg-[#FCFCFC]"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
