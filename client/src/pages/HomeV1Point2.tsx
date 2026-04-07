@@ -84,7 +84,7 @@ function HeaderV12() {
           <img
             src={miltonHobbsLogo}
             alt="Milton Hobbs"
-            className="h-10 w-auto block"
+            className="h-16 w-auto block"
           />
         </a>
 
