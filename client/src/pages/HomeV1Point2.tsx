@@ -100,10 +100,10 @@ function HeaderV12() {
               key={link.href}
               href={link.href}
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
-              className="text-xs tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300"
-              style={{ color: "rgba(0,20,137,0.70)" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#001489")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,20,137,0.70)")}
+              className="text-[16px] tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300"
+              style={{ color: "#001489" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "#D4AF36")}
+              onMouseLeave={e => (e.currentTarget.style.color = "#001489")}
             >
               {link.label}
             </a>
@@ -180,8 +180,8 @@ function HeaderV12() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-sm tracking-[0.15em] uppercase transition-colors"
-                  style={{ color: "rgba(0,20,137,0.65)" }}
+                  className="text-[16px] tracking-[0.15em] uppercase transition-colors"
+                  style={{ color: "#001489" }}
                 >
                   {link.label}
                 </a>
