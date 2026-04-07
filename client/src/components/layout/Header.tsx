@@ -257,7 +257,7 @@ export function Header() {
         <div className="flex items-center gap-5 shrink-0">
           <div
             data-testid="lang-toggle"
-            className={`hidden lg:flex items-center border text-xs tracking-widest overflow-hidden transition-colors duration-300 ${borderColor}`}
+            className={`hidden lg:flex items-center text-xs tracking-widest overflow-hidden transition-colors duration-300`}
           >
             <button
               onClick={() => setLang("EN")}

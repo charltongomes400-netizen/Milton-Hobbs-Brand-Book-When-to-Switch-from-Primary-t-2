@@ -115,7 +115,6 @@ function HeaderV12() {
             data-testid="lang-toggle"
             className="hidden lg:flex items-center text-xs tracking-widest overflow-hidden"
             style={{
-              border: "1px solid rgba(0,20,137,0.18)",
               background: "rgba(255,255,255,0.30)",
               backdropFilter: "blur(8px)",
             }}
@@ -187,7 +186,7 @@ function HeaderV12() {
                 </a>
               ))}
               <div className="flex items-center gap-0 mt-2 w-fit"
-                style={{ border: "1px solid rgba(0,20,137,0.18)" }}>
+                >
                 <button
                   onClick={() => setLang("EN")}
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
