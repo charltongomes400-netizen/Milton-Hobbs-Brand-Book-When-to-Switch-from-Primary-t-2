@@ -53,30 +53,33 @@ function HeaderV12() {
       className="fixed top-0 left-0 right-0 z-50"
       style={{
         background: scrolled
-          ? "rgba(7,12,26,0.98)"
-          : "rgba(7,12,26,0.80)",
+          ? "rgba(255,255,255,0.98)"
+          : "rgba(255,255,255,0.68)",
         backdropFilter: scrolled
           ? "none"
-          : "blur(24px) saturate(180%) brightness(0.95)",
+          : "blur(24px) saturate(180%) brightness(1.06)",
         WebkitBackdropFilter: scrolled
           ? "none"
-          : "blur(24px) saturate(180%) brightness(0.95)",
+          : "blur(24px) saturate(180%) brightness(1.06)",
         boxShadow: scrolled
-          ? "0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.4)"
+          ? "0 1px 0 rgba(0,20,137,0.08), 0 4px 24px rgba(0,20,137,0.06)"
           : [
-              "inset 0 1px 0 rgba(255,255,255,0.08)",
-              "inset 0 -1px 0 rgba(255,255,255,0.04)",
-              "0 4px 28px rgba(0,0,0,0.35)",
+              "inset 0 1px 0 rgba(255,255,255,0.95)",
+              "inset 0 -1px 0 rgba(0,20,137,0.07)",
+              "0 4px 28px rgba(0,20,137,0.07)",
             ].join(", "),
         borderBottom: scrolled
-          ? "1px solid rgba(255,255,255,0.08)"
-          : "1px solid rgba(255,255,255,0.08)",
+          ? "1px solid rgba(0,20,137,0.08)"
+          : "1px solid rgba(255,255,255,0.55)",
         transition: "background 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease",
       }}
     >
-      {/* Specular gloss — subtle bottom edge shimmer for dark header */}
+      {/* Specular gloss — top-edge bright line + upper-half sheen */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ opacity: scrolled ? 0 : 1, transition: "opacity 0.35s ease" }}>
-        <div className="absolute inset-x-0 bottom-0 h-px" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 25%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.12) 75%, transparent 100%)" }} />
+        {/* Upper-half white sheen */}
+        <div className="absolute inset-x-0 top-0 h-1/2" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%)" }} />
+        {/* Bright top-edge specular line */}
+        <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.95) 75%, transparent 100%)" }} />
       </div>
       <div className="max-w-[1400px] mx-auto px-8 h-20 flex items-center justify-between relative">
         <a
@@ -98,9 +101,9 @@ function HeaderV12() {
               href={link.href}
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
               className="text-[16px] tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300"
-              style={{ color: "rgba(255,255,255,0.85)" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#001489")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.85)")}
+              style={{ color: "#001489" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "#D4AF36")}
+              onMouseLeave={e => (e.currentTarget.style.color = "#001489")}
             >
               {link.label}
             </a>
@@ -112,8 +115,8 @@ function HeaderV12() {
             data-testid="lang-toggle"
             className="hidden lg:flex items-center text-xs tracking-widest overflow-hidden"
             style={{
-              border: "1px solid rgba(255,255,255,0.15)",
-              background: "rgba(255,255,255,0.06)",
+              border: "1px solid rgba(0,20,137,0.18)",
+              background: "rgba(255,255,255,0.30)",
               backdropFilter: "blur(8px)",
             }}
           >
@@ -122,8 +125,8 @@ function HeaderV12() {
               data-testid="lang-en"
               className="px-4 py-2 transition-all duration-200"
               style={lang === "EN"
-                ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
-                : { color: "rgba(255,255,255,0.45)" }
+                ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
+                : { color: "rgba(0,20,137,0.50)" }
               }
             >
               EN
@@ -133,8 +136,8 @@ function HeaderV12() {
               data-testid="lang-fr"
               className="px-4 py-2 transition-all duration-200"
               style={lang === "FR"
-                ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
-                : { color: "rgba(255,255,255,0.45)" }
+                ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
+                : { color: "rgba(0,20,137,0.50)" }
               }
             >
               FR
@@ -145,7 +148,7 @@ function HeaderV12() {
             data-testid="mobile-menu-toggle"
             aria-label="Toggle menu"
             className="lg:hidden p-1 transition-colors"
-            style={{ color: "rgba(255,255,255,0.75)" }}
+            style={{ color: "rgba(0,20,137,0.65)" }}
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             <div className="flex flex-col gap-[5px] w-5">
@@ -166,8 +169,8 @@ function HeaderV12() {
             transition={{ duration: 0.3 }}
             className="lg:hidden overflow-hidden border-t"
             style={{
-              borderColor: "rgba(255,255,255,0.10)",
-              background: "rgba(7,12,26,0.97)",
+              borderColor: "rgba(0,20,137,0.10)",
+              background: "rgba(240,244,255,0.80)",
               backdropFilter: "blur(28px)",
             }}
           >
@@ -178,27 +181,27 @@ function HeaderV12() {
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   className="text-[16px] tracking-[0.15em] uppercase transition-colors"
-                  style={{ color: "rgba(255,255,255,0.85)" }}
+                  style={{ color: "#001489" }}
                 >
                   {link.label}
                 </a>
               ))}
               <div className="flex items-center gap-0 mt-2 w-fit"
-                style={{ border: "1px solid rgba(255,255,255,0.15)" }}>
+                style={{ border: "1px solid rgba(0,20,137,0.18)" }}>
                 <button
                   onClick={() => setLang("EN")}
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "EN"
-                    ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
-                    : { color: "rgba(255,255,255,0.45)" }
+                    ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
+                    : { color: "rgba(0,20,137,0.50)" }
                   }
                 >EN</button>
                 <button
                   onClick={() => setLang("FR")}
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "FR"
-                    ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
-                    : { color: "rgba(255,255,255,0.45)" }
+                    ? { background: "#D4AF36", color: "#000A4F", fontWeight: 600 }
+                    : { color: "rgba(0,20,137,0.50)" }
                   }
                 >FR</button>
               </div>
@@ -267,7 +270,7 @@ function HeroV12() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen bg-[#070C1A] flex overflow-hidden"
+      className="relative min-h-screen bg-[#FCFCFC] flex overflow-hidden"
     >
       {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
       <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20">
@@ -285,12 +288,12 @@ function HeroV12() {
             {/* Gold accent line + Eyebrow */}
             <div className="flex items-center gap-3 mb-5">
               <motion.div
-                style={{ width: 1, height: 32, background: "#001489", flexShrink: 0 }}
+                style={{ width: 1, height: 32, background: "#D4AF36", flexShrink: 0 }}
                 animate={{ opacity: [0.3, 1, 0.3] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
               <p
-                className="text-[#001489] tracking-[0.22em] uppercase font-medium text-[16px]"
+                className="text-[#D4AF36] tracking-[0.22em] uppercase font-medium text-[16px]"
                 data-testid="hero-eyebrow"
               >
                 {featuredArticle?.category}
@@ -299,7 +302,7 @@ function HeroV12() {
 
             {/* Large article headline */}
             <h1
-              className="font-heading text-white font-bold text-[clamp(1.125rem,4vw,3.4375rem)] mb-8"
+              className="font-heading text-[#001489] font-bold text-[clamp(1.125rem,4vw,3.4375rem)] mb-8"
               style={{ lineHeight: "clamp(1.5rem, 1.1em, 3.75rem)" }}
               data-testid="hero-headline"
             >
@@ -310,9 +313,9 @@ function HeroV12() {
             <a
               href={`/insights/${featuredSlug}`}
               data-testid="hero-read-link"
-              className="group inline-flex items-center gap-2 text-white/80 hover:text-[#001489] transition-colors duration-300"
+              className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#D4AF36] transition-colors duration-300"
             >
-              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-white/25 group-hover:decoration-[#001489]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
+              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#D4AF36]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
               <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
                 <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
               </svg>
@@ -339,8 +342,8 @@ function HeroV12() {
                 width:           i === currentIndex ? 20 : 7,
                 height:          7,
                 borderRadius:    i === currentIndex ? 4 : "50%",
-                backgroundColor: i === currentIndex ? "#001489" : "transparent",
-                border:          i === currentIndex ? "none" : "1px solid rgba(255,255,255,0.25)",
+                backgroundColor: i === currentIndex ? "#D4AF36" : "transparent",
+                border:          i === currentIndex ? "none" : "1px solid rgba(0,20,137,0.22)",
               }}
             />
           ))}
@@ -452,11 +455,11 @@ function FounderVisual() {
         );
       })}
       <circle cx={cx} cy={cy} r={outerR} stroke="rgba(255,255,255,1)" strokeOpacity={0.15} strokeWidth={1} fill="none" />
-      <circle cx={cx} cy={cy} r={innerR} stroke="#001489" strokeOpacity={0.4} strokeWidth={1} fill="none" />
-      <circle cx={cx} cy={cy} r={8} fill="#001489" fillOpacity={0.95} />
+      <circle cx={cx} cy={cy} r={innerR} stroke="#D4AF36" strokeOpacity={0.4} strokeWidth={1} fill="none" />
+      <circle cx={cx} cy={cy} r={8} fill="#D4AF36" fillOpacity={0.95} />
       <motion.circle
         cx={cx} cy={cy} r={innerR}
-        stroke="#001489" strokeWidth={1} fill="none"
+        stroke="#D4AF36" strokeWidth={1} fill="none"
         animate={{ scale: [1, 1.6, 1], opacity: [0.4, 0, 0.4] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
         style={{ transformOrigin: `${cx}px ${cy}px` }}
@@ -515,7 +518,7 @@ function PrecisionVisual() {
       {[88, 64, 44].map((r, i) => (
         <circle
           key={i} cx={CX} cy={CY} r={r} fill="none"
-          stroke={locked ? "#001489" : "rgba(255,255,255,1)"}
+          stroke={locked ? "#D4AF36" : "rgba(255,255,255,1)"}
           strokeOpacity={locked ? 0.18 + i * 0.1 : 0.14 + i * 0.08}
           strokeWidth={1}
           style={{ transition: "stroke 0.4s, stroke-opacity 0.4s" }}
@@ -524,7 +527,7 @@ function PrecisionVisual() {
       <line x1={CX} y1={30} x2={CX} y2={230} stroke="rgba(255,255,255,1)" strokeOpacity={0.18} strokeWidth={1} />
       <line x1={40} y1={CY} x2={280} y2={CY} stroke="rgba(255,255,255,1)" strokeOpacity={0.18} strokeWidth={1} />
       <circle cx={CX} cy={CY} r={4}
-        fill={locked ? "#001489" : "rgba(255,255,255,1)"}
+        fill={locked ? "#D4AF36" : "rgba(255,255,255,1)"}
         fillOpacity={locked ? 1 : 0.55}
         style={{ transition: "fill 0.3s, fill-opacity 0.3s" }}
       />
@@ -533,7 +536,7 @@ function PrecisionVisual() {
           <motion.circle
             key={flashKey}
             cx={CX} cy={CY} r={22}
-            stroke="#001489" strokeWidth={2} fill="none"
+            stroke="#D4AF36" strokeWidth={2} fill="none"
             initial={{ scale: 1, opacity: 0.9 }}
             animate={{ scale: 2.2, opacity: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
@@ -542,18 +545,18 @@ function PrecisionVisual() {
         </AnimatePresence>
       )}
       <motion.g style={{ x: rx, y: ry }}>
-        <circle cx={CX} cy={CY} r={22} stroke="#001489" strokeWidth={1.5} fill="none" strokeOpacity={0.9} />
-        <path d={`M${CX-22} ${CY-9} L${CX-22} ${CY-22} L${CX-9} ${CY-22}`} stroke="#001489" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX+9} ${CY-22} L${CX+22} ${CY-22} L${CX+22} ${CY-9}`} stroke="#001489" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX+22} ${CY+9} L${CX+22} ${CY+22} L${CX+9} ${CY+22}`} stroke="#001489" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX-9} ${CY+22} L${CX-22} ${CY+22} L${CX-22} ${CY+9}`} stroke="#001489" strokeWidth={1.5} fill="none" />
-        <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="#001489" strokeWidth={1} strokeOpacity={0.7} />
-        <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="#001489" strokeWidth={1} strokeOpacity={0.7} />
+        <circle cx={CX} cy={CY} r={22} stroke="#D4AF36" strokeWidth={1.5} fill="none" strokeOpacity={0.9} />
+        <path d={`M${CX-22} ${CY-9} L${CX-22} ${CY-22} L${CX-9} ${CY-22}`} stroke="#D4AF36" strokeWidth={1.5} fill="none" />
+        <path d={`M${CX+9} ${CY-22} L${CX+22} ${CY-22} L${CX+22} ${CY-9}`} stroke="#D4AF36" strokeWidth={1.5} fill="none" />
+        <path d={`M${CX+22} ${CY+9} L${CX+22} ${CY+22} L${CX+9} ${CY+22}`} stroke="#D4AF36" strokeWidth={1.5} fill="none" />
+        <path d={`M${CX-9} ${CY+22} L${CX-22} ${CY+22} L${CX-22} ${CY+9}`} stroke="#D4AF36" strokeWidth={1.5} fill="none" />
+        <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="#D4AF36" strokeWidth={1} strokeOpacity={0.7} />
+        <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="#D4AF36" strokeWidth={1} strokeOpacity={0.7} />
       </motion.g>
       {locked && (
         <motion.text
           x={CX + 30} y={CY - 28}
-          fill="#001489" fontSize="8" fontFamily="monospace" letterSpacing="0.15em"
+          fill="#D4AF36" fontSize="8" fontFamily="monospace" letterSpacing="0.15em"
           initial={{ opacity: 0 }} animate={{ opacity: [0, 0.8, 0.8, 0] }}
           transition={{ duration: 2.2, times: [0, 0.15, 0.85, 1] }}
         >
@@ -582,7 +585,7 @@ function CrossBorderVisual() {
       {paths.map((p, i) => (
         <motion.path
           key={i} d={p.d}
-          stroke={i < 2 ? "#001489" : "rgba(255,255,255,1)"}
+          stroke={i < 2 ? "#D4AF36" : "rgba(255,255,255,1)"}
           strokeOpacity={i < 2 ? 0.5 : 0.30}
           strokeWidth={i < 2 ? 1.2 : 1}
           strokeDasharray="220"
@@ -599,10 +602,10 @@ function CrossBorderVisual() {
           >{n.label}</text>
         </g>
       ))}
-      <circle cx={160} cy={130} r={7} fill="#001489" fillOpacity={0.95} />
+      <circle cx={160} cy={130} r={7} fill="#D4AF36" fillOpacity={0.95} />
       <motion.circle
         cx={160} cy={130} r={18}
-        stroke="#001489" strokeWidth={1} fill="none"
+        stroke="#D4AF36" strokeWidth={1} fill="none"
         animate={{ scale: [1, 1.5, 1], opacity: [0.4, 0, 0.4] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
         style={{ transformOrigin: "160px 130px" }}
@@ -622,7 +625,7 @@ function DiscretionVisual() {
         return (
           <motion.circle
             key={i} cx={cx} cy={cy} r={r}
-            stroke={i === rings.length - 1 ? "#001489" : "rgba(255,255,255,1)"}
+            stroke={i === rings.length - 1 ? "#D4AF36" : "rgba(255,255,255,1)"}
             strokeOpacity={i === rings.length - 1 ? 0.7 : 0.12 + i * 0.07}
             strokeWidth={1}
             strokeDasharray={`${circumference * (1 - gap)} ${circumference * gap}`}
@@ -635,13 +638,13 @@ function DiscretionVisual() {
       })}
       <motion.rect
         x={cx - 7} y={cy - 4} width={14} height={11}
-        stroke="#001489" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
+        stroke="#D4AF36" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
         animate={{ opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.path
         d={`M${cx-4} ${cy-4} Q${cx-4} ${cy-11} ${cx} ${cy-11} Q${cx+4} ${cy-11} ${cx+4} ${cy-4}`}
-        stroke="#001489" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
+        stroke="#D4AF36" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
         animate={{ opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -681,7 +684,7 @@ function DifferentiatorsV12() {
       id="firm"
       data-header-theme="light"
       data-testid="differentiators-section"
-      className="bg-[#070C1A] py-28 px-8 border-t border-white/[0.08]"
+      className="bg-[#FCFCFC] py-28 px-8 border-t border-[#E5EAF4]"
     >
       <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
@@ -691,10 +694,10 @@ function DifferentiatorsV12() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <p className="text-[#001489] tracking-[0.3em] uppercase font-medium mb-10 text-[16px]">
+            <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-10 text-[16px]">
               {d.eyebrow}
             </p>
-            <h2 className="font-heading text-white text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25]">
+            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25]">
               {d.headline}
             </h2>
             <div className="flex flex-col">
@@ -703,7 +706,7 @@ function DifferentiatorsV12() {
                   key={i}
                   data-testid={`diff-card-${i}`}
                   onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
-                  className="group flex items-center gap-5 py-4 text-left border-b border-white/[0.08] last:border-b-0 focus:outline-none"
+                  className="group flex items-center gap-5 py-4 text-left border-b border-[#001489]/[0.08] last:border-b-0 focus:outline-none"
                 >
                   <motion.span
                     className="w-0.5 flex-shrink-0 bg-[#001489] origin-top"
@@ -713,7 +716,7 @@ function DifferentiatorsV12() {
                   <motion.span
                     className="font-heading font-semibold leading-tight"
                     animate={{
-                      color: i === active ? "#FFFFFF" : "rgba(255,255,255,0.28)",
+                      color: i === active ? "#001489" : "rgba(0,20,137,0.28)",
                       fontSize: i === active ? "clamp(1rem, 1.6vw, 1.375rem)" : "clamp(0.875rem, 1.2vw, 1.1rem)",
                     }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
@@ -744,7 +747,7 @@ function DifferentiatorsV12() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="absolute bottom-0 left-0 right-0 h-px bg-white/10">
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-[#001489]/10">
                 <motion.div
                   className="h-full bg-[#001489]"
                   style={{ width: `${progress}%` }}
@@ -762,10 +765,10 @@ function DifferentiatorsV12() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="pt-8"
               >
-                <h3 className="font-heading text-white text-[1.125rem] font-semibold mb-3 leading-[1.3]">
+                <h3 className="font-heading text-[#001489] text-[1.125rem] font-semibold mb-3 leading-[1.3]">
                   {d.cards[active].title}
                 </h3>
-                <p className="text-white/60 text-sm leading-[1.4] mb-7 max-w-sm">
+                <p className="text-black/55 text-sm leading-[1.4] mb-7 max-w-sm">
                   {d.cards[active].description}
                 </p>
                 <a
@@ -795,10 +798,10 @@ const cardImages = [imgCorp, imgEstate, imgLitig, imgArb, imgEmploy, imgBank, im
 function BorderTrace() {
   return (
     <span className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-      <span className="absolute top-0 left-0 right-0 h-px bg-[#001489] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-      <span className="absolute top-0 right-0 bottom-0 w-px bg-[#001489] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
-      <span className="absolute bottom-0 left-0 right-0 h-px bg-[#001489] origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" />
-      <span className="absolute top-0 left-0 bottom-0 w-px bg-[#001489] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-300" />
+      <span className="absolute top-0 left-0 right-0 h-px bg-[#D4AF36] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+      <span className="absolute top-0 right-0 bottom-0 w-px bg-[#D4AF36] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
+      <span className="absolute bottom-0 left-0 right-0 h-px bg-[#D4AF36] origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" />
+      <span className="absolute top-0 left-0 bottom-0 w-px bg-[#D4AF36] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-300" />
     </span>
   );
 }
@@ -811,7 +814,7 @@ function PracticeAreasV12() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="py-28 px-8 text-[#ffffff] bg-[#070C1A]"
+      className="py-28 px-8 text-[#ffffff] bg-[#FCFCFC]"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -822,14 +825,14 @@ function PracticeAreasV12() {
           className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6"
         >
           <div>
-            <p className="text-[#001489] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
+            <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
               {p.eyebrow}
             </p>
-            <h2 className="font-heading text-white text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
+            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
               {p.headline}
             </h2>
           </div>
-          <p className="text-white/45 text-sm max-w-xs leading-[1.4]">{p.subtext}</p>
+          <p className="text-black/45 text-sm max-w-xs leading-[1.4]">{p.subtext}</p>
         </motion.div>
 
         <div className="bento-grid">
@@ -851,7 +854,7 @@ function PracticeAreasV12() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#000A3D]/95 via-[#001070]/55 to-[#001489]/20" />
               <BorderTrace />
-              <span className="absolute top-6 left-7 text-[#001489] text-[10px] tracking-[0.25em] uppercase font-medium">
+              <span className="absolute top-6 left-7 text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className="absolute inset-x-0 bottom-0 px-7 pb-7 flex flex-col">
@@ -862,8 +865,8 @@ function PracticeAreasV12() {
                   <p className="text-white/65 text-sm leading-[1.4] pt-2">{item.description}</p>
                 </div>
                 <div className="flex items-center gap-2 pt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
-                  <span className="text-[#001489] text-[10px] tracking-[0.2em] uppercase font-medium">{p.learnMore}</span>
-                  <svg className="w-3 h-3 text-[#001489]" fill="none" viewBox="0 0 12 12">
+                  <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase font-medium">{p.learnMore}</span>
+                  <svg className="w-3 h-3 text-[#D4AF36]" fill="none" viewBox="0 0 12 12">
                     <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
                   </svg>
                 </div>
@@ -903,7 +906,7 @@ function ContactFormV12() {
       id="contact"
       data-header-theme="light"
       data-testid="contact-section"
-      className="bg-[#070C1A] py-28 px-8 border-t border-white/[0.08]"
+      className="bg-[#FCFCFC] py-28 px-8 border-t border-[#E5EAF4]"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -913,10 +916,10 @@ function ContactFormV12() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <p className="text-[#001489] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
+          <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
             {c.eyebrow}
           </p>
-          <h2 className="font-heading text-white text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
+          <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
             {c.headline}
           </h2>
         </motion.div>
@@ -929,30 +932,30 @@ function ContactFormV12() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex flex-col gap-5"
           >
-            <p className="text-white/60 text-sm leading-[1.4]">{c.subtext}</p>
+            <p className="text-black/55 text-sm leading-[1.4]">{c.subtext}</p>
 
             <div>
-              <p className="text-[#001489] tracking-[0.25em] uppercase font-medium mb-5 text-[12px]">
+              <p className="text-[#D4AF36] tracking-[0.25em] uppercase font-medium mb-5 text-[12px]">
                 {c.officeLabel}
               </p>
               <div className="flex flex-col gap-6">
                 <div>
-                  <p className="text-white/80 text-sm font-semibold mb-1">{c.dubaiLabel}</p>
+                  <p className="text-[#001489] text-sm font-semibold mb-1">{c.dubaiLabel}</p>
                   {f.dubaiAddr.map((line, i) => (
-                    <p key={i} className="text-white/45 text-xs leading-[1.5]">{line}</p>
+                    <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
                   ))}
                   <a href="tel:+97145232421" data-testid="contact-address-phone-dubai"
-                    className="text-white/45 text-xs hover:text-[#001489] transition-colors">
+                    className="text-black/45 text-xs hover:text-[#D4AF36] transition-colors">
                     +971 4 523 2421
                   </a>
                 </div>
                 <div>
-                  <p className="text-white/80 text-sm font-semibold mb-1">{c.parisLabel}</p>
+                  <p className="text-[#001489] text-sm font-semibold mb-1">{c.parisLabel}</p>
                   {f.parisAddr.map((line, i) => (
-                    <p key={i} className="text-white/45 text-xs leading-[1.5]">{line}</p>
+                    <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
                   ))}
                   <a href="tel:+33180270067" data-testid="contact-address-phone-paris"
-                    className="text-white/45 text-xs hover:text-[#001489] transition-colors">
+                    className="text-black/45 text-xs hover:text-[#D4AF36] transition-colors">
                     +33 1 80 27 00 67
                   </a>
                 </div>
@@ -960,11 +963,11 @@ function ContactFormV12() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <p className="text-[#001489] text-[10px] tracking-[0.25em] uppercase font-medium mb-1">
+              <p className="text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium mb-1">
                 Email
               </p>
               <a href={`mailto:${f.email}`} data-testid="contact-email"
-                className="text-white/60 hover:text-[#001489] text-sm transition-colors">
+                className="text-[#001489]/60 hover:text-[#D4AF36] text-sm transition-colors">
                 {f.email}
               </a>
             </div>
@@ -978,43 +981,43 @@ function ContactFormV12() {
           >
             {submitted ? (
               <div data-testid="contact-success"
-                className="border border-white/20 p-10 flex flex-col gap-4 h-full justify-center">
+                className="border border-[#001489]/20 p-10 flex flex-col gap-4 h-full justify-center">
                 <div className="flex items-center gap-3 mb-2">
                   <svg className="w-5 h-5 text-[#001489]" fill="none" viewBox="0 0 20 20">
                     <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <h3 className="font-heading text-white text-lg font-semibold">{c.successTitle}</h3>
+                  <h3 className="font-heading text-[#001489] text-lg font-semibold">{c.successTitle}</h3>
                 </div>
-                <p className="text-white/60 text-sm leading-[1.4]">{c.successText}</p>
+                <p className="text-black/55 text-sm leading-[1.4]">{c.successText}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input type="text" name="name" required value={form.name} onChange={handleChange}
                     placeholder={c.namePlaceholder} data-testid="input-name"
-                    className="bg-white/[0.05] border border-white/15 text-white placeholder-white/30 text-sm px-4 py-3.5 outline-none focus:border-white/40 transition-colors" />
+                    className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors" />
                   <input type="email" name="email" required value={form.email} onChange={handleChange}
                     placeholder={c.emailPlaceholder} data-testid="input-email"
-                    className="bg-white/[0.05] border border-white/15 text-white placeholder-white/30 text-sm px-4 py-3.5 outline-none focus:border-white/40 transition-colors" />
+                    className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors" />
                 </div>
                 <div className="relative">
                   <select name="subject" required value={form.subject} onChange={handleChange}
                     data-testid="select-subject"
-                    className="w-full bg-white/[0.05] border border-white/15 text-sm px-4 py-3.5 outline-none focus:border-white/40 transition-colors appearance-none cursor-pointer"
-                    style={{ color: form.subject ? "#FFFFFF" : "rgba(255,255,255,0.35)", background: "transparent" }}>
-                    <option value="" disabled hidden style={{ background: "#0D1527" }}>{c.subjectPlaceholder}</option>
+                    className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors appearance-none cursor-pointer"
+                    style={{ color: form.subject ? "#001489" : "rgba(0,20,137,0.3)" }}>
+                    <option value="" disabled hidden>{c.subjectPlaceholder}</option>
                     {c.subjectOptions.map((opt, i) => (
                       <option key={i} value={opt} style={{ color: "#001489", background: "#fff" }}>{opt}</option>
                     ))}
                   </select>
-                  <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-white/30"
+                  <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-[#001489]/30"
                     fill="none" viewBox="0 0 12 12">
                     <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                   </svg>
                 </div>
                 <textarea name="message" required rows={5} value={form.message} onChange={handleChange}
                   placeholder={c.messagePlaceholder} data-testid="input-message"
-                  className="bg-white/[0.05] border border-white/15 text-white placeholder-white/30 text-sm px-4 py-3.5 outline-none focus:border-white/40 transition-colors resize-none" />
+                  className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors resize-none" />
                 <button type="submit" disabled={submitting} data-testid="button-submit"
                   className="self-start bg-[#001489] text-white text-xs tracking-[0.2em] uppercase font-semibold px-8 py-4 hover:bg-[#001070] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
                   {submitting ? c.submitting : c.submit}
@@ -1043,7 +1046,7 @@ function FooterV12() {
   ];
 
   return (
-    <footer id="footer" data-testid="footer" className="bg-[#030712] border-t border-white/10">
+    <footer id="footer" data-testid="footer" className="bg-[#001489] border-t border-white/10">
       <div className="max-w-[1400px] mx-auto px-8">
         <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 border-b border-white/10">
           <div className="lg:col-span-5 lg:pr-16">
@@ -1055,7 +1058,7 @@ function FooterV12() {
             </p>
             <div className="space-y-2">
               <a href={`mailto:${f.email}`} data-testid="footer-email"
-                className="block text-[#001489] text-sm hover:text-[#E8C97E] transition-colors">
+                className="block text-[#D4AF36] text-sm hover:text-[#E8C97E] transition-colors">
                 {f.email}
               </a>
               <a href={`tel:${f.phone}`} data-testid="footer-phone-dubai"
@@ -1115,7 +1118,7 @@ function FooterV12() {
 
 function HomeV1Point4Inner() {
   return (
-    <div className="bg-[#070C1A] min-h-screen" data-testid="home-v1-4-page">
+    <div className="bg-[#FCFCFC] min-h-screen" data-testid="home-v1-4-page">
       <HeaderV12 />
       <main>
         <HeroV12 />
