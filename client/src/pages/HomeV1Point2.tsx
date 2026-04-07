@@ -930,7 +930,7 @@ function ContactFormV12() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col gap-10"
+            className="flex flex-col gap-5"
           >
             <p className="text-black/55 text-sm leading-[1.4]">{c.subtext}</p>
 
