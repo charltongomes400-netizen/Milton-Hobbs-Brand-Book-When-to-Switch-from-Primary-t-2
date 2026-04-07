@@ -962,17 +962,12 @@ function ContactFormV12() {
             </div>
 
             <div className="flex flex-col gap-2">
+              <p className="text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium mb-1">
+                Email
+              </p>
               <a href={`mailto:${f.email}`} data-testid="contact-email"
                 className="text-[#001489]/60 hover:text-[#D4AF36] text-sm transition-colors">
                 {f.email}
-              </a>
-              <a href={`tel:${f.phone}`} data-testid="contact-phone"
-                className="text-[#001489]/60 hover:text-[#D4AF36] text-sm transition-colors">
-                {f.phone}
-              </a>
-              <a href="tel:+33180270067" data-testid="contact-phone-paris"
-                className="text-[#001489]/60 hover:text-[#D4AF36] text-sm transition-colors">
-                +33 1 80 27 00 67
               </a>
             </div>
           </motion.div>
