@@ -331,31 +331,21 @@ function HeroV12() {
         </motion.div>
       </div>
 
-      {/* ── GOLD DIAGONAL SHARDS ──────────────────────────────────────────── */}
-      {/* Secondary shard — thinner, behind, lower opacity */}
+      {/* ── GOLD DIAGONAL SHARD ───────────────────────────────────────────── */}
+      {/* Single sharp shard at z=15 so it renders above both panels cleanly */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          zIndex: 5,
+          zIndex: 15,
           background: "#D4AF36",
-          opacity: 0.22,
-          clipPath: "polygon(33% 0%, 38% 0%, 56% 100%, 51% 100%)",
-        }}
-      />
-      {/* Primary shard — bold, full-opacity gold */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          zIndex: 6,
-          background: "#D4AF36",
-          clipPath: "polygon(38% 0%, 48% 0%, 66% 100%, 56% 100%)",
+          clipPath: "polygon(45% 0%, 51% 0%, 63% 100%, 57% 100%)",
         }}
       />
 
       {/* ── RIGHT PANEL: Animated tile grid (blue) ─────────────────────── */}
       <div
         className="absolute right-0 top-0 bottom-0 bg-[#001489] overflow-hidden"
-        style={{ left: "45%" }}
+        style={{ left: "50%" }}
       >
         {/* Tile shimmer — square tiles, white at low opacity on the blue bg */}
         <div
