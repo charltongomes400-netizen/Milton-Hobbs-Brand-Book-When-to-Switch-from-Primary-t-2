@@ -699,7 +699,7 @@ function DifferentiatorsV12() {
             <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-10">
               {d.eyebrow}
             </p>
-            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.37]">
+            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25]">
               {d.headline}
             </h2>
             <div className="flex flex-col">
@@ -767,10 +767,10 @@ function DifferentiatorsV12() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="pt-8"
               >
-                <h3 className="font-heading text-[#001489] text-[1.125rem] font-semibold mb-3 leading-[1.37]">
+                <h3 className="font-heading text-[#001489] text-[1.125rem] font-semibold mb-3 leading-[1.3]">
                   {d.cards[active].title}
                 </h3>
-                <p className="text-black/55 text-sm leading-relaxed mb-7 max-w-sm">
+                <p className="text-black/55 text-sm leading-[1.4] mb-7 max-w-sm">
                   {d.cards[active].description}
                 </p>
                 <a
@@ -830,11 +830,11 @@ function PracticeAreasV12() {
             <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-4">
               {p.eyebrow}
             </p>
-            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.37]">
+            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
               {p.headline}
             </h2>
           </div>
-          <p className="text-black/45 text-sm max-w-xs leading-relaxed">{p.subtext}</p>
+          <p className="text-black/45 text-sm max-w-xs leading-[1.4]">{p.subtext}</p>
         </motion.div>
 
         <div className="bento-grid">
@@ -864,7 +864,7 @@ function PracticeAreasV12() {
                   {item.title}
                 </h3>
                 <div className="max-h-0 overflow-hidden group-hover:max-h-20 transition-[max-height] duration-400 pr-[10%]">
-                  <p className="text-white/65 text-sm leading-relaxed pt-2">{item.description}</p>
+                  <p className="text-white/65 text-sm leading-[1.4] pt-2">{item.description}</p>
                 </div>
                 <div className="flex items-center gap-2 pt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
                   <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase font-medium">{p.learnMore}</span>
@@ -921,7 +921,7 @@ function ContactFormV12() {
           <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-4">
             {c.eyebrow}
           </p>
-          <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.37]">
+          <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
             {c.headline}
           </h2>
         </motion.div>
@@ -934,7 +934,7 @@ function ContactFormV12() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex flex-col gap-10"
           >
-            <p className="text-black/55 text-sm leading-relaxed">{c.subtext}</p>
+            <p className="text-black/55 text-sm leading-[1.4]">{c.subtext}</p>
 
             <div>
               <p className="text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium mb-5">
@@ -986,7 +986,7 @@ function ContactFormV12() {
                   </svg>
                   <h3 className="font-heading text-[#001489] text-lg font-semibold">{c.successTitle}</h3>
                 </div>
-                <p className="text-black/55 text-sm leading-relaxed">{c.successText}</p>
+                <p className="text-black/55 text-sm leading-[1.4]">{c.successText}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-4">
@@ -1051,7 +1051,7 @@ function FooterV12() {
             <p className="font-heading text-white font-semibold text-lg tracking-[0.18em] uppercase mb-5">
               Milton Hobbs
             </p>
-            <p className="text-white/45 text-sm leading-relaxed max-w-xs mb-8 pr-[20%]">
+            <p className="text-white/45 text-sm leading-[1.4] max-w-xs mb-8 pr-[20%]">
               {f.tagline}
             </p>
             <div className="space-y-2">
@@ -1073,7 +1073,7 @@ function FooterV12() {
             <p className="text-white/30 text-[10px] tracking-[0.25em] uppercase font-medium mb-6">
               {f.dubaiLabel}
             </p>
-            <address className="not-italic text-white/50 text-sm leading-[1.9]">
+            <address className="not-italic text-white/50 text-sm leading-[1.4]">
               {f.dubaiAddr.map((line, i) => <span key={i} className="block">{line}</span>)}
             </address>
           </div>
@@ -1081,7 +1081,7 @@ function FooterV12() {
             <p className="text-white/30 text-[10px] tracking-[0.25em] uppercase font-medium mb-6">
               {f.parisLabel}
             </p>
-            <address className="not-italic text-white/50 text-sm leading-[1.9]">
+            <address className="not-italic text-white/50 text-sm leading-[1.4]">
               {f.parisAddr.map((line, i) => <span key={i} className="block">{line}</span>)}
             </address>
           </div>
