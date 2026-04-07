@@ -694,7 +694,7 @@ function DifferentiatorsV12() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-10">
+            <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-10 text-[16px]">
               {d.eyebrow}
             </p>
             <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25]">
