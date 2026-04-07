@@ -293,7 +293,7 @@ function HeroV12() {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
               <p
-                className="text-[#D4AF36] text-[11px] tracking-[0.22em] uppercase font-medium"
+                className="text-[#D4AF36] tracking-[0.22em] uppercase font-medium text-[16px]"
                 data-testid="hero-eyebrow"
               >
                 {featuredArticle?.category}
@@ -349,7 +349,6 @@ function HeroV12() {
           ))}
         </motion.div>
       </div>
-
       {/* ── RIGHT PANEL: Tile shimmer (original design) ──────────────────── */}
       <div
         className="absolute inset-0 bg-[#000A4F] overflow-hidden"
@@ -414,7 +413,6 @@ function HeroV12() {
           }}
         />
       </div>
-
     </section>
   );
 }
