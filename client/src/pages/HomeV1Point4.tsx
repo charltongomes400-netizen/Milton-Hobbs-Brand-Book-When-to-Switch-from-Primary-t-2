@@ -125,7 +125,7 @@ function HeaderV12() {
               data-testid="lang-en"
               className="px-4 py-2 transition-all duration-200"
               style={lang === "EN"
-                ? { background: "#7A84BE", color: "#FFFFFF", fontWeight: 600 }
+                ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
                 : { color: "rgba(0,20,137,0.50)" }
               }
             >
@@ -136,7 +136,7 @@ function HeaderV12() {
               data-testid="lang-fr"
               className="px-4 py-2 transition-all duration-200"
               style={lang === "FR"
-                ? { background: "#7A84BE", color: "#FFFFFF", fontWeight: 600 }
+                ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
                 : { color: "rgba(0,20,137,0.50)" }
               }
             >
@@ -192,7 +192,7 @@ function HeaderV12() {
                   onClick={() => setLang("EN")}
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "EN"
-                    ? { background: "#7A84BE", color: "#FFFFFF", fontWeight: 600 }
+                    ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
                     : { color: "rgba(0,20,137,0.50)" }
                   }
                 >EN</button>
@@ -200,7 +200,7 @@ function HeaderV12() {
                   onClick={() => setLang("FR")}
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "FR"
-                    ? { background: "#7A84BE", color: "#FFFFFF", fontWeight: 600 }
+                    ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
                     : { color: "rgba(0,20,137,0.50)" }
                   }
                 >FR</button>
