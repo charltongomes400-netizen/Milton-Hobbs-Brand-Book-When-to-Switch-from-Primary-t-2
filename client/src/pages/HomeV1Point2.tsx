@@ -222,12 +222,12 @@ const TILE_ROWS = 18;
 
 const tiles = Array.from({ length: COLS * TILE_ROWS }, (_, i) => ({
   color:      i % 2 === 0 ? "#001489" : "#000A4F",
-  delay:      parseFloat(((i * 0.41 + (i % 7) * 0.29) % 9).toFixed(2)),
-  duration:   parseFloat((2.5 + (i * 0.17 + (i % 5) * 0.33) % 4.5).toFixed(2)),
-  maxOpacity: parseFloat((0.04 + (i * 0.07 + (i % 11) * 0.04) % 0.22).toFixed(2)),
+  delay:      parseFloat(((i * 0.41 + (i % 7) * 0.29) % 14).toFixed(2)),
+  duration:   parseFloat((5 + (i * 0.17 + (i % 5) * 0.33) % 8).toFixed(2)),
+  maxOpacity: parseFloat((0.06 + (i * 0.07 + (i % 11) * 0.04) % 0.28).toFixed(2)),
   goldBorder: i % 11 === 0 || i % 19 === 7,
-  borderDelay: parseFloat(((i * 0.63 + (i % 13) * 0.41) % 7).toFixed(2)),
-  borderDur:   parseFloat((4 + (i * 0.23 + (i % 7) * 0.51) % 4).toFixed(2)),
+  borderDelay: parseFloat(((i * 0.63 + (i % 13) * 0.41) % 12).toFixed(2)),
+  borderDur:   parseFloat((7 + (i * 0.23 + (i % 7) * 0.51) % 6).toFixed(2)),
 }));
 
 const HERO_CYCLE_MS = 6500;
@@ -379,7 +379,7 @@ function HeroV12() {
           {tiles.map((tile, i) => (
             <motion.div
               key={i}
-              style={{ backgroundColor: "rgba(255,255,255,1)" }}
+              style={{ backgroundColor: "rgba(0, 30, 180, 1)" }}
               animate={{
                 opacity: [0, tile.maxOpacity * 0.55, 0],
                 ...(tile.goldBorder ? {
