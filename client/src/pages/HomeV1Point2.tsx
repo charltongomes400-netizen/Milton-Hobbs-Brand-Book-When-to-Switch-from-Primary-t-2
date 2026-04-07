@@ -331,21 +331,10 @@ function HeroV12() {
         </motion.div>
       </div>
 
-      {/* ── GOLD DIAGONAL SHARD ───────────────────────────────────────────── */}
-      {/* Single sharp shard at z=15 so it renders above both panels cleanly */}
+      {/* ── RIGHT PANEL: Animated tile grid (blue, diagonal left edge) ───── */}
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          zIndex: 15,
-          background: "#D4AF36",
-          clipPath: "polygon(45% 0%, 51% 0%, 63% 100%, 57% 100%)",
-        }}
-      />
-
-      {/* ── RIGHT PANEL: Animated tile grid (blue) ─────────────────────── */}
-      <div
-        className="absolute right-0 top-0 bottom-0 bg-[#001489] overflow-hidden"
-        style={{ left: "50%" }}
+        className="absolute inset-0 bg-[#001489] overflow-hidden"
+        style={{ clipPath: "polygon(42% 0%, 100% 0%, 100% 100%, 58% 100%)" }}
       >
         {/* Tile shimmer — square tiles, white at low opacity on the blue bg */}
         <div
@@ -399,6 +388,18 @@ function HeroV12() {
           }}
         />
       </div>
+
+      {/* ── GOLD DIAGONAL LINE along the panel boundary ─────────────────── */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ zIndex: 15 }}
+      >
+        <line
+          x1="42%" y1="0%" x2="58%" y2="100%"
+          stroke="#D4AF36"
+          strokeWidth="2"
+        />
+      </svg>
     </section>
   );
 }
