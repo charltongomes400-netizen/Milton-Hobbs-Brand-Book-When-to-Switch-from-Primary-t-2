@@ -397,7 +397,7 @@ function HeroV12() {
         <line
           x1="42%" y1="0%" x2="58%" y2="100%"
           stroke="#D4AF36"
-          strokeWidth="2"
+          strokeWidth="12"
         />
       </svg>
     </section>
