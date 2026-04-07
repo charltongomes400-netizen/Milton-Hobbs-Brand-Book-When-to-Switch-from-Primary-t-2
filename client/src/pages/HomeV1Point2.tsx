@@ -825,7 +825,7 @@ function PracticeAreasV12() {
           className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6"
         >
           <div>
-            <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-medium mb-4">
+            <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
               {p.eyebrow}
             </p>
             <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
