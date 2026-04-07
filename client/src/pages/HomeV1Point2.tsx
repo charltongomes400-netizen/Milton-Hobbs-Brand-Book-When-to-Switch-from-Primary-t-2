@@ -233,14 +233,14 @@ const tiles = Array.from({ length: COLS * TILE_ROWS }, (_, i) => ({
 const HERO_CYCLE_MS = 12000;
 
 const ACCENT_SQUARES = [
-  { pos: { top: "4%",  left: "52%"  }, size: 90, dur: 18.0, delay: 0     },
-  { pos: { top: "2%",  right: "4%"  }, size: 90, dur: 23.5, delay: 7.2   },
-  { pos: { top: "22%", left: "46%"  }, size: 90, dur: 19.4, delay: 3.1   },
-  { pos: { top: "18%", right: "18%" }, size: 90, dur: 26.0, delay: 11.8  },
-  { pos: { top: "48%", left: "60%"  }, size: 90, dur: 17.2, delay: 5.0   },
-  { pos: { top: "60%", right: "6%"  }, size: 90, dur: 22.1, delay: 9.6   },
-  { pos: { top: "72%", left: "50%"  }, size: 90, dur: 24.4, delay: 2.3   },
-  { pos: { top: "82%", right: "24%" }, size: 90, dur: 20.3, delay: 14.0  },
+  { pos: { top: "4%",  left: "52%"  }, size: 115, dur: 6.5, delay: 0.0, minOpacity: 0.50 },
+  { pos: { top: "2%",  right: "4%"  }, size:  72, dur: 8.0, delay: 2.8, minOpacity: 0.42 },
+  { pos: { top: "22%", left: "46%"  }, size:  60, dur: 5.5, delay: 1.4, minOpacity: 0.45 },
+  { pos: { top: "18%", right: "18%" }, size:  95, dur: 9.0, delay: 4.6, minOpacity: 0.40 },
+  { pos: { top: "48%", left: "60%"  }, size: 108, dur: 7.0, delay: 0.8, minOpacity: 0.48 },
+  { pos: { top: "60%", right: "6%"  }, size:  78, dur: 6.0, delay: 3.5, minOpacity: 0.44 },
+  { pos: { top: "72%", left: "50%"  }, size:  65, dur: 8.5, delay: 1.9, minOpacity: 0.41 },
+  { pos: { top: "82%", right: "24%" }, size:  90, dur: 7.5, delay: 5.2, minOpacity: 0.47 },
 ];
 
 
@@ -393,7 +393,7 @@ function HeroV12() {
               height: sq.size,
               backgroundColor: "#001489",
             }}
-            animate={{ opacity: [0.05, 0.88, 0.05] }}
+            animate={{ opacity: [sq.minOpacity, 0.90, sq.minOpacity] }}
             transition={{ duration: sq.dur, delay: sq.delay, repeat: Infinity, ease: "easeInOut" }}
           />
         ))}
