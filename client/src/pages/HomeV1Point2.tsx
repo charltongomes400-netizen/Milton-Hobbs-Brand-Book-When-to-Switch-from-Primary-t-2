@@ -385,9 +385,19 @@ function HeroV12() {
             <motion.div
               key={i}
               style={{ backgroundColor: "#001489" }}
-              animate={{ opacity: [0, (i % 29 === 7 || i % 41 === 3) ? 1.0 : tile.maxOpacity * 0.55, 0] }}
+              animate={{
+                opacity: [
+                  0,
+                  (i % 29 === 7 || i % 41 === 3)
+                    ? 1.0
+                    : i % 4 === 0
+                      ? tile.maxOpacity * 0.55
+                      : 0,
+                  0,
+                ],
+              }}
               transition={{
-                duration: tile.duration,
+                duration: tile.duration * 2,
                 delay: tile.delay,
                 repeat: Infinity,
                 ease: "easeInOut",
