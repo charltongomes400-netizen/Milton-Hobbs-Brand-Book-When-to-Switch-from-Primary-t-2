@@ -23,8 +23,8 @@ const translations = {
     },
     diff: {
       eyebrow: "Why Milton Hobbs",
-      headline: "Counsel built for complexity.",
-      learnMore: "Speak to us",
+      headline: "Counsel Built for Complexity.",
+      learnMore: "Speak to Us",
       cards: [
         {
           title: "Founder-Led Advisory",
@@ -50,9 +50,9 @@ const translations = {
     },
     practices: {
       eyebrow: "Our Expertise",
-      headline: "Practice areas.",
+      headline: "Practice Areas.",
       subtext: "Across industries and borders, we provide precision-crafted legal strategies.",
-      learnMore: "Learn more",
+      learnMore: "Learn More",
       items: [
         { title: "Corporate & Commercial", description: "Mergers, acquisitions, joint ventures, and complex commercial agreements across jurisdictions." },
         { title: "Real Estate & Property", description: "Transactional real estate, development projects, and cross-border property structuring." },
@@ -114,7 +114,7 @@ const translations = {
     },
     contact: {
       eyebrow: "Get in Touch",
-      headline: "Let's discuss your matter.",
+      headline: "Let's Discuss Your Matter.",
       subtext:
         "Whether you need immediate counsel or are planning ahead, our partners are ready to assist you across our Dubai and Paris offices.",
       namePlaceholder: "Full Name",
@@ -136,7 +136,7 @@ const translations = {
       messagePlaceholder: "Tell us about your matter...",
       submit: "Send Message",
       submitting: "Sending...",
-      successTitle: "Message sent",
+      successTitle: "Message Sent",
       successText: "Thank you. A member of our team will be in touch shortly.",
       officeLabel: "Our Offices",
       dubaiLabel: "Dubai, UAE",
