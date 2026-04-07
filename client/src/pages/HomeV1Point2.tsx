@@ -302,7 +302,8 @@ function HeroV12() {
 
             {/* Large article headline */}
             <h1
-              className="font-heading text-[#001489] font-bold text-[clamp(1.125rem,4vw,3.4375rem)] leading-[1.1] mb-8"
+              className="font-heading text-[#001489] font-bold text-[clamp(1.125rem,4vw,3.4375rem)] mb-8"
+              style={{ lineHeight: "clamp(1.5rem, 1.1em, 3.75rem)" }}
               data-testid="hero-headline"
             >
               {featuredArticle?.title}
