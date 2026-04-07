@@ -1060,7 +1060,8 @@ function FooterV12() {
                 className="block text-[#D4AF36] text-sm hover:text-[#E8C97E] transition-colors">
                 {f.email}
               </a>
-              <p className="text-white/40 text-sm">{f.phone}</p>
+              <p className="text-white/40 text-sm">Dubai: {f.phone}</p>
+              <p className="text-white/40 text-sm">Paris: +33 1 80 27 00 67</p>
             </div>
           </div>
           <div className="lg:col-span-3">
