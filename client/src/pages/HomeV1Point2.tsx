@@ -954,6 +954,10 @@ function ContactFormV12() {
                   {f.parisAddr.map((line, i) => (
                     <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
                   ))}
+                  <a href="tel:+33180270067" data-testid="contact-address-phone-paris"
+                    className="text-black/45 text-xs hover:text-[#D4AF36] transition-colors">
+                    +33 1 80 27 00 67
+                  </a>
                 </div>
               </div>
             </div>
