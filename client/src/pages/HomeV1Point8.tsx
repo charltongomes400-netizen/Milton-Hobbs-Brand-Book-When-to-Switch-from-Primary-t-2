@@ -822,11 +822,9 @@ function DifferentiatorsV15() {
   );
 }
 
-/* ─── PRACTICE AREAS ─────────────────────────────────────────────────────── */
+/* ─── PRACTICE AREAS (EDITORIAL SPLIT) ──────────────────────────────────── */
 
-/* ─── FILING CABINET DATA ──────────────────────────────────────────────── */
-
-const DRAWER_ITEMS = [
+const EXPERTISE_ITEMS = [
   { num: "01", title: "Corporate & Commercial",             tag: "Transactional", desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors.",          img: imgCorp   },
   { num: "02", title: "Tax & Compliance",                   tag: "Advisory",      desc: "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals.", img: imgTax    },
   { num: "03", title: "Mergers & Acquisitions",             tag: "Strategic",     desc: "End-to-end advisory on M&A transactions, due diligence, valuations, and seamless post-merger integration across sectors.",                  img: imgBank   },
@@ -837,213 +835,280 @@ const DRAWER_ITEMS = [
   { num: "08", title: "Litigation & Dispute Resolution",    tag: "Disputes",      desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums.",                       img: imgLitig  },
 ];
 
-function FilingCabinetV18() {
-  const [open, setOpen] = useState<number | null>(null);
+const EXPERTISE_CYCLE_MS = 6000;
 
-  function toggle(i: number) {
-    setOpen(prev => (prev === i ? null : i));
-  }
+function EditorialExpertiseV18() {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    setProgress(0);
+    if (paused) return;
+    const tick = 50;
+    let elapsed = 0;
+    const id = setInterval(() => {
+      elapsed += tick;
+      setProgress(Math.min((elapsed / EXPERTISE_CYCLE_MS) * 100, 100));
+      if (elapsed >= EXPERTISE_CYCLE_MS) {
+        setActive(prev => (prev + 1) % EXPERTISE_ITEMS.length);
+      }
+    }, tick);
+    return () => clearInterval(id);
+  }, [active, paused]);
+
+  const item = EXPERTISE_ITEMS[active];
 
   return (
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="py-28 px-8 bg-[#FCFCFC]"
+      className="py-28 bg-[#FCFCFC] overflow-hidden"
     >
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1400px] mx-auto px-8">
 
-        {/* Header */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-14"
+          className="mb-16 text-center"
         >
-          <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
+          <p
+            className="uppercase font-semibold mb-4"
+            style={{ color: "#001489", fontSize: 22, letterSpacing: "0.3em" }}
+          >
             Our Expertise
           </p>
-          <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
-            Areas of Legal Practice
+          <h2
+            className="font-heading font-bold text-[#0B0F2E]"
+            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.15 }}
+          >
+            Areas of Practice
           </h2>
         </motion.div>
 
-        {/* ── Filing Cabinet ── */}
+        {/* Two-column split */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          style={{
-            background: "#E4E8F2",
-            border: "1.5px solid #C8CEDF",
-            boxShadow: "0 4px 6px rgba(0,20,137,0.06), 0 12px 40px rgba(0,20,137,0.08), inset 0 1px 0 rgba(255,255,255,0.7)",
-          }}
+          className="flex"
+          style={{ minHeight: 580 }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
         >
-          {/* Cabinet header bar */}
+          {/* ── Left: numbered list ── */}
           <div
-            className="flex items-center justify-between px-8 py-3"
-            style={{ background: "#001489", borderBottom: "2px solid #000A46" }}
+            className="flex flex-col"
+            style={{ width: "38%", paddingRight: 52, paddingTop: 2, paddingBottom: 2 }}
           >
-            <span className="font-mono text-white/40 text-[9px] tracking-[0.35em] uppercase">
-              Milton Hobbs LLP — Legal Files
-            </span>
-            <div className="flex items-center gap-1.5">
-              {[0,1,2].map(d => (
-                <div key={d} className="w-1.5 h-1.5" style={{ background: "rgba(255,255,255,0.2)", borderRadius: "50%" }} />
-              ))}
+            <div className="flex flex-col flex-1">
+              {EXPERTISE_ITEMS.map((it, i) => {
+                const isActive = i === active;
+                return (
+                  <button
+                    key={i}
+                    data-testid={`expertise-item-${i}`}
+                    onClick={() => { setActive(i); setProgress(0); }}
+                    className="flex items-baseline gap-4 py-4 text-left w-full"
+                    style={{
+                      paddingLeft: 20,
+                      paddingRight: 4,
+                      borderLeft: `2px solid ${isActive ? "#D4AF36" : "transparent"}`,
+                      borderBottom: "1px solid rgba(0,20,137,0.06)",
+                      background: "none",
+                      cursor: "pointer",
+                      transition: "border-color 0.25s ease",
+                    }}
+                  >
+                    <span
+                      className="font-mono shrink-0"
+                      style={{
+                        fontSize: 11,
+                        letterSpacing: "0.18em",
+                        color: isActive ? "#D4AF36" : "rgba(0,20,137,0.22)",
+                        transition: "color 0.25s ease",
+                        minWidth: 24,
+                      }}
+                    >
+                      {it.num}
+                    </span>
+                    <span
+                      className="font-heading leading-snug"
+                      style={{
+                        fontSize: "clamp(0.875rem, 1.05vw, 1rem)",
+                        fontWeight: isActive ? 700 : 500,
+                        color: isActive ? "#001489" : "#9399A6",
+                        transition: "color 0.25s ease",
+                      }}
+                    >
+                      {it.title}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Progress bar */}
+            <div
+              className="mt-6"
+              style={{ height: 2, background: "rgba(0,20,137,0.08)" }}
+            >
+              <div
+                style={{
+                  height: "100%",
+                  width: `${progress}%`,
+                  background: "#D4AF36",
+                  transition: "width 50ms linear",
+                }}
+              />
             </div>
           </div>
 
-          {/* Drawers */}
-          {DRAWER_ITEMS.map((item, i) => {
-            const isOpen = open === i;
-            return (
-              <div
-                key={i}
-                data-testid={`drawer-${i}`}
-                style={{ borderTop: i === 0 ? "none" : "1px solid #C8CEDF" }}
+          {/* ── Right: immersive panel ── */}
+          <div
+            className="relative overflow-hidden flex-1"
+            style={{ minHeight: 580 }}
+          >
+            {/* Crossfade image */}
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={`img-${active}`}
+                src={item.img}
+                alt={item.title}
+                className="absolute inset-0 w-full h-full object-cover"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+              />
+            </AnimatePresence>
+
+            {/* Bottom gradient — text legibility */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "linear-gradient(to top, rgba(5,10,40,0.88) 0%, rgba(5,10,40,0.50) 38%, rgba(5,10,40,0.0) 68%)",
+              }}
+            />
+            {/* Left edge gradient */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "linear-gradient(to right, rgba(5,10,40,0.22) 0%, transparent 45%)",
+              }}
+            />
+
+            {/* Ghost number — bottom right */}
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={`ghost-${active}`}
+                className="absolute font-heading font-black select-none pointer-events-none"
+                style={{
+                  fontSize: "18vw",
+                  color: "rgba(255,255,255,0.055)",
+                  bottom: -20,
+                  right: -12,
+                  lineHeight: 1,
+                  letterSpacing: "-0.04em",
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35 }}
               >
-                {/* Drawer face */}
-                <motion.div
-                  onClick={() => toggle(i)}
-                  animate={{ x: isOpen ? 8 : 0 }}
-                  whileHover={{ x: isOpen ? 8 : 4 }}
-                  transition={{ type: "spring", stiffness: 500, damping: 38 }}
-                  className="flex items-center gap-5 px-6 cursor-pointer select-none"
-                  style={{
-                    background: isOpen ? "#FFFFFF" : "#F7F8FC",
-                    boxShadow: isOpen
-                      ? "3px 0 0 0 #D4AF36, 4px 0 12px rgba(0,20,137,0.14), 6px 0 28px rgba(0,20,137,0.08)"
-                      : "1px 0 4px rgba(0,20,137,0.04)",
-                    minHeight: "72px",
-                    transition: "background 0.25s ease, box-shadow 0.25s ease",
-                  }}
+                {item.num}
+              </motion.span>
+            </AnimatePresence>
+
+            {/* Gold tag — top left */}
+            <div
+              className="absolute top-8 left-8"
+              style={{
+                background: "#D4AF36",
+                color: "#FFFFFF",
+                fontSize: 9,
+                letterSpacing: "0.3em",
+                fontWeight: 600,
+                padding: "4px 14px",
+                textTransform: "uppercase",
+              }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={`tag-${active}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.22 }}
                 >
-                  {/* Left: vertical tab + handle grip */}
-                  <div className="flex items-center gap-3 shrink-0">
-                    <motion.div
-                      animate={{ background: isOpen ? "#D4AF36" : "#001489" }}
-                      transition={{ duration: 0.3 }}
-                      style={{ width: 4, height: 48, borderRadius: 2 }}
-                    />
-                    <div
-                      style={{
-                        width: 40,
-                        height: 16,
-                        background: "linear-gradient(to bottom, #D8DCE8 0%, #B8BDCC 100%)",
-                        borderRadius: 3,
-                        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.65), inset 0 -1px 0 rgba(0,0,0,0.12), 0 2px 5px rgba(0,0,0,0.18)",
-                      }}
-                    />
-                  </div>
+                  {item.tag}
+                </motion.span>
+              </AnimatePresence>
+            </div>
 
-                  {/* Number */}
-                  <span
-                    className="font-mono text-[11px] tracking-[0.2em] shrink-0"
-                    style={{ color: "#D4AF36", minWidth: 28 }}
-                  >
-                    {item.num}
-                  </span>
-
-                  {/* Title */}
-                  <motion.h3
-                    className="font-heading font-semibold flex-1 leading-snug"
-                    animate={{ color: isOpen ? "#001489" : "#001489" }}
-                    style={{ fontSize: "clamp(0.875rem, 1.1vw, 1rem)" }}
+            {/* Content overlay — bottom left */}
+            <div className="absolute bottom-0 left-0 right-0 p-10 pb-12">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`content-${active}`}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                >
+                  <h3
+                    className="font-heading font-bold text-white mb-4"
+                    style={{ fontSize: "clamp(1.7rem, 2.6vw, 3.2rem)", lineHeight: 1.12 }}
                   >
                     {item.title}
-                  </motion.h3>
-
-                  {/* Tag */}
-                  <span
-                    className="hidden sm:block font-mono text-[9px] tracking-[0.28em] uppercase shrink-0"
-                    style={{ color: isOpen ? "#D4AF36" : "rgba(0,20,137,0.25)" }}
+                  </h3>
+                  <p
+                    className="text-white mb-8 max-w-lg"
+                    style={{
+                      opacity: 0.82,
+                      fontSize: "clamp(0.85rem, 1vw, 0.95rem)",
+                      lineHeight: 1.75,
+                    }}
                   >
-                    {item.tag}
-                  </span>
-
-                  {/* Chevron */}
-                  <motion.svg
-                    className="w-3.5 h-3.5 shrink-0 ml-2"
-                    fill="none" viewBox="0 0 12 12"
-                    animate={{ rotate: isOpen ? 90 : 0 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    style={{ color: isOpen ? "#D4AF36" : "rgba(0,20,137,0.3)" }}
+                    {item.desc}
+                  </p>
+                  <a
+                    href="#contact"
+                    data-testid="expertise-enquire-cta"
+                    className="inline-flex items-center gap-3"
+                    style={{ textDecoration: "none" }}
                   >
-                    <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </motion.svg>
-                </motion.div>
-
-                {/* Drawer content — slides open */}
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ type: "spring", stiffness: 280, damping: 32, opacity: { duration: 0.2 } }}
-                      style={{ overflow: "hidden" }}
+                    <span
+                      style={{
+                        color: "#D4AF36",
+                        fontSize: 11,
+                        letterSpacing: "0.2em",
+                        fontWeight: 600,
+                        textTransform: "uppercase",
+                        borderBottom: "1px solid rgba(212,175,54,0.4)",
+                        paddingBottom: 2,
+                        transition: "border-color 0.2s ease",
+                      }}
                     >
-                      <div
-                        className="grid grid-cols-1 sm:grid-cols-[1fr_340px]"
-                        style={{
-                          background: "#F0F3FA",
-                          borderTop: "1px solid #C8CEDF",
-                          marginLeft: 8,
-                        }}
-                      >
-                        {/* Text content */}
-                        <div className="p-8 flex flex-col justify-between gap-6">
-                          <div>
-                            <p className="text-[#D4AF36] text-[9px] tracking-[0.3em] uppercase font-medium mb-3">
-                              Area of Practice — {item.tag}
-                            </p>
-                            <p className="text-black/60 text-sm leading-[1.75] max-w-md">
-                              {item.desc}
-                            </p>
-                          </div>
-                          <a
-                            href="#contact"
-                            className="self-start inline-flex items-center gap-2.5 text-[#001489] text-[10px] tracking-[0.2em] uppercase font-semibold border-b border-[#D4AF36]/50 pb-0.5 hover:border-[#D4AF36] transition-colors duration-200"
-                          >
-                            <span>Enquire About This Practice</span>
-                            <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
-                              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
-                            </svg>
-                          </a>
-                        </div>
-
-                        {/* Image */}
-                        <div className="hidden sm:block relative overflow-hidden" style={{ minHeight: 220 }}>
-                          <img
-                            src={item.img}
-                            alt={item.title}
-                            className="absolute inset-0 w-full h-full object-cover"
-                            style={{ opacity: 0.75 }}
-                          />
-                          <div
-                            className="absolute inset-0"
-                            style={{ background: "linear-gradient(to right, #F0F3FA 0%, transparent 35%)" }}
-                          />
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
-
-          {/* Cabinet base */}
-          <div
-            style={{
-              height: 14,
-              background: "linear-gradient(to bottom, #C8CEDF, #B4BAC9)",
-              borderTop: "1px solid #B4BAC9",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.4)",
-            }}
-          />
+                      Enquire About This Area
+                    </span>
+                    <svg
+                      className="w-3.5 h-3.5"
+                      fill="none"
+                      viewBox="0 0 14 14"
+                      style={{ color: "#D4AF36" }}
+                    >
+                      <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
         </motion.div>
 
       </div>
@@ -1295,7 +1360,7 @@ function HomeV1Point8Inner() {
       <main>
         <HeroV15 />
         <DifferentiatorsV15 />
-        <FilingCabinetV18 />
+        <EditorialExpertiseV18 />
         <ContactFormV15 />
       </main>
       <FooterV15 />
