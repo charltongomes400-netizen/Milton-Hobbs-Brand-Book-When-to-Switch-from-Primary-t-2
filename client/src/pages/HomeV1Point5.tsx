@@ -272,7 +272,42 @@ function HeroV15() {
       className="relative min-h-screen bg-[#FCFCFC] flex overflow-hidden"
     >
       {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
-      <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20">
+      <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20 overflow-hidden">
+
+        {/* Tile shimmer grid — white side */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${COLS}, 1fr)`,
+            gridTemplateRows: `repeat(${TILE_ROWS}, calc(100vw / ${COLS}))`,
+            alignContent: "start",
+          }}
+        >
+          {tiles.map((tile, i) => (
+            <motion.div
+              key={i}
+              style={{ backgroundColor: "#001489" }}
+              animate={{
+                opacity: [
+                  0,
+                  (i % 29 === 7 || i % 41 === 3)
+                    ? 0.10
+                    : i % 4 === 0
+                      ? tile.maxOpacity * 0.18
+                      : 0,
+                  0,
+                ],
+              }}
+              transition={{
+                duration: tile.duration * 2,
+                delay: tile.delay,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
 
         {/* Editorial content block — animates on article change */}
         <AnimatePresence mode="wait">
@@ -367,42 +402,6 @@ function HeroV15() {
             transition={{ duration: 1.8, ease: "easeInOut" }}
           />
         </AnimatePresence>
-
-        {/* Tile shimmer grid */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-            gridTemplateRows: `repeat(${TILE_ROWS}, calc(100vw / ${COLS}))`,
-            alignContent: "start",
-          }}
-        >
-          {tiles.map((tile, i) => (
-            <motion.div
-              key={i}
-              style={{ backgroundColor: "#001489" }}
-              animate={{
-                opacity: [
-                  0,
-                  (i % 29 === 7 || i % 41 === 3)
-                    ? 1.0
-                    : i % 4 === 0
-                      ? tile.maxOpacity * 0.55
-                      : 0,
-                  0,
-                ],
-              }}
-              transition={{
-                duration: tile.duration * 2,
-                delay: tile.delay,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-        </div>
-
 
         {/* Soft vignette */}
         <div
