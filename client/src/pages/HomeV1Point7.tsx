@@ -708,7 +708,7 @@ function DifferentiatorsV15() {
             onMouseLeave={() => setPaused(false)}
             className="flex flex-col"
           >
-            <p className="text-[#001489] text-[22px] tracking-[0.22em] uppercase font-bold mb-8">
+            <p className="text-[#7A84BE] text-[22px] tracking-[0.22em] uppercase font-bold mb-8">
               Why Milton Hobbs
             </p>
             <div className="flex flex-col gap-0 pl-6 mt-[95px]">
@@ -855,7 +855,7 @@ function PracticeAreasV15() {
           className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6"
         >
           <div>
-            <p className="text-[#001489] text-[22px] tracking-[0.22em] uppercase font-bold mb-6">
+            <p className="text-[#7A84BE] text-[22px] tracking-[0.22em] uppercase font-bold mb-6">
               {p.eyebrow}
             </p>
           </div>
@@ -943,7 +943,7 @@ function ContactFormV15() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <p className="text-[#001489] text-[22px] tracking-[0.22em] uppercase font-bold mb-6">
+          <p className="text-[#7A84BE] text-[22px] tracking-[0.22em] uppercase font-bold mb-6">
             {c.eyebrow}
           </p>
         </motion.div>
@@ -959,12 +959,12 @@ function ContactFormV15() {
             <p className="text-white/55 text-sm leading-[1.6]">{c.subtext}</p>
 
             <div>
-              <p className="text-[#001489] text-[22px] tracking-[0.22em] uppercase font-bold mb-4">
+              <p className="text-[#7A84BE] text-[22px] tracking-[0.22em] uppercase font-bold mb-4">
                 {c.officeLabel}
               </p>
               <div className="flex flex-col gap-5">
                 <div>
-                  <p className="text-[#001489] text-sm font-semibold mb-1">{c.dubaiLabel}</p>
+                  <p className="text-[#7A84BE] text-sm font-semibold mb-1">{c.dubaiLabel}</p>
                   {f.dubaiAddr.map((line, i) => (
                     <p key={i} className="text-white/45 text-[14px] leading-[1.6]">{line}</p>
                   ))}
@@ -974,7 +974,7 @@ function ContactFormV15() {
                   </a>
                 </div>
                 <div>
-                  <p className="text-[#001489] text-sm font-semibold mb-1">{c.parisLabel}</p>
+                  <p className="text-[#7A84BE] text-sm font-semibold mb-1">{c.parisLabel}</p>
                   {f.parisAddr.map((line, i) => (
                     <p key={i} className="text-white/45 text-[14px] leading-[1.6]">{line}</p>
                   ))}
@@ -987,7 +987,7 @@ function ContactFormV15() {
             </div>
 
             <div>
-              <p className="text-[#001489] text-sm font-semibold mb-1">
+              <p className="text-[#7A84BE] text-sm font-semibold mb-1">
                 Email
               </p>
               <a href={`mailto:${f.email}`} data-testid="contact-email"
