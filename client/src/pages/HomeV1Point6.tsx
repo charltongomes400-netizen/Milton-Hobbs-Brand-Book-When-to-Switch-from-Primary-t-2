@@ -724,7 +724,7 @@ function DifferentiatorsV15() {
                   key={i}
                   data-testid={`diff-card-${i}`}
                   onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
-                  className="group flex items-center gap-4 py-2 text-left focus:outline-none"
+                  className="group flex items-center gap-4 py-2 text-left focus:outline-none pl-[50px] pt-[0px] mt-[0px]"
                 >
                   <motion.span
                     className="flex-shrink-0 self-stretch bg-[#7A84BE]"
