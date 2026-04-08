@@ -753,7 +753,14 @@ function DifferentiatorsV15() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div className="relative w-full overflow-hidden bg-[#001489]" style={{ aspectRatio: "4/3" }}>
+            <div className="relative w-full overflow-hidden" style={{
+              aspectRatio: "4/3",
+              background: "linear-gradient(135deg, rgba(0,20,137,0.65) 0%, rgba(0,10,80,0.75) 50%, rgba(0,20,137,0.60) 100%)",
+              backdropFilter: "blur(18px) saturate(1.4)",
+              WebkitBackdropFilter: "blur(18px) saturate(1.4)",
+              border: "1px solid rgba(255,255,255,0.10)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(0,0,0,0.12), 0 8px 32px rgba(0,10,80,0.25)",
+            }}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
