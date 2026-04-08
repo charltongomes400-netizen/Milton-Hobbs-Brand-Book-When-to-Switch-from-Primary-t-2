@@ -342,7 +342,7 @@ function HeroV15() {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
               <p
-                className="text-[#7A84BE] tracking-[0.22em] uppercase font-medium text-[16px]"
+                className="text-[#EEF6FD] tracking-[0.22em] uppercase font-medium text-[16px]"
                 data-testid="hero-eyebrow"
               >
                 {featuredArticle?.category}
@@ -362,7 +362,7 @@ function HeroV15() {
             <a
               href={`/insights/${featuredSlug}`}
               data-testid="hero-read-link"
-              className="group inline-flex items-center gap-2 text-[#FEFEFE] hover:text-[#7A84BE] transition-colors duration-300"
+              className="group inline-flex items-center gap-2 text-[#FEFEFE] hover:text-[#EEF6FD] transition-colors duration-300"
             >
               <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#FEFEFE]/25 group-hover:decoration-[#7A84BE]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
               <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
@@ -708,7 +708,7 @@ function DifferentiatorsV15() {
             onMouseLeave={() => setPaused(false)}
             className="flex flex-col"
           >
-            <p className="text-[#7A84BE] text-[22px] tracking-[0.22em] uppercase font-bold mb-8">
+            <p className="text-[#EEF6FD] text-[22px] tracking-[0.22em] uppercase font-bold mb-8">
               Why Milton Hobbs
             </p>
             <div className="flex flex-col gap-0 pl-6 mt-[95px]">
@@ -858,7 +858,7 @@ function PracticeAreasV15() {
           className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6"
         >
           <div>
-            <p className="text-[#7A84BE] text-[22px] tracking-[0.22em] uppercase font-bold mb-6">
+            <p className="text-[#EEF6FD] text-[22px] tracking-[0.22em] uppercase font-bold mb-6">
               {p.eyebrow}
             </p>
           </div>
@@ -884,7 +884,7 @@ function PracticeAreasV15() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#000A3D]/95 via-[#001070]/55 to-[#001489]/20" />
               <BorderTrace />
-              <span className="absolute top-6 left-7 text-[#7A84BE] text-[10px] tracking-[0.25em] uppercase font-medium">
+              <span className="absolute top-6 left-7 text-[#EEF6FD] text-[10px] tracking-[0.25em] uppercase font-medium">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className="absolute inset-x-0 bottom-0 px-7 pb-7 flex flex-col">
@@ -895,8 +895,8 @@ function PracticeAreasV15() {
                   <p className="text-white/65 text-sm leading-[1.4] pt-2">{item.description}</p>
                 </div>
                 <div className="flex items-center gap-2 pt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
-                  <span className="text-[#7A84BE] text-[10px] tracking-[0.2em] uppercase font-medium">{p.learnMore}</span>
-                  <svg className="w-3 h-3 text-[#7A84BE]" fill="none" viewBox="0 0 12 12">
+                  <span className="text-[#EEF6FD] text-[10px] tracking-[0.2em] uppercase font-medium">{p.learnMore}</span>
+                  <svg className="w-3 h-3 text-[#EEF6FD]" fill="none" viewBox="0 0 12 12">
                     <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
                   </svg>
                 </div>
@@ -946,7 +946,7 @@ function ContactFormV15() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <p className="text-[#7A84BE] text-[22px] tracking-[0.22em] uppercase font-bold mb-6">
+          <p className="text-[#EEF6FD] text-[22px] tracking-[0.22em] uppercase font-bold mb-6">
             {c.eyebrow}
           </p>
         </motion.div>
@@ -962,27 +962,27 @@ function ContactFormV15() {
             <p className="text-white/55 text-sm leading-[1.6]">{c.subtext}</p>
 
             <div>
-              <p className="text-[#7A84BE] text-[22px] tracking-[0.22em] uppercase font-bold mb-4">
+              <p className="text-[#EEF6FD] text-[22px] tracking-[0.22em] uppercase font-bold mb-4">
                 {c.officeLabel}
               </p>
               <div className="flex flex-col gap-5">
                 <div>
-                  <p className="text-[#7A84BE] text-sm font-semibold mb-1">{c.dubaiLabel}</p>
+                  <p className="text-[#EEF6FD] text-sm font-semibold mb-1">{c.dubaiLabel}</p>
                   {f.dubaiAddr.map((line, i) => (
                     <p key={i} className="text-white/45 text-[14px] leading-[1.6]">{line}</p>
                   ))}
                   <a href="tel:+97145232421" data-testid="contact-address-phone-dubai"
-                    className="text-white/45 text-[14px] hover:text-[#7A84BE] transition-colors">
+                    className="text-white/45 text-[14px] hover:text-[#EEF6FD] transition-colors">
                     +971 4 523 2421
                   </a>
                 </div>
                 <div>
-                  <p className="text-[#7A84BE] text-sm font-semibold mb-1">{c.parisLabel}</p>
+                  <p className="text-[#EEF6FD] text-sm font-semibold mb-1">{c.parisLabel}</p>
                   {f.parisAddr.map((line, i) => (
                     <p key={i} className="text-white/45 text-[14px] leading-[1.6]">{line}</p>
                   ))}
                   <a href="tel:+33180270067" data-testid="contact-address-phone-paris"
-                    className="text-white/45 text-[14px] hover:text-[#7A84BE] transition-colors">
+                    className="text-white/45 text-[14px] hover:text-[#EEF6FD] transition-colors">
                     +33 1 80 27 00 67
                   </a>
                 </div>
@@ -990,11 +990,11 @@ function ContactFormV15() {
             </div>
 
             <div>
-              <p className="text-[#7A84BE] text-sm font-semibold mb-1">
+              <p className="text-[#EEF6FD] text-sm font-semibold mb-1">
                 Email
               </p>
               <a href={`mailto:${f.email}`} data-testid="contact-email"
-                className="text-white/45 text-[14px] hover:text-[#7A84BE] transition-colors">
+                className="text-white/45 text-[14px] hover:text-[#EEF6FD] transition-colors">
                 {f.email}
               </a>
             </div>
@@ -1010,7 +1010,7 @@ function ContactFormV15() {
               <div data-testid="contact-success"
                 className="border border-[#001489]/40 p-10 flex flex-col gap-4 h-full justify-center">
                 <div className="flex items-center gap-3 mb-2">
-                  <svg className="w-5 h-5 text-[#7A84BE]" fill="none" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-[#EEF6FD]" fill="none" viewBox="0 0 20 20">
                     <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                   <h3 className="font-heading text-[#FEFEFE] text-lg font-semibold">{c.successTitle}</h3>
@@ -1089,7 +1089,7 @@ function FooterV15() {
             </p>
             <div className="space-y-2">
               <a href={`mailto:${f.email}`} data-testid="footer-email"
-                className="block text-[#7A84BE] text-sm hover:text-[#9BA3D0] transition-colors">
+                className="block text-[#EEF6FD] text-sm hover:text-[#9BA3D0] transition-colors">
                 {f.email}
               </a>
               <a href={`tel:${f.phone}`} data-testid="footer-phone-dubai"
