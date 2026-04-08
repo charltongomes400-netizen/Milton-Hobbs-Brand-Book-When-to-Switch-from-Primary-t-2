@@ -219,13 +219,15 @@ function HeaderV15() {
 const TILE_COLS = 8;
 const TILE_ROWS = 10;
 
-const tiles = Array.from({ length: TILE_COLS * TILE_ROWS }, (_, i) => ({
-  color:      i % 2 === 0 ? "#001489" : "#000A4F",
-  delay:      parseFloat(((i * 0.41 + (i % 7) * 0.29) % 9).toFixed(2)),
-  duration:   parseFloat((2.5 + (i * 0.17 + (i % 5) * 0.33) % 4.5).toFixed(2)),
-  // Every other cell is permanently silent — 50% fewer active tiles, spread across whole panel
-  maxOpacity: i % 2 === 0 ? parseFloat((0.04 + (i * 0.07 + (i % 11) * 0.04) % 0.14).toFixed(2)) : 0,
-}));
+const tiles = Array.from({ length: TILE_COLS * TILE_ROWS }, (_, i) => {
+  const active = Math.random() < 0.5;
+  return {
+    color:      i % 2 === 0 ? "#001489" : "#000A4F",
+    delay:      parseFloat((Math.random() * 9).toFixed(2)),
+    duration:   parseFloat((2.5 + Math.random() * 4.5).toFixed(2)),
+    maxOpacity: active ? parseFloat((0.04 + Math.random() * 0.12).toFixed(2)) : 0,
+  };
+});
 
 const HERO_CYCLE_MS = 12000;
 
