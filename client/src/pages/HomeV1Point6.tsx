@@ -961,19 +961,19 @@ function ContactFormV15() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col gap-5"
+            className="flex flex-col gap-8"
           >
-            <p className="text-black/55 text-sm leading-[1.4]">{c.subtext}</p>
+            <p className="text-black/55 text-sm leading-[1.6]">{c.subtext}</p>
 
             <div>
-              <p className="text-[#7A84BE] tracking-[0.25em] uppercase font-medium mb-5 text-[12px]">
+              <p className="text-[#7A84BE] tracking-[0.25em] uppercase font-medium mb-4 text-[12px]">
                 {c.officeLabel}
               </p>
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-5">
                 <div>
                   <p className="text-[#001489] text-sm font-semibold mb-1">{c.dubaiLabel}</p>
                   {f.dubaiAddr.map((line, i) => (
-                    <p key={i} className="text-black/45 text-[14px] leading-[1.5]">{line}</p>
+                    <p key={i} className="text-black/45 text-[14px] leading-[1.6]">{line}</p>
                   ))}
                   <a href="tel:+97145232421" data-testid="contact-address-phone-dubai"
                     className="text-black/45 text-[14px] hover:text-[#7A84BE] transition-colors">
@@ -983,7 +983,7 @@ function ContactFormV15() {
                 <div>
                   <p className="text-[#001489] text-sm font-semibold mb-1">{c.parisLabel}</p>
                   {f.parisAddr.map((line, i) => (
-                    <p key={i} className="text-black/45 text-[14px] leading-[1.5]">{line}</p>
+                    <p key={i} className="text-black/45 text-[14px] leading-[1.6]">{line}</p>
                   ))}
                   <a href="tel:+33180270067" data-testid="contact-address-phone-paris"
                     className="text-black/45 text-[14px] hover:text-[#7A84BE] transition-colors">
@@ -993,7 +993,7 @@ function ContactFormV15() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div>
               <p className="text-[#001489] text-sm font-semibold mb-1">
                 Email
               </p>
