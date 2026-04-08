@@ -91,7 +91,7 @@ uploads/                   — CV file storage (disk, via multer)
 
 ### v1.5 Tile Grid — Reference Style
 - Based on brand book reference: large squares, 3 distinct blue shades, always-on base tint, pulsing to peak
-- `COLS=8`, `TILE_ROWS=14`, `gridTemplateRows: calc(50vw / 8)` (true squares in 50%-wide panel)
+- `COLS=5`, `TILE_ROWS=9`, `gridTemplateRows: calc(50vw / 5)` (true squares in 50%-wide panel)
 - Bright tiles `#1A40FF`: baseOp 0.10 → peakOp 0.35
 - Medium tiles `#001489`: baseOp 0.05 → peakOp 0.20
 - Dark base tiles `#000A4F`: baseOp 0.02 → peakOp 0.08

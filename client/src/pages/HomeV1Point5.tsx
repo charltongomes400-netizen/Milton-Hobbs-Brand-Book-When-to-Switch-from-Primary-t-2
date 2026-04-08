@@ -214,8 +214,8 @@ function HeaderV15() {
 
 /* ─── HERO ─────────────────────────────────────────────────────────────── */
 
-const COLS = 8;
-const TILE_ROWS = 14;
+const COLS = 5;
+const TILE_ROWS = 9;
 
 // Three distinct blue tiers — dark navy, medium royal, electric accent
 // baseOp: always-visible tint; peakOp: pulsed brightness
@@ -287,6 +287,8 @@ function HeroV15() {
             gridTemplateColumns: `repeat(${COLS}, 1fr)`,
             gridTemplateRows: `repeat(${TILE_ROWS}, calc(50vw / ${COLS}))`,
             alignContent: "start",
+            WebkitMaskImage: "linear-gradient(to right, black 0%, black 55%, transparent 82%)",
+            maskImage: "linear-gradient(to right, black 0%, black 55%, transparent 82%)",
           }}
         >
           {tiles.map((tile, i) => (
