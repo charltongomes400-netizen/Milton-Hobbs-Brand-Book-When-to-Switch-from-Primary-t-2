@@ -280,7 +280,7 @@ function HeroV15() {
           style={{
             display: "grid",
             gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-            gridTemplateRows: `repeat(${TILE_ROWS}, calc(100vw / ${COLS}))`,
+            gridTemplateRows: `repeat(${TILE_ROWS}, calc(50vw / ${COLS}))`,
             alignContent: "start",
           }}
         >
@@ -292,9 +292,9 @@ function HeroV15() {
                 opacity: [
                   0,
                   (i % 29 === 7 || i % 41 === 3)
-                    ? 0.10
+                    ? 0.28
                     : i % 4 === 0
-                      ? tile.maxOpacity * 0.18
+                      ? tile.maxOpacity * 0.55
                       : 0,
                   0,
                 ],
