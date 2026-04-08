@@ -744,18 +744,6 @@ function DifferentiatorsV15() {
                 </button>
               ))}
             </div>
-            <div className="flex justify-center mt-10" style={{ paddingLeft: "calc(3px + 1rem)" }}>
-              <a
-                href="#contact"
-                data-testid="diff-cta"
-                className="inline-flex items-center gap-3 border border-[#001489] text-[#001489] text-xs tracking-[0.18em] uppercase font-semibold px-7 py-3.5 hover:bg-[#001489] hover:text-white transition-colors"
-              >
-                <span>{d.learnMore}</span>
-                <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
-                  <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
-                </svg>
-              </a>
-            </div>
           </div>
 
           {/* Right: visual panel */}
@@ -811,9 +799,18 @@ function DifferentiatorsV15() {
                 <h3 className="font-heading text-[#001489] text-[clamp(1.125rem,1.5vw,1.375rem)] font-semibold mb-3 leading-[1.3]">
                   {d.cards[active].title}
                 </h3>
-                <p className="text-black/50 text-[0.9rem] leading-[1.6] max-w-md">
+                <p className="text-black/50 text-[0.9rem] leading-[1.6] mb-7 max-w-md">
                   {d.cards[active].description}
                 </p>
+                <a
+                  href="#contact"
+                  className="inline-flex items-center gap-3 border border-[#001489] text-[#001489] text-xs tracking-[0.18em] uppercase font-semibold px-7 py-3.5 hover:bg-[#001489] hover:text-white transition-colors"
+                >
+                  <span>{d.learnMore}</span>
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+                    <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                  </svg>
+                </a>
               </motion.div>
             </AnimatePresence>
           </div>
