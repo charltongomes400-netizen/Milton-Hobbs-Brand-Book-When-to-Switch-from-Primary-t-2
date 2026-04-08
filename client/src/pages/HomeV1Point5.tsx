@@ -312,8 +312,14 @@ function HeroV15() {
           {tiles.map((tile, i) => (
             <motion.div
               key={i}
-              style={{ backgroundColor: tile.color }}
-              animate={{ opacity: [0, 0, tile.maxOpacity, tile.maxOpacity, 0, 0] }}
+              style={{
+                backgroundColor: `${tile.color}33`,
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                border: "1px solid rgba(0,20,137,0.06)",
+                boxShadow: "inset 0 0 12px rgba(0,20,137,0.04), 0 2px 8px rgba(0,20,137,0.03)",
+              }}
+              animate={{ opacity: [0, 0, tile.maxOpacity * 3.5, tile.maxOpacity * 3.5, 0, 0] }}
               transition={{
                 duration: tile.duration,
                 delay: tile.delay,
