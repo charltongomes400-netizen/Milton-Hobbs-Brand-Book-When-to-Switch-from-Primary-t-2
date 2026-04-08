@@ -753,27 +753,19 @@ function DifferentiatorsV15() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div style={{ perspective: "900px" }}>
             <div className="relative w-full overflow-hidden" style={{
               aspectRatio: "4/3",
               background: "linear-gradient(160deg, rgba(0,16,112,0.85) 0%, rgba(0,10,70,0.92) 40%, rgba(0,20,137,0.80) 100%)",
               backdropFilter: "blur(24px) saturate(1.5)",
               WebkitBackdropFilter: "blur(24px) saturate(1.5)",
               border: "1px solid rgba(30,120,255,0.25)",
-              borderTop: "1px solid rgba(100,170,255,0.30)",
-              borderBottom: "1px solid rgba(0,10,60,0.40)",
-              boxShadow: "0 0 20px rgba(30,120,255,0.15), 0 0 60px rgba(0,20,137,0.12), inset 0 1px 0 rgba(100,160,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.25), 0 20px 50px rgba(0,10,60,0.40), 0 4px 12px rgba(0,0,0,0.20)",
-              transform: "rotateX(2deg) rotateY(-1.5deg)",
-              transformStyle: "preserve-3d",
+              boxShadow: "0 0 20px rgba(30,120,255,0.15), 0 0 60px rgba(0,20,137,0.12), inset 0 1px 0 rgba(100,160,255,0.12), inset 0 -1px 0 rgba(0,0,0,0.2), 0 12px 40px rgba(0,10,60,0.35)",
             }}>
               <div className="absolute inset-0 pointer-events-none" style={{
-                background: "linear-gradient(170deg, rgba(80,160,255,0.12) 0%, transparent 25%, transparent 80%, rgba(0,5,40,0.15) 100%)",
+                background: "linear-gradient(180deg, rgba(60,140,255,0.08) 0%, transparent 30%, transparent 85%, rgba(30,100,255,0.05) 100%)",
               }} />
               <div className="absolute inset-0 pointer-events-none" style={{
-                background: "linear-gradient(90deg, rgba(40,120,255,0.06) 0%, transparent 15%, transparent 85%, rgba(0,10,60,0.08) 100%)",
-              }} />
-              <div className="absolute inset-0 pointer-events-none" style={{
-                boxShadow: "inset 0 0 50px rgba(30,100,255,0.06)",
+                boxShadow: "inset 0 0 40px rgba(30,100,255,0.06)",
               }} />
               <AnimatePresence mode="wait">
                 <motion.div
@@ -795,7 +787,6 @@ function DifferentiatorsV15() {
                   transition={{ ease: "linear" }}
                 />
               </div>
-            </div>
             </div>
 
             <AnimatePresence mode="wait">
