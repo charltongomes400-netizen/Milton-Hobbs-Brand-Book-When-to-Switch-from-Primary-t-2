@@ -3,16 +3,6 @@ import { motion, AnimatePresence, useMotionValue, animate } from "framer-motion"
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { articles } from "@/data/articles";
 import miltonHobbsLogo from "@assets/Milton_hobbs_logo_1775554832004.png";
-import imgCorp    from "@assets/stock_images/corporate_commercial.jpg";
-import imgEstate  from "@assets/stock_images/real_estate.jpg";
-import imgLitig   from "@assets/stock_images/litigation.jpg";
-import imgArb     from "@assets/stock_images/arbitration.jpg";
-import imgEmploy  from "@assets/stock_images/employment.jpg";
-import imgBank    from "@assets/stock_images/banking_finance.jpg";
-import imgTax     from "@assets/stock_images/tax_planning.jpg";
-import imgImmig   from "@assets/stock_images/immigration.jpg";
-import imgIp      from "@assets/stock_images/intellectual_property.jpg";
-import imgTech    from "@assets/stock_images/technology_startups.jpg";
 import heroBg0 from "@assets/verne-ho-0LAJfSNa-xQ-unsplash_1775562755413.jpg";
 import heroBg1 from "@assets/tim-stief-dH6IjhWHNQQ-unsplash_1775562755413.jpg";
 import heroBg2 from "@assets/joakim-nadell-K67sBVqLLuw-unsplash_1775562755414.jpg";
@@ -825,84 +815,199 @@ function DifferentiatorsV15() {
 
 /* ─── PRACTICE AREAS ─────────────────────────────────────────────────────── */
 
-const gridAreas = ["corp", "estate", "litig", "arb", "employ", "banking", "tax", "immig", "ip", "tech"];
-const cardImages = [imgCorp, imgEstate, imgLitig, imgArb, imgEmploy, imgBank, imgTax, imgImmig, imgIp, imgTech];
+const EXPERTISE_ITEMS = [
+  { num: "01", title: "Corporate & Commercial",            desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors." },
+  { num: "02", title: "Tax & Compliance",                  desc: "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals." },
+  { num: "03", title: "Mergers & Acquisitions",            desc: "End-to-end advisory on M&A transactions, due diligence, valuations, and seamless post-merger integration across sectors." },
+  { num: "04", title: "Startups & Venture Capital",        desc: "Funding rounds, term sheets, shareholder agreements, and robust legal infrastructure for founders, operators, and investors." },
+  { num: "05", title: "Intellectual Property & Technology", desc: "Patent strategy, trademark registration, licensing structures, and data protection compliance across jurisdictions." },
+  { num: "06", title: "Real Estate & Property Law",        desc: "Cross-border property acquisitions, development financing, and sophisticated real estate structuring in the UAE and Europe." },
+  { num: "07", title: "Employment & Labor Law",            desc: "Employment contracts, executive compensation structures, workforce restructuring, and workplace dispute resolution." },
+  { num: "08", title: "Litigation & Dispute Resolution",   desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums." },
+];
 
-function BorderTrace() {
-  return (
-    <span className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-      <span className="absolute top-0 left-0 right-0 h-px bg-[#7A84BE] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-      <span className="absolute top-0 right-0 bottom-0 w-px bg-[#7A84BE] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
-      <span className="absolute bottom-0 left-0 right-0 h-px bg-[#7A84BE] origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" />
-      <span className="absolute top-0 left-0 bottom-0 w-px bg-[#7A84BE] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-300" />
-    </span>
-  );
-}
+const EXPERTISE_CYCLE_MS = 6000;
 
-function PracticeAreasV15() {
-  const { t } = useLang();
-  const p = t.practices;
+function PracticeAreasV17() {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (paused) { setProgress(0); return; }
+    const start = Date.now();
+    const tick = setInterval(() => {
+      const elapsed = Date.now() - start;
+      const pct = Math.min((elapsed / EXPERTISE_CYCLE_MS) * 100, 100);
+      setProgress(pct);
+      if (elapsed >= EXPERTISE_CYCLE_MS) {
+        setActive(prev => (prev + 1) % EXPERTISE_ITEMS.length);
+        clearInterval(tick);
+      }
+    }, 30);
+    return () => clearInterval(tick);
+  }, [active, paused]);
 
   return (
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="py-28 px-8 text-[#FEFEFE] bg-[#151515]"
+      className="py-28 px-8 bg-[#151515] border-t border-white/[0.07]"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
     >
       <div className="max-w-[1400px] mx-auto">
+
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6"
+          className="mb-16"
         >
-          <div>
-            <p className="text-[#EEF6FD] text-[22px] tracking-[0.22em] uppercase font-bold mb-6">
-              {p.eyebrow}
-            </p>
-          </div>
-          <p className="text-white/45 text-sm max-w-xs leading-[1.4]">{p.subtext}</p>
+          <p className="text-[#EEF6FD] text-[22px] tracking-[0.22em] uppercase font-bold mb-4">
+            Our Expertise
+          </p>
+          <p className="text-white/40 text-sm max-w-sm leading-[1.6]">
+            Across industries and borders, we deliver precision-crafted legal strategy.
+          </p>
         </motion.div>
 
-        <div className="bento-grid">
-          {p.items.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: Math.min(i * 0.05, 0.4) }}
-              data-testid={`practice-card-${i}`}
-              className="group relative overflow-hidden cursor-pointer"
-              style={{ gridArea: gridAreas[i] }}
-            >
-              <img
-                src={cardImages[i]}
-                alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#000A3D]/95 via-[#001070]/55 to-[#001489]/20" />
-              <BorderTrace />
-              <span className="absolute top-6 left-7 text-[#EEF6FD] text-[10px] tracking-[0.25em] uppercase font-medium">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="absolute inset-x-0 bottom-0 px-7 pb-7 flex flex-col">
-                <h3 className="font-heading text-white font-semibold text-[1rem] leading-snug pr-[10%]">
+        {/* Two-column layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-0 lg:gap-20 items-start">
+
+          {/* Left: numbered selector list */}
+          <div className="flex flex-col">
+            {EXPERTISE_ITEMS.map((item, i) => (
+              <motion.button
+                key={i}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.045 }}
+                data-testid={`expertise-item-${i}`}
+                onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
+                className="group flex items-center gap-5 py-[14px] text-left border-b border-white/[0.07] last:border-0 focus:outline-none relative"
+              >
+                {/* Active accent bar */}
+                <motion.div
+                  className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#7A84BE]"
+                  animate={{ scaleY: i === active ? 1 : 0, opacity: i === active ? 1 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ originY: 0.5 }}
+                />
+
+                {/* Number */}
+                <span
+                  className="font-mono text-[10px] tracking-[0.2em] shrink-0 w-5 transition-colors duration-300"
+                  style={{ color: i === active ? "#7A84BE" : "rgba(255,255,255,0.18)" }}
+                >
+                  {item.num}
+                </span>
+
+                {/* Title */}
+                <motion.span
+                  className="font-heading font-semibold leading-snug flex-1"
+                  animate={{
+                    color: i === active ? "#FEFEFE" : "rgba(255,255,255,0.28)",
+                    fontSize: i === active ? "1.0625rem" : "0.9rem",
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
                   {item.title}
-                </h3>
-                <div className="max-h-0 overflow-hidden group-hover:max-h-20 transition-[max-height] duration-400 pr-[10%]">
-                  <p className="text-white/65 text-sm leading-[1.4] pt-2">{item.description}</p>
-                </div>
-                <div className="flex items-center gap-2 pt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
-                  <span className="text-[#EEF6FD] text-[10px] tracking-[0.2em] uppercase font-medium">{p.learnMore}</span>
-                  <svg className="w-3 h-3 text-[#EEF6FD]" fill="none" viewBox="0 0 12 12">
-                    <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
-                  </svg>
-                </div>
+                </motion.span>
+
+                {/* Arrow */}
+                <motion.svg
+                  className="shrink-0 w-3 h-3"
+                  fill="none" viewBox="0 0 12 12"
+                  animate={{ opacity: i === active ? 1 : 0, x: i === active ? 0 : -6 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ color: "#7A84BE" }}
+                >
+                  <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                </motion.svg>
+
+                {/* Mobile: expanded description */}
+                <AnimatePresence>
+                  {i === active && (
+                    <motion.p
+                      className="lg:hidden absolute left-10 right-8 top-full text-white/50 text-sm leading-[1.65] pt-2 pb-4"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.35 }}
+                    >
+                      {item.desc}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+              </motion.button>
+            ))}
+          </div>
+
+          {/* Right: Detail panel — desktop only */}
+          <div className="hidden lg:block sticky top-28">
+            <div
+              className="relative overflow-hidden"
+              style={{
+                background: "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)",
+                minHeight: "460px",
+              }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  className="absolute inset-0 flex flex-col justify-between p-10"
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -14 }}
+                  transition={{ duration: 0.45, ease: "easeOut" }}
+                >
+                  {/* Ghost number */}
+                  <div
+                    className="font-heading font-bold select-none leading-none"
+                    style={{ fontSize: "clamp(6rem,12vw,10rem)", color: "rgba(122,132,190,0.07)" }}
+                  >
+                    {EXPERTISE_ITEMS[active].num}
+                  </div>
+
+                  {/* Content */}
+                  <div>
+                    <p className="text-[#EEF6FD]/50 text-[10px] tracking-[0.28em] uppercase font-medium mb-4">
+                      Area of Practice
+                    </p>
+                    <h3 className="font-heading text-[#FEFEFE] font-bold text-[clamp(1.25rem,2vw,1.625rem)] leading-[1.2] mb-5">
+                      {EXPERTISE_ITEMS[active].title}
+                    </h3>
+                    <p className="text-white/55 text-sm leading-[1.75] max-w-sm mb-8">
+                      {EXPERTISE_ITEMS[active].desc}
+                    </p>
+                    <a
+                      href="#contact"
+                      className="inline-flex items-center gap-2.5 text-[#EEF6FD] text-[10px] tracking-[0.2em] uppercase font-semibold border-b border-[#7A84BE]/35 pb-0.5 hover:border-[#EEF6FD]/60 transition-colors duration-200"
+                    >
+                      <span>Enquire About This Practice</span>
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+                        <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                      </svg>
+                    </a>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Progress bar */}
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/5">
+                <motion.div
+                  className="h-full bg-[#7A84BE]"
+                  style={{ width: `${progress}%` }}
+                  transition={{ ease: "linear" }}
+                />
               </div>
-            </motion.div>
-          ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -1154,7 +1259,7 @@ function HomeV1Point7Inner() {
       <main>
         <HeroV15 />
         <DifferentiatorsV15 />
-        <PracticeAreasV15 />
+        <PracticeAreasV17 />
         <ContactFormV15 />
       </main>
       <FooterV15 />
