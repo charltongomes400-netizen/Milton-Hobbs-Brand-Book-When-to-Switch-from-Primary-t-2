@@ -707,6 +707,9 @@ function DifferentiatorsV15() {
       className="bg-[#FCFCFC] py-28 px-8 border-t border-[#E5EAF4]"
     >
       <div className="max-w-[1400px] mx-auto">
+        <p className="font-heading italic font-medium text-[#001489] text-[clamp(1.125rem,1.6vw,1.375rem)] leading-[1.3] mb-16" style={{ letterSpacing: 0 }}>
+          Why Milton Hobbs
+        </p>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
 
           {/* Left: card list */}
@@ -714,10 +717,7 @@ function DifferentiatorsV15() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <p className="font-heading italic font-medium text-[#001489] text-[clamp(1.125rem,1.6vw,1.375rem)] leading-[1.3] mb-10" style={{ letterSpacing: 0 }}>
-              Why Milton Hobbs
-            </p>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 pt-4">
               {d.cards.map((card, i) => (
                 <button
                   key={i}
