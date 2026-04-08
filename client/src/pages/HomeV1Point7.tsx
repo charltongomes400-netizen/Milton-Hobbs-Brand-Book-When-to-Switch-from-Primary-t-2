@@ -826,35 +826,14 @@ const EXPERTISE_ITEMS = [
   { num: "08", title: "Litigation & Dispute Resolution",   desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums." },
 ];
 
-const EXPERTISE_CYCLE_MS = 6000;
-
 function PracticeAreasV17() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    if (paused) { setProgress(0); return; }
-    const start = Date.now();
-    const tick = setInterval(() => {
-      const elapsed = Date.now() - start;
-      const pct = Math.min((elapsed / EXPERTISE_CYCLE_MS) * 100, 100);
-      setProgress(pct);
-      if (elapsed >= EXPERTISE_CYCLE_MS) {
-        setActive(prev => (prev + 1) % EXPERTISE_ITEMS.length);
-        clearInterval(tick);
-      }
-    }, 30);
-    return () => clearInterval(tick);
-  }, [active, paused]);
+  const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <section
       id="expertise"
       data-testid="practice-areas-section"
       className="py-28 px-8 bg-[#151515] border-t border-white/[0.07]"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
       <div className="max-w-[1400px] mx-auto">
 
@@ -864,7 +843,7 @@ function PracticeAreasV17() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-14"
         >
           <p className="text-[#EEF6FD] text-[22px] tracking-[0.22em] uppercase font-bold mb-4">
             Our Expertise
@@ -874,141 +853,159 @@ function PracticeAreasV17() {
           </p>
         </motion.div>
 
-        {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-0 lg:gap-20 items-start">
-
-          {/* Left: numbered selector list */}
-          <div className="flex flex-col">
-            {EXPERTISE_ITEMS.map((item, i) => (
-              <motion.button
+        {/* ── Desktop: horizontal expanding panels ── */}
+        <div
+          className="hidden lg:flex border border-white/[0.08]"
+          style={{ height: "540px" }}
+          onMouseLeave={() => setHovered(null)}
+        >
+          {EXPERTISE_ITEMS.map((item, i) => {
+            const isActive = hovered === i;
+            return (
+              <div
                 key={i}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.045 }}
                 data-testid={`expertise-item-${i}`}
-                onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
-                className="group flex items-center gap-5 py-[14px] text-left border-b border-white/[0.07] last:border-0 focus:outline-none relative"
+                onMouseEnter={() => setHovered(i)}
+                style={{
+                  flex: isActive ? 5 : 1,
+                  transition: "flex 0.55s cubic-bezier(0.4, 0, 0.2, 1)",
+                  background: isActive
+                    ? "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)"
+                    : "transparent",
+                  borderRight: i < EXPERTISE_ITEMS.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none",
+                  overflow: "hidden",
+                  position: "relative",
+                  cursor: "pointer",
+                  minWidth: 0,
+                }}
               >
-                {/* Active accent bar */}
-                <motion.div
-                  className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#7A84BE]"
-                  animate={{ scaleY: i === active ? 1 : 0, opacity: i === active ? 1 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ originY: 0.5 }}
-                />
-
-                {/* Number */}
-                <span
-                  className="font-mono text-[10px] tracking-[0.2em] shrink-0 w-5 transition-colors duration-300"
-                  style={{ color: i === active ? "#7A84BE" : "rgba(255,255,255,0.18)" }}
-                >
-                  {item.num}
-                </span>
-
-                {/* Title */}
-                <motion.span
-                  className="font-heading font-semibold leading-snug flex-1"
-                  animate={{
-                    color: i === active ? "#FEFEFE" : "rgba(255,255,255,0.28)",
-                    fontSize: i === active ? "1.0625rem" : "0.9rem",
+                {/* Collapsed view: number + rotated title */}
+                <div
+                  className="absolute inset-0 flex flex-col items-center py-8 gap-6"
+                  style={{
+                    opacity: isActive ? 0 : 1,
+                    transition: "opacity 0.2s ease",
+                    pointerEvents: isActive ? "none" : "auto",
                   }}
-                  transition={{ duration: 0.3 }}
                 >
-                  {item.title}
-                </motion.span>
+                  <span
+                    className="font-mono text-[10px] tracking-[0.18em]"
+                    style={{ color: "rgba(122,132,190,0.55)" }}
+                  >
+                    {item.num}
+                  </span>
+                  <span
+                    className="font-heading font-semibold text-white/25 text-[0.8rem] tracking-[0.04em] flex-1 flex items-center"
+                    style={{
+                      writingMode: "vertical-rl",
+                      transform: "rotate(180deg)",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {item.title}
+                  </span>
+                </div>
 
-                {/* Arrow */}
-                <motion.svg
-                  className="shrink-0 w-3 h-3"
-                  fill="none" viewBox="0 0 12 12"
-                  animate={{ opacity: i === active ? 1 : 0, x: i === active ? 0 : -6 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ color: "#7A84BE" }}
+                {/* Expanded view: full content */}
+                <div
+                  className="absolute inset-0 flex flex-col justify-between p-9"
+                  style={{
+                    opacity: isActive ? 1 : 0,
+                    transition: "opacity 0.3s ease 0.2s",
+                    pointerEvents: isActive ? "auto" : "none",
+                    minWidth: "340px",
+                  }}
                 >
-                  <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
-                </motion.svg>
-
-                {/* Mobile: expanded description */}
-                <AnimatePresence>
-                  {i === active && (
-                    <motion.p
-                      className="lg:hidden absolute left-10 right-8 top-full text-white/50 text-sm leading-[1.65] pt-2 pb-4"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.35 }}
-                    >
-                      {item.desc}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </motion.button>
-            ))}
-          </div>
-
-          {/* Right: Detail panel — desktop only */}
-          <div className="hidden lg:block sticky top-28">
-            <div
-              className="relative overflow-hidden"
-              style={{
-                background: "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)",
-                minHeight: "460px",
-              }}
-            >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active}
-                  className="absolute inset-0 flex flex-col justify-between p-10"
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.45, ease: "easeOut" }}
-                >
-                  {/* Ghost number */}
+                  {/* Ghost number top */}
                   <div
                     className="font-heading font-bold select-none leading-none"
-                    style={{ fontSize: "clamp(6rem,12vw,10rem)", color: "rgba(122,132,190,0.07)" }}
+                    style={{ fontSize: "clamp(5rem,9vw,7.5rem)", color: "rgba(122,132,190,0.07)" }}
                   >
-                    {EXPERTISE_ITEMS[active].num}
+                    {item.num}
                   </div>
 
-                  {/* Content */}
+                  {/* Content bottom */}
                   <div>
-                    <p className="text-[#EEF6FD]/50 text-[10px] tracking-[0.28em] uppercase font-medium mb-4">
+                    <p className="text-[#EEF6FD]/45 text-[9px] tracking-[0.3em] uppercase font-medium mb-3">
                       Area of Practice
                     </p>
-                    <h3 className="font-heading text-[#FEFEFE] font-bold text-[clamp(1.25rem,2vw,1.625rem)] leading-[1.2] mb-5">
-                      {EXPERTISE_ITEMS[active].title}
+                    <h3 className="font-heading text-[#FEFEFE] font-bold text-[1.3rem] leading-[1.2] mb-4" style={{ whiteSpace: "nowrap" }}>
+                      {item.title}
                     </h3>
-                    <p className="text-white/55 text-sm leading-[1.75] max-w-sm mb-8">
-                      {EXPERTISE_ITEMS[active].desc}
+                    <p className="text-white/50 text-[0.8rem] leading-[1.75] mb-7" style={{ maxWidth: "30ch" }}>
+                      {item.desc}
                     </p>
                     <a
                       href="#contact"
-                      className="inline-flex items-center gap-2.5 text-[#EEF6FD] text-[10px] tracking-[0.2em] uppercase font-semibold border-b border-[#7A84BE]/35 pb-0.5 hover:border-[#EEF6FD]/60 transition-colors duration-200"
+                      className="inline-flex items-center gap-2 text-[#EEF6FD] text-[9px] tracking-[0.22em] uppercase font-semibold border-b border-[#7A84BE]/40 pb-0.5 hover:border-[#EEF6FD]/55 transition-colors duration-200"
                     >
-                      <span>Enquire About This Practice</span>
-                      <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
-                        <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                      <span>Enquire</span>
+                      <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12">
+                        <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
                       </svg>
                     </a>
                   </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Progress bar */}
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/5">
-                <motion.div
-                  className="h-full bg-[#7A84BE]"
-                  style={{ width: `${progress}%` }}
-                  transition={{ ease: "linear" }}
-                />
+                </div>
               </div>
-            </div>
-          </div>
-
+            );
+          })}
         </div>
+
+        {/* ── Mobile: stacked accordion ── */}
+        <div className="flex flex-col lg:hidden divide-y divide-white/[0.07] border border-white/[0.07]">
+          {EXPERTISE_ITEMS.map((item, i) => {
+            const isOpen = hovered === i;
+            return (
+              <button
+                key={i}
+                data-testid={`expertise-item-mobile-${i}`}
+                onClick={() => setHovered(isOpen ? null : i)}
+                className="text-left focus:outline-none"
+              >
+                <div className="flex items-center gap-4 px-5 py-4">
+                  <span className="font-mono text-[10px] tracking-[0.18em] shrink-0" style={{ color: "rgba(122,132,190,0.6)" }}>
+                    {item.num}
+                  </span>
+                  <span className="font-heading font-semibold text-sm flex-1" style={{ color: isOpen ? "#FEFEFE" : "rgba(255,255,255,0.45)" }}>
+                    {item.title}
+                  </span>
+                  <svg
+                    className="w-3 h-3 shrink-0 transition-transform duration-300"
+                    style={{ color: "#7A84BE", transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
+                    fill="none" viewBox="0 0 12 12"
+                  >
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.3" />
+                  </svg>
+                </div>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35 }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <div
+                        className="px-5 pb-5"
+                        style={{ background: "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)" }}
+                      >
+                        <p className="text-white/50 text-sm leading-[1.7] pt-4 mb-4">{item.desc}</p>
+                        <a href="#contact" className="inline-flex items-center gap-2 text-[#EEF6FD] text-[10px] tracking-[0.2em] uppercase font-semibold border-b border-[#7A84BE]/40 pb-0.5">
+                          <span>Enquire</span>
+                          <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12">
+                            <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+                          </svg>
+                        </a>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </button>
+            );
+          })}
+        </div>
+
       </div>
     </section>
   );
