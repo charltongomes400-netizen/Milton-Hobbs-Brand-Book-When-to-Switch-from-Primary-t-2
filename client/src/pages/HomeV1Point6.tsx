@@ -717,9 +717,6 @@ function DifferentiatorsV15() {
             <p className="tracking-[0.3em] uppercase font-medium mb-3 text-[16px] text-[#001489]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
               {d.eyebrow}
             </p>
-            <h2 className="font-heading text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25] text-[#000000]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
-              {d.headline}
-            </h2>
             <div className="flex flex-col gap-1">
               {d.cards.map((card, i) => (
                 <button
@@ -862,9 +859,6 @@ function PracticeAreasV15() {
             <p className="text-[#7A84BE] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
               {p.eyebrow}
             </p>
-            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
-              {p.headline}
-            </h2>
           </div>
           <p className="text-black/45 text-sm max-w-xs leading-[1.4]">{p.subtext}</p>
         </motion.div>
@@ -953,9 +947,6 @@ function ContactFormV15() {
           <p className="text-[#7A84BE] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
             {c.eyebrow}
           </p>
-          <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
-            {c.headline}
-          </h2>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-16 lg:gap-24">
