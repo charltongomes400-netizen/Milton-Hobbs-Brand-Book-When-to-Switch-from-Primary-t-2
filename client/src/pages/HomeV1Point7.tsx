@@ -117,7 +117,7 @@ function HeaderV15() {
               data-testid="lang-en"
               className="px-4 py-2 transition-all duration-200"
               style={lang === "EN"
-                ? { background: "#001489", color: "#ffffff", fontWeight: 600 }
+                ? { background: "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)", color: "#ffffff", fontWeight: 600 }
                 : { color: "rgba(254,254,254,0.40)" }
               }
             >
@@ -128,7 +128,7 @@ function HeaderV15() {
               data-testid="lang-fr"
               className="px-4 py-2 transition-all duration-200"
               style={lang === "FR"
-                ? { background: "#001489", color: "#ffffff", fontWeight: 600 }
+                ? { background: "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)", color: "#ffffff", fontWeight: 600 }
                 : { color: "rgba(254,254,254,0.40)" }
               }
             >
@@ -184,7 +184,7 @@ function HeaderV15() {
                   onClick={() => setLang("EN")}
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "EN"
-                    ? { background: "#001489", color: "#ffffff", fontWeight: 600 }
+                    ? { background: "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)", color: "#ffffff", fontWeight: 600 }
                     : { color: "rgba(254,254,254,0.40)" }
                   }
                 >EN</button>
@@ -192,7 +192,7 @@ function HeaderV15() {
                   onClick={() => setLang("FR")}
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "FR"
-                    ? { background: "#001489", color: "#ffffff", fontWeight: 600 }
+                    ? { background: "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)", color: "#ffffff", fontWeight: 600 }
                     : { color: "rgba(254,254,254,0.40)" }
                   }
                 >FR</button>
@@ -803,7 +803,10 @@ function DifferentiatorsV15() {
                 </p>
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-3 border border-[#FEFEFE]/30 text-[#FEFEFE] text-[11px] tracking-[0.18em] uppercase font-semibold px-6 py-3 hover:bg-[#001489] hover:border-[#001489] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-3 text-[#FEFEFE] text-[11px] tracking-[0.18em] uppercase font-semibold px-6 py-3 transition-all"
+                  style={{ background: "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)" }}
+                  onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = "linear-gradient(160deg, #001489 0%, #001070 40%, #000A46 100%)"}
+                  onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)"}
                 >
                   <span>{d.learnMore}</span>
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
@@ -1043,7 +1046,11 @@ function ContactFormV15() {
                   placeholder={c.messagePlaceholder} data-testid="input-message"
                   className="bg-white/[0.05] border border-white/10 text-[#FEFEFE] placeholder-white/25 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/70 transition-colors resize-none" />
                 <button type="submit" disabled={submitting} data-testid="button-submit"
-                  className="self-start bg-[#001489] text-white text-xs tracking-[0.2em] uppercase font-semibold px-8 py-4 hover:bg-[#001070] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+                  className="self-start text-white text-xs tracking-[0.2em] uppercase font-semibold px-8 py-4 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                  style={{ background: "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)" }}
+                  onMouseEnter={e => { if (!submitting) (e.currentTarget as HTMLButtonElement).style.background = "linear-gradient(160deg, #001489 0%, #001070 40%, #000A46 100%)"; }}
+                  onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.background = "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)"}
+                >
                   {submitting ? c.submitting : c.submit}
                 </button>
               </form>
