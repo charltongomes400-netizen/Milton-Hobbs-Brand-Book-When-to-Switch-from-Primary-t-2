@@ -994,7 +994,7 @@ function ContactFormV15() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <p className="text-[#7A84BE] text-[10px] tracking-[0.25em] uppercase font-medium mb-1">
+              <p className="text-[#001489] text-sm font-semibold mb-1">
                 Email
               </p>
               <a href={`mailto:${f.email}`} data-testid="contact-email"
