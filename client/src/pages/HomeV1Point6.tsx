@@ -718,7 +718,7 @@ function DifferentiatorsV15() {
             <p className="text-[#001489] text-[13px] tracking-[0.22em] uppercase font-medium mb-8">
               Why Milton Hobbs
             </p>
-            <div className="flex flex-col gap-0 pl-6 mt-[20px]">
+            <div className="flex flex-col gap-0 pl-6 mt-[55px]">
               {d.cards.map((card, i) => (
                 <button
                   key={i}
