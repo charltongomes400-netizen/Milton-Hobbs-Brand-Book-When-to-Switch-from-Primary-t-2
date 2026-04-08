@@ -841,6 +841,7 @@ function EditorialExpertiseV18() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [hovered, setHovered] = useState<number | null>(null);
 
   useEffect(() => {
     setProgress(0);
@@ -863,9 +864,11 @@ function EditorialExpertiseV18() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="py-28 bg-[#FCFCFC] overflow-hidden"
+      className="py-28 bg-[#FCFCFC] overflow-hidden min-h-[90vh] flex flex-col justify-center"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
     >
-      <div className="max-w-[1400px] mx-auto px-8">
+      <div className="max-w-[1400px] mx-auto px-8 w-full">
 
         {/* Section Header */}
         <motion.div
@@ -897,8 +900,6 @@ function EditorialExpertiseV18() {
           transition={{ duration: 0.7 }}
           className="flex"
           style={{ minHeight: 580 }}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
         >
           {/* ── Left: numbered list ── */}
           <div
@@ -908,20 +909,23 @@ function EditorialExpertiseV18() {
             <div className="flex flex-col flex-1">
               {EXPERTISE_ITEMS.map((it, i) => {
                 const isActive = i === active;
+                const isHovered = !isActive && hovered === i;
                 return (
                   <button
                     key={i}
                     data-testid={`expertise-item-${i}`}
                     onClick={() => { setActive(i); setProgress(0); }}
+                    onMouseEnter={() => setHovered(i)}
+                    onMouseLeave={() => setHovered(null)}
                     className="flex items-baseline gap-4 py-4 text-left w-full"
                     style={{
                       paddingLeft: 20,
                       paddingRight: 4,
-                      borderLeft: `2px solid ${isActive ? "#D4AF36" : "transparent"}`,
+                      borderLeft: `2px solid ${isActive ? "#D4AF36" : isHovered ? "rgba(212,175,54,0.35)" : "transparent"}`,
                       borderBottom: "1px solid rgba(0,20,137,0.06)",
-                      background: "none",
+                      background: isHovered ? "rgba(0,20,137,0.02)" : "none",
                       cursor: "pointer",
-                      transition: "border-color 0.25s ease",
+                      transition: "border-color 0.2s ease, background 0.2s ease",
                     }}
                   >
                     <span
@@ -929,8 +933,8 @@ function EditorialExpertiseV18() {
                       style={{
                         fontSize: 11,
                         letterSpacing: "0.18em",
-                        color: isActive ? "#D4AF36" : "rgba(0,20,137,0.22)",
-                        transition: "color 0.25s ease",
+                        color: isActive ? "#D4AF36" : isHovered ? "rgba(212,175,54,0.7)" : "rgba(0,20,137,0.22)",
+                        transition: "color 0.2s ease",
                         minWidth: 24,
                       }}
                     >
@@ -940,9 +944,9 @@ function EditorialExpertiseV18() {
                       className="font-heading leading-snug"
                       style={{
                         fontSize: "clamp(0.875rem, 1.05vw, 1rem)",
-                        fontWeight: isActive ? 700 : 500,
-                        color: isActive ? "#001489" : "#9399A6",
-                        transition: "color 0.25s ease",
+                        fontWeight: isActive ? 700 : isHovered ? 600 : 500,
+                        color: isActive ? "#001489" : isHovered ? "#3B4699" : "#9399A6",
+                        transition: "color 0.2s ease, font-weight 0.15s ease",
                       }}
                     >
                       {it.title}
