@@ -715,7 +715,7 @@ function DifferentiatorsV15() {
             onMouseLeave={() => setPaused(false)}
           >
             <p className="font-heading font-bold text-[#001489] text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.3] mb-8" style={{ paddingLeft: "calc(3px + 1rem)", letterSpacing: 0 }}>
-              {d.eyebrow}
+              Why Milton Hobbs
             </p>
             <div className="flex flex-col gap-1">
               {d.cards.map((card, i) => (
