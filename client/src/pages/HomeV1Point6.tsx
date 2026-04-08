@@ -1103,7 +1103,7 @@ function FooterV15() {
             </div>
           </div>
           <div className="lg:col-span-3">
-            <p className="text-white/30 text-[10px] tracking-[0.25em] uppercase font-medium mb-6">
+            <p className="text-white text-[10px] tracking-[0.25em] uppercase font-medium mb-6">
               {f.dubaiLabel}
             </p>
             <address className="not-italic text-white/50 text-sm leading-[1.4]">
@@ -1111,7 +1111,7 @@ function FooterV15() {
             </address>
           </div>
           <div className="lg:col-span-3 lg:col-start-10">
-            <p className="text-white/30 text-[10px] tracking-[0.25em] uppercase font-medium mb-6">
+            <p className="text-white text-[10px] tracking-[0.25em] uppercase font-medium mb-6">
               {f.parisLabel}
             </p>
             <address className="not-italic text-white/50 text-sm leading-[1.4]">
