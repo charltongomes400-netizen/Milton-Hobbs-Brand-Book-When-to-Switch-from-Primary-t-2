@@ -53,33 +53,26 @@ function HeaderV15() {
       className="fixed top-0 left-0 right-0 z-50"
       style={{
         background: scrolled
-          ? "rgba(255,255,255,0.98)"
-          : "rgba(255,255,255,0.68)",
+          ? "rgba(21,21,21,0.98)"
+          : "rgba(21,21,21,0.85)",
         backdropFilter: scrolled
           ? "none"
-          : "blur(24px) saturate(180%) brightness(1.06)",
+          : "blur(24px) saturate(140%)",
         WebkitBackdropFilter: scrolled
           ? "none"
-          : "blur(24px) saturate(180%) brightness(1.06)",
+          : "blur(24px) saturate(140%)",
         boxShadow: scrolled
-          ? "0 1px 0 rgba(0,20,137,0.08), 0 4px 24px rgba(0,20,137,0.06)"
-          : [
-              "inset 0 1px 0 rgba(255,255,255,0.95)",
-              "inset 0 -1px 0 rgba(0,20,137,0.07)",
-              "0 4px 28px rgba(0,20,137,0.07)",
-            ].join(", "),
+          ? "0 1px 0 rgba(0,20,137,0.3), 0 4px 24px rgba(0,0,0,0.4)"
+          : "0 4px 28px rgba(0,0,0,0.3)",
         borderBottom: scrolled
-          ? "1px solid rgba(0,20,137,0.08)"
-          : "1px solid rgba(255,255,255,0.55)",
+          ? "1px solid rgba(0,20,137,0.35)"
+          : "1px solid rgba(254,254,254,0.08)",
         transition: "background 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease",
       }}
     >
-      {/* Specular gloss — top-edge bright line + upper-half sheen */}
+      {/* Subtle top-edge accent line */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ opacity: scrolled ? 0 : 1, transition: "opacity 0.35s ease" }}>
-        {/* Upper-half white sheen */}
-        <div className="absolute inset-x-0 top-0 h-1/2" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%)" }} />
-        {/* Bright top-edge specular line */}
-        <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.95) 75%, transparent 100%)" }} />
+        <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(0,20,137,0.6) 25%, rgba(0,20,137,0.8) 50%, rgba(0,20,137,0.6) 75%, transparent 100%)" }} />
       </div>
       <div className="max-w-[1400px] mx-auto px-8 h-20 flex items-center justify-between relative">
         <a
@@ -101,9 +94,9 @@ function HeaderV15() {
               href={link.href}
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
               className="text-[16px] tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300"
-              style={{ color: "#001489" }}
+              style={{ color: "#FEFEFE" }}
               onMouseEnter={e => (e.currentTarget.style.color = "#7A84BE")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#001489")}
+              onMouseLeave={e => (e.currentTarget.style.color = "#FEFEFE")}
             >
               {link.label}
             </a>
@@ -115,7 +108,7 @@ function HeaderV15() {
             data-testid="lang-toggle"
             className="hidden lg:flex items-center text-xs tracking-widest overflow-hidden"
             style={{
-              background: "rgba(255,255,255,0.30)",
+              background: "rgba(254,254,254,0.07)",
               backdropFilter: "blur(8px)",
             }}
           >
@@ -125,7 +118,7 @@ function HeaderV15() {
               className="px-4 py-2 transition-all duration-200"
               style={lang === "EN"
                 ? { background: "#001489", color: "#ffffff", fontWeight: 600 }
-                : { color: "rgba(0,20,137,0.50)" }
+                : { color: "rgba(254,254,254,0.40)" }
               }
             >
               EN
@@ -136,7 +129,7 @@ function HeaderV15() {
               className="px-4 py-2 transition-all duration-200"
               style={lang === "FR"
                 ? { background: "#001489", color: "#ffffff", fontWeight: 600 }
-                : { color: "rgba(0,20,137,0.50)" }
+                : { color: "rgba(254,254,254,0.40)" }
               }
             >
               FR
@@ -147,7 +140,7 @@ function HeaderV15() {
             data-testid="mobile-menu-toggle"
             aria-label="Toggle menu"
             className="lg:hidden p-1 transition-colors"
-            style={{ color: "rgba(0,20,137,0.65)" }}
+            style={{ color: "rgba(254,254,254,0.65)" }}
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             <div className="flex flex-col gap-[5px] w-5">
@@ -168,8 +161,8 @@ function HeaderV15() {
             transition={{ duration: 0.3 }}
             className="lg:hidden overflow-hidden border-t"
             style={{
-              borderColor: "rgba(0,20,137,0.10)",
-              background: "rgba(240,244,255,0.80)",
+              borderColor: "rgba(0,20,137,0.30)",
+              background: "rgba(21,21,21,0.97)",
               backdropFilter: "blur(28px)",
             }}
           >
@@ -180,7 +173,7 @@ function HeaderV15() {
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   className="text-[16px] tracking-[0.15em] uppercase transition-colors"
-                  style={{ color: "#001489" }}
+                  style={{ color: "#FEFEFE" }}
                 >
                   {link.label}
                 </a>
@@ -192,7 +185,7 @@ function HeaderV15() {
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "EN"
                     ? { background: "#001489", color: "#ffffff", fontWeight: 600 }
-                    : { color: "rgba(0,20,137,0.50)" }
+                    : { color: "rgba(254,254,254,0.40)" }
                   }
                 >EN</button>
                 <button
@@ -200,7 +193,7 @@ function HeaderV15() {
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "FR"
                     ? { background: "#001489", color: "#ffffff", fontWeight: 600 }
-                    : { color: "rgba(0,20,137,0.50)" }
+                    : { color: "rgba(254,254,254,0.40)" }
                   }
                 >FR</button>
               </div>
@@ -292,7 +285,7 @@ function HeroV15() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen bg-[#FCFCFC] flex overflow-hidden"
+      className="relative min-h-screen bg-[#151515] flex overflow-hidden"
     >
       {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
       <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20 overflow-hidden">
@@ -358,7 +351,7 @@ function HeroV15() {
 
             {/* Large article headline */}
             <h1
-              className="font-heading text-[#001489] font-bold text-[clamp(1.125rem,4vw,3.4375rem)] mb-8"
+              className="font-heading text-[#FEFEFE] font-bold text-[clamp(1.125rem,4vw,3.4375rem)] mb-8"
               style={{ lineHeight: "clamp(1.5rem, 1.1em, 3.75rem)" }}
               data-testid="hero-headline"
             >
@@ -369,9 +362,9 @@ function HeroV15() {
             <a
               href={`/insights/${featuredSlug}`}
               data-testid="hero-read-link"
-              className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#7A84BE] transition-colors duration-300"
+              className="group inline-flex items-center gap-2 text-[#FEFEFE] hover:text-[#7A84BE] transition-colors duration-300"
             >
-              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#7A84BE]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
+              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#FEFEFE]/25 group-hover:decoration-[#7A84BE]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
               <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
                 <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
               </svg>
@@ -399,7 +392,7 @@ function HeroV15() {
                 height:          7,
                 borderRadius:    i === currentIndex ? 4 : "50%",
                 backgroundColor: i === currentIndex ? "#7A84BE" : "transparent",
-                border:          i === currentIndex ? "none" : "1px solid rgba(0,20,137,0.22)",
+                border:          i === currentIndex ? "none" : "1px solid rgba(254,254,254,0.22)",
               }}
             />
           ))}
@@ -704,7 +697,7 @@ function DifferentiatorsV15() {
       id="firm"
       data-header-theme="light"
       data-testid="differentiators-section"
-      className="bg-[#FCFCFC] py-24 px-8 border-t border-[#E5EAF4]"
+      className="bg-[#151515] py-24 px-8 border-t border-white/[0.07]"
     >
       <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_6fr] gap-12 lg:gap-16 items-start">
@@ -739,7 +732,7 @@ function DifferentiatorsV15() {
                   <motion.span
                     className="font-heading font-semibold leading-[1.15]"
                     animate={{
-                      color: i === active ? "#001489" : "rgba(0,20,137,0.22)",
+                      color: i === active ? "#FEFEFE" : "rgba(254,254,254,0.18)",
                       fontSize: i === active ? "clamp(1.875rem, 3vw, 2.75rem)" : "clamp(1.5rem, 2.4vw, 2.125rem)",
                     }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
@@ -802,15 +795,15 @@ function DifferentiatorsV15() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="pt-7"
               >
-                <h3 className="font-heading text-[#001489] text-[clamp(1rem,1.4vw,1.25rem)] font-semibold mb-2.5 leading-[1.3]">
+                <h3 className="font-heading text-[#FEFEFE] text-[clamp(1rem,1.4vw,1.25rem)] font-semibold mb-2.5 leading-[1.3]">
                   {d.cards[active].title}
                 </h3>
-                <p className="text-black/50 text-[0.85rem] leading-[1.6] mb-6 max-w-md">
+                <p className="text-white/50 text-[0.85rem] leading-[1.6] mb-6 max-w-md">
                   {d.cards[active].description}
                 </p>
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-3 border border-[#001489] text-[#001489] text-[11px] tracking-[0.18em] uppercase font-semibold px-6 py-3 hover:bg-[#001489] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-3 border border-[#FEFEFE]/30 text-[#FEFEFE] text-[11px] tracking-[0.18em] uppercase font-semibold px-6 py-3 hover:bg-[#001489] hover:border-[#001489] hover:text-white transition-colors"
                 >
                   <span>{d.learnMore}</span>
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
@@ -851,7 +844,7 @@ function PracticeAreasV15() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="py-28 px-8 text-[#ffffff] bg-[#FCFCFC]"
+      className="py-28 px-8 text-[#FEFEFE] bg-[#151515]"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -866,7 +859,7 @@ function PracticeAreasV15() {
               {p.eyebrow}
             </p>
           </div>
-          <p className="text-black/45 text-sm max-w-xs leading-[1.4]">{p.subtext}</p>
+          <p className="text-white/45 text-sm max-w-xs leading-[1.4]">{p.subtext}</p>
         </motion.div>
 
         <div className="bento-grid">
@@ -940,7 +933,7 @@ function ContactFormV15() {
       id="contact"
       data-header-theme="light"
       data-testid="contact-section"
-      className="bg-[#FCFCFC] py-28 px-8 border-t border-[#E5EAF4]"
+      className="bg-[#151515] py-28 px-8 border-t border-white/[0.07]"
     >
       <div className="max-w-[1400px] mx-auto">
         <motion.div
@@ -963,7 +956,7 @@ function ContactFormV15() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex flex-col gap-8"
           >
-            <p className="text-black/55 text-sm leading-[1.6]">{c.subtext}</p>
+            <p className="text-white/55 text-sm leading-[1.6]">{c.subtext}</p>
 
             <div>
               <p className="text-[#001489] text-[22px] tracking-[0.22em] uppercase font-bold mb-4">
@@ -973,20 +966,20 @@ function ContactFormV15() {
                 <div>
                   <p className="text-[#001489] text-sm font-semibold mb-1">{c.dubaiLabel}</p>
                   {f.dubaiAddr.map((line, i) => (
-                    <p key={i} className="text-black/45 text-[14px] leading-[1.6]">{line}</p>
+                    <p key={i} className="text-white/45 text-[14px] leading-[1.6]">{line}</p>
                   ))}
                   <a href="tel:+97145232421" data-testid="contact-address-phone-dubai"
-                    className="text-black/45 text-[14px] hover:text-[#7A84BE] transition-colors">
+                    className="text-white/45 text-[14px] hover:text-[#7A84BE] transition-colors">
                     +971 4 523 2421
                   </a>
                 </div>
                 <div>
                   <p className="text-[#001489] text-sm font-semibold mb-1">{c.parisLabel}</p>
                   {f.parisAddr.map((line, i) => (
-                    <p key={i} className="text-black/45 text-[14px] leading-[1.6]">{line}</p>
+                    <p key={i} className="text-white/45 text-[14px] leading-[1.6]">{line}</p>
                   ))}
                   <a href="tel:+33180270067" data-testid="contact-address-phone-paris"
-                    className="text-black/45 text-[14px] hover:text-[#7A84BE] transition-colors">
+                    className="text-white/45 text-[14px] hover:text-[#7A84BE] transition-colors">
                     +33 1 80 27 00 67
                   </a>
                 </div>
@@ -998,7 +991,7 @@ function ContactFormV15() {
                 Email
               </p>
               <a href={`mailto:${f.email}`} data-testid="contact-email"
-                className="text-black/45 text-[14px] hover:text-[#001778] transition-colors">
+                className="text-white/45 text-[14px] hover:text-[#7A84BE] transition-colors">
                 {f.email}
               </a>
             </div>
@@ -1012,43 +1005,43 @@ function ContactFormV15() {
           >
             {submitted ? (
               <div data-testid="contact-success"
-                className="border border-[#001489]/20 p-10 flex flex-col gap-4 h-full justify-center">
+                className="border border-[#001489]/40 p-10 flex flex-col gap-4 h-full justify-center">
                 <div className="flex items-center gap-3 mb-2">
-                  <svg className="w-5 h-5 text-[#001489]" fill="none" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-[#7A84BE]" fill="none" viewBox="0 0 20 20">
                     <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <h3 className="font-heading text-[#001489] text-lg font-semibold">{c.successTitle}</h3>
+                  <h3 className="font-heading text-[#FEFEFE] text-lg font-semibold">{c.successTitle}</h3>
                 </div>
-                <p className="text-black/55 text-sm leading-[1.4]">{c.successText}</p>
+                <p className="text-white/55 text-sm leading-[1.4]">{c.successText}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input type="text" name="name" required value={form.name} onChange={handleChange}
                     placeholder={c.namePlaceholder} data-testid="input-name"
-                    className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors" />
+                    className="bg-white/[0.05] border border-white/10 text-[#FEFEFE] placeholder-white/25 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/70 transition-colors" />
                   <input type="email" name="email" required value={form.email} onChange={handleChange}
                     placeholder={c.emailPlaceholder} data-testid="input-email"
-                    className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors" />
+                    className="bg-white/[0.05] border border-white/10 text-[#FEFEFE] placeholder-white/25 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/70 transition-colors" />
                 </div>
                 <div className="relative">
                   <select name="subject" required value={form.subject} onChange={handleChange}
                     data-testid="select-subject"
-                    className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors appearance-none cursor-pointer"
-                    style={{ color: form.subject ? "#001489" : "rgba(0,20,137,0.3)" }}>
+                    className="w-full bg-white/[0.05] border border-white/10 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/70 transition-colors appearance-none cursor-pointer"
+                    style={{ color: form.subject ? "#FEFEFE" : "rgba(254,254,254,0.25)", background: "#1e1e1e" }}>
                     <option value="" disabled hidden>{c.subjectPlaceholder}</option>
                     {c.subjectOptions.map((opt, i) => (
-                      <option key={i} value={opt} style={{ color: "#001489", background: "#fff" }}>{opt}</option>
+                      <option key={i} value={opt} style={{ color: "#FEFEFE", background: "#1e1e1e" }}>{opt}</option>
                     ))}
                   </select>
-                  <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-[#001489]/30"
+                  <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-white/30"
                     fill="none" viewBox="0 0 12 12">
                     <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                   </svg>
                 </div>
                 <textarea name="message" required rows={5} value={form.message} onChange={handleChange}
                   placeholder={c.messagePlaceholder} data-testid="input-message"
-                  className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors resize-none" />
+                  className="bg-white/[0.05] border border-white/10 text-[#FEFEFE] placeholder-white/25 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/70 transition-colors resize-none" />
                 <button type="submit" disabled={submitting} data-testid="button-submit"
                   className="self-start bg-[#001489] text-white text-xs tracking-[0.2em] uppercase font-semibold px-8 py-4 hover:bg-[#001070] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
                   {submitting ? c.submitting : c.submit}
@@ -1149,7 +1142,7 @@ function FooterV15() {
 
 function HomeV1Point7Inner() {
   return (
-    <div className="bg-[#FCFCFC] min-h-screen" data-testid="home-v1-6-page">
+    <div className="bg-[#151515] min-h-screen" data-testid="home-v1-7-page">
       <HeaderV15 />
       <main>
         <HeroV15 />
