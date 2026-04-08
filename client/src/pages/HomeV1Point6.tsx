@@ -715,7 +715,7 @@ function DifferentiatorsV15() {
             onMouseLeave={() => setPaused(false)}
             className="flex flex-col"
           >
-            <p className="text-[#001489] text-[13px] tracking-[0.22em] uppercase font-medium mb-8">
+            <p className="text-[#001489] text-[22px] tracking-[0.22em] uppercase font-bold mb-8">
               Why Milton Hobbs
             </p>
             <div className="flex flex-col gap-0 pl-6 mt-[75px]">
@@ -862,7 +862,7 @@ function PracticeAreasV15() {
           className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6"
         >
           <div>
-            <p className="text-[#001489] text-[13px] tracking-[0.22em] uppercase font-medium mb-6">
+            <p className="text-[#001489] text-[22px] tracking-[0.22em] uppercase font-bold mb-6">
               {p.eyebrow}
             </p>
           </div>
@@ -950,7 +950,7 @@ function ContactFormV15() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <p className="text-[#001489] text-[13px] tracking-[0.22em] uppercase font-medium mb-6">
+          <p className="text-[#001489] text-[22px] tracking-[0.22em] uppercase font-bold mb-6">
             {c.eyebrow}
           </p>
         </motion.div>
