@@ -81,6 +81,22 @@ uploads/                   — CV file storage (disk, via multer)
 - CV/résumé file upload (PDF, DOC, DOCX — max 10 MB)
 - Applications stored in PostgreSQL with file saved to disk
 
+## Design Variants (Homepage)
+| Route | Theme | Notes |
+|-------|-------|-------|
+| `/home-v1.2` | White + gold `#D4AF36` | Primary reference; no EN/FR border |
+| `/home-v1.3` | Dark `#070C1A` + blue `#001489` | All gold replaced with blue; white text |
+| `/home-v1.4` | White + periwinkle `#7A84BE` | EN/FR active = `#001489` bg + white text |
+| `/home-v1.5` | White + gold (copy of v1.2) | Tile grid moved to LEFT (white) panel; 8-col square grid, 3-tone blues (`#000A4F` dark base, `#001489` medium, `#1A40FF` bright accent); tiles always visible (base opacity) and pulse to peak |
+
+### v1.5 Tile Grid — Reference Style
+- Based on brand book reference: large squares, 3 distinct blue shades, always-on base tint, pulsing to peak
+- `COLS=8`, `TILE_ROWS=14`, `gridTemplateRows: calc(50vw / 8)` (true squares in 50%-wide panel)
+- Bright tiles `#1A40FF`: baseOp 0.10 → peakOp 0.35
+- Medium tiles `#001489`: baseOp 0.05 → peakOp 0.20
+- Dark base tiles `#000A4F`: baseOp 0.02 → peakOp 0.08
+- Right panel: building photo crossfade + vignette only (no tile grid)
+
 ## Figma Sources
 - Brand Book: https://www.figma.com/design/Y5XBzCBRCZvxaKq1bzW0x7/Milton-Hobbs---Brand-Book
 - Site Map: https://www.figma.com/design/4IdOLDC5H8si1PL1Q2B9JS/Milton-Hobbs--Site-Map

@@ -214,18 +214,23 @@ function HeaderV15() {
 
 /* ─── HERO ─────────────────────────────────────────────────────────────── */
 
-const COLS = 16;
-const TILE_ROWS = 18;
+const COLS = 8;
+const TILE_ROWS = 14;
 
-const tiles = Array.from({ length: COLS * TILE_ROWS }, (_, i) => ({
-  color:      i % 2 === 0 ? "#001489" : "#000A4F",
-  delay:      parseFloat(((i * 0.41 + (i % 7) * 0.29) % 14).toFixed(2)),
-  duration:   parseFloat((5 + (i * 0.17 + (i % 5) * 0.33) % 8).toFixed(2)),
-  maxOpacity: parseFloat((0.06 + (i * 0.07 + (i % 11) * 0.04) % 0.28).toFixed(2)),
-  goldBorder: i % 11 === 0 || i % 19 === 7,
-  borderDelay: parseFloat(((i * 0.63 + (i % 13) * 0.41) % 12).toFixed(2)),
-  borderDur:   parseFloat((7 + (i * 0.23 + (i % 7) * 0.51) % 6).toFixed(2)),
-}));
+// Three distinct blue tiers — dark navy, medium royal, electric accent
+// baseOp: always-visible tint; peakOp: pulsed brightness
+const tiles = Array.from({ length: COLS * TILE_ROWS }, (_, i) => {
+  const isBright = i % 29 === 7 || i % 41 === 3 || i % 37 === 15 || i % 53 === 22;
+  const isMedium = i % 7 === 2 || i % 11 === 5 || i % 13 === 8;
+  const color    = isBright ? "#1A40FF" : isMedium ? "#001489" : "#000A4F";
+  const baseOp   = isBright ? 0.10 : isMedium ? 0.05 : 0.02;
+  const peakOp   = isBright ? 0.35 : isMedium ? 0.20 : 0.08;
+  return {
+    color, baseOp, peakOp,
+    delay:    parseFloat(((i * 0.41 + (i % 7) * 0.29) % 14).toFixed(2)),
+    duration: parseFloat((5 + (i * 0.17 + (i % 5) * 0.33) % 8).toFixed(2)),
+  };
+});
 
 const HERO_CYCLE_MS = 12000;
 
@@ -274,7 +279,7 @@ function HeroV15() {
       {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
       <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20 overflow-hidden">
 
-        {/* Tile shimmer grid — white side */}
+        {/* Tile shimmer grid — white side, multi-tone blues */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -287,17 +292,9 @@ function HeroV15() {
           {tiles.map((tile, i) => (
             <motion.div
               key={i}
-              style={{ backgroundColor: "#001489" }}
+              style={{ backgroundColor: tile.color }}
               animate={{
-                opacity: [
-                  0,
-                  (i % 29 === 7 || i % 41 === 3)
-                    ? 0.28
-                    : i % 4 === 0
-                      ? tile.maxOpacity * 0.55
-                      : 0,
-                  0,
-                ],
+                opacity: [tile.baseOp, tile.peakOp, tile.baseOp],
               }}
               transition={{
                 duration: tile.duration * 2,
