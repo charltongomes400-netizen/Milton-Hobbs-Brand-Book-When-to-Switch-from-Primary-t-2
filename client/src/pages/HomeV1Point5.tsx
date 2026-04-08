@@ -714,7 +714,7 @@ function DifferentiatorsV15() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <p className="text-[#D4AF36]/70 text-[clamp(0.95rem,1.3vw,1.125rem)] mb-10 leading-[1.4]">
+            <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-10 text-[14px]">
               {d.eyebrow}
             </p>
             <div className="flex flex-col gap-1">

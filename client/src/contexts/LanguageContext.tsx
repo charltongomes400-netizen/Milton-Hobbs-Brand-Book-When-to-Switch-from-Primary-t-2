@@ -22,7 +22,7 @@ const translations = {
       scroll: "Scroll",
     },
     diff: {
-      eyebrow: "Why Milton Hobbs",
+      eyebrow: "WHY MILTON HOBBS",
       headline: "Counsel Built for Complexity.",
       learnMore: "Speak to Us",
       cards: [
@@ -178,7 +178,7 @@ const translations = {
       scroll: "Défiler",
     },
     diff: {
-      eyebrow: "Pourquoi Milton Hobbs",
+      eyebrow: "POURQUOI MILTON HOBBS",
       headline: "Des conseils taillés pour la complexité.",
       learnMore: "Nous contacter",
       cards: [
