@@ -1479,22 +1479,14 @@ function PracticeAreasV18() {
           className="mb-14"
         >
           <p
-            style={{
-              color: "#C6A962",
-              fontSize: 11,
-              letterSpacing: "0.26em",
-              fontWeight: 700,
-              textTransform: "uppercase",
-              marginBottom: 16,
-              borderLeft: "2px solid #C6A962",
-              paddingLeft: 14,
-            }}
+            className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-3"
+            style={{ fontSize: 16, paddingLeft: "calc(3px + 1rem)" }}
           >
             Our Expertise
           </p>
           <h2
-            className="font-heading font-bold"
-            style={{ color: "#001489", fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.15 }}
+            className="font-heading font-semibold text-[#001489] leading-[1.25]"
+            style={{ fontSize: "clamp(1rem, 1.8vw, 1.375rem)", paddingLeft: "calc(3px + 1rem)" }}
           >
             Areas of Practice
           </h2>
