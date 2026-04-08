@@ -998,7 +998,7 @@ function ContactFormV15() {
                 Email
               </p>
               <a href={`mailto:${f.email}`} data-testid="contact-email"
-                className="text-[#001489] font-semibold text-sm hover:text-[#7A84BE] transition-colors">
+                className="text-black/45 text-[14px] hover:text-[#001778] transition-colors">
                 {f.email}
               </a>
             </div>
