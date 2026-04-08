@@ -822,51 +822,180 @@ function DifferentiatorsV15() {
   );
 }
 
-/* ─── PRACTICE AREAS (EDITORIAL SPLIT) ──────────────────────────────────── */
+/* ─── PRACTICE AREAS (CASE FILE STRIP) ──────────────────────────────────── */
 
-const EXPERTISE_ITEMS = [
-  { num: "01", title: "Corporate & Commercial",             tag: "Transactional", desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors.",          img: imgCorp   },
-  { num: "02", title: "Tax & Compliance",                   tag: "Advisory",      desc: "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals.", img: imgTax    },
-  { num: "03", title: "Mergers & Acquisitions",             tag: "Strategic",     desc: "End-to-end advisory on M&A transactions, due diligence, valuations, and seamless post-merger integration across sectors.",                  img: imgBank   },
-  { num: "04", title: "Startups & Venture Capital",         tag: "Emerging",      desc: "Funding rounds, term sheets, shareholder agreements, and robust legal infrastructure for founders, operators, and investors.",               img: imgTech   },
-  { num: "05", title: "Intellectual Property & Technology", tag: "Innovation",    desc: "Patent strategy, trademark registration, licensing structures, and data protection compliance across jurisdictions.",                        img: imgIp     },
-  { num: "06", title: "Real Estate & Property Law",         tag: "Property",      desc: "Cross-border property acquisitions, development financing, and sophisticated real estate structuring in the UAE and Europe.",               img: imgEstate },
-  { num: "07", title: "Employment & Labor Law",             tag: "Workforce",     desc: "Employment contracts, executive compensation structures, workforce restructuring, and workplace dispute resolution.",                         img: imgEmploy },
-  { num: "08", title: "Litigation & Dispute Resolution",    tag: "Disputes",      desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums.",                       img: imgLitig  },
+const CASE_FILE_ITEMS = [
+  {
+    num: "01", title: "Corporate & Commercial",             tag: "Transactional",
+    brief: "Cross-border transactions, joint ventures, and commercial agreements.",
+    desc:  "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors. We advise on the full lifecycle of corporate matters, from entity formation to complex multi-party deals.",
+    img: imgCorp,
+  },
+  {
+    num: "02", title: "Tax & Compliance",                   tag: "Advisory",
+    brief: "Strategic tax planning and regulatory advisory across jurisdictions.",
+    desc:  "Strategic tax planning, regulatory compliance, and advisory services to keep businesses aligned with evolving legal frameworks. Our team delivers forward-looking counsel across domestic and international tax environments.",
+    img: imgTax,
+  },
+  {
+    num: "03", title: "Mergers & Acquisitions",             tag: "Strategic",
+    brief: "End-to-end M&A counsel from structuring through post-closing integration.",
+    desc:  "End-to-end counsel on acquisitions, disposals, restructurings, and due diligence for domestic and cross-border deals. We guide clients through every phase — from initial structuring to seamless post-merger integration.",
+    img: imgBank,
+  },
+  {
+    num: "04", title: "Startups & Venture Capital",         tag: "Emerging",
+    brief: "Legal frameworks for founders, investors, and scaling ventures.",
+    desc:  "Legal frameworks for fundraising rounds, equity structuring, founder agreements, and scaling ventures. We partner with entrepreneurs and investors at every stage of the startup lifecycle.",
+    img: imgTech,
+  },
+  {
+    num: "05", title: "Intellectual Property & Technology", tag: "Innovation",
+    brief: "Protecting IP portfolios and advising on licensing and data law.",
+    desc:  "Protecting trademarks, patents, copyrights, trade secrets, and advising on technology licensing and data regulations. We build and defend the intellectual assets that define competitive advantage.",
+    img: imgIp,
+  },
+  {
+    num: "06", title: "Real Estate & Property Law",         tag: "Property",
+    brief: "Acquisitions, development projects, and portfolio management.",
+    desc:  "Advising on acquisitions, leasing, development projects, title disputes, and property portfolio management. Our practice spans residential, commercial, and mixed-use real estate across the UAE and Europe.",
+    img: imgEstate,
+  },
+  {
+    num: "07", title: "Employment & Labor Law",             tag: "Workforce",
+    brief: "Navigating workforce regulations and employment dispute resolution.",
+    desc:  "Navigating workforce regulations, employment contracts, terminations, and workplace dispute resolution. We advise employers and executives on the full spectrum of employment law obligations across jurisdictions.",
+    img: imgEmploy,
+  },
+  {
+    num: "08", title: "Litigation & Dispute Resolution",    tag: "Disputes",
+    brief: "Strategic advocacy in civil, commercial, and arbitration proceedings.",
+    desc:  "Representing clients in civil and commercial disputes, arbitration, and enforcement proceedings across jurisdictions. Our litigators combine rigorous strategy with efficient resolution across forums including DIFC and ICC.",
+    img: imgLitig,
+  },
 ];
 
-const EXPERTISE_CYCLE_MS = 6000;
+type CaseFileItem = typeof CASE_FILE_ITEMS[0];
 
-function EditorialExpertiseV18() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [hovered, setHovered] = useState<number | null>(null);
+function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: boolean; onClick: () => void }) {
+  const [hovering, setHovering] = useState(false);
+  const lifted = isOpen || hovering;
 
-  useEffect(() => {
-    setProgress(0);
-    if (paused) return;
-    const tick = 50;
-    let elapsed = 0;
-    const id = setInterval(() => {
-      elapsed += tick;
-      setProgress(Math.min((elapsed / EXPERTISE_CYCLE_MS) * 100, 100));
-      if (elapsed >= EXPERTISE_CYCLE_MS) {
-        setActive(prev => (prev + 1) % EXPERTISE_ITEMS.length);
-      }
-    }, tick);
-    return () => clearInterval(id);
-  }, [active, paused]);
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+      data-testid={`case-file-tab-${item.num}`}
+      style={{
+        flexShrink: 0,
+        width: 280,
+        background: lifted ? "#FDF9F0" : "#F8F3E8",
+        border: `1px solid ${isOpen ? "#C6A962" : hovering ? "rgba(198,169,98,0.55)" : "#E2D9C8"}`,
+        boxShadow: lifted
+          ? "0 8px 28px rgba(26,31,78,0.13), 0 2px 8px rgba(26,31,78,0.06)"
+          : "0 2px 8px rgba(26,31,78,0.06), 0 1px 3px rgba(26,31,78,0.03)",
+        transform: lifted ? "translateY(-4px)" : "translateY(0)",
+        transition: "transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease",
+        cursor: "pointer",
+        textAlign: "left",
+        padding: "28px 24px 22px",
+        position: "relative",
+        outline: "none",
+      }}
+    >
+      {/* Tab notch accent at top */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 20,
+          width: 56,
+          height: 3,
+          background: isOpen ? "#C6A962" : hovering ? "rgba(198,169,98,0.55)" : "rgba(198,169,98,0.25)",
+          transition: "background 0.22s ease",
+        }}
+      />
 
-  const item = EXPERTISE_ITEMS[active];
+      {/* Gold foil number */}
+      <span
+        style={{
+          display: "block",
+          color: isOpen || hovering ? "#C6A962" : "#B8A476",
+          fontSize: 11,
+          fontFamily: "monospace",
+          fontWeight: 700,
+          letterSpacing: "0.22em",
+          marginBottom: 14,
+          marginTop: 6,
+          transition: "color 0.22s ease",
+        }}
+      >
+        {item.num}
+      </span>
+
+      {/* Practice area name */}
+      <h3
+        className="font-heading"
+        style={{
+          color: "#1A1F4E",
+          fontWeight: 700,
+          fontSize: "clamp(0.88rem, 1.05vw, 1rem)",
+          lineHeight: 1.35,
+          marginBottom: 10,
+        }}
+      >
+        {item.title}
+      </h3>
+
+      {/* One-liner brief */}
+      <p
+        style={{
+          color: "#8A8478",
+          fontSize: "0.775rem",
+          lineHeight: 1.65,
+        }}
+      >
+        {item.brief}
+      </p>
+
+      {/* Active bottom bar */}
+      {isOpen && (
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 2,
+            background: "#C6A962",
+          }}
+        />
+      )}
+    </button>
+  );
+}
+
+function CaseFileStripV18() {
+  const [open, setOpen] = useState<number | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  function scrollStrip(dir: number) {
+    scrollRef.current?.scrollBy({ left: dir * 310, behavior: "smooth" });
+  }
+
+  function toggle(i: number) {
+    setOpen(prev => (prev === i ? null : i));
+  }
+
+  const activeItem = open !== null ? CASE_FILE_ITEMS[open] : null;
 
   return (
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="py-28 bg-[#FCFCFC] overflow-hidden min-h-[90vh] flex flex-col justify-center"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      className="py-24 overflow-hidden"
+      style={{ background: "#FAFAF7" }}
     >
       <div className="max-w-[1400px] mx-auto px-8 w-full">
 
@@ -876,244 +1005,205 @@ function EditorialExpertiseV18() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="mb-12"
         >
           <p
-            className="uppercase font-semibold mb-4"
-            style={{ color: "#001489", fontSize: 22, letterSpacing: "0.3em" }}
+            className="uppercase font-semibold mb-3"
+            style={{ color: "#C6A962", fontSize: 13, letterSpacing: "0.28em" }}
           >
             Our Expertise
           </p>
           <h2
-            className="font-heading font-bold text-[#0B0F2E]"
-            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.15 }}
+            className="font-heading font-bold"
+            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "#1A1F4E", lineHeight: 1.15 }}
           >
             Areas of Practice
           </h2>
         </motion.div>
 
-        {/* Two-column split */}
+        {/* Strip + arrow buttons */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="flex"
-          style={{ minHeight: 580 }}
+          className="relative"
         >
-          {/* ── Left: numbered list ── */}
-          <div
-            className="flex flex-col"
-            style={{ width: "38%", paddingRight: 52, paddingTop: 2, paddingBottom: 2 }}
+          {/* Left arrow */}
+          <button
+            aria-label="Scroll left"
+            onClick={() => scrollStrip(-1)}
+            data-testid="strip-scroll-left"
+            className="hidden md:flex absolute z-10 w-10 h-10 items-center justify-center"
+            style={{
+              left: -20,
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "#1A1F4E",
+              borderRadius: "50%",
+              boxShadow: "0 2px 12px rgba(26,31,78,0.22)",
+              border: "none",
+              cursor: "pointer",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = "#2C3370")}
+            onMouseLeave={e => (e.currentTarget.style.background = "#1A1F4E")}
           >
-            <div className="flex flex-col flex-1">
-              {EXPERTISE_ITEMS.map((it, i) => {
-                const isActive = i === active;
-                const isHovered = !isActive && hovered === i;
-                return (
-                  <button
-                    key={i}
-                    data-testid={`expertise-item-${i}`}
-                    onClick={() => { setActive(i); setProgress(0); }}
-                    onMouseEnter={() => setHovered(i)}
-                    onMouseLeave={() => setHovered(null)}
-                    className="flex items-baseline gap-4 py-4 text-left w-full"
-                    style={{
-                      paddingLeft: 20,
-                      paddingRight: 4,
-                      borderLeft: `2px solid ${isActive ? "#D4AF36" : isHovered ? "rgba(212,175,54,0.35)" : "transparent"}`,
-                      borderBottom: "1px solid rgba(0,20,137,0.06)",
-                      background: isHovered ? "rgba(0,20,137,0.02)" : "none",
-                      cursor: "pointer",
-                      transition: "border-color 0.2s ease, background 0.2s ease",
-                    }}
-                  >
-                    <span
-                      className="font-mono shrink-0"
-                      style={{
-                        fontSize: 11,
-                        letterSpacing: "0.18em",
-                        color: isActive ? "#D4AF36" : isHovered ? "rgba(212,175,54,0.7)" : "rgba(0,20,137,0.22)",
-                        transition: "color 0.2s ease",
-                        minWidth: 24,
-                      }}
-                    >
-                      {it.num}
-                    </span>
-                    <span
-                      className="font-heading leading-snug"
-                      style={{
-                        fontSize: "clamp(0.875rem, 1.05vw, 1rem)",
-                        fontWeight: isActive ? 700 : isHovered ? 600 : 500,
-                        color: isActive ? "#001489" : isHovered ? "#3B4699" : "#9399A6",
-                        transition: "color 0.2s ease, font-weight 0.15s ease",
-                      }}
-                    >
-                      {it.title}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+            <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
+              <path d="M9 2L4 7l5 5" stroke="#C6A962" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
 
-            {/* Progress bar */}
-            <div
-              className="mt-6"
-              style={{ height: 2, background: "rgba(0,20,137,0.08)" }}
-            >
-              <div
-                style={{
-                  height: "100%",
-                  width: `${progress}%`,
-                  background: "#D4AF36",
-                  transition: "width 50ms linear",
-                }}
+          {/* Scrollable strip */}
+          <div
+            ref={scrollRef}
+            className="flex gap-4 pb-3"
+            style={{
+              overflowX: "auto",
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {CASE_FILE_ITEMS.map((item, i) => (
+              <FolderTab
+                key={i}
+                item={item}
+                isOpen={open === i}
+                onClick={() => toggle(i)}
               />
-            </div>
+            ))}
+            <div style={{ flexShrink: 0, width: 4 }} />
           </div>
 
-          {/* ── Right: immersive panel ── */}
-          <div
-            className="relative overflow-hidden flex-1"
-            style={{ minHeight: 580 }}
+          {/* Right arrow */}
+          <button
+            aria-label="Scroll right"
+            onClick={() => scrollStrip(1)}
+            data-testid="strip-scroll-right"
+            className="hidden md:flex absolute z-10 w-10 h-10 items-center justify-center"
+            style={{
+              right: -20,
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "#1A1F4E",
+              borderRadius: "50%",
+              boxShadow: "0 2px 12px rgba(26,31,78,0.22)",
+              border: "none",
+              cursor: "pointer",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = "#2C3370")}
+            onMouseLeave={e => (e.currentTarget.style.background = "#1A1F4E")}
           >
-            {/* Crossfade image */}
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={`img-${active}`}
-                src={item.img}
-                alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.35, ease: "easeInOut" }}
-              />
-            </AnimatePresence>
+            <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
+              <path d="M5 2l5 5-5 5" stroke="#C6A962" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </motion.div>
 
-            {/* Bottom gradient — text legibility */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: "linear-gradient(to top, rgba(5,10,40,0.88) 0%, rgba(5,10,40,0.50) 38%, rgba(5,10,40,0.0) 68%)",
-              }}
-            />
-            {/* Left edge gradient */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: "linear-gradient(to right, rgba(5,10,40,0.22) 0%, transparent 45%)",
-              }}
-            />
-
-            {/* Ghost number — bottom right */}
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={`ghost-${active}`}
-                className="absolute font-heading font-black select-none pointer-events-none"
-                style={{
-                  fontSize: "18vw",
-                  color: "rgba(255,255,255,0.055)",
-                  bottom: -20,
-                  right: -12,
-                  lineHeight: 1,
-                  letterSpacing: "-0.04em",
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.35 }}
-              >
-                {item.num}
-              </motion.span>
-            </AnimatePresence>
-
-            {/* Gold tag — top left */}
-            <div
-              className="absolute top-8 left-8"
-              style={{
-                background: "#D4AF36",
-                color: "#FFFFFF",
-                fontSize: 9,
-                letterSpacing: "0.3em",
-                fontWeight: 600,
-                padding: "4px 14px",
-                textTransform: "uppercase",
-              }}
+        {/* Expanded panel — slides down below the strip */}
+        <AnimatePresence>
+          {open !== null && activeItem && (
+            <motion.div
+              key={`panel-${open}`}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              style={{ overflow: "hidden" }}
             >
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={`tag-${active}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.22 }}
-                >
-                  {item.tag}
-                </motion.span>
-              </AnimatePresence>
-            </div>
-
-            {/* Content overlay — bottom left */}
-            <div className="absolute bottom-0 left-0 right-0 p-10 pb-12">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`content-${active}`}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.35, ease: "easeOut" }}
-                >
-                  <h3
-                    className="font-heading font-bold text-white mb-4"
-                    style={{ fontSize: "clamp(1.7rem, 2.6vw, 3.2rem)", lineHeight: 1.12 }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    className="text-white mb-8 max-w-lg"
+              <div
+                data-testid="case-file-panel"
+                className="grid grid-cols-1 md:grid-cols-[1fr_300px]"
+                style={{
+                  background: "#1A1F4E",
+                  borderTop: "2px solid #C6A962",
+                }}
+              >
+                {/* Text content */}
+                <div style={{ padding: "48px 48px 52px" }}>
+                  <span
                     style={{
-                      opacity: 0.82,
-                      fontSize: "clamp(0.85rem, 1vw, 0.95rem)",
-                      lineHeight: 1.75,
+                      display: "block",
+                      color: "#C6A962",
+                      fontSize: 10,
+                      fontFamily: "monospace",
+                      fontWeight: 700,
+                      letterSpacing: "0.26em",
+                      marginBottom: 18,
+                      textTransform: "uppercase",
                     }}
                   >
-                    {item.desc}
+                    {activeItem.num} — {activeItem.tag}
+                  </span>
+                  <h3
+                    className="font-heading font-bold text-white mb-6"
+                    style={{ fontSize: "clamp(1.8rem, 3vw, 2.8rem)", lineHeight: 1.15 }}
+                  >
+                    {activeItem.title}
+                  </h3>
+                  <p
+                    style={{
+                      color: "rgba(255,255,255,0.62)",
+                      fontSize: "clamp(0.875rem, 1vw, 1rem)",
+                      lineHeight: 1.8,
+                      maxWidth: 520,
+                      marginBottom: 40,
+                    }}
+                  >
+                    {activeItem.desc}
                   </p>
                   <a
                     href="#contact"
-                    data-testid="expertise-enquire-cta"
-                    className="inline-flex items-center gap-3"
-                    style={{ textDecoration: "none" }}
+                    data-testid="case-file-enquire-cta"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 10,
+                      color: "#C6A962",
+                      fontSize: 11,
+                      fontWeight: 600,
+                      letterSpacing: "0.2em",
+                      textTransform: "uppercase",
+                      textDecoration: "none",
+                      borderBottom: "1px solid rgba(198,169,98,0.38)",
+                      paddingBottom: 2,
+                    }}
                   >
-                    <span
-                      style={{
-                        color: "#D4AF36",
-                        fontSize: 11,
-                        letterSpacing: "0.2em",
-                        fontWeight: 600,
-                        textTransform: "uppercase",
-                        borderBottom: "1px solid rgba(212,175,54,0.4)",
-                        paddingBottom: 2,
-                        transition: "border-color 0.2s ease",
-                      }}
-                    >
-                      Enquire About This Area
-                    </span>
-                    <svg
-                      className="w-3.5 h-3.5"
-                      fill="none"
-                      viewBox="0 0 14 14"
-                      style={{ color: "#D4AF36" }}
-                    >
+                    Enquire About This Area
+                    <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
                       <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </a>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-        </motion.div>
+                </div>
+
+                {/* Panel image */}
+                <div
+                  className="hidden md:block relative overflow-hidden"
+                  style={{ minHeight: 280 }}
+                >
+                  <img
+                    src={activeItem.img}
+                    alt={activeItem.title}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      opacity: 0.5,
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(to right, #1A1F4E 0%, transparent 45%)",
+                    }}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </div>
     </section>
@@ -1364,7 +1454,7 @@ function HomeV1Point8Inner() {
       <main>
         <HeroV15 />
         <DifferentiatorsV15 />
-        <EditorialExpertiseV18 />
+        <CaseFileStripV18 />
         <ContactFormV15 />
       </main>
       <FooterV15 />

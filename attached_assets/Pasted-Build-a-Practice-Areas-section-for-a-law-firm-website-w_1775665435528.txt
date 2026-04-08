@@ -1,0 +1,56 @@
+Build a "Practice Areas" section for a law firm website with a horizontal scrolling "Case File Strip" design.
+Overall Section:
+
+Full-width section with a light off-white/cream background (#FAFAF7 or similar)
+Top: small uppercase tracking label "OUR EXPERTISE" in gold (#C6A962), followed by a large serif heading "Areas of Practice" in dark navy (#1A1F4E)
+Below the heading, a horizontally scrollable strip of case file folder tabs
+
+The Case File Strip:
+
+Horizontal scroll container (CSS overflow-x: auto, hide scrollbar or style it minimally)
+Contains 8 practice area "folders" in a row, each styled like a physical manila/cream case file tab
+Each folder tab is roughly 280px wide, with a slight paper/folder texture feel (subtle off-white or warm beige background, maybe a very faint drop shadow or border to suggest a physical folder edge)
+Top of each tab has a small gold (#C6A962) foil-style number: 01, 02, 03… etc
+Below the number, the practice area name in bold navy (#1A1F4E) serif font
+Below that, a single subtle one-liner description in smaller gray text
+On hover, the tab lifts slightly (translateY -4px) with a soft shadow increase, and the gold number gets brighter
+
+Click/Expand Behavior:
+
+When a folder tab is clicked, it "opens" — a panel expands DOWNWARD below the entire strip (not inside the tab itself), sliding open smoothly (300ms ease)
+The expanded panel has a dark navy (#1A1F4E) background with:
+
+The practice area name in large white serif text
+A 2-3 sentence description in light gray
+A gold "Enquire About This Area →" CTA link
+A subtle gold top border or accent line connecting it to the selected tab
+
+
+Only one folder can be open at a time — clicking another closes the current and opens the new one
+Clicking the same tab again closes the panel
+
+The 8 Practice Areas:
+
+Corporate & Commercial — Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors.
+Tax & Compliance — Strategic tax planning, regulatory compliance, and advisory services to keep businesses aligned with evolving legal frameworks.
+Mergers & Acquisitions — End-to-end counsel on acquisitions, disposals, restructurings, and due diligence for domestic and cross-border deals.
+Startups & Venture Capital — Legal frameworks for fundraising rounds, equity structuring, founder agreements, and scaling ventures.
+Intellectual Property & Technology — Protecting trademarks, patents, copyrights, trade secrets, and advising on technology licensing and data regulations.
+Real Estate & Property Law — Advising on acquisitions, leasing, development projects, title disputes, and property portfolio management.
+Employment & Labor Law — Navigating workforce regulations, employment contracts, terminations, and workplace dispute resolution.
+Litigation & Dispute Resolution — Representing clients in civil and commercial disputes, arbitration, and enforcement proceedings across jurisdictions.
+
+Scroll Indicators:
+
+Left and right arrow buttons (small, circular, navy with gold arrow icon) at either end of the strip for desktop users
+On mobile, the strip is swipeable with momentum scroll
+
+Tech:
+
+React component (or plain HTML/CSS/JS — your choice)
+Use smooth scroll-behavior for the arrow buttons
+Google Fonts: use "Playfair Display" for serif headings, "Inter" or "DM Sans" for body text
+No external component libraries needed — keep it vanilla
+Make it fully responsive: on mobile (<768px), the tabs shrink slightly and the expanded panel stacks cleanly
+
+Vibe: Premium, tactile, understated. Think high-end stationery meets legal tradition. No flashy gradients or illustrations — just clean typography, gold accents, and paper-like warmth.
