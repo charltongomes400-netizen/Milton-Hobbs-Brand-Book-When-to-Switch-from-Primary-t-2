@@ -214,23 +214,16 @@ function HeaderV15() {
 
 /* ─── HERO ─────────────────────────────────────────────────────────────── */
 
-// All 24 grid cells (4 cols × 6 rows) — each independently fades in/out on its own
-// schedule, creating random-spawn illusion. ~5-7 visible at any given moment.
-const GRID_COLS = 4;
-const GRID_ROWS = 6;
-const SQ_SIZE = "7vw";
+// Tile system — mirrors Hero.tsx pattern: dense grid, every cell pulses independently.
+// 8 cols × 10 rows = 80 tiles across the white left panel. Tiles fill their cells.
+const TILE_COLS = 8;
+const TILE_ROWS = 10;
 
-const BLUE_SHADES = ["#000A4F", "#001489", "#1A40FF"] as const;
-const PEAK_OPS    = { "#000A4F": 0.09, "#001489": 0.20, "#1A40FF": 0.30 } as const;
-
-const ALL_CELLS = Array.from({ length: GRID_COLS * GRID_ROWS }, (_, i) => ({
-  col:    i % GRID_COLS,
-  row:    Math.floor(i / GRID_COLS),
-  color:  BLUE_SHADES[i % 3],
-  peakOp: PEAK_OPS[BLUE_SHADES[i % 3]],
-  // Cycle 12-22s, staggered delays so cells fire at different moments
-  dur:    parseFloat((12 + (i * 0.83 + (i % 5) * 1.30) % 10).toFixed(2)),
-  delay:  parseFloat(((i * 1.37 + (i % 7) * 0.91) % 14).toFixed(2)),
+const tiles = Array.from({ length: TILE_COLS * TILE_ROWS }, (_, i) => ({
+  color:      i % 2 === 0 ? "#001489" : "#000A4F",
+  delay:      parseFloat(((i * 0.41 + (i % 7) * 0.29) % 9).toFixed(2)),
+  duration:   parseFloat((2.5 + (i * 0.17 + (i % 5) * 0.33) % 4.5).toFixed(2)),
+  maxOpacity: parseFloat((0.04 + (i * 0.07 + (i % 11) * 0.04) % 0.14).toFixed(2)),
 }));
 
 const HERO_CYCLE_MS = 12000;
@@ -280,40 +273,29 @@ function HeroV15() {
       {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
       <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20 overflow-hidden">
 
-        {/* Random-spawn grid — all 24 cells cycle independently, ~5-7 visible at once */}
+        {/* Tile grid — mirrors /home Hero pattern: 8×10 dense grid, each cell fades in/out */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             display: "grid",
-            gridTemplateColumns: `repeat(${GRID_COLS}, 1fr)`,
-            gridTemplateRows: `repeat(${GRID_ROWS}, 1fr)`,
+            gridTemplateColumns: `repeat(${TILE_COLS}, 1fr)`,
+            gridTemplateRows: `repeat(${TILE_ROWS}, 1fr)`,
             WebkitMaskImage: "linear-gradient(to right, black 0%, black 60%, transparent 82%)",
             maskImage: "linear-gradient(to right, black 0%, black 60%, transparent 82%)",
           }}
         >
-          {ALL_CELLS.map((cell, i) => (
-            <div
+          {tiles.map((tile, i) => (
+            <motion.div
               key={i}
-              style={{
-                gridColumn: cell.col + 1,
-                gridRow: cell.row + 1,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+              style={{ backgroundColor: tile.color }}
+              animate={{ opacity: [0, tile.maxOpacity, 0] }}
+              transition={{
+                duration: tile.duration,
+                delay: tile.delay,
+                repeat: Infinity,
+                ease: "easeInOut",
               }}
-            >
-              <motion.div
-                style={{ width: SQ_SIZE, height: SQ_SIZE, backgroundColor: cell.color }}
-                animate={{ opacity: [0, 0, cell.peakOp, cell.peakOp, 0, 0] }}
-                transition={{
-                  duration: cell.dur,
-                  delay: cell.delay,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  times: [0, 0.20, 0.32, 0.68, 0.80, 1],
-                }}
-              />
-            </div>
+            />
           ))}
         </div>
 

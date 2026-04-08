@@ -89,16 +89,14 @@ uploads/                   — CV file storage (disk, via multer)
 | `/home-v1.4` | White + periwinkle `#7A84BE` | EN/FR active = `#001489` bg + white text |
 | `/home-v1.5` | White + gold (copy of v1.2) | Tile grid moved to LEFT (white) panel; 8-col square grid, 3-tone blues (`#000A4F` dark base, `#001489` medium, `#1A40FF` bright accent); tiles always visible (base opacity) and pulse to peak |
 
-### v1.5 Square Grid — Final System
-- `GRID_COLS=4`, `GRID_ROWS=6` CSS grid spans 100% of the left panel (`absolute inset-0`)
-- `SQ_SIZE="7vw"` — all squares identical size; centered in their cell (`display:flex; align/justify: center`)
-- Cell is `12.5vw wide` so gap between any two squares is always ≥ 5.5vw — they never touch
-- 9 squares in `GRID_SQUARES` array placed at `{col, row}` coordinates; well-distributed, no adjacent cells
-- Three blue shades: `#000A4F` dark navy, `#001489` medium royal, `#1A40FF` electric accent
-- Each has independent `dur` (7.5–14s) + `delay` (0–8.3s) for async pulsing between `baseOp` and `peakOp`
-- Container masked with `linear-gradient(to right, black 60%, transparent 82%)` — no bleed into diagonal
-- Right panel: building photo crossfade + vignette only (no squares)
-- To add/remove squares: edit `GRID_SQUARES` (col 0–3, row 0–5). Do NOT use absolute positioning.
+### v1.5 Tile System — Final
+- Mirrors `Hero.tsx` exactly: `TILE_COLS=8`, `TILE_ROWS=10` → 80 tiles filling the left panel
+- Each tile fills its grid cell completely (no centering/gap)
+- Colors alternate `#001489` / `#000A4F`; `maxOpacity` 0.04–0.16 (tuned for white bg)
+- Each tile animates `opacity: [0, maxOpacity, 0]` with `duration` 2.5–7s and staggered `delay` 0–9s
+- Container masked `linear-gradient(to right, black 60%, transparent 82%)` — no bleed into diagonal
+- Right panel: building photo crossfade + vignette only (no tiles)
+- To tune density/speed: adjust `TILE_COLS`, `TILE_ROWS`, or the `maxOpacity`/`duration` formulas in `tiles`
 
 ## Figma Sources
 - Brand Book: https://www.figma.com/design/Y5XBzCBRCZvxaKq1bzW0x7/Milton-Hobbs---Brand-Book
