@@ -3,16 +3,14 @@ import { motion, AnimatePresence, useMotionValue, animate } from "framer-motion"
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { articles } from "@/data/articles";
 import miltonHobbsLogo from "@assets/Milton_hobbs_logo_1775554832004.png";
-import imgCorp    from "@assets/stock_images/corporate_commercial.jpg";
-import imgEstate  from "@assets/stock_images/real_estate.jpg";
-import imgLitig   from "@assets/stock_images/litigation.jpg";
-import imgArb     from "@assets/stock_images/arbitration.jpg";
-import imgEmploy  from "@assets/stock_images/employment.jpg";
-import imgBank    from "@assets/stock_images/banking_finance.jpg";
-import imgTax     from "@assets/stock_images/tax_planning.jpg";
-import imgImmig   from "@assets/stock_images/immigration.jpg";
-import imgIp      from "@assets/stock_images/intellectual_property.jpg";
-import imgTech    from "@assets/stock_images/technology_startups.jpg";
+import imgCorp   from "@assets/stock_images/corporate_commercial.jpg";
+import imgTax    from "@assets/stock_images/tax_planning.jpg";
+import imgBank   from "@assets/stock_images/banking_finance.jpg";
+import imgTech   from "@assets/stock_images/technology_startups.jpg";
+import imgIp     from "@assets/stock_images/intellectual_property.jpg";
+import imgEstate from "@assets/stock_images/real_estate.jpg";
+import imgEmploy from "@assets/stock_images/employment.jpg";
+import imgLitig  from "@assets/stock_images/litigation.jpg";
 import heroBg0 from "@assets/verne-ho-0LAJfSNa-xQ-unsplash_1775562755413.jpg";
 import heroBg1 from "@assets/tim-stief-dH6IjhWHNQQ-unsplash_1775562755413.jpg";
 import heroBg2 from "@assets/joakim-nadell-K67sBVqLLuw-unsplash_1775562755414.jpg";
@@ -826,88 +824,228 @@ function DifferentiatorsV15() {
 
 /* ─── PRACTICE AREAS ─────────────────────────────────────────────────────── */
 
-const gridAreas = ["corp", "estate", "litig", "arb", "employ", "banking", "tax", "immig", "ip", "tech"];
-const cardImages = [imgCorp, imgEstate, imgLitig, imgArb, imgEmploy, imgBank, imgTax, imgImmig, imgIp, imgTech];
+/* ─── FILING CABINET DATA ──────────────────────────────────────────────── */
 
-function BorderTrace() {
-  return (
-    <span className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-      <span className="absolute top-0 left-0 right-0 h-px bg-[#D4AF36] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-      <span className="absolute top-0 right-0 bottom-0 w-px bg-[#D4AF36] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
-      <span className="absolute bottom-0 left-0 right-0 h-px bg-[#D4AF36] origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" />
-      <span className="absolute top-0 left-0 bottom-0 w-px bg-[#D4AF36] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-300" />
-    </span>
-  );
-}
+const DRAWER_ITEMS = [
+  { num: "01", title: "Corporate & Commercial",             tag: "Transactional", desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors.",          img: imgCorp   },
+  { num: "02", title: "Tax & Compliance",                   tag: "Advisory",      desc: "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals.", img: imgTax    },
+  { num: "03", title: "Mergers & Acquisitions",             tag: "Strategic",     desc: "End-to-end advisory on M&A transactions, due diligence, valuations, and seamless post-merger integration across sectors.",                  img: imgBank   },
+  { num: "04", title: "Startups & Venture Capital",         tag: "Emerging",      desc: "Funding rounds, term sheets, shareholder agreements, and robust legal infrastructure for founders, operators, and investors.",               img: imgTech   },
+  { num: "05", title: "Intellectual Property & Technology", tag: "Innovation",    desc: "Patent strategy, trademark registration, licensing structures, and data protection compliance across jurisdictions.",                        img: imgIp     },
+  { num: "06", title: "Real Estate & Property Law",         tag: "Property",      desc: "Cross-border property acquisitions, development financing, and sophisticated real estate structuring in the UAE and Europe.",               img: imgEstate },
+  { num: "07", title: "Employment & Labor Law",             tag: "Workforce",     desc: "Employment contracts, executive compensation structures, workforce restructuring, and workplace dispute resolution.",                         img: imgEmploy },
+  { num: "08", title: "Litigation & Dispute Resolution",    tag: "Disputes",      desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums.",                       img: imgLitig  },
+];
 
-function PracticeAreasV15() {
-  const { t } = useLang();
-  const p = t.practices;
+function FilingCabinetV18() {
+  const [open, setOpen] = useState<number | null>(null);
+
+  function toggle(i: number) {
+    setOpen(prev => (prev === i ? null : i));
+  }
 
   return (
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="py-28 px-8 text-[#ffffff] bg-[#FCFCFC]"
+      className="py-28 px-8 bg-[#FCFCFC]"
     >
       <div className="max-w-[1400px] mx-auto">
+
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6"
+          className="mb-14"
         >
-          <div>
-            <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
-              {p.eyebrow}
-            </p>
-            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
-              {p.headline}
-            </h2>
-          </div>
-          <p className="text-black/45 text-sm max-w-xs leading-[1.4]">{p.subtext}</p>
+          <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
+            Our Expertise
+          </p>
+          <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
+            Areas of Legal Practice
+          </h2>
         </motion.div>
 
-        <div className="bento-grid">
-          {p.items.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: Math.min(i * 0.05, 0.4) }}
-              data-testid={`practice-card-${i}`}
-              className="group relative overflow-hidden cursor-pointer"
-              style={{ gridArea: gridAreas[i] }}
-            >
-              <img
-                src={cardImages[i]}
-                alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#000A3D]/95 via-[#001070]/55 to-[#001489]/20" />
-              <BorderTrace />
-              <span className="absolute top-6 left-7 text-[#D4AF36] text-[10px] tracking-[0.25em] uppercase font-medium">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="absolute inset-x-0 bottom-0 px-7 pb-7 flex flex-col">
-                <h3 className="font-heading text-white font-semibold text-[1rem] leading-snug pr-[10%]">
-                  {item.title}
-                </h3>
-                <div className="max-h-0 overflow-hidden group-hover:max-h-20 transition-[max-height] duration-400 pr-[10%]">
-                  <p className="text-white/65 text-sm leading-[1.4] pt-2">{item.description}</p>
-                </div>
-                <div className="flex items-center gap-2 pt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
-                  <span className="text-[#D4AF36] text-[10px] tracking-[0.2em] uppercase font-medium">{p.learnMore}</span>
-                  <svg className="w-3 h-3 text-[#D4AF36]" fill="none" viewBox="0 0 12 12">
-                    <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
-                  </svg>
-                </div>
+        {/* ── Filing Cabinet ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          style={{
+            background: "#E4E8F2",
+            border: "1.5px solid #C8CEDF",
+            boxShadow: "0 4px 6px rgba(0,20,137,0.06), 0 12px 40px rgba(0,20,137,0.08), inset 0 1px 0 rgba(255,255,255,0.7)",
+          }}
+        >
+          {/* Cabinet header bar */}
+          <div
+            className="flex items-center justify-between px-8 py-3"
+            style={{ background: "#001489", borderBottom: "2px solid #000A46" }}
+          >
+            <span className="font-mono text-white/40 text-[9px] tracking-[0.35em] uppercase">
+              Milton Hobbs LLP — Legal Files
+            </span>
+            <div className="flex items-center gap-1.5">
+              {[0,1,2].map(d => (
+                <div key={d} className="w-1.5 h-1.5" style={{ background: "rgba(255,255,255,0.2)", borderRadius: "50%" }} />
+              ))}
+            </div>
+          </div>
+
+          {/* Drawers */}
+          {DRAWER_ITEMS.map((item, i) => {
+            const isOpen = open === i;
+            return (
+              <div
+                key={i}
+                data-testid={`drawer-${i}`}
+                style={{ borderTop: i === 0 ? "none" : "1px solid #C8CEDF" }}
+              >
+                {/* Drawer face */}
+                <motion.div
+                  onClick={() => toggle(i)}
+                  animate={{ x: isOpen ? 8 : 0 }}
+                  whileHover={{ x: isOpen ? 8 : 4 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 38 }}
+                  className="flex items-center gap-5 px-6 cursor-pointer select-none"
+                  style={{
+                    background: isOpen ? "#FFFFFF" : "#F7F8FC",
+                    boxShadow: isOpen
+                      ? "3px 0 0 0 #D4AF36, 4px 0 12px rgba(0,20,137,0.14), 6px 0 28px rgba(0,20,137,0.08)"
+                      : "1px 0 4px rgba(0,20,137,0.04)",
+                    minHeight: "72px",
+                    transition: "background 0.25s ease, box-shadow 0.25s ease",
+                  }}
+                >
+                  {/* Left: vertical tab + handle grip */}
+                  <div className="flex items-center gap-3 shrink-0">
+                    <motion.div
+                      animate={{ background: isOpen ? "#D4AF36" : "#001489" }}
+                      transition={{ duration: 0.3 }}
+                      style={{ width: 4, height: 48, borderRadius: 2 }}
+                    />
+                    <div
+                      style={{
+                        width: 40,
+                        height: 16,
+                        background: "linear-gradient(to bottom, #D8DCE8 0%, #B8BDCC 100%)",
+                        borderRadius: 3,
+                        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.65), inset 0 -1px 0 rgba(0,0,0,0.12), 0 2px 5px rgba(0,0,0,0.18)",
+                      }}
+                    />
+                  </div>
+
+                  {/* Number */}
+                  <span
+                    className="font-mono text-[11px] tracking-[0.2em] shrink-0"
+                    style={{ color: "#D4AF36", minWidth: 28 }}
+                  >
+                    {item.num}
+                  </span>
+
+                  {/* Title */}
+                  <motion.h3
+                    className="font-heading font-semibold flex-1 leading-snug"
+                    animate={{ color: isOpen ? "#001489" : "#001489" }}
+                    style={{ fontSize: "clamp(0.875rem, 1.1vw, 1rem)" }}
+                  >
+                    {item.title}
+                  </motion.h3>
+
+                  {/* Tag */}
+                  <span
+                    className="hidden sm:block font-mono text-[9px] tracking-[0.28em] uppercase shrink-0"
+                    style={{ color: isOpen ? "#D4AF36" : "rgba(0,20,137,0.25)" }}
+                  >
+                    {item.tag}
+                  </span>
+
+                  {/* Chevron */}
+                  <motion.svg
+                    className="w-3.5 h-3.5 shrink-0 ml-2"
+                    fill="none" viewBox="0 0 12 12"
+                    animate={{ rotate: isOpen ? 90 : 0 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    style={{ color: isOpen ? "#D4AF36" : "rgba(0,20,137,0.3)" }}
+                  >
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </motion.svg>
+                </motion.div>
+
+                {/* Drawer content — slides open */}
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ type: "spring", stiffness: 280, damping: 32, opacity: { duration: 0.2 } }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <div
+                        className="grid grid-cols-1 sm:grid-cols-[1fr_340px]"
+                        style={{
+                          background: "#F0F3FA",
+                          borderTop: "1px solid #C8CEDF",
+                          marginLeft: 8,
+                        }}
+                      >
+                        {/* Text content */}
+                        <div className="p-8 flex flex-col justify-between gap-6">
+                          <div>
+                            <p className="text-[#D4AF36] text-[9px] tracking-[0.3em] uppercase font-medium mb-3">
+                              Area of Practice — {item.tag}
+                            </p>
+                            <p className="text-black/60 text-sm leading-[1.75] max-w-md">
+                              {item.desc}
+                            </p>
+                          </div>
+                          <a
+                            href="#contact"
+                            className="self-start inline-flex items-center gap-2.5 text-[#001489] text-[10px] tracking-[0.2em] uppercase font-semibold border-b border-[#D4AF36]/50 pb-0.5 hover:border-[#D4AF36] transition-colors duration-200"
+                          >
+                            <span>Enquire About This Practice</span>
+                            <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+                              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                            </svg>
+                          </a>
+                        </div>
+
+                        {/* Image */}
+                        <div className="hidden sm:block relative overflow-hidden" style={{ minHeight: 220 }}>
+                          <img
+                            src={item.img}
+                            alt={item.title}
+                            className="absolute inset-0 w-full h-full object-cover"
+                            style={{ opacity: 0.75 }}
+                          />
+                          <div
+                            className="absolute inset-0"
+                            style={{ background: "linear-gradient(to right, #F0F3FA 0%, transparent 35%)" }}
+                          />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            </motion.div>
-          ))}
-        </div>
+            );
+          })}
+
+          {/* Cabinet base */}
+          <div
+            style={{
+              height: 14,
+              background: "linear-gradient(to bottom, #C8CEDF, #B4BAC9)",
+              borderTop: "1px solid #B4BAC9",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.4)",
+            }}
+          />
+        </motion.div>
+
       </div>
     </section>
   );
@@ -1157,7 +1295,7 @@ function HomeV1Point8Inner() {
       <main>
         <HeroV15 />
         <DifferentiatorsV15 />
-        <PracticeAreasV15 />
+        <FilingCabinetV18 />
         <ContactFormV15 />
       </main>
       <FooterV15 />
