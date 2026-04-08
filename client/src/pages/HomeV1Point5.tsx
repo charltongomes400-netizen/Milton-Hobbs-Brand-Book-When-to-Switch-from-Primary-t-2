@@ -245,7 +245,7 @@ const TILE_BLUES = ["#000A4F", "#001489", "#0A1E6E"] as const;
 
 const tiles = Array.from({ length: TILE_COLS * TILE_ROWS }, (_, i) => ({
   color:      TILE_BLUES[i % 3],
-  delay:      parseFloat((Math.random() * 14).toFixed(2)),
+  delay:      parseFloat((Math.random() * 2).toFixed(2)),
   duration:   parseFloat((8 + Math.random() * 8).toFixed(2)),
   maxOpacity: activeCells.has(i) ? parseFloat((0.06 + Math.random() * 0.08).toFixed(2)) : 0,
 }));
