@@ -90,13 +90,16 @@ uploads/                   — CV file storage (disk, via multer)
 | `/home-v1.5` | White + gold (copy of v1.2) | Tile grid moved to LEFT (white) panel; 8-col square grid, 3-tone blues (`#000A4F` dark base, `#001489` medium, `#1A40FF` bright accent); tiles always visible (base opacity) and pulse to peak |
 
 ### v1.5 Tile System — Final
-- Mirrors `Hero.tsx` exactly: `TILE_COLS=8`, `TILE_ROWS=10` → 80 tiles filling the left panel
-- Each tile fills its grid cell completely (no centering/gap)
-- Colors alternate `#001489` / `#000A4F`; `maxOpacity` 0.04–0.16 (tuned for white bg)
-- Each tile animates `opacity: [0, maxOpacity, 0]` with `duration` 2.5–7s and staggered `delay` 0–9s
+- `TILE_COLS=8`, `TILE_ROWS=10` CSS grid; ~40 of 80 cells randomly activated (no two adjacent)
+- `buildNonAdjacentCells()` shuffles all indices, greedily selects cells whose up/down/left/right neighbors aren't already active
+- Each cell has `padding: 12%` — the inner square is smaller than the cell, guaranteeing whitespace between any two squares
+- Three blue tones: `#000A4F` (deep navy), `#001489` (royal), `#0A1E6E` (mid-navy)
+- Animation: `opacity: [0,0,peak,peak,0,0]` with `times: [0,.15,.30,.70,.85,1]` — slow fade in, 40% hold, slow fade out
+- Timing: `duration` 8–16s, `delay` 0–14s, easing `cubic-bezier(0.45,0,0.55,1)` (sine-like)
+- `maxOpacity` 0.06–0.14 for active cells, 0 for silent cells
 - Container masked `linear-gradient(to right, black 60%, transparent 82%)` — no bleed into diagonal
 - Right panel: building photo crossfade + vignette only (no tiles)
-- To tune density/speed: adjust `TILE_COLS`, `TILE_ROWS`, or the `maxOpacity`/`duration` formulas in `tiles`
+- Fully randomized on each page load; different cells, different timing
 
 ## Figma Sources
 - Brand Book: https://www.figma.com/design/Y5XBzCBRCZvxaKq1bzW0x7/Milton-Hobbs---Brand-Book

@@ -215,19 +215,40 @@ function HeaderV15() {
 /* ─── HERO ─────────────────────────────────────────────────────────────── */
 
 // Tile system — mirrors Hero.tsx pattern: dense grid, every cell pulses independently.
-// 8 cols × 10 rows = 80 tiles across the white left panel. Tiles fill their cells.
 const TILE_COLS = 8;
 const TILE_ROWS = 10;
 
-const tiles = Array.from({ length: TILE_COLS * TILE_ROWS }, (_, i) => {
-  const active = Math.random() < 0.5;
-  return {
-    color:      i % 2 === 0 ? "#001489" : "#000A4F",
-    delay:      parseFloat((Math.random() * 9).toFixed(2)),
-    duration:   parseFloat((2.5 + Math.random() * 4.5).toFixed(2)),
-    maxOpacity: active ? parseFloat((0.04 + Math.random() * 0.12).toFixed(2)) : 0,
-  };
-});
+function buildNonAdjacentCells(cols: number, rows: number): Set<number> {
+  const total = cols * rows;
+  const active = new Set<number>();
+  const order = Array.from({ length: total }, (_, i) => i);
+  for (let j = order.length - 1; j > 0; j--) {
+    const k = Math.floor(Math.random() * (j + 1));
+    [order[j], order[k]] = [order[k], order[j]];
+  }
+  for (const idx of order) {
+    const c = idx % cols;
+    const r = Math.floor(idx / cols);
+    const nb = [
+      r > 0 ? (r - 1) * cols + c : -1,
+      r < rows - 1 ? (r + 1) * cols + c : -1,
+      c > 0 ? r * cols + (c - 1) : -1,
+      c < cols - 1 ? r * cols + (c + 1) : -1,
+    ];
+    if (nb.every(n => n < 0 || !active.has(n))) active.add(idx);
+  }
+  return active;
+}
+
+const activeCells = buildNonAdjacentCells(TILE_COLS, TILE_ROWS);
+const TILE_BLUES = ["#000A4F", "#001489", "#0A1E6E"] as const;
+
+const tiles = Array.from({ length: TILE_COLS * TILE_ROWS }, (_, i) => ({
+  color:      TILE_BLUES[i % 3],
+  delay:      parseFloat((Math.random() * 14).toFixed(2)),
+  duration:   parseFloat((8 + Math.random() * 8).toFixed(2)),
+  maxOpacity: activeCells.has(i) ? parseFloat((0.06 + Math.random() * 0.08).toFixed(2)) : 0,
+}));
 
 const HERO_CYCLE_MS = 12000;
 
@@ -276,7 +297,7 @@ function HeroV15() {
       {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
       <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20 overflow-hidden">
 
-        {/* Tile grid — mirrors /home Hero pattern: 8×10 dense grid, each cell fades in/out */}
+        {/* Elegant tile grid — padded cells, non-adjacent, slow smooth fades */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -288,17 +309,19 @@ function HeroV15() {
           }}
         >
           {tiles.map((tile, i) => (
-            <motion.div
-              key={i}
-              style={{ backgroundColor: tile.color }}
-              animate={{ opacity: [0, tile.maxOpacity, 0] }}
-              transition={{
-                duration: tile.duration,
-                delay: tile.delay,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
+            <div key={i} style={{ padding: "12%" }}>
+              <motion.div
+                style={{ width: "100%", height: "100%", backgroundColor: tile.color }}
+                animate={{ opacity: [0, 0, tile.maxOpacity, tile.maxOpacity, 0, 0] }}
+                transition={{
+                  duration: tile.duration,
+                  delay: tile.delay,
+                  repeat: Infinity,
+                  ease: [0.45, 0, 0.55, 1],
+                  times: [0, 0.15, 0.30, 0.70, 0.85, 1],
+                }}
+              />
+            </div>
           ))}
         </div>
 
