@@ -707,7 +707,7 @@ function DifferentiatorsV15() {
       className="bg-[#FCFCFC] py-24 px-8 border-t border-[#E5EAF4]"
     >
       <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[5fr_6fr] gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[5fr_6fr] gap-12 lg:gap-16 items-start">
 
           {/* Left: card list */}
           <div
