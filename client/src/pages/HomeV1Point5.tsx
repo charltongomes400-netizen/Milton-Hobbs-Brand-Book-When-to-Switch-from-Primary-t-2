@@ -714,30 +714,28 @@ function DifferentiatorsV15() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-5 text-[16px]">
+            <p className="text-[#D4AF36]/70 text-[clamp(0.95rem,1.3vw,1.125rem)] mb-10 leading-[1.4]">
               {d.eyebrow}
             </p>
-            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-8 leading-[1.25]">
-              {d.headline}
-            </h2>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-1">
               {d.cards.map((card, i) => (
                 <button
                   key={i}
                   data-testid={`diff-card-${i}`}
                   onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
-                  className="group flex items-center gap-4 py-3.5 text-left border-b border-[#001489]/[0.08] last:border-b-0 focus:outline-none"
+                  className="group flex items-center gap-4 py-1.5 text-left focus:outline-none"
                 >
                   <motion.span
-                    className="w-0.5 flex-shrink-0 bg-[#001489] origin-top"
-                    animate={{ height: i === active ? 32 : 12, opacity: i === active ? 1 : 0.2 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="w-[3px] flex-shrink-0 self-stretch bg-[#D4AF36]"
+                    animate={{ opacity: i === active ? 1 : 0, scaleY: i === active ? 1 : 0 }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                    style={{ originY: 0.5 }}
                   />
                   <motion.span
-                    className="font-heading font-semibold leading-tight"
+                    className="font-heading font-semibold leading-[1.15]"
                     animate={{
-                      color: i === active ? "#001489" : "rgba(0,20,137,0.28)",
-                      fontSize: i === active ? "clamp(1rem, 1.6vw, 1.375rem)" : "clamp(0.875rem, 1.2vw, 1.1rem)",
+                      color: i === active ? "#001489" : "rgba(0,20,137,0.22)",
+                      fontSize: i === active ? "clamp(1.75rem, 2.8vw, 2.5rem)" : "clamp(1.5rem, 2.4vw, 2.125rem)",
                     }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
                   >
@@ -798,15 +796,15 @@ function DifferentiatorsV15() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="pt-8"
               >
-                <h3 className="font-heading text-[#001489] text-[1.125rem] font-semibold mb-2 leading-[1.3]">
+                <h3 className="font-heading text-[#001489] text-[clamp(1.125rem,1.5vw,1.375rem)] font-semibold mb-3 leading-[1.3]">
                   {d.cards[active].title}
                 </h3>
-                <p className="text-black/55 text-sm leading-[1.55] mb-6 max-w-md">
+                <p className="text-black/50 text-[0.9rem] leading-[1.6] mb-7 max-w-md">
                   {d.cards[active].description}
                 </p>
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-3 bg-[#001489] text-white text-xs tracking-[0.18em] uppercase font-bold px-7 py-4 hover:bg-[#001070] transition-colors"
+                  className="inline-flex items-center gap-3 border border-[#001489] text-[#001489] text-xs tracking-[0.18em] uppercase font-semibold px-7 py-3.5 hover:bg-[#001489] hover:text-white transition-colors"
                 >
                   <span>{d.learnMore}</span>
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
