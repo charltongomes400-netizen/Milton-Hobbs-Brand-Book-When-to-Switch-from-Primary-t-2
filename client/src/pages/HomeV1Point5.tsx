@@ -707,17 +707,17 @@ function DifferentiatorsV15() {
       className="bg-[#FCFCFC] py-28 px-8 border-t border-[#E5EAF4]"
     >
       <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
 
           {/* Left: card list */}
           <div
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-10 text-[16px]">
+            <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-5 text-[16px]">
               {d.eyebrow}
             </p>
-            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25]">
+            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-8 leading-[1.25]">
               {d.headline}
             </h2>
             <div className="flex flex-col">
@@ -726,7 +726,7 @@ function DifferentiatorsV15() {
                   key={i}
                   data-testid={`diff-card-${i}`}
                   onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
-                  className="group flex items-center gap-5 py-4 text-left border-b border-[#001489]/[0.08] last:border-b-0 focus:outline-none"
+                  className="group flex items-center gap-4 py-3.5 text-left border-b border-[#001489]/[0.08] last:border-b-0 focus:outline-none"
                 >
                   <motion.span
                     className="w-0.5 flex-shrink-0 bg-[#001489] origin-top"
@@ -798,10 +798,10 @@ function DifferentiatorsV15() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="pt-8"
               >
-                <h3 className="font-heading text-[#001489] text-[1.125rem] font-semibold mb-3 leading-[1.3]">
+                <h3 className="font-heading text-[#001489] text-[1.125rem] font-semibold mb-2 leading-[1.3]">
                   {d.cards[active].title}
                 </h3>
-                <p className="text-black/55 text-sm leading-[1.4] mb-7 max-w-sm">
+                <p className="text-black/55 text-sm leading-[1.55] mb-6 max-w-md">
                   {d.cards[active].description}
                 </p>
                 <a
