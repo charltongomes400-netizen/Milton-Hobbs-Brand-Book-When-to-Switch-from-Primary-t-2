@@ -304,24 +304,24 @@ function HeroV15() {
             display: "grid",
             gridTemplateColumns: `repeat(${TILE_COLS}, 1fr)`,
             gridTemplateRows: `repeat(${TILE_ROWS}, 1fr)`,
+            gap: "0.5vw",
             WebkitMaskImage: "linear-gradient(to right, black 0%, black 60%, transparent 82%)",
             maskImage: "linear-gradient(to right, black 0%, black 60%, transparent 82%)",
           }}
         >
           {tiles.map((tile, i) => (
-            <div key={i} style={{ padding: "6%" }}>
-              <motion.div
-                style={{ width: "100%", height: "100%", backgroundColor: tile.color }}
-                animate={{ opacity: [0, 0, tile.maxOpacity, tile.maxOpacity, 0, 0] }}
-                transition={{
-                  duration: tile.duration,
-                  delay: tile.delay,
-                  repeat: Infinity,
-                  ease: [0.45, 0, 0.55, 1],
-                  times: [0, 0.15, 0.30, 0.70, 0.85, 1],
-                }}
-              />
-            </div>
+            <motion.div
+              key={i}
+              style={{ backgroundColor: tile.color }}
+              animate={{ opacity: [0, 0, tile.maxOpacity, tile.maxOpacity, 0, 0] }}
+              transition={{
+                duration: tile.duration,
+                delay: tile.delay,
+                repeat: Infinity,
+                ease: [0.45, 0, 0.55, 1],
+                times: [0, 0.15, 0.30, 0.70, 0.85, 1],
+              }}
+            />
           ))}
         </div>
 
