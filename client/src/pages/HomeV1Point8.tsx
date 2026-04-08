@@ -1494,7 +1494,7 @@ function PracticeAreasV18() {
           </p>
           <h2
             className="font-heading font-bold"
-            style={{ color: "#1A1F4E", fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.15 }}
+            style={{ color: "#001489", fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.15 }}
           >
             Areas of Practice
           </h2>
