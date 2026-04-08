@@ -309,7 +309,7 @@ function HeroV15() {
           }}
         >
           {tiles.map((tile, i) => (
-            <div key={i} style={{ padding: "12%" }}>
+            <div key={i} style={{ padding: "6%" }}>
               <motion.div
                 style={{ width: "100%", height: "100%", backgroundColor: tile.color }}
                 animate={{ opacity: [0, 0, tile.maxOpacity, tile.maxOpacity, 0, 0] }}
