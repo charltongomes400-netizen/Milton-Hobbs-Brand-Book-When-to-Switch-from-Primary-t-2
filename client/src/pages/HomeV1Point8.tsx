@@ -1512,8 +1512,8 @@ function PracticeAreasV18() {
                   flex: isActive ? 5 : 1,
                   transition: "flex 0.55s cubic-bezier(0.4, 0, 0.2, 1)",
                   background: isActive
-                    ? "linear-gradient(160deg, #1A1F4E 0%, #141838 40%, #222861 100%)"
-                    : "linear-gradient(160deg, #1A1F4E 0%, #141838 50%, #0D1035 100%)",
+                    ? "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)"
+                    : "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)",
                   borderRight: i < EXPERTISE_ITEMS_V18.length - 1
                     ? "1px solid rgba(198,169,98,0.18)"
                     : "none",
@@ -1585,7 +1585,7 @@ function PracticeAreasV18() {
                   />
                   <div
                     className="absolute inset-0"
-                    style={{ background: "linear-gradient(160deg, rgba(26,31,78,0.88) 0%, rgba(20,24,56,0.92) 40%, rgba(34,40,97,0.85) 100%)" }}
+                    style={{ background: "linear-gradient(160deg, rgba(0,16,112,0.82) 0%, rgba(0,10,70,0.88) 40%, rgba(0,20,137,0.78) 100%)" }}
                   />
 
                   <div className="relative z-10 p-9 flex flex-col h-full justify-between">
@@ -1679,7 +1679,7 @@ function PracticeAreasV18() {
                     >
                       <div
                         className="px-5 pb-5"
-                        style={{ background: "linear-gradient(160deg, #1A1F4E 0%, #141838 40%, #222861 100%)" }}
+                        style={{ background: "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)" }}
                       >
                         <p style={{ color: "rgba(255,255,255,0.52)", fontSize: "0.875rem", lineHeight: 1.7, paddingTop: 16, marginBottom: 16 }}>
                           {item.desc}
