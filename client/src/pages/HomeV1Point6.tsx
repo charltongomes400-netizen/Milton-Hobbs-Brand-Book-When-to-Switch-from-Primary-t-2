@@ -102,7 +102,7 @@ function HeaderV15() {
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
               className="text-[16px] tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300"
               style={{ color: "#001489" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#000000")}
+              onMouseEnter={e => (e.currentTarget.style.color = "#7A84BE")}
               onMouseLeave={e => (e.currentTarget.style.color = "#001489")}
             >
               {link.label}
@@ -124,7 +124,7 @@ function HeaderV15() {
               data-testid="lang-en"
               className="px-4 py-2 transition-all duration-200"
               style={lang === "EN"
-                ? { background: "#000000", color: "#000A4F", fontWeight: 600 }
+                ? { background: "#7A84BE", color: "#000A4F", fontWeight: 600 }
                 : { color: "rgba(0,20,137,0.50)" }
               }
             >
@@ -135,7 +135,7 @@ function HeaderV15() {
               data-testid="lang-fr"
               className="px-4 py-2 transition-all duration-200"
               style={lang === "FR"
-                ? { background: "#000000", color: "#000A4F", fontWeight: 600 }
+                ? { background: "#7A84BE", color: "#000A4F", fontWeight: 600 }
                 : { color: "rgba(0,20,137,0.50)" }
               }
             >
@@ -191,7 +191,7 @@ function HeaderV15() {
                   onClick={() => setLang("EN")}
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "EN"
-                    ? { background: "#000000", color: "#000A4F", fontWeight: 600 }
+                    ? { background: "#7A84BE", color: "#000A4F", fontWeight: 600 }
                     : { color: "rgba(0,20,137,0.50)" }
                   }
                 >EN</button>
@@ -199,7 +199,7 @@ function HeaderV15() {
                   onClick={() => setLang("FR")}
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "FR"
-                    ? { background: "#000000", color: "#000A4F", fontWeight: 600 }
+                    ? { background: "#7A84BE", color: "#000A4F", fontWeight: 600 }
                     : { color: "rgba(0,20,137,0.50)" }
                   }
                 >FR</button>
@@ -344,12 +344,12 @@ function HeroV15() {
             {/* Gold accent line + Eyebrow */}
             <div className="flex items-center gap-3 mb-5">
               <motion.div
-                style={{ width: 1, height: 32, background: "#000000", flexShrink: 0 }}
+                style={{ width: 1, height: 32, background: "#7A84BE", flexShrink: 0 }}
                 animate={{ opacity: [0.3, 1, 0.3] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
               <p
-                className="text-[#000000] tracking-[0.22em] uppercase font-medium text-[16px]"
+                className="text-[#7A84BE] tracking-[0.22em] uppercase font-medium text-[16px]"
                 data-testid="hero-eyebrow"
               >
                 {featuredArticle?.category}
@@ -369,9 +369,9 @@ function HeroV15() {
             <a
               href={`/insights/${featuredSlug}`}
               data-testid="hero-read-link"
-              className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#000000] transition-colors duration-300"
+              className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#7A84BE] transition-colors duration-300"
             >
-              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#000000]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
+              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#7A84BE]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
               <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
                 <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
               </svg>
@@ -398,7 +398,7 @@ function HeroV15() {
                 width:           i === currentIndex ? 20 : 7,
                 height:          7,
                 borderRadius:    i === currentIndex ? 4 : "50%",
-                backgroundColor: i === currentIndex ? "#000000" : "transparent",
+                backgroundColor: i === currentIndex ? "#7A84BE" : "transparent",
                 border:          i === currentIndex ? "none" : "1px solid rgba(0,20,137,0.22)",
               }}
             />
@@ -475,11 +475,11 @@ function FounderVisual() {
         );
       })}
       <circle cx={cx} cy={cy} r={outerR} stroke="rgba(255,255,255,1)" strokeOpacity={0.15} strokeWidth={1} fill="none" />
-      <circle cx={cx} cy={cy} r={innerR} stroke="#000000" strokeOpacity={0.4} strokeWidth={1} fill="none" />
-      <circle cx={cx} cy={cy} r={8} fill="#000000" fillOpacity={0.95} />
+      <circle cx={cx} cy={cy} r={innerR} stroke="#7A84BE" strokeOpacity={0.4} strokeWidth={1} fill="none" />
+      <circle cx={cx} cy={cy} r={8} fill="#7A84BE" fillOpacity={0.95} />
       <motion.circle
         cx={cx} cy={cy} r={innerR}
-        stroke="#000000" strokeWidth={1} fill="none"
+        stroke="#7A84BE" strokeWidth={1} fill="none"
         animate={{ scale: [1, 1.6, 1], opacity: [0.4, 0, 0.4] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
         style={{ transformOrigin: `${cx}px ${cy}px` }}
@@ -538,7 +538,7 @@ function PrecisionVisual() {
       {[88, 64, 44].map((r, i) => (
         <circle
           key={i} cx={CX} cy={CY} r={r} fill="none"
-          stroke={locked ? "#000000" : "rgba(255,255,255,1)"}
+          stroke={locked ? "#7A84BE" : "rgba(255,255,255,1)"}
           strokeOpacity={locked ? 0.18 + i * 0.1 : 0.14 + i * 0.08}
           strokeWidth={1}
           style={{ transition: "stroke 0.4s, stroke-opacity 0.4s" }}
@@ -547,7 +547,7 @@ function PrecisionVisual() {
       <line x1={CX} y1={30} x2={CX} y2={230} stroke="rgba(255,255,255,1)" strokeOpacity={0.18} strokeWidth={1} />
       <line x1={40} y1={CY} x2={280} y2={CY} stroke="rgba(255,255,255,1)" strokeOpacity={0.18} strokeWidth={1} />
       <circle cx={CX} cy={CY} r={4}
-        fill={locked ? "#000000" : "rgba(255,255,255,1)"}
+        fill={locked ? "#7A84BE" : "rgba(255,255,255,1)"}
         fillOpacity={locked ? 1 : 0.55}
         style={{ transition: "fill 0.3s, fill-opacity 0.3s" }}
       />
@@ -556,7 +556,7 @@ function PrecisionVisual() {
           <motion.circle
             key={flashKey}
             cx={CX} cy={CY} r={22}
-            stroke="#000000" strokeWidth={2} fill="none"
+            stroke="#7A84BE" strokeWidth={2} fill="none"
             initial={{ scale: 1, opacity: 0.9 }}
             animate={{ scale: 2.2, opacity: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
@@ -565,18 +565,18 @@ function PrecisionVisual() {
         </AnimatePresence>
       )}
       <motion.g style={{ x: rx, y: ry }}>
-        <circle cx={CX} cy={CY} r={22} stroke="#000000" strokeWidth={1.5} fill="none" strokeOpacity={0.9} />
-        <path d={`M${CX-22} ${CY-9} L${CX-22} ${CY-22} L${CX-9} ${CY-22}`} stroke="#000000" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX+9} ${CY-22} L${CX+22} ${CY-22} L${CX+22} ${CY-9}`} stroke="#000000" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX+22} ${CY+9} L${CX+22} ${CY+22} L${CX+9} ${CY+22}`} stroke="#000000" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX-9} ${CY+22} L${CX-22} ${CY+22} L${CX-22} ${CY+9}`} stroke="#000000" strokeWidth={1.5} fill="none" />
-        <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="#000000" strokeWidth={1} strokeOpacity={0.7} />
-        <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="#000000" strokeWidth={1} strokeOpacity={0.7} />
+        <circle cx={CX} cy={CY} r={22} stroke="#7A84BE" strokeWidth={1.5} fill="none" strokeOpacity={0.9} />
+        <path d={`M${CX-22} ${CY-9} L${CX-22} ${CY-22} L${CX-9} ${CY-22}`} stroke="#7A84BE" strokeWidth={1.5} fill="none" />
+        <path d={`M${CX+9} ${CY-22} L${CX+22} ${CY-22} L${CX+22} ${CY-9}`} stroke="#7A84BE" strokeWidth={1.5} fill="none" />
+        <path d={`M${CX+22} ${CY+9} L${CX+22} ${CY+22} L${CX+9} ${CY+22}`} stroke="#7A84BE" strokeWidth={1.5} fill="none" />
+        <path d={`M${CX-9} ${CY+22} L${CX-22} ${CY+22} L${CX-22} ${CY+9}`} stroke="#7A84BE" strokeWidth={1.5} fill="none" />
+        <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="#7A84BE" strokeWidth={1} strokeOpacity={0.7} />
+        <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="#7A84BE" strokeWidth={1} strokeOpacity={0.7} />
       </motion.g>
       {locked && (
         <motion.text
           x={CX + 30} y={CY - 28}
-          fill="#000000" fontSize="8" fontFamily="monospace" letterSpacing="0.15em"
+          fill="#7A84BE" fontSize="8" fontFamily="monospace" letterSpacing="0.15em"
           initial={{ opacity: 0 }} animate={{ opacity: [0, 0.8, 0.8, 0] }}
           transition={{ duration: 2.2, times: [0, 0.15, 0.85, 1] }}
         >
@@ -605,7 +605,7 @@ function CrossBorderVisual() {
       {paths.map((p, i) => (
         <motion.path
           key={i} d={p.d}
-          stroke={i < 2 ? "#000000" : "rgba(255,255,255,1)"}
+          stroke={i < 2 ? "#7A84BE" : "rgba(255,255,255,1)"}
           strokeOpacity={i < 2 ? 0.5 : 0.30}
           strokeWidth={i < 2 ? 1.2 : 1}
           strokeDasharray="220"
@@ -622,10 +622,10 @@ function CrossBorderVisual() {
           >{n.label}</text>
         </g>
       ))}
-      <circle cx={160} cy={130} r={7} fill="#000000" fillOpacity={0.95} />
+      <circle cx={160} cy={130} r={7} fill="#7A84BE" fillOpacity={0.95} />
       <motion.circle
         cx={160} cy={130} r={18}
-        stroke="#000000" strokeWidth={1} fill="none"
+        stroke="#7A84BE" strokeWidth={1} fill="none"
         animate={{ scale: [1, 1.5, 1], opacity: [0.4, 0, 0.4] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
         style={{ transformOrigin: "160px 130px" }}
@@ -645,7 +645,7 @@ function DiscretionVisual() {
         return (
           <motion.circle
             key={i} cx={cx} cy={cy} r={r}
-            stroke={i === rings.length - 1 ? "#000000" : "rgba(255,255,255,1)"}
+            stroke={i === rings.length - 1 ? "#7A84BE" : "rgba(255,255,255,1)"}
             strokeOpacity={i === rings.length - 1 ? 0.7 : 0.12 + i * 0.07}
             strokeWidth={1}
             strokeDasharray={`${circumference * (1 - gap)} ${circumference * gap}`}
@@ -658,13 +658,13 @@ function DiscretionVisual() {
       })}
       <motion.rect
         x={cx - 7} y={cy - 4} width={14} height={11}
-        stroke="#000000" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
+        stroke="#7A84BE" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
         animate={{ opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.path
         d={`M${cx-4} ${cy-4} Q${cx-4} ${cy-11} ${cx} ${cy-11} Q${cx+4} ${cy-11} ${cx+4} ${cy-4}`}
-        stroke="#000000" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
+        stroke="#7A84BE" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
         animate={{ opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -714,7 +714,7 @@ function DifferentiatorsV15() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <p className="text-[#000000] tracking-[0.3em] uppercase font-medium mb-3 text-[16px]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
+            <p className="text-[#7A84BE] tracking-[0.3em] uppercase font-medium mb-3 text-[16px]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
               {d.eyebrow}
             </p>
             <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
@@ -729,7 +729,7 @@ function DifferentiatorsV15() {
                   className="group flex items-center gap-4 py-1.5 text-left focus:outline-none"
                 >
                   <motion.span
-                    className="w-[3px] flex-shrink-0 self-stretch bg-[#000000]"
+                    className="w-[3px] flex-shrink-0 self-stretch bg-[#7A84BE]"
                     animate={{ opacity: i === active ? 1 : 0, scaleY: i === active ? 1 : 0 }}
                     transition={{ duration: 0.35, ease: "easeOut" }}
                     style={{ originY: 0.5 }}
@@ -832,10 +832,10 @@ const cardImages = [imgCorp, imgEstate, imgLitig, imgArb, imgEmploy, imgBank, im
 function BorderTrace() {
   return (
     <span className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-      <span className="absolute top-0 left-0 right-0 h-px bg-[#000000] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-      <span className="absolute top-0 right-0 bottom-0 w-px bg-[#000000] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
-      <span className="absolute bottom-0 left-0 right-0 h-px bg-[#000000] origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" />
-      <span className="absolute top-0 left-0 bottom-0 w-px bg-[#000000] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-300" />
+      <span className="absolute top-0 left-0 right-0 h-px bg-[#7A84BE] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+      <span className="absolute top-0 right-0 bottom-0 w-px bg-[#7A84BE] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
+      <span className="absolute bottom-0 left-0 right-0 h-px bg-[#7A84BE] origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-200" />
+      <span className="absolute top-0 left-0 bottom-0 w-px bg-[#7A84BE] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-300" />
     </span>
   );
 }
@@ -859,7 +859,7 @@ function PracticeAreasV15() {
           className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6"
         >
           <div>
-            <p className="text-[#000000] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
+            <p className="text-[#7A84BE] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
               {p.eyebrow}
             </p>
             <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
@@ -888,7 +888,7 @@ function PracticeAreasV15() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#000A3D]/95 via-[#001070]/55 to-[#001489]/20" />
               <BorderTrace />
-              <span className="absolute top-6 left-7 text-[#000000] text-[10px] tracking-[0.25em] uppercase font-medium">
+              <span className="absolute top-6 left-7 text-[#7A84BE] text-[10px] tracking-[0.25em] uppercase font-medium">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className="absolute inset-x-0 bottom-0 px-7 pb-7 flex flex-col">
@@ -899,8 +899,8 @@ function PracticeAreasV15() {
                   <p className="text-white/65 text-sm leading-[1.4] pt-2">{item.description}</p>
                 </div>
                 <div className="flex items-center gap-2 pt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
-                  <span className="text-[#000000] text-[10px] tracking-[0.2em] uppercase font-medium">{p.learnMore}</span>
-                  <svg className="w-3 h-3 text-[#000000]" fill="none" viewBox="0 0 12 12">
+                  <span className="text-[#7A84BE] text-[10px] tracking-[0.2em] uppercase font-medium">{p.learnMore}</span>
+                  <svg className="w-3 h-3 text-[#7A84BE]" fill="none" viewBox="0 0 12 12">
                     <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" />
                   </svg>
                 </div>
@@ -950,7 +950,7 @@ function ContactFormV15() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <p className="text-[#000000] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
+          <p className="text-[#7A84BE] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
             {c.eyebrow}
           </p>
           <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
@@ -969,7 +969,7 @@ function ContactFormV15() {
             <p className="text-black/55 text-sm leading-[1.4]">{c.subtext}</p>
 
             <div>
-              <p className="text-[#000000] tracking-[0.25em] uppercase font-medium mb-5 text-[12px]">
+              <p className="text-[#7A84BE] tracking-[0.25em] uppercase font-medium mb-5 text-[12px]">
                 {c.officeLabel}
               </p>
               <div className="flex flex-col gap-6">
@@ -979,7 +979,7 @@ function ContactFormV15() {
                     <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
                   ))}
                   <a href="tel:+97145232421" data-testid="contact-address-phone-dubai"
-                    className="text-black/45 text-xs hover:text-[#000000] transition-colors">
+                    className="text-black/45 text-xs hover:text-[#7A84BE] transition-colors">
                     +971 4 523 2421
                   </a>
                 </div>
@@ -989,7 +989,7 @@ function ContactFormV15() {
                     <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
                   ))}
                   <a href="tel:+33180270067" data-testid="contact-address-phone-paris"
-                    className="text-black/45 text-xs hover:text-[#000000] transition-colors">
+                    className="text-black/45 text-xs hover:text-[#7A84BE] transition-colors">
                     +33 1 80 27 00 67
                   </a>
                 </div>
@@ -997,11 +997,11 @@ function ContactFormV15() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <p className="text-[#000000] text-[10px] tracking-[0.25em] uppercase font-medium mb-1">
+              <p className="text-[#7A84BE] text-[10px] tracking-[0.25em] uppercase font-medium mb-1">
                 Email
               </p>
               <a href={`mailto:${f.email}`} data-testid="contact-email"
-                className="text-[#001489]/60 hover:text-[#000000] text-sm transition-colors">
+                className="text-[#001489]/60 hover:text-[#7A84BE] text-sm transition-colors">
                 {f.email}
               </a>
             </div>
@@ -1092,15 +1092,15 @@ function FooterV15() {
             </p>
             <div className="space-y-2">
               <a href={`mailto:${f.email}`} data-testid="footer-email"
-                className="block text-[#000000] text-sm hover:text-[#333333] transition-colors">
+                className="block text-[#7A84BE] text-sm hover:text-[#9BA3D0] transition-colors">
                 {f.email}
               </a>
               <a href={`tel:${f.phone}`} data-testid="footer-phone-dubai"
-                className="block text-white/40 text-sm hover:text-[#333333] transition-colors">
+                className="block text-white/40 text-sm hover:text-[#9BA3D0] transition-colors">
                 Dubai: {f.phone}
               </a>
               <a href="tel:+33180270067" data-testid="footer-phone-paris"
-                className="block text-white/40 text-sm hover:text-[#333333] transition-colors">
+                className="block text-white/40 text-sm hover:text-[#9BA3D0] transition-colors">
                 Paris: +33 1 80 27 00 67
               </a>
             </div>
