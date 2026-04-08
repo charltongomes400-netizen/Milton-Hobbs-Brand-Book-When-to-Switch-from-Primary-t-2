@@ -966,7 +966,7 @@ function ContactFormV15() {
             <p className="text-black/55 text-sm leading-[1.6]">{c.subtext}</p>
 
             <div>
-              <p className="text-[#7A84BE] tracking-[0.25em] uppercase font-medium mb-4 text-[12px]">
+              <p className="text-[#001489] text-[22px] tracking-[0.22em] uppercase font-bold mb-4">
                 {c.officeLabel}
               </p>
               <div className="flex flex-col gap-5">
