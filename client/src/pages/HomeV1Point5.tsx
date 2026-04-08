@@ -714,7 +714,7 @@ function DifferentiatorsV15() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-10 text-[16px]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
+            <p className="text-[#D4AF36] tracking-[0.3em] uppercase font-medium mb-3 text-[16px]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
               {d.eyebrow}
             </p>
             <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
