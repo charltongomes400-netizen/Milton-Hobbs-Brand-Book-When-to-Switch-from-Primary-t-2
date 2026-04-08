@@ -973,20 +973,20 @@ function ContactFormV15() {
                 <div>
                   <p className="text-[#001489] text-sm font-semibold mb-1">{c.dubaiLabel}</p>
                   {f.dubaiAddr.map((line, i) => (
-                    <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
+                    <p key={i} className="text-black/45 text-[14px] leading-[1.5]">{line}</p>
                   ))}
                   <a href="tel:+97145232421" data-testid="contact-address-phone-dubai"
-                    className="text-black/45 text-xs hover:text-[#7A84BE] transition-colors">
+                    className="text-black/45 text-[14px] hover:text-[#7A84BE] transition-colors">
                     +971 4 523 2421
                   </a>
                 </div>
                 <div>
                   <p className="text-[#001489] text-sm font-semibold mb-1">{c.parisLabel}</p>
                   {f.parisAddr.map((line, i) => (
-                    <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
+                    <p key={i} className="text-black/45 text-[14px] leading-[1.5]">{line}</p>
                   ))}
                   <a href="tel:+33180270067" data-testid="contact-address-phone-paris"
-                    className="text-black/45 text-xs hover:text-[#7A84BE] transition-colors">
+                    className="text-black/45 text-[14px] hover:text-[#7A84BE] transition-colors">
                     +33 1 80 27 00 67
                   </a>
                 </div>
@@ -998,7 +998,7 @@ function ContactFormV15() {
                 Email
               </p>
               <a href={`mailto:${f.email}`} data-testid="contact-email"
-                className="text-[#001489]/60 hover:text-[#7A84BE] text-sm transition-colors">
+                className="text-[#001489] font-semibold text-sm hover:text-[#7A84BE] transition-colors">
                 {f.email}
               </a>
             </div>
