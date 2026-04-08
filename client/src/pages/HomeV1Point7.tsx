@@ -53,8 +53,8 @@ function HeaderV15() {
       className="fixed top-0 left-0 right-0 z-50"
       style={{
         background: scrolled
-          ? "rgba(21,21,21,0.98)"
-          : "rgba(21,21,21,0.85)",
+          ? "rgba(21,21,21,0.82)"
+          : "rgba(21,21,21,0.55)",
         backdropFilter: scrolled
           ? "none"
           : "blur(24px) saturate(140%)",
