@@ -214,23 +214,22 @@ function HeaderV15() {
 
 /* ─── HERO ─────────────────────────────────────────────────────────────── */
 
-const COLS = 5;
-const TILE_ROWS = 9;
-
-// Three distinct blue tiers — dark navy, medium royal, electric accent
-// baseOp: always-visible tint; peakOp: pulsed brightness
-const tiles = Array.from({ length: COLS * TILE_ROWS }, (_, i) => {
-  const isBright = i % 29 === 7 || i % 41 === 3 || i % 37 === 15 || i % 53 === 22;
-  const isMedium = i % 7 === 2 || i % 11 === 5 || i % 13 === 8;
-  const color    = isBright ? "#1A40FF" : isMedium ? "#001489" : "#000A4F";
-  const baseOp   = isBright ? 0.10 : isMedium ? 0.05 : 0.02;
-  const peakOp   = isBright ? 0.35 : isMedium ? 0.20 : 0.08;
-  return {
-    color, baseOp, peakOp,
-    delay:    parseFloat(((i * 0.41 + (i % 7) * 0.29) % 14).toFixed(2)),
-    duration: parseFloat((5 + (i * 0.17 + (i % 5) * 0.33) % 8).toFixed(2)),
-  };
-});
+// Sparse hand-positioned squares for the white left panel
+// top/left in % of the panel; size in vw; covers full vertical range 5%→92%
+const SPARSE_SQUARES = [
+  { top: "5%",  left: "3%",  size: "8vw",  color: "#001489", baseOp: 0.06, peakOp: 0.20, dur: 10.0, delay: 0.0  },
+  { top: "9%",  left: "30%", size: "11vw", color: "#1A40FF", baseOp: 0.09, peakOp: 0.30, dur:  8.5, delay: 2.3  },
+  { top: "18%", left: "16%", size: "7vw",  color: "#000A4F", baseOp: 0.03, peakOp: 0.09, dur: 12.0, delay: 5.1  },
+  { top: "24%", left: "38%", size: "9vw",  color: "#001489", baseOp: 0.05, peakOp: 0.18, dur:  9.5, delay: 1.4  },
+  { top: "35%", left: "5%",  size: "12vw", color: "#000A4F", baseOp: 0.02, peakOp: 0.07, dur: 14.0, delay: 7.2  },
+  { top: "41%", left: "24%", size: "8vw",  color: "#1A40FF", baseOp: 0.08, peakOp: 0.28, dur:  7.5, delay: 3.8  },
+  { top: "53%", left: "11%", size: "10vw", color: "#001489", baseOp: 0.04, peakOp: 0.16, dur: 11.0, delay: 0.7  },
+  { top: "59%", left: "34%", size: "7vw",  color: "#000A4F", baseOp: 0.03, peakOp: 0.08, dur: 13.5, delay: 4.5  },
+  { top: "68%", left: "6%",  size: "9vw",  color: "#1A40FF", baseOp: 0.07, peakOp: 0.25, dur:  9.0, delay: 6.0  },
+  { top: "74%", left: "27%", size: "11vw", color: "#001489", baseOp: 0.05, peakOp: 0.17, dur: 10.5, delay: 2.9  },
+  { top: "83%", left: "9%",  size: "8vw",  color: "#000A4F", baseOp: 0.02, peakOp: 0.06, dur: 12.5, delay: 8.3  },
+  { top: "90%", left: "36%", size: "10vw", color: "#1A40FF", baseOp: 0.08, peakOp: 0.22, dur:  8.0, delay: 1.6  },
+];
 
 const HERO_CYCLE_MS = 12000;
 
@@ -279,28 +278,29 @@ function HeroV15() {
       {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
       <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20 overflow-hidden">
 
-        {/* Tile shimmer grid — white side, multi-tone blues */}
+        {/* Sparse squares — white side, scattered top-to-bottom */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-            gridTemplateRows: `repeat(${TILE_ROWS}, calc(50vw / ${COLS}))`,
-            alignContent: "start",
-            WebkitMaskImage: "linear-gradient(to right, black 0%, black 55%, transparent 82%)",
-            maskImage: "linear-gradient(to right, black 0%, black 55%, transparent 82%)",
+            WebkitMaskImage: "linear-gradient(to right, black 0%, black 55%, transparent 80%)",
+            maskImage: "linear-gradient(to right, black 0%, black 55%, transparent 80%)",
           }}
         >
-          {tiles.map((tile, i) => (
+          {SPARSE_SQUARES.map((sq, i) => (
             <motion.div
               key={i}
-              style={{ backgroundColor: tile.color }}
-              animate={{
-                opacity: [tile.baseOp, tile.peakOp, tile.baseOp],
+              style={{
+                position: "absolute",
+                top: sq.top,
+                left: sq.left,
+                width: sq.size,
+                height: sq.size,
+                backgroundColor: sq.color,
               }}
+              animate={{ opacity: [sq.baseOp, sq.peakOp, sq.baseOp] }}
               transition={{
-                duration: tile.duration * 2,
-                delay: tile.delay,
+                duration: sq.dur,
+                delay: sq.delay,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}

@@ -90,12 +90,13 @@ uploads/                   — CV file storage (disk, via multer)
 | `/home-v1.5` | White + gold (copy of v1.2) | Tile grid moved to LEFT (white) panel; 8-col square grid, 3-tone blues (`#000A4F` dark base, `#001489` medium, `#1A40FF` bright accent); tiles always visible (base opacity) and pulse to peak |
 
 ### v1.5 Tile Grid — Reference Style
-- Based on brand book reference: large squares, 3 distinct blue shades, always-on base tint, pulsing to peak
-- `COLS=5`, `TILE_ROWS=9`, `gridTemplateRows: calc(50vw / 5)` (true squares in 50%-wide panel)
-- Bright tiles `#1A40FF`: baseOp 0.10 → peakOp 0.35
-- Medium tiles `#001489`: baseOp 0.05 → peakOp 0.20
-- Dark base tiles `#000A4F`: baseOp 0.02 → peakOp 0.08
-- Right panel: building photo crossfade + vignette only (no tile grid)
+- 12 hand-positioned sparse squares via `SPARSE_SQUARES` array; absolute-positioned, no CSS grid
+- Cover full vertical range 5%→90% of the white left panel; sizes 7–12vw
+- Three blue shades: `#000A4F` (dark navy, baseOp 0.02–0.03), `#001489` (medium, baseOp 0.04–0.06), `#1A40FF` (electric accent, baseOp 0.07–0.09)
+- Each square has independent `dur` (7.5–14s) and `delay` (0–8.3s) for natural async pulsing
+- Container masked with `linear-gradient(to right, black 55%, transparent 80%)` to fade squares before the diagonal
+- Right panel: building photo crossfade + vignette only (no tiles)
+- Do NOT convert back to CSS grid; keep `SPARSE_SQUARES` array for individual tuning
 
 ## Figma Sources
 - Brand Book: https://www.figma.com/design/Y5XBzCBRCZvxaKq1bzW0x7/Milton-Hobbs---Brand-Book
