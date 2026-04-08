@@ -896,17 +896,17 @@ function PracticeAreasV17() {
                     pointerEvents: isActive ? "none" : "auto",
                   }}
                 >
-                  {/* Photo */}
+                  {/* Photo — low opacity */}
                   <img
                     src={item.img}
                     alt={item.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-                    style={{ transform: hovered === i ? "scale(1.05)" : "scale(1)" }}
+                    style={{ opacity: 0.28, transform: hovered === i ? "scale(1.05)" : "scale(1)" }}
                   />
-                  {/* Dark gradient overlay */}
+                  {/* Subtle gradient overlay */}
                   <div
                     className="absolute inset-0"
-                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.25) 100%)" }}
+                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.1) 100%)" }}
                   />
                   {/* Number top-center */}
                   <div className="relative z-10 pt-6 flex justify-center">
@@ -935,17 +935,17 @@ function PracticeAreasV17() {
                     minWidth: "340px",
                   }}
                 >
-                  {/* Background: photo at low opacity + gradient */}
+                  {/* Background: photo visible + blue gradient over it */}
                   <img
                     src={item.img}
                     alt=""
                     aria-hidden
                     className="absolute inset-0 w-full h-full object-cover"
-                    style={{ opacity: 0.12 }}
+                    style={{ opacity: 0.32 }}
                   />
                   <div
                     className="absolute inset-0"
-                    style={{ background: "linear-gradient(160deg, rgba(0,16,112,0.93) 0%, rgba(0,10,70,0.97) 40%, rgba(0,20,137,0.90) 100%)" }}
+                    style={{ background: "linear-gradient(160deg, rgba(0,16,112,0.82) 0%, rgba(0,10,70,0.88) 40%, rgba(0,20,137,0.78) 100%)" }}
                   />
 
                   {/* Content */}
