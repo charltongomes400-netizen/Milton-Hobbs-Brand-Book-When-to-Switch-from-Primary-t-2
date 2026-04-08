@@ -214,21 +214,24 @@ function HeaderV15() {
 
 /* ─── HERO ─────────────────────────────────────────────────────────────── */
 
-// Sparse hand-positioned squares for the white left panel
-// top/left in % of the panel; size in vw; covers full vertical range 5%→92%
-const SPARSE_SQUARES = [
-  { top: "5%",  left: "3%",  size: "8vw",  color: "#001489", baseOp: 0.06, peakOp: 0.20, dur: 10.0, delay: 0.0  },
-  { top: "9%",  left: "30%", size: "11vw", color: "#1A40FF", baseOp: 0.09, peakOp: 0.30, dur:  8.5, delay: 2.3  },
-  { top: "18%", left: "16%", size: "7vw",  color: "#000A4F", baseOp: 0.03, peakOp: 0.09, dur: 12.0, delay: 5.1  },
-  { top: "24%", left: "38%", size: "9vw",  color: "#001489", baseOp: 0.05, peakOp: 0.18, dur:  9.5, delay: 1.4  },
-  { top: "35%", left: "5%",  size: "12vw", color: "#000A4F", baseOp: 0.02, peakOp: 0.07, dur: 14.0, delay: 7.2  },
-  { top: "41%", left: "24%", size: "8vw",  color: "#1A40FF", baseOp: 0.08, peakOp: 0.28, dur:  7.5, delay: 3.8  },
-  { top: "53%", left: "11%", size: "10vw", color: "#001489", baseOp: 0.04, peakOp: 0.16, dur: 11.0, delay: 0.7  },
-  { top: "59%", left: "34%", size: "7vw",  color: "#000A4F", baseOp: 0.03, peakOp: 0.08, dur: 13.5, delay: 4.5  },
-  { top: "68%", left: "6%",  size: "9vw",  color: "#1A40FF", baseOp: 0.07, peakOp: 0.25, dur:  9.0, delay: 6.0  },
-  { top: "74%", left: "27%", size: "11vw", color: "#001489", baseOp: 0.05, peakOp: 0.17, dur: 10.5, delay: 2.9  },
-  { top: "83%", left: "9%",  size: "8vw",  color: "#000A4F", baseOp: 0.02, peakOp: 0.06, dur: 12.5, delay: 8.3  },
-  { top: "90%", left: "36%", size: "10vw", color: "#1A40FF", baseOp: 0.08, peakOp: 0.22, dur:  8.0, delay: 1.6  },
+// Grid-aligned squares: 4 cols × 6 rows covering the full panel height.
+// Each square is centered in its cell — cell padding ensures they never touch.
+// Square size = 7vw; cell = 12.5vw wide, so gap between any two squares ≥ 5.5vw.
+const GRID_COLS = 4;
+const GRID_ROWS = 6;
+const SQ_SIZE = "7vw";
+
+// 9 squares placed at non-adjacent cells, spread across all rows.
+const GRID_SQUARES = [
+  { col: 0, row: 0, color: "#001489", baseOp: 0.06, peakOp: 0.20, dur: 10.0, delay: 0.0 },
+  { col: 2, row: 0, color: "#1A40FF", baseOp: 0.09, peakOp: 0.30, dur:  8.5, delay: 3.2 },
+  { col: 3, row: 1, color: "#000A4F", baseOp: 0.03, peakOp: 0.09, dur: 12.0, delay: 5.7 },
+  { col: 1, row: 2, color: "#001489", baseOp: 0.05, peakOp: 0.18, dur:  9.5, delay: 1.4 },
+  { col: 0, row: 3, color: "#000A4F", baseOp: 0.03, peakOp: 0.08, dur: 13.5, delay: 7.1 },
+  { col: 3, row: 3, color: "#1A40FF", baseOp: 0.08, peakOp: 0.28, dur:  7.5, delay: 2.5 },
+  { col: 2, row: 4, color: "#001489", baseOp: 0.04, peakOp: 0.16, dur: 11.0, delay: 4.8 },
+  { col: 1, row: 5, color: "#000A4F", baseOp: 0.02, peakOp: 0.07, dur: 14.0, delay: 0.9 },
+  { col: 3, row: 5, color: "#1A40FF", baseOp: 0.07, peakOp: 0.24, dur:  9.0, delay: 6.3 },
 ];
 
 const HERO_CYCLE_MS = 12000;
@@ -278,33 +281,34 @@ function HeroV15() {
       {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
       <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20 overflow-hidden">
 
-        {/* Sparse squares — white side, scattered top-to-bottom */}
+        {/* Grid-aligned squares — same size, no overlap, full-height coverage */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            WebkitMaskImage: "linear-gradient(to right, black 0%, black 55%, transparent 80%)",
-            maskImage: "linear-gradient(to right, black 0%, black 55%, transparent 80%)",
+            display: "grid",
+            gridTemplateColumns: `repeat(${GRID_COLS}, 1fr)`,
+            gridTemplateRows: `repeat(${GRID_ROWS}, 1fr)`,
+            WebkitMaskImage: "linear-gradient(to right, black 0%, black 60%, transparent 82%)",
+            maskImage: "linear-gradient(to right, black 0%, black 60%, transparent 82%)",
           }}
         >
-          {SPARSE_SQUARES.map((sq, i) => (
-            <motion.div
+          {GRID_SQUARES.map((sq, i) => (
+            <div
               key={i}
               style={{
-                position: "absolute",
-                top: sq.top,
-                left: sq.left,
-                width: sq.size,
-                height: sq.size,
-                backgroundColor: sq.color,
+                gridColumn: sq.col + 1,
+                gridRow: sq.row + 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
-              animate={{ opacity: [sq.baseOp, sq.peakOp, sq.baseOp] }}
-              transition={{
-                duration: sq.dur,
-                delay: sq.delay,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
+            >
+              <motion.div
+                style={{ width: SQ_SIZE, height: SQ_SIZE, backgroundColor: sq.color }}
+                animate={{ opacity: [sq.baseOp, sq.peakOp, sq.baseOp] }}
+                transition={{ duration: sq.dur, delay: sq.delay, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
           ))}
         </div>
 
