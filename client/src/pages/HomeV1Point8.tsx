@@ -1521,7 +1521,7 @@ function PracticeAreasV18() {
                   transition: "flex 0.55s cubic-bezier(0.4, 0, 0.2, 1)",
                   background: isActive
                     ? "linear-gradient(160deg, #1A1F4E 0%, #141838 40%, #222861 100%)"
-                    : "#FAFAF7",
+                    : "linear-gradient(160deg, #1A1F4E 0%, #141838 50%, #0D1035 100%)",
                   borderRight: i < EXPERTISE_ITEMS_V18.length - 1
                     ? "1px solid rgba(198,169,98,0.18)"
                     : "none",
@@ -1544,16 +1544,16 @@ function PracticeAreasV18() {
                     src={item.img}
                     alt={item.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-                    style={{ opacity: 0.18, transform: hovered === i ? "scale(1.05)" : "scale(1)" }}
+                    style={{ opacity: 0.45, transform: hovered === i ? "scale(1.05)" : "scale(1)" }}
                   />
                   <div
                     className="absolute inset-0"
-                    style={{ background: "linear-gradient(to top, rgba(26,31,78,0.55) 0%, rgba(26,31,78,0.1) 55%, rgba(26,31,78,0.0) 100%)" }}
+                    style={{ background: "linear-gradient(to top, rgba(8,12,40,0.82) 0%, rgba(8,12,40,0.35) 55%, rgba(8,12,40,0.0) 100%)" }}
                   />
                   <div className="relative z-10 pt-6 flex justify-center">
                     <span
                       className="font-mono"
-                      style={{ fontSize: 10, letterSpacing: "0.2em", color: "rgba(198,169,98,0.7)" }}
+                      style={{ fontSize: 10, letterSpacing: "0.2em", color: "rgba(198,169,98,0.8)" }}
                     >
                       {item.num}
                     </span>
@@ -1564,7 +1564,7 @@ function PracticeAreasV18() {
                       style={{
                         fontSize: "0.65rem",
                         letterSpacing: "0.07em",
-                        color: "rgba(26,31,78,0.5)",
+                        color: "rgba(255,255,255,0.6)",
                         textOverflow: "ellipsis",
                         whiteSpace: "nowrap",
                       }}
