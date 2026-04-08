@@ -223,7 +223,8 @@ const tiles = Array.from({ length: TILE_COLS * TILE_ROWS }, (_, i) => ({
   color:      i % 2 === 0 ? "#001489" : "#000A4F",
   delay:      parseFloat(((i * 0.41 + (i % 7) * 0.29) % 9).toFixed(2)),
   duration:   parseFloat((2.5 + (i * 0.17 + (i % 5) * 0.33) % 4.5).toFixed(2)),
-  maxOpacity: parseFloat((0.04 + (i * 0.07 + (i % 11) * 0.04) % 0.14).toFixed(2)),
+  // Every other cell is permanently silent — 50% fewer active tiles, spread across whole panel
+  maxOpacity: i % 2 === 0 ? parseFloat((0.04 + (i * 0.07 + (i % 11) * 0.04) % 0.14).toFixed(2)) : 0,
 }));
 
 const HERO_CYCLE_MS = 12000;
