@@ -1490,7 +1490,7 @@ function PracticeAreasV18() {
           >
             Areas of Practice
           </h2>
-          <p style={{ color: "rgba(26,31,78,0.42)", fontSize: 14, marginTop: 14, maxWidth: 360, lineHeight: 1.6 }}>
+          <p style={{ color: "rgba(26,31,78,0.42)", fontSize: 14, marginTop: 14, maxWidth: 360, lineHeight: 1.6, paddingLeft: "calc(3px + 1rem)" }}>
             Across industries and borders, we deliver precision-crafted legal strategy.
           </p>
         </motion.div>
