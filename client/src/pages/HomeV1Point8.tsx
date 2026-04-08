@@ -1581,11 +1581,11 @@ function PracticeAreasV18() {
                     alt=""
                     aria-hidden
                     className="absolute inset-0 w-full h-full object-cover"
-                    style={{ opacity: 0.28 }}
+                    style={{ opacity: 0.52 }}
                   />
                   <div
                     className="absolute inset-0"
-                    style={{ background: "linear-gradient(160deg, rgba(0,16,112,0.82) 0%, rgba(0,10,70,0.88) 40%, rgba(0,20,137,0.78) 100%)" }}
+                    style={{ background: "linear-gradient(160deg, rgba(0,16,112,0.58) 0%, rgba(0,10,70,0.64) 40%, rgba(0,20,137,0.52) 100%)" }}
                   />
 
                   <div className="relative z-10 p-9 flex flex-col h-full justify-between">
