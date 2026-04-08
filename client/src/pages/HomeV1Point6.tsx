@@ -758,7 +758,7 @@ function DifferentiatorsV15() {
           >
             <div className="relative w-full overflow-hidden" style={{
               aspectRatio: "4/3",
-              borderRadius: "10px",
+              borderRadius: "0px",
               background: "linear-gradient(160deg, rgba(0,16,112,0.85) 0%, rgba(0,10,70,0.92) 40%, rgba(0,20,137,0.80) 100%)",
               backdropFilter: "blur(24px) saturate(1.5)",
               WebkitBackdropFilter: "blur(24px) saturate(1.5)",
