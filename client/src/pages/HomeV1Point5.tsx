@@ -214,7 +214,7 @@ function HeaderV15() {
 
 /* ─── HERO ─────────────────────────────────────────────────────────────── */
 
-// Tile system — mirrors Hero.tsx pattern: dense grid, every cell pulses independently.
+// Elegant tile system: 8×10 grid, ~40 non-adjacent cells fade in/out on slow random schedules.
 const TILE_COLS = 8;
 const TILE_ROWS = 10;
 
