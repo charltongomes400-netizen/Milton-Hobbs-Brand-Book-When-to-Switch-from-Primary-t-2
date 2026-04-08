@@ -714,7 +714,7 @@ function DifferentiatorsV15() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <p className="font-heading font-bold text-[#001489] text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.3] mb-8" style={{ letterSpacing: 0 }}>
+            <p className="font-heading italic font-medium text-[#001489] text-[clamp(1.125rem,1.6vw,1.375rem)] leading-[1.3] mb-10" style={{ letterSpacing: 0 }}>
               Why Milton Hobbs
             </p>
             <div className="flex flex-col gap-1">
@@ -856,7 +856,7 @@ function PracticeAreasV15() {
           className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-6"
         >
           <div>
-            <p className="font-heading font-bold text-[#001489] text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.3] mb-6" style={{ letterSpacing: 0 }}>
+            <p className="font-heading italic font-medium text-[#001489] text-[clamp(1.125rem,1.6vw,1.375rem)] leading-[1.3] mb-6" style={{ letterSpacing: 0 }}>
               {p.eyebrow}
             </p>
           </div>
@@ -944,7 +944,7 @@ function ContactFormV15() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <p className="font-heading font-bold text-[#001489] text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.3] mb-6" style={{ letterSpacing: 0 }}>
+          <p className="font-heading italic font-medium text-[#001489] text-[clamp(1.125rem,1.6vw,1.375rem)] leading-[1.3] mb-6" style={{ letterSpacing: 0 }}>
             {c.eyebrow}
           </p>
         </motion.div>
