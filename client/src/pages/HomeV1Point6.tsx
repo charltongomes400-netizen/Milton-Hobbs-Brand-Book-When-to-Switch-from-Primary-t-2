@@ -714,7 +714,7 @@ function DifferentiatorsV15() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <p className="font-heading font-bold text-[#001489] text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.3] mb-8" style={{ paddingLeft: "calc(3px + 1rem)", letterSpacing: 0 }}>
+            <p className="font-heading font-bold text-[#001489] text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.3] mb-8" style={{ letterSpacing: 0 }}>
               Why Milton Hobbs
             </p>
             <div className="flex flex-col gap-1">
