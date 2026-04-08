@@ -704,38 +704,43 @@ function DifferentiatorsV15() {
       id="firm"
       data-header-theme="light"
       data-testid="differentiators-section"
-      className="bg-[#FCFCFC] py-28 px-8 border-t border-[#E5EAF4]"
+      className="bg-[#FCFCFC] py-24 px-8 border-t border-[#E5EAF4]"
     >
       <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[5fr_6fr] gap-12 lg:gap-16 items-start">
 
           {/* Left: card list */}
           <div
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
+            className="flex flex-col"
           >
-            <p className="font-heading italic font-medium text-[#001489] text-[clamp(1.125rem,1.6vw,1.375rem)] leading-[1.3] mb-10" style={{ letterSpacing: 0 }}>
+            <p className="font-heading italic font-medium text-[#001489] text-[clamp(1rem,1.4vw,1.25rem)] leading-[1.3] mb-8" style={{ letterSpacing: 0 }}>
               Why Milton Hobbs
             </p>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-0">
               {d.cards.map((card, i) => (
                 <button
                   key={i}
                   data-testid={`diff-card-${i}`}
                   onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
-                  className="group flex items-center gap-4 py-1.5 text-left focus:outline-none"
+                  className="group flex items-center gap-4 py-2 text-left focus:outline-none"
                 >
                   <motion.span
-                    className="w-[3px] flex-shrink-0 self-stretch bg-[#7A84BE]"
-                    animate={{ opacity: i === active ? 1 : 0, scaleY: i === active ? 1 : 0 }}
+                    className="flex-shrink-0 self-stretch bg-[#7A84BE]"
+                    animate={{
+                      opacity: i === active ? 1 : 0,
+                      scaleY: i === active ? 1 : 0,
+                      width: i === active ? 3 : 3,
+                    }}
                     transition={{ duration: 0.35, ease: "easeOut" }}
-                    style={{ originY: 0.5 }}
+                    style={{ originY: 0.5, minWidth: 3 }}
                   />
                   <motion.span
                     className="font-heading font-semibold leading-[1.15]"
                     animate={{
                       color: i === active ? "#001489" : "rgba(0,20,137,0.22)",
-                      fontSize: i === active ? "clamp(1.75rem, 2.8vw, 2.5rem)" : "clamp(1.5rem, 2.4vw, 2.125rem)",
+                      fontSize: i === active ? "clamp(1.875rem, 3vw, 2.75rem)" : "clamp(1.5rem, 2.4vw, 2.125rem)",
                     }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
                   >
@@ -751,8 +756,9 @@ function DifferentiatorsV15() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div className="relative w-full overflow-hidden rounded-xl" style={{
+            <div className="relative w-full overflow-hidden" style={{
               aspectRatio: "4/3",
+              borderRadius: "10px",
               background: "linear-gradient(160deg, rgba(0,16,112,0.85) 0%, rgba(0,10,70,0.92) 40%, rgba(0,20,137,0.80) 100%)",
               backdropFilter: "blur(24px) saturate(1.5)",
               WebkitBackdropFilter: "blur(24px) saturate(1.5)",
@@ -794,17 +800,17 @@ function DifferentiatorsV15() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="pt-8"
+                className="pt-7"
               >
-                <h3 className="font-heading text-[#001489] text-[clamp(1.125rem,1.5vw,1.375rem)] font-semibold mb-3 leading-[1.3]">
+                <h3 className="font-heading text-[#001489] text-[clamp(1rem,1.4vw,1.25rem)] font-semibold mb-2.5 leading-[1.3]">
                   {d.cards[active].title}
                 </h3>
-                <p className="text-black/50 text-[0.9rem] leading-[1.6] mb-7 max-w-md">
+                <p className="text-black/50 text-[0.85rem] leading-[1.6] mb-6 max-w-md">
                   {d.cards[active].description}
                 </p>
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-3 border border-[#001489] text-[#001489] text-xs tracking-[0.18em] uppercase font-semibold px-7 py-3.5 hover:bg-[#001489] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-3 border border-[#001489] text-[#001489] text-[11px] tracking-[0.18em] uppercase font-semibold px-6 py-3 hover:bg-[#001489] hover:text-white transition-colors"
                 >
                   <span>{d.learnMore}</span>
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
