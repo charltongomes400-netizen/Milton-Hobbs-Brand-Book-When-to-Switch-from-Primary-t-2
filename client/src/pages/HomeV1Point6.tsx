@@ -717,7 +717,7 @@ function DifferentiatorsV15() {
             <p className="text-[#7A84BE] tracking-[0.3em] uppercase font-medium mb-3 text-[16px]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
               {d.eyebrow}
             </p>
-            <h2 className="font-heading text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25] text-[000000]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
+            <h2 className="font-heading text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25] text-[#000000]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
               {d.headline}
             </h2>
             <div className="flex flex-col gap-1">
