@@ -3,6 +3,14 @@ import { motion, AnimatePresence, useMotionValue, animate } from "framer-motion"
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { articles } from "@/data/articles";
 import miltonHobbsLogo from "@assets/Milton_hobbs_logo_1775554832004.png";
+import imgCorp   from "@assets/stock_images/corporate_commercial.jpg";
+import imgTax    from "@assets/stock_images/tax_planning.jpg";
+import imgBank   from "@assets/stock_images/banking_finance.jpg";
+import imgTech   from "@assets/stock_images/technology_startups.jpg";
+import imgIp     from "@assets/stock_images/intellectual_property.jpg";
+import imgEstate from "@assets/stock_images/real_estate.jpg";
+import imgEmploy from "@assets/stock_images/employment.jpg";
+import imgLitig  from "@assets/stock_images/litigation.jpg";
 import heroBg0 from "@assets/verne-ho-0LAJfSNa-xQ-unsplash_1775562755413.jpg";
 import heroBg1 from "@assets/tim-stief-dH6IjhWHNQQ-unsplash_1775562755413.jpg";
 import heroBg2 from "@assets/joakim-nadell-K67sBVqLLuw-unsplash_1775562755414.jpg";
@@ -816,14 +824,14 @@ function DifferentiatorsV15() {
 /* ─── PRACTICE AREAS ─────────────────────────────────────────────────────── */
 
 const EXPERTISE_ITEMS = [
-  { num: "01", title: "Corporate & Commercial",            desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors." },
-  { num: "02", title: "Tax & Compliance",                  desc: "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals." },
-  { num: "03", title: "Mergers & Acquisitions",            desc: "End-to-end advisory on M&A transactions, due diligence, valuations, and seamless post-merger integration across sectors." },
-  { num: "04", title: "Startups & Venture Capital",        desc: "Funding rounds, term sheets, shareholder agreements, and robust legal infrastructure for founders, operators, and investors." },
-  { num: "05", title: "Intellectual Property & Technology", desc: "Patent strategy, trademark registration, licensing structures, and data protection compliance across jurisdictions." },
-  { num: "06", title: "Real Estate & Property Law",        desc: "Cross-border property acquisitions, development financing, and sophisticated real estate structuring in the UAE and Europe." },
-  { num: "07", title: "Employment & Labor Law",            desc: "Employment contracts, executive compensation structures, workforce restructuring, and workplace dispute resolution." },
-  { num: "08", title: "Litigation & Dispute Resolution",   desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums." },
+  { num: "01", short: "Corporate",   title: "Corporate & Commercial",             desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors.",       img: imgCorp   },
+  { num: "02", short: "Tax",         title: "Tax & Compliance",                   desc: "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals.", img: imgTax    },
+  { num: "03", short: "M&A",         title: "Mergers & Acquisitions",             desc: "End-to-end advisory on M&A transactions, due diligence, valuations, and seamless post-merger integration across sectors.",               img: imgBank   },
+  { num: "04", short: "Startups",    title: "Startups & Venture Capital",         desc: "Funding rounds, term sheets, shareholder agreements, and robust legal infrastructure for founders, operators, and investors.",             img: imgTech   },
+  { num: "05", short: "IP & Tech",   title: "Intellectual Property & Technology", desc: "Patent strategy, trademark registration, licensing structures, and data protection compliance across jurisdictions.",                     img: imgIp     },
+  { num: "06", short: "Real Estate", title: "Real Estate & Property Law",         desc: "Cross-border property acquisitions, development financing, and sophisticated real estate structuring in the UAE and Europe.",              img: imgEstate },
+  { num: "07", short: "Employment",  title: "Employment & Labor Law",             desc: "Employment contracts, executive compensation structures, workforce restructuring, and workplace dispute resolution.",                       img: imgEmploy },
+  { num: "08", short: "Litigation",  title: "Litigation & Dispute Resolution",    desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums.",                     img: imgLitig  },
 ];
 
 function PracticeAreasV17() {
@@ -879,71 +887,96 @@ function PracticeAreasV17() {
                   minWidth: 0,
                 }}
               >
-                {/* Collapsed view: number + rotated title */}
+                {/* ── Collapsed: image bg + number + short horizontal label ── */}
                 <div
-                  className="absolute inset-0 flex flex-col items-center py-8 gap-6"
+                  className="absolute inset-0 flex flex-col"
                   style={{
                     opacity: isActive ? 0 : 1,
-                    transition: "opacity 0.2s ease",
+                    transition: "opacity 0.22s ease",
                     pointerEvents: isActive ? "none" : "auto",
                   }}
                 >
-                  <span
-                    className="font-mono text-[10px] tracking-[0.18em]"
-                    style={{ color: "rgba(122,132,190,0.55)" }}
-                  >
-                    {item.num}
-                  </span>
-                  <span
-                    className="font-heading font-semibold text-white/25 text-[0.8rem] tracking-[0.04em] flex-1 flex items-center"
-                    style={{
-                      writingMode: "vertical-rl",
-                      transform: "rotate(180deg)",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {item.title}
-                  </span>
+                  {/* Photo */}
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
+                    style={{ transform: hovered === i ? "scale(1.05)" : "scale(1)" }}
+                  />
+                  {/* Dark gradient overlay */}
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.25) 100%)" }}
+                  />
+                  {/* Number top-center */}
+                  <div className="relative z-10 pt-6 flex justify-center">
+                    <span className="font-mono text-[10px] tracking-[0.2em]" style={{ color: "rgba(122,132,190,0.75)" }}>
+                      {item.num}
+                    </span>
+                  </div>
+                  {/* Short label bottom — horizontal, no rotation */}
+                  <div className="relative z-10 mt-auto px-3 pb-6 text-center">
+                    <span
+                      className="font-heading font-semibold text-white/70 text-[0.65rem] tracking-[0.07em] uppercase block overflow-hidden"
+                      style={{ textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                    >
+                      {item.short}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Expanded view: full content */}
+                {/* ── Expanded: image behind blue gradient + full content ── */}
                 <div
-                  className="absolute inset-0 flex flex-col justify-between p-9"
+                  className="absolute inset-0 flex flex-col justify-between"
                   style={{
                     opacity: isActive ? 1 : 0,
-                    transition: "opacity 0.3s ease 0.2s",
+                    transition: "opacity 0.35s ease 0.18s",
                     pointerEvents: isActive ? "auto" : "none",
                     minWidth: "340px",
                   }}
                 >
-                  {/* Ghost number top */}
+                  {/* Background: photo at low opacity + gradient */}
+                  <img
+                    src={item.img}
+                    alt=""
+                    aria-hidden
+                    className="absolute inset-0 w-full h-full object-cover"
+                    style={{ opacity: 0.12 }}
+                  />
                   <div
-                    className="font-heading font-bold select-none leading-none"
-                    style={{ fontSize: "clamp(5rem,9vw,7.5rem)", color: "rgba(122,132,190,0.07)" }}
-                  >
-                    {item.num}
-                  </div>
+                    className="absolute inset-0"
+                    style={{ background: "linear-gradient(160deg, rgba(0,16,112,0.93) 0%, rgba(0,10,70,0.97) 40%, rgba(0,20,137,0.90) 100%)" }}
+                  />
 
-                  {/* Content bottom */}
-                  <div>
-                    <p className="text-[#EEF6FD]/45 text-[9px] tracking-[0.3em] uppercase font-medium mb-3">
-                      Area of Practice
-                    </p>
-                    <h3 className="font-heading text-[#FEFEFE] font-bold text-[1.3rem] leading-[1.2] mb-4" style={{ whiteSpace: "nowrap" }}>
-                      {item.title}
-                    </h3>
-                    <p className="text-white/50 text-[0.8rem] leading-[1.75] mb-7" style={{ maxWidth: "30ch" }}>
-                      {item.desc}
-                    </p>
-                    <a
-                      href="#contact"
-                      className="inline-flex items-center gap-2 text-[#EEF6FD] text-[9px] tracking-[0.22em] uppercase font-semibold border-b border-[#7A84BE]/40 pb-0.5 hover:border-[#EEF6FD]/55 transition-colors duration-200"
+                  {/* Content */}
+                  <div className="relative z-10 p-9 flex flex-col h-full justify-between">
+                    {/* Ghost number */}
+                    <div
+                      className="font-heading font-bold select-none leading-none"
+                      style={{ fontSize: "clamp(5rem,8vw,7rem)", color: "rgba(122,132,190,0.07)" }}
                     >
-                      <span>Enquire</span>
-                      <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12">
-                        <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-                      </svg>
-                    </a>
+                      {item.num}
+                    </div>
+                    <div>
+                      <p className="text-[#EEF6FD]/45 text-[9px] tracking-[0.3em] uppercase font-medium mb-3">
+                        Area of Practice
+                      </p>
+                      <h3 className="font-heading text-[#FEFEFE] font-bold text-[1.25rem] leading-[1.2] mb-4" style={{ whiteSpace: "nowrap" }}>
+                        {item.title}
+                      </h3>
+                      <p className="text-white/50 text-[0.8rem] leading-[1.75] mb-7" style={{ maxWidth: "30ch" }}>
+                        {item.desc}
+                      </p>
+                      <a
+                        href="#contact"
+                        className="inline-flex items-center gap-2 text-[#EEF6FD] text-[9px] tracking-[0.22em] uppercase font-semibold border-b border-[#7A84BE]/40 pb-0.5 hover:border-[#EEF6FD]/55 transition-colors duration-200"
+                      >
+                        <span>Enquire</span>
+                        <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12">
+                          <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
