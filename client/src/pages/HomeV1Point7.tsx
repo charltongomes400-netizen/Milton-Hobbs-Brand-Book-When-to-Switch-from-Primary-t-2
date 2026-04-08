@@ -234,7 +234,7 @@ function buildNonAdjacentCells(cols: number, rows: number): Set<number> {
 }
 
 const activeCells = buildNonAdjacentCells(TILE_COLS, TILE_ROWS);
-const TILE_BLUES = ["#000A4F", "#001489", "#0A1E6E"] as const;
+const TILE_BLUES = ["#7A84BE", "#6B75B2", "#8A93C8"] as const;
 
 const tiles = Array.from({ length: TILE_COLS * TILE_ROWS }, (_, i) => ({
   color:      TILE_BLUES[i % 3],
@@ -309,8 +309,8 @@ function HeroV15() {
                 backgroundColor: `${tile.color}33`,
                 backdropFilter: "blur(8px)",
                 WebkitBackdropFilter: "blur(8px)",
-                border: "1px solid rgba(0,20,137,0.06)",
-                boxShadow: "inset 0 0 12px rgba(0,20,137,0.04), 0 2px 8px rgba(0,20,137,0.03)",
+                border: "1px solid rgba(122,132,190,0.12)",
+                boxShadow: "inset 0 0 12px rgba(122,132,190,0.06), 0 2px 8px rgba(122,132,190,0.04)",
               }}
               animate={{ opacity: [0, 0, tile.maxOpacity * 3.5, tile.maxOpacity * 3.5, 0, 0] }}
               transition={{
