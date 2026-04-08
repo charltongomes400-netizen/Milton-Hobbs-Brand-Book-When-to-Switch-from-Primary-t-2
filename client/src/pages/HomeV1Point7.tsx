@@ -1070,7 +1070,7 @@ function FooterV15() {
   ];
 
   return (
-    <footer id="footer" data-testid="footer" className="bg-[#001489] border-t border-white/10">
+    <footer id="footer" data-testid="footer" className="border-t border-white/10" style={{ background: "linear-gradient(160deg, #001070 0%, #000A46 40%, #001489 100%)" }}>
       <div className="max-w-[1400px] mx-auto px-8">
         <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 border-b border-white/10">
           <div className="lg:col-span-5 lg:pr-16">
