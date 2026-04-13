@@ -262,9 +262,9 @@ function HeroV15() {
       id="home"
       data-testid="hero-section"
       className="relative min-h-screen overflow-hidden"
-      style={{ background: "#00081E" }}
+      style={{ background: "#001489" }}
     >
-      {/* ── Full-bleed architectural photo ──────────────────────────────── */}
+      {/* ── Full-bleed architectural photo — multiply blend over #001489 ── */}
       <AnimatePresence>
         <motion.img
           key={bgIndex}
@@ -272,22 +272,13 @@ function HeroV15() {
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-          style={{ objectPosition: "center 30%" }}
+          style={{ objectPosition: "center 30%", mixBlendMode: "multiply" }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.62 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 2.4, ease: "easeInOut" }}
         />
       </AnimatePresence>
-
-      {/* ── Deep blue colour wash ────────────────────────────────────────── */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "linear-gradient(160deg, rgba(0,6,38,0.58) 0%, rgba(0,10,50,0.52) 55%, rgba(0,6,30,0.72) 100%)",
-          mixBlendMode: "multiply",
-        }}
-      />
 
       {/* ── Scattered brand-blue accent tiles ───────────────────────────── */}
       {ACCENT_TILES.map((tile, i) => (
@@ -315,7 +306,7 @@ function HeroV15() {
         className="absolute inset-x-0 bottom-0 pointer-events-none"
         style={{
           height: "70%",
-          background: "linear-gradient(to top, rgba(0,6,30,0.88) 0%, rgba(0,6,30,0.55) 45%, transparent 100%)",
+          background: "linear-gradient(to top, rgba(0,14,80,0.80) 0%, rgba(0,14,80,0.40) 45%, transparent 100%)",
         }}
       />
 
