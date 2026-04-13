@@ -762,18 +762,17 @@ function DifferentiatorsV15() {
             style={{ paddingRight: "clamp(32px, 4vw, 72px)" }}
           >
             <p
-              className="font-sans"
-              style={{
-                color: "#4A58AA",
-                fontSize: "0.9375rem",
-                fontWeight: 500,
-                letterSpacing: "0.01em",
-                marginBottom: 44,
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-              }}
+              className="uppercase font-medium mb-3"
+              style={{ color: "#4A58AA", fontSize: 16, letterSpacing: "0.3em" }}
+            >
+              Our Firm
+            </p>
+            <h2
+              className="font-heading font-semibold text-[#001489] leading-[1.25]"
+              style={{ fontSize: "clamp(1rem, 1.8vw, 1.375rem)", marginBottom: 44 }}
             >
               Why Miltion Hobbs
-            </p>
+            </h2>
 
             {/* Pillar name stack */}
             <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 48 }}>
