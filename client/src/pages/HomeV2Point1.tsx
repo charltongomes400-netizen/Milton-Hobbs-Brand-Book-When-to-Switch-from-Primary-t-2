@@ -2050,7 +2050,7 @@ function PracticeAreasV18() {
           overflowX: "auto",
           overflowY: "hidden",
           scrollbarWidth: "none",
-          height: 600,
+          height: 740,
           cursor: "grab",
         }}
       >
