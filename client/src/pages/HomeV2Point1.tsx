@@ -76,19 +76,18 @@ function HeaderV15() {
               key={link.href}
               href={link.href}
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
-              className="relative whitespace-nowrap group"
+              className="relative whitespace-nowrap"
               style={{
-                color: "rgba(0,20,137,0.55)",
-                fontSize: 11,
+                color: "rgba(0,20,137,0.60)",
+                fontSize: 14,
                 fontWeight: 600,
-                letterSpacing: "0.22em",
+                letterSpacing: "0.04em",
                 textTransform: "uppercase",
                 textDecoration: "none",
                 transition: "color 0.2s ease",
-                paddingBottom: 2,
               }}
               onMouseEnter={e => (e.currentTarget.style.color = "#001489")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,20,137,0.55)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,20,137,0.60)")}
             >
               {link.label}
             </a>
@@ -105,10 +104,10 @@ function HeaderV15() {
             className="inline-flex items-center gap-2 text-white"
             style={{
               background: "#001489",
-              padding: "9px 22px",
-              fontSize: 10,
+              padding: "10px 24px",
+              fontSize: 13,
               fontWeight: 700,
-              letterSpacing: "0.22em",
+              letterSpacing: "0.06em",
               textTransform: "uppercase",
               textDecoration: "none",
               transition: "background 0.2s ease",
@@ -123,7 +122,7 @@ function HeaderV15() {
           <div
             data-testid="lang-toggle"
             className="flex items-center"
-            style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.2em" }}
+            style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.04em" }}
           >
             <button
               onClick={() => setLang("EN")}
@@ -179,9 +178,9 @@ function HeaderV15() {
                   onClick={() => setMobileOpen(false)}
                   style={{
                     color: "#001489",
-                    fontSize: 11,
+                    fontSize: 14,
                     fontWeight: 600,
-                    letterSpacing: "0.22em",
+                    letterSpacing: "0.04em",
                     textTransform: "uppercase",
                     textDecoration: "none",
                   }}
@@ -194,20 +193,20 @@ function HeaderV15() {
                   onClick={() => setLang("EN")}
                   style={{
                     color: lang === "EN" ? "#001489" : "rgba(0,20,137,0.30)",
-                    fontSize: 10,
+                    fontSize: 13,
                     fontWeight: 700,
-                    letterSpacing: "0.2em",
+                    letterSpacing: "0.04em",
                     transition: "color 0.2s",
                   }}
                 >EN</button>
-                <span style={{ color: "rgba(0,20,137,0.18)", margin: "0 8px", fontSize: 12, fontWeight: 300 }}>|</span>
+                <span style={{ color: "rgba(0,20,137,0.18)", margin: "0 8px", fontSize: 14, fontWeight: 300 }}>|</span>
                 <button
                   onClick={() => setLang("FR")}
                   style={{
                     color: lang === "FR" ? "#001489" : "rgba(0,20,137,0.30)",
-                    fontSize: 10,
+                    fontSize: 13,
                     fontWeight: 700,
-                    letterSpacing: "0.2em",
+                    letterSpacing: "0.04em",
                     transition: "color 0.2s",
                   }}
                 >FR</button>
