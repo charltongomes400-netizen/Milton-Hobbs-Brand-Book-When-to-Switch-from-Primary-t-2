@@ -727,8 +727,6 @@ function DifferentiatorsV15() {
   const d = t.diff;
   const [hovered, setHovered] = useState<number | null>(null);
 
-  const VISUALS = [FounderVisual, PrecisionVisual, CrossBorderVisual, DiscretionVisual];
-
   return (
     <section
       id="firm"
@@ -736,17 +734,17 @@ function DifferentiatorsV15() {
       data-testid="differentiators-section"
       style={{ background: "#FFFFFF", borderTop: "1px solid #E8EDF5" }}
     >
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 88, paddingBottom: 96 }}>
+      <div
+        className="max-w-[1400px] mx-auto px-8"
+        style={{ paddingTop: 96, paddingBottom: 104 }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-16 lg:gap-24">
 
-        {/* ── Section header row ── */}
-        <div
-          className="flex flex-col lg:flex-row lg:items-end lg:justify-between"
-          style={{ paddingBottom: 56, borderBottom: "1px solid #E8EDF5", gap: 32 }}
-        >
-          <div>
+          {/* ── LEFT: anchor column ── */}
+          <div className="flex flex-col" style={{ paddingTop: 4 }}>
             <p
               className="font-sans font-bold uppercase"
-              style={{ color: "#4A58AA", fontSize: 10, letterSpacing: "0.32em", marginBottom: 22 }}
+              style={{ color: "#4A58AA", fontSize: 10, letterSpacing: "0.32em", marginBottom: 28 }}
             >
               Why Miltion Hobbs
             </p>
@@ -754,139 +752,137 @@ function DifferentiatorsV15() {
               className="font-heading font-bold"
               style={{
                 color: "#001489",
-                fontSize: "clamp(1.875rem, 3vw, 2.875rem)",
-                lineHeight: 1.08,
+                fontSize: "clamp(1.75rem, 2.6vw, 2.5rem)",
+                lineHeight: 1.12,
                 letterSpacing: "-0.02em",
+                marginBottom: 28,
               }}
             >
-              Built Different.<br />By Design.
+              The standard of a major firm.<br />The attention of a boutique.
             </h2>
+            <p
+              style={{
+                color: "#595959",
+                fontSize: "0.9375rem",
+                lineHeight: 1.85,
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                marginBottom: 44,
+                maxWidth: 320,
+              }}
+            >
+              Every engagement is managed directly by senior counsel — bringing strategic rigour and personal accountability to every mandate.
+            </p>
+            <a
+              href="#contact"
+              data-testid="diff-cta"
+              className="inline-flex items-center gap-3"
+              style={{
+                color: "#001489",
+                fontSize: 10,
+                fontWeight: 700,
+                letterSpacing: "0.24em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                borderBottom: "1px solid #001489",
+                paddingBottom: 5,
+                alignSelf: "flex-start",
+                transition: "opacity 0.2s",
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "0.6"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }}
+            >
+              <span>{d.learnMore}</span>
+              <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
+                <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+              </svg>
+            </a>
           </div>
 
-          <a
-            href="#contact"
-            data-testid="diff-cta"
-            className="inline-flex items-center gap-3 self-start lg:self-auto"
-            style={{
-              color: "#FFFFFF",
-              background: "#001489",
-              fontSize: 10,
-              fontWeight: 700,
-              letterSpacing: "0.24em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              padding: "15px 32px",
-              whiteSpace: "nowrap",
-              transition: "background 0.22s",
-              flexShrink: 0,
-            }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#192B94"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#001489"; }}
-          >
-            <span>{d.learnMore}</span>
-            <svg width="12" height="12" fill="none" viewBox="0 0 12 12">
-              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
-            </svg>
-          </a>
-        </div>
-
-        {/* ── Stacked pillar rows ── */}
-        {d.cards.map((card, i) => {
-          const V = VISUALS[i];
-          const isHov = hovered === i;
-          return (
-            <div
-              key={i}
-              data-testid={`diff-row-${i}`}
-              onMouseEnter={() => setHovered(i)}
-              onMouseLeave={() => setHovered(null)}
-              style={{
-                borderBottom: "1px solid #E8EDF5",
-                position: "relative",
-                background: isHov ? "#F9F9F9" : "#FFFFFF",
-                transition: "background 0.25s ease",
-              }}
-            >
-              {/* Left accent bar */}
-              <motion.div
-                style={{
-                  position: "absolute",
-                  left: 0, top: 0, bottom: 0,
-                  width: 3,
-                  background: "#4A58AA",
-                  transformOrigin: "top",
-                  zIndex: 1,
-                }}
-                animate={{ scaleY: isHov ? 1 : 0 }}
-                transition={{ duration: 0.26, ease: "easeOut" }}
-              />
-
-              <div
-                className="grid grid-cols-1 lg:grid-cols-[280px_1fr_220px]"
-                style={{
-                  paddingTop: 52,
-                  paddingBottom: 52,
-                  paddingLeft: 28,
-                  alignItems: "center",
-                  gap: "clamp(28px, 4vw, 60px)",
-                }}
-              >
-                {/* LEFT: number + title */}
-                <div>
-                  <motion.span
-                    style={{
-                      display: "block",
-                      fontSize: 11,
-                      fontWeight: 700,
-                      letterSpacing: "0.22em",
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
-                      marginBottom: 18,
-                    }}
-                    animate={{ color: isHov ? "#001489" : "#4A58AA" }}
-                    transition={{ duration: 0.22 }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </motion.span>
-                  <motion.h3
-                    className="font-heading font-bold"
-                    style={{
-                      fontSize: "clamp(1.25rem, 1.75vw, 1.625rem)",
-                      lineHeight: 1.2,
-                      letterSpacing: "-0.02em",
-                    }}
-                    animate={{ color: isHov ? "#001489" : "#192B94" }}
-                    transition={{ duration: 0.22 }}
-                  >
-                    {card.title}
-                  </motion.h3>
-                </div>
-
-                {/* CENTER: description */}
-                <p
+          {/* ── RIGHT: numbered list ── */}
+          <div>
+            {d.cards.map((card, i) => {
+              const isHov = hovered === i;
+              return (
+                <div
+                  key={i}
+                  data-testid={`diff-row-${i}`}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
                   style={{
-                    color: "#595959",
-                    fontSize: "clamp(0.875rem, 1vw, 0.9375rem)",
-                    lineHeight: 1.9,
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    borderTop: "1px solid #E8EDF5",
+                    paddingTop: 32,
+                    paddingBottom: 32,
+                    cursor: "default",
                   }}
                 >
-                  {card.description}
-                </p>
+                  <div className="flex items-start gap-8">
+                    {/* Number */}
+                    <span
+                      style={{
+                        flexShrink: 0,
+                        fontSize: 11,
+                        fontWeight: 700,
+                        letterSpacing: "0.2em",
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        color: isHov ? "#001489" : "#7A84BE",
+                        paddingTop: 3,
+                        transition: "color 0.2s",
+                        minWidth: 28,
+                      }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
 
-                {/* RIGHT: animated SVG */}
-                <motion.div
-                  style={{ width: "100%", height: 180 }}
-                  animate={{ opacity: isHov ? 1 : 0.38 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <V />
-                </motion.div>
-              </div>
-            </div>
-          );
-        })}
+                    {/* Text block */}
+                    <div style={{ flex: 1 }}>
+                      <div className="flex items-center justify-between" style={{ marginBottom: 12 }}>
+                        <h3
+                          className="font-heading font-bold"
+                          style={{
+                            color: isHov ? "#001489" : "#151515",
+                            fontSize: "clamp(1rem, 1.25vw, 1.125rem)",
+                            lineHeight: 1.3,
+                            letterSpacing: "-0.01em",
+                            transition: "color 0.2s",
+                          }}
+                        >
+                          {card.title}
+                        </h3>
+                        <svg
+                          width="14" height="14" fill="none" viewBox="0 0 14 14"
+                          style={{
+                            flexShrink: 0,
+                            marginLeft: 16,
+                            opacity: isHov ? 1 : 0,
+                            transition: "opacity 0.2s, transform 0.2s",
+                            transform: isHov ? "translate(2px, -2px)" : "translate(0,0)",
+                            color: "#001489",
+                          }}
+                        >
+                          <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
+                      <p
+                        style={{
+                          color: "#595959",
+                          fontSize: "0.875rem",
+                          lineHeight: 1.8,
+                          fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        }}
+                      >
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            {/* close rule */}
+            <div style={{ borderTop: "1px solid #E8EDF5" }} />
+          </div>
 
+        </div>
       </div>
     </section>
   );
