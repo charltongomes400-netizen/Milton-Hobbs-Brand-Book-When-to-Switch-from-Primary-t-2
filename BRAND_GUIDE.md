@@ -48,34 +48,48 @@
 | Off-White 2     | `#FCFCFC` | 252, 252, 252    | Section background alternation                        |
 | Off-White 3     | `#F9F9F9` | 249, 249, 249    | Card/panel backgrounds                                |
 
-### 2.2 Secondary Colors (Accent Use Only)
+### 2.2 Secondary Colors (Accent Use Only — NOT for web)
 
-| Name       | HEX       | RGB              | Role                                                          |
+> ⚠️ **CLIENT DECISION — LOCKED:** Gold, Maroon, and warm accent tones are **NOT used on the website**. The web palette is strictly limited to the Primary Colors (Deep Blue family + Charcoal/Gray family + White family) defined in Section 2.1. Any future changes must follow this rule.
+
+| Name       | HEX       | RGB              | Note                                                          |
 |------------|-----------|------------------|---------------------------------------------------------------|
-| Maroon     | `#6B1E3E` | 107, 30, 62      | Tradition, authority — legal seals, callout tags, quotes       |
-| Maroon 80  | `#793451` | 121, 52, 81      | Lighter maroon tint                                           |
-| Maroon 60  | `#955F75` | 149, 95, 117     | Lighter maroon tint                                           |
-| Gold       | `#D4AF37` | 212, 175, 55     | Prestige — highlights, seals, infographics. Use sparingly.    |
-| Gold 80    | `#D8B64A` | 216, 182, 74     | Lighter gold tint                                             |
-| Gold 60    | `#DEC470` | 222, 196, 112    | Lighter gold tint                                             |
-| Soft Blue  | `#8099FF` | 128, 153, 255    | Calming digital accent — icons, UI highlights, backgrounds    |
-| Soft Blue 80 | `#8CA3FE` | 140, 163, 254  | Lighter soft blue tint                                        |
-| Soft Blue 60 | `#A4B5FC` | 164, 181, 252  | Lighter soft blue tint                                        |
+| Maroon     | `#6B1E3E` | 107, 30, 62      | Brand guide only — do NOT use on website                      |
+| Gold       | `#D4AF37` | 212, 175, 55     | Brand guide only — do NOT use on website                      |
+| Soft Blue  | `#8099FF` | 128, 153, 255    | Brand guide only — do NOT use on website                      |
 
-### 2.3 Color Usage Rules
+### 2.3 Web Color Palette (Active — Use These Only)
+
+The website uses **only** these colors. No gold, no maroon, no warm tones.
+
+| Token | HEX | Use |
+|-------|-----|-----|
+| Deep Blue | `#001489` | Primary backgrounds, headers, CTAs, overlays, dark panels |
+| Blue-80 | `#192B94` | Button hover states, gradient variants |
+| Blue-60 | `#4A58AA` | Eyebrow labels, accent text on light bg, active indicators, tab highlights |
+| Blue-40 | `#7A84BE` | Subtle accents, number labels in dark contexts |
+| Charcoal | `#151515` | Body text on light backgrounds |
+| Dark Gray | `#2C2C2C` | Secondary text |
+| Mid Gray | `#595959` | Tertiary text, captions |
+| Light Gray | `#848484` | Borders on light bg, dividers, subtle text |
+| Pure White | `#FFFFFF` | Text on dark bg, bright highlights, backgrounds |
+| Off-White 2 | `#FCFCFC` | Section backgrounds (alternating) |
+| Off-White 3 | `#F9F9F9` | Card and panel backgrounds |
+
+### 2.4 Color Usage Rules
 
 **DO:**
 - Use `#001489` (Deep Blue) or `#FFFFFF` (White) as the main background or accent.
 - Pair white text/logo on Deep Blue backgrounds. Use blue/black text on white backgrounds.
 - Use `#FCFCFC` / `#F9F9F9` for clean, spacious layouts and section alternation.
-- Deep Blue overlays on images: 80–90% opacity + Multiply blend mode.
-- White overlays on images: 70–90% opacity + Screen blend mode.
+- Use `#4A58AA` (Blue-60) for eyebrow labels, active indicator bars, and accent text on light backgrounds.
+- On dark panels/navy backgrounds: use white (with opacity as needed) for accents and labels.
+- Deep Blue overlays on images: 80–90% opacity.
 
 **DON'T:**
-- Never use secondary colors (Maroon, Gold, Soft Blue) for main headers, body paragraphs, navigation, or backgrounds.
+- **Never use Gold (`#D4AF37`), Maroon (`#6B1E3E`), or any warm/yellow tones on the website.**
 - Never use the logo in secondary colors.
-- Never mix unrelated tones (e.g., blue with saturated reds). Stick with navy, charcoal, and soft neutrals.
-- Never mix primary and secondary blues in the same layout.
+- Never mix unrelated tones. Stick to the blue/charcoal/white family defined above.
 - Never layer text on low-contrast combinations (e.g., gray text on white).
 
 ---

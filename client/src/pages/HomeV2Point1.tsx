@@ -100,7 +100,7 @@ function HeaderV15() {
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
               className="text-[16px] tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300"
               style={{ color: "#001489" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#D4AF37")}
+              onMouseEnter={e => (e.currentTarget.style.color = "#4A58AA")}
               onMouseLeave={e => (e.currentTarget.style.color = "#001489")}
             >
               {link.label}
@@ -122,7 +122,7 @@ function HeaderV15() {
               data-testid="lang-en"
               className="px-4 py-2 transition-all duration-200"
               style={lang === "EN"
-                ? { background: "#D4AF37", color: "#001489", fontWeight: 600 }
+                ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
                 : { color: "rgba(0,20,137,0.50)" }
               }
             >
@@ -133,7 +133,7 @@ function HeaderV15() {
               data-testid="lang-fr"
               className="px-4 py-2 transition-all duration-200"
               style={lang === "FR"
-                ? { background: "#D4AF37", color: "#001489", fontWeight: 600 }
+                ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
                 : { color: "rgba(0,20,137,0.50)" }
               }
             >
@@ -189,7 +189,7 @@ function HeaderV15() {
                   onClick={() => setLang("EN")}
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "EN"
-                    ? { background: "#D4AF37", color: "#001489", fontWeight: 600 }
+                    ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
                     : { color: "rgba(0,20,137,0.50)" }
                   }
                 >EN</button>
@@ -197,7 +197,7 @@ function HeaderV15() {
                   onClick={() => setLang("FR")}
                   className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
                   style={lang === "FR"
-                    ? { background: "#D4AF37", color: "#001489", fontWeight: 600 }
+                    ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
                     : { color: "rgba(0,20,137,0.50)" }
                   }
                 >FR</button>
@@ -342,12 +342,12 @@ function HeroV15() {
             {/* Gold accent line + Eyebrow */}
             <div className="flex items-center gap-3 mb-5">
               <motion.div
-                style={{ width: 1, height: 32, background: "#D4AF37", flexShrink: 0 }}
+                style={{ width: 1, height: 32, background: "#4A58AA", flexShrink: 0 }}
                 animate={{ opacity: [0.3, 1, 0.3] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
               <p
-                className="text-[#D4AF37] tracking-[0.22em] uppercase font-medium text-[16px]"
+                className="text-[#4A58AA] tracking-[0.22em] uppercase font-medium text-[16px]"
                 data-testid="hero-eyebrow"
               >
                 {featuredArticle?.category}
@@ -367,9 +367,9 @@ function HeroV15() {
             <a
               href={`/insights/${featuredSlug}`}
               data-testid="hero-read-link"
-              className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#D4AF37] transition-colors duration-300"
+              className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#4A58AA] transition-colors duration-300"
             >
-              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#D4AF37]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
+              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#4A58AA]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
               <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
                 <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
               </svg>
@@ -396,7 +396,7 @@ function HeroV15() {
                 width:           i === currentIndex ? 20 : 7,
                 height:          7,
                 borderRadius:    i === currentIndex ? 4 : "50%",
-                backgroundColor: i === currentIndex ? "#D4AF37" : "transparent",
+                backgroundColor: i === currentIndex ? "#001489" : "transparent",
                 border:          i === currentIndex ? "none" : "1px solid rgba(0,20,137,0.22)",
               }}
             />
@@ -473,11 +473,11 @@ function FounderVisual() {
         );
       })}
       <circle cx={cx} cy={cy} r={outerR} stroke="rgba(255,255,255,1)" strokeOpacity={0.15} strokeWidth={1} fill="none" />
-      <circle cx={cx} cy={cy} r={innerR} stroke="#D4AF37" strokeOpacity={0.4} strokeWidth={1} fill="none" />
-      <circle cx={cx} cy={cy} r={8} fill="#D4AF37" fillOpacity={0.95} />
+      <circle cx={cx} cy={cy} r={innerR} stroke="rgba(255,255,255,1)" strokeOpacity={0.35} strokeWidth={1} fill="none" />
+      <circle cx={cx} cy={cy} r={8} fill="rgba(255,255,255,1)" fillOpacity={0.85} />
       <motion.circle
         cx={cx} cy={cy} r={innerR}
-        stroke="#D4AF37" strokeWidth={1} fill="none"
+        stroke="rgba(255,255,255,1)" strokeWidth={1} fill="none"
         animate={{ scale: [1, 1.6, 1], opacity: [0.4, 0, 0.4] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
         style={{ transformOrigin: `${cx}px ${cy}px` }}
@@ -536,7 +536,7 @@ function PrecisionVisual() {
       {[88, 64, 44].map((r, i) => (
         <circle
           key={i} cx={CX} cy={CY} r={r} fill="none"
-          stroke={locked ? "#D4AF37" : "rgba(255,255,255,1)"}
+          stroke={locked ? "rgba(255,255,255,1)" : "rgba(255,255,255,1)"}
           strokeOpacity={locked ? 0.18 + i * 0.1 : 0.14 + i * 0.08}
           strokeWidth={1}
           style={{ transition: "stroke 0.4s, stroke-opacity 0.4s" }}
@@ -545,7 +545,7 @@ function PrecisionVisual() {
       <line x1={CX} y1={30} x2={CX} y2={230} stroke="rgba(255,255,255,1)" strokeOpacity={0.18} strokeWidth={1} />
       <line x1={40} y1={CY} x2={280} y2={CY} stroke="rgba(255,255,255,1)" strokeOpacity={0.18} strokeWidth={1} />
       <circle cx={CX} cy={CY} r={4}
-        fill={locked ? "#D4AF37" : "rgba(255,255,255,1)"}
+        fill={locked ? "rgba(255,255,255,1)" : "rgba(255,255,255,1)"}
         fillOpacity={locked ? 1 : 0.55}
         style={{ transition: "fill 0.3s, fill-opacity 0.3s" }}
       />
@@ -554,7 +554,7 @@ function PrecisionVisual() {
           <motion.circle
             key={flashKey}
             cx={CX} cy={CY} r={22}
-            stroke="#D4AF37" strokeWidth={2} fill="none"
+            stroke="rgba(255,255,255,0.85)" strokeWidth={2} fill="none"
             initial={{ scale: 1, opacity: 0.9 }}
             animate={{ scale: 2.2, opacity: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
@@ -563,18 +563,18 @@ function PrecisionVisual() {
         </AnimatePresence>
       )}
       <motion.g style={{ x: rx, y: ry }}>
-        <circle cx={CX} cy={CY} r={22} stroke="#D4AF37" strokeWidth={1.5} fill="none" strokeOpacity={0.9} />
-        <path d={`M${CX-22} ${CY-9} L${CX-22} ${CY-22} L${CX-9} ${CY-22}`} stroke="#D4AF37" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX+9} ${CY-22} L${CX+22} ${CY-22} L${CX+22} ${CY-9}`} stroke="#D4AF37" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX+22} ${CY+9} L${CX+22} ${CY+22} L${CX+9} ${CY+22}`} stroke="#D4AF37" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX-9} ${CY+22} L${CX-22} ${CY+22} L${CX-22} ${CY+9}`} stroke="#D4AF37" strokeWidth={1.5} fill="none" />
-        <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="#D4AF37" strokeWidth={1} strokeOpacity={0.7} />
-        <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="#D4AF37" strokeWidth={1} strokeOpacity={0.7} />
+        <circle cx={CX} cy={CY} r={22} stroke="rgba(255,255,255,1)" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX-22} ${CY-9} L${CX-22} ${CY-22} L${CX-9} ${CY-22}`} stroke="rgba(255,255,255,1)" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX+9} ${CY-22} L${CX+22} ${CY-22} L${CX+22} ${CY-9}`} stroke="rgba(255,255,255,1)" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX+22} ${CY+9} L${CX+22} ${CY+22} L${CX+9} ${CY+22}`} stroke="rgba(255,255,255,1)" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX-9} ${CY+22} L${CX-22} ${CY+22} L${CX-22} ${CY+9}`} stroke="rgba(255,255,255,1)" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="rgba(255,255,255,1)" strokeWidth={1} strokeOpacity={0.5} />
+        <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="rgba(255,255,255,1)" strokeWidth={1} strokeOpacity={0.5} />
       </motion.g>
       {locked && (
         <motion.text
           x={CX + 30} y={CY - 28}
-          fill="#D4AF37" fontSize="8" fontFamily="'Satoshi', sans-serif" letterSpacing="0.15em"
+          fill="rgba(255,255,255,0.8)" fontSize="8" fontFamily="'Satoshi', sans-serif" letterSpacing="0.15em"
           initial={{ opacity: 0 }} animate={{ opacity: [0, 0.8, 0.8, 0] }}
           transition={{ duration: 2.2, times: [0, 0.15, 0.85, 1] }}
         >
@@ -603,7 +603,7 @@ function CrossBorderVisual() {
       {paths.map((p, i) => (
         <motion.path
           key={i} d={p.d}
-          stroke={i < 2 ? "#D4AF37" : "rgba(255,255,255,1)"}
+          stroke={i < 2 ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,1)"}
           strokeOpacity={i < 2 ? 0.5 : 0.30}
           strokeWidth={i < 2 ? 1.2 : 1}
           strokeDasharray="220"
@@ -620,10 +620,10 @@ function CrossBorderVisual() {
           >{n.label}</text>
         </g>
       ))}
-      <circle cx={160} cy={130} r={7} fill="#D4AF37" fillOpacity={0.95} />
+      <circle cx={160} cy={130} r={7} fill="rgba(255,255,255,1)" fillOpacity={0.85} />
       <motion.circle
         cx={160} cy={130} r={18}
-        stroke="#D4AF37" strokeWidth={1} fill="none"
+        stroke="rgba(255,255,255,0.8)" strokeWidth={1} fill="none"
         animate={{ scale: [1, 1.5, 1], opacity: [0.4, 0, 0.4] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
         style={{ transformOrigin: "160px 130px" }}
@@ -643,7 +643,7 @@ function DiscretionVisual() {
         return (
           <motion.circle
             key={i} cx={cx} cy={cy} r={r}
-            stroke={i === rings.length - 1 ? "#D4AF37" : "rgba(255,255,255,1)"}
+            stroke={i === rings.length - 1 ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,1)"}
             strokeOpacity={i === rings.length - 1 ? 0.7 : 0.12 + i * 0.07}
             strokeWidth={1}
             strokeDasharray={`${circumference * (1 - gap)} ${circumference * gap}`}
@@ -656,13 +656,13 @@ function DiscretionVisual() {
       })}
       <motion.rect
         x={cx - 7} y={cy - 4} width={14} height={11}
-        stroke="#D4AF37" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
+        stroke="rgba(255,255,255,0.85)" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
         animate={{ opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.path
         d={`M${cx-4} ${cy-4} Q${cx-4} ${cy-11} ${cx} ${cy-11} Q${cx+4} ${cy-11} ${cx+4} ${cy-4}`}
-        stroke="#D4AF37" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
+        stroke="rgba(255,255,255,0.85)" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
         animate={{ opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -712,7 +712,7 @@ function DifferentiatorsV15() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <p className="text-[#D4AF37] tracking-[0.3em] uppercase font-medium mb-3 text-[16px]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
+            <p className="text-[#4A58AA] tracking-[0.3em] uppercase font-medium mb-3 text-[16px]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
               {d.eyebrow}
             </p>
             <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
@@ -727,7 +727,7 @@ function DifferentiatorsV15() {
                   className="group flex items-center gap-4 py-1.5 text-left focus:outline-none"
                 >
                   <motion.span
-                    className="w-[3px] flex-shrink-0 self-stretch bg-[#D4AF37]"
+                    className="w-[3px] flex-shrink-0 self-stretch bg-[#4A58AA]"
                     animate={{ opacity: i === active ? 1 : 0, scaleY: i === active ? 1 : 0 }}
                     transition={{ duration: 0.35, ease: "easeOut" }}
                     style={{ originY: 0.5 }}
@@ -891,7 +891,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
         flexShrink: 0,
         width: 280,
         background: lifted ? "#FCFCFC" : "#F9F9F9",
-        border: `1px solid ${isOpen ? "#D4AF37" : hovering ? "rgba(212,175,55,0.55)" : "rgba(132,132,132,0.25)"}`,
+        border: `1px solid ${isOpen ? "#4A58AA" : hovering ? "rgba(74,88,170,0.45)" : "rgba(132,132,132,0.2)"}`,
         boxShadow: lifted
           ? "0 8px 28px rgba(0,20,137,0.13), 0 2px 8px rgba(0,20,137,0.06)"
           : "0 2px 8px rgba(0,20,137,0.06), 0 1px 3px rgba(0,20,137,0.03)",
@@ -912,7 +912,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
           left: 20,
           width: 56,
           height: 3,
-          background: isOpen ? "#D4AF37" : hovering ? "rgba(212,175,55,0.55)" : "rgba(212,175,55,0.25)",
+          background: isOpen ? "#4A58AA" : hovering ? "rgba(74,88,170,0.45)" : "rgba(74,88,170,0.15)",
           transition: "background 0.22s ease",
         }}
       />
@@ -921,7 +921,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
       <span
         style={{
           display: "block",
-          color: isOpen || hovering ? "#D4AF37" : "rgba(212,175,55,0.55)",
+          color: isOpen || hovering ? "#4A58AA" : "rgba(74,88,170,0.6)",
           fontSize: 11,
           fontFamily: "'Satoshi', 'Plus Jakarta Sans', sans-serif",
           fontWeight: 700,
@@ -968,7 +968,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
             left: 0,
             right: 0,
             height: 2,
-            background: "#D4AF37",
+            background: "#4A58AA",
           }}
         />
       )}
@@ -1009,7 +1009,7 @@ function CaseFileStripV18() {
         >
           <p
             className="uppercase font-medium mb-3"
-            style={{ color: "#D4AF37", fontSize: 16, letterSpacing: "0.3em", paddingLeft: "calc(3px + 1rem)" }}
+            style={{ color: "#4A58AA", fontSize: 16, letterSpacing: "0.3em", paddingLeft: "calc(3px + 1rem)" }}
           >
             Our Expertise
           </p>
@@ -1049,7 +1049,7 @@ function CaseFileStripV18() {
             onMouseLeave={e => (e.currentTarget.style.background = "#001489")}
           >
             <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-              <path d="M9 2L4 7l5 5" stroke="#D4AF37" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M9 2L4 7l5 5" stroke="#FFFFFF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
 
@@ -1094,7 +1094,7 @@ function CaseFileStripV18() {
             onMouseLeave={e => (e.currentTarget.style.background = "#001489")}
           >
             <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-              <path d="M5 2l5 5-5 5" stroke="#D4AF37" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M5 2l5 5-5 5" stroke="#FFFFFF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         </motion.div>
@@ -1115,7 +1115,7 @@ function CaseFileStripV18() {
                 className="grid grid-cols-1 md:grid-cols-[1fr_300px]"
                 style={{
                   background: "#001489",
-                  borderTop: "2px solid #D4AF37",
+                  borderTop: "2px solid #4A58AA",
                 }}
               >
                 {/* Text content */}
@@ -1123,7 +1123,7 @@ function CaseFileStripV18() {
                   <span
                     style={{
                       display: "block",
-                      color: "#D4AF37",
+                      color: "rgba(255,255,255,0.65)",
                       fontSize: 10,
                       fontFamily: "'Satoshi', 'Plus Jakarta Sans', sans-serif",
                       fontWeight: 700,
@@ -1158,13 +1158,13 @@ function CaseFileStripV18() {
                       display: "inline-flex",
                       alignItems: "center",
                       gap: 10,
-                      color: "#D4AF37",
+                      color: "rgba(255,255,255,0.85)",
                       fontSize: 11,
                       fontWeight: 600,
                       letterSpacing: "0.2em",
                       textTransform: "uppercase",
                       textDecoration: "none",
-                      borderBottom: "1px solid rgba(212,175,55,0.38)",
+                      borderBottom: "1px solid rgba(255,255,255,0.3)",
                       paddingBottom: 2,
                     }}
                   >
@@ -1247,7 +1247,7 @@ function ContactFormV15() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <p className="text-[#D4AF37] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
+          <p className="text-[#4A58AA] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
             {c.eyebrow}
           </p>
           <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
@@ -1266,7 +1266,7 @@ function ContactFormV15() {
             <p className="text-black/55 text-sm leading-[1.4]">{c.subtext}</p>
 
             <div>
-              <p className="text-[#D4AF37] tracking-[0.25em] uppercase font-medium mb-5 text-[12px]">
+              <p className="text-[#4A58AA] tracking-[0.25em] uppercase font-medium mb-5 text-[12px]">
                 {c.officeLabel}
               </p>
               <div className="flex flex-col gap-6">
@@ -1276,7 +1276,7 @@ function ContactFormV15() {
                     <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
                   ))}
                   <a href="tel:+97145232421" data-testid="contact-address-phone-dubai"
-                    className="text-black/45 text-xs hover:text-[#D4AF37] transition-colors">
+                    className="text-black/45 text-xs hover:text-[#4A58AA] transition-colors">
                     +971 4 523 2421
                   </a>
                 </div>
@@ -1286,7 +1286,7 @@ function ContactFormV15() {
                     <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
                   ))}
                   <a href="tel:+33180270067" data-testid="contact-address-phone-paris"
-                    className="text-black/45 text-xs hover:text-[#D4AF37] transition-colors">
+                    className="text-black/45 text-xs hover:text-[#4A58AA] transition-colors">
                     +33 1 80 27 00 67
                   </a>
                 </div>
@@ -1294,11 +1294,11 @@ function ContactFormV15() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <p className="text-[#D4AF37] text-[10px] tracking-[0.25em] uppercase font-medium mb-1">
+              <p className="text-[#4A58AA] text-[10px] tracking-[0.25em] uppercase font-medium mb-1">
                 Email
               </p>
               <a href={`mailto:${f.email}`} data-testid="contact-email"
-                className="text-[#001489]/60 hover:text-[#D4AF37] text-sm transition-colors">
+                className="text-[#001489]/60 hover:text-[#4A58AA] text-sm transition-colors">
                 {f.email}
               </a>
             </div>
@@ -1389,15 +1389,15 @@ function FooterV15() {
             </p>
             <div className="space-y-2">
               <a href={`mailto:${f.email}`} data-testid="footer-email"
-                className="block text-[#D4AF37] text-sm hover:text-[#D8B64A] transition-colors">
+                className="block text-white text-sm hover:text-white/70 transition-colors">
                 {f.email}
               </a>
               <a href={`tel:${f.phone}`} data-testid="footer-phone-dubai"
-                className="block text-white/40 text-sm hover:text-[#D8B64A] transition-colors">
+                className="block text-white/40 text-sm hover:text-white/70 transition-colors">
                 Dubai: {f.phone}
               </a>
               <a href="tel:+33180270067" data-testid="footer-phone-paris"
-                className="block text-white/40 text-sm hover:text-[#D8B64A] transition-colors">
+                className="block text-white/40 text-sm hover:text-white/70 transition-colors">
                 Paris: +33 1 80 27 00 67
               </a>
             </div>
@@ -1466,7 +1466,7 @@ function PracticeAreasV18() {
       id="expertise"
       data-testid="practice-areas-section"
       className="py-28 px-8"
-      style={{ background: "#F9F9F9", borderTop: "1px solid rgba(212,175,55,0.25)" }}
+      style={{ background: "#F9F9F9", borderTop: "1px solid rgba(0,20,137,0.1)" }}
     >
       <div className="max-w-[1400px] mx-auto">
 
@@ -1479,7 +1479,7 @@ function PracticeAreasV18() {
           className="mb-14"
         >
           <p
-            className="text-[#D4AF37] tracking-[0.3em] uppercase font-medium mb-3"
+            className="text-[#4A58AA] tracking-[0.3em] uppercase font-medium mb-3"
             style={{ fontSize: 16, paddingLeft: "calc(3px + 1rem)" }}
           >
             Our Expertise
@@ -1498,7 +1498,7 @@ function PracticeAreasV18() {
         {/* ── Desktop: horizontal expanding panels ── */}
         <div
           className="hidden lg:flex"
-          style={{ height: "540px", border: "1px solid rgba(212,175,55,0.28)" }}
+          style={{ height: "540px", border: "1px solid rgba(0,20,137,0.15)" }}
           onMouseLeave={() => setHovered(null)}
         >
           {EXPERTISE_ITEMS_V18.map((item, i) => {
@@ -1515,7 +1515,7 @@ function PracticeAreasV18() {
                     ? "linear-gradient(160deg, #192B94 0%, #001489 40%, #001489 100%)"
                     : "linear-gradient(160deg, #192B94 0%, #001489 40%, #001489 100%)",
                   borderRight: i < EXPERTISE_ITEMS_V18.length - 1
-                    ? "1px solid rgba(212,175,55,0.18)"
+                    ? "1px solid rgba(255,255,255,0.1)"
                     : "none",
                   overflow: "hidden",
                   position: "relative",
@@ -1545,7 +1545,7 @@ function PracticeAreasV18() {
                   <div className="relative z-10 pt-6 flex justify-center">
                     <span
                       className="font-heading"
-                      style={{ fontSize: 10, letterSpacing: "0.2em", color: "rgba(212,175,55,0.8)" }}
+                      style={{ fontSize: 10, letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)" }}
                     >
                       {item.num}
                     </span>
@@ -1591,12 +1591,12 @@ function PracticeAreasV18() {
                   <div className="relative z-10 p-9 flex flex-col h-full justify-between">
                     <div
                       className="font-heading font-bold select-none leading-none"
-                      style={{ fontSize: "clamp(5rem,8vw,7rem)", color: "rgba(212,175,55,0.08)" }}
+                      style={{ fontSize: "clamp(5rem,8vw,7rem)", color: "rgba(255,255,255,0.05)" }}
                     >
                       {item.num}
                     </div>
                     <div>
-                      <p style={{ color: "rgba(212,175,55,0.8)", fontSize: 9, letterSpacing: "0.3em", textTransform: "uppercase", fontWeight: 500, marginBottom: 12 }}>
+                      <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 9, letterSpacing: "0.3em", textTransform: "uppercase", fontWeight: 500, marginBottom: 12 }}>
                         Area of Practice
                       </p>
                       <h3 className="font-heading font-bold text-white leading-[1.2]" style={{ fontSize: "1.25rem", whiteSpace: "nowrap", marginBottom: 16 }}>
@@ -1609,13 +1609,13 @@ function PracticeAreasV18() {
                         href="#contact"
                         className="inline-flex items-center gap-2"
                         style={{
-                          color: "#D4AF37",
+                          color: "rgba(255,255,255,0.85)",
                           fontSize: 9,
                           letterSpacing: "0.22em",
                           textTransform: "uppercase",
                           fontWeight: 600,
                           textDecoration: "none",
-                          borderBottom: "1px solid rgba(212,175,55,0.4)",
+                          borderBottom: "1px solid rgba(255,255,255,0.3)",
                           paddingBottom: 2,
                         }}
                       >
@@ -1635,7 +1635,7 @@ function PracticeAreasV18() {
         {/* ── Mobile: stacked accordion ── */}
         <div
           className="flex flex-col lg:hidden"
-          style={{ border: "1px solid rgba(212,175,55,0.25)", borderBottom: "none" }}
+          style={{ border: "1px solid rgba(0,20,137,0.12)", borderBottom: "none" }}
         >
           {EXPERTISE_ITEMS_V18.map((item, i) => {
             const isOpen = hovered === i;
@@ -1645,12 +1645,12 @@ function PracticeAreasV18() {
                 data-testid={`expertise-item-mobile-${i}`}
                 onClick={() => setHovered(isOpen ? null : i)}
                 className="text-left focus:outline-none"
-                style={{ borderBottom: "1px solid rgba(212,175,55,0.18)" }}
+                style={{ borderBottom: "1px solid rgba(0,20,137,0.08)" }}
               >
                 <div className="flex items-center gap-4 px-5 py-4">
                   <span
                     className="font-heading shrink-0"
-                    style={{ fontSize: 10, letterSpacing: "0.18em", color: "rgba(212,175,55,0.65)" }}
+                    style={{ fontSize: 10, letterSpacing: "0.18em", color: "rgba(74,88,170,0.75)" }}
                   >
                     {item.num}
                   </span>
@@ -1662,7 +1662,7 @@ function PracticeAreasV18() {
                   </span>
                   <svg
                     className="w-3 h-3 shrink-0 transition-transform duration-300"
-                    style={{ color: "#D4AF37", transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
+                    style={{ color: "#4A58AA", transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
                     fill="none" viewBox="0 0 12 12"
                   >
                     <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.3" />
@@ -1688,13 +1688,13 @@ function PracticeAreasV18() {
                           href="#contact"
                           className="inline-flex items-center gap-2"
                           style={{
-                            color: "#D4AF37",
+                            color: "rgba(255,255,255,0.85)",
                             fontSize: 10,
                             letterSpacing: "0.2em",
                             textTransform: "uppercase",
                             fontWeight: 600,
                             textDecoration: "none",
-                            borderBottom: "1px solid rgba(212,175,55,0.4)",
+                            borderBottom: "1px solid rgba(255,255,255,0.3)",
                             paddingBottom: 2,
                           }}
                         >
