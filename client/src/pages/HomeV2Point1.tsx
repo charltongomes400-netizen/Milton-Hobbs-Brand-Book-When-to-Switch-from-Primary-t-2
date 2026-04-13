@@ -574,7 +574,7 @@ function PrecisionVisual() {
       {locked && (
         <motion.text
           x={CX + 30} y={CY - 28}
-          fill="#D4AF37" fontSize="8" fontFamily="monospace" letterSpacing="0.15em"
+          fill="#D4AF37" fontSize="8" fontFamily="'Satoshi', sans-serif" letterSpacing="0.15em"
           initial={{ opacity: 0 }} animate={{ opacity: [0, 0.8, 0.8, 0] }}
           transition={{ duration: 2.2, times: [0, 0.15, 0.85, 1] }}
         >
@@ -616,7 +616,7 @@ function CrossBorderVisual() {
           <circle cx={n.cx} cy={n.cy} r={5} fill="rgba(255,255,255,1)" fillOpacity={0.65} />
           <text x={n.cx} y={n.cy + (i < 2 ? -12 : 18)}
             fill="rgba(255,255,255,1)" fillOpacity={0.55} fontSize="8"
-            fontFamily="sans-serif" textAnchor="middle"
+            fontFamily="'Plus Jakarta Sans', sans-serif" textAnchor="middle"
           >{n.label}</text>
         </g>
       ))}
@@ -923,7 +923,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
           display: "block",
           color: isOpen || hovering ? "#D4AF37" : "rgba(212,175,55,0.55)",
           fontSize: 11,
-          fontFamily: "monospace",
+          fontFamily: "'Satoshi', 'Plus Jakarta Sans', sans-serif",
           fontWeight: 700,
           letterSpacing: "0.22em",
           marginBottom: 14,
@@ -1008,14 +1008,14 @@ function CaseFileStripV18() {
           className="mb-12"
         >
           <p
-            className="uppercase font-semibold mb-3"
-            style={{ color: "#D4AF37", fontSize: 13, letterSpacing: "0.28em" }}
+            className="uppercase font-medium mb-3"
+            style={{ color: "#D4AF37", fontSize: 16, letterSpacing: "0.3em", paddingLeft: "calc(3px + 1rem)" }}
           >
             Our Expertise
           </p>
           <h2
-            className="font-heading font-bold"
-            style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "#001489", lineHeight: 1.15 }}
+            className="font-heading font-semibold text-[#001489] leading-[1.25]"
+            style={{ fontSize: "clamp(1rem, 1.8vw, 1.375rem)", paddingLeft: "calc(3px + 1rem)" }}
           >
             Areas of Practice
           </h2>
@@ -1125,7 +1125,7 @@ function CaseFileStripV18() {
                       display: "block",
                       color: "#D4AF37",
                       fontSize: 10,
-                      fontFamily: "monospace",
+                      fontFamily: "'Satoshi', 'Plus Jakarta Sans', sans-serif",
                       fontWeight: 700,
                       letterSpacing: "0.26em",
                       marginBottom: 18,
@@ -1544,7 +1544,7 @@ function PracticeAreasV18() {
                   />
                   <div className="relative z-10 pt-6 flex justify-center">
                     <span
-                      className="font-mono"
+                      className="font-heading"
                       style={{ fontSize: 10, letterSpacing: "0.2em", color: "rgba(212,175,55,0.8)" }}
                     >
                       {item.num}
@@ -1649,7 +1649,7 @@ function PracticeAreasV18() {
               >
                 <div className="flex items-center gap-4 px-5 py-4">
                   <span
-                    className="font-mono shrink-0"
+                    className="font-heading shrink-0"
                     style={{ fontSize: 10, letterSpacing: "0.18em", color: "rgba(212,175,55,0.65)" }}
                   >
                     {item.num}
