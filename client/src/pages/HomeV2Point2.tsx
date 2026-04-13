@@ -754,10 +754,13 @@ function DifferentiatorsV15() {
         className="max-w-[1400px] mx-auto px-8"
         style={{ paddingTop: 96, paddingBottom: 104 }}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2" style={{ minHeight: 560 }}>
 
-          {/* ── LEFT: heading + stacked pillar names ── */}
-          <div className="flex flex-col" style={{ paddingTop: 4 }}>
+          {/* ── LEFT HALF: text content ── */}
+          <div
+            className="flex flex-col justify-center"
+            style={{ paddingRight: "clamp(32px, 4vw, 72px)" }}
+          >
             <p
               className="font-sans"
               style={{
@@ -765,7 +768,7 @@ function DifferentiatorsV15() {
                 fontSize: "0.9375rem",
                 fontWeight: 500,
                 letterSpacing: "0.01em",
-                marginBottom: 40,
+                marginBottom: 44,
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
               }}
             >
@@ -773,7 +776,7 @@ function DifferentiatorsV15() {
             </p>
 
             {/* Pillar name stack */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 48 }}>
               {d.cards.map((card, i) => {
                 const isActive = active === i;
                 return (
@@ -790,10 +793,8 @@ function DifferentiatorsV15() {
                       outline: "none",
                       padding: "8px 0 8px 20px",
                       position: "relative",
-                      transition: "padding-left 0.25s",
                     }}
                   >
-                    {/* Left accent bar */}
                     <motion.div
                       style={{
                         position: "absolute",
@@ -805,7 +806,6 @@ function DifferentiatorsV15() {
                       animate={{ scaleY: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
                       transition={{ duration: 0.3, ease: "easeOut" }}
                     />
-
                     <span
                       className="font-heading font-bold"
                       style={{
@@ -823,104 +823,86 @@ function DifferentiatorsV15() {
                 );
               })}
             </div>
-          </div>
 
-          {/* ── RIGHT: animation + detail below ── */}
-          <div>
-            {/* Animation panel */}
-            <div
+            {/* Active description + CTA */}
+            <p
               style={{
-                width: "100%",
-                height: 380,
-                background: "#F7F8FD",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                position: "relative",
-                overflow: "hidden",
+                color: "#595959",
+                fontSize: "0.9375rem",
+                lineHeight: 1.82,
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                maxWidth: 480,
+                marginBottom: 32,
               }}
             >
-              <div
-                style={{
-                  position: "absolute",
-                  width: 480,
-                  height: 480,
-                  borderRadius: "50%",
-                  background: "radial-gradient(circle, rgba(74,88,170,0.06) 0%, transparent 70%)",
-                  pointerEvents: "none",
-                }}
-              />
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active}
-                  style={{ width: 400, height: 340, position: "relative", zIndex: 1 }}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.03 }}
-                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {(() => { const V = VISUALS[active]; return <V />; })()}
-                </motion.div>
-              </AnimatePresence>
-            </div>
+              {d.cards[active].description}
+            </p>
+            <a
+              href="#contact"
+              data-testid="diff-cta"
+              className="inline-flex items-center gap-3 self-start"
+              style={{
+                color: "#001489",
+                fontSize: 10,
+                fontWeight: 700,
+                letterSpacing: "0.24em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                border: "1px solid rgba(0,20,137,0.25)",
+                padding: "12px 28px",
+                transition: "background 0.2s, border-color 0.2s",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.background = "rgba(0,20,137,0.04)";
+                (e.currentTarget as HTMLElement).style.borderColor = "#001489";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.background = "transparent";
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.25)";
+              }}
+            >
+              <span>{d.learnMore}</span>
+              <svg width="11" height="11" fill="none" viewBox="0 0 14 14">
+                <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          </div>
 
-            {/* Detail below animation */}
-            <div style={{ paddingTop: 36 }}>
-              <h3
-                className="font-heading font-bold"
-                style={{
-                  color: "#001489",
-                  fontSize: "clamp(1.25rem, 1.8vw, 1.625rem)",
-                  lineHeight: 1.2,
-                  letterSpacing: "-0.015em",
-                  marginBottom: 16,
-                }}
+          {/* ── RIGHT HALF: animation ── */}
+          <div
+            style={{
+              background: "#F7F8FD",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
+              overflow: "hidden",
+              minHeight: 480,
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                width: 520,
+                height: 520,
+                borderRadius: "50%",
+                background: "radial-gradient(circle, rgba(74,88,170,0.06) 0%, transparent 70%)",
+                pointerEvents: "none",
+              }}
+            />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                style={{ width: 420, height: 360, position: "relative", zIndex: 1 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.03 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               >
-                {d.cards[active].title}
-              </h3>
-              <p
-                style={{
-                  color: "#595959",
-                  fontSize: "0.9375rem",
-                  lineHeight: 1.82,
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  maxWidth: 520,
-                  marginBottom: 32,
-                }}
-              >
-                {d.cards[active].description}
-              </p>
-              <a
-                href="#contact"
-                data-testid="diff-cta"
-                className="inline-flex items-center gap-3"
-                style={{
-                  color: "#001489",
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: "0.24em",
-                  textTransform: "uppercase",
-                  textDecoration: "none",
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  border: "1px solid rgba(0,20,137,0.25)",
-                  padding: "12px 28px",
-                  transition: "background 0.2s, border-color 0.2s",
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.background = "rgba(0,20,137,0.04)";
-                  (e.currentTarget as HTMLElement).style.borderColor = "#001489";
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.background = "transparent";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.25)";
-                }}
-              >
-                <span>{d.learnMore}</span>
-                <svg width="11" height="11" fill="none" viewBox="0 0 14 14">
-                  <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-            </div>
+                {(() => { const V = VISUALS[active]; return <V />; })()}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
         </div>
