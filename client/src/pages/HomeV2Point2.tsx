@@ -1811,15 +1811,11 @@ function PracticeAreasV18() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      data-header-theme="dark"
-      style={{ background: "#001489", position: "relative", overflow: "hidden" }}
+      data-header-theme="light"
+      style={{ background: "#FFFFFF", position: "relative", overflow: "hidden", borderTop: "1px solid rgba(0,20,137,0.06)" }}
       onMouseLeave={() => { setPaused(false); setHovered(null); }}
     >
       <style>{`
-        @keyframes pa-float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-8px); }
-        }
         @keyframes pa-pulse-ring {
           0% { transform: scale(1); opacity: 0.4; }
           100% { transform: scale(2.2); opacity: 0; }
@@ -1833,12 +1829,12 @@ function PracticeAreasV18() {
         }
       `}</style>
 
-      {/* Subtle grid pattern overlay */}
-      <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.03 }}>
+      {/* Subtle dot pattern overlay */}
+      <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.025 }}>
         <svg width="100%" height="100%">
           <defs>
             <pattern id="pa-grid" width="60" height="60" patternUnits="userSpaceOnUse">
-              <circle cx="30" cy="30" r="1" fill="#FFFFFF" />
+              <circle cx="30" cy="30" r="1" fill="#001489" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#pa-grid)" />
@@ -1857,12 +1853,12 @@ function PracticeAreasV18() {
         >
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
-              <p style={{ color: "rgba(255,255,255,0.30)", fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                 08 Disciplines
               </p>
               <h2
                 className="font-heading font-bold leading-[1.15]"
-                style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", color: "#FFFFFF" }}
+                style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", color: "#001489" }}
               >
                 Areas of Practice
               </h2>
@@ -1871,10 +1867,10 @@ function PracticeAreasV18() {
               <span style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 fontSize: 13,
-                color: "rgba(255,255,255,0.20)",
+                color: "rgba(0,20,137,0.20)",
                 letterSpacing: "0.06em",
               }}>
-                {String(active + 1).padStart(2, "0")} <span style={{ color: "rgba(255,255,255,0.10)" }}>/</span> {String(EXPERTISE_ITEMS_V18.length).padStart(2, "0")}
+                {String(active + 1).padStart(2, "0")} <span style={{ color: "rgba(0,20,137,0.10)" }}>/</span> {String(EXPERTISE_ITEMS_V18.length).padStart(2, "0")}
               </span>
               {/* Progress dots */}
               <div className="flex items-center gap-1.5">
@@ -1885,7 +1881,7 @@ function PracticeAreasV18() {
                     style={{
                       width: active === i ? 20 : 6,
                       height: 3,
-                      background: active === i ? "rgba(255,255,255,0.50)" : "rgba(255,255,255,0.12)",
+                      background: active === i ? "#001489" : "rgba(0,20,137,0.12)",
                       border: "none",
                       cursor: "pointer",
                       transition: "all 0.3s ease",
@@ -1917,7 +1913,7 @@ function PracticeAreasV18() {
               { x1: "18%", y1: "46%", x2: "18%", y2: "58%" },
               { x1: "80%", y1: "46%", x2: "80%", y2: "58%" },
             ].map((line, i) => (
-              <line key={i} {...line} stroke="rgba(122,132,190,0.08)" strokeWidth="1" strokeDasharray="4 4" style={{ animation: "pa-line-flow 3s linear infinite" }} />
+              <line key={i} {...line} stroke="rgba(0,20,137,0.05)" strokeWidth="1" strokeDasharray="4 4" style={{ animation: "pa-line-flow 3s linear infinite" }} />
             ))}
           </svg>
 
@@ -1941,13 +1937,13 @@ function PracticeAreasV18() {
                     textAlign: "center",
                     padding: "clamp(28px, 3vw, 40px) clamp(16px, 2vw, 24px)",
                     position: "relative",
-                    background: isActive ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.02)",
-                    border: `1px solid ${isActive ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.04)"}`,
+                    background: isActive ? "rgba(0,20,137,0.04)" : "#FFFFFF",
+                    border: `1px solid ${isActive ? "rgba(0,20,137,0.12)" : "rgba(0,20,137,0.06)"}`,
                     transition: "all 0.4s ease",
                     ...(isHovered ? { transform: "translateY(-4px)" } : {}),
                   }}
                 >
-                  {/* Glowing icon container */}
+                  {/* Icon container with ring */}
                   <div style={{
                     width: 64,
                     height: 64,
@@ -1963,7 +1959,7 @@ function PracticeAreasV18() {
                         position: "absolute",
                         inset: -4,
                         borderRadius: "50%",
-                        border: "1px solid rgba(122,132,190,0.25)",
+                        border: "1px solid rgba(0,20,137,0.15)",
                       }} className="pa-node-ring" />
                     )}
                     {/* Outer ring */}
@@ -1971,7 +1967,7 @@ function PracticeAreasV18() {
                       position: "absolute",
                       inset: 0,
                       borderRadius: "50%",
-                      border: `1.5px solid ${isActive ? "rgba(122,132,190,0.40)" : "rgba(255,255,255,0.08)"}`,
+                      border: `1.5px solid ${isActive ? "rgba(0,20,137,0.25)" : "rgba(0,20,137,0.08)"}`,
                       transition: "border-color 0.4s ease",
                     }} />
                     {/* Inner icon */}
@@ -1980,9 +1976,8 @@ function PracticeAreasV18() {
                         scale: isActive ? [1, 1.08, 1] : 1,
                       }}
                       transition={{ duration: 0.5, ease: "easeInOut" }}
-                      style={{ color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.35)", transition: "color 0.3s" }}
                     >
-                      <PracticeIcon index={i} size={28} color={isActive ? "#FFFFFF" : "rgba(255,255,255,0.35)"} />
+                      <PracticeIcon index={i} size={28} color={isActive ? "#001489" : "rgba(0,20,137,0.25)"} />
                     </motion.div>
                   </div>
 
@@ -1991,7 +1986,7 @@ function PracticeAreasV18() {
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     fontSize: 10,
                     fontWeight: 700,
-                    color: isActive ? "rgba(122,132,190,0.80)" : "rgba(255,255,255,0.15)",
+                    color: isActive ? "#4A58AA" : "rgba(0,20,137,0.18)",
                     letterSpacing: "0.15em",
                     marginBottom: 8,
                     transition: "color 0.3s",
@@ -2005,7 +2000,7 @@ function PracticeAreasV18() {
                     style={{
                       fontSize: "clamp(0.8rem, 1.1vw, 0.95rem)",
                       lineHeight: 1.35,
-                      color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.35)",
+                      color: isActive ? "#001489" : "rgba(0,20,137,0.35)",
                       transition: "color 0.3s",
                     }}
                   >
@@ -2020,9 +2015,9 @@ function PracticeAreasV18() {
                       width: 6,
                       height: 6,
                       borderRadius: "50%",
-                      background: "#7A84BE",
+                      background: "#001489",
                       margin: "14px auto 0",
-                      boxShadow: "0 0 10px rgba(122,132,190,0.50)",
+                      boxShadow: "0 0 10px rgba(0,20,137,0.25)",
                     }}
                   />
                 </motion.div>
@@ -2045,7 +2040,7 @@ function PracticeAreasV18() {
             style={{ minHeight: 380 }}
           >
             {/* Image side */}
-            <div className="relative" style={{ background: "#000C4A", overflow: "hidden", minHeight: 320 }}>
+            <div className="relative" style={{ background: "#001489", overflow: "hidden", minHeight: 320 }}>
               <motion.img
                 src={item.img}
                 alt={item.title}
@@ -2078,7 +2073,7 @@ function PracticeAreasV18() {
                     {item.num}
                   </span>
                   <div className="flex items-center gap-3" style={{ marginBottom: 12 }}>
-                    <div style={{ color: "rgba(255,255,255,0.60)" }}>
+                    <div>
                       <PracticeIcon index={active} size={20} color="rgba(255,255,255,0.60)" />
                     </div>
                     <div style={{ height: 1, flex: 1, background: "rgba(255,255,255,0.10)", maxWidth: 80 }} />
@@ -2109,8 +2104,7 @@ function PracticeAreasV18() {
               className="flex flex-col justify-center relative"
               style={{
                 padding: "clamp(32px, 4vw, 56px) clamp(28px, 4vw, 64px)",
-                background: "rgba(0,12,74,0.60)",
-                backdropFilter: "blur(20px)",
+                background: "#F9F9F9",
               }}
             >
               <motion.div
@@ -2119,7 +2113,7 @@ function PracticeAreasV18() {
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <p style={{
-                  color: "rgba(255,255,255,0.50)",
+                  color: "rgba(0,20,137,0.50)",
                   fontSize: 14,
                   lineHeight: 1.82,
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -2142,18 +2136,15 @@ function PracticeAreasV18() {
                     textDecoration: "none",
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     padding: "14px 32px",
-                    border: "1px solid rgba(255,255,255,0.18)",
+                    background: "#001489",
                     alignSelf: "flex-start",
                     transition: "all 0.3s ease",
-                    background: "transparent",
                   }}
                   onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)";
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.35)";
+                    (e.currentTarget as HTMLElement).style.background = "#192B94";
                   }}
                   onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.background = "transparent";
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.18)";
+                    (e.currentTarget as HTMLElement).style.background = "#001489";
                   }}
                 >
                   Enquire
