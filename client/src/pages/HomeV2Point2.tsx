@@ -725,7 +725,22 @@ function DiffVisual({ index }: { index: number }) {
 function DifferentiatorsV15() {
   const { t } = useLang();
   const d = t.diff;
-  const [hovered, setHovered] = useState<number | null>(null);
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) return;
+    const start = Date.now();
+    const tick = setInterval(() => {
+      if (Date.now() - start >= CYCLE_MS) {
+        setActive(prev => (prev + 1) % d.cards.length);
+        clearInterval(tick);
+      }
+    }, 80);
+    return () => clearInterval(tick);
+  }, [active, paused, d.cards.length]);
+
+  const VISUALS = [FounderVisual, PrecisionVisual, CrossBorderVisual, DiscretionVisual];
 
   return (
     <section
@@ -733,15 +748,16 @@ function DifferentiatorsV15() {
       data-header-theme="light"
       data-testid="differentiators-section"
       style={{ background: "#FFFFFF", borderTop: "1px solid #E8EDF5" }}
+      onMouseLeave={() => setPaused(false)}
     >
       <div
         className="max-w-[1400px] mx-auto px-8"
         style={{ paddingTop: 96, paddingBottom: 104 }}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr_300px] gap-0 lg:gap-16 xl:gap-20">
 
           {/* ── LEFT: anchor column ── */}
-          <div className="flex flex-col" style={{ paddingTop: 4 }}>
+          <div className="flex flex-col lg:pr-8 mb-12 lg:mb-0" style={{ paddingTop: 4 }}>
             <p
               className="font-sans font-bold uppercase"
               style={{ color: "#4A58AA", fontSize: 10, letterSpacing: "0.32em", marginBottom: 28 }}
@@ -752,7 +768,7 @@ function DifferentiatorsV15() {
               className="font-heading font-bold"
               style={{
                 color: "#001489",
-                fontSize: "clamp(1.75rem, 2.6vw, 2.5rem)",
+                fontSize: "clamp(1.625rem, 2.4vw, 2.375rem)",
                 lineHeight: 1.12,
                 letterSpacing: "-0.02em",
                 marginBottom: 28,
@@ -763,11 +779,10 @@ function DifferentiatorsV15() {
             <p
               style={{
                 color: "#595959",
-                fontSize: "0.9375rem",
+                fontSize: "0.9rem",
                 lineHeight: 1.85,
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 marginBottom: 44,
-                maxWidth: 320,
               }}
             >
               Every engagement is managed directly by senior counsel — bringing strategic rigour and personal accountability to every mandate.
@@ -799,24 +814,23 @@ function DifferentiatorsV15() {
             </a>
           </div>
 
-          {/* ── RIGHT: numbered list ── */}
-          <div>
+          {/* ── CENTRE: numbered list ── */}
+          <div style={{ borderLeft: "1px solid #E8EDF5", paddingLeft: "clamp(24px, 3vw, 48px)" }}>
             {d.cards.map((card, i) => {
-              const isHov = hovered === i;
+              const isActive = active === i;
               return (
                 <div
                   key={i}
                   data-testid={`diff-row-${i}`}
-                  onMouseEnter={() => setHovered(i)}
-                  onMouseLeave={() => setHovered(null)}
+                  onMouseEnter={() => { setActive(i); setPaused(true); }}
                   style={{
                     borderTop: "1px solid #E8EDF5",
-                    paddingTop: 32,
-                    paddingBottom: 32,
+                    paddingTop: 28,
+                    paddingBottom: 28,
                     cursor: "default",
                   }}
                 >
-                  <div className="flex items-start gap-8">
+                  <div className="flex items-start gap-6">
                     {/* Number */}
                     <span
                       style={{
@@ -825,10 +839,10 @@ function DifferentiatorsV15() {
                         fontWeight: 700,
                         letterSpacing: "0.2em",
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        color: isHov ? "#001489" : "#7A84BE",
+                        color: isActive ? "#001489" : "#7A84BE",
                         paddingTop: 3,
-                        transition: "color 0.2s",
-                        minWidth: 28,
+                        transition: "color 0.25s",
+                        minWidth: 26,
                       }}
                     >
                       {String(i + 1).padStart(2, "0")}
@@ -836,27 +850,27 @@ function DifferentiatorsV15() {
 
                     {/* Text block */}
                     <div style={{ flex: 1 }}>
-                      <div className="flex items-center justify-between" style={{ marginBottom: 12 }}>
+                      <div className="flex items-center justify-between" style={{ marginBottom: 10 }}>
                         <h3
                           className="font-heading font-bold"
                           style={{
-                            color: isHov ? "#001489" : "#151515",
-                            fontSize: "clamp(1rem, 1.25vw, 1.125rem)",
+                            color: isActive ? "#001489" : "#151515",
+                            fontSize: "clamp(1rem, 1.2vw, 1.0625rem)",
                             lineHeight: 1.3,
                             letterSpacing: "-0.01em",
-                            transition: "color 0.2s",
+                            transition: "color 0.25s",
                           }}
                         >
                           {card.title}
                         </h3>
                         <svg
-                          width="14" height="14" fill="none" viewBox="0 0 14 14"
+                          width="13" height="13" fill="none" viewBox="0 0 14 14"
                           style={{
                             flexShrink: 0,
                             marginLeft: 16,
-                            opacity: isHov ? 1 : 0,
-                            transition: "opacity 0.2s, transform 0.2s",
-                            transform: isHov ? "translate(2px, -2px)" : "translate(0,0)",
+                            opacity: isActive ? 1 : 0,
+                            transition: "opacity 0.25s, transform 0.25s",
+                            transform: isActive ? "translate(2px,-2px)" : "translate(0,0)",
                             color: "#001489",
                           }}
                         >
@@ -878,8 +892,75 @@ function DifferentiatorsV15() {
                 </div>
               );
             })}
-            {/* close rule */}
+            {/* bottom rule */}
             <div style={{ borderTop: "1px solid #E8EDF5" }} />
+          </div>
+
+          {/* ── RIGHT: animated SVG panel ── */}
+          <div
+            className="hidden lg:flex flex-col items-center justify-center"
+            style={{
+              borderLeft: "1px solid #E8EDF5",
+              paddingLeft: "clamp(24px, 3vw, 40px)",
+            }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                className="w-full"
+                style={{ height: 300 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                {(() => { const V = VISUALS[active]; return <V />; })()}
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Active label */}
+            <div style={{ marginTop: 24, width: "100%" }}>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={active}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.3 }}
+                  style={{
+                    color: "#4A58AA",
+                    fontSize: 10,
+                    fontWeight: 700,
+                    letterSpacing: "0.22em",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    textTransform: "uppercase",
+                    textAlign: "center",
+                  }}
+                >
+                  {String(active + 1).padStart(2, "0")} — {d.cards[active].title}
+                </motion.p>
+              </AnimatePresence>
+
+              {/* Progress dots */}
+              <div className="flex items-center justify-center gap-2" style={{ marginTop: 16 }}>
+                {d.cards.map((_, i) => (
+                  <button
+                    key={i}
+                    data-testid={`diff-dot-${i}`}
+                    onClick={() => { setActive(i); setPaused(true); }}
+                    style={{
+                      width: i === active ? 24 : 6,
+                      height: 2,
+                      background: i === active ? "#001489" : "#D6DAF0",
+                      border: "none",
+                      padding: 0,
+                      cursor: "pointer",
+                      transition: "width 0.3s, background 0.3s",
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
         </div>
