@@ -1619,7 +1619,7 @@ function FooterV15() {
         .mh-ticker-track {
           display: inline-flex;
           white-space: nowrap;
-          animation: mh-ticker 44s linear infinite;
+          animation: mh-ticker 100s linear infinite;
         }
       `}</style>
       <div
