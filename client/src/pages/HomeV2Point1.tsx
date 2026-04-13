@@ -1612,70 +1612,273 @@ function FooterV15() {
     { label: t.nav.contact,   href: "#contact" },
   ];
 
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const fmtTime = (tz: string) =>
+    new Intl.DateTimeFormat("en-GB", {
+      timeZone: tz,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    }).format(now);
+
+  const dubaiTime = fmtTime("Asia/Dubai");
+  const parisTime = fmtTime("Europe/Paris");
+
+  const marqueeSingle = (
+    <>
+      {["REASON", "RIGOR", "RESOLUTION", "RAISON", "RIGUEUR", "RÉSOLUTION"].map((word, i) => (
+        <span key={i} className="inline-flex items-center">
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 600,
+              letterSpacing: "0.14em",
+              color: i % 3 === 0 ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.28)",
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+            }}
+          >
+            {word}
+          </span>
+          <span style={{ color: "rgba(255,255,255,0.14)", padding: "0 20px", fontSize: 10 }}>◆</span>
+        </span>
+      ))}
+    </>
+  );
+
   return (
-    <footer id="footer" data-testid="footer" className="bg-[#001489] border-t border-white/10">
+    <footer id="footer" data-testid="footer" style={{ background: "#001489" }}>
+
+      {/* ── Scrolling motto ticker ── */}
+      <style>{`
+        @keyframes mh-ticker {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+      `}</style>
+      <div
+        style={{
+          background: "#192B94",
+          overflow: "hidden",
+          padding: "11px 0",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          userSelect: "none",
+        }}
+      >
+        <div
+          style={{
+            display: "inline-flex",
+            whiteSpace: "nowrap",
+            animation: "mh-ticker 44s linear infinite",
+            willChange: "transform",
+          }}
+        >
+          {marqueeSingle}{marqueeSingle}
+        </div>
+      </div>
+
+      {/* ── Main body ── */}
       <div className="max-w-[1400px] mx-auto px-8">
-        <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 border-b border-white/10">
-          <div className="lg:col-span-5 lg:pr-16">
-            <p className="font-heading text-white font-semibold text-lg tracking-[0.06em] uppercase mb-5">
-              Milton Hobbs
-            </p>
-            <p className="text-white/45 text-sm leading-[1.4] max-w-xs mb-8 pr-[20%]">
-              {f.tagline}
-            </p>
-            <div className="space-y-2">
-              <a href={`mailto:${f.email}`} data-testid="footer-email"
-                className="block text-white text-sm hover:text-white/70 transition-colors">
+        <div
+          className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] gap-12 lg:gap-20"
+          style={{ paddingTop: 56, paddingBottom: 52, borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+        >
+
+          {/* LEFT: Giant masthead wordmark */}
+          <div className="flex flex-col justify-between gap-10">
+            <div>
+              <div
+                className="font-heading font-bold leading-[0.9] select-none"
+                aria-label="Milton Hobbs"
+              >
+                <div style={{ fontSize: "clamp(3.5rem, 9.5vw, 8rem)", color: "#FFFFFF", letterSpacing: "-0.02em" }}>
+                  MILTON
+                </div>
+                <div style={{ fontSize: "clamp(3.5rem, 9.5vw, 8rem)", color: "rgba(255,255,255,0.16)", letterSpacing: "-0.02em" }}>
+                  HOBBS
+                </div>
+              </div>
+              <div style={{ width: 48, height: 1, background: "rgba(255,255,255,0.14)", margin: "24px 0 20px" }} />
+              <p style={{ color: "rgba(255,255,255,0.38)", fontSize: 14, lineHeight: 1.7, maxWidth: "38ch" }}>
+                {f.tagline}
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <a
+                href={`mailto:${f.email}`}
+                data-testid="footer-email"
+                className="self-start"
+                style={{
+                  color: "rgba(255,255,255,0.62)",
+                  fontSize: 14,
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.62)"}
+              >
                 {f.email}
               </a>
-              <a href={`tel:${f.phone}`} data-testid="footer-phone-dubai"
-                className="block text-white/40 text-sm hover:text-white/70 transition-colors">
-                Dubai: {f.phone}
-              </a>
-              <a href="tel:+33180270067" data-testid="footer-phone-paris"
-                className="block text-white/40 text-sm hover:text-white/70 transition-colors">
-                Paris: +33 1 80 27 00 67
-              </a>
+              <div className="flex flex-wrap gap-x-7 gap-y-1 mt-0.5">
+                <a
+                  href={`tel:${f.phone}`}
+                  data-testid="footer-phone-dubai"
+                  style={{ color: "rgba(255,255,255,0.28)", fontSize: 13, textDecoration: "none", transition: "color 0.2s" }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.60)"}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.28)"}
+                >
+                  Dubai {f.phone}
+                </a>
+                <a
+                  href="tel:+33180270067"
+                  data-testid="footer-phone-paris"
+                  style={{ color: "rgba(255,255,255,0.28)", fontSize: 13, textDecoration: "none", transition: "color 0.2s" }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.60)"}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.28)"}
+                >
+                  Paris +33 1 80 27 00 67
+                </a>
+              </div>
             </div>
           </div>
-          <div className="lg:col-span-3">
-            <p className="text-white/30 text-[12px] tracking-[0.06em] uppercase font-medium mb-6">
-              {f.dubaiLabel}
-            </p>
-            <address className="not-italic text-white/50 text-sm leading-[1.4]">
-              {f.dubaiAddr.map((line, i) => <span key={i} className="block">{line}</span>)}
-            </address>
-          </div>
-          <div className="lg:col-span-3 lg:col-start-10">
-            <p className="text-white/30 text-[12px] tracking-[0.06em] uppercase font-medium mb-6">
-              {f.parisLabel}
-            </p>
-            <address className="not-italic text-white/50 text-sm leading-[1.4]">
-              {f.parisAddr.map((line, i) => <span key={i} className="block">{line}</span>)}
-            </address>
+
+          {/* RIGHT: Offices + nav */}
+          <div className="flex flex-col gap-10 lg:pt-2">
+            <div className="grid grid-cols-2 gap-8">
+              <div>
+                <p
+                  style={{ color: "#7A84BE", fontSize: 12, textTransform: "uppercase", fontWeight: 600, marginBottom: 14 }}
+                >
+                  {f.dubaiLabel}
+                </p>
+                <address className="not-italic" style={{ color: "rgba(255,255,255,0.38)", fontSize: 13, lineHeight: 1.7 }}>
+                  {f.dubaiAddr.map((line, i) => <span key={i} className="block">{line}</span>)}
+                </address>
+              </div>
+              <div>
+                <p
+                  style={{ color: "#7A84BE", fontSize: 12, textTransform: "uppercase", fontWeight: 600, marginBottom: 14 }}
+                >
+                  {f.parisLabel}
+                </p>
+                <address className="not-italic" style={{ color: "rgba(255,255,255,0.38)", fontSize: 13, lineHeight: 1.7 }}>
+                  {f.parisAddr.map((line, i) => <span key={i} className="block">{line}</span>)}
+                </address>
+              </div>
+            </div>
+
+            <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 24 }}>
+              <p style={{ color: "#7A84BE", fontSize: 12, textTransform: "uppercase", fontWeight: 600, marginBottom: 14 }}>
+                Navigation
+              </p>
+              <div className="flex flex-wrap gap-x-6 gap-y-2.5">
+                {navEntries.map(link => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    style={{
+                      color: "rgba(255,255,255,0.28)",
+                      fontSize: 13,
+                      textDecoration: "none",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.04em",
+                      transition: "color 0.2s",
+                    }}
+                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.70)"}
+                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.28)"}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-        <div className="py-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 border-b border-white/5">
-          <div className="flex flex-wrap gap-x-7 gap-y-3">
-            {navEntries.map(link => (
-              <a key={link.href} href={link.href}
-                className="text-white/30 hover:text-white/60 text-[12px] tracking-[0.04em] uppercase transition-colors">
-                {link.label}
-              </a>
-            ))}
-          </div>
+
+        {/* ── Bottom bar: live clocks + legal ── */}
+        <div
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          style={{ padding: "18px 0 20px" }}
+        >
+          {/* Live local times */}
           <div className="flex items-center gap-6">
-            <a href="#" className="text-white/30 hover:text-white/60 text-[12px] tracking-[0.04em] uppercase transition-colors">{f.privacy}</a>
-            <a href="#" className="text-white/30 hover:text-white/60 text-[12px] tracking-[0.04em] uppercase transition-colors">{f.cookie}</a>
+            <div className="flex items-center gap-2.5">
+              <span
+                style={{
+                  display: "inline-block",
+                  width: 7,
+                  height: 7,
+                  background: "#7A84BE",
+                  borderRadius: "50%",
+                  flexShrink: 0,
+                  boxShadow: "0 0 0 2px rgba(122,132,190,0.25)",
+                }}
+              />
+              <span style={{ color: "rgba(255,255,255,0.28)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                Dubai
+              </span>
+              <span
+                style={{
+                  color: "rgba(255,255,255,0.62)",
+                  fontSize: 12,
+                  fontFamily: "'Plus Jakarta Sans', monospace",
+                  letterSpacing: "0.04em",
+                  minWidth: "6.5ch",
+                }}
+              >
+                {dubaiTime}
+              </span>
+            </div>
+            <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.10)" }} />
+            <div className="flex items-center gap-2.5">
+              <span
+                style={{
+                  display: "inline-block",
+                  width: 7,
+                  height: 7,
+                  background: "#4A58AA",
+                  borderRadius: "50%",
+                  flexShrink: 0,
+                  boxShadow: "0 0 0 2px rgba(74,88,170,0.25)",
+                }}
+              />
+              <span style={{ color: "rgba(255,255,255,0.28)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                Paris
+              </span>
+              <span
+                style={{
+                  color: "rgba(255,255,255,0.62)",
+                  fontSize: 12,
+                  fontFamily: "'Plus Jakarta Sans', monospace",
+                  letterSpacing: "0.04em",
+                  minWidth: "6.5ch",
+                }}
+              >
+                {parisTime}
+              </span>
+            </div>
+          </div>
+
+          {/* Copyright + legal */}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
+            <p style={{ color: "rgba(255,255,255,0.20)", fontSize: 12 }}>{f.copyright}</p>
+            <a href="#" style={{ color: "rgba(255,255,255,0.20)", fontSize: 12, textDecoration: "none" }}>{f.privacy}</a>
+            <a href="#" style={{ color: "rgba(255,255,255,0.20)", fontSize: 12, textDecoration: "none" }}>{f.cookie}</a>
           </div>
         </div>
-        <div className="py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-          <p className="text-white/25 text-xs leading-[1.5] shrink-0">{f.copyright}</p>
-          <p data-testid="footer-disclaimer"
-            className="text-white/20 text-[12px] max-w-lg sm:text-right leading-[1.5]">
-            {f.disclaimer}
-          </p>
-        </div>
+
+        <p
+          data-testid="footer-disclaimer"
+          style={{ color: "rgba(255,255,255,0.13)", fontSize: 11, lineHeight: 1.6, paddingBottom: 20, maxWidth: "90ch" }}
+        >
+          {f.disclaimer}
+        </p>
       </div>
     </footer>
   );
