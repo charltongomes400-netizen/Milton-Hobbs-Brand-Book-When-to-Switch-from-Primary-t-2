@@ -375,31 +375,6 @@ function HeroV15() {
         </span>
       </motion.div>
 
-      {/* ── Ghost watermark numeral ───────────────────────────────────────── */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={`ghost-${currentIndex}`}
-          className="absolute right-0 bottom-0 pointer-events-none z-[1] select-none"
-          style={{
-            fontFamily: "'Satoshi', sans-serif",
-            fontWeight: 900,
-            fontSize: "clamp(14rem, 30vw, 28rem)",
-            lineHeight: 0.82,
-            color: "rgba(255,255,255,0.035)",
-            letterSpacing: "-0.05em",
-            userSelect: "none",
-            paddingRight: "2vw",
-            paddingBottom: "1rem",
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.8 }}
-        >
-          {String(currentIndex + 1).padStart(2, "0")}
-        </motion.div>
-      </AnimatePresence>
-
       {/* ── Main editorial content ────────────────────────────────────────── */}
       <div className="relative z-10 flex flex-col min-h-screen pl-16 xl:pl-28 pr-12 xl:pr-24 pt-28 pb-16">
 
@@ -452,33 +427,12 @@ function HeroV15() {
               className="group inline-flex items-center gap-4"
               style={{ textDecoration: "none" }}
             >
-              <motion.span
-                className="flex items-center justify-center"
-                style={{
-                  width: 44,
-                  height: 44,
-                  border: "1px solid rgba(255,255,255,0.30)",
-                  borderRadius: "50%",
-                  flexShrink: 0,
-                  transition: "border-color 0.25s, background 0.25s",
-                }}
-                whileHover={{ scale: 1.08 }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.75)";
-                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)";
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.30)";
-                  (e.currentTarget as HTMLElement).style.background = "";
-                }}
+              <svg
+                className="group-hover:translate-x-0.5 transition-transform duration-200"
+                width="13" height="13" fill="none" viewBox="0 0 12 12"
               >
-                <svg
-                  className="group-hover:translate-x-0.5 transition-transform duration-200"
-                  width="13" height="13" fill="none" viewBox="0 0 12 12"
-                >
-                  <path d="M1 6h10M6 1l5 5-5 5" stroke="rgba(255,255,255,0.75)" strokeWidth="1.4" />
-                </svg>
-              </motion.span>
+                <path d="M1 6h10M6 1l5 5-5 5" stroke="rgba(255,255,255,0.75)" strokeWidth="1.4" />
+              </svg>
               <span style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 color: "rgba(255,255,255,0.55)",
