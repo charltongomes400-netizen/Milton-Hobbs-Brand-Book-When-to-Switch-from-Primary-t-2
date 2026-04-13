@@ -1870,12 +1870,49 @@ function PracticeAreasV18() {
   const [active, setActive] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollPct, setScrollPct] = useState(0);
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragScrollLeft = useRef(0);
 
   const handleScroll = () => {
     const el = scrollRef.current;
     if (!el) return;
     const max = el.scrollWidth - el.clientWidth;
     setScrollPct(max > 0 ? el.scrollLeft / max : 0);
+  };
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    isDragging.current = true;
+    dragStartX.current = e.pageX - el.offsetLeft;
+    dragScrollLeft.current = el.scrollLeft;
+    el.style.cursor = "grabbing";
+    el.style.userSelect = "none";
+  };
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - dragStartX.current) * 1.8;
+    scrollRef.current.scrollLeft = dragScrollLeft.current - walk;
+  };
+
+  const onMouseUp = () => {
+    isDragging.current = false;
+    if (scrollRef.current) {
+      scrollRef.current.style.cursor = "grab";
+      scrollRef.current.style.userSelect = "";
+    }
+  };
+
+  const onMouseLeaveStrip = () => {
+    isDragging.current = false;
+    if (scrollRef.current) {
+      scrollRef.current.style.cursor = "grab";
+      scrollRef.current.style.userSelect = "";
+    }
   };
 
   return (
@@ -1914,19 +1951,33 @@ function PracticeAreasV18() {
         </div>
       </motion.div>
 
+      {/* ── Scrollbar styles ── */}
+      <style>{`
+        .expertise-scroll::-webkit-scrollbar { height: 6px; }
+        .expertise-scroll::-webkit-scrollbar-track { background: rgba(0,20,137,0.06); }
+        .expertise-scroll::-webkit-scrollbar-thumb { background: #001489; }
+        .expertise-scroll::-webkit-scrollbar-thumb:hover { background: #192B94; }
+      `}</style>
+
       {/* ── Horizontal scroll strip ── */}
       <div
         ref={scrollRef}
         onScroll={handleScroll}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseLeaveStrip}
+        className="expertise-scroll"
         style={{
           display: "flex",
           overflowX: "auto",
           overflowY: "hidden",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          height: 500,
+          scrollbarWidth: "thin",
+          scrollbarColor: "#001489 rgba(0,20,137,0.06)",
+          height: 620,
+          cursor: "grab",
+          paddingBottom: 0,
         }}
-        className="[&::-webkit-scrollbar]:hidden"
       >
         {/* Photo cards */}
         {EXPERTISE_ITEMS_V18.map((item, i) => {
@@ -1935,15 +1986,15 @@ function PracticeAreasV18() {
             <div
               key={i}
               data-testid={`expertise-item-${i}`}
-              onMouseEnter={() => setActive(i)}
+              onMouseEnter={() => !isDragging.current && setActive(i)}
               onMouseLeave={() => setActive(null)}
               style={{
                 position: "relative",
                 flexShrink: 0,
-                width: "clamp(240px, 25vw, 320px)",
+                width: "clamp(300px, 28vw, 400px)",
                 overflow: "hidden",
                 background: "#001489",
-                cursor: "pointer",
+                cursor: "grab",
                 borderRight: "1px solid rgba(255,255,255,0.06)",
               }}
             >
@@ -2004,7 +2055,7 @@ function PracticeAreasV18() {
           data-testid="expertise-cta-card"
           style={{
             flexShrink: 0,
-            width: "clamp(240px, 25vw, 320px)",
+            width: "clamp(300px, 28vw, 400px)",
             background: "#192B94",
             display: "flex",
             flexDirection: "column",
@@ -2043,14 +2094,16 @@ function PracticeAreasV18() {
       </div>
 
       {/* ── Scroll progress bar ── */}
-      <div style={{ height: 3, background: "rgba(0,20,137,0.07)" }}>
+      <div style={{ height: 8, background: "rgba(0,20,137,0.08)", position: "relative" }}>
         <div
           style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
             height: "100%",
             background: "#001489",
-            width: `${scrollPct * 100}%`,
-            transition: "width 0.1s linear",
-            minWidth: scrollPct > 0 ? 0 : "15%",
+            width: `${Math.max(scrollPct * 100, 12)}%`,
+            transition: "width 0.08s linear",
           }}
         />
       </div>
