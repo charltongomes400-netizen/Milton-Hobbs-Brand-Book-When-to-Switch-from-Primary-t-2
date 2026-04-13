@@ -1693,13 +1693,14 @@ function FooterV15() {
           <div className="flex flex-col justify-between gap-10">
             <div>
               <div
-                className="font-heading font-bold leading-[0.9] select-none"
+                className="leading-[0.92] select-none"
                 aria-label="Milton Hobbs"
+                style={{ fontFamily: "'Cormorant Garant', Georgia, serif" }}
               >
-                <div style={{ fontSize: "clamp(3.5rem, 9.5vw, 8rem)", color: "#FFFFFF", letterSpacing: "-0.02em" }}>
+                <div style={{ fontSize: "clamp(3.5rem, 9.5vw, 8rem)", color: "#FFFFFF", fontWeight: 600, letterSpacing: "0.08em" }}>
                   MILTON
                 </div>
-                <div style={{ fontSize: "clamp(3.5rem, 9.5vw, 8rem)", color: "rgba(255,255,255,0.16)", letterSpacing: "-0.02em" }}>
+                <div style={{ fontSize: "clamp(3.5rem, 9.5vw, 8rem)", color: "rgba(255,255,255,0.18)", fontWeight: 600, letterSpacing: "0.08em" }}>
                   HOBBS
                 </div>
               </div>
