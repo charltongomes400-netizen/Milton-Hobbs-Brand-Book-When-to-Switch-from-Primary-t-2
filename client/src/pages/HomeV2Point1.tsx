@@ -1528,7 +1528,7 @@ function PracticeAreasV18() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
             <h2
               className="font-heading font-bold text-[#001489] leading-[1.15]"
-              style={{ fontSize: "clamp(1.375rem, 2.5vw, 1.875rem)" }}
+              style={{ fontSize: "clamp(1.375rem, 2.5vw, 1.75rem)" }}
             >
               Areas of Practice
             </h2>
@@ -1743,7 +1743,7 @@ function PracticeAreasV18() {
                   <div>
                     <h3
                       className="font-heading font-bold text-white"
-                      style={{ fontSize: "1rem", lineHeight: 1.3, marginBottom: isOpen ? 10 : 0 }}
+                      style={{ fontSize: "1.125rem", lineHeight: 1.3, marginBottom: isOpen ? 10 : 0 }}
                     >
                       {item.title}
                     </h3>
@@ -1758,7 +1758,7 @@ function PracticeAreasV18() {
                           <p
                             style={{
                               color: "rgba(255,255,255,0.55)",
-                              fontSize: 13,
+                              fontSize: 14,
                               lineHeight: 1.65,
                               marginBottom: 14,
                               fontFamily: "'Plus Jakarta Sans', sans-serif",
