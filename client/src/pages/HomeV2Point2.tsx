@@ -1767,6 +1767,17 @@ function FooterV15() {
 
 /* ─── PRACTICE AREAS ────────────────────────────────────────────────────── */
 
+const PRACTICE_ICONS: Record<string, string> = {
+  Corporate: "M3 21V7l9-4 9 4v14M3 10h18M9 21V14h6v7M12 3v4",
+  Tax: "M4 4h16v3H4zM6 7v13h12V7M9 10v7M12 10v7M15 10v7M2 4h20",
+  "M&A": "M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM16 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 14v4M8 22h8M12 18h0",
+  Startups: "M12 2L4 7v6c0 5.5 3.4 10.7 8 12 4.6-1.3 8-6.5 8-12V7l-8-5zM9 12l2 2 4-4",
+  "IP & Tech": "M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.5-3 5.7V17H8v-2.3C6.2 13.5 5 11.4 5 9a7 7 0 0 1 7-7zM9 21h6M10 17v4M14 17v4",
+  "Real Estate": "M3 21h18M5 21V9l7-6 7 6v12M9 21v-6h6v6",
+  Employment: "M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M10 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM21 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8",
+  Litigation: "M12 22c1-4 6-6 6-10a6 6 0 1 0-12 0c0 4 5 6 6 10zM12 2v2M4.9 4.9l1.4 1.4M2 12h2M4.9 19.1l1.4-1.4M19.1 4.9l-1.4 1.4M22 12h-2M19.1 19.1l-1.4-1.4",
+};
+
 const EXPERTISE_ITEMS_V18 = [
   { num: "01", short: "Corporate",   title: "Corporate & Commercial",             desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors.",                               img: imgCorp   },
   { num: "02", short: "Tax",         title: "Tax & Compliance",                   desc: "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals.",                    img: imgTax    },
@@ -1778,7 +1789,32 @@ const EXPERTISE_ITEMS_V18 = [
   { num: "08", short: "Litigation",  title: "Litigation & Dispute Resolution",    desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums.",                                          img: imgLitig  },
 ];
 
-const PRACTICE_CYCLE_MS = 6000;
+const PRACTICE_CYCLE_MS = 5000;
+
+function PracticeAreaIcon({ pathD, isActive }: { pathD: string; isActive: boolean }) {
+  return (
+    <motion.svg
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      animate={{
+        scale: isActive ? [1, 1.12, 1] : 1,
+        rotate: isActive ? [0, -3, 3, 0] : 0,
+      }}
+      transition={{
+        duration: isActive ? 0.6 : 0.3,
+        ease: "easeInOut",
+      }}
+    >
+      <path d={pathD} />
+    </motion.svg>
+  );
+}
 
 function PracticeAreasV18() {
   const [active, setActive] = useState(0);
@@ -1802,262 +1838,251 @@ function PracticeAreasV18() {
       style={{ background: "#FFFFFF", borderTop: "1px solid rgba(0,20,137,0.07)" }}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 88, paddingBottom: 88 }}>
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 96, paddingBottom: 0 }}>
+
+        {/* ── Section header ── */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
+          style={{ marginBottom: 64, textAlign: "center" }}
         >
-          <div className="flex items-end justify-between gap-6 flex-wrap" style={{ marginBottom: 56 }}>
-            <div>
-              <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 14, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                08 Disciplines
-              </p>
-              <h2
-                className="font-heading font-bold text-[#001489] leading-[1.15]"
-                style={{ fontSize: "clamp(1.375rem, 2.5vw, 1.75rem)" }}
-              >
-                Areas of Practice
-              </h2>
-            </div>
-            <span
-              style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 13,
-                color: "rgba(0,20,137,0.25)",
-                letterSpacing: "0.06em",
-                paddingBottom: 4,
-              }}
-            >
-              {String(active + 1).padStart(2, "0")} <span style={{ color: "rgba(0,20,137,0.15)" }}>/</span> {String(EXPERTISE_ITEMS_V18.length).padStart(2, "0")}
-            </span>
-          </div>
+          <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            08 Disciplines
+          </p>
+          <h2
+            className="font-heading font-bold text-[#001489] leading-[1.15]"
+            style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)" }}
+          >
+            Areas of Practice
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[5fr_6fr] gap-0" style={{ minHeight: 580 }}>
-
-          {/* ── Mobile image panel (visible below lg) ── */}
-          <div
-            className="relative block lg:hidden"
-            style={{
-              background: "#001489",
-              overflow: "hidden",
-              height: 320,
-              marginBottom: 24,
-            }}
-          >
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={`mobile-${active}`}
-                src={item.img}
-                alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ mixBlendMode: "multiply" }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6 }}
-              />
-            </AnimatePresence>
-            <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(0,6,44,0.70) 0%, transparent 60%)" }} />
-            <div className="absolute bottom-0 left-0 right-0" style={{ padding: "0 24px 24px" }}>
-              <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 6, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.short}</p>
-              <h3 className="font-heading font-bold text-white" style={{ fontSize: "1.15rem", lineHeight: 1.2 }}>{item.title}</h3>
-            </div>
-          </div>
-
-          {/* ── Left: numbered list with staggered entrance ── */}
-          <motion.div
-            className="flex flex-col"
-            style={{ borderTop: "1px solid rgba(0,20,137,0.08)" }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.06 } },
-            }}
-          >
-            {EXPERTISE_ITEMS_V18.map((itm, i) => {
-              const isActive = active === i;
-              return (
+        {/* ── Icon tile grid: 4 columns × 2 rows ── */}
+        <motion.div
+          className="grid grid-cols-2 sm:grid-cols-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07 } } }}
+          style={{ borderTop: "1px solid rgba(0,20,137,0.08)", borderLeft: "1px solid rgba(0,20,137,0.08)" }}
+        >
+          {EXPERTISE_ITEMS_V18.map((itm, i) => {
+            const isActive = active === i;
+            const iconPath = PRACTICE_ICONS[itm.short] || "";
+            return (
+              <motion.div
+                key={i}
+                data-testid={`expertise-item-${i}`}
+                onClick={() => { setActive(i); setPaused(true); }}
+                onMouseEnter={() => { setActive(i); setPaused(true); }}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+                }}
+                style={{
+                  cursor: "pointer",
+                  padding: "clamp(24px, 3vw, 40px) clamp(16px, 2vw, 28px)",
+                  borderRight: "1px solid rgba(0,20,137,0.08)",
+                  borderBottom: "1px solid rgba(0,20,137,0.08)",
+                  position: "relative",
+                  overflow: "hidden",
+                  transition: "background 0.35s ease",
+                  background: isActive ? "rgba(0,20,137,0.04)" : "transparent",
+                }}
+              >
+                {/* Active top accent line */}
                 <motion.div
-                  key={i}
-                  data-testid={`expertise-item-${i}`}
-                  onClick={() => { setActive(i); setPaused(true); }}
-                  onMouseEnter={() => { setActive(i); setPaused(true); }}
-                  variants={{
-                    hidden: { opacity: 0, x: -24 },
-                    visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
-                  }}
                   style={{
-                    borderBottom: "1px solid rgba(0,20,137,0.08)",
-                    cursor: "pointer",
-                    padding: isActive ? "22px 0 22px 0" : "16px 0 16px 0",
-                    transition: "padding 0.35s ease",
-                    position: "relative",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 3,
+                    background: "#001489",
+                  }}
+                  animate={{ scaleX: isActive ? 1 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  initial={{ scaleX: 0, transformOrigin: "left" }}
+                />
+
+                {/* Number + icon row */}
+                <div className="flex items-center justify-between" style={{ marginBottom: 16 }}>
+                  <span style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: 11,
+                    fontWeight: 600,
+                    color: isActive ? "#001489" : "rgba(0,20,137,0.20)",
+                    letterSpacing: "0.06em",
+                    transition: "color 0.3s",
+                  }}>
+                    {itm.num}
+                  </span>
+                  <div style={{
+                    color: isActive ? "#001489" : "rgba(0,20,137,0.22)",
+                    transition: "color 0.3s",
+                  }}>
+                    <PracticeAreaIcon pathD={iconPath} isActive={isActive} />
+                  </div>
+                </div>
+
+                {/* Title */}
+                <h3
+                  className="font-heading font-bold"
+                  style={{
+                    fontSize: "clamp(0.85rem, 1.2vw, 1.05rem)",
+                    lineHeight: 1.3,
+                    color: isActive ? "#001489" : "rgba(0,20,137,0.45)",
+                    transition: "color 0.3s",
+                    minHeight: "2.6em",
                   }}
                 >
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: 0,
-                      top: 0,
-                      bottom: 0,
-                      width: 3,
-                      background: "#001489",
-                      opacity: isActive ? 1 : 0,
-                      transition: "opacity 0.3s ease",
-                    }}
-                  />
-                  <div className="flex items-start gap-5" style={{ paddingLeft: 20 }}>
-                    <span
-                      style={{
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        fontSize: 11,
-                        fontWeight: 600,
-                        color: isActive ? "#001489" : "rgba(0,20,137,0.22)",
-                        letterSpacing: "0.06em",
-                        minWidth: "2.5ch",
-                        paddingTop: 3,
-                        transition: "color 0.3s ease",
-                      }}
-                    >
-                      {itm.num}
+                  {itm.title}
+                </h3>
+
+                {/* Subtle arrow indicator on active */}
+                <motion.div
+                  animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 4 }}
+                  transition={{ duration: 0.25 }}
+                  style={{ marginTop: 12 }}
+                >
+                  <svg width="14" height="14" fill="none" viewBox="0 0 16 16" style={{ color: "#001489" }}>
+                    <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                  </svg>
+                </motion.div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* ── Expanded detail panel below grid ── */}
+        <div style={{ overflow: "hidden" }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
+              className="grid grid-cols-1 lg:grid-cols-[1fr_1fr]"
+              style={{ minHeight: 340 }}
+            >
+              {/* Detail: image panel */}
+              <div
+                className="relative"
+                style={{
+                  background: "#001489",
+                  overflow: "hidden",
+                  minHeight: 280,
+                }}
+              >
+                <motion.img
+                  src={item.img}
+                  alt={item.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ mixBlendMode: "multiply" }}
+                  initial={{ scale: 1.06 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,14,80,0.25) 0%, transparent 40%, rgba(0,6,44,0.55) 100%)" }} />
+                <div className="absolute bottom-0 left-0 right-0" style={{ height: "50%", background: "linear-gradient(to top, rgba(0,6,44,0.80) 0%, transparent 100%)" }} />
+
+                {/* Image overlay: number + category */}
+                <div className="absolute bottom-0 left-0 right-0" style={{ padding: "0 32px 28px" }}>
+                  <div className="flex items-end gap-4">
+                    <span style={{
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontSize: "clamp(2.5rem, 5vw, 4rem)",
+                      fontWeight: 800,
+                      color: "rgba(255,255,255,0.08)",
+                      lineHeight: 1,
+                      letterSpacing: "-0.02em",
+                    }}>
+                      {item.num}
                     </span>
-                    <div style={{ flex: 1 }}>
-                      <h3
-                        className="font-heading font-bold"
-                        style={{
-                          fontSize: "clamp(0.95rem, 1.3vw, 1.15rem)",
-                          lineHeight: 1.3,
-                          color: isActive ? "#001489" : "rgba(0,20,137,0.40)",
-                          transition: "color 0.3s ease",
-                        }}
-                      >
-                        {itm.title}
+                    <div style={{ paddingBottom: 6 }}>
+                      <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 6, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                        {item.short}
+                      </p>
+                      <h3 className="font-heading font-bold text-white" style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.5rem)", lineHeight: 1.2 }}>
+                        {item.title}
                       </h3>
-                      <div
-                        style={{
-                          overflow: "hidden",
-                          maxHeight: isActive ? 120 : 0,
-                          opacity: isActive ? 1 : 0,
-                          transition: "max-height 0.4s ease, opacity 0.3s ease, margin 0.4s ease",
-                          marginTop: isActive ? 12 : 0,
-                        }}
-                      >
-                        <p style={{
-                          color: "rgba(0,20,137,0.50)",
-                          fontSize: 13,
-                          lineHeight: 1.72,
-                          fontFamily: "'Plus Jakarta Sans', sans-serif",
-                          maxWidth: "44ch",
-                          marginBottom: 14,
-                        }}>
-                          {itm.desc}
-                        </p>
-                        <a
-                          href="#contact"
-                          className="inline-flex items-center gap-2"
-                          style={{
-                            color: "#001489",
-                            fontSize: 11,
-                            fontWeight: 700,
-                            textTransform: "uppercase",
-                            letterSpacing: "0.08em",
-                            textDecoration: "none",
-                            fontFamily: "'Plus Jakarta Sans', sans-serif",
-                            transition: "opacity 0.2s",
-                          }}
-                          onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = "0.6"}
-                          onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = "1"}
-                        >
-                          Enquire
-                          <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
-                            <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-                          </svg>
-                        </a>
-                      </div>
                     </div>
                   </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+                </div>
 
-          {/* ── Right: image panel (desktop) ── */}
-          <div
-            className="relative hidden lg:block"
-            style={{
-              background: "#001489",
-              overflow: "hidden",
-              minHeight: 580,
-            }}
-          >
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={active}
-                src={item.img}
-                alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ mixBlendMode: "multiply" }}
-                initial={{ opacity: 0, scale: 1.04 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-              />
-            </AnimatePresence>
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: "linear-gradient(135deg, rgba(0,14,80,0.30) 0%, transparent 50%, rgba(0,6,44,0.50) 100%)",
-              }}
-            />
-            <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: "40%", background: "linear-gradient(to top, rgba(0,6,44,0.70) 0%, transparent 100%)" }} />
+                {/* Progress bar */}
+                <div className="absolute top-0 left-0 right-0" style={{ height: 3, background: "rgba(255,255,255,0.06)" }}>
+                  <motion.div
+                    key={`prog-${active}-${paused}`}
+                    style={{ height: "100%", background: "rgba(255,255,255,0.30)", transformOrigin: "left" }}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: paused ? undefined : 1 }}
+                    transition={paused ? undefined : { duration: PRACTICE_CYCLE_MS / 1000, ease: "linear" }}
+                  />
+                </div>
+              </div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                className="absolute bottom-0 left-0 right-0"
-                style={{ padding: "0 36px 36px" }}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.5, delay: 0.15 }}
+              {/* Detail: text content */}
+              <div
+                className="flex flex-col justify-center"
+                style={{
+                  padding: "clamp(28px, 4vw, 48px) clamp(24px, 4vw, 56px)",
+                  background: "#F9F9F9",
+                }}
               >
-                <p style={{
-                  color: "#7A84BE",
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  marginBottom: 8,
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                }}>
-                  {item.short}
-                </p>
+                <div className="flex items-center gap-3" style={{ marginBottom: 20 }}>
+                  <div style={{ color: "#001489" }}>
+                    <PracticeAreaIcon pathD={PRACTICE_ICONS[item.short] || ""} isActive={true} />
+                  </div>
+                  <div style={{ flex: 1, height: 1, background: "rgba(0,20,137,0.08)" }} />
+                </div>
                 <h3
-                  className="font-heading font-bold text-white"
-                  style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.2 }}
+                  className="font-heading font-bold text-[#001489]"
+                  style={{ fontSize: "clamp(1.15rem, 1.8vw, 1.5rem)", lineHeight: 1.25, marginBottom: 16 }}
                 >
                   {item.title}
                 </h3>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Progress indicator */}
-            <div className="absolute top-0 left-0 right-0" style={{ height: 3, background: "rgba(255,255,255,0.08)" }}>
-              <motion.div
-                key={`progress-${active}-${paused}`}
-                style={{ height: "100%", background: "rgba(255,255,255,0.35)", transformOrigin: "left" }}
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: paused ? undefined : 1 }}
-                transition={paused ? undefined : { duration: PRACTICE_CYCLE_MS / 1000, ease: "linear" }}
-              />
-            </div>
-          </div>
-
+                <p style={{
+                  color: "rgba(0,20,137,0.50)",
+                  fontSize: 14,
+                  lineHeight: 1.78,
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  maxWidth: "50ch",
+                  marginBottom: 28,
+                }}>
+                  {item.desc}
+                </p>
+                <a
+                  href="#contact"
+                  data-testid={`expertise-enquire-${active}`}
+                  className="inline-flex items-center gap-3"
+                  style={{
+                    color: "#FFFFFF",
+                    background: "#001489",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    textDecoration: "none",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    padding: "12px 28px",
+                    alignSelf: "flex-start",
+                    transition: "background 0.2s",
+                  }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "#192B94"}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "#001489"}
+                >
+                  Enquire
+                  <svg width="12" height="12" fill="none" viewBox="0 0 12 12">
+                    <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+                  </svg>
+                </a>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>
