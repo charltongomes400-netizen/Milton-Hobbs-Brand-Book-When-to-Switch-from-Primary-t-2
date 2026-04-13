@@ -214,22 +214,33 @@ function HeaderV15() {
 
 const HERO_CYCLE_MS = 12000;
 
-// Scattered blue tiles — inspired by brand colours editorial visual:
-// bold Deep Blue rectangles of varied size scattered over dark architectural photo.
-const ACCENT_TILES = [
-  // Top-center anchor (largest block — anchors the composition)
-  { pos: { top: 0, left: "38%" },  w: 160, h: 210, dur: 9.0, delay: 0.0, col: "#001489", baseOp: 0.88 },
-  // Top-right cluster
-  { pos: { top: 0, right: "4%"  }, w: 135, h: 118, dur: 10.5, delay: 2.3, col: "#001050", baseOp: 0.80 },
-  { pos: { top: "14%", left: "57%" }, w: 82, h: 82,  dur: 7.0,  delay: 1.5, col: "#192B94", baseOp: 0.66 },
-  { pos: { top: "26%", right: "5%" }, w: 108, h: 84, dur: 8.0,  delay: 3.8, col: "#001489", baseOp: 0.72 },
-  // Mid scattered
-  { pos: { top: "42%", left: "50%" }, w: 72, h: 52,  dur: 9.5,  delay: 0.9, col: "#192B94", baseOp: 0.58 },
-  { pos: { top: "52%", right: "22%"}, w: 55, h: 88,  dur: 7.5,  delay: 5.8, col: "#001489", baseOp: 0.60 },
-  // Bottom-right cluster
-  { pos: { top: "63%", right: "6%"  }, w: 118, h: 92, dur: 6.5, delay: 4.2, col: "#001489", baseOp: 0.82 },
-  { pos: { top: "74%", right: "20%" }, w: 96, h: 132, dur: 8.5, delay: 2.0, col: "#001050", baseOp: 0.76 },
-  { pos: { top: "79%", left: "46%"  }, w: 134, h: 90, dur: 10.0,delay: 5.5, col: "#001489", baseOp: 0.78 },
+const TILE_SZ = 100; // px — all tiles are the exact same 100×100 square
+
+// Conceptual grid: curated cells — some isolated, some forming adjacent clusters.
+// Two shades: vivid #001489 and dark navy #001050, matching brand reference.
+const ACCENT_TILES: Array<{
+  left: string; top: string; col: string; dur: number; delay: number;
+}> = [
+  // ── Isolated upper-left
+  { left: "38%",   top: "10%", col: "#001489", dur: 7.0, delay: 0.0 },
+
+  // ── Top-right solo
+  { left: "69%",   top:  "4%", col: "#001050", dur: 9.0, delay: 3.2 },
+
+  // ── Mid-right diagonal step cluster (tiles touch corner-to-corner)
+  { left: "71%",   top: "26%", col: "#001489", dur: 6.5, delay: 1.5 },
+  { left: "78.5%", top: "33%", col: "#001050", dur: 8.0, delay: 1.8 },
+  { left: "84%",   top: "40%", col: "#001489", dur: 7.5, delay: 2.1 },
+
+  // ── Bottom-center vertical pair (stacked directly below each other)
+  { left: "49%",   top: "44%", col: "#001050", dur: 5.5, delay: 5.5 },
+  { left: "49%",   top: "55%", col: "#001489", dur: 6.0, delay: 5.7 },
+
+  // ── Bottom-right solo
+  { left: "84%",   top: "59%", col: "#001489", dur: 8.5, delay: 2.8 },
+
+  // ── Mid scatter
+  { left: "63%",   top: "64%", col: "#001050", dur: 7.0, delay: 7.0 },
 ];
 
 
@@ -280,23 +291,25 @@ function HeroV15() {
         />
       </AnimatePresence>
 
-      {/* ── Scattered brand-blue accent tiles ───────────────────────────── */}
+      {/* ── Grid-aligned accent tiles — uniform squares, fade in/hold/fade out ── */}
       {ACCENT_TILES.map((tile, i) => (
         <motion.div
           key={i}
           className="absolute pointer-events-none"
           style={{
-            ...tile.pos,
-            width:  tile.w,
-            height: tile.h,
+            left:            tile.left,
+            top:             tile.top,
+            width:           TILE_SZ,
+            height:          TILE_SZ,
             backgroundColor: tile.col,
           }}
-          animate={{ opacity: [tile.baseOp - 0.10, tile.baseOp, tile.baseOp - 0.10] }}
+          animate={{ opacity: [0, 0, 1, 1, 0, 0] }}
           transition={{
             duration: tile.dur,
             delay:    tile.delay,
             repeat:   Infinity,
             ease:     "easeInOut",
+            times:    [0, 0.10, 0.25, 0.75, 0.90, 1],
           }}
         />
       ))}
