@@ -1784,12 +1784,12 @@ function FooterV15() {
                   boxShadow: "0 0 0 2px rgba(122,132,190,0.25)",
                 }}
               />
-              <span style={{ color: "#FFFFFF", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em" }}>
+              <span style={{ color: "rgba(255,255,255,0.40)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em" }}>
                 Dubai
               </span>
               <span
                 style={{
-                  color: "#FFFFFF",
+                  color: "rgba(255,255,255,0.40)",
                   fontSize: 12,
                   fontFamily: "'Plus Jakarta Sans', monospace",
                   letterSpacing: "0.04em",
@@ -1812,12 +1812,12 @@ function FooterV15() {
                   boxShadow: "0 0 0 2px rgba(74,88,170,0.25)",
                 }}
               />
-              <span style={{ color: "#FFFFFF", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em" }}>
+              <span style={{ color: "rgba(255,255,255,0.40)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em" }}>
                 Paris
               </span>
               <span
                 style={{
-                  color: "#FFFFFF",
+                  color: "rgba(255,255,255,0.40)",
                   fontSize: 12,
                   fontFamily: "'Plus Jakarta Sans', monospace",
                   letterSpacing: "0.04em",
@@ -1831,9 +1831,9 @@ function FooterV15() {
 
           {/* Copyright + legal */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
-            <p style={{ color: "#FFFFFF", fontSize: 12 }}>{f.copyright}</p>
-            <a href="#" style={{ color: "#FFFFFF", fontSize: 12, textDecoration: "none" }}>{f.privacy}</a>
-            <a href="#" style={{ color: "#FFFFFF", fontSize: 12, textDecoration: "none" }}>{f.cookie}</a>
+            <p style={{ color: "rgba(255,255,255,0.40)", fontSize: 12 }}>{f.copyright}</p>
+            <a href="#" style={{ color: "rgba(255,255,255,0.40)", fontSize: 12, textDecoration: "none" }}>{f.privacy}</a>
+            <a href="#" style={{ color: "rgba(255,255,255,0.40)", fontSize: 12, textDecoration: "none" }}>{f.cookie}</a>
           </div>
         </div>
 
