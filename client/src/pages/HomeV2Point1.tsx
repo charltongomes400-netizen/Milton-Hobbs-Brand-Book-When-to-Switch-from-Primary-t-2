@@ -1506,144 +1506,281 @@ function PracticeAreasV18() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="py-28 px-8"
-      style={{ background: "#F9F9F9", borderTop: "1px solid rgba(0,20,137,0.1)" }}
+      style={{ background: "#001489" }}
     >
-      <div className="max-w-[1400px] mx-auto">
-
-        {/* Header */}
+      {/* ── Section header ── */}
+      <div className="px-10 xl:px-16 pt-24 pb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-14"
+          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6"
         >
+          <div>
+            <p
+              className="text-[#7A84BE] tracking-[0.06em] uppercase font-medium mb-4"
+              style={{ fontSize: 13 }}
+            >
+              Our Expertise
+            </p>
+            <h2
+              className="font-heading font-bold text-white leading-[1.1]"
+              style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)" }}
+            >
+              Areas of Practice
+            </h2>
+          </div>
           <p
-            className="text-[#4A58AA] tracking-[0.06em] uppercase font-medium mb-3"
-            style={{ fontSize: 13, paddingLeft: "calc(3px + 1rem)" }}
+            className="text-white/40 max-w-xs leading-relaxed"
+            style={{ fontSize: 14, paddingBottom: 4 }}
           >
-            Our Expertise
-          </p>
-          <h2
-            className="font-heading font-semibold text-[#001489] leading-[1.25]"
-            style={{ fontSize: "clamp(1.375rem, 2vw, 1.75rem)", paddingLeft: "calc(3px + 1rem)" }}
-          >
-            Areas of Practice
-          </h2>
-          <p style={{ color: "rgba(0,20,137,0.42)", fontSize: 14, marginTop: 14, maxWidth: 360, lineHeight: 1.6, paddingLeft: "calc(3px + 1rem)" }}>
             Across industries and borders, we deliver precision-crafted legal strategy.
           </p>
         </motion.div>
+      </div>
 
-        {/* ── Desktop: horizontal expanding panels ── */}
-        <div
-          className="hidden lg:flex"
-          style={{ height: "540px", border: "1px solid rgba(0,20,137,0.15)" }}
-          onMouseLeave={() => setHovered(null)}
-        >
-          {EXPERTISE_ITEMS_V18.map((item, i) => {
-            const isActive = hovered === i;
-            return (
-              <div
-                key={i}
-                data-testid={`expertise-item-${i}`}
-                onMouseEnter={() => setHovered(i)}
+      {/* ── Desktop: tall portrait accordion — full-bleed ── */}
+      <div
+        className="hidden lg:flex w-full"
+        style={{ height: "700px" }}
+        onMouseLeave={() => setHovered(null)}
+      >
+        {EXPERTISE_ITEMS_V18.map((item, i) => {
+          const isActive = hovered === i;
+          return (
+            <div
+              key={i}
+              data-testid={`expertise-item-${i}`}
+              onMouseEnter={() => setHovered(i)}
+              style={{
+                flex: isActive ? "0 0 400px" : "1 1 0",
+                minWidth: 0,
+                transition: "flex 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+                position: "relative",
+                overflow: "hidden",
+                cursor: "pointer",
+                borderRight: i < EXPERTISE_ITEMS_V18.length - 1
+                  ? "1px solid rgba(255,255,255,0.07)"
+                  : "none",
+              }}
+            >
+              {/* Photo — full bleed, vivid */}
+              <img
+                src={item.img}
+                alt={item.title}
+                className="absolute inset-0 w-full h-full object-cover"
                 style={{
-                  flex: isActive ? 5 : 1,
-                  transition: "flex 0.55s cubic-bezier(0.4, 0, 0.2, 1)",
+                  opacity: isActive ? 0.70 : 0.58,
+                  transform: isActive ? "scale(1.06)" : "scale(1)",
+                  transition: "opacity 0.6s ease, transform 0.7s ease",
+                }}
+              />
+
+              {/* Directional gradient — stronger at bottom */}
+              <div
+                className="absolute inset-0"
+                style={{
                   background: isActive
-                    ? "linear-gradient(160deg, #192B94 0%, #001489 40%, #001489 100%)"
-                    : "linear-gradient(160deg, #192B94 0%, #001489 40%, #001489 100%)",
-                  borderRight: i < EXPERTISE_ITEMS_V18.length - 1
-                    ? "1px solid rgba(255,255,255,0.1)"
-                    : "none",
-                  overflow: "hidden",
-                  position: "relative",
-                  cursor: "pointer",
-                  minWidth: 0,
+                    ? "linear-gradient(to top, rgba(0,8,60,0.95) 0%, rgba(0,20,137,0.35) 55%, rgba(0,8,60,0.15) 100%)"
+                    : "linear-gradient(to top, rgba(0,8,60,0.90) 0%, rgba(0,20,137,0.50) 65%, rgba(0,8,60,0.25) 100%)",
+                  transition: "background 0.6s ease",
+                }}
+              />
+
+              {/* ── Collapsed label (vertical text) ── */}
+              <div
+                className="absolute inset-0 flex flex-col items-center justify-between py-7"
+                style={{
+                  opacity: isActive ? 0 : 1,
+                  transition: "opacity 0.18s ease",
+                  pointerEvents: isActive ? "none" : "auto",
                 }}
               >
-                {/* ── Collapsed: image bg + number + short label ── */}
-                <div
-                  className="absolute inset-0 flex flex-col"
+                <span
+                  className="font-heading font-bold text-white"
+                  style={{ fontSize: 13, opacity: 0.50, letterSpacing: "0.04em" }}
+                >
+                  {item.num}
+                </span>
+                <span
+                  className="font-heading font-semibold text-white uppercase"
                   style={{
-                    opacity: isActive ? 0 : 1,
-                    transition: "opacity 0.22s ease",
-                    pointerEvents: isActive ? "none" : "auto",
+                    fontSize: 11,
+                    letterSpacing: "0.10em",
+                    writingMode: "vertical-rl",
+                    textOrientation: "mixed",
+                    transform: "rotate(180deg)",
+                    opacity: 0.70,
+                    maxHeight: "180px",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
                   }}
                 >
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-                    style={{ opacity: 0.45, transform: hovered === i ? "scale(1.05)" : "scale(1)" }}
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{ background: "linear-gradient(to top, rgba(0,20,137,0.82) 0%, rgba(0,20,137,0.35) 55%, rgba(0,20,137,0.0) 100%)" }}
-                  />
-                  <div className="relative z-10 pt-6 flex justify-center">
-                    <span
-                      className="font-heading"
-                      style={{ fontSize: 12, letterSpacing: "0.06em", color: "rgba(255,255,255,0.5)" }}
-                    >
-                      {item.num}
-                    </span>
-                  </div>
-                  <div className="relative z-10 mt-auto px-3 pb-6 text-center">
-                    <span
-                      className="font-heading font-semibold uppercase block overflow-hidden"
-                      style={{
-                        fontSize: "0.75rem",
-                        letterSpacing: "0.04em",
-                        color: "rgba(255,255,255,0.6)",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {item.short}
-                    </span>
-                  </div>
+                  {item.short}
+                </span>
+              </div>
+
+              {/* ── Expanded content ── */}
+              <div
+                className="absolute inset-0 flex flex-col justify-end"
+                style={{
+                  opacity: isActive ? 1 : 0,
+                  transition: "opacity 0.38s ease 0.18s",
+                  pointerEvents: isActive ? "auto" : "none",
+                  minWidth: "340px",
+                }}
+              >
+                {/* Ghost watermark number — top-right */}
+                <div
+                  className="absolute top-0 right-0 font-heading font-bold select-none leading-none"
+                  style={{
+                    fontSize: "clamp(7rem, 11vw, 10rem)",
+                    color: "rgba(255,255,255,0.05)",
+                    lineHeight: 0.85,
+                    paddingRight: 16,
+                    paddingTop: 12,
+                  }}
+                >
+                  {item.num}
                 </div>
 
-                {/* ── Expanded: navy bg + photo + full content ── */}
-                <div
-                  className="absolute inset-0 flex flex-col justify-between"
-                  style={{
-                    opacity: isActive ? 1 : 0,
-                    transition: "opacity 0.35s ease 0.18s",
-                    pointerEvents: isActive ? "auto" : "none",
-                    minWidth: "340px",
-                  }}
-                >
-                  <img
-                    src={item.img}
-                    alt=""
-                    aria-hidden
-                    className="absolute inset-0 w-full h-full object-cover"
-                    style={{ opacity: 0.52 }}
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{ background: "linear-gradient(160deg, rgba(0,20,137,0.58) 0%, rgba(0,20,137,0.64) 40%, rgba(0,20,137,0.52) 100%)" }}
-                  />
+                <div style={{ padding: "0 40px 44px" }}>
+                  <p
+                    style={{
+                      color: "rgba(255,255,255,0.48)",
+                      fontSize: 12,
+                      letterSpacing: "0.06em",
+                      textTransform: "uppercase",
+                      fontWeight: 500,
+                      marginBottom: 10,
+                    }}
+                  >
+                    Area of Practice
+                  </p>
+                  <h3
+                    className="font-heading font-bold text-white leading-[1.15]"
+                    style={{ fontSize: "clamp(1.25rem, 2.2vw, 1.625rem)", marginBottom: 14 }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p
+                    style={{
+                      color: "rgba(255,255,255,0.52)",
+                      fontSize: "0.875rem",
+                      lineHeight: 1.78,
+                      maxWidth: "32ch",
+                      marginBottom: 28,
+                    }}
+                  >
+                    {item.desc}
+                  </p>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-2.5"
+                    style={{
+                      color: "rgba(255,255,255,0.88)",
+                      fontSize: 12,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      borderBottom: "1px solid rgba(255,255,255,0.32)",
+                      paddingBottom: 3,
+                    }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
+                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.65)";
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.88)";
+                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.32)";
+                    }}
+                  >
+                    <span>Enquire</span>
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+                      <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
 
-                  <div className="relative z-10 p-9 flex flex-col h-full justify-between">
-                    <div
-                      className="font-heading font-bold select-none leading-none"
-                      style={{ fontSize: "clamp(5rem,8vw,7rem)", color: "rgba(255,255,255,0.05)" }}
+      {/* ── Mobile: image-backed accordion ── */}
+      <div className="flex flex-col lg:hidden">
+        {EXPERTISE_ITEMS_V18.map((item, i) => {
+          const isOpen = hovered === i;
+          return (
+            <button
+              key={i}
+              data-testid={`expertise-item-mobile-${i}`}
+              onClick={() => setHovered(isOpen ? null : i)}
+              className="text-left focus:outline-none relative overflow-hidden"
+              style={{
+                borderBottom: "1px solid rgba(255,255,255,0.07)",
+                minHeight: isOpen ? 260 : 72,
+                transition: "min-height 0.4s ease",
+              }}
+            >
+              {/* Photo always behind */}
+              <img
+                src={item.img}
+                alt={item.title}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ opacity: isOpen ? 0.60 : 0.35, transition: "opacity 0.4s ease" }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: "linear-gradient(to top, rgba(0,8,60,0.96) 0%, rgba(0,20,137,0.62) 100%)",
+                }}
+              />
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 px-5 py-5">
+                  <span
+                    className="font-heading shrink-0 text-white/45"
+                    style={{ fontSize: 12, letterSpacing: "0.06em" }}
+                  >
+                    {item.num}
+                  </span>
+                  <span
+                    className="font-heading font-semibold flex-1 text-white"
+                    style={{ fontSize: 15 }}
+                  >
+                    {item.title}
+                  </span>
+                  <svg
+                    className="w-3.5 h-3.5 shrink-0 transition-transform duration-300"
+                    style={{
+                      color: "rgba(255,255,255,0.45)",
+                      transform: isOpen ? "rotate(90deg)" : "rotate(0deg)",
+                    }}
+                    fill="none" viewBox="0 0 12 12"
+                  >
+                    <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.3" />
+                  </svg>
+                </div>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 4 }}
+                      transition={{ duration: 0.3 }}
+                      className="px-5 pb-6"
                     >
-                      {item.num}
-                    </div>
-                    <div>
-                      <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 500, marginBottom: 12 }}>
-                        Area of Practice
-                      </p>
-                      <h3 className="font-heading font-bold text-white leading-[1.2]" style={{ fontSize: "1.25rem", whiteSpace: "nowrap", marginBottom: 16 }}>
-                        {item.title}
-                      </h3>
-                      <p style={{ color: "rgba(255,255,255,0.52)", fontSize: "0.875rem", lineHeight: 1.75, maxWidth: "30ch", marginBottom: 28 }}>
+                      <p
+                        style={{
+                          color: "rgba(255,255,255,0.55)",
+                          fontSize: "0.875rem",
+                          lineHeight: 1.72,
+                          marginBottom: 16,
+                        }}
+                      >
                         {item.desc}
                       </p>
                       <a
@@ -1665,95 +1802,15 @@ function PracticeAreasV18() {
                           <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
                         </svg>
                       </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* ── Mobile: stacked accordion ── */}
-        <div
-          className="flex flex-col lg:hidden"
-          style={{ border: "1px solid rgba(0,20,137,0.12)", borderBottom: "none" }}
-        >
-          {EXPERTISE_ITEMS_V18.map((item, i) => {
-            const isOpen = hovered === i;
-            return (
-              <button
-                key={i}
-                data-testid={`expertise-item-mobile-${i}`}
-                onClick={() => setHovered(isOpen ? null : i)}
-                className="text-left focus:outline-none"
-                style={{ borderBottom: "1px solid rgba(0,20,137,0.08)" }}
-              >
-                <div className="flex items-center gap-4 px-5 py-4">
-                  <span
-                    className="font-heading shrink-0"
-                    style={{ fontSize: 12, letterSpacing: "0.06em", color: "rgba(74,88,170,0.75)" }}
-                  >
-                    {item.num}
-                  </span>
-                  <span
-                    className="font-heading font-semibold text-sm flex-1"
-                    style={{ color: isOpen ? "#001489" : "rgba(0,20,137,0.45)" }}
-                  >
-                    {item.title}
-                  </span>
-                  <svg
-                    className="w-3 h-3 shrink-0 transition-transform duration-300"
-                    style={{ color: "#4A58AA", transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
-                    fill="none" viewBox="0 0 12 12"
-                  >
-                    <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.3" />
-                  </svg>
-                </div>
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35 }}
-                      style={{ overflow: "hidden" }}
-                    >
-                      <div
-                        className="px-5 pb-5"
-                        style={{ background: "linear-gradient(160deg, #192B94 0%, #001489 40%, #001489 100%)" }}
-                      >
-                        <p style={{ color: "rgba(255,255,255,0.52)", fontSize: "0.875rem", lineHeight: 1.7, paddingTop: 16, marginBottom: 16 }}>
-                          {item.desc}
-                        </p>
-                        <a
-                          href="#contact"
-                          className="inline-flex items-center gap-2"
-                          style={{
-                            color: "rgba(255,255,255,0.85)",
-                            fontSize: 12,
-                            letterSpacing: "0.06em",
-                            textTransform: "uppercase",
-                            fontWeight: 600,
-                            textDecoration: "none",
-                            borderBottom: "1px solid rgba(255,255,255,0.3)",
-                            paddingBottom: 2,
-                          }}
-                        >
-                          <span>Enquire</span>
-                          <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12">
-                            <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-                          </svg>
-                        </a>
-                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </button>
-            );
-          })}
-        </div>
-
+              </div>
+            </button>
+          );
+        })}
       </div>
+
     </section>
   );
 }
