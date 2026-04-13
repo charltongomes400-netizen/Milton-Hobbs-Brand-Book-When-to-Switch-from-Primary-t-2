@@ -1279,11 +1279,11 @@ function ContactFormV15() {
       data-testid="contact-section"
       style={{ background: "#FFFFFF", borderTop: "1px solid rgba(0,20,137,0.07)" }}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-[45fr_55fr]" style={{ minHeight: 680 }}>
+      <div className="grid grid-cols-1 lg:grid-cols-[45fr_55fr]" style={{ minHeight: 760 }}>
 
         {/* ── LEFT: White info panel ── */}
         <div
-          className="relative overflow-hidden flex flex-col justify-between px-8 pt-20 pb-16"
+          className="relative overflow-hidden flex flex-col justify-between px-8 pt-28 pb-24"
           style={{
             paddingLeft: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
             paddingRight: "clamp(2rem, 4vw, 5rem)",
@@ -1421,7 +1421,7 @@ function ContactFormV15() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col justify-center px-8 pt-16 pb-16"
+          className="flex flex-col justify-center px-8 pt-24 pb-24"
           style={{
             background: "#FFFFFF",
             paddingRight: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
