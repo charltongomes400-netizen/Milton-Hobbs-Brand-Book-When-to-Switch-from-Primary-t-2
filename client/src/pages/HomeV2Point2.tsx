@@ -845,68 +845,65 @@ function DifferentiatorsV15() {
 
       {/* ── Active pillar detail: title left, description right ── */}
       <div className="max-w-[1400px] mx-auto px-8">
+        {/* Fixed-height container so layout never shifts during crossfade */}
         <div
-          className="grid grid-cols-1 lg:grid-cols-[320px_1fr]"
           style={{
-            gap: "clamp(32px, 5vw, 80px)",
+            position: "relative",
+            minHeight: 160,
             paddingTop: 44,
             paddingBottom: 44,
             borderBottom: "1px solid #E8EDF5",
-            alignItems: "flex-start",
           }}
         >
-          {/* Large pillar title */}
-          <AnimatePresence mode="wait">
-            <motion.h3
-              key={`title-${active}`}
-              className="font-heading font-bold"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.32, ease: "easeOut" }}
-              style={{
-                color: "#001489",
-                fontSize: "clamp(1.5rem, 2.2vw, 2.125rem)",
-                lineHeight: 1.18,
-                letterSpacing: "-0.02em",
-              }}
-            >
-              {d.cards[active].title}
-            </motion.h3>
-          </AnimatePresence>
-
-          {/* Description + meta */}
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
-              key={`desc-${active}`}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.32, ease: "easeOut", delay: 0.05 }}
+              key={active}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.28, ease: "easeOut" }}
+              className="grid grid-cols-1 lg:grid-cols-[320px_1fr]"
+              style={{ gap: "clamp(32px, 5vw, 80px)", alignItems: "flex-start" }}
             >
-              <p
+              {/* Large pillar title */}
+              <h3
+                className="font-heading font-bold"
                 style={{
-                  color: "#595959",
-                  fontSize: "0.9375rem",
-                  lineHeight: 1.82,
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  marginBottom: 24,
+                  color: "#001489",
+                  fontSize: "clamp(1.5rem, 2.2vw, 2.125rem)",
+                  lineHeight: 1.18,
+                  letterSpacing: "-0.02em",
                 }}
               >
-                {d.cards[active].description}
-              </p>
-              <span
-                style={{
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: "0.28em",
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  color: "#4A58AA",
-                  textTransform: "uppercase",
-                }}
-              >
-                {String(active + 1).padStart(2, "0")} of {String(d.cards.length).padStart(2, "0")}
-              </span>
+                {d.cards[active].title}
+              </h3>
+
+              {/* Description + meta */}
+              <div>
+                <p
+                  style={{
+                    color: "#595959",
+                    fontSize: "0.9375rem",
+                    lineHeight: 1.82,
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    marginBottom: 24,
+                  }}
+                >
+                  {d.cards[active].description}
+                </p>
+                <span
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 700,
+                    letterSpacing: "0.28em",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    color: "#4A58AA",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {String(active + 1).padStart(2, "0")} of {String(d.cards.length).padStart(2, "0")}
+                </span>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
