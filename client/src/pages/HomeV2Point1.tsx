@@ -212,53 +212,24 @@ function HeaderV15() {
 
 /* ─── HERO ─────────────────────────────────────────────────────────────── */
 
-// Elegant tile system: 8×10 grid, ~40 non-adjacent cells fade in/out on slow random schedules.
-const TILE_COLS = 8;
-const TILE_ROWS = 10;
-
-function buildNonAdjacentCells(cols: number, rows: number): Set<number> {
-  const total = cols * rows;
-  const active = new Set<number>();
-  const order = Array.from({ length: total }, (_, i) => i);
-  for (let j = order.length - 1; j > 0; j--) {
-    const k = Math.floor(Math.random() * (j + 1));
-    [order[j], order[k]] = [order[k], order[j]];
-  }
-  for (const idx of order) {
-    const c = idx % cols;
-    const r = Math.floor(idx / cols);
-    const nb = [
-      r > 0 ? (r - 1) * cols + c : -1,
-      r < rows - 1 ? (r + 1) * cols + c : -1,
-      c > 0 ? r * cols + (c - 1) : -1,
-      c < cols - 1 ? r * cols + (c + 1) : -1,
-    ];
-    if (nb.every(n => n < 0 || !active.has(n))) active.add(idx);
-  }
-  return active;
-}
-
-const activeCells = buildNonAdjacentCells(TILE_COLS, TILE_ROWS);
-const TILE_BLUES = ["#001489", "#001489", "#192B94"] as const;
-
-const tiles = Array.from({ length: TILE_COLS * TILE_ROWS }, (_, i) => ({
-  color:      TILE_BLUES[i % 3],
-  delay:      parseFloat((Math.random() * 14).toFixed(2)),
-  duration:   parseFloat((8 + Math.random() * 8).toFixed(2)),
-  maxOpacity: activeCells.has(i) ? parseFloat((0.06 + Math.random() * 0.08).toFixed(2)) : 0,
-}));
-
 const HERO_CYCLE_MS = 12000;
 
-const ACCENT_SQUARES = [
-  { pos: { top: "4%",  left: "52%"  }, size: 90, dur: 6.5, delay: 0.0, minOpacity: 0.50 },
-  { pos: { top: "2%",  right: "4%"  }, size: 90, dur: 8.0, delay: 2.8, minOpacity: 0.42 },
-  { pos: { top: "22%", left: "46%"  }, size: 90, dur: 5.5, delay: 1.4, minOpacity: 0.45 },
-  { pos: { top: "18%", right: "18%" }, size: 90, dur: 9.0, delay: 4.6, minOpacity: 0.40 },
-  { pos: { top: "48%", left: "60%"  }, size: 90, dur: 7.0, delay: 0.8, minOpacity: 0.48 },
-  { pos: { top: "60%", right: "6%"  }, size: 90, dur: 6.0, delay: 3.5, minOpacity: 0.44 },
-  { pos: { top: "72%", left: "50%"  }, size: 90, dur: 8.5, delay: 1.9, minOpacity: 0.41 },
-  { pos: { top: "82%", right: "24%" }, size: 90, dur: 7.5, delay: 5.2, minOpacity: 0.47 },
+// Scattered blue tiles — inspired by brand colours editorial visual:
+// bold Deep Blue rectangles of varied size scattered over dark architectural photo.
+const ACCENT_TILES = [
+  // Top-center anchor (largest block — anchors the composition)
+  { pos: { top: 0, left: "38%" },  w: 160, h: 210, dur: 9.0, delay: 0.0, col: "#001489", baseOp: 0.88 },
+  // Top-right cluster
+  { pos: { top: 0, right: "4%"  }, w: 135, h: 118, dur: 10.5, delay: 2.3, col: "#001050", baseOp: 0.80 },
+  { pos: { top: "14%", left: "57%" }, w: 82, h: 82,  dur: 7.0,  delay: 1.5, col: "#192B94", baseOp: 0.66 },
+  { pos: { top: "26%", right: "5%" }, w: 108, h: 84, dur: 8.0,  delay: 3.8, col: "#001489", baseOp: 0.72 },
+  // Mid scattered
+  { pos: { top: "42%", left: "50%" }, w: 72, h: 52,  dur: 9.5,  delay: 0.9, col: "#192B94", baseOp: 0.58 },
+  { pos: { top: "52%", right: "22%"}, w: 55, h: 88,  dur: 7.5,  delay: 5.8, col: "#001489", baseOp: 0.60 },
+  // Bottom-right cluster
+  { pos: { top: "63%", right: "6%"  }, w: 118, h: 92, dur: 6.5, delay: 4.2, col: "#001489", baseOp: 0.82 },
+  { pos: { top: "74%", right: "20%" }, w: 96, h: 132, dur: 8.5, delay: 2.0, col: "#001050", baseOp: 0.76 },
+  { pos: { top: "79%", left: "46%"  }, w: 134, h: 90, dur: 10.0,delay: 5.5, col: "#001489", baseOp: 0.78 },
 ];
 
 
@@ -290,64 +261,82 @@ function HeroV15() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen bg-[#FCFCFC] flex overflow-hidden"
+      className="relative min-h-screen overflow-hidden"
+      style={{ background: "#00081E" }}
     >
-      {/* ── LEFT PANEL: Editorial content ───────────────────────────────── */}
-      <div className="relative z-10 w-[50%] flex flex-col justify-center px-12 xl:px-24 pt-24 pb-20 overflow-hidden">
+      {/* ── Full-bleed architectural photo ──────────────────────────────── */}
+      <AnimatePresence>
+        <motion.img
+          key={bgIndex}
+          src={HERO_BG_IMAGES[bgIndex]}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ objectPosition: "center 30%" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.62 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 2.4, ease: "easeInOut" }}
+        />
+      </AnimatePresence>
 
-        {/* Elegant tile grid — padded cells, non-adjacent, slow smooth fades */}
-        <div
-          className="absolute inset-0 pointer-events-none"
+      {/* ── Deep blue colour wash ────────────────────────────────────────── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "linear-gradient(160deg, rgba(0,6,38,0.58) 0%, rgba(0,10,50,0.52) 55%, rgba(0,6,30,0.72) 100%)",
+          mixBlendMode: "multiply",
+        }}
+      />
+
+      {/* ── Scattered brand-blue accent tiles ───────────────────────────── */}
+      {ACCENT_TILES.map((tile, i) => (
+        <motion.div
+          key={i}
+          className="absolute pointer-events-none"
           style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${TILE_COLS}, 1fr)`,
-            gridTemplateRows: `repeat(${TILE_ROWS}, 1fr)`,
-            gap: "0.5vw",
-            WebkitMaskImage: "linear-gradient(to right, black 0%, black 60%, transparent 82%)",
-            maskImage: "linear-gradient(to right, black 0%, black 60%, transparent 82%)",
+            ...tile.pos,
+            width:  tile.w,
+            height: tile.h,
+            backgroundColor: tile.col,
           }}
-        >
-          {tiles.map((tile, i) => (
-            <motion.div
-              key={i}
-              style={{
-                backgroundColor: `${tile.color}33`,
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                border: "1px solid rgba(0,20,137,0.06)",
-                boxShadow: "inset 0 0 12px rgba(0,20,137,0.04), 0 2px 8px rgba(0,20,137,0.03)",
-              }}
-              animate={{ opacity: [0, 0, tile.maxOpacity * 3.5, tile.maxOpacity * 3.5, 0, 0] }}
-              transition={{
-                duration: tile.duration,
-                delay: tile.delay,
-                repeat: Infinity,
-                ease: [0.45, 0, 0.55, 1],
-                times: [0, 0.15, 0.30, 0.70, 0.85, 1],
-              }}
-            />
-          ))}
-        </div>
+          animate={{ opacity: [tile.baseOp - 0.10, tile.baseOp, tile.baseOp - 0.10] }}
+          transition={{
+            duration: tile.dur,
+            delay:    tile.delay,
+            repeat:   Infinity,
+            ease:     "easeInOut",
+          }}
+        />
+      ))}
 
-        {/* Editorial content block — animates on article change */}
+      {/* ── Bottom-left content gradient for legibility ─────────────────── */}
+      <div
+        className="absolute inset-x-0 bottom-0 pointer-events-none"
+        style={{
+          height: "70%",
+          background: "linear-gradient(to top, rgba(0,6,30,0.88) 0%, rgba(0,6,30,0.55) 45%, transparent 100%)",
+        }}
+      />
+
+      {/* ── Editorial content — bottom-left ─────────────────────────────── */}
+      <div className="relative z-10 flex flex-col justify-end min-h-screen px-12 xl:px-24 pb-16 pt-28"
+        style={{ maxWidth: "860px" }}>
+
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.1, ease: "easeInOut" }}
-            className="w-full"
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -14 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
           >
-            {/* Gold accent line + Eyebrow */}
-            <div className="flex items-center gap-3 mb-5">
-              <motion.div
-                style={{ width: 1, height: 32, background: "#4A58AA", flexShrink: 0 }}
-                animate={{ opacity: [0.3, 1, 0.3] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              />
+            {/* Category eyebrow */}
+            <div className="flex items-center gap-3 mb-6">
+              <div style={{ width: 24, height: 1, background: "rgba(255,255,255,0.45)", flexShrink: 0 }} />
               <p
-                className="text-[#4A58AA] tracking-[0.22em] uppercase font-medium text-[16px]"
+                className="font-sans font-medium uppercase tracking-[0.28em]"
+                style={{ color: "rgba(255,255,255,0.55)", fontSize: 11 }}
                 data-testid="hero-eyebrow"
               >
                 {featuredArticle?.category}
@@ -356,33 +345,59 @@ function HeroV15() {
 
             {/* Large article headline */}
             <h1
-              className="font-heading text-[#001489] font-bold text-[clamp(1.125rem,4vw,3.4375rem)] mb-8"
-              style={{ lineHeight: "clamp(1.5rem, 1.1em, 3.75rem)" }}
+              className="font-heading text-white font-bold mb-9"
+              style={{
+                fontSize: "clamp(2.25rem, 5.5vw, 4.75rem)",
+                lineHeight: 1.04,
+                letterSpacing: "-0.01em",
+              }}
               data-testid="hero-headline"
             >
               {featuredArticle?.title}
             </h1>
 
-            {/* Read link */}
+            {/* Read Article link */}
             <a
               href={`/insights/${featuredSlug}`}
               data-testid="hero-read-link"
-              className="group inline-flex items-center gap-2 text-[#001489] hover:text-[#4A58AA] transition-colors duration-300"
+              className="group inline-flex items-center gap-3"
+              style={{
+                color: "rgba(255,255,255,0.65)",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                borderBottom: "1px solid rgba(255,255,255,0.25)",
+                paddingBottom: 4,
+                transition: "color 0.25s, border-color 0.25s",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.6)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)";
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.25)";
+              }}
             >
-              <span className="text-sm font-medium tracking-[0.06em] underline underline-offset-4 decoration-[#001489]/25 group-hover:decoration-[#4A58AA]/60 transition-[text-decoration-color] duration-300">{ins.read}</span>
-              <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 12 12">
+              <span>{ins.read}</span>
+              <svg
+                className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200"
+                fill="none" viewBox="0 0 12 12"
+              >
                 <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
               </svg>
             </a>
           </motion.div>
         </AnimatePresence>
 
-        {/* Functional carousel dots — bottom-left */}
+        {/* Carousel dots — horizontal dashes */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-          className="absolute bottom-10 left-12 xl:left-24 flex items-center gap-2.5"
+          transition={{ duration: 0.8, delay: 1.0 }}
+          className="flex items-center gap-2 mt-10"
           data-testid="hero-dots"
         >
           {ins.articles.map((_, i) => (
@@ -393,43 +408,13 @@ function HeroV15() {
               aria-label={`Article ${i + 1}`}
               className="block focus:outline-none cursor-pointer transition-all duration-300"
               style={{
-                width:           i === currentIndex ? 20 : 7,
-                height:          7,
-                borderRadius:    i === currentIndex ? 4 : "50%",
-                backgroundColor: i === currentIndex ? "#001489" : "transparent",
-                border:          i === currentIndex ? "none" : "1px solid rgba(0,20,137,0.22)",
+                width:           i === currentIndex ? 28 : 8,
+                height:          2,
+                backgroundColor: i === currentIndex ? "#FFFFFF" : "rgba(255,255,255,0.30)",
               }}
             />
           ))}
         </motion.div>
-      </div>
-      {/* ── RIGHT PANEL: Tile shimmer (original design) ──────────────────── */}
-      <div
-        className="absolute inset-0 bg-[#001489] overflow-hidden"
-        style={{ clipPath: "polygon(42% 0%, 100% 0%, 100% 100%, 58% 100%)" }}
-      >
-        {/* Building photo — subtle background, slow crossfade */}
-        <AnimatePresence>
-          <motion.img
-            key={bgIndex}
-            src={HERO_BG_IMAGES[bgIndex]}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.15 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.8, ease: "easeInOut" }}
-          />
-        </AnimatePresence>
-
-        {/* Soft vignette */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse 80% 80% at 70% 50%, transparent 40%, rgba(0,20,137,0.35) 100%)",
-          }}
-        />
       </div>
     </section>
   );
