@@ -836,26 +836,6 @@ function DifferentiatorsV15() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Active card label — bottom-left corner of visual */}
-            <div
-              className="absolute bottom-0 left-0 right-0"
-              style={{ padding: "0 0 28px 36px" }}
-            >
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={active}
-                  className="font-heading font-bold text-white"
-                  style={{ fontSize: "clamp(1.25rem, 2vw, 1.625rem)", lineHeight: 1.2 }}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.35 }}
-                >
-                  {d.cards[active].title}
-                </motion.p>
-              </AnimatePresence>
-            </div>
-
             {/* Progress bar — bottom edge */}
             <div
               className="absolute bottom-0 left-0 right-0"
