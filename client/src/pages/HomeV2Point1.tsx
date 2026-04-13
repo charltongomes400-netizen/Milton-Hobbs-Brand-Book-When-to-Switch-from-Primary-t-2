@@ -62,11 +62,11 @@ function HeaderV15() {
       {/* Brand accent line — top edge */}
       <div className="absolute top-0 left-0 right-0" style={{ height: 3, background: "#001489" }} />
 
-      <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 72 }}>
+      <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 80 }}>
 
         {/* Logo */}
-        <a href="#home" data-testid="logo" className="shrink-0 mt-[3px]">
-          <img src={miltonHobbsLogo} alt="Milton Hobbs" className="h-14 w-auto block" />
+        <a href="#home" data-testid="logo" className="shrink-0">
+          <img src={miltonHobbsLogo} alt="Milton Hobbs" className="h-16 w-auto block" />
         </a>
 
         {/* Desktop nav — main links */}
