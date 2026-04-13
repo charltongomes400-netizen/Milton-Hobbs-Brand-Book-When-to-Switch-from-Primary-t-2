@@ -862,36 +862,20 @@ function DifferentiatorsV15() {
             </a>
           </div>
 
-          {/* ── RIGHT HALF: Apple liquid glass panel ── */}
+          {/* ── RIGHT HALF: animation panel ── */}
           <div
             style={{
-              background: "rgba(0,20,137,0.32)",
-              backdropFilter: "blur(44px) saturate(1.6)",
-              WebkitBackdropFilter: "blur(44px) saturate(1.6)",
+              background: "#001489",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               position: "relative",
               overflow: "hidden",
               minHeight: 560,
-              borderRadius: "28px",
-              border: "1px solid rgba(255,255,255,0.18)",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -1px 0 rgba(0,0,0,0.08), 0 24px 64px rgba(0,20,137,0.18), 0 8px 24px rgba(0,20,137,0.10)",
+              borderRadius: "0px",
               padding: 32,
             }}
           >
-            {/* Top specular edge — thin bright line like light on glass */}
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                height: 1,
-                background: "linear-gradient(90deg, transparent 5%, rgba(255,255,255,0.28) 25%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.28) 75%, transparent 95%)",
-                pointerEvents: "none",
-              }}
-            />
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
