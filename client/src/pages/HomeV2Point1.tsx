@@ -693,154 +693,168 @@ function DifferentiatorsV15() {
       id="firm"
       data-header-theme="light"
       data-testid="differentiators-section"
-      className="py-28 px-8"
-      style={{ background: "#F9F9F9", borderTop: "1px solid #E8EDF5" }}
+      style={{ background: "#FFFFFF", borderTop: "1px solid #E8EDF5" }}
     >
       <div className="max-w-[1400px] mx-auto">
-
-        {/* Eyebrow + headline */}
-        <div className="mb-12">
-          <p
-            style={{
-              color: "#4A58AA",
-              fontSize: 13,
-              fontWeight: 600,
-              letterSpacing: "0.3em",
-              textTransform: "uppercase",
-              marginBottom: 14,
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-            }}
-          >
-            {d.eyebrow}
-          </p>
-          <h2
-            className="font-heading font-bold"
-            style={{ color: "#001489", fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1, maxWidth: 500 }}
-          >
-            {d.headline}
-          </h2>
-        </div>
-
-        {/* ── 4 horizontal tab buttons ──────────────────────────────────── */}
         <div
-          className="grid grid-cols-2 md:grid-cols-4"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
+          className="grid grid-cols-1 lg:grid-cols-[55fr_45fr]"
+          style={{ minHeight: 600 }}
         >
-          {d.cards.map((card, i) => {
-            const isActive = i === active;
-            const borderColor = isActive ? "#001489" : "#E8EDF5";
-            return (
-              <button
-                key={i}
-                data-testid={`diff-card-${i}`}
-                onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
-                className="relative text-left focus:outline-none"
-                style={{
-                  padding: "22px 28px 26px",
-                  background: isActive ? "#001489" : "#FFFFFF",
-                  border: `1px solid ${borderColor}`,
-                  borderRight: i < 3 ? "none" : `1px solid ${borderColor}`,
-                  transition: "background 0.3s, border-color 0.3s",
-                  cursor: "pointer",
-                }}
+
+          {/* ── LEFT: large animated visual panel ─────────────────── */}
+          <div
+            className="relative overflow-hidden"
+            style={{ background: "#001489", minHeight: 480 }}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
+            {/* Full-bleed SVG animation */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                className="absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
               >
-                {/* Index number */}
-                <span
-                  style={{
-                    display: "block",
-                    fontSize: 11,
-                    fontWeight: 700,
-                    letterSpacing: "0.22em",
-                    color: isActive ? "rgba(255,255,255,0.5)" : "#7A84BE",
-                    marginBottom: 10,
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    transition: "color 0.3s",
-                  }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                {/* Title */}
-                <span
-                  className="font-heading font-bold"
-                  style={{
-                    display: "block",
-                    fontSize: "clamp(0.875rem, 1.1vw, 1rem)",
-                    lineHeight: 1.3,
-                    color: isActive ? "#FFFFFF" : "#001489",
-                    transition: "color 0.3s",
-                  }}
-                >
-                  {card.title}
-                </span>
-                {/* Progress fill — bottom of active tab */}
-                {isActive && (
-                  <div
-                    className="absolute bottom-0 left-0 right-0"
-                    style={{ height: 2, background: "rgba(122,132,190,0.25)" }}
-                  >
-                    <motion.div
-                      style={{ height: "100%", width: `${progress}%`, background: "#7A84BE" }}
-                      transition={{ ease: "linear" }}
-                    />
-                  </div>
-                )}
-              </button>
-            );
-          })}
-        </div>
+                <DiffVisual index={active} />
+              </motion.div>
+            </AnimatePresence>
 
-        {/* ── Content panel (white card below tabs) ─────────────────────── */}
-        <div
-          style={{ background: "#FFFFFF", border: "1px solid #E8EDF5", borderTop: "none" }}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              className="grid grid-cols-1 md:grid-cols-[1fr_400px]"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.38, ease: "easeOut" }}
+            {/* Active card label — bottom-left corner of visual */}
+            <div
+              className="absolute bottom-0 left-0 right-0"
+              style={{ padding: "0 0 28px 36px" }}
             >
-              {/* Left: large title + description + CTA */}
-              <div style={{ padding: "52px 56px", borderRight: "1px solid #E8EDF5" }}>
-                <h3
-                  className="font-heading font-bold"
-                  style={{
-                    color: "#001489",
-                    fontSize: "clamp(1.5rem, 2.4vw, 2.125rem)",
-                    lineHeight: 1.15,
-                    marginBottom: 18,
-                  }}
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={active}
+                  className="font-heading font-bold text-white"
+                  style={{ fontSize: "clamp(1.25rem, 2vw, 1.625rem)", lineHeight: 1.2 }}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.35 }}
                 >
                   {d.cards[active].title}
-                </h3>
+                </motion.p>
+              </AnimatePresence>
+            </div>
+
+            {/* Progress bar — bottom edge */}
+            <div
+              className="absolute bottom-0 left-0 right-0"
+              style={{ height: 2, background: "rgba(255,255,255,0.10)" }}
+            >
+              <motion.div
+                style={{ height: "100%", width: `${progress}%`, background: "#7A84BE" }}
+                transition={{ ease: "linear" }}
+              />
+            </div>
+          </div>
+
+          {/* ── RIGHT: content stack ───────────────────────────────── */}
+          <div
+            className="flex flex-col justify-between"
+            style={{ padding: "56px 52px 52px 56px", borderLeft: "1px solid #E8EDF5" }}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
+            {/* Eyebrow + headline */}
+            <div className="mb-10">
+              <p
+                style={{
+                  color: "#4A58AA",
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: "0.3em",
+                  textTransform: "uppercase",
+                  marginBottom: 14,
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                }}
+              >
+                {d.eyebrow}
+              </p>
+              <h2
+                className="font-heading font-bold"
+                style={{ color: "#001489", fontSize: "clamp(1.5rem, 2.2vw, 2rem)", lineHeight: 1.15 }}
+              >
+                {d.headline}
+              </h2>
+            </div>
+
+            {/* Card selector list */}
+            <div className="flex flex-col mb-10">
+              {d.cards.map((card, i) => (
+                <button
+                  key={i}
+                  data-testid={`diff-card-${i}`}
+                  onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
+                  className="flex items-center gap-4 py-4 text-left focus:outline-none group"
+                  style={{ borderBottom: "1px solid #F0F2F8" }}
+                >
+                  <motion.span
+                    className="flex-shrink-0"
+                    style={{ width: 3, alignSelf: "stretch", minHeight: 18, backgroundColor: "rgba(0,0,0,0)" }}
+                    animate={{ backgroundColor: i === active ? "#4A58AA" : "rgba(0,0,0,0)" }}
+                    transition={{ duration: 0.25 }}
+                  />
+                  <div className="flex items-center justify-between w-full gap-3">
+                    <motion.span
+                      className="font-heading font-bold leading-[1.2]"
+                      animate={{
+                        color: i === active ? "#001489" : "#848484",
+                        fontSize: i === active
+                          ? "clamp(1.25rem, 1.8vw, 1.5rem)"
+                          : "clamp(1rem, 1.4vw, 1.2rem)",
+                      }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
+                      {card.title}
+                    </motion.span>
+                    <span
+                      style={{
+                        flexShrink: 0,
+                        fontSize: 11,
+                        fontWeight: 700,
+                        letterSpacing: "0.15em",
+                        color: i === active ? "#4A58AA" : "#C8CDD8",
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* Active card description + CTA */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
+              >
                 <p
                   style={{
                     color: "#595959",
-                    fontSize: "0.925rem",
+                    fontSize: "0.9rem",
                     lineHeight: 1.8,
-                    marginBottom: 36,
-                    maxWidth: 460,
+                    marginBottom: 28,
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                   }}
                 >
                   {d.cards[active].description}
                 </p>
-                {/* Primary CTA — brand spec: #001489 bg, white text */}
                 <a
                   href="#contact"
                   data-testid="diff-cta"
                   className="inline-flex items-center gap-3 text-white text-xs tracking-[0.18em] uppercase font-semibold"
-                  style={{
-                    background: "#001489",
-                    padding: "14px 32px",
-                    textDecoration: "none",
-                    transition: "background 0.2s",
-                  }}
+                  style={{ background: "#001489", padding: "13px 28px", textDecoration: "none" }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#192B94"; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#001489"; }}
                 >
@@ -849,21 +863,11 @@ function DifferentiatorsV15() {
                     <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
                   </svg>
                 </a>
-              </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-              {/* Right: animated visual — solid #001489 panel */}
-              <div
-                className="relative overflow-hidden"
-                style={{ background: "#001489", minHeight: 340 }}
-              >
-                <div className="absolute inset-0">
-                  <DiffVisual index={active} />
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
         </div>
-
       </div>
     </section>
   );
