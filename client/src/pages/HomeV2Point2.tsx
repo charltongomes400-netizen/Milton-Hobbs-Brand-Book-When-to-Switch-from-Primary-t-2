@@ -487,77 +487,46 @@ function HeroV15() {
 const CYCLE_MS = 8500;
 
 function FounderVisual() {
-  const cx = 160, cy = 130;
-  const outerR = 98, midR = 62, innerR = 28;
-  const SPOKES = 12;
-  const outerC = 2 * Math.PI * outerR;
-  const midC = 2 * Math.PI * midR;
+  const spokes = 8;
+  const cx = 160, cy = 130, innerR = 22, outerR = 100;
   return (
     <svg viewBox="0 0 320 260" fill="none" className="w-full h-full">
-      {/* Outer dashed ring — slow clockwise */}
-      <motion.circle cx={cx} cy={cy} r={outerR}
-        stroke="#001489" strokeWidth={1.2}
-        strokeDasharray={`${outerC * 0.05} ${outerC * 0.07}`}
-        fill="none"
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-        style={{ transformOrigin: `${cx}px ${cy}px` }}
-      />
-      {/* Mid dashed ring — counter-clockwise, faster */}
-      <motion.circle cx={cx} cy={cy} r={midR}
-        stroke="#001489" strokeWidth={1}
-        strokeDasharray={`${midC * 0.08} ${midC * 0.08}`}
-        fill="none"
-        animate={{ rotate: [360, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-        style={{ transformOrigin: `${cx}px ${cy}px` }}
-      />
-      {/* Inner solid ring */}
-      <circle cx={cx} cy={cy} r={innerR} stroke="#001489" strokeWidth={1.5} fill="none" />
-      {/* 12 spokes — sequential opacity pulse chasing around the dial */}
-      {Array.from({ length: SPOKES }).map((_, i) => {
-        const angle = (i / SPOKES) * 2 * Math.PI - Math.PI / 2;
-        const isMajor = i % 3 === 0;
-        const r1 = innerR, r2 = isMajor ? outerR : midR;
+      {Array.from({ length: spokes }).map((_, i) => {
+        const angle = (i / spokes) * 2 * Math.PI - Math.PI / 2;
+        const x1 = cx + innerR * Math.cos(angle);
+        const y1 = cy + innerR * Math.sin(angle);
+        const x2 = cx + outerR * Math.cos(angle);
+        const y2 = cy + outerR * Math.sin(angle);
         return (
-          <motion.line key={i}
-            x1={cx + r1 * Math.cos(angle)} y1={cy + r1 * Math.sin(angle)}
-            x2={cx + r2 * Math.cos(angle)} y2={cy + r2 * Math.sin(angle)}
-            stroke="#001489" strokeWidth={isMajor ? 1.5 : 0.75}
-            animate={{ opacity: [0.08, 1, 0.08] }}
-            transition={{ duration: SPOKES * 0.35, delay: (i / SPOKES) * (SPOKES * 0.35), repeat: Infinity, ease: "easeInOut" }}
+          <motion.line
+            key={i} x1={x1} y1={y1} x2={x2} y2={y2}
+            stroke="#4A58AA" strokeWidth={1}
+            animate={{ strokeOpacity: [0.12, 0.55, 0.12] }}
+            transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
           />
         );
       })}
-      {/* Outer tick dots — light up in sequence */}
-      {Array.from({ length: SPOKES }).map((_, i) => {
-        if (i % 3 !== 0) return null;
-        const angle = (i / SPOKES) * 2 * Math.PI - Math.PI / 2;
+      {Array.from({ length: spokes }).map((_, i) => {
+        const angle = (i / spokes) * 2 * Math.PI - Math.PI / 2;
         const x = cx + outerR * Math.cos(angle);
         const y = cy + outerR * Math.sin(angle);
         return (
-          <motion.circle key={i} cx={x} cy={y} r={3.5}
-            fill="#001489"
-            animate={{ opacity: [0.1, 1, 0.1], scale: [0.6, 1.3, 0.6] }}
-            transition={{ duration: SPOKES * 0.35, delay: (i / SPOKES) * (SPOKES * 0.35), repeat: Infinity, ease: "easeInOut" }}
-            style={{ transformOrigin: `${x}px ${y}px` }}
+          <motion.circle
+            key={i} cx={x} cy={y} r={3}
+            fill="#4A58AA" fillOpacity={0.5}
+            animate={{ fillOpacity: [0.2, 0.75, 0.2] }}
+            transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
           />
         );
       })}
-      {/* Rotating second-hand */}
-      <motion.line x1={cx} y1={cy} x2={cx} y2={cy - outerR + 4}
-        stroke="#001489" strokeWidth={1.5}
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-        style={{ transformOrigin: `${cx}px ${cy}px` }}
-      />
-      {/* Center hub */}
-      <circle cx={cx} cy={cy} r={6} fill="#001489" />
-      {/* Expanding pulse */}
-      <motion.circle cx={cx} cy={cy} r={innerR}
-        stroke="#001489" strokeWidth={1.5} fill="none"
-        animate={{ scale: [1, 3.5], opacity: [0.8, 0] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeOut" }}
+      <circle cx={cx} cy={cy} r={outerR} stroke="#001489" strokeOpacity={0.10} strokeWidth={1} fill="none" />
+      <circle cx={cx} cy={cy} r={innerR} stroke="#001489" strokeOpacity={0.20} strokeWidth={1} fill="none" />
+      <circle cx={cx} cy={cy} r={8} fill="#001489" fillOpacity={0.85} />
+      <motion.circle
+        cx={cx} cy={cy} r={innerR}
+        stroke="#4A58AA" strokeWidth={1} fill="none"
+        animate={{ scale: [1, 1.6, 1], opacity: [0.45, 0, 0.45] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
         style={{ transformOrigin: `${cx}px ${cy}px` }}
       />
     </svg>
@@ -611,178 +580,138 @@ function PrecisionVisual() {
 
   return (
     <svg viewBox="0 0 320 260" fill="none" className="w-full h-full">
-      {/* Static guide rings — solid, faint via opacity */}
       {[88, 64, 44].map((r, i) => (
-        <circle key={i} cx={CX} cy={CY} r={r} fill="none"
-          stroke="#001489" strokeWidth={i === 0 ? 1 : 0.75}
-          style={{ opacity: locked ? 0.22 + i * 0.18 : 0.08 + i * 0.06, transition: "opacity 0.4s" }}
+        <circle
+          key={i} cx={CX} cy={CY} r={r} fill="none"
+          stroke="#001489"
+          strokeOpacity={locked ? 0.18 + i * 0.10 : 0.10 + i * 0.06}
+          strokeWidth={1}
+          style={{ transition: "stroke-opacity 0.4s" }}
         />
       ))}
-      {/* Crosshair lines */}
-      <line x1={CX} y1={30} x2={CX} y2={230} stroke="#001489" strokeWidth={0.75} style={{ opacity: 0.15 }} />
-      <line x1={40} y1={CY} x2={280} y2={CY} stroke="#001489" strokeWidth={0.75} style={{ opacity: 0.15 }} />
-      {/* Radar sweep — rotating line from center */}
-      <motion.line x1={CX} y1={CY} x2={CX} y2={CY - 88}
-        stroke="#001489" strokeWidth={1}
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-        style={{ transformOrigin: `${CX}px ${CY}px`, opacity: locked ? 0 : 1, transition: "opacity 0.4s" }}
+      <line x1={CX} y1={30} x2={CX} y2={230} stroke="#001489" strokeOpacity={0.12} strokeWidth={1} />
+      <line x1={40} y1={CY} x2={280} y2={CY} stroke="#001489" strokeOpacity={0.12} strokeWidth={1} />
+      <circle cx={CX} cy={CY} r={4}
+        fill="#001489"
+        fillOpacity={locked ? 1 : 0.60}
+        style={{ transition: "fill-opacity 0.3s" }}
       />
-      {/* Radar trail — fading lines offset behind the sweep */}
-      {!locked && Array.from({ length: 6 }).map((_, i) => (
-        <motion.line key={i} x1={CX} y1={CY}
-          x2={CX + 88 * Math.sin(i * -0.22)}
-          y2={CY - 88 * Math.cos(i * -0.22)}
-          stroke="#001489" strokeWidth={1}
-          style={{ opacity: (6 - i) / 10, transformOrigin: `${CX}px ${CY}px` }}
-          animate={{ rotate: [0, 360] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-        />
-      ))}
-      {/* Reticle — hunts then locks */}
-      <motion.g style={{ x: rx, y: ry }}>
-        <circle cx={CX} cy={CY} r={24} stroke="#001489" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX-24} ${CY-10} L${CX-24} ${CY-24} L${CX-10} ${CY-24}`} stroke="#001489" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX+10} ${CY-24} L${CX+24} ${CY-24} L${CX+24} ${CY-10}`} stroke="#001489" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX+24} ${CY+10} L${CX+24} ${CY+24} L${CX+10} ${CY+24}`} stroke="#001489" strokeWidth={1.5} fill="none" />
-        <path d={`M${CX-10} ${CY+24} L${CX-24} ${CY+24} L${CX-24} ${CY+10}`} stroke="#001489" strokeWidth={1.5} fill="none" />
-        <line x1={CX-10} y1={CY} x2={CX+10} y2={CY} stroke="#001489" strokeWidth={1} />
-        <line x1={CX} y1={CY-10} x2={CX} y2={CY+10} stroke="#001489" strokeWidth={1} />
-      </motion.g>
-      {/* Lock-on burst */}
       {locked && (
         <AnimatePresence>
-          <motion.circle key={flashKey}
-            cx={CX} cy={CY} r={24}
-            stroke="#001489" strokeWidth={2} fill="none"
-            initial={{ scale: 1, opacity: 1 }}
-            animate={{ scale: 2.8, opacity: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
+          <motion.circle
+            key={flashKey}
+            cx={CX} cy={CY} r={22}
+            stroke="#4A58AA" strokeWidth={2} fill="none"
+            initial={{ scale: 1, opacity: 0.85 }}
+            animate={{ scale: 2.2, opacity: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
             style={{ transformOrigin: `${CX}px ${CY}px` }}
           />
         </AnimatePresence>
       )}
-      {/* LOCKED label */}
+      <motion.g style={{ x: rx, y: ry }}>
+        <circle cx={CX} cy={CY} r={22} stroke="#001489" strokeWidth={1.5} fill="none" strokeOpacity={0.65} />
+        <path d={`M${CX-22} ${CY-9} L${CX-22} ${CY-22} L${CX-9} ${CY-22}`} stroke="#001489" strokeWidth={1.5} fill="none" strokeOpacity={0.65} />
+        <path d={`M${CX+9} ${CY-22} L${CX+22} ${CY-22} L${CX+22} ${CY-9}`} stroke="#001489" strokeWidth={1.5} fill="none" strokeOpacity={0.65} />
+        <path d={`M${CX+22} ${CY+9} L${CX+22} ${CY+22} L${CX+9} ${CY+22}`} stroke="#001489" strokeWidth={1.5} fill="none" strokeOpacity={0.65} />
+        <path d={`M${CX-9} ${CY+22} L${CX-22} ${CY+22} L${CX-22} ${CY+9}`} stroke="#001489" strokeWidth={1.5} fill="none" strokeOpacity={0.65} />
+        <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="#001489" strokeWidth={1} strokeOpacity={0.45} />
+        <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="#001489" strokeWidth={1} strokeOpacity={0.45} />
+      </motion.g>
       {locked && (
-        <motion.text x={CX + 32} y={CY - 30}
-          fill="#001489" fontSize="8" fontFamily="'Satoshi', sans-serif" letterSpacing="0.15em"
-          initial={{ opacity: 0 }} animate={{ opacity: [0, 1, 1, 0] }}
-          transition={{ duration: 2.2, times: [0, 0.12, 0.88, 1] }}
-        >LOCKED</motion.text>
+        <motion.text
+          x={CX + 30} y={CY - 28}
+          fill="rgba(0,20,137,0.60)" fontSize="8" fontFamily="'Satoshi', sans-serif" letterSpacing="0.15em"
+          initial={{ opacity: 0 }} animate={{ opacity: [0, 0.8, 0.8, 0] }}
+          transition={{ duration: 2.2, times: [0, 0.15, 0.85, 1] }}
+        >
+          LOCKED
+        </motion.text>
       )}
-      {/* Center dot */}
-      <circle cx={CX} cy={CY} r={4} fill="#001489" />
     </svg>
   );
 }
 
 function CrossBorderVisual() {
-  const HUB = { cx: 160, cy: 130 };
   const nodes = [
-    { cx: 52,  cy: 80,  label: "FR", delay: 0    },
-    { cx: 268, cy: 80,  label: "AE", delay: 0.9  },
-    { cx: 52,  cy: 180, label: "UK", delay: 1.8  },
-    { cx: 268, cy: 180, label: "CH", delay: 2.7  },
+    { cx: 55,  cy: 100, label: "FR"  },
+    { cx: 55,  cy: 160, label: "EU"  },
+    { cx: 265, cy: 100, label: "UAE" },
+    { cx: 265, cy: 160, label: "GCC" },
+  ];
+  const paths = [
+    { d: "M60 100 Q160 70 260 100",  delay: 0   },
+    { d: "M60 160 Q160 190 260 160", delay: 0.6 },
+    { d: "M60 100 Q160 130 260 160", delay: 1.2 },
+    { d: "M60 160 Q160 130 260 100", delay: 1.8 },
   ];
   return (
     <svg viewBox="0 0 320 260" fill="none" className="w-full h-full">
-      {/* Static spokes — hub to node */}
-      {nodes.map((n, i) => (
-        <line key={i} x1={HUB.cx} y1={HUB.cy} x2={n.cx} y2={n.cy}
-          stroke="#001489" strokeWidth={0.75} style={{ opacity: 0.15 }}
+      {paths.map((p, i) => (
+        <motion.path
+          key={i} d={p.d}
+          stroke={i < 2 ? "#4A58AA" : "#001489"}
+          strokeOpacity={i < 2 ? 0.55 : 0.28}
+          strokeWidth={i < 2 ? 1.2 : 1}
+          strokeDasharray="220"
+          animate={{ strokeDashoffset: [220, 0, -220] }}
+          transition={{ duration: 3, delay: p.delay, repeat: Infinity, ease: "linear" }}
         />
       ))}
-      {/* Traveling signal dots */}
-      {nodes.map((n, i) => (
-        <motion.circle key={i} r={4} fill="#001489"
-          animate={{
-            cx: [n.cx, HUB.cx, n.cx],
-            cy: [n.cy, HUB.cy, n.cy],
-            opacity: [0, 1, 1, 0.2, 0],
-          }}
-          transition={{ duration: 3.2, delay: n.delay, repeat: Infinity, ease: "easeInOut", times: [0, 0.35, 0.5, 0.75, 1] }}
-        />
-      ))}
-      {/* Node circles */}
       {nodes.map((n, i) => (
         <g key={i}>
-          <motion.circle cx={n.cx} cy={n.cy} r={16}
-            stroke="#001489" strokeWidth={1} fill="none"
-            animate={{ opacity: [0.12, 0.35, 0.12] }}
-            transition={{ duration: 3.2, delay: n.delay, repeat: Infinity }}
-          />
-          <circle cx={n.cx} cy={n.cy} r={5} fill="#001489" />
-          <text x={n.cx} y={i < 2 ? n.cy - 22 : n.cy + 28}
-            fill="#001489" fontSize="9" fontFamily="'Satoshi', sans-serif"
-            textAnchor="middle" letterSpacing="0.1em" style={{ opacity: 0.7 }}
+          <circle cx={n.cx} cy={n.cy} r={5} fill="#001489" fillOpacity={0.65} />
+          <text x={n.cx} y={n.cy + (i < 2 ? -12 : 18)}
+            fill="#001489" fillOpacity={0.45} fontSize="8"
+            fontFamily="'Plus Jakarta Sans', sans-serif" textAnchor="middle"
           >{n.label}</text>
         </g>
       ))}
-      {/* Hub — outer ring + inner solid */}
-      <motion.circle cx={HUB.cx} cy={HUB.cy} r={20}
-        stroke="#001489" strokeWidth={1.5} fill="none"
-        animate={{ scale: [1, 1.8], opacity: [0.9, 0] }}
-        transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
-        style={{ transformOrigin: `${HUB.cx}px ${HUB.cy}px` }}
+      <circle cx={160} cy={130} r={7} fill="#001489" fillOpacity={0.85} />
+      <motion.circle
+        cx={160} cy={130} r={18}
+        stroke="#4A58AA" strokeWidth={1} fill="none"
+        animate={{ scale: [1, 1.5, 1], opacity: [0.45, 0, 0.45] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+        style={{ transformOrigin: "160px 130px" }}
       />
-      <circle cx={HUB.cx} cy={HUB.cy} r={8} stroke="#001489" strokeWidth={1.5} fill="none" />
-      <circle cx={HUB.cx} cy={HUB.cy} r={3} fill="#001489" />
     </svg>
   );
 }
 
 function DiscretionVisual() {
   const cx = 160, cy = 130;
-  const rings: Array<{ r: number; dashRatio: number; dur: number; dir: 1 | -1 }> = [
-    { r: 96, dashRatio: 0.04, dur: 38, dir: 1  },
-    { r: 74, dashRatio: 0.07, dur: 24, dir: -1 },
-    { r: 54, dashRatio: 0.10, dur: 16, dir: 1  },
-    { r: 36, dashRatio: 0.14, dur: 10, dir: -1 },
-  ];
+  const rings = [95, 72, 52, 34, 18];
   return (
     <svg viewBox="0 0 320 260" fill="none" className="w-full h-full">
-      {/* Spinning dashed rings — each its own speed/direction */}
-      {rings.map(({ r, dashRatio, dur, dir }, i) => {
-        const c = 2 * Math.PI * r;
+      {rings.map((r, i) => {
+        const circumference = 2 * Math.PI * r;
+        const gap = i % 2 === 0 ? 0.15 : 0.25;
         return (
-          <motion.circle key={i} cx={cx} cy={cy} r={r}
-            stroke="#001489" strokeWidth={i === 0 ? 1 : 1.2}
-            strokeDasharray={`${c * dashRatio} ${c * dashRatio}`}
+          <motion.circle
+            key={i} cx={cx} cy={cy} r={r}
+            stroke={i === rings.length - 1 ? "#001489" : "#4A58AA"}
+            strokeOpacity={i === rings.length - 1 ? 0.65 : 0.10 + i * 0.06}
+            strokeWidth={1}
+            strokeDasharray={`${circumference * (1 - gap)} ${circumference * gap}`}
             fill="none"
-            style={{ opacity: 0.2 + i * 0.2, transformOrigin: `${cx}px ${cy}px` }}
-            animate={{ rotate: dir === 1 ? [0, 360] : [360, 0] }}
-            transition={{ duration: dur, repeat: Infinity, ease: "linear" }}
+            animate={{ rotate: i % 2 === 0 ? [0, 360] : [360, 0] }}
+            transition={{ duration: 10 + i * 4, repeat: Infinity, ease: "linear" }}
+            style={{ transformOrigin: `${cx}px ${cy}px` }}
           />
         );
       })}
-      {/* Innermost solid ring */}
-      <circle cx={cx} cy={cy} r={20} stroke="#001489" strokeWidth={1.5} fill="none" />
-      {/* Scanning arc — quarter arc that sweeps continuously */}
-      <motion.path
-        d={`M ${cx} ${cy - 54} A 54 54 0 0 1 ${cx + 54} ${cy}`}
-        stroke="#001489" strokeWidth={2} fill="none"
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-        style={{ transformOrigin: `${cx}px ${cy}px` }}
+      <motion.rect
+        x={cx - 7} y={cy - 4} width={14} height={11}
+        stroke="#001489" strokeWidth={1.2} fill="none" strokeOpacity={0.80}
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
-      {/* Lock body */}
-      <rect x={cx - 9} y={cy - 6} width={18} height={14}
-        stroke="#001489" strokeWidth={1.5} fill="none" rx={1} />
-      {/* Lock shackle */}
       <motion.path
-        d={`M${cx - 6} ${cy - 6} Q${cx - 6} ${cy - 17} ${cx} ${cy - 17} Q${cx + 6} ${cy - 17} ${cx + 6} ${cy - 6}`}
-        stroke="#001489" strokeWidth={1.5} fill="none"
-        animate={{ opacity: [0.4, 1, 0.4] }}
-        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-      />
-      {/* Keyhole dot */}
-      <circle cx={cx} cy={cy + 1} r={2} fill="#001489" />
-      {/* Outer pulse */}
-      <motion.circle cx={cx} cy={cy} r={36}
-        stroke="#001489" strokeWidth={1} fill="none"
-        animate={{ scale: [1, 2.6], opacity: [0.6, 0] }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: "easeOut" }}
-        style={{ transformOrigin: `${cx}px ${cy}px` }}
+        d={`M${cx-4} ${cy-4} Q${cx-4} ${cy-11} ${cx} ${cy-11} Q${cx+4} ${cy-11} ${cx+4} ${cy-4}`}
+        stroke="#001489" strokeWidth={1.2} fill="none" strokeOpacity={0.80}
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
     </svg>
   );
