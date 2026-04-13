@@ -1837,19 +1837,60 @@ function PracticeAreasV18() {
 
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_6fr] gap-0" style={{ minHeight: 580 }}>
 
-          {/* ── Left: numbered list ── */}
+          {/* ── Mobile image panel (visible below lg) ── */}
           <div
+            className="relative block lg:hidden"
+            style={{
+              background: "#001489",
+              overflow: "hidden",
+              height: 320,
+              marginBottom: 24,
+            }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={`mobile-${active}`}
+                src={item.img}
+                alt={item.title}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ mixBlendMode: "multiply" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6 }}
+              />
+            </AnimatePresence>
+            <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(0,6,44,0.70) 0%, transparent 60%)" }} />
+            <div className="absolute bottom-0 left-0 right-0" style={{ padding: "0 24px 24px" }}>
+              <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 6, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{item.short}</p>
+              <h3 className="font-heading font-bold text-white" style={{ fontSize: "1.15rem", lineHeight: 1.2 }}>{item.title}</h3>
+            </div>
+          </div>
+
+          {/* ── Left: numbered list with staggered entrance ── */}
+          <motion.div
             className="flex flex-col"
             style={{ borderTop: "1px solid rgba(0,20,137,0.08)" }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.06 } },
+            }}
           >
             {EXPERTISE_ITEMS_V18.map((itm, i) => {
               const isActive = active === i;
               return (
-                <button
+                <motion.button
                   key={i}
                   data-testid={`expertise-item-${i}`}
                   onClick={() => { setActive(i); setPaused(true); }}
                   onMouseEnter={() => { setActive(i); setPaused(true); }}
+                  variants={{
+                    hidden: { opacity: 0, x: -24 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+                  }}
                   style={{
                     background: "none",
                     border: "none",
@@ -1943,12 +1984,12 @@ function PracticeAreasV18() {
                       </div>
                     </div>
                   </div>
-                </button>
+                </motion.button>
               );
             })}
-          </div>
+          </motion.div>
 
-          {/* ── Right: image panel ── */}
+          {/* ── Right: image panel (desktop) ── */}
           <div
             className="relative hidden lg:block"
             style={{
