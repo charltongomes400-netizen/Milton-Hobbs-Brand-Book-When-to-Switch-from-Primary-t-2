@@ -693,71 +693,19 @@ function DifferentiatorsV15() {
       id="firm"
       data-header-theme="light"
       data-testid="differentiators-section"
+      className="py-28 px-8"
       style={{ background: "#FFFFFF", borderTop: "1px solid #E8EDF5" }}
     >
       <div className="max-w-[1400px] mx-auto">
         <div
-          className="grid grid-cols-1 lg:grid-cols-[55fr_45fr]"
-          style={{ minHeight: 600 }}
+          className="grid grid-cols-1 lg:grid-cols-[45fr_55fr]"
+          style={{ minHeight: 580 }}
         >
 
-          {/* ── LEFT: large animated visual panel ─────────────────── */}
-          <div
-            className="relative overflow-hidden"
-            style={{ background: "#001489", minHeight: 480 }}
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
-            {/* Full-bleed SVG animation */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                className="absolute inset-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <DiffVisual index={active} />
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Active card label — bottom-left corner of visual */}
-            <div
-              className="absolute bottom-0 left-0 right-0"
-              style={{ padding: "0 0 28px 36px" }}
-            >
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={active}
-                  className="font-heading font-bold text-white"
-                  style={{ fontSize: "clamp(1.25rem, 2vw, 1.625rem)", lineHeight: 1.2 }}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.35 }}
-                >
-                  {d.cards[active].title}
-                </motion.p>
-              </AnimatePresence>
-            </div>
-
-            {/* Progress bar — bottom edge */}
-            <div
-              className="absolute bottom-0 left-0 right-0"
-              style={{ height: 2, background: "rgba(255,255,255,0.10)" }}
-            >
-              <motion.div
-                style={{ height: "100%", width: `${progress}%`, background: "#7A84BE" }}
-                transition={{ ease: "linear" }}
-              />
-            </div>
-          </div>
-
-          {/* ── RIGHT: content stack ───────────────────────────────── */}
+          {/* ── LEFT: content stack ────────────────────────────────── */}
           <div
             className="flex flex-col justify-between"
-            style={{ padding: "56px 52px 52px 56px", borderLeft: "1px solid #E8EDF5" }}
+            style={{ padding: "56px 56px 52px 0", borderRight: "1px solid #E8EDF5" }}
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
@@ -865,6 +813,59 @@ function DifferentiatorsV15() {
                 </a>
               </motion.div>
             </AnimatePresence>
+          </div>
+
+          {/* ── RIGHT: large animated visual panel ─────────────────── */}
+          <div
+            className="relative overflow-hidden"
+            style={{ background: "#001489", minHeight: 480 }}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
+            {/* Full-bleed SVG animation */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                className="absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <DiffVisual index={active} />
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Active card label — bottom-left corner of visual */}
+            <div
+              className="absolute bottom-0 left-0 right-0"
+              style={{ padding: "0 0 28px 36px" }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={active}
+                  className="font-heading font-bold text-white"
+                  style={{ fontSize: "clamp(1.25rem, 2vw, 1.625rem)", lineHeight: 1.2 }}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.35 }}
+                >
+                  {d.cards[active].title}
+                </motion.p>
+              </AnimatePresence>
+            </div>
+
+            {/* Progress bar — bottom edge */}
+            <div
+              className="absolute bottom-0 left-0 right-0"
+              style={{ height: 2, background: "rgba(255,255,255,0.10)" }}
+            >
+              <motion.div
+                style={{ height: "100%", width: `${progress}%`, background: "#7A84BE" }}
+                transition={{ ease: "linear" }}
+              />
+            </div>
           </div>
 
         </div>
