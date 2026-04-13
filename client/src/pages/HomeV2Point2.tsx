@@ -761,12 +761,6 @@ function DifferentiatorsV15() {
           style={{ gap: 16 }}
         >
           <div>
-            <p
-              className="font-sans font-bold uppercase"
-              style={{ color: "#4A58AA", fontSize: 10, letterSpacing: "0.32em", marginBottom: 18 }}
-            >
-              Why Miltion Hobbs
-            </p>
             <h2
               className="font-heading font-bold"
               style={{
@@ -776,7 +770,7 @@ function DifferentiatorsV15() {
                 letterSpacing: "-0.025em",
               }}
             >
-              The standard of a major firm.<br />The attention of a boutique.
+              Why Miltion Hobbs
             </h2>
           </div>
           <a
