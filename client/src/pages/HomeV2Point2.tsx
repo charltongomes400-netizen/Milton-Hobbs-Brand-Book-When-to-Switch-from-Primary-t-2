@@ -1356,7 +1356,7 @@ function ContactFormV15() {
       style={{ background: "#FFFFFF", borderTop: "1px solid rgba(0,20,137,0.07)" }}
     >
       {/* ── TOP BAND: headline + subtext ── */}
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 120, paddingBottom: 72 }}>
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 130, paddingBottom: 72 }}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
