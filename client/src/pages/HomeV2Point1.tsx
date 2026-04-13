@@ -691,160 +691,179 @@ function DifferentiatorsV15() {
   return (
     <section
       id="firm"
-      data-header-theme="dark"
+      data-header-theme="light"
       data-testid="differentiators-section"
       className="py-28 px-8"
-      style={{ background: "#001489", borderTop: "1px solid #001050" }}
+      style={{ background: "#F9F9F9", borderTop: "1px solid #E8EDF5" }}
     >
       <div className="max-w-[1400px] mx-auto">
 
-        {/* Section label + headline — sits above the two-column grid */}
-        <div className="mb-16">
+        {/* Eyebrow + headline */}
+        <div className="mb-12">
           <p
             style={{
-              color: "#7A84BE",
+              color: "#4A58AA",
               fontSize: 13,
               fontWeight: 600,
               letterSpacing: "0.3em",
               textTransform: "uppercase",
-              marginBottom: 16,
+              marginBottom: 14,
               fontFamily: "'Plus Jakarta Sans', sans-serif",
             }}
           >
             {d.eyebrow}
           </p>
           <h2
-            className="font-heading font-bold text-white"
-            style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1, maxWidth: 520 }}
+            className="font-heading font-bold"
+            style={{ color: "#001489", fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1, maxWidth: 500 }}
           >
             {d.headline}
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-
-          {/* ── Left: interactive card list ──────────────────────────── */}
-          <div
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
-            <div className="flex flex-col">
-              {d.cards.map((card, i) => (
-                <button
-                  key={i}
-                  data-testid={`diff-card-${i}`}
-                  onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
-                  className="group flex items-center gap-5 py-5 text-left focus:outline-none"
-                  style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+        {/* ── 4 horizontal tab buttons ──────────────────────────────────── */}
+        <div
+          className="grid grid-cols-2 md:grid-cols-4"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          {d.cards.map((card, i) => {
+            const isActive = i === active;
+            const borderColor = isActive ? "#001489" : "#E8EDF5";
+            return (
+              <button
+                key={i}
+                data-testid={`diff-card-${i}`}
+                onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
+                className="relative text-left focus:outline-none"
+                style={{
+                  padding: "22px 28px 26px",
+                  background: isActive ? "#001489" : "#FFFFFF",
+                  border: `1px solid ${borderColor}`,
+                  borderRight: i < 3 ? "none" : `1px solid ${borderColor}`,
+                  transition: "background 0.3s, border-color 0.3s",
+                  cursor: "pointer",
+                }}
+              >
+                {/* Index number */}
+                <span
+                  style={{
+                    display: "block",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: "0.22em",
+                    color: isActive ? "rgba(255,255,255,0.5)" : "#7A84BE",
+                    marginBottom: 10,
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    transition: "color 0.3s",
+                  }}
                 >
-                  {/* Active bar */}
-                  <motion.span
-                    className="flex-shrink-0 self-stretch"
-                    style={{ width: 2, minHeight: 20 }}
-                    animate={{ backgroundColor: i === active ? "#7A84BE" : "rgba(255,255,255,0)" }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <motion.span
-                    className="font-heading font-bold leading-[1.15]"
-                    animate={{
-                      color: i === active ? "#FFFFFF" : "rgba(255,255,255,0.28)",
-                      fontSize: i === active ? "clamp(1.75rem, 2.8vw, 2.5rem)" : "clamp(1.5rem, 2.4vw, 2.125rem)",
-                    }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {/* Title */}
+                <span
+                  className="font-heading font-bold"
+                  style={{
+                    display: "block",
+                    fontSize: "clamp(0.875rem, 1.1vw, 1rem)",
+                    lineHeight: 1.3,
+                    color: isActive ? "#FFFFFF" : "#001489",
+                    transition: "color 0.3s",
+                  }}
+                >
+                  {card.title}
+                </span>
+                {/* Progress fill — bottom of active tab */}
+                {isActive && (
+                  <div
+                    className="absolute bottom-0 left-0 right-0"
+                    style={{ height: 2, background: "rgba(122,132,190,0.25)" }}
                   >
-                    {card.title}
-                  </motion.span>
-                </button>
-              ))}
-            </div>
-          </div>
+                    <motion.div
+                      style={{ height: "100%", width: `${progress}%`, background: "#7A84BE" }}
+                      transition={{ ease: "linear" }}
+                    />
+                  </div>
+                )}
+              </button>
+            );
+          })}
+        </div>
 
-          {/* ── Right: visual panel + description ───────────────────── */}
-          <div
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
-            {/* Solid visual box — brand-compliant, no blur or gradient layers */}
-            <div
-              className="relative w-full overflow-hidden"
-              style={{
-                aspectRatio: "4/3",
-                background: "#001050",
-                border: "1px solid rgba(255,255,255,0.08)",
-              }}
+        {/* ── Content panel (white card below tabs) ─────────────────────── */}
+        <div
+          style={{ background: "#FFFFFF", border: "1px solid #E8EDF5", borderTop: "none" }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              className="grid grid-cols-1 md:grid-cols-[1fr_400px]"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.38, ease: "easeOut" }}
             >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active}
-                  className="absolute inset-0"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <DiffVisual index={active} />
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Thin progress bar — bottom edge */}
-              <div
-                className="absolute bottom-0 left-0 right-0"
-                style={{ height: 1, background: "rgba(255,255,255,0.08)" }}
-              >
-                <motion.div
-                  className="h-full"
-                  style={{ width: `${progress}%`, background: "#7A84BE" }}
-                  transition={{ ease: "linear" }}
-                />
-              </div>
-            </div>
-
-            {/* Card description below the visual */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="pt-8"
-              >
+              {/* Left: large title + description + CTA */}
+              <div style={{ padding: "52px 56px", borderRight: "1px solid #E8EDF5" }}>
                 <h3
-                  className="font-heading font-semibold text-white mb-3 leading-[1.3]"
-                  style={{ fontSize: "clamp(1.125rem, 1.5vw, 1.375rem)" }}
+                  className="font-heading font-bold"
+                  style={{
+                    color: "#001489",
+                    fontSize: "clamp(1.5rem, 2.4vw, 2.125rem)",
+                    lineHeight: 1.15,
+                    marginBottom: 18,
+                  }}
                 >
                   {d.cards[active].title}
                 </h3>
                 <p
                   style={{
-                    color: "rgba(255,255,255,0.55)",
-                    fontSize: "0.9rem",
-                    lineHeight: 1.75,
-                    marginBottom: 28,
-                    maxWidth: 480,
+                    color: "#595959",
+                    fontSize: "0.925rem",
+                    lineHeight: 1.8,
+                    marginBottom: 36,
+                    maxWidth: 460,
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                   }}
                 >
                   {d.cards[active].description}
                 </p>
-                {/* Secondary CTA — outline on dark per brand spec */}
+                {/* Primary CTA — brand spec: #001489 bg, white text */}
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-3 text-white text-xs tracking-[0.18em] uppercase font-semibold px-7 py-3.5 transition-colors"
-                  style={{ border: "1px solid rgba(255,255,255,0.35)" }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.07)"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
+                  data-testid="diff-cta"
+                  className="inline-flex items-center gap-3 text-white text-xs tracking-[0.18em] uppercase font-semibold"
+                  style={{
+                    background: "#001489",
+                    padding: "14px 32px",
+                    textDecoration: "none",
+                    transition: "background 0.2s",
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#192B94"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#001489"; }}
                 >
                   <span>{d.learnMore}</span>
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
                     <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
                   </svg>
                 </a>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+              </div>
 
+              {/* Right: animated visual — solid #001489 panel */}
+              <div
+                className="relative overflow-hidden"
+                style={{ background: "#001489", minHeight: 340 }}
+              >
+                <div className="absolute inset-0">
+                  <DiffVisual index={active} />
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
+
       </div>
     </section>
   );
