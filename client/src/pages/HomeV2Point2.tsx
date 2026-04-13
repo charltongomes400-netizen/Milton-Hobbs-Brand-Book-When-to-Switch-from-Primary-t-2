@@ -1646,8 +1646,7 @@ function FooterV15() {
   );
 
   return (
-    <footer id="footer" data-testid="footer" style={{ background: "#001489" }}>
-      {/* ── Scrolling motto ticker ── */}
+    <footer id="footer" data-testid="footer" style={{ background: "#001489", position: "relative", overflow: "hidden" }}>
       <style>{`
         @keyframes mh-ticker {
           0%   { transform: translateX(0); }
@@ -1656,230 +1655,240 @@ function FooterV15() {
         .mh-ticker-track {
           display: inline-flex;
           white-space: nowrap;
-          animation: mh-ticker 100s linear infinite;
+          animation: mh-ticker 80s linear infinite;
+        }
+        @keyframes mh-footer-pulse {
+          0%, 100% { opacity: 0.04; transform: scale(1); }
+          50%      { opacity: 0.08; transform: scale(1.15); }
         }
       `}</style>
+
+      {/* Ambient background orbs */}
+      <div style={{ position: "absolute", top: -120, right: -80, width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(74,88,170,0.12) 0%, transparent 60%)", pointerEvents: "none", animation: "mh-footer-pulse 10s ease-in-out infinite" }} />
+      <div style={{ position: "absolute", bottom: -160, left: -100, width: 600, height: 600, borderRadius: "50%", background: "radial-gradient(circle, rgba(25,43,148,0.10) 0%, transparent 55%)", pointerEvents: "none", animation: "mh-footer-pulse 14s ease-in-out infinite 3s" }} />
+
+      {/* ── Giant typographic statement ── */}
+      <div className="max-w-[1400px] mx-auto px-8 relative z-10" style={{ paddingTop: 100 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <h2
+            className="font-heading font-bold"
+            style={{
+              fontSize: "clamp(3rem, 8vw, 7rem)",
+              lineHeight: 1.0,
+              color: "transparent",
+              WebkitTextStroke: "1px rgba(255,255,255,0.18)",
+              letterSpacing: "-0.03em",
+              marginBottom: 16,
+              userSelect: "none",
+            }}
+          >
+            MILTION
+          </h2>
+          <h2
+            className="font-heading font-bold"
+            style={{
+              fontSize: "clamp(3rem, 8vw, 7rem)",
+              lineHeight: 1.0,
+              color: "#FFFFFF",
+              letterSpacing: "-0.03em",
+              marginBottom: 0,
+            }}
+          >
+            HOBBS
+          </h2>
+        </motion.div>
+      </div>
+
+      {/* ── Scrolling ticker divider ── */}
       <div
         style={{
-          background: "#001489",
           overflow: "hidden",
-          padding: "11px 0",
+          padding: "20px 0",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
           borderBottom: "1px solid rgba(255,255,255,0.06)",
           userSelect: "none",
           width: "100%",
+          marginTop: 56,
         }}
       >
         <div className="mh-ticker-track">
-          {/* Copy A */}
           {tickerHalf.map(({ key, word, bright }) => (
             <span key={`a-${key}`} style={{ display: "inline-flex", alignItems: "center", flexShrink: 0 }}>
-              <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", color: bright ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.28)", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{word}</span>
-              <span style={{ color: "rgba(255,255,255,0.14)", padding: "0 20px", fontSize: 10 }}>◆</span>
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", color: bright ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.18)", fontFamily: "'Plus Jakarta Sans', sans-serif", textTransform: "uppercase" }}>{word}</span>
+              <span style={{ color: "rgba(255,255,255,0.10)", padding: "0 28px", fontSize: 8 }}>●</span>
             </span>
           ))}
-          {/* Copy B — pixel-identical, enables seamless -50% loop */}
           {tickerHalf.map(({ key, word, bright }) => (
             <span key={`b-${key}`} aria-hidden="true" style={{ display: "inline-flex", alignItems: "center", flexShrink: 0 }}>
-              <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", color: bright ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.28)", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{word}</span>
-              <span style={{ color: "rgba(255,255,255,0.14)", padding: "0 20px", fontSize: 10 }}>◆</span>
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", color: bright ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.18)", fontFamily: "'Plus Jakarta Sans', sans-serif", textTransform: "uppercase" }}>{word}</span>
+              <span style={{ color: "rgba(255,255,255,0.10)", padding: "0 28px", fontSize: 8 }}>●</span>
             </span>
           ))}
         </div>
       </div>
-      {/* ── Main body ── */}
-      <div className="max-w-[1400px] mx-auto px-8">
-        <div
-          className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] gap-12 lg:gap-20 text-[#ffffff40]"
-          style={{ paddingTop: 56, paddingBottom: 52, borderBottom: "1px solid rgba(255,255,255,0.08)" }}
-        >
 
-          {/* LEFT: Giant masthead wordmark */}
-          <div className="flex flex-col justify-between gap-10">
+      {/* ── Main content: 4-column grid ── */}
+      <div className="max-w-[1400px] mx-auto px-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8"
+          style={{ paddingTop: 56, paddingBottom: 56 }}
+        >
+          {/* Col 1: Tagline + contact */}
+          <div className="flex flex-col gap-8 lg:col-span-1">
             <div>
               <img
                 src={miltonHobbsWordmark}
                 alt="Milton Hobbs"
                 style={{
-                  width: "clamp(160px, 22vw, 280px)",
+                  width: "clamp(120px, 14vw, 180px)",
                   height: "auto",
                   filter: "brightness(0) invert(1)",
-                  opacity: 0.92,
+                  opacity: 0.9,
                   display: "block",
+                  marginBottom: 20,
                 }}
               />
-              <div style={{ width: 48, height: 1, background: "rgba(255,255,255,0.14)", margin: "24px 0 20px" }} />
-              <p style={{ color: "#FFFFFF", fontSize: 14, lineHeight: 1.7, maxWidth: "38ch" }}>
+              <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 13, lineHeight: 1.72, maxWidth: "30ch" }}>
                 {f.tagline}
               </p>
             </div>
-
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5">
               <a
                 href={`mailto:${f.email}`}
                 data-testid="footer-email"
-                className="self-start"
-                style={{
-                  color: "#FFFFFF",
-                  fontSize: 14,
-                  textDecoration: "none",
-                  transition: "color 0.2s",
-                }}
+                style={{ color: "rgba(255,255,255,0.70)", fontSize: 13, textDecoration: "none", transition: "color 0.2s" }}
                 onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.70)"}
               >
                 {f.email}
               </a>
-              <div className="flex flex-wrap gap-x-7 gap-y-1 mt-0.5">
-                <a
-                  href={`tel:${f.phone}`}
-                  data-testid="footer-phone-dubai"
-                  style={{ color: "#FFFFFF", fontSize: 13, textDecoration: "none", transition: "color 0.2s" }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                >
-                  Dubai {f.phone}
-                </a>
-                <a
-                  href="tel:+33180270067"
-                  data-testid="footer-phone-paris"
-                  style={{ color: "#FFFFFF", fontSize: 13, textDecoration: "none", transition: "color 0.2s" }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                >
-                  Paris +33 1 80 27 00 67
-                </a>
-              </div>
             </div>
           </div>
 
-          {/* RIGHT: Offices + nav */}
-          <div className="flex flex-col gap-10 lg:pt-2">
-            <div className="grid grid-cols-2 gap-8">
-              <div>
-                <p
-                  style={{ color: "#7A84BE", fontSize: 12, textTransform: "uppercase", fontWeight: 600, marginBottom: 14 }}
-                >
-                  {f.dubaiLabel}
-                </p>
-                <address className="not-italic" style={{ color: "#FFFFFF", fontSize: 13, lineHeight: 1.7 }}>
-                  {f.dubaiAddr.map((line, i) => <span key={i} className="block">{line}</span>)}
-                </address>
-              </div>
-              <div>
-                <p
-                  style={{ color: "#7A84BE", fontSize: 12, textTransform: "uppercase", fontWeight: 600, marginBottom: 14 }}
-                >
-                  {f.parisLabel}
-                </p>
-                <address className="not-italic" style={{ color: "#FFFFFF", fontSize: 13, lineHeight: 1.7 }}>
-                  {f.parisAddr.map((line, i) => <span key={i} className="block">{line}</span>)}
-                </address>
-              </div>
-            </div>
+          {/* Col 2: Dubai */}
+          <div>
+            <p style={{ color: "#7A84BE", fontSize: 10, textTransform: "uppercase", fontWeight: 700, letterSpacing: "0.2em", marginBottom: 18 }}>
+              {f.dubaiLabel}
+            </p>
+            <address className="not-italic" style={{ color: "rgba(255,255,255,0.55)", fontSize: 13, lineHeight: 1.75 }}>
+              {f.dubaiAddr.map((line, i) => <span key={i} className="block">{line}</span>)}
+            </address>
+            <a
+              href={`tel:${f.phone}`}
+              data-testid="footer-phone-dubai"
+              style={{ color: "rgba(255,255,255,0.40)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 8 }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
+            >
+              {f.phone}
+            </a>
+          </div>
 
-            <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 24 }}>
-              <p style={{ color: "#7A84BE", fontSize: 12, textTransform: "uppercase", fontWeight: 600, marginBottom: 14 }}>
-                Navigation
-              </p>
-              <div className="flex flex-wrap gap-x-6 gap-y-2.5">
-                {navEntries.map(link => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    style={{
-                      color: "rgba(255,255,255,0.40)",
-                      fontSize: 13,
-                      textDecoration: "none",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.04em",
-                      transition: "color 0.2s",
-                    }}
-                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
+          {/* Col 3: Paris */}
+          <div>
+            <p style={{ color: "#7A84BE", fontSize: 10, textTransform: "uppercase", fontWeight: 700, letterSpacing: "0.2em", marginBottom: 18 }}>
+              {f.parisLabel}
+            </p>
+            <address className="not-italic" style={{ color: "rgba(255,255,255,0.55)", fontSize: 13, lineHeight: 1.75 }}>
+              {f.parisAddr.map((line, i) => <span key={i} className="block">{line}</span>)}
+            </address>
+            <a
+              href="tel:+33180270067"
+              data-testid="footer-phone-paris"
+              style={{ color: "rgba(255,255,255,0.40)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 8 }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
+            >
+              +33 1 80 27 00 67
+            </a>
+          </div>
+
+          {/* Col 4: Navigation */}
+          <div>
+            <p style={{ color: "#7A84BE", fontSize: 10, textTransform: "uppercase", fontWeight: 700, letterSpacing: "0.2em", marginBottom: 18 }}>
+              Navigation
+            </p>
+            <div className="flex flex-col gap-3">
+              {navEntries.map(link => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    color: "rgba(255,255,255,0.45)",
+                    fontSize: 13,
+                    textDecoration: "none",
+                    transition: "color 0.2s, padding-left 0.2s",
+                    paddingLeft: 0,
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
+                    (e.currentTarget as HTMLElement).style.paddingLeft = "8px";
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.45)";
+                    (e.currentTarget as HTMLElement).style.paddingLeft = "0px";
+                  }}
+                >
+                  {link.label}
+                </a>
+              ))}
             </div>
           </div>
-        </div>
+        </motion.div>
+      </div>
 
-        {/* ── Bottom bar: live clocks + legal ── */}
+      {/* ── Bottom bar: live clocks + legal ── */}
+      <div
+        className="max-w-[1400px] mx-auto px-8 relative z-10"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+      >
         <div
           className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-          style={{ padding: "18px 0 20px" }}
+          style={{ padding: "20px 0 22px" }}
         >
-          {/* Live local times */}
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2.5">
-              <span
-                style={{
-                  display: "inline-block",
-                  width: 7,
-                  height: 7,
-                  background: "#7A84BE",
-                  borderRadius: "50%",
-                  flexShrink: 0,
-                  boxShadow: "0 0 0 2px rgba(122,132,190,0.25)",
-                }}
-              />
-              <span style={{ color: "rgba(255,255,255,0.40)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                Dubai
-              </span>
-              <span
-                style={{
-                  color: "rgba(255,255,255,0.40)",
-                  fontSize: 12,
-                  fontFamily: "'Plus Jakarta Sans', monospace",
-                  letterSpacing: "0.04em",
-                  minWidth: "6.5ch",
-                }}
-              >
-                {dubaiTime}
-              </span>
-            </div>
-            <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.10)" }} />
-            <div className="flex items-center gap-2.5">
-              <span
-                style={{
-                  display: "inline-block",
-                  width: 7,
-                  height: 7,
-                  background: "#4A58AA",
-                  borderRadius: "50%",
-                  flexShrink: 0,
-                  boxShadow: "0 0 0 2px rgba(74,88,170,0.25)",
-                }}
-              />
-              <span style={{ color: "rgba(255,255,255,0.40)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                Paris
-              </span>
-              <span
-                style={{
-                  color: "rgba(255,255,255,0.40)",
-                  fontSize: 12,
-                  fontFamily: "'Plus Jakarta Sans', monospace",
-                  letterSpacing: "0.04em",
-                  minWidth: "6.5ch",
-                }}
-              >
-                {parisTime}
-              </span>
-            </div>
+            {[
+              { label: "Dubai", time: dubaiTime, color: "#7A84BE" },
+              { label: "Paris", time: parisTime, color: "#4A58AA" },
+            ].map((office, i) => (
+              <div key={office.label} className="flex items-center gap-2.5">
+                {i > 0 && <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.08)", marginRight: 10 }} />}
+                <span style={{ display: "inline-block", width: 6, height: 6, background: office.color, borderRadius: "50%", flexShrink: 0, boxShadow: `0 0 6px ${office.color}40` }} />
+                <span style={{ color: "rgba(255,255,255,0.35)", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 600 }}>
+                  {office.label}
+                </span>
+                <span style={{ color: "rgba(255,255,255,0.45)", fontSize: 12, fontFamily: "'Plus Jakarta Sans', monospace", letterSpacing: "0.04em", minWidth: "6.5ch" }}>
+                  {office.time}
+                </span>
+              </div>
+            ))}
           </div>
 
-          {/* Copyright + legal */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
-            <p style={{ color: "rgba(255,255,255,0.40)", fontSize: 12 }}>{f.copyright}</p>
-            <a href="#" style={{ color: "rgba(255,255,255,0.40)", fontSize: 12, textDecoration: "none" }}>{f.privacy}</a>
-            <a href="#" style={{ color: "rgba(255,255,255,0.40)", fontSize: 12, textDecoration: "none" }}>{f.cookie}</a>
+            <p style={{ color: "rgba(255,255,255,0.30)", fontSize: 11 }}>{f.copyright}</p>
+            <a href="#" style={{ color: "rgba(255,255,255,0.30)", fontSize: 11, textDecoration: "none", transition: "color 0.2s" }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.6)"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.30)"}
+            >{f.privacy}</a>
+            <a href="#" style={{ color: "rgba(255,255,255,0.30)", fontSize: 11, textDecoration: "none", transition: "color 0.2s" }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.6)"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.30)"}
+            >{f.cookie}</a>
           </div>
         </div>
 
         <p
           data-testid="footer-disclaimer"
-          style={{ color: "rgba(255,255,255,0.25)", fontSize: 11, lineHeight: 1.6, paddingBottom: 20, maxWidth: "90ch" }}
+          style={{ color: "rgba(255,255,255,0.18)", fontSize: 10, lineHeight: 1.65, paddingBottom: 24, maxWidth: "90ch" }}
         >
           {f.disclaimer}
         </p>
