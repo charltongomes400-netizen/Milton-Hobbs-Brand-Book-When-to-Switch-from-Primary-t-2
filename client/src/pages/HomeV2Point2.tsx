@@ -500,8 +500,8 @@ function FounderVisual() {
         return (
           <motion.line
             key={i} x1={x1} y1={y1} x2={x2} y2={y2}
-            stroke="#4A58AA" strokeWidth={1}
-            animate={{ strokeOpacity: [0.12, 0.55, 0.12] }}
+            stroke="#FFFFFF" strokeWidth={1}
+            animate={{ strokeOpacity: [0.15, 0.6, 0.15] }}
             transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
           />
         );
@@ -513,19 +513,19 @@ function FounderVisual() {
         return (
           <motion.circle
             key={i} cx={x} cy={y} r={3}
-            fill="#4A58AA" fillOpacity={0.5}
-            animate={{ fillOpacity: [0.2, 0.75, 0.2] }}
+            fill="#FFFFFF" fillOpacity={0.5}
+            animate={{ fillOpacity: [0.2, 0.8, 0.2] }}
             transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
           />
         );
       })}
-      <circle cx={cx} cy={cy} r={outerR} stroke="#001489" strokeOpacity={0.10} strokeWidth={1} fill="none" />
-      <circle cx={cx} cy={cy} r={innerR} stroke="#001489" strokeOpacity={0.20} strokeWidth={1} fill="none" />
-      <circle cx={cx} cy={cy} r={8} fill="#001489" fillOpacity={0.85} />
+      <circle cx={cx} cy={cy} r={outerR} stroke="#FFFFFF" strokeOpacity={0.12} strokeWidth={1} fill="none" />
+      <circle cx={cx} cy={cy} r={innerR} stroke="#FFFFFF" strokeOpacity={0.22} strokeWidth={1} fill="none" />
+      <circle cx={cx} cy={cy} r={8} fill="#FFFFFF" fillOpacity={0.9} />
       <motion.circle
         cx={cx} cy={cy} r={innerR}
-        stroke="#4A58AA" strokeWidth={1} fill="none"
-        animate={{ scale: [1, 1.6, 1], opacity: [0.45, 0, 0.45] }}
+        stroke="#FFFFFF" strokeWidth={1} fill="none"
+        animate={{ scale: [1, 1.6, 1], opacity: [0.5, 0, 0.5] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
         style={{ transformOrigin: `${cx}px ${cy}px` }}
       />
@@ -583,17 +583,17 @@ function PrecisionVisual() {
       {[88, 64, 44].map((r, i) => (
         <circle
           key={i} cx={CX} cy={CY} r={r} fill="none"
-          stroke="#001489"
-          strokeOpacity={locked ? 0.18 + i * 0.10 : 0.10 + i * 0.06}
+          stroke="#FFFFFF"
+          strokeOpacity={locked ? 0.20 + i * 0.10 : 0.10 + i * 0.06}
           strokeWidth={1}
           style={{ transition: "stroke-opacity 0.4s" }}
         />
       ))}
-      <line x1={CX} y1={30} x2={CX} y2={230} stroke="#001489" strokeOpacity={0.12} strokeWidth={1} />
-      <line x1={40} y1={CY} x2={280} y2={CY} stroke="#001489" strokeOpacity={0.12} strokeWidth={1} />
+      <line x1={CX} y1={30} x2={CX} y2={230} stroke="#FFFFFF" strokeOpacity={0.14} strokeWidth={1} />
+      <line x1={40} y1={CY} x2={280} y2={CY} stroke="#FFFFFF" strokeOpacity={0.14} strokeWidth={1} />
       <circle cx={CX} cy={CY} r={4}
-        fill="#001489"
-        fillOpacity={locked ? 1 : 0.60}
+        fill="#FFFFFF"
+        fillOpacity={locked ? 1 : 0.65}
         style={{ transition: "fill-opacity 0.3s" }}
       />
       {locked && (
@@ -601,7 +601,7 @@ function PrecisionVisual() {
           <motion.circle
             key={flashKey}
             cx={CX} cy={CY} r={22}
-            stroke="#4A58AA" strokeWidth={2} fill="none"
+            stroke="#FFFFFF" strokeWidth={2} fill="none"
             initial={{ scale: 1, opacity: 0.85 }}
             animate={{ scale: 2.2, opacity: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
@@ -610,18 +610,18 @@ function PrecisionVisual() {
         </AnimatePresence>
       )}
       <motion.g style={{ x: rx, y: ry }}>
-        <circle cx={CX} cy={CY} r={22} stroke="#001489" strokeWidth={1.5} fill="none" strokeOpacity={0.65} />
-        <path d={`M${CX-22} ${CY-9} L${CX-22} ${CY-22} L${CX-9} ${CY-22}`} stroke="#001489" strokeWidth={1.5} fill="none" strokeOpacity={0.65} />
-        <path d={`M${CX+9} ${CY-22} L${CX+22} ${CY-22} L${CX+22} ${CY-9}`} stroke="#001489" strokeWidth={1.5} fill="none" strokeOpacity={0.65} />
-        <path d={`M${CX+22} ${CY+9} L${CX+22} ${CY+22} L${CX+9} ${CY+22}`} stroke="#001489" strokeWidth={1.5} fill="none" strokeOpacity={0.65} />
-        <path d={`M${CX-9} ${CY+22} L${CX-22} ${CY+22} L${CX-22} ${CY+9}`} stroke="#001489" strokeWidth={1.5} fill="none" strokeOpacity={0.65} />
-        <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="#001489" strokeWidth={1} strokeOpacity={0.45} />
-        <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="#001489" strokeWidth={1} strokeOpacity={0.45} />
+        <circle cx={CX} cy={CY} r={22} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX-22} ${CY-9} L${CX-22} ${CY-22} L${CX-9} ${CY-22}`} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX+9} ${CY-22} L${CX+22} ${CY-22} L${CX+22} ${CY-9}`} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX+22} ${CY+9} L${CX+22} ${CY+22} L${CX+9} ${CY+22}`} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX-9} ${CY+22} L${CX-22} ${CY+22} L${CX-22} ${CY+9}`} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="#FFFFFF" strokeWidth={1} strokeOpacity={0.5} />
+        <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="#FFFFFF" strokeWidth={1} strokeOpacity={0.5} />
       </motion.g>
       {locked && (
         <motion.text
           x={CX + 30} y={CY - 28}
-          fill="rgba(0,20,137,0.60)" fontSize="8" fontFamily="'Satoshi', sans-serif" letterSpacing="0.15em"
+          fill="rgba(255,255,255,0.65)" fontSize="8" fontFamily="'Satoshi', sans-serif" letterSpacing="0.15em"
           initial={{ opacity: 0 }} animate={{ opacity: [0, 0.8, 0.8, 0] }}
           transition={{ duration: 2.2, times: [0, 0.15, 0.85, 1] }}
         >
@@ -650,8 +650,8 @@ function CrossBorderVisual() {
       {paths.map((p, i) => (
         <motion.path
           key={i} d={p.d}
-          stroke={i < 2 ? "#4A58AA" : "#001489"}
-          strokeOpacity={i < 2 ? 0.55 : 0.28}
+          stroke="#FFFFFF"
+          strokeOpacity={i < 2 ? 0.6 : 0.3}
           strokeWidth={i < 2 ? 1.2 : 1}
           strokeDasharray="220"
           animate={{ strokeDashoffset: [220, 0, -220] }}
@@ -660,18 +660,18 @@ function CrossBorderVisual() {
       ))}
       {nodes.map((n, i) => (
         <g key={i}>
-          <circle cx={n.cx} cy={n.cy} r={5} fill="#001489" fillOpacity={0.65} />
+          <circle cx={n.cx} cy={n.cy} r={5} fill="#FFFFFF" fillOpacity={0.7} />
           <text x={n.cx} y={n.cy + (i < 2 ? -12 : 18)}
-            fill="#001489" fillOpacity={0.45} fontSize="8"
+            fill="#FFFFFF" fillOpacity={0.5} fontSize="8"
             fontFamily="'Plus Jakarta Sans', sans-serif" textAnchor="middle"
           >{n.label}</text>
         </g>
       ))}
-      <circle cx={160} cy={130} r={7} fill="#001489" fillOpacity={0.85} />
+      <circle cx={160} cy={130} r={7} fill="#FFFFFF" fillOpacity={0.9} />
       <motion.circle
         cx={160} cy={130} r={18}
-        stroke="#4A58AA" strokeWidth={1} fill="none"
-        animate={{ scale: [1, 1.5, 1], opacity: [0.45, 0, 0.45] }}
+        stroke="#FFFFFF" strokeWidth={1} fill="none"
+        animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
         style={{ transformOrigin: "160px 130px" }}
       />
@@ -690,8 +690,8 @@ function DiscretionVisual() {
         return (
           <motion.circle
             key={i} cx={cx} cy={cy} r={r}
-            stroke={i === rings.length - 1 ? "#001489" : "#4A58AA"}
-            strokeOpacity={i === rings.length - 1 ? 0.65 : 0.10 + i * 0.06}
+            stroke="#FFFFFF"
+            strokeOpacity={i === rings.length - 1 ? 0.7 : 0.12 + i * 0.07}
             strokeWidth={1}
             strokeDasharray={`${circumference * (1 - gap)} ${circumference * gap}`}
             fill="none"
@@ -703,13 +703,13 @@ function DiscretionVisual() {
       })}
       <motion.rect
         x={cx - 7} y={cy - 4} width={14} height={11}
-        stroke="#001489" strokeWidth={1.2} fill="none" strokeOpacity={0.80}
+        stroke="#FFFFFF" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
         animate={{ opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.path
         d={`M${cx-4} ${cy-4} Q${cx-4} ${cy-11} ${cx} ${cy-11} Q${cx+4} ${cy-11} ${cx+4} ${cy-4}`}
-        stroke="#001489" strokeWidth={1.2} fill="none" strokeOpacity={0.80}
+        stroke="#FFFFFF" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
         animate={{ opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -869,25 +869,51 @@ function DifferentiatorsV15() {
             </a>
           </div>
 
-          {/* ── RIGHT HALF: animation ── */}
+          {/* ── RIGHT HALF: 3D glass animation panel ── */}
           <div
             style={{
-              background: "#F7F8FD",
+              background: "linear-gradient(145deg, rgba(0,20,137,0.92) 0%, rgba(25,43,148,0.95) 40%, rgba(0,14,100,0.98) 100%)",
+              backdropFilter: "blur(20px)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               position: "relative",
               overflow: "hidden",
               minHeight: 480,
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(0,0,0,0.15), 0 32px 80px rgba(0,20,137,0.35), 0 12px 32px rgba(0,20,137,0.2)",
+              border: "1px solid rgba(255,255,255,0.08)",
             }}
           >
+            {/* Glass edge highlights */}
             <div
               style={{
                 position: "absolute",
-                width: 520,
-                height: 520,
+                inset: 0,
+                background: "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%, rgba(0,0,0,0.08) 100%)",
+                pointerEvents: "none",
+              }}
+            />
+            {/* Subtle inner glow */}
+            <div
+              style={{
+                position: "absolute",
+                width: 600,
+                height: 600,
                 borderRadius: "50%",
-                background: "radial-gradient(circle, rgba(74,88,170,0.06) 0%, transparent 70%)",
+                background: "radial-gradient(circle, rgba(74,88,170,0.18) 0%, transparent 65%)",
+                pointerEvents: "none",
+              }}
+            />
+            {/* Top-left glass reflection */}
+            <div
+              style={{
+                position: "absolute",
+                top: -60,
+                left: -40,
+                width: 300,
+                height: 300,
+                borderRadius: "50%",
+                background: "radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)",
                 pointerEvents: "none",
               }}
             />
