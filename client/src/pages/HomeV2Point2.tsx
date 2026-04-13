@@ -750,17 +750,17 @@ function DifferentiatorsV15() {
       style={{ background: "#FFFFFF", borderTop: "1px solid #E8EDF5" }}
       onMouseLeave={() => setPaused(false)}
     >
-      <div
-        className="max-w-[1400px] mx-auto px-8"
-        style={{ paddingTop: 96, paddingBottom: 104 }}
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr_300px] gap-0 lg:gap-16 xl:gap-20">
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 88, paddingBottom: 96 }}>
 
-          {/* ── LEFT: anchor column ── */}
-          <div className="flex flex-col lg:pr-8 mb-12 lg:mb-0" style={{ paddingTop: 4 }}>
+        {/* ── Full-width section header ── */}
+        <div
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between"
+          style={{ paddingBottom: 52, borderBottom: "1px solid #E8EDF5", gap: 24, marginBottom: 0 }}
+        >
+          <div>
             <p
               className="font-sans font-bold uppercase"
-              style={{ color: "#4A58AA", fontSize: 10, letterSpacing: "0.32em", marginBottom: 28 }}
+              style={{ color: "#4A58AA", fontSize: 10, letterSpacing: "0.32em", marginBottom: 20 }}
             >
               Why Miltion Hobbs
             </p>
@@ -768,54 +768,46 @@ function DifferentiatorsV15() {
               className="font-heading font-bold"
               style={{
                 color: "#001489",
-                fontSize: "clamp(1.625rem, 2.4vw, 2.375rem)",
-                lineHeight: 1.12,
-                letterSpacing: "-0.02em",
-                marginBottom: 28,
+                fontSize: "clamp(1.75rem, 2.8vw, 2.625rem)",
+                lineHeight: 1.1,
+                letterSpacing: "-0.025em",
               }}
             >
               The standard of a major firm.<br />The attention of a boutique.
             </h2>
-            <p
-              style={{
-                color: "#595959",
-                fontSize: "0.9rem",
-                lineHeight: 1.85,
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                marginBottom: 44,
-              }}
-            >
-              Every engagement is managed directly by senior counsel — bringing strategic rigour and personal accountability to every mandate.
-            </p>
-            <a
-              href="#contact"
-              data-testid="diff-cta"
-              className="inline-flex items-center gap-3"
-              style={{
-                color: "#001489",
-                fontSize: 10,
-                fontWeight: 700,
-                letterSpacing: "0.24em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                borderBottom: "1px solid #001489",
-                paddingBottom: 5,
-                alignSelf: "flex-start",
-                transition: "opacity 0.2s",
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "0.6"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }}
-            >
-              <span>{d.learnMore}</span>
-              <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
-                <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-              </svg>
-            </a>
           </div>
+          <a
+            href="#contact"
+            data-testid="diff-cta"
+            className="inline-flex items-center gap-3 self-start lg:self-auto"
+            style={{
+              color: "#001489",
+              fontSize: 10,
+              fontWeight: 700,
+              letterSpacing: "0.24em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              borderBottom: "1px solid rgba(0,20,137,0.3)",
+              paddingBottom: 4,
+              whiteSpace: "nowrap",
+              transition: "border-color 0.2s",
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "#001489"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.3)"; }}
+          >
+            <span>{d.learnMore}</span>
+            <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
+              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+            </svg>
+          </a>
+        </div>
 
-          {/* ── CENTRE: numbered list ── */}
-          <div style={{ borderLeft: "1px solid #E8EDF5", paddingLeft: "clamp(24px, 3vw, 48px)" }}>
+        {/* ── Split: accordion left / sticky animation right ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px]" style={{ alignItems: "start" }}>
+
+          {/* LEFT: expanding accordion */}
+          <div style={{ paddingRight: "clamp(32px, 5vw, 72px)" }}>
             {d.cards.map((card, i) => {
               const isActive = active === i;
               return (
@@ -824,142 +816,194 @@ function DifferentiatorsV15() {
                   data-testid={`diff-row-${i}`}
                   onMouseEnter={() => { setActive(i); setPaused(true); }}
                   style={{
-                    borderTop: "1px solid #E8EDF5",
-                    paddingTop: 28,
-                    paddingBottom: 28,
+                    borderBottom: "1px solid #E8EDF5",
+                    position: "relative",
+                    paddingLeft: 20,
                     cursor: "default",
                   }}
                 >
-                  <div className="flex items-start gap-6">
-                    {/* Number */}
+                  {/* Active left accent bar */}
+                  <motion.div
+                    style={{
+                      position: "absolute",
+                      left: 0, top: 0, bottom: 0,
+                      width: 2,
+                      background: "#4A58AA",
+                      transformOrigin: "top",
+                    }}
+                    animate={{ scaleY: isActive ? 1 : 0 }}
+                    transition={{ duration: 0.28, ease: "easeOut" }}
+                  />
+
+                  {/* Ghost watermark numeral */}
+                  <span
+                    style={{
+                      position: "absolute",
+                      right: 0,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      fontSize: 80,
+                      fontWeight: 900,
+                      fontFamily: "'Satoshi', sans-serif",
+                      color: "#001489",
+                      opacity: isActive ? 0.045 : 0.02,
+                      lineHeight: 1,
+                      pointerEvents: "none",
+                      userSelect: "none",
+                      transition: "opacity 0.4s",
+                    }}
+                  >
+                    {i + 1}
+                  </span>
+
+                  {/* Header row — always visible */}
+                  <div
+                    className="flex items-center gap-5"
+                    style={{ paddingTop: 28, paddingBottom: isActive ? 0 : 28 }}
+                  >
                     <span
                       style={{
                         flexShrink: 0,
-                        fontSize: 11,
+                        fontSize: 10,
                         fontWeight: 700,
-                        letterSpacing: "0.2em",
+                        letterSpacing: "0.22em",
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        color: isActive ? "#001489" : "#7A84BE",
-                        paddingTop: 3,
+                        color: isActive ? "#4A58AA" : "#C4C9DC",
                         transition: "color 0.25s",
-                        minWidth: 26,
+                        minWidth: 22,
                       }}
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-
-                    {/* Text block */}
-                    <div style={{ flex: 1 }}>
-                      <div className="flex items-center justify-between" style={{ marginBottom: 10 }}>
-                        <h3
-                          className="font-heading font-bold"
-                          style={{
-                            color: isActive ? "#001489" : "#151515",
-                            fontSize: "clamp(1rem, 1.2vw, 1.0625rem)",
-                            lineHeight: 1.3,
-                            letterSpacing: "-0.01em",
-                            transition: "color 0.25s",
-                          }}
-                        >
-                          {card.title}
-                        </h3>
-                        <svg
-                          width="13" height="13" fill="none" viewBox="0 0 14 14"
-                          style={{
-                            flexShrink: 0,
-                            marginLeft: 16,
-                            opacity: isActive ? 1 : 0,
-                            transition: "opacity 0.25s, transform 0.25s",
-                            transform: isActive ? "translate(2px,-2px)" : "translate(0,0)",
-                            color: "#001489",
-                          }}
-                        >
-                          <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </div>
-                      <p
-                        style={{
-                          color: "#595959",
-                          fontSize: "0.875rem",
-                          lineHeight: 1.8,
-                          fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        }}
-                      >
-                        {card.description}
-                      </p>
-                    </div>
+                    <h3
+                      className="font-heading font-bold"
+                      style={{
+                        flex: 1,
+                        color: isActive ? "#001489" : "#2C2C2C",
+                        fontSize: "clamp(1.05rem, 1.4vw, 1.2rem)",
+                        lineHeight: 1.25,
+                        letterSpacing: "-0.015em",
+                        transition: "color 0.25s",
+                      }}
+                    >
+                      {card.title}
+                    </h3>
+                    {/* Expand indicator */}
+                    <motion.svg
+                      width="16" height="16" fill="none" viewBox="0 0 16 16"
+                      animate={{ rotate: isActive ? 45 : 0, opacity: isActive ? 1 : 0.35 }}
+                      transition={{ duration: 0.25 }}
+                      style={{ flexShrink: 0, color: "#001489" }}
+                    >
+                      <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                    </motion.svg>
                   </div>
+
+                  {/* Expandable description */}
+                  <AnimatePresence initial={false}>
+                    {isActive && (
+                      <motion.div
+                        key="desc"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        <p
+                          style={{
+                            color: "#595959",
+                            fontSize: "0.875rem",
+                            lineHeight: 1.85,
+                            fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            paddingTop: 16,
+                            paddingBottom: 28,
+                            paddingLeft: 27,
+                            maxWidth: 480,
+                          }}
+                        >
+                          {card.description}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             })}
-            {/* bottom rule */}
-            <div style={{ borderTop: "1px solid #E8EDF5" }} />
           </div>
 
-          {/* ── RIGHT: animated SVG panel ── */}
+          {/* RIGHT: sticky animation panel */}
           <div
-            className="hidden lg:flex flex-col items-center justify-center"
+            className="hidden lg:block"
             style={{
+              position: "sticky",
+              top: 100,
               borderLeft: "1px solid #E8EDF5",
-              paddingLeft: "clamp(24px, 3vw, 40px)",
+              paddingLeft: "clamp(32px, 4vw, 52px)",
+              paddingTop: 40,
             }}
           >
+            {/* SVG crossfade */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
-                className="w-full"
-                style={{ height: 300 }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
+                style={{ width: "100%", height: 280 }}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.45, ease: "easeOut" }}
               >
                 {(() => { const V = VISUALS[active]; return <V />; })()}
               </motion.div>
             </AnimatePresence>
 
-            {/* Active label */}
-            <div style={{ marginTop: 24, width: "100%" }}>
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={active}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.3 }}
+            {/* Divider */}
+            <div style={{ height: 1, background: "#E8EDF5", margin: "28px 0" }} />
+
+            {/* Active pillar label */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.28 }}
+              >
+                <p
                   style={{
                     color: "#4A58AA",
                     fontSize: 10,
                     fontWeight: 700,
-                    letterSpacing: "0.22em",
+                    letterSpacing: "0.28em",
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     textTransform: "uppercase",
-                    textAlign: "center",
+                    marginBottom: 10,
                   }}
                 >
                   {String(active + 1).padStart(2, "0")} — {d.cards[active].title}
-                </motion.p>
-              </AnimatePresence>
+                </p>
+              </motion.div>
+            </AnimatePresence>
 
-              {/* Progress dots */}
-              <div className="flex items-center justify-center gap-2" style={{ marginTop: 16 }}>
-                {d.cards.map((_, i) => (
-                  <button
-                    key={i}
-                    data-testid={`diff-dot-${i}`}
-                    onClick={() => { setActive(i); setPaused(true); }}
-                    style={{
-                      width: i === active ? 24 : 6,
-                      height: 2,
-                      background: i === active ? "#001489" : "#D6DAF0",
-                      border: "none",
-                      padding: 0,
-                      cursor: "pointer",
-                      transition: "width 0.3s, background 0.3s",
-                    }}
-                  />
-                ))}
-              </div>
+            {/* Progress dots */}
+            <div className="flex items-center gap-2">
+              {d.cards.map((_, i) => (
+                <button
+                  key={i}
+                  data-testid={`diff-dot-${i}`}
+                  onClick={() => { setActive(i); setPaused(true); }}
+                  aria-label={`Pillar ${i + 1}`}
+                  style={{
+                    width: i === active ? 28 : 6,
+                    height: 2,
+                    background: i === active ? "#001489" : "#D0D5E8",
+                    border: "none",
+                    padding: 0,
+                    cursor: "pointer",
+                    transition: "width 0.35s, background 0.35s",
+                  }}
+                />
+              ))}
             </div>
           </div>
 
