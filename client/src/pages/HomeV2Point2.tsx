@@ -862,10 +862,12 @@ function DifferentiatorsV15() {
             </a>
           </div>
 
-          {/* ── RIGHT HALF: animation panel ── */}
+          {/* ── RIGHT HALF: liquid glass animation panel ── */}
           <div
             style={{
-              background: "#001489",
+              background: "linear-gradient(145deg, rgba(0,20,137,0.92) 0%, rgba(0,20,137,0.85) 40%, rgba(0,20,137,0.95) 100%)",
+              backdropFilter: "blur(40px) saturate(1.5)",
+              WebkitBackdropFilter: "blur(40px) saturate(1.5)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -873,9 +875,46 @@ function DifferentiatorsV15() {
               overflow: "hidden",
               minHeight: 560,
               borderRadius: "0px",
+              border: "1px solid rgba(255,255,255,0.12)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.12), 0 24px 80px rgba(0,14,74,0.25), 0 8px 24px rgba(0,20,137,0.15)",
               padding: 32,
             }}
           >
+            {/* Liquid glass caustic shimmer */}
+            <motion.div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(125deg, rgba(255,255,255,0.06) 0%, transparent 20%, rgba(255,255,255,0.04) 40%, transparent 55%, rgba(255,255,255,0.05) 75%, transparent 90%)",
+                backgroundSize: "200% 200%",
+                pointerEvents: "none",
+              }}
+              animate={{
+                backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+              }}
+              transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+            />
+            {/* Top specular edge highlight */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: "5%",
+                right: "5%",
+                height: 1,
+                background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.22) 25%, rgba(255,255,255,0.30) 50%, rgba(255,255,255,0.22) 75%, transparent)",
+                pointerEvents: "none",
+              }}
+            />
+            {/* Subtle inner depth glow */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.06) 0%, transparent 50%)",
+                pointerEvents: "none",
+              }}
+            />
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
