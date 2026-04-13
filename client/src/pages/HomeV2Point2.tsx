@@ -845,67 +845,56 @@ function DifferentiatorsV15() {
 
       {/* ── Active pillar detail: title left, description right ── */}
       <div className="max-w-[1400px] mx-auto px-8">
-        {/* Fixed-height container so layout never shifts during crossfade */}
+        {/* Stable detail panel — no layout-shifting animation */}
         <div
+          className="grid grid-cols-1 lg:grid-cols-[320px_1fr]"
           style={{
-            position: "relative",
-            minHeight: 160,
+            gap: "clamp(32px, 5vw, 80px)",
             paddingTop: 44,
             paddingBottom: 44,
             borderBottom: "1px solid #E8EDF5",
+            alignItems: "flex-start",
           }}
         >
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={active}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.28, ease: "easeOut" }}
-              className="grid grid-cols-1 lg:grid-cols-[320px_1fr]"
-              style={{ gap: "clamp(32px, 5vw, 80px)", alignItems: "flex-start" }}
-            >
-              {/* Large pillar title */}
-              <h3
-                className="font-heading font-bold"
-                style={{
-                  color: "#001489",
-                  fontSize: "clamp(1.5rem, 2.2vw, 2.125rem)",
-                  lineHeight: 1.18,
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {d.cards[active].title}
-              </h3>
+          {/* Large pillar title */}
+          <h3
+            className="font-heading font-bold"
+            style={{
+              color: "#001489",
+              fontSize: "clamp(1.5rem, 2.2vw, 2.125rem)",
+              lineHeight: 1.18,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            {d.cards[active].title}
+          </h3>
 
-              {/* Description + meta */}
-              <div>
-                <p
-                  style={{
-                    color: "#595959",
-                    fontSize: "0.9375rem",
-                    lineHeight: 1.82,
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    marginBottom: 24,
-                  }}
-                >
-                  {d.cards[active].description}
-                </p>
-                <span
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: "0.28em",
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    color: "#4A58AA",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {String(active + 1).padStart(2, "0")} of {String(d.cards.length).padStart(2, "0")}
-                </span>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+          {/* Description + meta */}
+          <div>
+            <p
+              style={{
+                color: "#595959",
+                fontSize: "0.9375rem",
+                lineHeight: 1.82,
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                marginBottom: 24,
+              }}
+            >
+              {d.cards[active].description}
+            </p>
+            <span
+              style={{
+                fontSize: 10,
+                fontWeight: 700,
+                letterSpacing: "0.28em",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                color: "#4A58AA",
+                textTransform: "uppercase",
+              }}
+            >
+              {String(active + 1).padStart(2, "0")} of {String(d.cards.length).padStart(2, "0")}
+            </span>
+          </div>
         </div>
 
         {/* ── Pillar tab selector strip ── */}
