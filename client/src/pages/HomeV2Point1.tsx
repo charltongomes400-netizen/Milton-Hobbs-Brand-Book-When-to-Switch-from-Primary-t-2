@@ -1485,7 +1485,7 @@ function ContactFormV15() {
               <p style={{ color: "#595959", fontSize: 14, lineHeight: 1.72 }}>{c.successText}</p>
             </motion.div>
           ) : (
-            <div className="max-w-lg w-full">
+            <div className="w-full">
               <p className="font-medium uppercase mb-8" style={{ color: "#4A58AA", fontSize: 12 }}>
                 Send a Message
               </p>
