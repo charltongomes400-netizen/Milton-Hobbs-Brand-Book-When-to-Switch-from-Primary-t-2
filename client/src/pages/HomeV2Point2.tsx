@@ -333,101 +333,195 @@ function HeroV15() {
         }}
       />
 
-      {/* ── Editorial content — bottom-left ─────────────────────────────── */}
-      <div className="relative z-10 flex flex-col justify-end min-h-screen px-12 xl:px-24 pb-16 pt-28"
-        style={{ maxWidth: "860px" }}>
+      {/* ── Left accent line ─────────────────────────────────────────────── */}
+      <motion.div
+        className="absolute left-8 xl:left-14 top-0 bottom-0 z-10 pointer-events-none"
+        style={{ width: 1, background: "rgba(255,255,255,0.10)" }}
+        initial={{ scaleY: 0, originY: 0 }}
+        animate={{ scaleY: 1 }}
+        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+      />
+
+      {/* ── Article counter — top-right ───────────────────────────────────── */}
+      <motion.div
+        className="absolute top-28 right-12 xl:right-24 z-10 flex items-center gap-3"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.6 }}
+      >
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={currentIndex}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 6 }}
+            transition={{ duration: 0.45 }}
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 11, fontWeight: 700, letterSpacing: "0.22em",
+              color: "rgba(255,255,255,0.55)",
+            }}
+          >
+            {String(currentIndex + 1).padStart(2, "0")}
+          </motion.span>
+        </AnimatePresence>
+        <div style={{ width: 22, height: 1, background: "rgba(255,255,255,0.22)" }} />
+        <span style={{
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontSize: 11, fontWeight: 700, letterSpacing: "0.22em",
+          color: "rgba(255,255,255,0.22)",
+        }}>
+          {String(ins.articles.length).padStart(2, "0")}
+        </span>
+      </motion.div>
+
+      {/* ── Ghost watermark numeral ───────────────────────────────────────── */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`ghost-${currentIndex}`}
+          className="absolute right-0 bottom-0 pointer-events-none z-[1] select-none"
+          style={{
+            fontFamily: "'Satoshi', sans-serif",
+            fontWeight: 900,
+            fontSize: "clamp(14rem, 30vw, 28rem)",
+            lineHeight: 0.82,
+            color: "rgba(255,255,255,0.035)",
+            letterSpacing: "-0.05em",
+            userSelect: "none",
+            paddingRight: "2vw",
+            paddingBottom: "1rem",
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.8 }}
+        >
+          {String(currentIndex + 1).padStart(2, "0")}
+        </motion.div>
+      </AnimatePresence>
+
+      {/* ── Main editorial content ────────────────────────────────────────── */}
+      <div className="relative z-10 flex flex-col min-h-screen pl-16 xl:pl-28 pr-12 xl:pr-24 pt-28 pb-16">
+
+        {/* Spacer to push content toward bottom */}
+        <div className="flex-1" />
 
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -14 }}
+            exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
           >
-            {/* Category eyebrow */}
-            <div className="flex items-center gap-3 mb-6">
-              <div style={{ width: 24, height: 1, background: "rgba(255,255,255,0.45)", flexShrink: 0 }} />
-              <p
-                className="font-sans font-medium uppercase tracking-[0.28em]"
-                style={{ color: "rgba(255,255,255,0.55)", fontSize: 11 }}
-                data-testid="hero-eyebrow"
-              >
+            {/* Category row — tick + label + horizontal rule */}
+            <div className="flex items-center gap-4 mb-8" data-testid="hero-eyebrow">
+              <div style={{ width: 1, height: 28, background: "rgba(255,255,255,0.35)", flexShrink: 0 }} />
+              <p style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                color: "rgba(255,255,255,0.45)",
+                fontSize: 10,
+                fontWeight: 700,
+                letterSpacing: "0.34em",
+                textTransform: "uppercase",
+              }}>
                 {featuredArticle?.category}
               </p>
+              <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.10)", maxWidth: 120 }} />
             </div>
 
-            {/* Large article headline */}
+            {/* Headline — spans wide, tight leading */}
             <h1
-              className="font-heading text-white font-bold mb-9"
+              className="font-heading text-white font-bold"
               style={{
-                fontSize: "clamp(2.25rem, 5.5vw, 4.75rem)",
-                lineHeight: 1.04,
-                letterSpacing: "-0.01em",
+                fontSize: "clamp(2.75rem, 6.5vw, 5.75rem)",
+                lineHeight: 0.97,
+                letterSpacing: "-0.025em",
+                maxWidth: "15ch",
+                marginBottom: "2.75rem",
               }}
               data-testid="hero-headline"
             >
               {featuredArticle?.title}
             </h1>
 
-            {/* Read Article link */}
+            {/* CTA — circle arrow button + label */}
             <a
               href={`/insights/${featuredSlug}`}
               data-testid="hero-read-link"
-              className="group inline-flex items-center gap-3"
-              style={{
-                color: "rgba(255,255,255,0.65)",
-                fontSize: 11,
-                fontWeight: 600,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                borderBottom: "1px solid rgba(255,255,255,0.25)",
-                paddingBottom: 4,
-                transition: "color 0.25s, border-color 0.25s",
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.6)";
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)";
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.25)";
-              }}
+              className="group inline-flex items-center gap-4"
+              style={{ textDecoration: "none" }}
             >
-              <span>{ins.read}</span>
-              <svg
-                className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200"
-                fill="none" viewBox="0 0 12 12"
+              <motion.span
+                className="flex items-center justify-center"
+                style={{
+                  width: 44,
+                  height: 44,
+                  border: "1px solid rgba(255,255,255,0.30)",
+                  borderRadius: "50%",
+                  flexShrink: 0,
+                  transition: "border-color 0.25s, background 0.25s",
+                }}
+                whileHover={{ scale: 1.08 }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.75)";
+                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.30)";
+                  (e.currentTarget as HTMLElement).style.background = "";
+                }}
               >
-                <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-              </svg>
+                <svg
+                  className="group-hover:translate-x-0.5 transition-transform duration-200"
+                  width="13" height="13" fill="none" viewBox="0 0 12 12"
+                >
+                  <path d="M1 6h10M6 1l5 5-5 5" stroke="rgba(255,255,255,0.75)" strokeWidth="1.4" />
+                </svg>
+              </motion.span>
+              <span style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                color: "rgba(255,255,255,0.55)",
+                fontSize: 10,
+                fontWeight: 700,
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                transition: "color 0.25s",
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.9)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.55)"; }}
+              >
+                {ins.read}
+              </span>
             </a>
           </motion.div>
         </AnimatePresence>
 
-        {/* Carousel dots — horizontal dashes */}
+        {/* Bottom bar — dots left, thin rule right */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.0 }}
-          className="flex items-center gap-2 mt-10"
+          className="flex items-center gap-6 mt-12"
           data-testid="hero-dots"
         >
-          {ins.articles.map((_, i) => (
-            <button
-              key={i}
-              data-testid={`hero-dot-${i}`}
-              onClick={() => goTo(i)}
-              aria-label={`Article ${i + 1}`}
-              className="block focus:outline-none cursor-pointer transition-all duration-300"
-              style={{
-                width:           i === currentIndex ? 28 : 8,
-                height:          2,
-                backgroundColor: i === currentIndex ? "#FFFFFF" : "rgba(255,255,255,0.30)",
-              }}
-            />
-          ))}
+          <div className="flex items-center gap-2">
+            {ins.articles.map((_, i) => (
+              <button
+                key={i}
+                data-testid={`hero-dot-${i}`}
+                onClick={() => goTo(i)}
+                aria-label={`Article ${i + 1}`}
+                className="block focus:outline-none cursor-pointer transition-all duration-300"
+                style={{
+                  width:           i === currentIndex ? 28 : 8,
+                  height:          2,
+                  backgroundColor: i === currentIndex ? "#FFFFFF" : "rgba(255,255,255,0.25)",
+                }}
+              />
+            ))}
+          </div>
+          <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
         </motion.div>
       </div>
     </section>
