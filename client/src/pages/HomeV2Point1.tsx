@@ -214,34 +214,36 @@ function HeaderV15() {
 
 const HERO_CYCLE_MS = 12000;
 
-const TILE_SZ = 100; // px — all tiles are the exact same 100×100 square
+const TILE_SZ = 150; // px — uniform 150×150px squares (50% bigger)
 
-// Conceptual grid: curated cells — some isolated, some forming adjacent clusters.
-// Two shades: vivid #001489 and dark navy #001050, matching brand reference.
-const ACCENT_TILES: Array<{
-  left: string; top: string; col: string; dur: number; delay: number;
-}> = [
-  // ── Isolated upper-left
-  { left: "38%",   top: "10%", col: "#001489", dur: 7.0, delay: 0.0 },
+// ── Strict 5×5 grid ──────────────────────────────────────────────────────────
+// Column step ≈ 11.5% (≈ 165px at 1440px wide)
+// Row step    ≈ 18%   (≈ 162px at 900px tall)
+// Each tile occupies exactly one cell — zero overlaps.
+const GRID_COLS = [38, 49.5, 61, 72.5, 84];     // % left values for C0–C4
+const GRID_ROWS = [4,  22,   40, 58,   76];      // % top  values for R0–R4
 
-  // ── Top-right solo
-  { left: "69%",   top:  "4%", col: "#001050", dur: 9.0, delay: 3.2 },
-
-  // ── Mid-right diagonal step cluster (tiles touch corner-to-corner)
-  { left: "71%",   top: "26%", col: "#001489", dur: 6.5, delay: 1.5 },
-  { left: "78.5%", top: "33%", col: "#001050", dur: 8.0, delay: 1.8 },
-  { left: "84%",   top: "40%", col: "#001489", dur: 7.5, delay: 2.1 },
-
-  // ── Bottom-center vertical pair (stacked directly below each other)
-  { left: "49%",   top: "44%", col: "#001050", dur: 5.5, delay: 5.5 },
-  { left: "49%",   top: "55%", col: "#001489", dur: 6.0, delay: 5.7 },
-
-  // ── Bottom-right solo
-  { left: "84%",   top: "59%", col: "#001489", dur: 8.5, delay: 2.8 },
-
-  // ── Mid scatter
-  { left: "63%",   top: "64%", col: "#001050", dur: 7.0, delay: 7.0 },
+// (colIdx, rowIdx, color, duration, delay)
+// Cells chosen so no two tiles share a row+col position:
+const TILE_DEFS: [number, number, string, number, number][] = [
+  [0, 0, "#001489", 7.0, 0.0],  // C0·R0 — isolated upper-left
+  [3, 0, "#001050", 9.0, 3.2],  // C3·R0 — top-right solo
+  [2, 1, "#001489", 6.5, 1.5],  // C2·R1 — upper-mid
+  [3, 1, "#001050", 8.0, 4.0],  // C3·R1 — adjacent right of above
+  [4, 2, "#001489", 7.5, 2.5],  // C4·R2 — far-right mid
+  [1, 2, "#001050", 6.0, 5.5],  // C1·R2 — left-mid
+  [1, 3, "#001489", 8.5, 5.7],  // C1·R3 — vertical pair with above
+  [3, 3, "#001050", 7.0, 2.8],  // C3·R3 — right-mid lower
+  [4, 4, "#001489", 5.5, 7.0],  // C4·R4 — bottom-right
 ];
+
+const ACCENT_TILES = TILE_DEFS.map(([ci, ri, col, dur, delay]) => ({
+  left:  `${GRID_COLS[ci]}%`,
+  top:   `${GRID_ROWS[ri]}%`,
+  col,
+  dur,
+  delay,
+}));
 
 
 function HeroV15() {
