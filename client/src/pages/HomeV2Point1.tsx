@@ -719,25 +719,12 @@ function DifferentiatorsV15() {
           >
             {/* Eyebrow + headline */}
             <div className="mb-10">
-              <p
-                style={{
-                  color: "#4A58AA",
-                  fontSize: 13,
-                  fontWeight: 600,
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  marginBottom: 14,
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                }}
-              >
-                {d.eyebrow}
-              </p>
-              <h2
+              <h1
                 className="font-heading font-bold"
-                style={{ color: "#001489", fontSize: "clamp(1.375rem, 2vw, 1.875rem)", lineHeight: 1.15 }}
+                style={{ color: "#001489", fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.08, letterSpacing: "-0.01em" }}
               >
                 WHY MILTION HOBBS
-              </h2>
+              </h1>
             </div>
 
             {/* Card selector list */}
