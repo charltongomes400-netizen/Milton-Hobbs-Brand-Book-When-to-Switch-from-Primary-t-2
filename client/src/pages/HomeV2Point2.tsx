@@ -1779,14 +1779,14 @@ const PRACTICE_CYCLE_MS = 5000;
 
 function PracticeIcon({ index, size = 32, color = "currentColor" }: { index: number; size?: number; color?: string }) {
   const icons = [
-    <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><line x1="6.5" y1="10" x2="6.5" y2="14" /><line x1="17.5" y1="10" x2="17.5" y2="14" /></>,
-    <><path d="M2 4h20v3H2z" /><path d="M4 7v12h16V7" /><line x1="8" y1="11" x2="8" y2="16" /><line x1="12" y1="11" x2="12" y2="16" /><line x1="16" y1="11" x2="16" y2="16" /><line x1="2" y1="19" x2="22" y2="19" /></>,
-    <><circle cx="9" cy="10" r="5" /><circle cx="15" cy="10" r="5" /><path d="M12 6.2a5 5 0 0 1 0 7.6" /><line x1="12" y1="15" x2="12" y2="20" /><line x1="8" y1="20" x2="16" y2="20" /></>,
-    <><path d="M13 2L3 7v6c0 5.5 3.4 10.7 8 12" /><path d="M11 2l10 5v6c0 5.5-3.4 10.7-8 12" /><polyline points="9 12 11 14 15 10" /></>,
-    <><circle cx="12" cy="9" r="5" /><line x1="12" y1="14" x2="12" y2="17" /><line x1="8" y1="17" x2="16" y2="17" /><line x1="10" y1="17" x2="10" y2="21" /><line x1="14" y1="17" x2="14" y2="21" /><line x1="8" y1="21" x2="16" y2="21" /><path d="M12 4v0" /><circle cx="12" cy="8" r="1.5" fill={color} stroke="none" /></>,
-    <><path d="M3 21h18" /><path d="M5 21V8l7-5 7 5v13" /><rect x="9" y="14" width="6" height="7" /><line x1="12" y1="8" x2="12" y2="11" /><line x1="10.5" y1="9.5" x2="13.5" y2="9.5" /></>,
-    <><circle cx="9" cy="7" r="3" /><circle cx="17" cy="7" r="2.5" /><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2" /><path d="M17 14a4 4 0 0 1 4 4v3" /></>,
-    <><path d="M12 3L4 8v3h16V8z" /><line x1="4" y1="11" x2="4" y2="19" /><line x1="20" y1="11" x2="20" y2="19" /><line x1="2" y1="19" x2="22" y2="19" /><line x1="12" y1="11" x2="12" y2="19" /><line x1="8" y1="11" x2="8" y2="19" /><line x1="16" y1="11" x2="16" y2="19" /></>,
+    <><rect x="3" y="3" width="8" height="8" rx="1.5" /><rect x="13" y="3" width="8" height="8" rx="1.5" /><rect x="3" y="13" width="8" height="8" rx="1.5" /><rect x="13" y="13" width="8" height="8" rx="1.5" /></>,
+    <><circle cx="12" cy="12" r="8" /><path d="M12 8v4.5" /><path d="M12 12.5l3 1.5" /><circle cx="12" cy="12" r="1" fill={color} stroke="none" /></>,
+    <><path d="M17 2.1a7 7 0 0 1 4.9 4.9" /><path d="M20.9 14.1A9 9 0 0 1 3 12" /><path d="M3 12a9 9 0 0 1 7.1-8.8" /><path d="M14 8l4-4" /><path d="M18 4h-4" /><path d="M18 4v4" /></>,
+    <><path d="M9.5 2L4 6.5V12l8 10 8-10V6.5L14.5 2h-5z" /><path d="M12 22V12" /><path d="M4 12h16" /></>,
+    <><path d="M4 7V4h16v3" /><path d="M9 20h6" /><path d="M12 4v16" /><circle cx="12" cy="11" r="3" /></>,
+    <><path d="M3 20h18" /><path d="M5 20V9.5" /><path d="M19 20V9.5" /><path d="M5 9.5l7-5.5 7 5.5" /><rect x="9" y="14" width="6" height="6" /></>,
+    <><circle cx="9" cy="7" r="3.5" /><path d="M2 20v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1" /><circle cx="18" cy="9" r="2.5" /><path d="M18 14.5a4 4 0 0 1 4 4V20" /></>,
+    <><path d="M12 3v4" /><circle cx="12" cy="9" r="2" /><path d="M6 19l4-6" /><path d="M18 19l-4-6" /><path d="M4 19h16" /><path d="M8 19l-2 2" /><path d="M16 19l2 2" /></>,
   ];
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
