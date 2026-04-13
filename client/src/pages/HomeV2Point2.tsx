@@ -1856,9 +1856,6 @@ function PracticeAreasV18() {
         >
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
-              <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                08 Disciplines
-              </p>
               <h2
                 className="font-heading font-bold leading-[1.15]"
                 style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", color: "#001489" }}
