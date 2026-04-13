@@ -1866,108 +1866,17 @@ const EXPERTISE_ITEMS_V18 = [
   { num: "08", short: "Litigation",  title: "Litigation & Dispute Resolution",    desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums.",                                          img: imgLitig  },
 ];
 
-function ExpertiseCard({ item, i, active, setActive }: { item: typeof EXPERTISE_ITEMS_V18[0]; i: number; active: number | null; setActive: (n: number | null) => void }) {
-  const isActive = active === i;
-  return (
-    <motion.div
-      data-testid={`expertise-item-${i}`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: (i % 4) * 0.07 }}
-      onMouseEnter={() => setActive(i)}
-      onMouseLeave={() => setActive(null)}
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        background: "#001489",
-        cursor: "pointer",
-      }}
-    >
-      <img
-        src={item.img}
-        alt={item.title}
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{
-          mixBlendMode: "multiply",
-          transform: isActive ? "scale(1.06)" : "scale(1)",
-          transition: "transform 0.75s ease",
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{ background: "linear-gradient(to top, rgba(0,6,44,0.95) 0%, rgba(0,20,137,0.28) 55%, transparent 100%)" }}
-      />
-      <div className="absolute inset-0 flex flex-col justify-end" style={{ padding: "24px 26px 26px" }}>
-        <p
-          style={{
-            color: "#7A84BE",
-            fontSize: 11,
-            fontWeight: 600,
-            textTransform: "uppercase",
-            letterSpacing: "0.12em",
-            marginBottom: 8,
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-          }}
-        >
-          {item.short}
-        </p>
-        <h3
-          className="font-heading font-bold text-white"
-          style={{ fontSize: "clamp(1rem, 1.4vw, 1.2rem)", lineHeight: 1.25 }}
-        >
-          {item.title}
-        </h3>
-        <div
-          style={{
-            overflow: "hidden",
-            maxHeight: isActive ? "130px" : "0",
-            opacity: isActive ? 1 : 0,
-            transition: "max-height 0.4s ease, opacity 0.3s ease",
-            marginTop: isActive ? 14 : 0,
-          }}
-        >
-          <p
-            style={{
-              color: "rgba(255,255,255,0.55)",
-              fontSize: 13,
-              lineHeight: 1.7,
-              marginBottom: 16,
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-            }}
-          >
-            {item.desc}
-          </p>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2"
-            style={{
-              color: "rgba(255,255,255,0.80)",
-              fontSize: 11,
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              textDecoration: "none",
-              borderBottom: "1px solid rgba(255,255,255,0.25)",
-              paddingBottom: 2,
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-            }}
-          >
-            Enquire
-            <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
-              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
 function PracticeAreasV18() {
   const [active, setActive] = useState<number | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [scrollPct, setScrollPct] = useState(0);
 
-  const ROW1 = EXPERTISE_ITEMS_V18.slice(0, 3);
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setScrollPct(max > 0 ? el.scrollLeft / max : 0);
+  };
 
   return (
     <section
@@ -1982,7 +1891,6 @@ function PracticeAreasV18() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.55 }}
-        className="px-8"
         style={{
           paddingLeft: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
           paddingRight: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
@@ -2006,20 +1914,97 @@ function PracticeAreasV18() {
         </div>
       </motion.div>
 
-      {/* ── Desktop: Row 1 — 3 photo cards + 1 solid CTA ── */}
-      <div className="hidden lg:grid grid-cols-4" style={{ height: 490 }}>
-        {ROW1.map((item, i) => (
-          <ExpertiseCard key={i} item={item} i={i} active={active} setActive={setActive} />
-        ))}
+      {/* ── Horizontal scroll strip ── */}
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        style={{
+          display: "flex",
+          overflowX: "auto",
+          overflowY: "hidden",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          height: 500,
+        }}
+        className="[&::-webkit-scrollbar]:hidden"
+      >
+        {/* Photo cards */}
+        {EXPERTISE_ITEMS_V18.map((item, i) => {
+          const isActive = active === i;
+          return (
+            <div
+              key={i}
+              data-testid={`expertise-item-${i}`}
+              onMouseEnter={() => setActive(i)}
+              onMouseLeave={() => setActive(null)}
+              style={{
+                position: "relative",
+                flexShrink: 0,
+                width: "clamp(240px, 25vw, 320px)",
+                overflow: "hidden",
+                background: "#001489",
+                cursor: "pointer",
+                borderRight: "1px solid rgba(255,255,255,0.06)",
+              }}
+            >
+              <img
+                src={item.img}
+                alt={item.title}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{
+                  mixBlendMode: "multiply",
+                  transform: isActive ? "scale(1.06)" : "scale(1)",
+                  transition: "transform 0.75s ease",
+                }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(to top, rgba(0,6,44,0.95) 0%, rgba(0,20,137,0.25) 55%, transparent 100%)" }}
+              />
+              <div className="absolute inset-0 flex flex-col justify-end" style={{ padding: "24px 26px 28px" }}>
+                <p style={{ color: "#7A84BE", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 8, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  {item.short}
+                </p>
+                <h3
+                  className="font-heading font-bold text-white"
+                  style={{ fontSize: "clamp(1rem, 1.3vw, 1.2rem)", lineHeight: 1.25 }}
+                >
+                  {item.title}
+                </h3>
+                <div
+                  style={{
+                    overflow: "hidden",
+                    maxHeight: isActive ? "140px" : "0",
+                    opacity: isActive ? 1 : 0,
+                    transition: "max-height 0.4s ease, opacity 0.3s ease",
+                    marginTop: isActive ? 14 : 0,
+                  }}
+                >
+                  <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 13, lineHeight: 1.7, marginBottom: 16, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    {item.desc}
+                  </p>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-2"
+                    style={{ color: "rgba(255,255,255,0.80)", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.25)", paddingBottom: 2, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                  >
+                    Enquire
+                    <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
+                      <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          );
+        })}
 
-        {/* Solid CTA card */}
-        <motion.div
+        {/* Solid CTA card — last in the strip */}
+        <div
           data-testid="expertise-cta-card"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.21 }}
           style={{
+            flexShrink: 0,
+            width: "clamp(240px, 25vw, 320px)",
             background: "#192B94",
             display: "flex",
             flexDirection: "column",
@@ -2028,65 +2013,25 @@ function PracticeAreasV18() {
           }}
         >
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <div
-              style={{
-                width: 38,
-                height: 38,
-                border: "1px solid rgba(255,255,255,0.20)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexShrink: 0,
-              }}
-            >
+            <div style={{ width: 38, height: 38, border: "1px solid rgba(255,255,255,0.20)", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <svg width="15" height="15" fill="none" viewBox="0 0 16 16">
                 <path d="M3 13L13 3M13 3H6M13 3v7" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
               </svg>
             </div>
           </div>
           <div>
-            <p
-              style={{
-                color: "#7A84BE",
-                fontSize: 11,
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-                marginBottom: 12,
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-              }}
-            >
+            <p style={{ color: "#7A84BE", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 12, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
               08 Disciplines
             </p>
-            <h3
-              className="font-heading font-bold text-white"
-              style={{ fontSize: "clamp(1rem, 1.4vw, 1.2rem)", lineHeight: 1.25, marginBottom: 28 }}
-            >
+            <h3 className="font-heading font-bold text-white" style={{ fontSize: "clamp(1rem, 1.3vw, 1.2rem)", lineHeight: 1.25, marginBottom: 28 }}>
               All Areas of Practice
             </h3>
             <a
               href="#contact"
               className="inline-flex items-center gap-2"
-              style={{
-                color: "rgba(255,255,255,0.65)",
-                fontSize: 11,
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                textDecoration: "none",
-                borderBottom: "1px solid rgba(255,255,255,0.18)",
-                paddingBottom: 2,
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                transition: "color 0.2s, border-color 0.2s",
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.55)";
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)";
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.18)";
-              }}
+              style={{ color: "rgba(255,255,255,0.65)", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.18)", paddingBottom: 2, fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "color 0.2s" }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)"}
             >
               Get in Touch
               <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
@@ -2094,84 +2039,20 @@ function PracticeAreasV18() {
               </svg>
             </a>
           </div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* ── Desktop: Row 2 — remaining 5 items ── */}
-      <div className="hidden lg:grid grid-cols-5" style={{ height: 360, borderTop: "1px solid rgba(0,20,137,0.06)" }}>
-        {EXPERTISE_ITEMS_V18.slice(3).map((item, i) => (
-          <ExpertiseCard key={i + 3} item={item} i={i + 3} active={active} setActive={setActive} />
-        ))}
-      </div>
-
-      {/* ── Mobile: 2-column grid ── */}
-      <div className="grid grid-cols-2 lg:hidden">
-        {EXPERTISE_ITEMS_V18.map((item, i) => {
-          const isOpen = active === i;
-          return (
-            <div
-              key={i}
-              data-testid={`expertise-item-mobile-${i}`}
-              onClick={() => setActive(isOpen ? null : i)}
-              style={{
-                position: "relative",
-                overflow: "hidden",
-                background: "#001489",
-                height: isOpen ? "320px" : "240px",
-                cursor: "pointer",
-                transition: "height 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                borderRight: i % 2 === 0 ? "1px solid rgba(255,255,255,0.05)" : "none",
-                borderBottom: "1px solid rgba(255,255,255,0.05)",
-              }}
-            >
-              <img
-                src={item.img}
-                alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ mixBlendMode: "multiply" }}
-              />
-              <div
-                className="absolute inset-0"
-                style={{ background: "linear-gradient(to top, rgba(0,6,44,0.94) 0%, rgba(0,20,137,0.25) 55%, transparent 100%)" }}
-              />
-              <div className="absolute inset-0 flex flex-col justify-end" style={{ padding: "14px 16px 18px" }}>
-                <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.10em", marginBottom: 6, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                  {item.short}
-                </p>
-                <h3
-                  className="font-heading font-bold text-white"
-                  style={{ fontSize: "1rem", lineHeight: 1.3, marginBottom: isOpen ? 10 : 0 }}
-                >
-                  {item.title}
-                </h3>
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.25 }}
-                    >
-                      <p style={{ color: "rgba(255,255,255,0.52)", fontSize: 13, lineHeight: 1.65, marginBottom: 12, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                        {item.desc}
-                      </p>
-                      <a
-                        href="#contact"
-                        className="inline-flex items-center gap-1.5"
-                        style={{ color: "rgba(255,255,255,0.80)", fontSize: 11, fontWeight: 600, textTransform: "uppercase", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.25)", paddingBottom: 2, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                      >
-                        Enquire
-                        <svg width="9" height="9" fill="none" viewBox="0 0 12 12">
-                          <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-                        </svg>
-                      </a>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </div>
-          );
-        })}
+      {/* ── Scroll progress bar ── */}
+      <div style={{ height: 3, background: "rgba(0,20,137,0.07)" }}>
+        <div
+          style={{
+            height: "100%",
+            background: "#001489",
+            width: `${scrollPct * 100}%`,
+            transition: "width 0.1s linear",
+            minWidth: scrollPct > 0 ? 0 : "15%",
+          }}
+        />
       </div>
 
     </section>
