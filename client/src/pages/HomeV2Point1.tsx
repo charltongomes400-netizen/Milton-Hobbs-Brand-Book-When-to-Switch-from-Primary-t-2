@@ -1521,7 +1521,7 @@ function PracticeAreasV18() {
         >
           <p
             className="text-[#4A58AA] uppercase font-medium mb-3"
-            style={{ fontSize: 13, letterSpacing: "0.04em" }}
+            style={{ fontSize: 13 }}
           >
             Our Expertise
           </p>
@@ -1612,12 +1612,25 @@ function PracticeAreasV18() {
                     </p>
                     <h3
                       className="font-heading font-bold text-white"
-                      style={{ fontSize: "clamp(1rem, 1.35vw, 1.125rem)", lineHeight: 1.25 }}
+                      style={{ fontSize: "clamp(1.125rem, 1.5vw, 1.25rem)", lineHeight: 1.25 }}
                     >
                       {item.title}
                     </h3>
                   </div>
                 </div>
+
+                {/* ── Hover: white translucent panel slides up from bottom ── */}
+                <div
+                  className="absolute left-0 right-0 bottom-0"
+                  style={{
+                    background: "rgba(255,255,255,0.10)",
+                    backdropFilter: "blur(0px)",
+                    height: "72%",
+                    transform: isActive ? "translateY(0)" : "translateY(100%)",
+                    transition: "transform 0.38s cubic-bezier(0.4, 0, 0.2, 1)",
+                    pointerEvents: "none",
+                  }}
+                />
 
                 {/* ── Hover: full content panel slides up ── */}
                 <div
@@ -1638,7 +1651,7 @@ function PracticeAreasV18() {
                   </span>
                   <h3
                     className="font-heading font-bold text-white"
-                    style={{ fontSize: "clamp(1rem, 1.35vw, 1.125rem)", lineHeight: 1.25, marginBottom: 12 }}
+                    style={{ fontSize: "clamp(1.125rem, 1.5vw, 1.25rem)", lineHeight: 1.25, marginBottom: 12 }}
                   >
                     {item.title}
                   </h3>
@@ -1700,7 +1713,7 @@ function PracticeAreasV18() {
                   position: "relative",
                   overflow: "hidden",
                   background: "#001489",
-                  height: isOpen ? "320px" : "240px",
+                  height: isOpen ? "340px" : "280px",
                   cursor: "pointer",
                   transition: "height 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                 }}
@@ -1730,7 +1743,7 @@ function PracticeAreasV18() {
                   <div>
                     <h3
                       className="font-heading font-bold text-white"
-                      style={{ fontSize: "0.875rem", lineHeight: 1.3, marginBottom: isOpen ? 10 : 0 }}
+                      style={{ fontSize: "1rem", lineHeight: 1.3, marginBottom: isOpen ? 10 : 0 }}
                     >
                       {item.title}
                     </h3>
