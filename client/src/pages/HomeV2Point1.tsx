@@ -1277,47 +1277,48 @@ function ContactFormV15() {
   return (
     <section
       id="contact"
-      data-header-theme="dark"
+      data-header-theme="light"
       data-testid="contact-section"
-      style={{ background: "#001489" }}
+      style={{ background: "#FFFFFF", borderTop: "1px solid rgba(0,20,137,0.07)" }}
     >
       <div className="grid grid-cols-1 lg:grid-cols-[45fr_55fr]" style={{ minHeight: 680 }}>
 
-        {/* ── LEFT: Deep Blue info panel ── */}
+        {/* ── LEFT: White info panel ── */}
         <div
           className="relative overflow-hidden flex flex-col justify-between px-8 pt-20 pb-16"
           style={{
             paddingLeft: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
             paddingRight: "clamp(2rem, 4vw, 5rem)",
+            borderRight: "1px solid rgba(0,20,137,0.07)",
           }}
         >
-          {/* Ghost city watermark — background texture */}
+          {/* Ghost coordinate watermark */}
           <div
             aria-hidden="true"
-            className="absolute bottom-0 left-0 right-0 select-none pointer-events-none leading-none overflow-hidden"
-            style={{ lineHeight: 0.88 }}
+            className="absolute bottom-0 left-0 right-0 select-none pointer-events-none overflow-hidden"
+            style={{ lineHeight: 0.9 }}
           >
             <div
               className="font-heading font-bold"
               style={{
-                fontSize: "clamp(5rem, 13vw, 11.5rem)",
-                color: "rgba(255,255,255,0.045)",
+                fontSize: "clamp(4rem, 11vw, 9.5rem)",
+                color: "rgba(0,20,137,0.035)",
                 whiteSpace: "nowrap",
                 letterSpacing: "-0.01em",
               }}
             >
-              DUBAI
+              25.2048°
             </div>
             <div
               className="font-heading font-bold"
               style={{
-                fontSize: "clamp(5rem, 13vw, 11.5rem)",
-                color: "rgba(255,255,255,0.045)",
+                fontSize: "clamp(4rem, 11vw, 9.5rem)",
+                color: "rgba(0,20,137,0.035)",
                 whiteSpace: "nowrap",
                 letterSpacing: "-0.01em",
               }}
             >
-              PARIS
+              48.8566°
             </div>
           </div>
 
@@ -1331,20 +1332,20 @@ function ContactFormV15() {
           >
             <p
               className="font-medium uppercase mb-5"
-              style={{ color: "#7A84BE", fontSize: 13 }}
+              style={{ color: "#4A58AA", fontSize: 13 }}
             >
               {c.eyebrow}
             </p>
             <h2
-              className="font-heading font-bold text-white leading-[1.1] mb-6"
-              style={{ fontSize: "clamp(1.75rem, 3.5vw, 3rem)" }}
+              className="font-heading font-bold leading-[1.1] mb-6"
+              style={{ fontSize: "clamp(1.75rem, 3.5vw, 3rem)", color: "#001489" }}
             >
               {c.headline}
             </h2>
-            <div style={{ width: 40, height: 1, background: "rgba(255,255,255,0.20)", marginBottom: 24 }} />
+            <div style={{ width: 40, height: 1, background: "rgba(0,20,137,0.15)", marginBottom: 24 }} />
             <p
               style={{
-                color: "rgba(255,255,255,0.50)",
+                color: "#595959",
                 fontSize: 14,
                 lineHeight: 1.72,
                 maxWidth: "38ch",
@@ -1364,7 +1365,7 @@ function ContactFormV15() {
           >
             <p
               className="font-medium uppercase mb-7"
-              style={{ color: "#7A84BE", fontSize: 12 }}
+              style={{ color: "#4A58AA", fontSize: 12 }}
             >
               {c.officeLabel}
             </p>
@@ -1373,25 +1374,25 @@ function ContactFormV15() {
               {/* Dubai */}
               <div>
                 <p
-                  className="font-heading font-semibold text-white mb-2"
-                  style={{ fontSize: 14 }}
+                  className="font-heading font-semibold mb-2"
+                  style={{ fontSize: 14, color: "#151515" }}
                 >
                   {c.dubaiLabel}
                 </p>
                 {f.dubaiAddr.map((line, i) => (
-                  <p key={i} style={{ color: "rgba(255,255,255,0.40)", fontSize: 13, lineHeight: 1.6 }}>{line}</p>
+                  <p key={i} style={{ color: "#595959", fontSize: 13, lineHeight: 1.6 }}>{line}</p>
                 ))}
                 <a
                   href="tel:+97145232421"
                   data-testid="contact-address-phone-dubai"
                   style={{
-                    color: "rgba(255,255,255,0.40)",
+                    color: "#848484",
                     fontSize: 13,
                     textDecoration: "none",
                     transition: "color 0.2s",
                   }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#7A84BE"}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#001489"}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "#848484"}
                 >
                   +971 4 523 2421
                 </a>
@@ -1400,53 +1401,53 @@ function ContactFormV15() {
               {/* Paris */}
               <div>
                 <p
-                  className="font-heading font-semibold text-white mb-2"
-                  style={{ fontSize: 14 }}
+                  className="font-heading font-semibold mb-2"
+                  style={{ fontSize: 14, color: "#151515" }}
                 >
                   {c.parisLabel}
                 </p>
                 {f.parisAddr.map((line, i) => (
-                  <p key={i} style={{ color: "rgba(255,255,255,0.40)", fontSize: 13, lineHeight: 1.6 }}>{line}</p>
+                  <p key={i} style={{ color: "#595959", fontSize: 13, lineHeight: 1.6 }}>{line}</p>
                 ))}
                 <a
                   href="tel:+33180270067"
                   data-testid="contact-address-phone-paris"
                   style={{
-                    color: "rgba(255,255,255,0.40)",
+                    color: "#848484",
                     fontSize: 13,
                     textDecoration: "none",
                     transition: "color 0.2s",
                   }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#7A84BE"}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#001489"}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "#848484"}
                 >
                   +33 1 80 27 00 67
                 </a>
               </div>
             </div>
 
-            <div style={{ width: "100%", height: 1, background: "rgba(255,255,255,0.08)", marginBottom: 20 }} />
-            <p className="font-medium uppercase mb-2" style={{ color: "#7A84BE", fontSize: 12 }}>
+            <div style={{ width: "100%", height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 20 }} />
+            <p className="font-medium uppercase mb-2" style={{ color: "#4A58AA", fontSize: 12 }}>
               Email
             </p>
             <a
               href={`mailto:${f.email}`}
               data-testid="contact-email"
               style={{
-                color: "rgba(255,255,255,0.55)",
+                color: "#001489",
                 fontSize: 14,
                 textDecoration: "none",
                 transition: "color 0.2s",
               }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.55)"}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#192B94"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "#001489"}
             >
               {f.email}
             </a>
           </motion.div>
         </div>
 
-        {/* ── RIGHT: White form panel ── */}
+        {/* ── RIGHT: Light form panel ── */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -1454,7 +1455,7 @@ function ContactFormV15() {
           transition={{ duration: 0.5 }}
           className="flex flex-col justify-center px-8 pt-16 pb-16"
           style={{
-            background: "#FFFFFF",
+            background: "#F9F9F9",
             paddingRight: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
             paddingLeft: "clamp(2rem, 4vw, 5rem)",
           }}
