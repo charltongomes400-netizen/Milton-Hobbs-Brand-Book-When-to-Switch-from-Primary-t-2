@@ -750,12 +750,15 @@ function DifferentiatorsV15() {
       style={{ background: "#FFFFFF", borderTop: "1px solid #E8EDF5" }}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 80, paddingBottom: 0 }}>
 
-        {/* ── Section header: one compact row ── */}
+      {/* ── Header ── */}
+      <div
+        className="max-w-[1400px] mx-auto px-8"
+        style={{ paddingTop: 80, paddingBottom: 0 }}
+      >
         <div
           className="flex flex-col lg:flex-row lg:items-end lg:justify-between"
-          style={{ paddingBottom: 0, gap: 16 }}
+          style={{ gap: 16 }}
         >
           <div>
             <p
@@ -768,7 +771,7 @@ function DifferentiatorsV15() {
               className="font-heading font-bold"
               style={{
                 color: "#001489",
-                fontSize: "clamp(1.625rem, 2.5vw, 2.5rem)",
+                fontSize: "clamp(1.75rem, 2.8vw, 2.75rem)",
                 lineHeight: 1.08,
                 letterSpacing: "-0.025em",
               }}
@@ -803,219 +806,203 @@ function DifferentiatorsV15() {
             </svg>
           </a>
         </div>
-
       </div>
 
-      {/* ── Expanding column theatre ── */}
+      {/* ── Full-bleed animation stage ── */}
       <div
         style={{
-          display: "flex",
-          alignItems: "stretch",
-          minHeight: 540,
-          borderTop: "1px solid #E8EDF5",
+          width: "100%",
+          height: 400,
+          background: "#F7F8FD",
           marginTop: 52,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
           overflow: "hidden",
         }}
       >
-        {d.cards.map((card, i) => {
-          const isActive = active === i;
-          return (
-            <motion.div
-              key={i}
-              layout
-              data-testid={`diff-row-${i}`}
-              onMouseEnter={() => { setActive(i); setPaused(true); }}
-              animate={{ flexGrow: isActive ? 3 : 1 }}
-              transition={{ type: "spring", stiffness: 240, damping: 30 }}
-              style={{
-                flexBasis: 0,
-                flexShrink: 0,
-                minWidth: 0,
-                overflow: "hidden",
-                borderRight: i < d.cards.length - 1 ? "1px solid #E8EDF5" : "none",
-                cursor: isActive ? "default" : "pointer",
-                position: "relative",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              {/* Active top accent bar */}
-              <motion.div
-                style={{
-                  position: "absolute",
-                  top: 0, left: 0, right: 0,
-                  height: 3,
-                  background: "#4A58AA",
-                  transformOrigin: "left",
-                  zIndex: 2,
-                }}
-                animate={{ scaleX: isActive ? 1 : 0 }}
-                transition={{ type: "spring", stiffness: 300, damping: 32 }}
-              />
+        {/* Subtle radial glow behind animation */}
+        <div
+          style={{
+            position: "absolute",
+            width: 520,
+            height: 520,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(74,88,170,0.07) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
 
-              <AnimatePresence mode="wait" initial={false}>
-                {isActive ? (
-                  /* ── ACTIVE: animation + content ── */
-                  <motion.div
-                    key={`open-${i}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.28, delay: 0.08 }}
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      height: "100%",
-                      padding: "36px 40px 36px 40px",
-                    }}
-                  >
-                    {/* SVG animation — generous height */}
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={`svg-${active}`}
-                        style={{ width: "100%", height: 240, flexShrink: 0 }}
-                        initial={{ opacity: 0, scale: 0.96 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 1.02 }}
-                        transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-                      >
-                        {(() => { const V = VISUALS[active]; return <V />; })()}
-                      </motion.div>
-                    </AnimatePresence>
-
-                    {/* Thin rule */}
-                    <div style={{ height: 1, background: "#E8EDF5", margin: "24px 0 20px" }} />
-
-                    {/* Title */}
-                    <h3
-                      className="font-heading font-bold"
-                      style={{
-                        color: "#001489",
-                        fontSize: "clamp(1.1rem, 1.4vw, 1.35rem)",
-                        lineHeight: 1.25,
-                        letterSpacing: "-0.015em",
-                        marginBottom: 14,
-                      }}
-                    >
-                      {card.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p
-                      style={{
-                        color: "#595959",
-                        fontSize: "0.875rem",
-                        lineHeight: 1.85,
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        flex: 1,
-                      }}
-                    >
-                      {card.description}
-                    </p>
-
-                    {/* Bottom bar: label + progress dots */}
-                    <div
-                      className="flex items-center justify-between"
-                      style={{ marginTop: 28, paddingTop: 20, borderTop: "1px solid #E8EDF5" }}
-                    >
-                      <span
-                        style={{
-                          fontSize: 10,
-                          fontWeight: 700,
-                          letterSpacing: "0.24em",
-                          fontFamily: "'Plus Jakarta Sans', sans-serif",
-                          color: "#4A58AA",
-                          textTransform: "uppercase",
-                        }}
-                      >
-                        {String(i + 1).padStart(2, "0")} — {card.title}
-                      </span>
-                      <div className="flex items-center gap-[6px]">
-                        {d.cards.map((_, j) => (
-                          <button
-                            key={j}
-                            data-testid={`diff-dot-${j}`}
-                            onClick={e => { e.stopPropagation(); setActive(j); setPaused(true); }}
-                            aria-label={`Pillar ${j + 1}`}
-                            style={{
-                              width: j === active ? 22 : 5,
-                              height: 2,
-                              background: j === active ? "#001489" : "#D0D5E8",
-                              border: "none",
-                              padding: 0,
-                              cursor: "pointer",
-                              transition: "width 0.4s cubic-bezier(0.4,0,0.2,1), background 0.3s",
-                            }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                ) : (
-                  /* ── INACTIVE: vertical label strip ── */
-                  <motion.div
-                    key={`closed-${i}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.22 }}
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      height: "100%",
-                      paddingTop: 28,
-                      paddingBottom: 24,
-                    }}
-                  >
-                    {/* Vertical pillar name */}
-                    <span
-                      style={{
-                        writingMode: "vertical-rl",
-                        textOrientation: "mixed",
-                        transform: "rotate(180deg)",
-                        color: "#001489",
-                        opacity: 0.18,
-                        fontSize: 10,
-                        fontWeight: 700,
-                        letterSpacing: "0.22em",
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        textTransform: "uppercase",
-                        flex: 1,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        transition: "opacity 0.2s",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {card.title}
-                    </span>
-
-                    {/* Number at bottom */}
-                    <span
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 700,
-                        letterSpacing: "0.18em",
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        color: "#C8CEDF",
-                        marginTop: 16,
-                      }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          );
-        })}
+        {/* SVG crossfade */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            style={{ width: 440, height: 360, position: "relative", zIndex: 1 }}
+            initial={{ opacity: 0, scale: 0.94, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 1.04, y: -10 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {(() => { const V = VISUALS[active]; return <V />; })()}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-      {/* Bottom breathing room */}
-      <div style={{ height: 80 }} />
+      {/* ── Active pillar detail: title left, description right ── */}
+      <div className="max-w-[1400px] mx-auto px-8">
+        <div
+          className="grid grid-cols-1 lg:grid-cols-[320px_1fr]"
+          style={{
+            gap: "clamp(32px, 5vw, 80px)",
+            paddingTop: 44,
+            paddingBottom: 44,
+            borderBottom: "1px solid #E8EDF5",
+            alignItems: "flex-start",
+          }}
+        >
+          {/* Large pillar title */}
+          <AnimatePresence mode="wait">
+            <motion.h3
+              key={`title-${active}`}
+              className="font-heading font-bold"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.32, ease: "easeOut" }}
+              style={{
+                color: "#001489",
+                fontSize: "clamp(1.5rem, 2.2vw, 2.125rem)",
+                lineHeight: 1.18,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {d.cards[active].title}
+            </motion.h3>
+          </AnimatePresence>
+
+          {/* Description + meta */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`desc-${active}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.32, ease: "easeOut", delay: 0.05 }}
+            >
+              <p
+                style={{
+                  color: "#595959",
+                  fontSize: "0.9375rem",
+                  lineHeight: 1.82,
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  marginBottom: 24,
+                }}
+              >
+                {d.cards[active].description}
+              </p>
+              <span
+                style={{
+                  fontSize: 10,
+                  fontWeight: 700,
+                  letterSpacing: "0.28em",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  color: "#4A58AA",
+                  textTransform: "uppercase",
+                }}
+              >
+                {String(active + 1).padStart(2, "0")} of {String(d.cards.length).padStart(2, "0")}
+              </span>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* ── Pillar tab selector strip ── */}
+        <div className="grid" style={{ gridTemplateColumns: `repeat(${d.cards.length}, 1fr)` }}>
+          {d.cards.map((card, i) => {
+            const isActive = active === i;
+            return (
+              <button
+                key={i}
+                data-testid={`diff-row-${i}`}
+                onMouseEnter={() => { setActive(i); setPaused(true); }}
+                onClick={() => { setActive(i); setPaused(true); }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  borderRight: i < d.cards.length - 1 ? "1px solid #E8EDF5" : "none",
+                  textAlign: "left",
+                  padding: "0 0 32px 0",
+                  paddingRight: i < d.cards.length - 1 ? "clamp(16px, 2vw, 32px)" : 0,
+                  paddingLeft: i > 0 ? "clamp(16px, 2vw, 32px)" : 0,
+                  cursor: "pointer",
+                  position: "relative",
+                  outline: "none",
+                }}
+              >
+                {/* Progress fill line at very top */}
+                <div
+                  style={{
+                    height: 2,
+                    background: "#EEF0F8",
+                    marginBottom: 24,
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
+                >
+                  {isActive && (
+                    <motion.div
+                      key={`prog-${active}`}
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        background: "#4A58AA",
+                        transformOrigin: "left",
+                        scaleX: 0,
+                      }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: CYCLE_MS / 1000, ease: "linear" }}
+                    />
+                  )}
+                </div>
+
+                {/* Number */}
+                <span
+                  style={{
+                    display: "block",
+                    fontSize: 10,
+                    fontWeight: 700,
+                    letterSpacing: "0.22em",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    color: isActive ? "#4A58AA" : "#C4C9DC",
+                    marginBottom: 10,
+                    transition: "color 0.25s",
+                  }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                {/* Tab title */}
+                <span
+                  className="font-heading font-bold"
+                  style={{
+                    display: "block",
+                    color: isActive ? "#001489" : "#ACACAC",
+                    fontSize: "clamp(0.8rem, 1vw, 0.9375rem)",
+                    lineHeight: 1.35,
+                    letterSpacing: "-0.01em",
+                    transition: "color 0.25s",
+                  }}
+                >
+                  {card.title}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div style={{ height: 0 }} />
     </section>
   );
 }
