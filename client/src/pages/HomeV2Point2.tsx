@@ -725,24 +725,9 @@ function DiffVisual({ index }: { index: number }) {
 function DifferentiatorsV15() {
   const { t } = useLang();
   const d = t.diff;
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [hovered, setHovered] = useState<number | null>(null);
 
-  useEffect(() => {
-    if (paused) { setProgress(0); return; }
-    const start = Date.now();
-    const tick = setInterval(() => {
-      const elapsed = Date.now() - start;
-      const pct = Math.min((elapsed / CYCLE_MS) * 100, 100);
-      setProgress(pct);
-      if (elapsed >= CYCLE_MS) {
-        setActive(prev => (prev + 1) % d.cards.length);
-        clearInterval(tick);
-      }
-    }, 30);
-    return () => clearInterval(tick);
-  }, [active, paused, d.cards.length]);
+  const VISUALS = [FounderVisual, PrecisionVisual, CrossBorderVisual, DiscretionVisual];
 
   return (
     <section
@@ -750,163 +735,157 @@ function DifferentiatorsV15() {
       data-header-theme="light"
       data-testid="differentiators-section"
       style={{ background: "#FFFFFF", borderTop: "1px solid #E8EDF5" }}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 96, paddingBottom: 120 }}>
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 88, paddingBottom: 96 }}>
 
-        {/* ── Section eyebrow ── */}
-        <p
-          className="font-sans font-bold uppercase"
-          style={{ color: "#4A58AA", fontSize: 10, letterSpacing: "0.32em", marginBottom: 72 }}
-        >
-          Why Miltion Hobbs
-        </p>
-
-        {/* ── Horizontal tab selector — 4 across ── */}
+        {/* ── Section header row ── */}
         <div
-          className="grid grid-cols-2 lg:grid-cols-4"
-          style={{ borderBottom: "1px solid #E8EDF5", marginBottom: 80 }}
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between"
+          style={{ paddingBottom: 56, borderBottom: "1px solid #E8EDF5", gap: 32 }}
         >
-          {d.cards.map((card, i) => (
-            <button
-              key={i}
-              data-testid={`diff-card-${i}`}
-              onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
-              className="relative text-left focus:outline-none"
+          <div>
+            <p
+              className="font-sans font-bold uppercase"
+              style={{ color: "#4A58AA", fontSize: 10, letterSpacing: "0.32em", marginBottom: 22 }}
+            >
+              Why Miltion Hobbs
+            </p>
+            <h2
+              className="font-heading font-bold"
               style={{
-                paddingBottom: 28,
-                paddingRight: 32,
-                background: "transparent",
-                cursor: "pointer",
+                color: "#001489",
+                fontSize: "clamp(1.875rem, 3vw, 2.875rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.02em",
               }}
             >
-              {/* Active bottom-line sweep */}
+              Built Different.<br />By Design.
+            </h2>
+          </div>
+
+          <a
+            href="#contact"
+            data-testid="diff-cta"
+            className="inline-flex items-center gap-3 self-start lg:self-auto"
+            style={{
+              color: "#FFFFFF",
+              background: "#001489",
+              fontSize: 10,
+              fontWeight: 700,
+              letterSpacing: "0.24em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              padding: "15px 32px",
+              whiteSpace: "nowrap",
+              transition: "background 0.22s",
+              flexShrink: 0,
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#192B94"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#001489"; }}
+          >
+            <span>{d.learnMore}</span>
+            <svg width="12" height="12" fill="none" viewBox="0 0 12 12">
+              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+            </svg>
+          </a>
+        </div>
+
+        {/* ── Stacked pillar rows ── */}
+        {d.cards.map((card, i) => {
+          const V = VISUALS[i];
+          const isHov = hovered === i;
+          return (
+            <div
+              key={i}
+              data-testid={`diff-row-${i}`}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              style={{
+                borderBottom: "1px solid #E8EDF5",
+                position: "relative",
+                background: isHov ? "#F9F9F9" : "#FFFFFF",
+                transition: "background 0.25s ease",
+              }}
+            >
+              {/* Left accent bar */}
               <motion.div
                 style={{
                   position: "absolute",
-                  bottom: 0, left: 0, right: 0,
-                  height: 2,
-                  background: "#001489",
-                  transformOrigin: "left",
+                  left: 0, top: 0, bottom: 0,
+                  width: 3,
+                  background: "#4A58AA",
+                  transformOrigin: "top",
+                  zIndex: 1,
                 }}
-                animate={{ scaleX: i === active ? 1 : 0 }}
-                transition={{ duration: 0.38, ease: "easeOut" }}
+                animate={{ scaleY: isHov ? 1 : 0 }}
+                transition={{ duration: 0.26, ease: "easeOut" }}
               />
 
-              <motion.span
+              <div
+                className="grid grid-cols-1 lg:grid-cols-[280px_1fr_220px]"
                 style={{
-                  display: "block",
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: "0.22em",
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  marginBottom: 16,
+                  paddingTop: 52,
+                  paddingBottom: 52,
+                  paddingLeft: 28,
+                  alignItems: "center",
+                  gap: "clamp(28px, 4vw, 60px)",
                 }}
-                animate={{ color: i === active ? "#4A58AA" : "#C8CDD8" }}
-                transition={{ duration: 0.25 }}
               >
-                {String(i + 1).padStart(2, "0")}
-              </motion.span>
+                {/* LEFT: number + title */}
+                <div>
+                  <motion.span
+                    style={{
+                      display: "block",
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: "0.22em",
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      marginBottom: 18,
+                    }}
+                    animate={{ color: isHov ? "#001489" : "#4A58AA" }}
+                    transition={{ duration: 0.22 }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </motion.span>
+                  <motion.h3
+                    className="font-heading font-bold"
+                    style={{
+                      fontSize: "clamp(1.25rem, 1.75vw, 1.625rem)",
+                      lineHeight: 1.2,
+                      letterSpacing: "-0.02em",
+                    }}
+                    animate={{ color: isHov ? "#001489" : "#192B94" }}
+                    transition={{ duration: 0.22 }}
+                  >
+                    {card.title}
+                  </motion.h3>
+                </div>
 
-              <motion.h3
-                className="font-heading font-bold leading-tight"
-                style={{ fontSize: "clamp(0.95rem, 1.3vw, 1.125rem)" }}
-                animate={{ color: i === active ? "#001489" : "#848484" }}
-                transition={{ duration: 0.25 }}
-              >
-                {card.title}
-              </motion.h3>
-            </button>
-          ))}
-        </div>
-
-        {/* ── Content + visual ── */}
-        <div
-          className="grid grid-cols-1 lg:grid-cols-[1fr_560px] gap-20"
-          style={{ minHeight: 560 }}
-        >
-          {/* LEFT: large active title + description + CTA */}
-          <div className="flex flex-col justify-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.42, ease: "easeOut" }}
-              >
-                <h2
-                  className="font-heading font-bold"
-                  style={{
-                    color: "#001489",
-                    fontSize: "clamp(2.25rem, 4vw, 3.5rem)",
-                    lineHeight: 1.05,
-                    letterSpacing: "-0.02em",
-                    marginBottom: 32,
-                  }}
-                >
-                  {d.cards[active].title}
-                </h2>
+                {/* CENTER: description */}
                 <p
                   style={{
                     color: "#595959",
-                    fontSize: "1rem",
+                    fontSize: "clamp(0.875rem, 1vw, 0.9375rem)",
                     lineHeight: 1.9,
-                    marginBottom: 44,
-                    maxWidth: 460,
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                   }}
                 >
-                  {d.cards[active].description}
+                  {card.description}
                 </p>
-                <a
-                  href="#contact"
-                  data-testid="diff-cta"
-                  className="inline-flex items-center gap-3"
-                  style={{
-                    color: "#001489",
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: "0.24em",
-                    textTransform: "uppercase",
-                    textDecoration: "none",
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    borderBottom: "1px solid rgba(0,20,137,0.22)",
-                    paddingBottom: 4,
-                    transition: "border-color 0.25s",
-                  }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "#001489"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.22)"; }}
-                >
-                  <span>{d.learnMore}</span>
-                  <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
-                    <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
-                  </svg>
-                </a>
-              </motion.div>
-            </AnimatePresence>
-          </div>
 
-          {/* RIGHT: animated visual — no background, brand blue on white */}
-          <div
-            className="relative overflow-hidden"
-            style={{ minHeight: 520 }}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                className="absolute inset-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.55 }}
-              >
-                <DiffVisual index={active} />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
+                {/* RIGHT: animated SVG */}
+                <motion.div
+                  style={{ width: "100%", height: 180 }}
+                  animate={{ opacity: isHov ? 1 : 0.38 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <V />
+                </motion.div>
+              </div>
+            </div>
+          );
+        })}
 
       </div>
     </section>
