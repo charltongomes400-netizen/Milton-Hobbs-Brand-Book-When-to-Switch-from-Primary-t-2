@@ -1870,6 +1870,7 @@ function PracticeAreasV18() {
   const [active, setActive] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [slider, setSlider] = useState({ frac: 0, thumbW: 0.25 });
   const isDragging = useRef(false);
   const dragStartX = useRef(0);
   const dragScrollLeft = useRef(0);
@@ -1878,11 +1879,22 @@ function PracticeAreasV18() {
 
   const TOTAL = EXPERTISE_ITEMS_V18.length + 1;
 
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setSlider({ frac: 0, thumbW: el.clientWidth / el.scrollWidth });
+  }, []);
+
   const handleScroll = () => {
     const el = scrollRef.current;
     if (!el) return;
     const cardW = el.scrollWidth / TOTAL;
     setCurrentIdx(Math.min(Math.round(el.scrollLeft / cardW), TOTAL - 1));
+    const max = el.scrollWidth - el.clientWidth;
+    setSlider({
+      frac: max > 0 ? el.scrollLeft / max : 0,
+      thumbW: el.clientWidth / el.scrollWidth,
+    });
   };
 
   const scrollToCard = (idx: number) => {
@@ -2145,34 +2157,31 @@ function PracticeAreasV18() {
         </div>
       </div>
 
-      {/* ── Segmented progress / custom scrollbar ── */}
+      {/* ── Continuous scroll slider ── */}
       <div
         ref={progressBarRef}
         onMouseDown={onProgressMouseDown}
         style={{
-          display: "flex",
-          gap: 3,
-          padding: "0",
+          position: "relative",
+          height: 6,
+          background: "rgba(0,20,137,0.08)",
           cursor: "grab",
           userSelect: "none",
+          overflow: "hidden",
         }}
       >
-        {Array.from({ length: TOTAL }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => scrollToCard(i)}
-            aria-label={`Go to card ${i + 1}`}
-            style={{
-              flex: 1,
-              height: 13,
-              border: "none",
-              background: i === currentIdx ? "#001489" : "rgba(0,20,137,0.10)",
-              cursor: "inherit",
-              padding: 0,
-              transition: "background 0.3s ease",
-            }}
-          />
-        ))}
+        {/* Thumb */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: `${slider.frac * (100 - slider.thumbW * 100)}%`,
+            width: `${slider.thumbW * 100}%`,
+            height: "100%",
+            background: "#001489",
+            transition: isBarDragging.current ? "none" : "left 0.06s linear",
+          }}
+        />
       </div>
 
     </section>
