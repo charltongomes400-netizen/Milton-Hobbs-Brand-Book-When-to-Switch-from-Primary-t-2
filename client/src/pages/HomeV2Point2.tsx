@@ -1640,255 +1640,123 @@ function FooterV15() {
   const dubaiTime = fmtTime("Asia/Dubai");
   const parisTime = fmtTime("Europe/Paris");
 
-  const TICKER_WORDS = ["REASON", "RIGOR", "RESOLUTION", "RAISON", "RIGUEUR", "RÉSOLUTION"];
-  const tickerHalf = Array.from({ length: 12 }).flatMap((_, r) =>
-    TICKER_WORDS.map((word, w) => ({ key: `${r}-${w}`, word, bright: w % 3 === 0 }))
-  );
-
   return (
-    <footer id="footer" data-testid="footer" style={{ background: "#001489", position: "relative", overflow: "hidden" }}>
-      <style>{`
-        @keyframes mh-ticker {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .mh-ticker-track {
-          display: inline-flex;
-          white-space: nowrap;
-          animation: mh-ticker 80s linear infinite;
-        }
-        @keyframes mh-footer-pulse {
-          0%, 100% { opacity: 0.04; transform: scale(1); }
-          50%      { opacity: 0.08; transform: scale(1.15); }
-        }
-      `}</style>
-
-      {/* Ambient background orbs */}
-      <div style={{ position: "absolute", top: -120, right: -80, width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(74,88,170,0.12) 0%, transparent 60%)", pointerEvents: "none", animation: "mh-footer-pulse 10s ease-in-out infinite" }} />
-      <div style={{ position: "absolute", bottom: -160, left: -100, width: 600, height: 600, borderRadius: "50%", background: "radial-gradient(circle, rgba(25,43,148,0.10) 0%, transparent 55%)", pointerEvents: "none", animation: "mh-footer-pulse 14s ease-in-out infinite 3s" }} />
-
-      {/* ── Giant typographic statement ── */}
-      <div className="max-w-[1400px] mx-auto px-8 relative z-10" style={{ paddingTop: 100 }}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+    <footer id="footer" data-testid="footer" style={{ background: "#001489" }}>
+      {/* ── Top band: wordmark · nav · contact ── */}
+      <div className="max-w-[1400px] mx-auto px-8">
+        <div
+          className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-12"
+          style={{ paddingTop: 44, paddingBottom: 40, borderBottom: "1px solid rgba(255,255,255,0.07)" }}
         >
-          <h2
-            className="font-heading font-bold"
+          {/* Wordmark */}
+          <img
+            src={miltonHobbsWordmark}
+            alt="Milton Hobbs"
             style={{
-              fontSize: "clamp(3rem, 8vw, 7rem)",
-              lineHeight: 1.0,
-              color: "transparent",
-              WebkitTextStroke: "1px rgba(255,255,255,0.18)",
-              letterSpacing: "-0.03em",
-              marginBottom: 16,
-              userSelect: "none",
+              width: "clamp(110px, 12vw, 155px)",
+              height: "auto",
+              filter: "brightness(0) invert(1)",
+              opacity: 0.88,
+              display: "block",
+              flexShrink: 0,
             }}
-          >
-            MILTION
-          </h2>
-          <h2
-            className="font-heading font-bold"
-            style={{
-              fontSize: "clamp(3rem, 8vw, 7rem)",
-              lineHeight: 1.0,
-              color: "#FFFFFF",
-              letterSpacing: "-0.03em",
-              marginBottom: 0,
-            }}
-          >
-            HOBBS
-          </h2>
-        </motion.div>
-      </div>
+          />
 
-      {/* ── Scrolling ticker divider ── */}
-      <div
-        style={{
-          overflow: "hidden",
-          padding: "20px 0",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
-          userSelect: "none",
-          width: "100%",
-          marginTop: 56,
-        }}
-      >
-        <div className="mh-ticker-track">
-          {tickerHalf.map(({ key, word, bright }) => (
-            <span key={`a-${key}`} style={{ display: "inline-flex", alignItems: "center", flexShrink: 0 }}>
-              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", color: bright ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.18)", fontFamily: "'Plus Jakarta Sans', sans-serif", textTransform: "uppercase" }}>{word}</span>
-              <span style={{ color: "rgba(255,255,255,0.10)", padding: "0 28px", fontSize: 8 }}>●</span>
-            </span>
-          ))}
-          {tickerHalf.map(({ key, word, bright }) => (
-            <span key={`b-${key}`} aria-hidden="true" style={{ display: "inline-flex", alignItems: "center", flexShrink: 0 }}>
-              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", color: bright ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.18)", fontFamily: "'Plus Jakarta Sans', sans-serif", textTransform: "uppercase" }}>{word}</span>
-              <span style={{ color: "rgba(255,255,255,0.10)", padding: "0 28px", fontSize: 8 }}>●</span>
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Main content: 4-column grid ── */}
-      <div className="max-w-[1400px] mx-auto px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8"
-          style={{ paddingTop: 56, paddingBottom: 56 }}
-        >
-          {/* Col 1: Tagline + contact */}
-          <div className="flex flex-col gap-8 lg:col-span-1">
-            <div>
-              <img
-                src={miltonHobbsWordmark}
-                alt="Milton Hobbs"
-                style={{
-                  width: "clamp(120px, 14vw, 180px)",
-                  height: "auto",
-                  filter: "brightness(0) invert(1)",
-                  opacity: 0.9,
-                  display: "block",
-                  marginBottom: 20,
-                }}
-              />
-              <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 13, lineHeight: 1.72, maxWidth: "30ch" }}>
-                {f.tagline}
-              </p>
-            </div>
-            <div className="flex flex-col gap-1.5">
+          {/* Inline nav */}
+          <nav className="flex flex-wrap items-center gap-x-7 gap-y-2">
+            {navEntries.map(link => (
               <a
-                href={`mailto:${f.email}`}
-                data-testid="footer-email"
-                style={{ color: "rgba(255,255,255,0.70)", fontSize: 13, textDecoration: "none", transition: "color 0.2s" }}
+                key={link.href}
+                href={link.href}
+                style={{
+                  color: "rgba(255,255,255,0.40)",
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                }}
                 onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.70)"}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
               >
-                {f.email}
+                {link.label}
               </a>
-            </div>
-          </div>
+            ))}
+          </nav>
 
-          {/* Col 2: Dubai */}
-          <div>
-            <p style={{ color: "#7A84BE", fontSize: 10, textTransform: "uppercase", fontWeight: 700, letterSpacing: "0.2em", marginBottom: 18 }}>
-              {f.dubaiLabel}
-            </p>
-            <address className="not-italic" style={{ color: "rgba(255,255,255,0.55)", fontSize: 13, lineHeight: 1.75 }}>
-              {f.dubaiAddr.map((line, i) => <span key={i} className="block">{line}</span>)}
-            </address>
+          {/* Contact cluster */}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 lg:flex-shrink-0">
+            <a
+              href={`mailto:${f.email}`}
+              data-testid="footer-email"
+              style={{ color: "rgba(255,255,255,0.55)", fontSize: 12, textDecoration: "none", transition: "color 0.2s" }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.55)"}
+            >
+              {f.email}
+            </a>
+            <span style={{ width: 1, height: 12, background: "rgba(255,255,255,0.10)", flexShrink: 0 }} />
             <a
               href={`tel:${f.phone}`}
               data-testid="footer-phone-dubai"
-              style={{ color: "rgba(255,255,255,0.40)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 8 }}
+              style={{ color: "rgba(255,255,255,0.40)", fontSize: 12, textDecoration: "none", transition: "color 0.2s" }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
             >
               {f.phone}
             </a>
-          </div>
-
-          {/* Col 3: Paris */}
-          <div>
-            <p style={{ color: "#7A84BE", fontSize: 10, textTransform: "uppercase", fontWeight: 700, letterSpacing: "0.2em", marginBottom: 18 }}>
-              {f.parisLabel}
-            </p>
-            <address className="not-italic" style={{ color: "rgba(255,255,255,0.55)", fontSize: 13, lineHeight: 1.75 }}>
-              {f.parisAddr.map((line, i) => <span key={i} className="block">{line}</span>)}
-            </address>
             <a
               href="tel:+33180270067"
               data-testid="footer-phone-paris"
-              style={{ color: "rgba(255,255,255,0.40)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 8 }}
+              style={{ color: "rgba(255,255,255,0.40)", fontSize: 12, textDecoration: "none", transition: "color 0.2s" }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
             >
               +33 1 80 27 00 67
             </a>
           </div>
-
-          {/* Col 4: Navigation */}
-          <div>
-            <p style={{ color: "#7A84BE", fontSize: 10, textTransform: "uppercase", fontWeight: 700, letterSpacing: "0.2em", marginBottom: 18 }}>
-              Navigation
-            </p>
-            <div className="flex flex-col gap-3">
-              {navEntries.map(link => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  style={{
-                    color: "rgba(255,255,255,0.45)",
-                    fontSize: 13,
-                    textDecoration: "none",
-                    transition: "color 0.2s, padding-left 0.2s",
-                    paddingLeft: 0,
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
-                    (e.currentTarget as HTMLElement).style.paddingLeft = "8px";
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.45)";
-                    (e.currentTarget as HTMLElement).style.paddingLeft = "0px";
-                  }}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* ── Bottom bar: live clocks + legal ── */}
-      <div
-        className="max-w-[1400px] mx-auto px-8 relative z-10"
-        style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
-      >
+      {/* ── Bottom band: clocks · copyright · legal ── */}
+      <div className="max-w-[1400px] mx-auto px-8">
         <div
-          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-          style={{ padding: "20px 0 22px" }}
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
+          style={{ padding: "16px 0 18px" }}
         >
-          <div className="flex items-center gap-6">
+          {/* Live clocks */}
+          <div className="flex items-center gap-5">
             {[
-              { label: "Dubai", time: dubaiTime, color: "#7A84BE" },
-              { label: "Paris", time: parisTime, color: "#4A58AA" },
-            ].map((office, i) => (
-              <div key={office.label} className="flex items-center gap-2.5">
-                {i > 0 && <div style={{ width: 1, height: 14, background: "rgba(255,255,255,0.08)", marginRight: 10 }} />}
-                <span style={{ display: "inline-block", width: 6, height: 6, background: office.color, borderRadius: "50%", flexShrink: 0, boxShadow: `0 0 6px ${office.color}40` }} />
-                <span style={{ color: "rgba(255,255,255,0.35)", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 600 }}>
-                  {office.label}
-                </span>
-                <span style={{ color: "rgba(255,255,255,0.45)", fontSize: 12, fontFamily: "'Plus Jakarta Sans', monospace", letterSpacing: "0.04em", minWidth: "6.5ch" }}>
-                  {office.time}
-                </span>
+              { label: "Dubai", time: dubaiTime, dot: "#7A84BE" },
+              { label: "Paris", time: parisTime, dot: "#4A58AA" },
+            ].map((o, i) => (
+              <div key={o.label} className="flex items-center gap-2">
+                {i > 0 && <span style={{ width: 1, height: 10, background: "rgba(255,255,255,0.08)", marginRight: 6 }} />}
+                <span style={{ width: 5, height: 5, borderRadius: "50%", background: o.dot, flexShrink: 0 }} />
+                <span style={{ color: "rgba(255,255,255,0.30)", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>{o.label}</span>
+                <span style={{ color: "rgba(255,255,255,0.40)", fontSize: 11, fontFamily: "'Plus Jakarta Sans', monospace", letterSpacing: "0.04em", minWidth: "6ch" }}>{o.time}</span>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
-            <p style={{ color: "rgba(255,255,255,0.30)", fontSize: 11 }}>{f.copyright}</p>
-            <a href="#" style={{ color: "rgba(255,255,255,0.30)", fontSize: 11, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.6)"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.30)"}
+          {/* Legal */}
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+            <span style={{ color: "rgba(255,255,255,0.25)", fontSize: 10 }}>{f.copyright}</span>
+            <a href="#" style={{ color: "rgba(255,255,255,0.25)", fontSize: 10, textDecoration: "none", transition: "color 0.2s" }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.25)"}
             >{f.privacy}</a>
-            <a href="#" style={{ color: "rgba(255,255,255,0.30)", fontSize: 11, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.6)"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.30)"}
+            <a href="#" style={{ color: "rgba(255,255,255,0.25)", fontSize: 10, textDecoration: "none", transition: "color 0.2s" }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.25)"}
             >{f.cookie}</a>
           </div>
         </div>
 
         <p
           data-testid="footer-disclaimer"
-          style={{ color: "rgba(255,255,255,0.18)", fontSize: 10, lineHeight: 1.65, paddingBottom: 24, maxWidth: "90ch" }}
+          style={{ color: "rgba(255,255,255,0.15)", fontSize: 9, lineHeight: 1.6, paddingBottom: 18, maxWidth: "85ch" }}
         >
           {f.disclaimer}
         </p>
