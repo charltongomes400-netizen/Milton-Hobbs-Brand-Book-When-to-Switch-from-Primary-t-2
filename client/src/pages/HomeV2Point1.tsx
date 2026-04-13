@@ -62,7 +62,6 @@ function HeaderV15() {
     >
       {/* Brand accent line — top edge */}
       <div className="absolute top-0 left-0 right-0" style={{ height: 3, background: "#001489" }} />
-
       <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 80 }}>
 
         {/* Logo */}
@@ -158,7 +157,6 @@ function HeaderV15() {
         </button>
 
       </div>
-
       {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
@@ -1609,7 +1607,6 @@ function FooterV15() {
 
   return (
     <footer id="footer" data-testid="footer" style={{ background: "#001489" }}>
-
       {/* ── Scrolling motto ticker ── */}
       <style>{`
         @keyframes mh-ticker {
@@ -1649,11 +1646,10 @@ function FooterV15() {
           ))}
         </div>
       </div>
-
       {/* ── Main body ── */}
       <div className="max-w-[1400px] mx-auto px-8">
         <div
-          className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] gap-12 lg:gap-20"
+          className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] gap-12 lg:gap-20 text-[#ffffff40]"
           style={{ paddingTop: 56, paddingBottom: 52, borderBottom: "1px solid rgba(255,255,255,0.08)" }}
         >
 
