@@ -2163,7 +2163,7 @@ function PracticeAreasV18() {
         onMouseDown={onProgressMouseDown}
         style={{
           position: "relative",
-          height: 6,
+          height: 16,
           background: "rgba(0,20,137,0.08)",
           cursor: "grab",
           userSelect: "none",
