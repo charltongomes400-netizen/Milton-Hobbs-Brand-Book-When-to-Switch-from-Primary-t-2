@@ -1362,12 +1362,6 @@ function ContactFormV15() {
           className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-20 items-end"
         >
           <div>
-            <p
-              className="font-medium uppercase mb-5"
-              style={{ color: "#4A58AA", fontSize: 12, letterSpacing: "0.25em" }}
-            >
-              {c.eyebrow}
-            </p>
             <h2
               className="font-heading font-bold leading-[1.08]"
               style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)", color: "#001489" }}
