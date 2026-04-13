@@ -1853,7 +1853,7 @@ function FooterV15() {
   );
 }
 
-/* ─── PRACTICE AREAS V18 (white/gold expanding panel) ───────────────────── */
+/* ─── PRACTICE AREAS ────────────────────────────────────────────────────── */
 
 const EXPERTISE_ITEMS_V18 = [
   { num: "01", short: "Corporate",   title: "Corporate & Commercial",             desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors.",                               img: imgCorp   },
@@ -1866,303 +1866,314 @@ const EXPERTISE_ITEMS_V18 = [
   { num: "08", short: "Litigation",  title: "Litigation & Dispute Resolution",    desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums.",                                          img: imgLitig  },
 ];
 
+function ExpertiseCard({ item, i, active, setActive }: { item: typeof EXPERTISE_ITEMS_V18[0]; i: number; active: number | null; setActive: (n: number | null) => void }) {
+  const isActive = active === i;
+  return (
+    <motion.div
+      data-testid={`expertise-item-${i}`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: (i % 4) * 0.07 }}
+      onMouseEnter={() => setActive(i)}
+      onMouseLeave={() => setActive(null)}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        background: "#001489",
+        cursor: "pointer",
+      }}
+    >
+      <img
+        src={item.img}
+        alt={item.title}
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{
+          mixBlendMode: "multiply",
+          transform: isActive ? "scale(1.06)" : "scale(1)",
+          transition: "transform 0.75s ease",
+        }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(to top, rgba(0,6,44,0.95) 0%, rgba(0,20,137,0.28) 55%, transparent 100%)" }}
+      />
+      <div className="absolute inset-0 flex flex-col justify-end" style={{ padding: "24px 26px 26px" }}>
+        <p
+          style={{
+            color: "#7A84BE",
+            fontSize: 11,
+            fontWeight: 600,
+            textTransform: "uppercase",
+            letterSpacing: "0.12em",
+            marginBottom: 8,
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+          }}
+        >
+          {item.short}
+        </p>
+        <h3
+          className="font-heading font-bold text-white"
+          style={{ fontSize: "clamp(1rem, 1.4vw, 1.2rem)", lineHeight: 1.25 }}
+        >
+          {item.title}
+        </h3>
+        <div
+          style={{
+            overflow: "hidden",
+            maxHeight: isActive ? "130px" : "0",
+            opacity: isActive ? 1 : 0,
+            transition: "max-height 0.4s ease, opacity 0.3s ease",
+            marginTop: isActive ? 14 : 0,
+          }}
+        >
+          <p
+            style={{
+              color: "rgba(255,255,255,0.55)",
+              fontSize: 13,
+              lineHeight: 1.7,
+              marginBottom: 16,
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+            }}
+          >
+            {item.desc}
+          </p>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2"
+            style={{
+              color: "rgba(255,255,255,0.80)",
+              fontSize: 11,
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              textDecoration: "none",
+              borderBottom: "1px solid rgba(255,255,255,0.25)",
+              paddingBottom: 2,
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+            }}
+          >
+            Enquire
+            <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
+              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 function PracticeAreasV18() {
   const [active, setActive] = useState<number | null>(null);
+
+  const ROW1 = EXPERTISE_ITEMS_V18.slice(0, 3);
 
   return (
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      className="py-24 px-8"
-      style={{ background: "#F9F9F9", borderTop: "1px solid rgba(0,20,137,0.07)" }}
+      data-header-theme="light"
+      style={{ background: "#FFFFFF", borderTop: "1px solid rgba(0,20,137,0.07)" }}
     >
-      <div className="max-w-[1400px] mx-auto">
+      {/* ── Section header ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.55 }}
+        className="px-8"
+        style={{
+          paddingLeft: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
+          paddingRight: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
+          paddingTop: 72,
+          paddingBottom: 48,
+        }}
+      >
+        <p className="text-[#4A58AA] uppercase font-medium mb-3" style={{ fontSize: 13 }}>
+          Our Expertise
+        </p>
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+          <h2
+            className="font-heading font-bold text-[#001489] leading-[1.15]"
+            style={{ fontSize: "clamp(1.375rem, 2.5vw, 1.75rem)" }}
+          >
+            Areas of Practice
+          </h2>
+          <p className="text-[#595959]" style={{ fontSize: 14, lineHeight: 1.6, maxWidth: 320 }}>
+            Across industries and borders, we deliver precision-crafted legal strategy.
+          </p>
+        </div>
+      </motion.div>
 
-        {/* ── Section header ── */}
+      {/* ── Desktop: Row 1 — 3 photo cards + 1 solid CTA ── */}
+      <div className="hidden lg:grid grid-cols-4" style={{ height: 490 }}>
+        {ROW1.map((item, i) => (
+          <ExpertiseCard key={i} item={item} i={i} active={active} setActive={setActive} />
+        ))}
+
+        {/* Solid CTA card */}
         <motion.div
+          data-testid="expertise-cta-card"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
+          transition={{ duration: 0.5, delay: 0.21 }}
+          style={{
+            background: "#192B94",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: "26px 28px 28px",
+          }}
         >
-          <p
-            className="text-[#4A58AA] uppercase font-medium mb-3"
-            style={{ fontSize: 13 }}
-          >
-            Our Expertise
-          </p>
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
-            <h2
-              className="font-heading font-bold text-[#001489] leading-[1.15]"
-              style={{ fontSize: "clamp(1.375rem, 2.5vw, 1.75rem)" }}
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <div
+              style={{
+                width: 38,
+                height: 38,
+                border: "1px solid rgba(255,255,255,0.20)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
             >
-              Areas of Practice
-            </h2>
+              <svg width="15" height="15" fill="none" viewBox="0 0 16 16">
+                <path d="M3 13L13 3M13 3H6M13 3v7" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
+              </svg>
+            </div>
+          </div>
+          <div>
             <p
-              className="text-[#595959]"
-              style={{ fontSize: 14, lineHeight: 1.6, maxWidth: 320 }}
+              style={{
+                color: "#7A84BE",
+                fontSize: 11,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                marginBottom: 12,
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+              }}
             >
-              Across industries and borders, we deliver precision-crafted legal strategy.
+              08 Disciplines
             </p>
+            <h3
+              className="font-heading font-bold text-white"
+              style={{ fontSize: "clamp(1rem, 1.4vw, 1.2rem)", lineHeight: 1.25, marginBottom: 28 }}
+            >
+              All Areas of Practice
+            </h3>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2"
+              style={{
+                color: "rgba(255,255,255,0.65)",
+                fontSize: 11,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                textDecoration: "none",
+                borderBottom: "1px solid rgba(255,255,255,0.18)",
+                paddingBottom: 2,
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                transition: "color 0.2s, border-color 0.2s",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.55)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)";
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.18)";
+              }}
+            >
+              Get in Touch
+              <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
+                <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+              </svg>
+            </a>
           </div>
         </motion.div>
-
-        {/* ── Desktop: 4-column portrait card grid ── */}
-        <div className="hidden lg:grid grid-cols-4 gap-4">
-          {EXPERTISE_ITEMS_V18.map((item, i) => {
-            const isActive = active === i;
-            return (
-              <motion.div
-                key={i}
-                data-testid={`expertise-item-${i}`}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: (i % 4) * 0.08 }}
-                onMouseEnter={() => setActive(i)}
-                onMouseLeave={() => setActive(null)}
-                style={{
-                  position: "relative",
-                  overflow: "hidden",
-                  background: "#001489",
-                  height: "430px",
-                  cursor: "pointer",
-                }}
-              >
-                {/* ── Photo — multiply blend, same technique as hero ── */}
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  style={{
-                    mixBlendMode: "multiply",
-                    transform: isActive ? "scale(1.05)" : "scale(1)",
-                    transition: "transform 0.7s ease",
-                  }}
-                />
-
-                {/* Bottom gradient for text legibility */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "linear-gradient(to top, rgba(0,8,55,0.92) 0%, rgba(0,20,137,0.30) 52%, rgba(0,8,55,0.05) 100%)",
-                  }}
-                />
-
-                {/* ── Default: number + tag + title pinned to bottom ── */}
-                <div
-                  className="absolute inset-0 flex flex-col justify-between"
-                  style={{
-                    padding: "20px 22px 24px",
-                    opacity: isActive ? 0 : 1,
-                    transition: "opacity 0.2s ease",
-                    pointerEvents: isActive ? "none" : "auto",
-                  }}
-                >
-                  <span
-                    className="font-heading font-semibold"
-                    style={{ color: "#7A84BE", fontSize: 12 }}
-                  >
-                    {item.num}
-                  </span>
-                  <div>
-                    <p
-                      style={{
-                        color: "rgba(255,255,255,0.48)",
-                        fontSize: 12,
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        marginBottom: 6,
-                      }}
-                    >
-                      {item.short}
-                    </p>
-                    <h3
-                      className="font-heading font-bold text-white"
-                      style={{ fontSize: "clamp(1.125rem, 1.5vw, 1.25rem)", lineHeight: 1.25 }}
-                    >
-                      {item.title}
-                    </h3>
-                  </div>
-                </div>
-
-                {/* ── Hover: white translucent panel slides up from bottom ── */}
-                <div
-                  className="absolute left-0 right-0 bottom-0"
-                  style={{
-                    background: "rgba(255,255,255,0.10)",
-                    backdropFilter: "blur(0px)",
-                    height: "72%",
-                    transform: isActive ? "translateY(0)" : "translateY(100%)",
-                    transition: "transform 0.38s cubic-bezier(0.4, 0, 0.2, 1)",
-                    pointerEvents: "none",
-                  }}
-                />
-
-                {/* ── Hover: full content panel slides up ── */}
-                <div
-                  className="absolute inset-0 flex flex-col justify-end"
-                  style={{
-                    padding: "20px 22px 26px",
-                    opacity: isActive ? 1 : 0,
-                    transform: isActive ? "translateY(0)" : "translateY(10px)",
-                    transition: "opacity 0.32s ease 0.06s, transform 0.32s ease 0.06s",
-                    pointerEvents: isActive ? "auto" : "none",
-                  }}
-                >
-                  <span
-                    className="font-heading font-semibold"
-                    style={{ color: "#7A84BE", fontSize: 12, display: "block", marginBottom: 8 }}
-                  >
-                    {item.num}
-                  </span>
-                  <h3
-                    className="font-heading font-bold text-white"
-                    style={{ fontSize: "clamp(1.125rem, 1.5vw, 1.25rem)", lineHeight: 1.25, marginBottom: 12 }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    style={{
-                      color: "rgba(255,255,255,0.58)",
-                      fontSize: 14,
-                      lineHeight: 1.72,
-                      marginBottom: 22,
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    }}
-                  >
-                    {item.desc}
-                  </p>
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center gap-2 self-start"
-                    style={{
-                      color: "rgba(255,255,255,0.85)",
-                      fontSize: 12,
-                      textTransform: "uppercase",
-                      fontWeight: 600,
-                      textDecoration: "none",
-                      borderBottom: "1px solid rgba(255,255,255,0.30)",
-                      paddingBottom: 2,
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
-                      transition: "color 0.2s, border-color 0.2s",
-                    }}
-                    onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
-                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.7)";
-                    }}
-                    onMouseLeave={e => {
-                      (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.85)";
-                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.30)";
-                    }}
-                  >
-                    <span>Enquire</span>
-                    <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
-                      <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-                    </svg>
-                  </a>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* ── Mobile: 2-column portrait grid ── */}
-        <div className="grid grid-cols-2 lg:hidden gap-3">
-          {EXPERTISE_ITEMS_V18.map((item, i) => {
-            const isOpen = active === i;
-            return (
-              <div
-                key={i}
-                data-testid={`expertise-item-mobile-${i}`}
-                onClick={() => setActive(isOpen ? null : i)}
-                style={{
-                  position: "relative",
-                  overflow: "hidden",
-                  background: "#001489",
-                  height: isOpen ? "340px" : "280px",
-                  cursor: "pointer",
-                  transition: "height 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                }}
-              >
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  style={{ mixBlendMode: "multiply" }}
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "linear-gradient(to top, rgba(0,8,55,0.93) 0%, rgba(0,20,137,0.30) 55%, rgba(0,8,55,0.05) 100%)",
-                  }}
-                />
-                <div
-                  className="absolute inset-0 flex flex-col justify-between"
-                  style={{ padding: "14px 14px 16px" }}
-                >
-                  <span
-                    className="font-heading font-semibold"
-                    style={{ color: "#7A84BE", fontSize: 12 }}
-                  >
-                    {item.num}
-                  </span>
-                  <div>
-                    <h3
-                      className="font-heading font-bold text-white"
-                      style={{ fontSize: "1.125rem", lineHeight: 1.3, marginBottom: isOpen ? 10 : 0 }}
-                    >
-                      {item.title}
-                    </h3>
-                    <AnimatePresence>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 6 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.28 }}
-                        >
-                          <p
-                            style={{
-                              color: "rgba(255,255,255,0.55)",
-                              fontSize: 14,
-                              lineHeight: 1.65,
-                              marginBottom: 14,
-                              fontFamily: "'Plus Jakarta Sans', sans-serif",
-                            }}
-                          >
-                            {item.desc}
-                          </p>
-                          <a
-                            href="#contact"
-                            className="inline-flex items-center gap-1.5"
-                            style={{
-                              color: "rgba(255,255,255,0.85)",
-                              fontSize: 12,
-                              textTransform: "uppercase",
-                              fontWeight: 600,
-                              textDecoration: "none",
-                              borderBottom: "1px solid rgba(255,255,255,0.30)",
-                              paddingBottom: 2,
-                              fontFamily: "'Plus Jakarta Sans', sans-serif",
-                            }}
-                          >
-                            <span>Enquire</span>
-                            <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12">
-                              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-                            </svg>
-                          </a>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
       </div>
+
+      {/* ── Desktop: Row 2 — remaining 5 items ── */}
+      <div className="hidden lg:grid grid-cols-5" style={{ height: 360, borderTop: "1px solid rgba(0,20,137,0.06)" }}>
+        {EXPERTISE_ITEMS_V18.slice(3).map((item, i) => (
+          <ExpertiseCard key={i + 3} item={item} i={i + 3} active={active} setActive={setActive} />
+        ))}
+      </div>
+
+      {/* ── Mobile: 2-column grid ── */}
+      <div className="grid grid-cols-2 lg:hidden">
+        {EXPERTISE_ITEMS_V18.map((item, i) => {
+          const isOpen = active === i;
+          return (
+            <div
+              key={i}
+              data-testid={`expertise-item-mobile-${i}`}
+              onClick={() => setActive(isOpen ? null : i)}
+              style={{
+                position: "relative",
+                overflow: "hidden",
+                background: "#001489",
+                height: isOpen ? "320px" : "240px",
+                cursor: "pointer",
+                transition: "height 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                borderRight: i % 2 === 0 ? "1px solid rgba(255,255,255,0.05)" : "none",
+                borderBottom: "1px solid rgba(255,255,255,0.05)",
+              }}
+            >
+              <img
+                src={item.img}
+                alt={item.title}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ mixBlendMode: "multiply" }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(to top, rgba(0,6,44,0.94) 0%, rgba(0,20,137,0.25) 55%, transparent 100%)" }}
+              />
+              <div className="absolute inset-0 flex flex-col justify-end" style={{ padding: "14px 16px 18px" }}>
+                <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.10em", marginBottom: 6, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  {item.short}
+                </p>
+                <h3
+                  className="font-heading font-bold text-white"
+                  style={{ fontSize: "1rem", lineHeight: 1.3, marginBottom: isOpen ? 10 : 0 }}
+                >
+                  {item.title}
+                </h3>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      <p style={{ color: "rgba(255,255,255,0.52)", fontSize: 13, lineHeight: 1.65, marginBottom: 12, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                        {item.desc}
+                      </p>
+                      <a
+                        href="#contact"
+                        className="inline-flex items-center gap-1.5"
+                        style={{ color: "rgba(255,255,255,0.80)", fontSize: 11, fontWeight: 600, textTransform: "uppercase", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.25)", paddingBottom: 2, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      >
+                        Enquire
+                        <svg width="9" height="9" fill="none" viewBox="0 0 12 12">
+                          <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+                        </svg>
+                      </a>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
     </section>
   );
 }
