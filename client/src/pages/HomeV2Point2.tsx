@@ -1767,17 +1767,6 @@ function FooterV15() {
 
 /* ─── PRACTICE AREAS ────────────────────────────────────────────────────── */
 
-const PRACTICE_ICONS: Record<string, string> = {
-  Corporate: "M3 21V7l9-4 9 4v14M3 10h18M9 21V14h6v7M12 3v4",
-  Tax: "M4 4h16v3H4zM6 7v13h12V7M9 10v7M12 10v7M15 10v7M2 4h20",
-  "M&A": "M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM16 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 14v4M8 22h8M12 18h0",
-  Startups: "M12 2L4 7v6c0 5.5 3.4 10.7 8 12 4.6-1.3 8-6.5 8-12V7l-8-5zM9 12l2 2 4-4",
-  "IP & Tech": "M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.5-3 5.7V17H8v-2.3C6.2 13.5 5 11.4 5 9a7 7 0 0 1 7-7zM9 21h6M10 17v4M14 17v4",
-  "Real Estate": "M3 21h18M5 21V9l7-6 7 6v12M9 21v-6h6v6",
-  Employment: "M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M10 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM21 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8",
-  Litigation: "M12 22c1-4 6-6 6-10a6 6 0 1 0-12 0c0 4 5 6 6 10zM12 2v2M4.9 4.9l1.4 1.4M2 12h2M4.9 19.1l1.4-1.4M19.1 4.9l-1.4 1.4M22 12h-2M19.1 19.1l-1.4-1.4",
-};
-
 const EXPERTISE_ITEMS_V18 = [
   { num: "01", short: "Corporate",   title: "Corporate & Commercial",             desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors.",                               img: imgCorp   },
   { num: "02", short: "Tax",         title: "Tax & Compliance",                   desc: "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals.",                    img: imgTax    },
@@ -1791,34 +1780,28 @@ const EXPERTISE_ITEMS_V18 = [
 
 const PRACTICE_CYCLE_MS = 5000;
 
-function PracticeAreaIcon({ pathD, isActive }: { pathD: string; isActive: boolean }) {
+function PracticeIcon({ index, size = 32, color = "currentColor" }: { index: number; size?: number; color?: string }) {
+  const icons = [
+    <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><line x1="6.5" y1="10" x2="6.5" y2="14" /><line x1="17.5" y1="10" x2="17.5" y2="14" /></>,
+    <><path d="M2 4h20v3H2z" /><path d="M4 7v12h16V7" /><line x1="8" y1="11" x2="8" y2="16" /><line x1="12" y1="11" x2="12" y2="16" /><line x1="16" y1="11" x2="16" y2="16" /><line x1="2" y1="19" x2="22" y2="19" /></>,
+    <><circle cx="9" cy="10" r="5" /><circle cx="15" cy="10" r="5" /><path d="M12 6.2a5 5 0 0 1 0 7.6" /><line x1="12" y1="15" x2="12" y2="20" /><line x1="8" y1="20" x2="16" y2="20" /></>,
+    <><path d="M13 2L3 7v6c0 5.5 3.4 10.7 8 12" /><path d="M11 2l10 5v6c0 5.5-3.4 10.7-8 12" /><polyline points="9 12 11 14 15 10" /></>,
+    <><circle cx="12" cy="9" r="5" /><line x1="12" y1="14" x2="12" y2="17" /><line x1="8" y1="17" x2="16" y2="17" /><line x1="10" y1="17" x2="10" y2="21" /><line x1="14" y1="17" x2="14" y2="21" /><line x1="8" y1="21" x2="16" y2="21" /><path d="M12 4v0" /><circle cx="12" cy="8" r="1.5" fill={color} stroke="none" /></>,
+    <><path d="M3 21h18" /><path d="M5 21V8l7-5 7 5v13" /><rect x="9" y="14" width="6" height="7" /><line x1="12" y1="8" x2="12" y2="11" /><line x1="10.5" y1="9.5" x2="13.5" y2="9.5" /></>,
+    <><circle cx="9" cy="7" r="3" /><circle cx="17" cy="7" r="2.5" /><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2" /><path d="M17 14a4 4 0 0 1 4 4v3" /></>,
+    <><path d="M12 3L4 8v3h16V8z" /><line x1="4" y1="11" x2="4" y2="19" /><line x1="20" y1="11" x2="20" y2="19" /><line x1="2" y1="19" x2="22" y2="19" /><line x1="12" y1="11" x2="12" y2="19" /><line x1="8" y1="11" x2="8" y2="19" /><line x1="16" y1="11" x2="16" y2="19" /></>,
+  ];
   return (
-    <motion.svg
-      width="28"
-      height="28"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      animate={{
-        scale: isActive ? [1, 1.12, 1] : 1,
-        rotate: isActive ? [0, -3, 3, 0] : 0,
-      }}
-      transition={{
-        duration: isActive ? 0.6 : 0.3,
-        ease: "easeInOut",
-      }}
-    >
-      <path d={pathD} />
-    </motion.svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+      {icons[index]}
+    </svg>
   );
 }
 
 function PracticeAreasV18() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState<number | null>(null);
 
   useEffect(() => {
     if (paused) return;
@@ -1834,256 +1817,360 @@ function PracticeAreasV18() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      data-header-theme="light"
-      style={{ background: "#FFFFFF", borderTop: "1px solid rgba(0,20,137,0.07)" }}
-      onMouseLeave={() => setPaused(false)}
+      data-header-theme="dark"
+      style={{ background: "#001489", position: "relative", overflow: "hidden" }}
+      onMouseLeave={() => { setPaused(false); setHovered(null); }}
     >
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 96, paddingBottom: 0 }}>
+      <style>{`
+        @keyframes pa-float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-8px); }
+        }
+        @keyframes pa-pulse-ring {
+          0% { transform: scale(1); opacity: 0.4; }
+          100% { transform: scale(2.2); opacity: 0; }
+        }
+        .pa-node-ring {
+          animation: pa-pulse-ring 2s ease-out infinite;
+        }
+        @keyframes pa-line-flow {
+          0% { stroke-dashoffset: 20; }
+          100% { stroke-dashoffset: 0; }
+        }
+      `}</style>
 
-        {/* ── Section header ── */}
+      {/* Subtle grid pattern overlay */}
+      <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.03 }}>
+        <svg width="100%" height="100%">
+          <defs>
+            <pattern id="pa-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+              <circle cx="30" cy="30" r="1" fill="#FFFFFF" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#pa-grid)" />
+        </svg>
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-8 relative z-10" style={{ paddingTop: 100, paddingBottom: 0 }}>
+
+        {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
-          style={{ marginBottom: 64, textAlign: "center" }}
+          style={{ marginBottom: 72 }}
         >
-          <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-            08 Disciplines
-          </p>
-          <h2
-            className="font-heading font-bold text-[#001489] leading-[1.15]"
-            style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)" }}
-          >
-            Areas of Practice
-          </h2>
+          <div className="flex items-end justify-between gap-6 flex-wrap">
+            <div>
+              <p style={{ color: "rgba(255,255,255,0.30)", fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                08 Disciplines
+              </p>
+              <h2
+                className="font-heading font-bold leading-[1.15]"
+                style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", color: "#FFFFFF" }}
+              >
+                Areas of Practice
+              </h2>
+            </div>
+            <div className="flex items-center gap-4" style={{ paddingBottom: 4 }}>
+              <span style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontSize: 13,
+                color: "rgba(255,255,255,0.20)",
+                letterSpacing: "0.06em",
+              }}>
+                {String(active + 1).padStart(2, "0")} <span style={{ color: "rgba(255,255,255,0.10)" }}>/</span> {String(EXPERTISE_ITEMS_V18.length).padStart(2, "0")}
+              </span>
+              {/* Progress dots */}
+              <div className="flex items-center gap-1.5">
+                {EXPERTISE_ITEMS_V18.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => { setActive(i); setPaused(true); }}
+                    style={{
+                      width: active === i ? 20 : 6,
+                      height: 3,
+                      background: active === i ? "rgba(255,255,255,0.50)" : "rgba(255,255,255,0.12)",
+                      border: "none",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                      padding: 0,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </motion.div>
 
-        {/* ── Icon tile grid: 4 columns × 2 rows ── */}
+        {/* ── Icon node grid — 4×2 with connecting lines ── */}
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-4"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07 } } }}
-          style={{ borderTop: "1px solid rgba(0,20,137,0.08)", borderLeft: "1px solid rgba(0,20,137,0.08)" }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
         >
-          {EXPERTISE_ITEMS_V18.map((itm, i) => {
-            const isActive = active === i;
-            const iconPath = PRACTICE_ICONS[itm.short] || "";
-            return (
-              <motion.div
-                key={i}
-                data-testid={`expertise-item-${i}`}
-                onClick={() => { setActive(i); setPaused(true); }}
-                onMouseEnter={() => { setActive(i); setPaused(true); }}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-                }}
-                style={{
-                  cursor: "pointer",
-                  padding: "clamp(24px, 3vw, 40px) clamp(16px, 2vw, 28px)",
-                  borderRight: "1px solid rgba(0,20,137,0.08)",
-                  borderBottom: "1px solid rgba(0,20,137,0.08)",
-                  position: "relative",
-                  overflow: "hidden",
-                  transition: "background 0.35s ease",
-                  background: isActive ? "rgba(0,20,137,0.04)" : "transparent",
-                }}
-              >
-                {/* Active top accent line */}
-                <motion.div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 3,
-                    background: "#001489",
-                  }}
-                  animate={{ scaleX: isActive ? 1 : 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  initial={{ scaleX: 0, transformOrigin: "left" }}
-                />
+          {/* Connection lines SVG layer */}
+          <svg className="absolute inset-0 pointer-events-none z-0 hidden lg:block" style={{ width: "100%", height: "100%", overflow: "visible" }}>
+            {[
+              { x1: "18%", y1: "42%", x2: "35%", y2: "42%" },
+              { x1: "40%", y1: "42%", x2: "57%", y2: "42%" },
+              { x1: "63%", y1: "42%", x2: "80%", y2: "42%" },
+              { x1: "18%", y1: "62%", x2: "35%", y2: "62%" },
+              { x1: "40%", y1: "62%", x2: "57%", y2: "62%" },
+              { x1: "63%", y1: "62%", x2: "80%", y2: "62%" },
+              { x1: "18%", y1: "46%", x2: "18%", y2: "58%" },
+              { x1: "80%", y1: "46%", x2: "80%", y2: "58%" },
+            ].map((line, i) => (
+              <line key={i} {...line} stroke="rgba(122,132,190,0.08)" strokeWidth="1" strokeDasharray="4 4" style={{ animation: "pa-line-flow 3s linear infinite" }} />
+            ))}
+          </svg>
 
-                {/* Number + icon row */}
-                <div className="flex items-center justify-between" style={{ marginBottom: 16 }}>
-                  <span style={{
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 lg:gap-8 relative z-10">
+            {EXPERTISE_ITEMS_V18.map((itm, i) => {
+              const isActive = active === i;
+              const isHovered = hovered === i;
+              return (
+                <motion.div
+                  key={i}
+                  data-testid={`expertise-item-${i}`}
+                  onClick={() => { setActive(i); setPaused(true); }}
+                  onMouseEnter={() => { setActive(i); setPaused(true); setHovered(i); }}
+                  onMouseLeave={() => setHovered(null)}
+                  variants={{
+                    hidden: { opacity: 0, y: 30, scale: 0.95 },
+                    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: "easeOut" } },
+                  }}
+                  style={{
+                    cursor: "pointer",
+                    textAlign: "center",
+                    padding: "clamp(28px, 3vw, 40px) clamp(16px, 2vw, 24px)",
+                    position: "relative",
+                    background: isActive ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.02)",
+                    border: `1px solid ${isActive ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.04)"}`,
+                    transition: "all 0.4s ease",
+                    ...(isHovered ? { transform: "translateY(-4px)" } : {}),
+                  }}
+                >
+                  {/* Glowing icon container */}
+                  <div style={{
+                    width: 64,
+                    height: 64,
+                    margin: "0 auto 20px",
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}>
+                    {/* Pulse ring on active */}
+                    {isActive && (
+                      <div style={{
+                        position: "absolute",
+                        inset: -4,
+                        borderRadius: "50%",
+                        border: "1px solid rgba(122,132,190,0.25)",
+                      }} className="pa-node-ring" />
+                    )}
+                    {/* Outer ring */}
+                    <div style={{
+                      position: "absolute",
+                      inset: 0,
+                      borderRadius: "50%",
+                      border: `1.5px solid ${isActive ? "rgba(122,132,190,0.40)" : "rgba(255,255,255,0.08)"}`,
+                      transition: "border-color 0.4s ease",
+                    }} />
+                    {/* Inner icon */}
+                    <motion.div
+                      animate={{
+                        scale: isActive ? [1, 1.08, 1] : 1,
+                      }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      style={{ color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.35)", transition: "color 0.3s" }}
+                    >
+                      <PracticeIcon index={i} size={28} color={isActive ? "#FFFFFF" : "rgba(255,255,255,0.35)"} />
+                    </motion.div>
+                  </div>
+
+                  {/* Number */}
+                  <p style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: 11,
-                    fontWeight: 600,
-                    color: isActive ? "#001489" : "rgba(0,20,137,0.20)",
-                    letterSpacing: "0.06em",
+                    fontSize: 10,
+                    fontWeight: 700,
+                    color: isActive ? "rgba(122,132,190,0.80)" : "rgba(255,255,255,0.15)",
+                    letterSpacing: "0.15em",
+                    marginBottom: 8,
                     transition: "color 0.3s",
                   }}>
                     {itm.num}
-                  </span>
-                  <div style={{
-                    color: isActive ? "#001489" : "rgba(0,20,137,0.22)",
-                    transition: "color 0.3s",
-                  }}>
-                    <PracticeAreaIcon pathD={iconPath} isActive={isActive} />
-                  </div>
-                </div>
+                  </p>
 
-                {/* Title */}
-                <h3
-                  className="font-heading font-bold"
-                  style={{
-                    fontSize: "clamp(0.85rem, 1.2vw, 1.05rem)",
-                    lineHeight: 1.3,
-                    color: isActive ? "#001489" : "rgba(0,20,137,0.45)",
-                    transition: "color 0.3s",
-                    minHeight: "2.6em",
-                  }}
-                >
-                  {itm.title}
-                </h3>
+                  {/* Title */}
+                  <h3
+                    className="font-heading font-bold"
+                    style={{
+                      fontSize: "clamp(0.8rem, 1.1vw, 0.95rem)",
+                      lineHeight: 1.35,
+                      color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.35)",
+                      transition: "color 0.3s",
+                    }}
+                  >
+                    {itm.title}
+                  </h3>
 
-                {/* Subtle arrow indicator on active */}
-                <motion.div
-                  animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 4 }}
-                  transition={{ duration: 0.25 }}
-                  style={{ marginTop: 12 }}
-                >
-                  <svg width="14" height="14" fill="none" viewBox="0 0 16 16" style={{ color: "#001489" }}>
-                    <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-                  </svg>
-                </motion.div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
-        {/* ── Expanded detail panel below grid ── */}
-        <div style={{ overflow: "hidden" }}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-              className="grid grid-cols-1 lg:grid-cols-[1fr_1fr]"
-              style={{ minHeight: 340 }}
-            >
-              {/* Detail: image panel */}
-              <div
-                className="relative"
-                style={{
-                  background: "#001489",
-                  overflow: "hidden",
-                  minHeight: 280,
-                }}
-              >
-                <motion.img
-                  src={item.img}
-                  alt={item.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  style={{ mixBlendMode: "multiply" }}
-                  initial={{ scale: 1.06 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,14,80,0.25) 0%, transparent 40%, rgba(0,6,44,0.55) 100%)" }} />
-                <div className="absolute bottom-0 left-0 right-0" style={{ height: "50%", background: "linear-gradient(to top, rgba(0,6,44,0.80) 0%, transparent 100%)" }} />
-
-                {/* Image overlay: number + category */}
-                <div className="absolute bottom-0 left-0 right-0" style={{ padding: "0 32px 28px" }}>
-                  <div className="flex items-end gap-4">
-                    <span style={{
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
-                      fontSize: "clamp(2.5rem, 5vw, 4rem)",
-                      fontWeight: 800,
-                      color: "rgba(255,255,255,0.08)",
-                      lineHeight: 1,
-                      letterSpacing: "-0.02em",
-                    }}>
-                      {item.num}
-                    </span>
-                    <div style={{ paddingBottom: 6 }}>
-                      <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 6, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                        {item.short}
-                      </p>
-                      <h3 className="font-heading font-bold text-white" style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.5rem)", lineHeight: 1.2 }}>
-                        {item.title}
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Progress bar */}
-                <div className="absolute top-0 left-0 right-0" style={{ height: 3, background: "rgba(255,255,255,0.06)" }}>
+                  {/* Active indicator dot */}
                   <motion.div
-                    key={`prog-${active}-${paused}`}
-                    style={{ height: "100%", background: "rgba(255,255,255,0.30)", transformOrigin: "left" }}
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: paused ? undefined : 1 }}
-                    transition={paused ? undefined : { duration: PRACTICE_CYCLE_MS / 1000, ease: "linear" }}
+                    animate={{ scale: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: "50%",
+                      background: "#7A84BE",
+                      margin: "14px auto 0",
+                      boxShadow: "0 0 10px rgba(122,132,190,0.50)",
+                    }}
                   />
-                </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+      </div>
+
+      {/* ── Cinematic detail panel — full width below nodes ── */}
+      <div style={{ marginTop: 48 }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="grid grid-cols-1 lg:grid-cols-[5fr_4fr]"
+            style={{ minHeight: 380 }}
+          >
+            {/* Image side */}
+            <div className="relative" style={{ background: "#000C4A", overflow: "hidden", minHeight: 320 }}>
+              <motion.img
+                src={item.img}
+                alt={item.title}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ mixBlendMode: "multiply", opacity: 0.85 }}
+                initial={{ scale: 1.08 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+              />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(0,12,74,0.85) 0%, rgba(0,12,74,0.20) 50%, rgba(0,12,74,0.60) 100%)" }} />
+
+              {/* Overlay content */}
+              <div className="absolute inset-0 flex flex-col justify-end" style={{ padding: "clamp(24px, 4vw, 48px)" }}>
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.15 }}
+                >
+                  {/* Large ghost number */}
+                  <span style={{
+                    fontFamily: "'Satoshi', sans-serif",
+                    fontSize: "clamp(4rem, 8vw, 7rem)",
+                    fontWeight: 900,
+                    color: "rgba(255,255,255,0.04)",
+                    lineHeight: 0.85,
+                    display: "block",
+                    letterSpacing: "-0.04em",
+                    marginBottom: -10,
+                  }}>
+                    {item.num}
+                  </span>
+                  <div className="flex items-center gap-3" style={{ marginBottom: 12 }}>
+                    <div style={{ color: "rgba(255,255,255,0.60)" }}>
+                      <PracticeIcon index={active} size={20} color="rgba(255,255,255,0.60)" />
+                    </div>
+                    <div style={{ height: 1, flex: 1, background: "rgba(255,255,255,0.10)", maxWidth: 80 }} />
+                    <span style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                      {item.short}
+                    </span>
+                  </div>
+                  <h3 className="font-heading font-bold text-white" style={{ fontSize: "clamp(1.25rem, 2.2vw, 1.75rem)", lineHeight: 1.2 }}>
+                    {item.title}
+                  </h3>
+                </motion.div>
               </div>
 
-              {/* Detail: text content */}
-              <div
-                className="flex flex-col justify-center"
-                style={{
-                  padding: "clamp(28px, 4vw, 48px) clamp(24px, 4vw, 56px)",
-                  background: "#F9F9F9",
-                }}
+              {/* Progress bar */}
+              <div className="absolute bottom-0 left-0 right-0" style={{ height: 3, background: "rgba(255,255,255,0.06)" }}>
+                <motion.div
+                  key={`prog-${active}-${paused}`}
+                  style={{ height: "100%", background: "rgba(122,132,190,0.50)", transformOrigin: "left" }}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: paused ? undefined : 1 }}
+                  transition={paused ? undefined : { duration: PRACTICE_CYCLE_MS / 1000, ease: "linear" }}
+                />
+              </div>
+            </div>
+
+            {/* Content side */}
+            <div
+              className="flex flex-col justify-center relative"
+              style={{
+                padding: "clamp(32px, 4vw, 56px) clamp(28px, 4vw, 64px)",
+                background: "rgba(0,12,74,0.60)",
+                backdropFilter: "blur(20px)",
+              }}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <div className="flex items-center gap-3" style={{ marginBottom: 20 }}>
-                  <div style={{ color: "#001489" }}>
-                    <PracticeAreaIcon pathD={PRACTICE_ICONS[item.short] || ""} isActive={true} />
-                  </div>
-                  <div style={{ flex: 1, height: 1, background: "rgba(0,20,137,0.08)" }} />
-                </div>
-                <h3
-                  className="font-heading font-bold text-[#001489]"
-                  style={{ fontSize: "clamp(1.15rem, 1.8vw, 1.5rem)", lineHeight: 1.25, marginBottom: 16 }}
-                >
-                  {item.title}
-                </h3>
                 <p style={{
-                  color: "rgba(0,20,137,0.50)",
+                  color: "rgba(255,255,255,0.50)",
                   fontSize: 14,
-                  lineHeight: 1.78,
+                  lineHeight: 1.82,
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  maxWidth: "50ch",
-                  marginBottom: 28,
+                  maxWidth: "48ch",
+                  marginBottom: 32,
                 }}>
                   {item.desc}
                 </p>
+
                 <a
                   href="#contact"
                   data-testid={`expertise-enquire-${active}`}
-                  className="inline-flex items-center gap-3"
+                  className="inline-flex items-center gap-3 group"
                   style={{
                     color: "#FFFFFF",
-                    background: "#001489",
                     fontSize: 11,
                     fontWeight: 700,
                     textTransform: "uppercase",
-                    letterSpacing: "0.1em",
+                    letterSpacing: "0.12em",
                     textDecoration: "none",
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    padding: "12px 28px",
+                    padding: "14px 32px",
+                    border: "1px solid rgba(255,255,255,0.18)",
                     alignSelf: "flex-start",
-                    transition: "background 0.2s",
+                    transition: "all 0.3s ease",
+                    background: "transparent",
                   }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "#192B94"}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "#001489"}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.35)";
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.background = "transparent";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.18)";
+                  }}
                 >
                   Enquire
-                  <svg width="12" height="12" fill="none" viewBox="0 0 12 12">
-                    <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+                  <svg width="14" height="14" fill="none" viewBox="0 0 16 16" className="transition-transform group-hover:translate-x-1">
+                    <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
                   </svg>
                 </a>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
