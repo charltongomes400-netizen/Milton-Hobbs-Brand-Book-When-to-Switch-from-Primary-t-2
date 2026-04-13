@@ -1631,25 +1631,9 @@ function FooterV15() {
   const dubaiTime = fmtTime("Asia/Dubai");
   const parisTime = fmtTime("Europe/Paris");
 
-  const marqueeSingle = (
-    <>
-      {["REASON", "RIGOR", "RESOLUTION", "RAISON", "RIGUEUR", "RÉSOLUTION"].map((word, i) => (
-        <span key={i} className="inline-flex items-center">
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: "0.14em",
-              color: i % 3 === 0 ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.28)",
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-            }}
-          >
-            {word}
-          </span>
-          <span style={{ color: "rgba(255,255,255,0.14)", padding: "0 20px", fontSize: 10 }}>◆</span>
-        </span>
-      ))}
-    </>
+  const TICKER_WORDS = ["REASON", "RIGOR", "RESOLUTION", "RAISON", "RIGUEUR", "RÉSOLUTION"];
+  const tickerHalf = Array.from({ length: 12 }).flatMap((_, r) =>
+    TICKER_WORDS.map((word, w) => ({ key: `${r}-${w}`, word, bright: w % 3 === 0 }))
   );
 
   return (
@@ -1673,13 +1657,26 @@ function FooterV15() {
       >
         <div
           style={{
-            display: "inline-flex",
+            display: "flex",
             whiteSpace: "nowrap",
             animation: "mh-ticker 44s linear infinite",
             willChange: "transform",
           }}
         >
-          {marqueeSingle}{marqueeSingle}
+          {/* Copy A */}
+          {tickerHalf.map(({ key, word, bright }) => (
+            <span key={`a-${key}`} style={{ display: "inline-flex", alignItems: "center", flexShrink: 0 }}>
+              <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", color: bright ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.28)", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{word}</span>
+              <span style={{ color: "rgba(255,255,255,0.14)", padding: "0 20px", fontSize: 10 }}>◆</span>
+            </span>
+          ))}
+          {/* Copy B — identical, enables seamless -50% loop */}
+          {tickerHalf.map(({ key, word, bright }) => (
+            <span key={`b-${key}`} style={{ display: "inline-flex", alignItems: "center", flexShrink: 0 }}>
+              <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", color: bright ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.28)", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{word}</span>
+              <span style={{ color: "rgba(255,255,255,0.14)", padding: "0 20px", fontSize: 10 }}>◆</span>
+            </span>
+          ))}
         </div>
       </div>
 
