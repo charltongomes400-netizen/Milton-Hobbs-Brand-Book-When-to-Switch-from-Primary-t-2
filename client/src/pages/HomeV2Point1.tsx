@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useMotionValue, animate } from "framer-motion"
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { articles } from "@/data/articles";
 import miltonHobbsLogo from "@assets/Milton_hobbs_logo_1775554832004.png";
+import miltonHobbsWordmark from "@assets/image_1776101259071.png";
 import imgCorp   from "@assets/stock_images/corporate_commercial.jpg";
 import imgTax    from "@assets/stock_images/tax_planning.jpg";
 import imgBank   from "@assets/stock_images/banking_finance.jpg";
@@ -1692,18 +1693,17 @@ function FooterV15() {
           {/* LEFT: Giant masthead wordmark */}
           <div className="flex flex-col justify-between gap-10">
             <div>
-              <div
-                className="leading-[0.92] select-none"
-                aria-label="Milton Hobbs"
-                style={{ fontFamily: "'Cormorant Garant', Georgia, serif" }}
-              >
-                <div style={{ fontSize: "clamp(3.5rem, 9.5vw, 8rem)", color: "#FFFFFF", fontWeight: 600, letterSpacing: "0.08em" }}>
-                  MILTON
-                </div>
-                <div style={{ fontSize: "clamp(3.5rem, 9.5vw, 8rem)", color: "rgba(255,255,255,0.18)", fontWeight: 600, letterSpacing: "0.08em" }}>
-                  HOBBS
-                </div>
-              </div>
+              <img
+                src={miltonHobbsWordmark}
+                alt="Milton Hobbs"
+                style={{
+                  width: "clamp(160px, 22vw, 280px)",
+                  height: "auto",
+                  filter: "brightness(0) invert(1)",
+                  opacity: 0.92,
+                  display: "block",
+                }}
+              />
               <div style={{ width: 48, height: 1, background: "rgba(255,255,255,0.14)", margin: "24px 0 20px" }} />
               <p style={{ color: "rgba(255,255,255,0.38)", fontSize: 14, lineHeight: 1.7, maxWidth: "38ch" }}>
                 {f.tagline}
