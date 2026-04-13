@@ -709,7 +709,7 @@ function DifferentiatorsV15() {
         {/* ── Section heading ── */}
         <h1
           className="font-heading font-bold"
-          style={{ color: "#001489", fontSize: "clamp(1.375rem, 2.5vw, 1.75rem)", lineHeight: 1.15, marginBottom: 40 }}
+          style={{ color: "#001489", fontSize: "clamp(1.375rem, 2.5vw, 1.75rem)", lineHeight: 1.15, marginBottom: 40, paddingLeft: "calc(3px + 1rem)" }}
         >
           Why Miltion Hobbs
         </h1>
