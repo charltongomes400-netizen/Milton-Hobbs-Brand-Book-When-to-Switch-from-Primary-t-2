@@ -1292,36 +1292,6 @@ function ContactFormV15() {
             borderRight: "1px solid rgba(0,20,137,0.07)",
           }}
         >
-          {/* Ghost coordinate watermark */}
-          <div
-            aria-hidden="true"
-            className="absolute bottom-0 left-0 right-0 select-none pointer-events-none overflow-hidden"
-            style={{ lineHeight: 0.9 }}
-          >
-            <div
-              className="font-heading font-bold"
-              style={{
-                fontSize: "clamp(4rem, 11vw, 9.5rem)",
-                color: "rgba(0,20,137,0.035)",
-                whiteSpace: "nowrap",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              25.2048°
-            </div>
-            <div
-              className="font-heading font-bold"
-              style={{
-                fontSize: "clamp(4rem, 11vw, 9.5rem)",
-                color: "rgba(0,20,137,0.035)",
-                whiteSpace: "nowrap",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              48.8566°
-            </div>
-          </div>
-
           {/* ── Top: eyebrow + headline ── */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
