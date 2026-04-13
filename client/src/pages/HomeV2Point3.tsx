@@ -1008,23 +1008,25 @@ function DifferentiatorsV15() {
             <a
               href="#contact"
               data-testid="diff-cta"
-              className="inline-flex items-center gap-3 self-start"
+              className="inline-flex items-center gap-3 group self-start"
               style={{
-                color: "rgba(255,255,255,0.75)",
-                fontSize: 10,
+                color: "#001489",
+                fontSize: 11,
                 fontWeight: 700,
-                letterSpacing: "0.26em",
+                letterSpacing: "0.12em",
                 textTransform: "uppercase",
                 textDecoration: "none",
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                transition: "color 0.2s",
+                padding: "14px 32px",
+                background: "#FFFFFF",
+                transition: "background 0.25s ease",
               }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#FFFFFF"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.75)"; }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#E8EDF5"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#FFFFFF"; }}
             >
               <span>Speak to Us</span>
-              <svg width="20" height="10" fill="none" viewBox="0 0 20 10">
-                <path d="M1 5h17M14 1l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              <svg width="14" height="14" fill="none" viewBox="0 0 16 16" style={{ transition: "transform 0.2s" }} className="group-hover:translate-x-1 transition-transform">
+                <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
               </svg>
             </a>
           </motion.div>
@@ -1367,23 +1369,28 @@ function CaseFileStripV18() {
                   <a
                     href="#contact"
                     data-testid="case-file-enquire-cta"
+                    className="inline-flex items-center gap-3 group"
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
                       gap: 10,
-                      color: "rgba(255,255,255,0.85)",
+                      color: "#001489",
                       fontSize: 11,
-                      fontWeight: 600,
-                      letterSpacing: "0.2em",
+                      fontWeight: 700,
+                      letterSpacing: "0.12em",
                       textTransform: "uppercase",
                       textDecoration: "none",
-                      borderBottom: "1px solid rgba(255,255,255,0.3)",
-                      paddingBottom: 2,
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      padding: "14px 32px",
+                      background: "#FFFFFF",
+                      transition: "background 0.25s ease",
                     }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#E8EDF5"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#FFFFFF"; }}
                   >
                     Enquire About This Area
-                    <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-                      <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                    <svg width="14" height="14" fill="none" viewBox="0 0 16 16" className="transition-transform group-hover:translate-x-1">
+                      <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
                     </svg>
                   </a>
                 </div>
