@@ -862,97 +862,44 @@ function DifferentiatorsV15() {
             </a>
           </div>
 
-          {/* ── RIGHT HALF: liquid glass animation panel ── */}
+          {/* ── RIGHT HALF: Apple liquid glass panel ── */}
           <div
             style={{
-              background: "linear-gradient(160deg, #0a1a7a 0%, #001489 30%, #0d2090 55%, #071560 80%, #000e4a 100%)",
+              background: "rgba(0,20,137,0.32)",
+              backdropFilter: "blur(44px) saturate(1.6)",
+              WebkitBackdropFilter: "blur(44px) saturate(1.6)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               position: "relative",
               overflow: "hidden",
               minHeight: 560,
-              borderRadius: "24px",
-              boxShadow: "0 40px 100px rgba(0,14,74,0.45), 0 16px 40px rgba(0,20,137,0.3), inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -2px 0 rgba(0,0,0,0.2)",
-              border: "1px solid rgba(255,255,255,0.10)",
+              borderRadius: "28px",
+              border: "1px solid rgba(255,255,255,0.18)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -1px 0 rgba(0,0,0,0.08), 0 24px 64px rgba(0,20,137,0.18), 0 8px 24px rgba(0,20,137,0.10)",
+              padding: 32,
             }}
           >
-            {/* Liquid glass caustic shimmer layer */}
-            <motion.div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "linear-gradient(125deg, rgba(255,255,255,0.08) 0%, transparent 25%, rgba(120,140,220,0.06) 40%, transparent 55%, rgba(255,255,255,0.05) 70%, transparent 85%)",
-                pointerEvents: "none",
-              }}
-              animate={{
-                backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
-              }}
-              transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-            />
-            {/* Large floating glass orb — top right */}
-            <motion.div
-              style={{
-                position: "absolute",
-                top: -80,
-                right: -60,
-                width: 360,
-                height: 360,
-                borderRadius: "50%",
-                background: "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.10) 0%, rgba(74,88,170,0.06) 40%, transparent 70%)",
-                border: "1px solid rgba(255,255,255,0.06)",
-                pointerEvents: "none",
-              }}
-              animate={{ y: [0, 15, 0], x: [0, -8, 0] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Smaller floating glass orb — bottom left */}
-            <motion.div
-              style={{
-                position: "absolute",
-                bottom: -50,
-                left: -30,
-                width: 240,
-                height: 240,
-                borderRadius: "50%",
-                background: "radial-gradient(circle at 60% 40%, rgba(255,255,255,0.07) 0%, rgba(74,88,170,0.04) 50%, transparent 70%)",
-                border: "1px solid rgba(255,255,255,0.04)",
-                pointerEvents: "none",
-              }}
-              animate={{ y: [0, -12, 0], x: [0, 10, 0] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-            />
-            {/* Glass specular highlight — top edge */}
+            {/* Top specular edge — thin bright line like light on glass */}
             <div
               style={{
                 position: "absolute",
                 top: 0,
-                left: "10%",
-                right: "10%",
+                left: 0,
+                right: 0,
                 height: 1,
-                background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.18) 30%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.18) 70%, transparent)",
-                pointerEvents: "none",
-              }}
-            />
-            {/* Radial center glow */}
-            <div
-              style={{
-                position: "absolute",
-                width: "120%",
-                height: "120%",
-                borderRadius: "50%",
-                background: "radial-gradient(ellipse at center, rgba(74,88,170,0.15) 0%, transparent 55%)",
+                background: "linear-gradient(90deg, transparent 5%, rgba(255,255,255,0.28) 25%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.28) 75%, transparent 95%)",
                 pointerEvents: "none",
               }}
             />
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
-                style={{ width: "85%", height: "80%", position: "relative", zIndex: 1 }}
-                initial={{ opacity: 0, scale: 0.95 }}
+                style={{ width: "100%", height: "100%", position: "relative", zIndex: 1 }}
+                initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.03 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                exit={{ opacity: 0, scale: 1.02 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
                 {(() => { const V = VISUALS[active]; return <V />; })()}
               </motion.div>
