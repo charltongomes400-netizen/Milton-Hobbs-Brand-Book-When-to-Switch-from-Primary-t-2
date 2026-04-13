@@ -226,15 +226,15 @@ const GRID_ROWS = [4,  22,   40, 58,   76];      // % top  values for R0–R4
 // (colIdx, rowIdx, color, duration, delay)
 // Cells chosen so no two tiles share a row+col position:
 const TILE_DEFS: [number, number, string, number, number][] = [
-  [0, 0, "#001489", 16.0,  0.0],  // C0·R0 — isolated upper-left
-  [3, 0, "#001050", 18.0,  6.0],  // C3·R0 — top-right solo
-  [2, 1, "#001489", 14.0,  3.0],  // C2·R1 — upper-mid
-  [3, 1, "#001050", 17.0,  9.0],  // C3·R1 — adjacent right of above
-  [4, 2, "#001489", 15.0,  5.0],  // C4·R2 — far-right mid
-  [1, 2, "#001050", 19.0, 12.0],  // C1·R2 — left-mid
-  [1, 3, "#001489", 16.0, 14.0],  // C1·R3 — vertical pair with above
-  [3, 3, "#001050", 15.0,  7.0],  // C3·R3 — right-mid lower
-  [4, 4, "#001489", 18.0,  2.0],  // C4·R4 — bottom-right
+  [0, 0, "#001489", 22.0,  0.0],  // C0·R0 — isolated upper-left
+  [3, 0, "#001050", 24.0,  6.0],  // C3·R0 — top-right solo
+  [2, 1, "#001489", 20.0,  3.0],  // C2·R1 — upper-mid
+  [3, 1, "#001050", 23.0,  9.0],  // C3·R1 — adjacent right of above
+  [4, 2, "#001489", 21.0,  5.0],  // C4·R2 — far-right mid
+  [1, 2, "#001050", 26.0, 12.0],  // C1·R2 — left-mid
+  [1, 3, "#001489", 22.0, 14.0],  // C1·R3 — vertical pair with above
+  [3, 3, "#001050", 20.0,  7.0],  // C3·R3 — right-mid lower
+  [4, 4, "#001489", 24.0,  2.0],  // C4·R4 — bottom-right
 ];
 
 const ACCENT_TILES = TILE_DEFS.map(([ci, ri, col, dur, delay]) => ({
@@ -311,7 +311,7 @@ function HeroV15() {
             delay:    tile.delay,
             repeat:   Infinity,
             ease:     "easeInOut",
-            times:    [0, 0.20, 0.38, 0.62, 0.80, 1],
+            times:    [0, 0.15, 0.40, 0.60, 0.85, 1],
           }}
         />
       ))}
