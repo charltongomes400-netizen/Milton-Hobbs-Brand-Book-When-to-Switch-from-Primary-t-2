@@ -723,9 +723,9 @@ function DifferentiatorsV15() {
               <p
                 style={{
                   color: "#4A58AA",
-                  fontSize: 12,
+                  fontSize: 13,
                   fontWeight: 600,
-                  letterSpacing: "0.3em",
+                  letterSpacing: "0.06em",
                   textTransform: "uppercase",
                   marginBottom: 14,
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -735,7 +735,7 @@ function DifferentiatorsV15() {
               </p>
               <h2
                 className="font-heading font-bold"
-                style={{ color: "#001489", fontSize: "clamp(1.5rem, 2.2vw, 2rem)", lineHeight: 1.15 }}
+                style={{ color: "#001489", fontSize: "clamp(1.375rem, 2vw, 1.875rem)", lineHeight: 1.15 }}
               >
                 {d.headline}
               </h2>
@@ -763,8 +763,8 @@ function DifferentiatorsV15() {
                       animate={{
                         color: i === active ? "#001489" : "#848484",
                         fontSize: i === active
-                          ? "clamp(1.25rem, 1.8vw, 1.5rem)"
-                          : "clamp(1rem, 1.4vw, 1.2rem)",
+                          ? "clamp(1.125rem, 1.6vw, 1.375rem)"
+                          : "clamp(0.9375rem, 1.3vw, 1.125rem)",
                       }}
                       transition={{ duration: 0.3, ease: "easeOut" }}
                     >
@@ -773,9 +773,9 @@ function DifferentiatorsV15() {
                     <span
                       style={{
                         flexShrink: 0,
-                        fontSize: 11,
+                        fontSize: 12,
                         fontWeight: 700,
-                        letterSpacing: "0.15em",
+                        letterSpacing: "0.06em",
                         color: i === active ? "#4A58AA" : "#C8CDD8",
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
                       }}
@@ -1288,10 +1288,10 @@ function ContactFormV15() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <p className="text-[#4A58AA] tracking-[0.3em] uppercase font-medium mb-4 text-[16px]">
+          <p className="text-[#4A58AA] tracking-[0.06em] uppercase font-medium mb-4 text-[13px]">
             {c.eyebrow}
           </p>
-          <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold leading-[1.25]">
+          <h2 className="font-heading text-[#001489] font-semibold leading-[1.25]" style={{ fontSize: "clamp(1.375rem, 2vw, 1.75rem)" }}>
             {c.headline}
           </h2>
         </motion.div>
@@ -1307,7 +1307,7 @@ function ContactFormV15() {
             <p className="text-black/55 text-sm leading-[1.4]">{c.subtext}</p>
 
             <div>
-              <p className="text-[#4A58AA] tracking-[0.25em] uppercase font-medium mb-5 text-[12px]">
+              <p className="text-[#4A58AA] tracking-[0.06em] uppercase font-medium mb-5 text-[12px]">
                 {c.officeLabel}
               </p>
               <div className="flex flex-col gap-6">
@@ -1335,7 +1335,7 @@ function ContactFormV15() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <p className="text-[#4A58AA] text-[10px] tracking-[0.25em] uppercase font-medium mb-1">
+              <p className="text-[#4A58AA] text-[12px] tracking-[0.06em] uppercase font-medium mb-1">
                 Email
               </p>
               <a href={`mailto:${f.email}`} data-testid="contact-email"
@@ -1422,7 +1422,7 @@ function FooterV15() {
       <div className="max-w-[1400px] mx-auto px-8">
         <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 border-b border-white/10">
           <div className="lg:col-span-5 lg:pr-16">
-            <p className="font-heading text-white font-semibold text-lg tracking-[0.18em] uppercase mb-5">
+            <p className="font-heading text-white font-semibold text-lg tracking-[0.06em] uppercase mb-5">
               Milton Hobbs
             </p>
             <p className="text-white/45 text-sm leading-[1.4] max-w-xs mb-8 pr-[20%]">
@@ -1444,7 +1444,7 @@ function FooterV15() {
             </div>
           </div>
           <div className="lg:col-span-3">
-            <p className="text-white/30 text-[10px] tracking-[0.25em] uppercase font-medium mb-6">
+            <p className="text-white/30 text-[12px] tracking-[0.06em] uppercase font-medium mb-6">
               {f.dubaiLabel}
             </p>
             <address className="not-italic text-white/50 text-sm leading-[1.4]">
@@ -1452,7 +1452,7 @@ function FooterV15() {
             </address>
           </div>
           <div className="lg:col-span-3 lg:col-start-10">
-            <p className="text-white/30 text-[10px] tracking-[0.25em] uppercase font-medium mb-6">
+            <p className="text-white/30 text-[12px] tracking-[0.06em] uppercase font-medium mb-6">
               {f.parisLabel}
             </p>
             <address className="not-italic text-white/50 text-sm leading-[1.4]">
@@ -1464,20 +1464,20 @@ function FooterV15() {
           <div className="flex flex-wrap gap-x-7 gap-y-3">
             {navEntries.map(link => (
               <a key={link.href} href={link.href}
-                className="text-white/30 hover:text-white/60 text-[10px] tracking-[0.18em] uppercase transition-colors">
+                className="text-white/30 hover:text-white/60 text-[12px] tracking-[0.04em] uppercase transition-colors">
                 {link.label}
               </a>
             ))}
           </div>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-white/30 hover:text-white/60 text-[10px] tracking-[0.18em] uppercase transition-colors">{f.privacy}</a>
-            <a href="#" className="text-white/30 hover:text-white/60 text-[10px] tracking-[0.18em] uppercase transition-colors">{f.cookie}</a>
+            <a href="#" className="text-white/30 hover:text-white/60 text-[12px] tracking-[0.04em] uppercase transition-colors">{f.privacy}</a>
+            <a href="#" className="text-white/30 hover:text-white/60 text-[12px] tracking-[0.04em] uppercase transition-colors">{f.cookie}</a>
           </div>
         </div>
         <div className="py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
           <p className="text-white/25 text-xs leading-[1.5] shrink-0">{f.copyright}</p>
           <p data-testid="footer-disclaimer"
-            className="text-white/20 text-[11px] max-w-lg sm:text-right leading-[1.5]">
+            className="text-white/20 text-[12px] max-w-lg sm:text-right leading-[1.5]">
             {f.disclaimer}
           </p>
         </div>
@@ -1520,14 +1520,14 @@ function PracticeAreasV18() {
           className="mb-14"
         >
           <p
-            className="text-[#4A58AA] tracking-[0.3em] uppercase font-medium mb-3"
-            style={{ fontSize: 16, paddingLeft: "calc(3px + 1rem)" }}
+            className="text-[#4A58AA] tracking-[0.06em] uppercase font-medium mb-3"
+            style={{ fontSize: 13, paddingLeft: "calc(3px + 1rem)" }}
           >
             Our Expertise
           </p>
           <h2
             className="font-heading font-semibold text-[#001489] leading-[1.25]"
-            style={{ fontSize: "clamp(1rem, 1.8vw, 1.375rem)", paddingLeft: "calc(3px + 1rem)" }}
+            style={{ fontSize: "clamp(1.375rem, 2vw, 1.75rem)", paddingLeft: "calc(3px + 1rem)" }}
           >
             Areas of Practice
           </h2>
@@ -1586,7 +1586,7 @@ function PracticeAreasV18() {
                   <div className="relative z-10 pt-6 flex justify-center">
                     <span
                       className="font-heading"
-                      style={{ fontSize: 10, letterSpacing: "0.2em", color: "rgba(255,255,255,0.5)" }}
+                      style={{ fontSize: 12, letterSpacing: "0.06em", color: "rgba(255,255,255,0.5)" }}
                     >
                       {item.num}
                     </span>
@@ -1595,8 +1595,8 @@ function PracticeAreasV18() {
                     <span
                       className="font-heading font-semibold uppercase block overflow-hidden"
                       style={{
-                        fontSize: "0.65rem",
-                        letterSpacing: "0.07em",
+                        fontSize: "0.75rem",
+                        letterSpacing: "0.04em",
                         color: "rgba(255,255,255,0.6)",
                         textOverflow: "ellipsis",
                         whiteSpace: "nowrap",
@@ -1637,13 +1637,13 @@ function PracticeAreasV18() {
                       {item.num}
                     </div>
                     <div>
-                      <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 9, letterSpacing: "0.3em", textTransform: "uppercase", fontWeight: 500, marginBottom: 12 }}>
+                      <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 12, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 500, marginBottom: 12 }}>
                         Area of Practice
                       </p>
                       <h3 className="font-heading font-bold text-white leading-[1.2]" style={{ fontSize: "1.25rem", whiteSpace: "nowrap", marginBottom: 16 }}>
                         {item.title}
                       </h3>
-                      <p style={{ color: "rgba(255,255,255,0.52)", fontSize: "0.8rem", lineHeight: 1.75, maxWidth: "30ch", marginBottom: 28 }}>
+                      <p style={{ color: "rgba(255,255,255,0.52)", fontSize: "0.875rem", lineHeight: 1.75, maxWidth: "30ch", marginBottom: 28 }}>
                         {item.desc}
                       </p>
                       <a
@@ -1651,8 +1651,8 @@ function PracticeAreasV18() {
                         className="inline-flex items-center gap-2"
                         style={{
                           color: "rgba(255,255,255,0.85)",
-                          fontSize: 9,
-                          letterSpacing: "0.22em",
+                          fontSize: 12,
+                          letterSpacing: "0.06em",
                           textTransform: "uppercase",
                           fontWeight: 600,
                           textDecoration: "none",
@@ -1691,7 +1691,7 @@ function PracticeAreasV18() {
                 <div className="flex items-center gap-4 px-5 py-4">
                   <span
                     className="font-heading shrink-0"
-                    style={{ fontSize: 10, letterSpacing: "0.18em", color: "rgba(74,88,170,0.75)" }}
+                    style={{ fontSize: 12, letterSpacing: "0.06em", color: "rgba(74,88,170,0.75)" }}
                   >
                     {item.num}
                   </span>
@@ -1730,8 +1730,8 @@ function PracticeAreasV18() {
                           className="inline-flex items-center gap-2"
                           style={{
                             color: "rgba(255,255,255,0.85)",
-                            fontSize: 10,
-                            letterSpacing: "0.2em",
+                            fontSize: 12,
+                            letterSpacing: "0.06em",
                             textTransform: "uppercase",
                             fontWeight: 600,
                             textDecoration: "none",
