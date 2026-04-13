@@ -55,8 +55,8 @@ module.exports = {
         DEFAULT: "0px",
       },
       fontFamily: {
-        sans:    ["'Plus Jakarta Sans'", "ui-sans-serif", "system-ui", "sans-serif"],
-        heading: ["'Satoshi'", "'Plus Jakarta Sans'", "ui-sans-serif", "sans-serif"],
+        sans:    ["'Plus Jakarta Sans'", "'Inter'", "ui-sans-serif", "system-ui", "sans-serif"],
+        heading: ["'Satoshi'", "'Manrope'", "ui-sans-serif", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
