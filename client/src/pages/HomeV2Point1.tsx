@@ -42,120 +42,124 @@ function HeaderV15() {
     { label: t.nav.contact,   href: "#contact" },
   ];
 
+  const mainLinks = navLinks.filter(l => l.href !== "#contact");
+  const contactLink = navLinks.find(l => l.href === "#contact")!;
+
   return (
     <motion.header
       data-testid="header"
-      initial={{ y: -80, opacity: 0 }}
+      initial={{ y: -72, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.55, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: scrolled
-          ? "rgba(255,255,255,0.98)"
-          : "rgba(255,255,255,0.68)",
-        backdropFilter: scrolled
-          ? "none"
-          : "blur(24px) saturate(180%) brightness(1.06)",
-        WebkitBackdropFilter: scrolled
-          ? "none"
-          : "blur(24px) saturate(180%) brightness(1.06)",
-        boxShadow: scrolled
-          ? "0 1px 0 rgba(0,20,137,0.08), 0 4px 24px rgba(0,20,137,0.06)"
-          : [
-              "inset 0 1px 0 rgba(255,255,255,0.95)",
-              "inset 0 -1px 0 rgba(0,20,137,0.07)",
-              "0 4px 28px rgba(0,20,137,0.07)",
-            ].join(", "),
-        borderBottom: scrolled
-          ? "1px solid rgba(0,20,137,0.08)"
-          : "1px solid rgba(255,255,255,0.55)",
-        transition: "background 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease",
+        background: "#FFFFFF",
+        borderBottom: "1px solid #E8EDF5",
+        boxShadow: scrolled ? "0 2px 20px rgba(0,20,137,0.06)" : "none",
+        transition: "box-shadow 0.35s ease",
       }}
     >
-      {/* Specular gloss — top-edge bright line + upper-half sheen */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ opacity: scrolled ? 0 : 1, transition: "opacity 0.35s ease" }}>
-        {/* Upper-half white sheen */}
-        <div className="absolute inset-x-0 top-0 h-1/2" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%)" }} />
-        {/* Bright top-edge specular line */}
-        <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.95) 75%, transparent 100%)" }} />
-      </div>
-      <div className="max-w-[1400px] mx-auto px-8 h-20 flex items-center justify-between relative">
-        <a
-          href="#home"
-          data-testid="logo"
-          className="shrink-0"
-        >
-          <img
-            src={miltonHobbsLogo}
-            alt="Milton Hobbs"
-            className="h-16 w-auto block"
-          />
+      {/* Brand accent line — top edge */}
+      <div className="absolute top-0 left-0 right-0" style={{ height: 3, background: "#001489" }} />
+
+      <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 72 }}>
+
+        {/* Logo */}
+        <a href="#home" data-testid="logo" className="shrink-0 mt-[3px]">
+          <img src={miltonHobbsLogo} alt="Milton Hobbs" className="h-14 w-auto block" />
         </a>
 
-        <nav data-testid="nav-desktop" className="hidden lg:flex items-center gap-7 xl:gap-9">
-          {navLinks.map((link) => (
+        {/* Desktop nav — main links */}
+        <nav data-testid="nav-desktop" className="hidden lg:flex items-center gap-8 xl:gap-10">
+          {mainLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
-              className="text-[16px] tracking-[0.12em] uppercase font-medium whitespace-nowrap transition-colors duration-300"
-              style={{ color: "#001489" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#4A58AA")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#001489")}
+              className="relative whitespace-nowrap group"
+              style={{
+                color: "rgba(0,20,137,0.55)",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                transition: "color 0.2s ease",
+                paddingBottom: 2,
+              }}
+              onMouseEnter={e => (e.currentTarget.style.color = "#001489")}
+              onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,20,137,0.55)")}
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-5 shrink-0">
+        {/* Right side: Contact CTA + Language */}
+        <div className="hidden lg:flex items-center gap-6 shrink-0">
+
+          {/* Contact — filled button */}
+          <a
+            href={contactLink.href}
+            data-testid="nav-link-contact"
+            className="inline-flex items-center gap-2 text-white"
+            style={{
+              background: "#001489",
+              padding: "9px 22px",
+              fontSize: 10,
+              fontWeight: 700,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              transition: "background 0.2s ease",
+            }}
+            onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "#192B94"}
+            onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "#001489"}
+          >
+            {contactLink.label}
+          </a>
+
+          {/* Language toggle — plain text */}
           <div
             data-testid="lang-toggle"
-            className="hidden lg:flex items-center text-xs tracking-widest overflow-hidden"
-            style={{
-              background: "rgba(255,255,255,0.30)",
-              backdropFilter: "blur(8px)",
-            }}
+            className="flex items-center"
+            style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.2em" }}
           >
             <button
               onClick={() => setLang("EN")}
               data-testid="lang-en"
-              className="px-4 py-2 transition-all duration-200"
-              style={lang === "EN"
-                ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
-                : { color: "rgba(0,20,137,0.50)" }
-              }
+              className="transition-colors duration-200"
+              style={{ color: lang === "EN" ? "#001489" : "rgba(0,20,137,0.28)" }}
             >
               EN
             </button>
+            <span style={{ color: "rgba(0,20,137,0.18)", margin: "0 7px", fontWeight: 300, fontSize: 12 }}>|</span>
             <button
               onClick={() => setLang("FR")}
               data-testid="lang-fr"
-              className="px-4 py-2 transition-all duration-200"
-              style={lang === "FR"
-                ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
-                : { color: "rgba(0,20,137,0.50)" }
-              }
+              className="transition-colors duration-200"
+              style={{ color: lang === "FR" ? "#001489" : "rgba(0,20,137,0.28)" }}
             >
               FR
             </button>
           </div>
-
-          <button
-            data-testid="mobile-menu-toggle"
-            aria-label="Toggle menu"
-            className="lg:hidden p-1 transition-colors"
-            style={{ color: "rgba(0,20,137,0.65)" }}
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            <div className="flex flex-col gap-[5px] w-5">
-              <span className={`block h-px bg-current transition-all duration-300 origin-center ${mobileOpen ? "rotate-45 translate-y-[6px]" : ""}`} />
-              <span className={`block h-px bg-current transition-all duration-300 ${mobileOpen ? "opacity-0 scale-x-0" : ""}`} />
-              <span className={`block h-px bg-current transition-all duration-300 origin-center ${mobileOpen ? "-rotate-45 -translate-y-[6px]" : ""}`} />
-            </div>
-          </button>
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          data-testid="mobile-menu-toggle"
+          aria-label="Toggle menu"
+          className="lg:hidden flex flex-col gap-[5px] w-6 p-1 focus:outline-none"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          <span className={`block h-px bg-[#001489] transition-all duration-300 origin-center ${mobileOpen ? "rotate-45 translate-y-[6px]" : ""}`} />
+          <span className={`block h-px bg-[#001489] transition-all duration-300 ${mobileOpen ? "opacity-0 scale-x-0" : ""}`} />
+          <span className={`block h-px bg-[#001489] transition-all duration-300 origin-center ${mobileOpen ? "-rotate-45 -translate-y-[6px]" : ""}`} />
+        </button>
+
       </div>
+
+      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -163,43 +167,49 @@ function HeaderV15() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden border-t"
-            style={{
-              borderColor: "rgba(0,20,137,0.10)",
-              background: "rgba(240,244,255,0.80)",
-              backdropFilter: "blur(28px)",
-            }}
+            transition={{ duration: 0.28, ease: "easeInOut" }}
+            className="lg:hidden overflow-hidden"
+            style={{ background: "#FFFFFF", borderTop: "1px solid #E8EDF5" }}
           >
-            <div className="px-8 py-8 flex flex-col gap-5">
+            <div className="px-8 py-7 flex flex-col gap-6">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-[16px] tracking-[0.15em] uppercase transition-colors"
-                  style={{ color: "#001489" }}
+                  style={{
+                    color: "#001489",
+                    fontSize: 11,
+                    fontWeight: 600,
+                    letterSpacing: "0.22em",
+                    textTransform: "uppercase",
+                    textDecoration: "none",
+                  }}
                 >
                   {link.label}
                 </a>
               ))}
-              <div className="flex items-center gap-0 mt-2 w-fit"
-                >
+              <div className="flex items-center pt-2" style={{ borderTop: "1px solid #E8EDF5" }}>
                 <button
                   onClick={() => setLang("EN")}
-                  className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
-                  style={lang === "EN"
-                    ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
-                    : { color: "rgba(0,20,137,0.50)" }
-                  }
+                  style={{
+                    color: lang === "EN" ? "#001489" : "rgba(0,20,137,0.30)",
+                    fontSize: 10,
+                    fontWeight: 700,
+                    letterSpacing: "0.2em",
+                    transition: "color 0.2s",
+                  }}
                 >EN</button>
+                <span style={{ color: "rgba(0,20,137,0.18)", margin: "0 8px", fontSize: 12, fontWeight: 300 }}>|</span>
                 <button
                   onClick={() => setLang("FR")}
-                  className="text-xs tracking-widest px-4 py-2 transition-all duration-200"
-                  style={lang === "FR"
-                    ? { background: "#001489", color: "#FFFFFF", fontWeight: 600 }
-                    : { color: "rgba(0,20,137,0.50)" }
-                  }
+                  style={{
+                    color: lang === "FR" ? "#001489" : "rgba(0,20,137,0.30)",
+                    fontSize: 10,
+                    fontWeight: 700,
+                    letterSpacing: "0.2em",
+                    transition: "color 0.2s",
+                  }}
                 >FR</button>
               </div>
             </div>
