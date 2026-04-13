@@ -752,7 +752,7 @@ function DifferentiatorsV15() {
     >
       <div
         className="max-w-[1400px] mx-auto px-8"
-        style={{ paddingTop: 146, paddingBottom: 154 }}
+        style={{ paddingTop: 171, paddingBottom: 179 }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2" style={{ minHeight: 560 }}>
 
