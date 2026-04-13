@@ -736,7 +736,7 @@ function DifferentiatorsV15() {
                 className="font-heading font-bold"
                 style={{ color: "#001489", fontSize: "clamp(1.375rem, 2vw, 1.875rem)", lineHeight: 1.15 }}
               >
-                {d.headline}
+                WHY MILTION HOBBS
               </h2>
             </div>
 
