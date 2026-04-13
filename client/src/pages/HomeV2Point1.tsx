@@ -1276,128 +1276,323 @@ function ContactFormV15() {
   return (
     <section
       id="contact"
-      data-header-theme="light"
+      data-header-theme="dark"
       data-testid="contact-section"
-      className="bg-[#FCFCFC] py-28 px-8 border-t border-[#E5EAF4]"
+      style={{ background: "#001489" }}
     >
-      <div className="max-w-[1400px] mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
+      <div className="grid grid-cols-1 lg:grid-cols-[45fr_55fr]" style={{ minHeight: 680 }}>
+
+        {/* ── LEFT: Deep Blue info panel ── */}
+        <div
+          className="relative overflow-hidden flex flex-col justify-between px-8 pt-20 pb-16"
+          style={{
+            paddingLeft: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
+            paddingRight: "clamp(2rem, 4vw, 5rem)",
+          }}
         >
-          <p className="text-[#4A58AA] tracking-[0.06em] uppercase font-medium mb-4 text-[13px]">
-            {c.eyebrow}
-          </p>
-          <h2 className="font-heading text-[#001489] font-semibold leading-[1.25]" style={{ fontSize: "clamp(1.375rem, 2vw, 1.75rem)" }}>
-            {c.headline}
-          </h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-16 lg:gap-24">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col gap-5"
+          {/* Ghost city watermark — background texture */}
+          <div
+            aria-hidden="true"
+            className="absolute bottom-0 left-0 right-0 select-none pointer-events-none leading-none overflow-hidden"
+            style={{ lineHeight: 0.88 }}
           >
-            <p className="text-black/55 text-sm leading-[1.4]">{c.subtext}</p>
-
-            <div>
-              <p className="text-[#4A58AA] tracking-[0.06em] uppercase font-medium mb-5 text-[12px]">
-                {c.officeLabel}
-              </p>
-              <div className="flex flex-col gap-6">
-                <div>
-                  <p className="text-[#001489] text-sm font-semibold mb-1">{c.dubaiLabel}</p>
-                  {f.dubaiAddr.map((line, i) => (
-                    <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
-                  ))}
-                  <a href="tel:+97145232421" data-testid="contact-address-phone-dubai"
-                    className="text-black/45 text-xs hover:text-[#4A58AA] transition-colors">
-                    +971 4 523 2421
-                  </a>
-                </div>
-                <div>
-                  <p className="text-[#001489] text-sm font-semibold mb-1">{c.parisLabel}</p>
-                  {f.parisAddr.map((line, i) => (
-                    <p key={i} className="text-black/45 text-xs leading-[1.5]">{line}</p>
-                  ))}
-                  <a href="tel:+33180270067" data-testid="contact-address-phone-paris"
-                    className="text-black/45 text-xs hover:text-[#4A58AA] transition-colors">
-                    +33 1 80 27 00 67
-                  </a>
-                </div>
-              </div>
+            <div
+              className="font-heading font-bold"
+              style={{
+                fontSize: "clamp(5rem, 13vw, 11.5rem)",
+                color: "rgba(255,255,255,0.045)",
+                whiteSpace: "nowrap",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              DUBAI
             </div>
-
-            <div className="flex flex-col gap-2">
-              <p className="text-[#4A58AA] text-[12px] tracking-[0.06em] uppercase font-medium mb-1">
-                Email
-              </p>
-              <a href={`mailto:${f.email}`} data-testid="contact-email"
-                className="text-[#001489]/60 hover:text-[#4A58AA] text-sm transition-colors">
-                {f.email}
-              </a>
+            <div
+              className="font-heading font-bold"
+              style={{
+                fontSize: "clamp(5rem, 13vw, 11.5rem)",
+                color: "rgba(255,255,255,0.045)",
+                whiteSpace: "nowrap",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              PARIS
             </div>
+          </div>
+
+          {/* ── Top: eyebrow + headline ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65 }}
+            className="relative z-10"
+          >
+            <p
+              className="font-medium uppercase mb-5"
+              style={{ color: "#7A84BE", fontSize: 13 }}
+            >
+              {c.eyebrow}
+            </p>
+            <h2
+              className="font-heading font-bold text-white leading-[1.1] mb-6"
+              style={{ fontSize: "clamp(1.75rem, 3.5vw, 3rem)" }}
+            >
+              {c.headline}
+            </h2>
+            <div style={{ width: 40, height: 1, background: "rgba(255,255,255,0.20)", marginBottom: 24 }} />
+            <p
+              style={{
+                color: "rgba(255,255,255,0.50)",
+                fontSize: 14,
+                lineHeight: 1.72,
+                maxWidth: "38ch",
+              }}
+            >
+              {c.subtext}
+            </p>
           </motion.div>
 
+          {/* ── Bottom: offices + email ── */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.65, delay: 0.15 }}
+            className="relative z-10 mt-12 lg:mt-0"
           >
-            {submitted ? (
-              <div data-testid="contact-success"
-                className="border border-[#001489]/20 p-10 flex flex-col gap-4 h-full justify-center">
-                <div className="flex items-center gap-3 mb-2">
-                  <svg className="w-5 h-5 text-[#001489]" fill="none" viewBox="0 0 20 20">
-                    <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <h3 className="font-heading text-[#001489] text-lg font-semibold">{c.successTitle}</h3>
-                </div>
-                <p className="text-black/55 text-sm leading-[1.4]">{c.successText}</p>
+            <p
+              className="font-medium uppercase mb-7"
+              style={{ color: "#7A84BE", fontSize: 12 }}
+            >
+              {c.officeLabel}
+            </p>
+
+            <div className="grid grid-cols-2 gap-8 mb-10">
+              {/* Dubai */}
+              <div>
+                <p
+                  className="font-heading font-semibold text-white mb-2"
+                  style={{ fontSize: 14 }}
+                >
+                  {c.dubaiLabel}
+                </p>
+                {f.dubaiAddr.map((line, i) => (
+                  <p key={i} style={{ color: "rgba(255,255,255,0.40)", fontSize: 13, lineHeight: 1.6 }}>{line}</p>
+                ))}
+                <a
+                  href="tel:+97145232421"
+                  data-testid="contact-address-phone-dubai"
+                  style={{
+                    color: "rgba(255,255,255,0.40)",
+                    fontSize: 13,
+                    textDecoration: "none",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#7A84BE"}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
+                >
+                  +971 4 523 2421
+                </a>
               </div>
-            ) : (
+
+              {/* Paris */}
+              <div>
+                <p
+                  className="font-heading font-semibold text-white mb-2"
+                  style={{ fontSize: 14 }}
+                >
+                  {c.parisLabel}
+                </p>
+                {f.parisAddr.map((line, i) => (
+                  <p key={i} style={{ color: "rgba(255,255,255,0.40)", fontSize: 13, lineHeight: 1.6 }}>{line}</p>
+                ))}
+                <a
+                  href="tel:+33180270067"
+                  data-testid="contact-address-phone-paris"
+                  style={{
+                    color: "rgba(255,255,255,0.40)",
+                    fontSize: 13,
+                    textDecoration: "none",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#7A84BE"}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
+                >
+                  +33 1 80 27 00 67
+                </a>
+              </div>
+            </div>
+
+            <div style={{ width: "100%", height: 1, background: "rgba(255,255,255,0.08)", marginBottom: 20 }} />
+            <p className="font-medium uppercase mb-2" style={{ color: "#7A84BE", fontSize: 12 }}>
+              Email
+            </p>
+            <a
+              href={`mailto:${f.email}`}
+              data-testid="contact-email"
+              style={{
+                color: "rgba(255,255,255,0.55)",
+                fontSize: 14,
+                textDecoration: "none",
+                transition: "color 0.2s",
+              }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.55)"}
+            >
+              {f.email}
+            </a>
+          </motion.div>
+        </div>
+
+        {/* ── RIGHT: White form panel ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col justify-center px-8 pt-16 pb-16"
+          style={{
+            background: "#FFFFFF",
+            paddingRight: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
+            paddingLeft: "clamp(2rem, 4vw, 5rem)",
+          }}
+        >
+          {submitted ? (
+            <motion.div
+              data-testid="contact-success"
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className="flex flex-col gap-5 max-w-lg"
+            >
+              <div
+                className="flex items-center justify-center"
+                style={{
+                  width: 52,
+                  height: 52,
+                  background: "#001489",
+                  marginBottom: 8,
+                }}
+              >
+                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 20 20">
+                  <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <h3 className="font-heading text-[#001489] font-bold" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)" }}>
+                {c.successTitle}
+              </h3>
+              <p style={{ color: "#595959", fontSize: 14, lineHeight: 1.72 }}>{c.successText}</p>
+            </motion.div>
+          ) : (
+            <div className="max-w-lg w-full">
+              <p className="font-medium uppercase mb-8" style={{ color: "#4A58AA", fontSize: 12 }}>
+                Send a Message
+              </p>
+
               <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input type="text" name="name" required value={form.name} onChange={handleChange}
-                    placeholder={c.namePlaceholder} data-testid="input-name"
-                    className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors" />
-                  <input type="email" name="email" required value={form.email} onChange={handleChange}
-                    placeholder={c.emailPlaceholder} data-testid="input-email"
-                    className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors" />
+                  <div className="flex flex-col gap-1.5">
+                    <input
+                      type="text" name="name" required value={form.name} onChange={handleChange}
+                      placeholder={c.namePlaceholder} data-testid="input-name"
+                      className="border text-[#151515] placeholder-[#848484] text-sm px-4 py-4 outline-none transition-colors"
+                      style={{
+                        background: "#F9F9F9",
+                        borderColor: "rgba(0,20,137,0.12)",
+                      }}
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.12)"}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <input
+                      type="email" name="email" required value={form.email} onChange={handleChange}
+                      placeholder={c.emailPlaceholder} data-testid="input-email"
+                      className="border text-[#151515] placeholder-[#848484] text-sm px-4 py-4 outline-none transition-colors"
+                      style={{
+                        background: "#F9F9F9",
+                        borderColor: "rgba(0,20,137,0.12)",
+                      }}
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.12)"}
+                    />
+                  </div>
                 </div>
+
                 <div className="relative">
-                  <select name="subject" required value={form.subject} onChange={handleChange}
+                  <select
+                    name="subject" required value={form.subject} onChange={handleChange}
                     data-testid="select-subject"
-                    className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors appearance-none cursor-pointer"
-                    style={{ color: form.subject ? "#001489" : "rgba(0,20,137,0.3)" }}>
+                    className="w-full border text-sm px-4 py-4 outline-none transition-colors appearance-none cursor-pointer"
+                    style={{
+                      background: "#F9F9F9",
+                      borderColor: "rgba(0,20,137,0.12)",
+                      color: form.subject ? "#151515" : "#848484",
+                    }}
+                    onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+                    onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.12)"}
+                  >
                     <option value="" disabled hidden>{c.subjectPlaceholder}</option>
                     {c.subjectOptions.map((opt, i) => (
-                      <option key={i} value={opt} style={{ color: "#001489", background: "#fff" }}>{opt}</option>
+                      <option key={i} value={opt} style={{ color: "#151515", background: "#fff" }}>{opt}</option>
                     ))}
                   </select>
-                  <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-[#001489]/30"
-                    fill="none" viewBox="0 0 12 12">
+                  <svg
+                    className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3"
+                    style={{ color: "#848484" }}
+                    fill="none" viewBox="0 0 12 12"
+                  >
                     <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                   </svg>
                 </div>
-                <textarea name="message" required rows={5} value={form.message} onChange={handleChange}
+
+                <textarea
+                  name="message" required rows={5} value={form.message} onChange={handleChange}
                   placeholder={c.messagePlaceholder} data-testid="input-message"
-                  className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3.5 outline-none focus:border-[#001489]/40 transition-colors resize-none" />
-                <button type="submit" disabled={submitting} data-testid="button-submit"
-                  className="self-start bg-[#001489] text-white text-xs tracking-[0.2em] uppercase font-semibold px-8 py-4 hover:bg-[#000E45] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
-                  {submitting ? c.submitting : c.submit}
-                </button>
+                  className="border text-[#151515] placeholder-[#848484] text-sm px-4 py-4 outline-none transition-colors resize-none"
+                  style={{
+                    background: "#F9F9F9",
+                    borderColor: "rgba(0,20,137,0.12)",
+                  }}
+                  onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+                  onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.12)"}
+                />
+
+                <div className="flex items-center gap-6 mt-1">
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    data-testid="button-submit"
+                    className="bg-[#001489] text-white uppercase font-semibold px-10 py-4 hover:bg-[#000E45] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                    style={{ fontSize: 12 }}
+                  >
+                    {submitting ? (
+                      <span className="flex items-center gap-2.5">
+                        <svg className="w-3.5 h-3.5 animate-spin" viewBox="0 0 16 16" fill="none">
+                          <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.3" />
+                          <path d="M8 2a6 6 0 016 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                        </svg>
+                        {c.submitting}
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-2.5">
+                        {c.submit}
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+                          <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+                        </svg>
+                      </span>
+                    )}
+                  </button>
+                  <p style={{ color: "#848484", fontSize: 12 }}>
+                    Typically replies within 24 hours
+                  </p>
+                </div>
               </form>
-            )}
-          </motion.div>
-        </div>
+            </div>
+          )}
+        </motion.div>
+
       </div>
     </section>
   );
