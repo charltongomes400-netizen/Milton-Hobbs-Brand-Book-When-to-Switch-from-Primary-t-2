@@ -1778,92 +1778,21 @@ const EXPERTISE_ITEMS_V18 = [
   { num: "08", short: "Litigation",  title: "Litigation & Dispute Resolution",    desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums.",                                          img: imgLitig  },
 ];
 
-function PracticeAreasV18() {
-  const [active, setActive] = useState<number | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const [slider, setSlider] = useState({ frac: 0, thumbW: 0.25 });
-  const isDragging = useRef(false);
-  const dragStartX = useRef(0);
-  const dragScrollLeft = useRef(0);
-  const progressBarRef = useRef<HTMLDivElement>(null);
-  const isBarDragging = useRef(false);
+const PRACTICE_CYCLE_MS = 6000;
 
-  const TOTAL = EXPERTISE_ITEMS_V18.length + 1;
+function PracticeAreasV18() {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setSlider({ frac: 0, thumbW: el.clientWidth / el.scrollWidth });
-  }, []);
+    if (paused) return;
+    const timer = setInterval(() => {
+      setActive(prev => (prev + 1) % EXPERTISE_ITEMS_V18.length);
+    }, PRACTICE_CYCLE_MS);
+    return () => clearInterval(timer);
+  }, [active, paused]);
 
-  const handleScroll = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const cardW = el.scrollWidth / TOTAL;
-    setCurrentIdx(Math.min(Math.round(el.scrollLeft / cardW), TOTAL - 1));
-    const max = el.scrollWidth - el.clientWidth;
-    setSlider({
-      frac: max > 0 ? el.scrollLeft / max : 0,
-      thumbW: el.clientWidth / el.scrollWidth,
-    });
-  };
-
-  const scrollToCard = (idx: number) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const cardW = el.scrollWidth / TOTAL;
-    el.scrollTo({ left: idx * cardW, behavior: "smooth" });
-  };
-
-  const onProgressMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault();
-    isBarDragging.current = true;
-    const bar = progressBarRef.current;
-    const strip = scrollRef.current;
-    if (!bar || !strip) return;
-
-    const move = (ev: MouseEvent) => {
-      const rect = bar.getBoundingClientRect();
-      const pct = Math.min(1, Math.max(0, (ev.clientX - rect.left) / rect.width));
-      strip.scrollLeft = pct * (strip.scrollWidth - strip.clientWidth);
-    };
-
-    const up = () => {
-      isBarDragging.current = false;
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseup", up);
-      if (bar) bar.style.cursor = "grab";
-    };
-
-    bar.style.cursor = "grabbing";
-    move(e.nativeEvent);
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", up);
-  };
-
-  const onMouseDown = (e: React.MouseEvent) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    isDragging.current = true;
-    dragStartX.current = e.pageX - el.offsetLeft;
-    dragScrollLeft.current = el.scrollLeft;
-    el.style.cursor = "grabbing";
-  };
-
-  const onMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current || !scrollRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    scrollRef.current.scrollLeft = dragScrollLeft.current - (x - dragStartX.current) * 1.6;
-  };
-
-  const endDrag = () => {
-    isDragging.current = false;
-    if (scrollRef.current) scrollRef.current.style.cursor = "grab";
-  };
-
-  const CARD_W = "clamp(300px, 28vw, 420px)";
+  const item = EXPERTISE_ITEMS_V18[active];
 
   return (
     <section
@@ -1871,228 +1800,228 @@ function PracticeAreasV18() {
       data-testid="practice-areas-section"
       data-header-theme="light"
       style={{ background: "#FFFFFF", borderTop: "1px solid rgba(0,20,137,0.07)" }}
+      onMouseLeave={() => setPaused(false)}
     >
-      {/* ── Section header with counter + arrows ── */}
-      <style>{`.expertise-scroll::-webkit-scrollbar{display:none}`}</style>
-      <motion.div
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.55 }}
-        style={{
-          paddingLeft: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
-          paddingRight: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
-          paddingTop: 72,
-          paddingBottom: 48,
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "space-between",
-          gap: 24,
-          flexWrap: "wrap",
-        }}
-      >
-        <div>
-          <h2
-            className="font-heading font-bold text-[#001489] leading-[1.15]"
-            style={{ fontSize: "clamp(1.375rem, 2.5vw, 1.75rem)" }}
-          >
-            Areas of Practice
-          </h2>
-        </div>
-
-        {/* Counter + arrow controls */}
-        <div style={{ display: "flex", alignItems: "center", gap: 20, flexShrink: 0, paddingBottom: 4 }}>
-          <span
-            style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: 13,
-              color: "#848484",
-              letterSpacing: "0.06em",
-              minWidth: "4.5ch",
-            }}
-          >
-            {String(currentIdx + 1).padStart(2, "0")} <span style={{ color: "rgba(0,20,137,0.20)" }}>/</span> {String(TOTAL).padStart(2, "0")}
-          </span>
-          <div style={{ display: "flex", gap: 8 }}>
-            {[{ dir: -1, icon: "M10 6H2M2 6l4-4M2 6l4 4" }, { dir: 1, icon: "M2 6h8M10 6L6 2M10 6L6 10" }].map(({ dir, icon }) => (
-              <button
-                key={dir}
-                onClick={() => scrollToCard(Math.max(0, Math.min(TOTAL - 1, currentIdx + dir)))}
-                style={{
-                  width: 40,
-                  height: 40,
-                  border: "1px solid rgba(0,20,137,0.18)",
-                  background: "transparent",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                  transition: "background 0.2s, border-color 0.2s",
-                  flexShrink: 0,
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.background = "#001489";
-                  (e.currentTarget as HTMLElement).style.borderColor = "#001489";
-                  (e.currentTarget.querySelector("svg") as SVGElement).style.color = "#FFFFFF";
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.background = "transparent";
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)";
-                  (e.currentTarget.querySelector("svg") as SVGElement).style.color = "#001489";
-                }}
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 88, paddingBottom: 88 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55 }}
+        >
+          <div className="flex items-end justify-between gap-6 flex-wrap" style={{ marginBottom: 56 }}>
+            <div>
+              <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 14, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                08 Disciplines
+              </p>
+              <h2
+                className="font-heading font-bold text-[#001489] leading-[1.15]"
+                style={{ fontSize: "clamp(1.375rem, 2.5vw, 1.75rem)" }}
               >
-                <svg width="14" height="12" fill="none" viewBox="0 0 12 12" style={{ color: "#001489", transition: "color 0.2s" }}>
-                  <path d={icon} stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-
-      {/* ── Horizontal scroll strip ── */}
-      <div
-        ref={scrollRef}
-        onScroll={handleScroll}
-        onMouseDown={onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseUp={endDrag}
-        onMouseLeave={endDrag}
-        className="expertise-scroll"
-        style={{
-          display: "flex",
-          overflowX: "auto",
-          overflowY: "hidden",
-          scrollbarWidth: "none",
-          height: 740,
-          cursor: "grab",
-        }}
-      >
-        {EXPERTISE_ITEMS_V18.map((item, i) => {
-          const isActive = active === i;
-          return (
-            <div
-              key={i}
-              data-testid={`expertise-item-${i}`}
-              onMouseEnter={() => !isDragging.current && setActive(i)}
-              onMouseLeave={() => setActive(null)}
+                Areas of Practice
+              </h2>
+            </div>
+            <span
               style={{
-                position: "relative",
-                flexShrink: 0,
-                width: CARD_W,
-                overflow: "hidden",
-                background: "#001489",
-                cursor: "grab",
-                borderRight: "1px solid rgba(255,255,255,0.05)",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontSize: 13,
+                color: "rgba(0,20,137,0.25)",
+                letterSpacing: "0.06em",
+                paddingBottom: 4,
               }}
             >
-              <img
+              {String(active + 1).padStart(2, "0")} <span style={{ color: "rgba(0,20,137,0.15)" }}>/</span> {String(EXPERTISE_ITEMS_V18.length).padStart(2, "0")}
+            </span>
+          </div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[5fr_6fr] gap-0" style={{ minHeight: 580 }}>
+
+          {/* ── Left: numbered list ── */}
+          <div
+            className="flex flex-col"
+            style={{ borderTop: "1px solid rgba(0,20,137,0.08)" }}
+          >
+            {EXPERTISE_ITEMS_V18.map((itm, i) => {
+              const isActive = active === i;
+              return (
+                <button
+                  key={i}
+                  data-testid={`expertise-item-${i}`}
+                  onClick={() => { setActive(i); setPaused(true); }}
+                  onMouseEnter={() => { setActive(i); setPaused(true); }}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    borderBottom: "1px solid rgba(0,20,137,0.08)",
+                    textAlign: "left",
+                    cursor: "pointer",
+                    padding: isActive ? "22px 0 22px 0" : "16px 0 16px 0",
+                    transition: "padding 0.35s ease",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: 3,
+                      background: "#001489",
+                      opacity: isActive ? 1 : 0,
+                      transition: "opacity 0.3s ease",
+                    }}
+                  />
+                  <div className="flex items-start gap-5" style={{ paddingLeft: 20 }}>
+                    <span
+                      style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontSize: 11,
+                        fontWeight: 600,
+                        color: isActive ? "#001489" : "rgba(0,20,137,0.22)",
+                        letterSpacing: "0.06em",
+                        minWidth: "2.5ch",
+                        paddingTop: 3,
+                        transition: "color 0.3s ease",
+                      }}
+                    >
+                      {itm.num}
+                    </span>
+                    <div style={{ flex: 1 }}>
+                      <h3
+                        className="font-heading font-bold"
+                        style={{
+                          fontSize: "clamp(0.95rem, 1.3vw, 1.15rem)",
+                          lineHeight: 1.3,
+                          color: isActive ? "#001489" : "rgba(0,20,137,0.40)",
+                          transition: "color 0.3s ease",
+                        }}
+                      >
+                        {itm.title}
+                      </h3>
+                      <div
+                        style={{
+                          overflow: "hidden",
+                          maxHeight: isActive ? 120 : 0,
+                          opacity: isActive ? 1 : 0,
+                          transition: "max-height 0.4s ease, opacity 0.3s ease, margin 0.4s ease",
+                          marginTop: isActive ? 12 : 0,
+                        }}
+                      >
+                        <p style={{
+                          color: "rgba(0,20,137,0.50)",
+                          fontSize: 13,
+                          lineHeight: 1.72,
+                          fontFamily: "'Plus Jakarta Sans', sans-serif",
+                          maxWidth: "44ch",
+                          marginBottom: 14,
+                        }}>
+                          {itm.desc}
+                        </p>
+                        <a
+                          href="#contact"
+                          className="inline-flex items-center gap-2"
+                          style={{
+                            color: "#001489",
+                            fontSize: 11,
+                            fontWeight: 700,
+                            textTransform: "uppercase",
+                            letterSpacing: "0.08em",
+                            textDecoration: "none",
+                            fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            transition: "opacity 0.2s",
+                          }}
+                          onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = "0.6"}
+                          onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = "1"}
+                        >
+                          Enquire
+                          <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
+                            <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* ── Right: image panel ── */}
+          <div
+            className="relative hidden lg:block"
+            style={{
+              background: "#001489",
+              overflow: "hidden",
+              minHeight: 580,
+            }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={active}
                 src={item.img}
                 alt={item.title}
                 className="absolute inset-0 w-full h-full object-cover"
-                style={{
-                  mixBlendMode: "multiply",
-                  transform: isActive ? "scale(1.06)" : "scale(1)",
-                  transition: "transform 0.75s ease",
-                  pointerEvents: "none",
-                }}
+                style={{ mixBlendMode: "multiply" }}
+                initial={{ opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
               />
-              <div
-                className="absolute inset-0"
-                style={{ background: "linear-gradient(to top, rgba(0,6,44,0.96) 0%, rgba(0,20,137,0.22) 52%, transparent 100%)" }}
-              />
-              <div className="absolute inset-0 flex flex-col justify-end" style={{ padding: "28px 30px 32px" }}>
-                <p style={{ color: "#7A84BE", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 10, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            </AnimatePresence>
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "linear-gradient(135deg, rgba(0,14,80,0.30) 0%, transparent 50%, rgba(0,6,44,0.50) 100%)",
+              }}
+            />
+            <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: "40%", background: "linear-gradient(to top, rgba(0,6,44,0.70) 0%, transparent 100%)" }} />
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                className="absolute bottom-0 left-0 right-0"
+                style={{ padding: "0 36px 36px" }}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+              >
+                <p style={{
+                  color: "#7A84BE",
+                  fontSize: 10,
+                  fontWeight: 700,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  marginBottom: 8,
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                }}>
                   {item.short}
                 </p>
                 <h3
                   className="font-heading font-bold text-white"
-                  style={{ fontSize: "clamp(1.05rem, 1.4vw, 1.3rem)", lineHeight: 1.22 }}
+                  style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.2 }}
                 >
                   {item.title}
                 </h3>
-                <div style={{ overflow: "hidden", maxHeight: isActive ? "150px" : "0", opacity: isActive ? 1 : 0, transition: "max-height 0.4s ease, opacity 0.28s ease", marginTop: isActive ? 16 : 0 }}>
-                  <p style={{ color: "rgba(255,255,255,0.52)", fontSize: 13, lineHeight: 1.72, marginBottom: 18, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                    {item.desc}
-                  </p>
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center gap-2"
-                    style={{ color: "rgba(255,255,255,0.78)", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.22)", paddingBottom: 2, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                  >
-                    Enquire
-                    <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
-                      <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+              </motion.div>
+            </AnimatePresence>
 
-        {/* Solid CTA card */}
-        <div
-          data-testid="expertise-cta-card"
-          style={{ flexShrink: 0, width: CARD_W, background: "#192B94", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "30px 30px 32px" }}
-        >
-          <div style={{ alignSelf: "flex-end" }}>
-            <div style={{ width: 40, height: 40, border: "1px solid rgba(255,255,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <svg width="15" height="15" fill="none" viewBox="0 0 16 16">
-                <path d="M3 13L13 3M13 3H6M13 3v7" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
-              </svg>
+            {/* Progress indicator */}
+            <div className="absolute top-0 left-0 right-0" style={{ height: 3, background: "rgba(255,255,255,0.08)" }}>
+              <motion.div
+                key={`progress-${active}-${paused}`}
+                style={{ height: "100%", background: "rgba(255,255,255,0.35)", transformOrigin: "left" }}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: paused ? undefined : 1 }}
+                transition={paused ? undefined : { duration: PRACTICE_CYCLE_MS / 1000, ease: "linear" }}
+              />
             </div>
           </div>
-          <div>
-            <p style={{ color: "#7A84BE", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 14, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              08 Disciplines
-            </p>
-            <h3 className="font-heading font-bold text-white" style={{ fontSize: "clamp(1.05rem, 1.4vw, 1.3rem)", lineHeight: 1.22, marginBottom: 28 }}>
-              All Areas of Practice
-            </h3>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2"
-              style={{ color: "rgba(255,255,255,0.60)", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.16)", paddingBottom: 2, fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "color 0.2s" }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.60)"}
-            >
-              Get in Touch
-              <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
-                <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-              </svg>
-            </a>
-          </div>
+
         </div>
       </div>
-
-      {/* ── Continuous scroll slider ── */}
-      <div
-        ref={progressBarRef}
-        onMouseDown={onProgressMouseDown}
-        style={{
-          position: "relative",
-          height: 16,
-          background: "rgba(0,20,137,0.08)",
-          cursor: "grab",
-          userSelect: "none",
-          overflow: "hidden",
-        }}
-      >
-        {/* Thumb */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: `${slider.frac * (100 - slider.thumbW * 100)}%`,
-            width: `${slider.thumbW * 100}%`,
-            height: "100%",
-            background: "#001489",
-            transition: isBarDragging.current ? "none" : "left 0.06s linear",
-          }}
-        />
-      </div>
-
     </section>
   );
 }
