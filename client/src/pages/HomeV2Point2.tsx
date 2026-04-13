@@ -761,9 +761,12 @@ function DifferentiatorsV15() {
             className="flex flex-col justify-center"
             style={{ paddingRight: "clamp(32px, 4vw, 72px)" }}
           >
+            <p style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              Our Difference
+            </p>
             <h2
-              className="font-heading font-semibold text-[#001489] leading-[1.25]"
-              style={{ fontSize: "clamp(1rem, 1.8vw, 1.375rem)", marginBottom: 44 }}
+              className="font-heading font-bold text-[#001489] leading-[1.15]"
+              style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", marginBottom: 44 }}
             >
               Why Miltion Hobbs
             </h2>
