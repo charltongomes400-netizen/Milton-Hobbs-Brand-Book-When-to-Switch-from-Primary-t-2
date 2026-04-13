@@ -1613,8 +1613,13 @@ function FooterV15() {
       {/* ── Scrolling motto ticker ── */}
       <style>{`
         @keyframes mh-ticker {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .mh-ticker-track {
+          display: inline-flex;
+          white-space: nowrap;
+          animation: mh-ticker 44s linear infinite;
         }
       `}</style>
       <div
@@ -1624,16 +1629,10 @@ function FooterV15() {
           padding: "11px 0",
           borderBottom: "1px solid rgba(255,255,255,0.06)",
           userSelect: "none",
+          width: "100%",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            whiteSpace: "nowrap",
-            animation: "mh-ticker 44s linear infinite",
-            willChange: "transform",
-          }}
-        >
+        <div className="mh-ticker-track">
           {/* Copy A */}
           {tickerHalf.map(({ key, word, bright }) => (
             <span key={`a-${key}`} style={{ display: "inline-flex", alignItems: "center", flexShrink: 0 }}>
@@ -1641,9 +1640,9 @@ function FooterV15() {
               <span style={{ color: "rgba(255,255,255,0.14)", padding: "0 20px", fontSize: 10 }}>◆</span>
             </span>
           ))}
-          {/* Copy B — identical, enables seamless -50% loop */}
+          {/* Copy B — pixel-identical, enables seamless -50% loop */}
           {tickerHalf.map(({ key, word, bright }) => (
-            <span key={`b-${key}`} style={{ display: "inline-flex", alignItems: "center", flexShrink: 0 }}>
+            <span key={`b-${key}`} aria-hidden="true" style={{ display: "inline-flex", alignItems: "center", flexShrink: 0 }}>
               <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", color: bright ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.28)", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{word}</span>
               <span style={{ color: "rgba(255,255,255,0.14)", padding: "0 20px", fontSize: 10 }}>◆</span>
             </span>
