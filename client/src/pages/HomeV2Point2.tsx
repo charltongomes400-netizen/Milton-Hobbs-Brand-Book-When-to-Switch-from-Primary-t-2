@@ -1882,7 +1882,7 @@ function PracticeAreasV18() {
             {EXPERTISE_ITEMS_V18.map((itm, i) => {
               const isActive = active === i;
               return (
-                <motion.button
+                <motion.div
                   key={i}
                   data-testid={`expertise-item-${i}`}
                   onClick={() => { setActive(i); setPaused(true); }}
@@ -1892,10 +1892,7 @@ function PracticeAreasV18() {
                     visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
                   }}
                   style={{
-                    background: "none",
-                    border: "none",
                     borderBottom: "1px solid rgba(0,20,137,0.08)",
-                    textAlign: "left",
                     cursor: "pointer",
                     padding: isActive ? "22px 0 22px 0" : "16px 0 16px 0",
                     transition: "padding 0.35s ease",
@@ -1984,7 +1981,7 @@ function PracticeAreasV18() {
                       </div>
                     </div>
                   </div>
-                </motion.button>
+                </motion.div>
               );
             })}
           </motion.div>
