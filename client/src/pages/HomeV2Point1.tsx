@@ -691,45 +691,66 @@ function DifferentiatorsV15() {
   return (
     <section
       id="firm"
-      data-header-theme="light"
+      data-header-theme="dark"
       data-testid="differentiators-section"
-      className="bg-[#FCFCFC] py-28 px-8 border-t border-[#E5EAF4]"
+      className="py-28 px-8"
+      style={{ background: "#001489", borderTop: "1px solid #001050" }}
     >
       <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
 
-          {/* Left: card list */}
+        {/* Section label + headline — sits above the two-column grid */}
+        <div className="mb-16">
+          <p
+            style={{
+              color: "#7A84BE",
+              fontSize: 13,
+              fontWeight: 600,
+              letterSpacing: "0.3em",
+              textTransform: "uppercase",
+              marginBottom: 16,
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+            }}
+          >
+            {d.eyebrow}
+          </p>
+          <h2
+            className="font-heading font-bold text-white"
+            style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1, maxWidth: 520 }}
+          >
+            {d.headline}
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+
+          {/* ── Left: interactive card list ──────────────────────────── */}
           <div
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <p className="text-[#4A58AA] tracking-[0.3em] uppercase font-medium mb-3 text-[16px]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
-              {d.eyebrow}
-            </p>
-            <h2 className="font-heading text-[#001489] text-[clamp(1rem,1.8vw,1.375rem)] font-semibold mb-10 leading-[1.25]" style={{ paddingLeft: "calc(3px + 1rem)" }}>
-              {d.headline}
-            </h2>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col">
               {d.cards.map((card, i) => (
                 <button
                   key={i}
                   data-testid={`diff-card-${i}`}
                   onClick={() => { setActive(i); setPaused(true); setProgress(0); }}
-                  className="group flex items-center gap-4 py-1.5 text-left focus:outline-none"
+                  className="group flex items-center gap-5 py-5 text-left focus:outline-none"
+                  style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
                 >
+                  {/* Active bar */}
                   <motion.span
-                    className="w-[3px] flex-shrink-0 self-stretch bg-[#4A58AA]"
-                    animate={{ opacity: i === active ? 1 : 0, scaleY: i === active ? 1 : 0 }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    style={{ originY: 0.5 }}
+                    className="flex-shrink-0 self-stretch"
+                    style={{ width: 2, minHeight: 20 }}
+                    animate={{ backgroundColor: i === active ? "#7A84BE" : "rgba(255,255,255,0)" }}
+                    transition={{ duration: 0.3 }}
                   />
                   <motion.span
-                    className="font-heading font-semibold leading-[1.15]"
+                    className="font-heading font-bold leading-[1.15]"
                     animate={{
-                      color: i === active ? "#001489" : "rgba(0,20,137,0.22)",
+                      color: i === active ? "#FFFFFF" : "rgba(255,255,255,0.28)",
                       fontSize: i === active ? "clamp(1.75rem, 2.8vw, 2.5rem)" : "clamp(1.5rem, 2.4vw, 2.125rem)",
                     }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
                   >
                     {card.title}
                   </motion.span>
@@ -738,25 +759,20 @@ function DifferentiatorsV15() {
             </div>
           </div>
 
-          {/* Right: visual panel */}
+          {/* ── Right: visual panel + description ───────────────────── */}
           <div
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div className="relative w-full overflow-hidden" style={{
-              aspectRatio: "4/3",
-              background: "linear-gradient(160deg, rgba(0,20,137,0.85) 0%, rgba(0,20,137,0.92) 40%, rgba(0,20,137,0.80) 100%)",
-              backdropFilter: "blur(24px) saturate(1.5)",
-              WebkitBackdropFilter: "blur(24px) saturate(1.5)",
-              border: "1px solid rgba(0,20,137,0.25)",
-              boxShadow: "0 0 20px rgba(0,20,137,0.15), 0 0 60px rgba(0,20,137,0.12), inset 0 1px 0 rgba(122,132,190,0.12), inset 0 -1px 0 rgba(0,0,0,0.2), 0 12px 40px rgba(0,10,60,0.35)",
-            }}>
-              <div className="absolute inset-0 pointer-events-none" style={{
-                background: "linear-gradient(180deg, rgba(0,20,137,0.08) 0%, transparent 30%, transparent 85%, rgba(0,20,137,0.05) 100%)",
-              }} />
-              <div className="absolute inset-0 pointer-events-none" style={{
-                boxShadow: "inset 0 0 40px rgba(0,20,137,0.06)",
-              }} />
+            {/* Solid visual box — brand-compliant, no blur or gradient layers */}
+            <div
+              className="relative w-full overflow-hidden"
+              style={{
+                aspectRatio: "4/3",
+                background: "#001050",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -770,15 +786,20 @@ function DifferentiatorsV15() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="absolute bottom-0 left-0 right-0 h-px bg-[#001489]/10">
+              {/* Thin progress bar — bottom edge */}
+              <div
+                className="absolute bottom-0 left-0 right-0"
+                style={{ height: 1, background: "rgba(255,255,255,0.08)" }}
+              >
                 <motion.div
-                  className="h-full bg-[#001489]"
-                  style={{ width: `${progress}%` }}
+                  className="h-full"
+                  style={{ width: `${progress}%`, background: "#7A84BE" }}
                   transition={{ ease: "linear" }}
                 />
               </div>
             </div>
 
+            {/* Card description below the visual */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
@@ -788,15 +809,31 @@ function DifferentiatorsV15() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="pt-8"
               >
-                <h3 className="font-heading text-[#001489] text-[clamp(1.125rem,1.5vw,1.375rem)] font-semibold mb-3 leading-[1.3]">
+                <h3
+                  className="font-heading font-semibold text-white mb-3 leading-[1.3]"
+                  style={{ fontSize: "clamp(1.125rem, 1.5vw, 1.375rem)" }}
+                >
                   {d.cards[active].title}
                 </h3>
-                <p className="text-black/50 text-[0.9rem] leading-[1.6] mb-7 max-w-md">
+                <p
+                  style={{
+                    color: "rgba(255,255,255,0.55)",
+                    fontSize: "0.9rem",
+                    lineHeight: 1.75,
+                    marginBottom: 28,
+                    maxWidth: 480,
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  }}
+                >
                   {d.cards[active].description}
                 </p>
+                {/* Secondary CTA — outline on dark per brand spec */}
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-3 border border-[#001489] text-[#001489] text-xs tracking-[0.18em] uppercase font-semibold px-7 py-3.5 hover:bg-[#001489] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-3 text-white text-xs tracking-[0.18em] uppercase font-semibold px-7 py-3.5 transition-colors"
+                  style={{ border: "1px solid rgba(255,255,255,0.35)" }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.07)"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
                 >
                   <span>{d.learnMore}</span>
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
