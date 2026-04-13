@@ -722,9 +722,7 @@ function DifferentiatorsV15() {
               <h1
                 className="font-heading font-bold"
                 style={{ color: "#001489", fontSize: "clamp(1.375rem, 2.5vw, 1.75rem)", lineHeight: 1.15 }}
-              >
-                WHY MILTION HOBBS
-              </h1>
+              >Why Miltion Hobbs</h1>
             </div>
 
             {/* Card selector list */}
