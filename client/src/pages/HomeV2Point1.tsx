@@ -1425,7 +1425,7 @@ function ContactFormV15() {
           transition={{ duration: 0.5 }}
           className="flex flex-col justify-center px-8 pt-16 pb-16"
           style={{
-            background: "#F9F9F9",
+            background: "#FFFFFF",
             paddingRight: "clamp(2rem, calc((100vw - 1400px) / 2 + 3.5rem), 8rem)",
             paddingLeft: "clamp(2rem, 4vw, 5rem)",
           }}
