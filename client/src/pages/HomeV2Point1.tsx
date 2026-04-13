@@ -1873,6 +1873,8 @@ function PracticeAreasV18() {
   const isDragging = useRef(false);
   const dragStartX = useRef(0);
   const dragScrollLeft = useRef(0);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const isBarDragging = useRef(false);
 
   const TOTAL = EXPERTISE_ITEMS_V18.length + 1;
 
@@ -1888,6 +1890,32 @@ function PracticeAreasV18() {
     if (!el) return;
     const cardW = el.scrollWidth / TOTAL;
     el.scrollTo({ left: idx * cardW, behavior: "smooth" });
+  };
+
+  const onProgressMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    isBarDragging.current = true;
+    const bar = progressBarRef.current;
+    const strip = scrollRef.current;
+    if (!bar || !strip) return;
+
+    const move = (ev: MouseEvent) => {
+      const rect = bar.getBoundingClientRect();
+      const pct = Math.min(1, Math.max(0, (ev.clientX - rect.left) / rect.width));
+      strip.scrollLeft = pct * (strip.scrollWidth - strip.clientWidth);
+    };
+
+    const up = () => {
+      isBarDragging.current = false;
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseup", up);
+      if (bar) bar.style.cursor = "grab";
+    };
+
+    bar.style.cursor = "grabbing";
+    move(e.nativeEvent);
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", up);
   };
 
   const onMouseDown = (e: React.MouseEvent) => {
@@ -2117,12 +2145,16 @@ function PracticeAreasV18() {
         </div>
       </div>
 
-      {/* ── Segmented progress ── */}
+      {/* ── Segmented progress / custom scrollbar ── */}
       <div
+        ref={progressBarRef}
+        onMouseDown={onProgressMouseDown}
         style={{
           display: "flex",
           gap: 3,
           padding: "0",
+          cursor: "grab",
+          userSelect: "none",
         }}
       >
         {Array.from({ length: TOTAL }).map((_, i) => (
@@ -2132,10 +2164,10 @@ function PracticeAreasV18() {
             aria-label={`Go to card ${i + 1}`}
             style={{
               flex: 1,
-              height: 3,
+              height: 13,
               border: "none",
               background: i === currentIdx ? "#001489" : "rgba(0,20,137,0.10)",
-              cursor: "pointer",
+              cursor: "inherit",
               padding: 0,
               transition: "background 0.3s ease",
             }}
