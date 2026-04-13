@@ -1752,7 +1752,7 @@ function FooterV15() {
                     key={link.href}
                     href={link.href}
                     style={{
-                      color: "#FFFFFF",
+                      color: "rgba(255,255,255,0.40)",
                       fontSize: 13,
                       textDecoration: "none",
                       textTransform: "uppercase",
@@ -1760,7 +1760,7 @@ function FooterV15() {
                       transition: "color 0.2s",
                     }}
                     onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
+                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
                   >
                     {link.label}
                   </a>
@@ -1844,7 +1844,7 @@ function FooterV15() {
 
         <p
           data-testid="footer-disclaimer"
-          style={{ color: "rgba(255,255,255,0.60)", fontSize: 11, lineHeight: 1.6, paddingBottom: 20, maxWidth: "90ch" }}
+          style={{ color: "rgba(255,255,255,0.25)", fontSize: 11, lineHeight: 1.6, paddingBottom: 20, maxWidth: "90ch" }}
         >
           {f.disclaimer}
         </p>
