@@ -1348,11 +1348,11 @@ function ContactFormV15() {
   return (
     <section
       id="contact"
-      data-header-theme="dark"
+      data-header-theme="light"
       data-testid="contact-section"
-      style={{ background: "#001489" }}
+      style={{ background: "#FFFFFF", borderTop: "1px solid rgba(0,20,137,0.07)" }}
     >
-      {/* ── TOP BAND: headline + subtext on deep blue ── */}
+      {/* ── TOP BAND: headline + subtext ── */}
       <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 120, paddingBottom: 72 }}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -1364,13 +1364,13 @@ function ContactFormV15() {
           <div>
             <p
               className="font-medium uppercase mb-5"
-              style={{ color: "#7A84BE", fontSize: 12, letterSpacing: "0.25em" }}
+              style={{ color: "#4A58AA", fontSize: 12, letterSpacing: "0.25em" }}
             >
               {c.eyebrow}
             </p>
             <h2
               className="font-heading font-bold leading-[1.08]"
-              style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)", color: "#FFFFFF" }}
+              style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)", color: "#001489" }}
             >
               {c.headline}
             </h2>
@@ -1378,7 +1378,7 @@ function ContactFormV15() {
           <div style={{ maxWidth: 440 }}>
             <p
               style={{
-                color: "rgba(255,255,255,0.55)",
+                color: "#595959",
                 fontSize: 15,
                 lineHeight: 1.75,
               }}
@@ -1398,11 +1398,13 @@ function ContactFormV15() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="grid grid-cols-1 lg:grid-cols-[7fr_4fr] gap-0"
         >
-          {/* ── Form panel (white card) ── */}
+          {/* ── Form panel ── */}
           <div
             style={{
-              background: "#FFFFFF",
+              background: "#F9F9F9",
               padding: "clamp(32px, 4vw, 56px)",
+              border: "1px solid rgba(0,20,137,0.06)",
+              borderRight: "none",
             }}
           >
             {submitted ? (
@@ -1516,10 +1518,10 @@ function ContactFormV15() {
             )}
           </div>
 
-          {/* ── Office details sidebar (darker blue) ── */}
+          {/* ── Office details sidebar (deep blue) ── */}
           <div
             style={{
-              background: "rgba(0,10,70,0.5)",
+              background: "#001489",
               padding: "clamp(32px, 4vw, 56px)",
               display: "flex",
               flexDirection: "column",
