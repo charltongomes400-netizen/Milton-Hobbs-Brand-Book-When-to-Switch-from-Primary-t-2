@@ -1624,7 +1624,7 @@ function FooterV15() {
       `}</style>
       <div
         style={{
-          background: "#192B94",
+          background: "#001489",
           overflow: "hidden",
           padding: "11px 0",
           borderBottom: "1px solid rgba(255,255,255,0.06)",
