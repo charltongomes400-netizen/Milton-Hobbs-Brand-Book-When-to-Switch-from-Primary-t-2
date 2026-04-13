@@ -721,7 +721,7 @@ function DifferentiatorsV15() {
             <div className="mb-10">
               <h1
                 className="font-heading font-bold"
-                style={{ color: "#001489", fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.08, letterSpacing: "-0.01em" }}
+                style={{ color: "#001489", fontSize: "clamp(1.375rem, 2.5vw, 1.75rem)", lineHeight: 1.15 }}
               >
                 WHY MILTION HOBBS
               </h1>
@@ -1962,9 +1962,6 @@ function PracticeAreasV18() {
         }}
       >
         <div>
-          <p className="text-[#4A58AA] uppercase font-medium mb-3" style={{ fontSize: 13 }}>
-            Our Expertise
-          </p>
           <h2
             className="font-heading font-bold text-[#001489] leading-[1.15]"
             style={{ fontSize: "clamp(1.375rem, 2.5vw, 1.75rem)" }}
