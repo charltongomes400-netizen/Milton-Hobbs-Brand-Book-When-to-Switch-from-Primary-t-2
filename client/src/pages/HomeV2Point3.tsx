@@ -740,298 +740,248 @@ function DifferentiatorsV15() {
     return () => clearInterval(tick);
   }, [active, paused, d.cards.length]);
 
+  const VISUALS = [FounderVisual, PrecisionVisual, CrossBorderVisual, DiscretionVisual];
+
   return (
     <section
       id="firm"
-      data-header-theme="dark"
+      data-header-theme="light"
       data-testid="differentiators-section"
-      style={{ background: "#001489" }}
+      style={{ background: "#FFFFFF", borderTop: "1px solid #E8EDF5" }}
     >
-      <div
-        className="max-w-[1400px] mx-auto"
-        style={{ paddingTop: 120, paddingBottom: 120, paddingLeft: "clamp(32px, 6vw, 100px)", paddingRight: "clamp(32px, 6vw, 100px)" }}
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2" style={{ minHeight: 620 }}>
 
-          {/* ── LEFT: Image card with MH monogram ── */}
+        {/* ── LEFT HALF: animated visual panel ── */}
+        <div
+          style={{
+            background: "linear-gradient(145deg, rgba(0,20,137,0.92) 0%, rgba(0,20,137,0.85) 40%, rgba(0,20,137,0.95) 100%)",
+            backdropFilter: "blur(40px) saturate(1.5)",
+            WebkitBackdropFilter: "blur(40px) saturate(1.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            overflow: "hidden",
+            minHeight: 560,
+          }}
+        >
+          {/* Liquid glass caustic shimmer */}
           <motion.div
-            initial={{ opacity: 0, x: -32 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              position: "relative",
-              aspectRatio: "4/5",
-              maxWidth: 460,
-              overflow: "hidden",
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(125deg, rgba(255,255,255,0.06) 0%, transparent 20%, rgba(255,255,255,0.04) 40%, transparent 55%, rgba(255,255,255,0.05) 75%, transparent 90%)",
+              backgroundSize: "200% 200%",
+              pointerEvents: "none",
+            }}
+            animate={{ backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"] }}
+            transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+          />
+          {/* Top specular edge highlight */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0, left: "5%", right: "5%",
+              height: 1,
+              background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.22) 25%, rgba(255,255,255,0.30) 50%, rgba(255,255,255,0.22) 75%, transparent)",
+              pointerEvents: "none",
+            }}
+          />
+          {/* Subtle inner depth glow */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.06) 0%, transparent 50%)",
+              pointerEvents: "none",
+            }}
+          />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              style={{ width: "100%", height: "100%", position: "relative", zIndex: 1, padding: 48 }}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {(() => { const V = VISUALS[active]; return <V />; })()}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* ── RIGHT HALF: text content ── */}
+        <div
+          className="flex flex-col justify-center"
+          style={{
+            background: "#FFFFFF",
+            padding: "clamp(48px, 7vw, 96px) clamp(32px, 5vw, 80px)",
+          }}
+        >
+          {/* Eyebrow */}
+          <p
+            style={{
+              color: "#7A84BE",
+              fontSize: 10,
+              fontWeight: 700,
+              letterSpacing: "0.26em",
+              textTransform: "uppercase",
+              marginBottom: 20,
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
             }}
           >
-            {/* Architectural photo */}
-            <img
-              src={heroBg2}
-              alt="Milton Hobbs — architectural"
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "center",
-                mixBlendMode: "multiply",
-                filter: "grayscale(20%)",
-              }}
-            />
-            {/* Blue overlay */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "linear-gradient(165deg, rgba(0,20,137,0.55) 0%, rgba(0,20,137,0.82) 100%)",
-              }}
-            />
-            {/* Grid texture overlay */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                backgroundImage: `
-                  linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)
-                `,
-                backgroundSize: "40px 40px",
-              }}
-            />
-            {/* MH Monogram — centered */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <div style={{ textAlign: "center" }}>
-                <img
-                  src={miltonHobbsLogo}
-                  alt="Milton Hobbs"
-                  style={{
-                    width: 120,
-                    opacity: 0.22,
-                    filter: "brightness(0) invert(1)",
-                    display: "block",
-                    margin: "0 auto",
-                  }}
-                />
-              </div>
-            </div>
-            {/* Bottom caption */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: 28,
-                left: 28,
-                right: 28,
-              }}
-            >
-              <p
-                style={{
-                  color: "rgba(255,255,255,0.55)",
-                  fontSize: 11,
-                  letterSpacing: "0.18em",
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontWeight: 500,
-                  textTransform: "uppercase",
-                }}
-              >
-                Dubai · Paris · Est. 2024
-              </p>
-            </div>
-            {/* Subtle border */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                border: "1px solid rgba(255,255,255,0.12)",
-                pointerEvents: "none",
-              }}
-            />
-          </motion.div>
+            Why Milton Hobbs
+          </p>
 
-          {/* ── RIGHT: Text content ── */}
-          <motion.div
-            initial={{ opacity: 0, x: 32 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-            className="flex flex-col"
+          {/* Heading */}
+          <h2
+            className="font-heading font-bold leading-[1.1]"
+            style={{
+              color: "#001489",
+              fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)",
+              marginBottom: 20,
+              letterSpacing: "-0.02em",
+            }}
           >
-            {/* Eyebrow */}
-            <p
-              style={{
-                color: "rgba(122,132,190,0.9)",
-                fontSize: 10,
-                fontWeight: 700,
-                letterSpacing: "0.26em",
-                textTransform: "uppercase",
-                marginBottom: 20,
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-              }}
-            >
-              Why Milton Hobbs
-            </p>
+            Counsel Built<br />for Complexity.
+          </h2>
 
-            {/* Heading */}
-            <h2
-              className="font-heading font-bold leading-[1.1]"
-              style={{
-                color: "#FFFFFF",
-                fontSize: "clamp(2rem, 4vw, 3.25rem)",
-                marginBottom: 24,
-                letterSpacing: "-0.02em",
-              }}
-            >
-              Counsel Built<br />for Complexity.
-            </h2>
+          {/* Sub-paragraph */}
+          <p
+            style={{
+              color: "#595959",
+              fontSize: "0.9375rem",
+              lineHeight: 1.75,
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              marginBottom: 36,
+              maxWidth: 420,
+            }}
+          >
+            Milton Hobbs is a boutique corporate law firm delivering clear, composed, and commercially astute counsel. Bridging Europe and the GCC.
+          </p>
 
-            {/* Sub-paragraph */}
-            <p
-              style={{
-                color: "rgba(255,255,255,0.55)",
-                fontSize: "0.9375rem",
-                lineHeight: 1.75,
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                marginBottom: 40,
-                maxWidth: 440,
-              }}
-            >
-              Milton Hobbs is a boutique corporate law firm delivering clear, composed, and commercially astute counsel. Bridging Europe and the GCC.
-            </p>
-
-            {/* Accordion differentiator list */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                borderTop: "1px solid rgba(255,255,255,0.1)",
-                marginBottom: 40,
-              }}
-            >
-              {d.cards.map((card, i) => {
-                const isActive = active === i;
-                return (
-                  <div
-                    key={i}
-                    style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}
+          {/* Accordion differentiator list */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              borderTop: "1px solid #E8EDF5",
+              marginBottom: 36,
+            }}
+          >
+            {d.cards.map((card, i) => {
+              const isActive = active === i;
+              return (
+                <div
+                  key={i}
+                  style={{ borderBottom: "1px solid #E8EDF5" }}
+                >
+                  <button
+                    data-testid={`diff-row-${i}`}
+                    onClick={() => { setActive(i); setPaused(true); }}
+                    onMouseEnter={() => { setActive(i); setPaused(true); }}
+                    style={{
+                      width: "100%",
+                      background: "none",
+                      border: "none",
+                      textAlign: "left",
+                      cursor: "pointer",
+                      outline: "none",
+                      padding: "16px 0",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 16,
+                    }}
                   >
-                    <button
-                      data-testid={`diff-row-${i}`}
-                      onClick={() => { setActive(i); setPaused(true); }}
-                      onMouseEnter={() => { setActive(i); setPaused(true); }}
+                    <span
+                      className="font-heading"
                       style={{
-                        width: "100%",
-                        background: "none",
-                        border: "none",
-                        textAlign: "left",
-                        cursor: "pointer",
-                        outline: "none",
-                        padding: "18px 0",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        gap: 16,
+                        color: isActive ? "#001489" : "#848484",
+                        fontSize: "clamp(0.875rem, 1.1vw, 1rem)",
+                        fontWeight: isActive ? 700 : 500,
+                        letterSpacing: "-0.01em",
+                        transition: "color 0.25s",
                       }}
                     >
-                      <span
-                        className="font-heading"
-                        style={{
-                          color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.45)",
-                          fontSize: "clamp(0.875rem, 1.1vw, 1rem)",
-                          fontWeight: isActive ? 700 : 500,
-                          letterSpacing: "-0.01em",
-                          transition: "color 0.25s, font-weight 0.25s",
-                        }}
-                      >
-                        {card.title}
-                      </span>
-                      {/* Expand indicator */}
+                      {card.title}
+                    </span>
+                    {/* Expand indicator */}
+                    <motion.div
+                      animate={{ rotate: isActive ? 45 : 0 }}
+                      transition={{ duration: 0.25 }}
+                      style={{
+                        width: 18, height: 18,
+                        flexShrink: 0,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <svg width="12" height="12" fill="none" viewBox="0 0 12 12">
+                        <path d="M6 1v10M1 6h10" stroke={isActive ? "#001489" : "#848484"} strokeWidth="1.3" strokeLinecap="round" />
+                      </svg>
+                    </motion.div>
+                  </button>
+
+                  {/* Expanded description */}
+                  <AnimatePresence initial={false}>
+                    {isActive && (
                       <motion.div
-                        animate={{ rotate: isActive ? 45 : 0 }}
-                        transition={{ duration: 0.25 }}
-                        style={{
-                          width: 18,
-                          height: 18,
-                          flexShrink: 0,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
+                        key="desc"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                        style={{ overflow: "hidden" }}
                       >
-                        <svg width="12" height="12" fill="none" viewBox="0 0 12 12">
-                          <path d="M6 1v10M1 6h10" stroke={isActive ? "#FFFFFF" : "rgba(255,255,255,0.35)"} strokeWidth="1.3" strokeLinecap="round" />
-                        </svg>
-                      </motion.div>
-                    </button>
-
-                    {/* Expanded description */}
-                    <AnimatePresence initial={false}>
-                      {isActive && (
-                        <motion.div
-                          key="desc"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                          style={{ overflow: "hidden" }}
+                        <p
+                          style={{
+                            color: "#595959",
+                            fontSize: "0.875rem",
+                            lineHeight: 1.75,
+                            fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            paddingBottom: 18,
+                            maxWidth: 420,
+                          }}
                         >
-                          <p
-                            style={{
-                              color: "rgba(255,255,255,0.55)",
-                              fontSize: "0.875rem",
-                              lineHeight: 1.75,
-                              fontFamily: "'Plus Jakarta Sans', sans-serif",
-                              paddingBottom: 20,
-                              maxWidth: 420,
-                            }}
-                          >
-                            {card.description}
-                          </p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </div>
+                          {card.description}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
 
-            {/* CTA */}
-            <a
-              href="#contact"
-              data-testid="diff-cta"
-              className="inline-flex items-center gap-3 group self-start"
-              style={{
-                color: "#001489",
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                padding: "14px 32px",
-                background: "#FFFFFF",
-                transition: "background 0.25s ease",
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#E8EDF5"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#FFFFFF"; }}
-            >
-              <span>Speak to Us</span>
-              <svg width="14" height="14" fill="none" viewBox="0 0 16 16" style={{ transition: "transform 0.2s" }} className="group-hover:translate-x-1 transition-transform">
-                <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-              </svg>
-            </a>
-          </motion.div>
-
+          {/* CTA */}
+          <a
+            href="#contact"
+            data-testid="diff-cta"
+            className="inline-flex items-center gap-3 group self-start"
+            style={{
+              color: "#FFFFFF",
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              padding: "14px 32px",
+              background: "#001489",
+              transition: "background 0.25s ease",
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#192B94"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#001489"; }}
+          >
+            <span>Speak to Us</span>
+            <svg width="14" height="14" fill="none" viewBox="0 0 16 16" className="transition-transform group-hover:translate-x-1">
+              <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+            </svg>
+          </a>
         </div>
+
       </div>
     </section>
   );
