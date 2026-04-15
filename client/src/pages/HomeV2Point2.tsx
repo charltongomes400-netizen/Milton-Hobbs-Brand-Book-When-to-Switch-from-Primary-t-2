@@ -2246,7 +2246,7 @@ function PracticeAreasV18() {
                   background: "#001489",
                 }}
               >
-                {/* Photo — multiply blend on #001489, matching Hero treatment */}
+                {/* Photo — renders normally, no blend mode */}
                 <img
                   src={item.img}
                   alt={item.title}
@@ -2256,19 +2256,27 @@ function PracticeAreasV18() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    mixBlendMode: "multiply",
                     transition: "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
                     transform: isActive ? "scale(1.04)" : "scale(1)",
                   }}
                 />
 
-                {/* Bottom gradient — uses #001489 RGB (0,20,137) to stay on-brand */}
+                {/* Solid #001489 multiply layer — exact Photoshop equivalent */}
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "#001489",
+                  mixBlendMode: "multiply",
+                  pointerEvents: "none",
+                }} />
+
+                {/* Bottom gradient for text legibility — sits above multiply layer */}
                 <div style={{
                   position: "absolute",
                   inset: 0,
                   background: isActive
-                    ? "linear-gradient(to bottom, rgba(0,20,137,0.08) 0%, rgba(0,20,137,0.72) 55%, rgba(0,20,137,0.92) 100%)"
-                    : "linear-gradient(to bottom, rgba(0,20,137,0.25) 0%, rgba(0,20,137,0.80) 100%)",
+                    ? "linear-gradient(to bottom, transparent 30%, rgba(0,0,20,0.68) 60%, rgba(0,0,20,0.90) 100%)"
+                    : "linear-gradient(to bottom, transparent 20%, rgba(0,0,20,0.72) 100%)",
                   transition: "background 0.5s ease",
                   pointerEvents: "none",
                 }} />
@@ -2465,9 +2473,10 @@ function PracticeAreasV18() {
                 <img
                   src={item.img}
                   alt={item.title}
-                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", mixBlendMode: "multiply" }}
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
                 />
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,20,137,0.82) 0%, rgba(0,20,137,0.32) 100%)" }} />
+                <div style={{ position: "absolute", inset: 0, background: "#001489", mixBlendMode: "multiply" }} />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,20,0.75) 0%, transparent 100%)" }} />
                 <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", padding: "0 24px", gap: 16 }}>
                   <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", color: "#7A84BE", flexShrink: 0 }}>
                     {item.num}
