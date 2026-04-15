@@ -1791,41 +1791,49 @@ function ContactFormV15() {
                 <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase", marginBottom: 32 }}>
                   Send a Message
                 </p>
-                <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
                       type="text" name="name" required value={form.name} onChange={handleChange}
                       placeholder={c.namePlaceholder} data-testid="input-name"
-                      style={{ background: "#001489", border: "none", color: "#FFFFFF", padding: "14px 16px", fontSize: 14, outline: "none", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                      className="placeholder-[rgba(255,255,255,0.38)]"
+                      style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      className="placeholder-[rgba(0,0,0,0.30)]"
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
                     />
                     <input
                       type="email" name="email" required value={form.email} onChange={handleChange}
                       placeholder={c.emailPlaceholder} data-testid="input-email"
-                      style={{ background: "#001489", border: "none", color: "#FFFFFF", padding: "14px 16px", fontSize: 14, outline: "none", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                      className="placeholder-[rgba(255,255,255,0.38)]"
+                      style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      className="placeholder-[rgba(0,0,0,0.30)]"
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
                     />
                   </div>
                   <div className="relative">
                     <select
                       name="subject" required value={form.subject} onChange={handleChange}
                       data-testid="select-subject"
-                      style={{ width: "100%", background: "#001489", border: "none", color: form.subject ? "#FFFFFF" : "rgba(255,255,255,0.38)", padding: "14px 40px 14px 16px", fontSize: 14, outline: "none", appearance: "none", cursor: "pointer", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      style={{ width: "100%", background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: form.subject ? "#0A0A1A" : "rgba(0,0,0,0.30)", padding: "13px 40px 13px 16px", fontSize: 14, outline: "none", appearance: "none", cursor: "pointer", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
                     >
-                      <option value="" disabled hidden style={{ background: "#001489" }}>{c.subjectPlaceholder}</option>
+                      <option value="" disabled hidden>{c.subjectPlaceholder}</option>
                       {c.subjectOptions.map((opt, i) => (
-                        <option key={i} value={opt} style={{ background: "#001489", color: "#FFFFFF" }}>{opt}</option>
+                        <option key={i} value={opt}>{opt}</option>
                       ))}
                     </select>
-                    <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3" style={{ color: "rgba(255,255,255,0.50)" }} fill="none" viewBox="0 0 12 12">
+                    <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3" style={{ color: "rgba(0,20,137,0.40)" }} fill="none" viewBox="0 0 12 12">
                       <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                     </svg>
                   </div>
                   <textarea
                     name="message" required rows={5} value={form.message} onChange={handleChange}
                     placeholder={c.messagePlaceholder} data-testid="input-message"
-                    style={{ background: "#001489", border: "none", color: "#FFFFFF", padding: "14px 16px", fontSize: 14, outline: "none", resize: "none", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                    className="placeholder-[rgba(255,255,255,0.38)]"
+                    style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", resize: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    className="placeholder-[rgba(0,0,0,0.30)]"
+                    onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+                    onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
                   />
                   <div className="flex items-center gap-6 mt-2">
                     <button
