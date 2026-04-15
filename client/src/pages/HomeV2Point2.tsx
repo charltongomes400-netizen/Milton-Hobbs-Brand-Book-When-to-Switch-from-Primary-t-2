@@ -875,184 +875,398 @@ function DifferentiatorsV15() {
     >
       <div
         className="max-w-[1400px] mx-auto px-8"
-        style={{ paddingTop: 171, paddingBottom: 179 }}
+        style={{ paddingTop: 120, paddingBottom: 140 }}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2" style={{ minHeight: 560 }}>
 
-          {/* ── LEFT HALF: text content ── */}
-          <div
-            className="flex flex-col justify-center"
-            style={{ paddingRight: "clamp(32px, 4vw, 72px)" }}
-          >
-            <h2
-              className="font-heading font-bold text-[#001489] leading-[1.15]"
-              style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", marginBottom: 44 }}
-            >
-              Why Miltion Hobbs
-            </h2>
-
-            {/* Pillar name stack */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 48 }}>
-              {d.cards.map((card, i) => {
-                const isActive = active === i;
-                return (
-                  <button
-                    key={i}
-                    data-testid={`diff-row-${i}`}
-                    onMouseEnter={() => { setActive(i); setPaused(true); }}
-                    onClick={() => { setActive(i); setPaused(true); }}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      textAlign: "left",
-                      cursor: "pointer",
-                      outline: "none",
-                      padding: "8px 0 8px 20px",
-                      position: "relative",
-                    }}
-                  >
-                    <motion.div
-                      style={{
-                        position: "absolute",
-                        left: 0, top: 0, bottom: 0,
-                        width: 3,
-                        background: "#4A58AA",
-                        transformOrigin: "top",
-                      }}
-                      animate={{ scaleY: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
-                      transition={{ duration: 0.3, ease: "easeOut" }}
-                    />
-                    <span
-                      className="font-heading font-bold"
-                      style={{
-                        display: "block",
-                        color: isActive ? "#001489" : "#D0D5E8",
-                        fontSize: "clamp(1.75rem, 3vw, 2.75rem)",
-                        lineHeight: 1.15,
-                        letterSpacing: "-0.025em",
-                        transition: "color 0.3s",
-                      }}
-                    >
-                      {card.title}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Active description + CTA */}
-            <p
+        {/* ── Section header ─────────────────────────────────────────────── */}
+        <div
+          className="grid grid-cols-1 lg:grid-cols-2 items-end"
+          style={{ marginBottom: 64, gap: 32 }}
+        >
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
               style={{
-                color: "#595959",
-                fontSize: "0.9375rem",
-                lineHeight: 1.82,
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                maxWidth: 480,
-                marginBottom: 32,
-              }}
-            >
-              {d.cards[active].description}
-            </p>
-            <a
-              href="#contact"
-              data-testid="diff-cta"
-              className="inline-flex items-center gap-3 self-start"
-              style={{
-                color: "#001489",
-                fontSize: 10,
+                fontSize: 9,
                 fontWeight: 700,
-                letterSpacing: "0.24em",
+                letterSpacing: "0.38em",
                 textTransform: "uppercase",
-                textDecoration: "none",
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                border: "1px solid rgba(0,20,137,0.25)",
-                padding: "12px 28px",
-                transition: "background 0.2s, border-color 0.2s",
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.background = "rgba(0,20,137,0.04)";
-                (e.currentTarget as HTMLElement).style.borderColor = "#001489";
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.background = "transparent";
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.25)";
+                color: "#4A58AA",
+                marginBottom: 20,
               }}
             >
-              <span>{d.learnMore}</span>
-              <svg width="11" height="11" fill="none" viewBox="0 0 14 14">
-                <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
+              {d.eyebrow}
+            </motion.p>
+            <motion.h2
+              className="font-heading font-bold text-[#001489]"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              style={{
+                fontSize: "clamp(2.25rem, 4vw, 3.5rem)",
+                lineHeight: 1.06,
+                letterSpacing: "-0.03em",
+              }}
+            >
+              {d.headline}
+            </motion.h2>
           </div>
-
-          {/* ── RIGHT HALF: liquid glass animation panel ── */}
-          <div
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
             style={{
-              background: "linear-gradient(145deg, rgba(0,20,137,0.92) 0%, rgba(0,20,137,0.85) 40%, rgba(0,20,137,0.95) 100%)",
-              backdropFilter: "blur(40px) saturate(1.5)",
-              WebkitBackdropFilter: "blur(40px) saturate(1.5)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              position: "relative",
-              overflow: "hidden",
-              minHeight: 560,
-              borderRadius: "0px",
-              border: "1px solid rgba(255,255,255,0.12)",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.12), 0 24px 80px rgba(0,14,74,0.25), 0 8px 24px rgba(0,20,137,0.15)",
-              padding: 32,
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              color: "#848484",
+              fontSize: "0.9375rem",
+              lineHeight: 1.8,
+              maxWidth: 500,
+              marginLeft: "auto",
             }}
           >
-            {/* Liquid glass caustic shimmer */}
-            <motion.div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "linear-gradient(125deg, rgba(255,255,255,0.06) 0%, transparent 20%, rgba(255,255,255,0.04) 40%, transparent 55%, rgba(255,255,255,0.05) 75%, transparent 90%)",
-                backgroundSize: "200% 200%",
-                pointerEvents: "none",
-              }}
-              animate={{
-                backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
-              }}
-              transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-            />
-            {/* Top specular edge highlight */}
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: "5%",
-                right: "5%",
-                height: 1,
-                background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.22) 25%, rgba(255,255,255,0.30) 50%, rgba(255,255,255,0.22) 75%, transparent)",
-                pointerEvents: "none",
-              }}
-            />
-            {/* Subtle inner depth glow */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.06) 0%, transparent 50%)",
-                pointerEvents: "none",
-              }}
-            />
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                style={{ width: "100%", height: "100%", position: "relative", zIndex: 1 }}
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.02 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {(() => { const V = VISUALS[active]; return <V />; })()}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
+            Built for confidential and high-impact engagements. Our clients trust us with their most sensitive matters for a reason.
+          </motion.p>
         </div>
+
+        {/* ── Horizontal accordion panels ─────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.15 }}
+          className="hidden lg:flex"
+          style={{
+            height: 580,
+            border: "1px solid #E8EDF5",
+            overflow: "hidden",
+            position: "relative",
+          }}
+        >
+          {d.cards.map((card, i) => {
+            const isActive = active === i;
+            return (
+              <motion.div
+                key={i}
+                data-testid={`diff-panel-${i}`}
+                animate={{ flexGrow: isActive ? 5 : 1 }}
+                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                style={{
+                  position: "relative",
+                  overflow: "hidden",
+                  flexShrink: 1,
+                  flexBasis: 0,
+                  borderRight: i < d.cards.length - 1 ? "1px solid #E8EDF5" : "none",
+                  background: isActive ? "#F5F7FF" : "#FFFFFF",
+                  transition: "background 0.5s ease",
+                  cursor: "pointer",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                onMouseEnter={() => { setActive(i); setPaused(true); }}
+                onClick={() => { setActive(i); setPaused(true); }}
+              >
+                {/* Top left: number */}
+                <div style={{ padding: "32px 28px 0", flexShrink: 0 }}>
+                  <span
+                    style={{
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontSize: 9,
+                      fontWeight: 700,
+                      letterSpacing: "0.30em",
+                      color: isActive ? "#4A58AA" : "rgba(74,88,170,0.35)",
+                      transition: "color 0.4s",
+                    }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                {/* Inactive state: large number watermark + vertical title */}
+                <AnimatePresence>
+                  {!isActive && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      style={{
+                        flex: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "16px 12px",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {/* Large ghost number */}
+                      <span
+                        className="font-heading font-bold"
+                        style={{
+                          fontSize: "clamp(4rem, 8vw, 8rem)",
+                          color: "rgba(0,20,137,0.04)",
+                          lineHeight: 1,
+                          letterSpacing: "-0.04em",
+                          display: "block",
+                          textAlign: "center",
+                          marginBottom: 24,
+                        }}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      {/* Vertical title */}
+                      <span
+                        className="font-heading font-bold"
+                        style={{
+                          writingMode: "vertical-rl",
+                          transform: "rotate(180deg)",
+                          color: "rgba(0,20,137,0.35)",
+                          fontSize: "clamp(0.75rem, 1vw, 0.875rem)",
+                          letterSpacing: "0.08em",
+                          lineHeight: 1.2,
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {card.title}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Active state: title + description + animation panel */}
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5, delay: 0.15 }}
+                      style={{
+                        flex: 1,
+                        display: "grid",
+                        gridTemplateColumns: "1fr 260px",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {/* Left: text content */}
+                      <div
+                        style={{
+                          padding: "36px 40px 40px 28px",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "space-between",
+                          overflow: "hidden",
+                        }}
+                      >
+                        <div>
+                          <motion.h3
+                            className="font-heading font-bold text-[#001489]"
+                            initial={{ opacity: 0, y: 14 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            style={{
+                              fontSize: "clamp(1.5rem, 2.4vw, 2.1rem)",
+                              lineHeight: 1.12,
+                              letterSpacing: "-0.025em",
+                              marginBottom: 24,
+                            }}
+                          >
+                            {card.title}
+                          </motion.h3>
+                          <motion.p
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.28 }}
+                            style={{
+                              fontFamily: "'Plus Jakarta Sans', sans-serif",
+                              color: "#595959",
+                              fontSize: "0.9rem",
+                              lineHeight: 1.85,
+                              maxWidth: 360,
+                            }}
+                          >
+                            {card.description}
+                          </motion.p>
+                        </div>
+
+                        <motion.a
+                          href="#contact"
+                          data-testid="diff-cta"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.4, delay: 0.4 }}
+                          className="inline-flex items-center gap-3 self-start"
+                          style={{
+                            color: "#001489",
+                            fontSize: 9,
+                            fontWeight: 700,
+                            letterSpacing: "0.26em",
+                            textTransform: "uppercase",
+                            textDecoration: "none",
+                            fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            borderBottom: "1px solid rgba(0,20,137,0.30)",
+                            paddingBottom: 4,
+                            transition: "border-color 0.2s",
+                          }}
+                          onMouseEnter={e => {
+                            (e.currentTarget as HTMLElement).style.borderColor = "#001489";
+                          }}
+                          onMouseLeave={e => {
+                            (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.30)";
+                          }}
+                        >
+                          <span>{d.learnMore}</span>
+                          <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
+                            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </motion.a>
+                      </div>
+
+                      {/* Right: dark animation panel */}
+                      <div
+                        style={{
+                          background: "linear-gradient(145deg, #001489 0%, #001050 100%)",
+                          position: "relative",
+                          overflow: "hidden",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          padding: 24,
+                        }}
+                      >
+                        {/* Caustic shimmer */}
+                        <motion.div
+                          style={{
+                            position: "absolute",
+                            inset: 0,
+                            background: "linear-gradient(125deg, rgba(255,255,255,0.06) 0%, transparent 25%, rgba(255,255,255,0.04) 50%, transparent 75%)",
+                            backgroundSize: "200% 200%",
+                            pointerEvents: "none",
+                          }}
+                          animate={{ backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"] }}
+                          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                        />
+                        {/* Top edge specular */}
+                        <div style={{
+                          position: "absolute",
+                          top: 0, left: "10%", right: "10%",
+                          height: 1,
+                          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.25) 50%, transparent)",
+                          pointerEvents: "none",
+                        }} />
+                        <AnimatePresence mode="wait">
+                          <motion.div
+                            key={active}
+                            style={{ width: "100%", height: "100%", position: "relative", zIndex: 1 }}
+                            initial={{ opacity: 0, scale: 0.94 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 1.04 }}
+                            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                          >
+                            {(() => { const V = VISUALS[active]; return <V />; })()}
+                          </motion.div>
+                        </AnimatePresence>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Active bottom progress bar */}
+                {isActive && (
+                  <motion.div
+                    key={`progress-${active}`}
+                    style={{
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      height: 2,
+                      background: "#001489",
+                      transformOrigin: "left",
+                    }}
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: CYCLE_MS / 1000, ease: "linear" }}
+                  />
+                )}
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* ── Mobile: stacked cards ─────────────────────────────────────────── */}
+        <div className="lg:hidden flex flex-col gap-0" style={{ border: "1px solid #E8EDF5" }}>
+          {d.cards.map((card, i) => {
+            const isActive = active === i;
+            return (
+              <div
+                key={i}
+                style={{
+                  borderBottom: i < d.cards.length - 1 ? "1px solid #E8EDF5" : "none",
+                  background: isActive ? "#F5F7FF" : "#FFFFFF",
+                }}
+              >
+                <button
+                  onClick={() => { setActive(isActive ? -1 : i); setPaused(true); }}
+                  data-testid={`diff-mobile-${i}`}
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    padding: "24px 24px",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    textAlign: "left",
+                    outline: "none",
+                  }}
+                >
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", color: "#4A58AA", flexShrink: 0 }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="font-heading font-bold text-[#001489] flex-1" style={{ fontSize: "1.1rem", lineHeight: 1.2 }}>
+                    {card.title}
+                  </span>
+                  <motion.svg
+                    animate={{ rotate: isActive ? 45 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    width="16" height="16" fill="none" viewBox="0 0 16 16"
+                    style={{ flexShrink: 0 }}
+                  >
+                    <path d="M8 3v10M3 8h10" stroke="#001489" strokeWidth="1.5" strokeLinecap="round" />
+                  </motion.svg>
+                </button>
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <div style={{ padding: "0 24px 28px" }}>
+                        <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#595959", fontSize: "0.9rem", lineHeight: 1.8, marginBottom: 20 }}>
+                          {card.description}
+                        </p>
+                        <a href="#contact" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 9, fontWeight: 700, letterSpacing: "0.26em", textTransform: "uppercase", textDecoration: "none", borderBottom: "1px solid rgba(0,20,137,0.3)", paddingBottom: 3 }}>
+                          {d.learnMore} →
+                        </a>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+
       </div>
     </section>
   );
