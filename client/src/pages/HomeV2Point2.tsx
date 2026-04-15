@@ -83,10 +83,10 @@ function HeaderV15() {
               key={link.href}
               href={link.href}
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
-              className="relative whitespace-nowrap text-[18px]"
+              className="relative whitespace-nowrap"
               style={{
                 color: textCol,
-                fontSize: 11,
+                fontSize: 18,
                 fontWeight: 600,
                 letterSpacing: "0.10em",
                 textTransform: "uppercase",
