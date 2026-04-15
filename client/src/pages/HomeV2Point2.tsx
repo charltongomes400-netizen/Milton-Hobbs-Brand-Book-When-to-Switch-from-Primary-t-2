@@ -2172,7 +2172,7 @@ function PracticeAreasV18() {
       {/* ── DESKTOP: Vertical photo accordion ── */}
       <div
         className="hidden lg:block"
-        style={{ height: "88vh", minHeight: 620, position: "relative" }}
+        style={{ height: "88vh", minHeight: 600, position: "relative" }}
       >
         {/* Section header — overlaid at top-left */}
         <div
@@ -2295,7 +2295,7 @@ function PracticeAreasV18() {
                       transition={{ duration: 0.22 }}
                       style={{
                         position: "absolute",
-                        bottom: 36,
+                        bottom: 28,
                         left: "50%",
                         transform: "translateX(-50%)",
                         display: "flex",
@@ -2454,7 +2454,7 @@ function PracticeAreasV18() {
                 data-testid={`expertise-item-${i}`}
                 style={{
                   width: "100%",
-                  height: 160,
+                  height: 200,
                   position: "relative",
                   overflow: "hidden",
                   cursor: "pointer",
