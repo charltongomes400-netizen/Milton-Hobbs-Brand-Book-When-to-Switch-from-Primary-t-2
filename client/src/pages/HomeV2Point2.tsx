@@ -65,14 +65,14 @@ function HeaderV15() {
         borderBottom: "1px solid rgba(0,20,137,0.08)",
       }}
     >
-      <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 72 }}>
+      <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 92 }}>
 
         {/* Logo */}
         <a href="#home" data-testid="logo" className="shrink-0" style={{ transition: "filter 0.45s ease" }} onClick={e => { e.preventDefault(); snapScrollTo("#home"); }}>
           <img
             src={miltonHobbsLogo}
             alt="Milton Hobbs"
-            style={{ height: 52, width: "auto", display: "block" }}
+            style={{ height: 72, width: "auto", display: "block" }}
           />
         </a>
 
