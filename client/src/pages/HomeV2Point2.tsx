@@ -2004,7 +2004,7 @@ function FooterV15() {
           fontWeight: 700,
           letterSpacing: "0.50em",
           textTransform: "uppercase",
-          color: "rgba(255,255,255,0.09)",
+          color: "rgba(255,255,255,0.50)",
           textAlign: "center",
         }}>
           Reason&ensp;·&ensp;Rigor&ensp;·&ensp;Resolution
