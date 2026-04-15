@@ -37,45 +37,6 @@ function snapScrollTo(hash: string) {
 function HeaderV15() {
   const { lang, setLang, t } = useLang();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [isDark, setIsDark] = useState(true); // starts over dark hero
-
-  // Scroll detection — listen on snap container if present, else window
-  useEffect(() => {
-    const container = document.querySelector('.v2-snap-container') as HTMLElement | null;
-    const getScroll = () => container ? container.scrollTop : window.scrollY;
-    const check = () => setScrolled(getScroll() > 40);
-    check();
-    const target = container || window;
-    target.addEventListener("scroll", check, { passive: true });
-    return () => target.removeEventListener("scroll", check);
-  }, []);
-
-  // Section theme detection via IntersectionObserver
-  useEffect(() => {
-    const container = document.querySelector('.v2-snap-container') as HTMLElement | null;
-    const sections = document.querySelectorAll("[data-header-theme]");
-    if (!sections.length) return;
-    const obs = new IntersectionObserver(
-      entries => {
-        let best: IntersectionObserverEntry | null = null;
-        for (const entry of entries) {
-          if (entry.isIntersecting && (!best || entry.intersectionRatio > best.intersectionRatio)) {
-            best = entry;
-          }
-        }
-        if (best && best.intersectionRatio >= 0.15) {
-          setIsDark((best.target as HTMLElement).dataset.headerTheme === "dark");
-        }
-      },
-      { threshold: [0.15, 0.5, 0.8], root: container || undefined }
-    );
-    sections.forEach(s => obs.observe(s));
-    return () => obs.disconnect();
-  }, []);
-
-  // Effective theme: if scrolled past hero on a dark section, treat differently
-  const dark = isDark && !scrolled ? true : isDark;
 
   const navLinks = [
     { label: t.nav.home,      href: "#home" },
@@ -89,20 +50,8 @@ function HeaderV15() {
   const mainLinks = navLinks.filter(l => l.href !== "#contact");
   const contactLink = navLinks.find(l => l.href === "#contact")!;
 
-  const textCol   = dark ? "rgba(255,255,255,0.72)" : "rgba(0,20,137,0.55)";
-  const textHover = dark ? "#FFFFFF" : "#001489";
-  const logoFilter = dark ? "brightness(0) invert(1)" : "none";
-  const bgStyle: React.CSSProperties = dark
-    ? {
-        background: scrolled ? "rgba(0,14,80,0.92)" : "transparent",
-        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "1px solid transparent",
-        backdropFilter: scrolled ? "blur(16px)" : "none",
-      }
-    : {
-        background: "#FFFFFF",
-        borderBottom: "1px solid rgba(0,20,137,0.08)",
-        backdropFilter: "none",
-      };
+  const textCol   = "rgba(0,20,137,0.55)";
+  const textHover = "#001489";
 
   return (
     <motion.header
@@ -112,8 +61,8 @@ function HeaderV15() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        ...bgStyle,
-        transition: "background 0.45s ease, border-color 0.45s ease, backdrop-filter 0.45s ease",
+        background: "#FFFFFF",
+        borderBottom: "1px solid rgba(0,20,137,0.08)",
       }}
     >
       <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 72 }}>
@@ -123,7 +72,7 @@ function HeaderV15() {
           <img
             src={miltonHobbsLogo}
             alt="Milton Hobbs"
-            style={{ height: 52, width: "auto", display: "block", filter: logoFilter, transition: "filter 0.45s ease" }}
+            style={{ height: 52, width: "auto", display: "block" }}
           />
         </a>
 
@@ -166,28 +115,28 @@ function HeaderV15() {
             <button
               onClick={() => setLang("EN")}
               data-testid="lang-en"
-              style={{ color: lang === "EN" ? textHover : (dark ? "rgba(255,255,255,0.28)" : "rgba(0,20,137,0.28)"), transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+              style={{ color: lang === "EN" ? textHover : "rgba(0,20,137,0.28)", transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
             >EN</button>
-            <span style={{ color: dark ? "rgba(255,255,255,0.15)" : "rgba(0,20,137,0.15)", margin: "0 8px", fontWeight: 300, fontSize: 11 }}>|</span>
+            <span style={{ color: "rgba(0,20,137,0.15)", margin: "0 8px", fontWeight: 300, fontSize: 11 }}>|</span>
             <button
               onClick={() => setLang("FR")}
               data-testid="lang-fr"
-              style={{ color: lang === "FR" ? textHover : (dark ? "rgba(255,255,255,0.28)" : "rgba(0,20,137,0.28)"), transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+              style={{ color: lang === "FR" ? textHover : "rgba(0,20,137,0.28)", transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
             >FR</button>
           </div>
 
           {/* Thin divider */}
-          <div style={{ width: 1, height: 16, background: dark ? "rgba(255,255,255,0.15)" : "rgba(0,20,137,0.12)" }} />
+          <div style={{ width: 1, height: 16, background: "rgba(0,20,137,0.12)" }} />
 
-          {/* Contact — ghost outline on dark, filled on light */}
+          {/* Contact — solid blue */}
           <a
             href={contactLink.href}
             data-testid="nav-link-contact"
             className="inline-flex items-center whitespace-nowrap"
             onClick={e => { e.preventDefault(); snapScrollTo(contactLink.href); }}
             style={{
-              border: dark ? "1px solid rgba(255,255,255,0.35)" : "1px solid #001489",
-              color: dark ? "#FFFFFF" : "#001489",
+              border: "1px solid #001489",
+              color: "#001489",
               background: "transparent",
               padding: "9px 22px",
               fontSize: 10,
@@ -196,19 +145,17 @@ function HeaderV15() {
               textTransform: "uppercase",
               textDecoration: "none",
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              transition: "background 0.25s, color 0.25s, border-color 0.25s",
+              transition: "background 0.25s, color 0.25s",
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = dark ? "rgba(255,255,255,0.12)" : "#001489";
-              el.style.color = dark ? "#FFFFFF" : "#FFFFFF";
-              el.style.borderColor = dark ? "rgba(255,255,255,0.60)" : "#001489";
+              el.style.background = "#001489";
+              el.style.color = "#FFFFFF";
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement;
               el.style.background = "transparent";
-              el.style.color = dark ? "#FFFFFF" : "#001489";
-              el.style.borderColor = dark ? "rgba(255,255,255,0.35)" : "#001489";
+              el.style.color = "#001489";
             }}
           >
             {contactLink.label}
@@ -222,9 +169,9 @@ function HeaderV15() {
           className="lg:hidden flex flex-col gap-[5px] w-8 h-8 items-center justify-center focus:outline-none"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
-          <span style={{ background: dark ? "#FFFFFF" : "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "rotate-45 translate-y-[3px]" : ""}`} />
-          <span style={{ background: dark ? "#FFFFFF" : "#001489" }} className={`block w-5 h-px transition-all duration-300 ${mobileOpen ? "opacity-0 scale-x-0" : ""}`} />
-          <span style={{ background: dark ? "#FFFFFF" : "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "-rotate-45 -translate-y-[3px]" : ""}`} />
+          <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "rotate-45 translate-y-[3px]" : ""}`} />
+          <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 ${mobileOpen ? "opacity-0 scale-x-0" : ""}`} />
+          <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "-rotate-45 -translate-y-[3px]" : ""}`} />
         </button>
 
       </div>
