@@ -20,6 +20,18 @@ import heroBg4 from "@assets/anders-jilden-Sc5RKXLBjGg-unsplash_1775562755415.jp
 
 const HERO_BG_IMAGES = [heroBg0, heroBg1, heroBg2, heroBg3, heroBg4];
 
+function snapScrollTo(hash: string) {
+  const id = hash.replace("#", "");
+  const el = document.getElementById(id);
+  if (!el) return;
+  const container = document.querySelector('.v2-snap-container');
+  if (container) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    el.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
 /* ─── HEADER ────────────────────────────────────────────────────────────── */
 
 function HeaderV15() {
@@ -28,16 +40,20 @@ function HeaderV15() {
   const [scrolled, setScrolled] = useState(false);
   const [isDark, setIsDark] = useState(true); // starts over dark hero
 
-  // Scroll detection
+  // Scroll detection — listen on snap container if present, else window
   useEffect(() => {
-    const check = () => setScrolled(window.scrollY > 40);
+    const container = document.querySelector('.v2-snap-container') as HTMLElement | null;
+    const getScroll = () => container ? container.scrollTop : window.scrollY;
+    const check = () => setScrolled(getScroll() > 40);
     check();
-    window.addEventListener("scroll", check, { passive: true });
-    return () => window.removeEventListener("scroll", check);
+    const target = container || window;
+    target.addEventListener("scroll", check, { passive: true });
+    return () => target.removeEventListener("scroll", check);
   }, []);
 
   // Section theme detection via IntersectionObserver
   useEffect(() => {
+    const container = document.querySelector('.v2-snap-container') as HTMLElement | null;
     const sections = document.querySelectorAll("[data-header-theme]");
     if (!sections.length) return;
     const obs = new IntersectionObserver(
@@ -48,7 +64,7 @@ function HeaderV15() {
           }
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3, root: container || undefined }
     );
     sections.forEach(s => obs.observe(s));
     return () => obs.disconnect();
@@ -99,7 +115,7 @@ function HeaderV15() {
       <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 72 }}>
 
         {/* Logo */}
-        <a href="#home" data-testid="logo" className="shrink-0" style={{ transition: "filter 0.45s ease" }}>
+        <a href="#home" data-testid="logo" className="shrink-0" style={{ transition: "filter 0.45s ease" }} onClick={e => { e.preventDefault(); snapScrollTo("#home"); }}>
           <img
             src={miltonHobbsLogo}
             alt="Milton Hobbs"
@@ -114,7 +130,7 @@ function HeaderV15() {
               key={link.href}
               href={link.href}
               data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
-              className="relative whitespace-nowrap"
+              className="relative whitespace-nowrap text-[18px]"
               style={{
                 color: textCol,
                 fontSize: 11,
@@ -125,6 +141,7 @@ function HeaderV15() {
                 transition: "color 0.25s ease",
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
               }}
+              onClick={e => { if (link.href.startsWith("#")) { e.preventDefault(); snapScrollTo(link.href); } }}
               onMouseEnter={e => (e.currentTarget.style.color = textHover)}
               onMouseLeave={e => (e.currentTarget.style.color = textCol)}
             >
@@ -163,6 +180,7 @@ function HeaderV15() {
             href={contactLink.href}
             data-testid="nav-link-contact"
             className="inline-flex items-center whitespace-nowrap"
+            onClick={e => { e.preventDefault(); snapScrollTo(contactLink.href); }}
             style={{
               border: dark ? "1px solid rgba(255,255,255,0.35)" : "1px solid #001489",
               color: dark ? "#FFFFFF" : "#001489",
@@ -206,7 +224,6 @@ function HeaderV15() {
         </button>
 
       </div>
-
       {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
@@ -314,7 +331,7 @@ function HeroV15() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen overflow-hidden"
+      className="relative min-h-screen overflow-hidden v2-snap-section"
       style={{ background: "#001489" }}
     >
       {/* ── Full-bleed architectural photo — multiply blend ── */}
@@ -906,13 +923,14 @@ function DifferentiatorsV15() {
       id="firm"
       data-header-theme="light"
       data-testid="differentiators-section"
+      className="v2-snap-section"
       style={{ background: "#FFFFFF" }}
       onMouseLeave={() => setPaused(false)}
     >
       {/* ════════════════════════════════════════════════════════════
           DESKTOP — Editorial split: white left / dark right
       ════════════════════════════════════════════════════════════ */}
-      <div className="hidden lg:grid" style={{ gridTemplateColumns: "55% 45%", minHeight: 680 }}>
+      <div className="hidden lg:grid" style={{ gridTemplateColumns: "55% 45%", minHeight: "100dvh" }}>
 
         {/* ── LEFT: white content column ─────────────────────────────── */}
         <motion.div
@@ -923,8 +941,8 @@ function DifferentiatorsV15() {
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-end",
-            padding: "160px 72px 180px 64px",
+            justifyContent: "center",
+            padding: "80px 72px 80px 64px",
             borderRight: "1px solid #E8EDF5",
           }}
         >
@@ -1759,9 +1777,10 @@ function ContactFormV15() {
       id="contact"
       data-header-theme="light"
       data-testid="contact-section"
-      style={{ background: "#FFFFFF" }}
+      className="v2-snap-section"
+      style={{ background: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "center" }}
     >
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 160, paddingBottom: 160 }}>
+      <div className="max-w-[1400px] mx-auto px-8 w-full" style={{ paddingTop: 80, paddingBottom: 80 }}>
 
         {/* ── Section header ── */}
         <motion.div
@@ -2034,7 +2053,7 @@ function FooterV15() {
   const parisTime = fmtTime("Europe/Paris");
 
   return (
-    <footer id="footer" data-testid="footer" style={{ background: "#001489", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+    <footer id="footer" data-testid="footer" className="v2-snap-end" style={{ background: "#001489", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       {/* ── Motto whisper — very top ── */}
       <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 40, paddingBottom: 36, borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <p style={{
@@ -2205,13 +2224,14 @@ function PracticeAreasV18() {
       id="expertise"
       data-testid="practice-areas-section"
       data-header-theme="dark"
+      className="v2-snap-section"
       style={{ background: "#001489", position: "relative", overflow: "hidden" }}
       onMouseLeave={() => setPaused(false)}
     >
       {/* ── DESKTOP: Vertical photo accordion ── */}
       <div
         className="hidden lg:block"
-        style={{ height: "88vh", minHeight: 600, position: "relative" }}
+        style={{ height: "100dvh", minHeight: 600, position: "relative" }}
       >
         {/* Section header — overlaid at top-left */}
         <div
@@ -2579,16 +2599,11 @@ function PracticeAreasV18() {
 
 function HomeV2Point2Inner() {
   return (
-    <div className="bg-[#FCFCFC] min-h-screen" data-testid="home-v1-5-page">
+    <div className="bg-[#FCFCFC] min-h-screen v2-snap-container" data-testid="home-v1-5-page">
       <HeaderV15 />
       <main>
         <HeroV15 />
         <DifferentiatorsV15 />
-        <div style={{ background: "#FFFFFF", paddingTop: 40, paddingBottom: 40 }}>
-          <div className="max-w-[1400px] mx-auto px-8">
-            <div style={{ height: 1, background: "rgba(0,20,137,0.06)" }} />
-          </div>
-        </div>
         <PracticeAreasV18 />
         <ContactFormV15 />
       </main>

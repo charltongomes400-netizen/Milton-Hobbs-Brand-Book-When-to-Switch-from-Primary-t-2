@@ -176,3 +176,22 @@
   from { height: var(--radix-accordion-content-height); }
   to   { height: 0; }
 }
+
+@media (min-width: 1024px) {
+  .v2-snap-container {
+    height: 100dvh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+  }
+  .v2-snap-section {
+    scroll-snap-align: start;
+    min-height: 100dvh;
+  }
+  .v2-snap-end {
+    scroll-snap-align: end;
+  }
+}
+
+.v2-snap-container {
+  -webkit-overflow-scrolling: touch;
+}
