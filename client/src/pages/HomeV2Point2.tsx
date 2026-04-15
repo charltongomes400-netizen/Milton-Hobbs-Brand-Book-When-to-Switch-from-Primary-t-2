@@ -2201,7 +2201,7 @@ function PracticeAreasV18() {
           <div>
             <p style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: 9,
+              fontSize: 18,
               fontWeight: 700,
               letterSpacing: "0.42em",
               textTransform: "uppercase",
