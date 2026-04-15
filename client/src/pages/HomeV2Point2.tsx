@@ -86,7 +86,7 @@ function HeaderV15() {
               className="relative whitespace-nowrap"
               style={{
                 color: textCol,
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: 600,
                 letterSpacing: "0.10em",
                 textTransform: "uppercase",
