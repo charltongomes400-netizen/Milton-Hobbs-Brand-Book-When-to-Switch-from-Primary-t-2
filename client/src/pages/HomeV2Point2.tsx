@@ -909,7 +909,7 @@ function DifferentiatorsV15() {
               color: "#4A58AA",
               marginBottom: 20,
             }}
-          >
+            className="text-[18px]">
             {d.eyebrow}
           </p>
 
@@ -1195,7 +1195,6 @@ function DifferentiatorsV15() {
           </AnimatePresence>
         </motion.div>
       </div>
-
       {/* ════════════════════════════════════════════════════════════
           MOBILE — simple accordion, white throughout
       ════════════════════════════════════════════════════════════ */}
