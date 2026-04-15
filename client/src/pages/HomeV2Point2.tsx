@@ -902,14 +902,13 @@ function DifferentiatorsV15() {
           <p
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: 9,
+              fontSize: 18,
               fontWeight: 700,
               letterSpacing: "0.40em",
               textTransform: "uppercase",
               color: "#4A58AA",
               marginBottom: 20,
-            }}
-            className="text-[18px]">
+            }}>
             {d.eyebrow}
           </p>
 
