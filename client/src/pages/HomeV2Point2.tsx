@@ -884,8 +884,8 @@ function DifferentiatorsV15() {
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
-            padding: "88px 72px 88px 64px",
+            justifyContent: "flex-end",
+            padding: "88px 72px 96px 64px",
             borderRight: "1px solid #E8EDF5",
           }}
         >
@@ -1172,8 +1172,8 @@ function DifferentiatorsV15() {
             <motion.div
               key={active}
               style={{
-                width: "75%",
-                maxWidth: 360,
+                width: "92%",
+                maxWidth: 480,
                 aspectRatio: "320 / 260",
                 position: "relative",
                 zIndex: 1,
