@@ -253,10 +253,9 @@ function HeroV15() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex(prev => (prev + 1) % totalArticles);
-      setTimerKey(k => k + 1);
     }, HERO_CYCLE_MS);
     return () => clearInterval(timer);
-  }, [totalArticles]);
+  }, [timerKey, totalArticles]);
 
   function goTo(i: number) {
     setCurrentIndex(i);
@@ -295,13 +294,6 @@ function HeroV15() {
         />
       </AnimatePresence>
 
-      {/* ── Subtle vignette on right side for depth ──────────────────────── */}
-      <div
-        className="absolute inset-0 pointer-events-none hidden lg:block"
-        style={{
-          background: "linear-gradient(to right, transparent 40%, rgba(0,10,60,0.35) 100%)",
-        }}
-      />
 
       {/* ── Diagonal kinetic tile border along the editorial panel cut line ── */}
       {DIAG_TILES.map((tile, i) => (
@@ -344,7 +336,7 @@ function HeroV15() {
       >
         {/* ── Left-edge animated progress timer bar ─────────────────────── */}
         <motion.div
-          key={timerKey}
+          key={currentIndex}
           className="absolute left-0 top-0 bottom-0 pointer-events-none"
           style={{ width: 3, background: "#4A58AA", transformOrigin: "top" }}
           initial={{ scaleY: 1 }}
@@ -406,7 +398,7 @@ function HeroV15() {
               <h1
                 className="font-heading text-white font-bold"
                 style={{
-                  fontSize: "clamp(2rem, 3.8vw, 3.75rem)",
+                  fontSize: "clamp(2.75rem, 6.5vw, 5.75rem)",
                   lineHeight: 1.02,
                   letterSpacing: "-0.022em",
                   maxWidth: "14ch",
