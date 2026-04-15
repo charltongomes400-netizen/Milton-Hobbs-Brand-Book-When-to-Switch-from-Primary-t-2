@@ -2165,42 +2165,53 @@ function PracticeAreasV18() {
     <section
       id="expertise"
       data-testid="practice-areas-section"
-      data-header-theme="light"
-      style={{ background: "#F9F9F9", borderTop: "1px solid #E8EDF5" }}
+      data-header-theme="dark"
+      style={{ background: "#001489", position: "relative", overflow: "hidden" }}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 100, paddingBottom: 100 }}>
-
-        {/* ── Section header ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex items-end justify-between gap-6 flex-wrap"
-          style={{ marginBottom: 64 }}
+      {/* ── DESKTOP: Vertical photo accordion ── */}
+      <div
+        className="hidden lg:block"
+        style={{ height: "88vh", minHeight: 620, position: "relative" }}
+      >
+        {/* Section header — overlaid at top-left */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 20,
+            padding: "44px 52px",
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+            background: "linear-gradient(to bottom, rgba(0,14,80,0.72) 0%, transparent 100%)",
+            pointerEvents: "none",
+          }}
         >
           <div>
             <p style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 9,
               fontWeight: 700,
-              letterSpacing: "0.40em",
+              letterSpacing: "0.42em",
               textTransform: "uppercase",
-              color: "#4A58AA",
-              marginBottom: 16,
+              color: "#7A84BE",
+              marginBottom: 14,
             }}>
               Our Expertise
             </p>
             <h2
-              className="font-heading font-bold text-[#001489]"
-              style={{ fontSize: "clamp(2.25rem, 4vw, 3.5rem)", lineHeight: 1.06, letterSpacing: "-0.03em" }}
+              className="font-heading font-bold"
+              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#FFFFFF" }}
             >
               Practice Areas.
             </h2>
           </div>
-          <div className="flex items-center gap-4" style={{ paddingBottom: 6 }}>
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 12, color: "rgba(0,20,137,0.22)", letterSpacing: "0.06em" }}>
+          {/* Counter + dot nav */}
+          <div className="flex items-center gap-4" style={{ pointerEvents: "all" }}>
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 11, color: "rgba(255,255,255,0.28)", letterSpacing: "0.06em" }}>
               {String(active + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(EXPERTISE_ITEMS_V18.length).padStart(2, "0")}
             </span>
             <div className="flex items-center gap-1.5">
@@ -2208,203 +2219,310 @@ function PracticeAreasV18() {
                 <button
                   key={i}
                   onClick={() => { setActive(i); setPaused(true); }}
-                  style={{ width: active === i ? 20 : 6, height: 2, background: active === i ? "#001489" : "rgba(0,20,137,0.12)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }}
+                  style={{ width: active === i ? 20 : 5, height: 2, background: active === i ? "#FFFFFF" : "rgba(255,255,255,0.22)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }}
                 />
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* ── Typographic index list ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          style={{ borderTop: "1px solid #E8EDF5" }}
-        >
+        {/* Panels row */}
+        <div style={{ display: "flex", height: "100%" }}>
           {EXPERTISE_ITEMS_V18.map((item, i) => {
             const isActive = active === i;
             return (
               <div
                 key={i}
                 data-testid={`expertise-item-${i}`}
-                style={{ borderBottom: "1px solid #E8EDF5", position: "relative" }}
+                onMouseEnter={() => { setActive(i); setPaused(true); }}
+                onClick={() => { setActive(i); setPaused(true); }}
+                style={{
+                  flex: isActive ? 5 : 0.65,
+                  transition: "flex 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+                  position: "relative",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  borderRight: i < EXPERTISE_ITEMS_V18.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none",
+                  background: "#001050",
+                }}
               >
-                {/* Left accent bar */}
-                <motion.div
-                  style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 2, background: "#001489", transformOrigin: "top" }}
-                  animate={{ scaleY: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
-                  transition={{ duration: 0.28 }}
+                {/* Photo */}
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    mixBlendMode: "multiply",
+                    transition: "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease",
+                    transform: isActive ? "scale(1.04)" : "scale(1)",
+                    opacity: isActive ? 0.82 : 0.60,
+                  }}
                 />
 
-                {/* Row — clickable/hoverable */}
-                <button
-                  onClick={() => { setActive(i); setPaused(true); }}
-                  onMouseEnter={() => { setActive(i); setPaused(true); }}
-                  aria-expanded={isActive}
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 20,
-                    padding: "26px 4px 26px 20px",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    textAlign: "left",
-                    outline: "none",
-                  }}
-                >
-                  {/* Index number */}
-                  <span style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: 9,
-                    fontWeight: 700,
-                    letterSpacing: "0.28em",
-                    color: isActive ? "#4A58AA" : "rgba(74,88,170,0.30)",
-                    flexShrink: 0,
-                    minWidth: 22,
-                    transition: "color 0.25s",
-                  }}>
-                    {item.num}
-                  </span>
+                {/* Bottom gradient */}
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: isActive
+                    ? "linear-gradient(to bottom, rgba(0,8,50,0.10) 0%, rgba(0,8,50,0.78) 60%, rgba(0,8,50,0.92) 100%)"
+                    : "linear-gradient(to bottom, rgba(0,8,50,0.30) 0%, rgba(0,8,50,0.82) 100%)",
+                  transition: "background 0.5s ease",
+                  pointerEvents: "none",
+                }} />
 
-                  {/* Practice area title */}
-                  <span
-                    className="font-heading font-bold"
-                    style={{
-                      flex: 1,
-                      fontSize: "clamp(1.05rem, 1.8vw, 1.5rem)",
-                      lineHeight: 1.2,
-                      letterSpacing: "-0.015em",
-                      color: isActive ? "#001489" : "rgba(0,20,137,0.30)",
-                      transition: "color 0.25s",
-                    }}
-                  >
-                    {item.title}
-                  </span>
-
-                  {/* Category tag — right side, hidden on mobile */}
-                  <span
-                    className="hidden sm:block"
-                    style={{
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
-                      fontSize: 9,
-                      fontWeight: 700,
-                      letterSpacing: "0.28em",
-                      textTransform: "uppercase",
-                      color: isActive ? "#4A58AA" : "rgba(0,20,137,0.20)",
-                      flexShrink: 0,
-                      transition: "color 0.25s",
-                      minWidth: 80,
-                      textAlign: "right",
-                    }}
-                  >
-                    {item.short}
-                  </span>
-
-                  {/* Arrow */}
-                  <motion.div
-                    animate={{ x: isActive ? 3 : 0, opacity: isActive ? 1 : 0.18 }}
-                    transition={{ duration: 0.25 }}
-                    style={{ flexShrink: 0 }}
-                  >
-                    <svg width="15" height="15" fill="none" viewBox="0 0 16 16">
-                      <path d="M3 8h10M8 3l5 5-5 5" stroke="#001489" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </motion.div>
-                </button>
-
-                {/* Progress bar inside active row */}
+                {/* Progress bar — bottom of active panel */}
                 {isActive && (
                   <motion.div
                     key={`pa-prog-${active}`}
-                    style={{ position: "absolute", bottom: 0, left: 0, height: 1, background: "#001489", opacity: 0.12 }}
+                    style={{ position: "absolute", bottom: 0, left: 0, height: 2, background: "rgba(255,255,255,0.40)", zIndex: 3 }}
                     initial={{ width: "0%" }}
                     animate={{ width: "100%" }}
                     transition={{ duration: PRACTICE_CYCLE_MS / 1000, ease: "linear" }}
                   />
                 )}
 
-                {/* Description — slides in below when active */}
-                <AnimatePresence initial={false}>
-                  {isActive && (
+                {/* COLLAPSED LABEL — vertical rotated text, bottom-center */}
+                <AnimatePresence>
+                  {!isActive && (
                     <motion.div
-                      key={`desc-pa-${i}`}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
-                      style={{ overflow: "hidden" }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.22 }}
+                      style={{
+                        position: "absolute",
+                        bottom: 36,
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: 10,
+                        zIndex: 2,
+                      }}
                     >
-                      <div
+                      <span style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontSize: 8,
+                        fontWeight: 700,
+                        letterSpacing: "0.30em",
+                        color: "rgba(255,255,255,0.38)",
+                        writingMode: "vertical-rl",
+                        transform: "rotate(180deg)",
+                      }}>
+                        {item.num}
+                      </span>
+                      <span
+                        className="font-heading font-bold"
                         style={{
-                          padding: "0 4px 28px 42px",
-                          display: "flex",
-                          alignItems: "flex-end",
-                          justifyContent: "space-between",
-                          gap: 24,
-                          flexWrap: "wrap",
+                          fontSize: "0.72rem",
+                          color: "rgba(255,255,255,0.55)",
+                          writingMode: "vertical-rl",
+                          transform: "rotate(180deg)",
+                          whiteSpace: "nowrap",
+                          letterSpacing: "0.04em",
                         }}
                       >
-                        <motion.p
-                          initial={{ y: 8, opacity: 0 }}
-                          animate={{ y: 0, opacity: 1 }}
-                          transition={{ duration: 0.35, delay: 0.08 }}
-                          style={{
-                            fontFamily: "'Plus Jakarta Sans', sans-serif",
-                            color: "#595959",
-                            fontSize: "0.9375rem",
-                            lineHeight: 1.8,
-                            maxWidth: "58ch",
-                          }}
-                        >
-                          {item.desc}
-                        </motion.p>
-                        <motion.a
-                          href="#contact"
-                          data-testid={`expertise-enquire-${i}`}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.3, delay: 0.16 }}
-                          className="inline-flex items-center gap-3"
-                          style={{
-                            color: "#001489",
-                            fontSize: 9,
-                            fontWeight: 700,
-                            letterSpacing: "0.26em",
-                            textTransform: "uppercase",
-                            textDecoration: "none",
-                            fontFamily: "'Plus Jakarta Sans', sans-serif",
-                            border: "1px solid rgba(0,20,137,0.20)",
-                            padding: "11px 22px",
-                            flexShrink: 0,
-                            transition: "background 0.2s, border-color 0.2s",
-                          }}
-                          onMouseEnter={e => {
-                            (e.currentTarget as HTMLElement).style.background = "rgba(0,20,137,0.05)";
-                            (e.currentTarget as HTMLElement).style.borderColor = "#001489";
-                          }}
-                          onMouseLeave={e => {
-                            (e.currentTarget as HTMLElement).style.background = "transparent";
-                            (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.20)";
-                          }}
-                        >
-                          Enquire
-                          <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
-                            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-                          </svg>
-                        </motion.a>
-                      </div>
+                        {item.short}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* EXPANDED CONTENT — bottom-anchored */}
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        padding: "36px 32px 40px",
+                        zIndex: 2,
+                      }}
+                    >
+                      {/* Number */}
+                      <p style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontSize: 8,
+                        fontWeight: 700,
+                        letterSpacing: "0.34em",
+                        textTransform: "uppercase",
+                        color: "#7A84BE",
+                        marginBottom: 10,
+                      }}>
+                        {item.num}
+                      </p>
+
+                      {/* Title */}
+                      <h3
+                        className="font-heading font-bold"
+                        style={{
+                          fontSize: "clamp(1.15rem, 1.6vw, 1.6rem)",
+                          lineHeight: 1.12,
+                          letterSpacing: "-0.02em",
+                          color: "#FFFFFF",
+                          marginBottom: 18,
+                        }}
+                      >
+                        {item.title}
+                      </h3>
+
+                      {/* Thin rule */}
+                      <div style={{ width: 28, height: 1, background: "rgba(255,255,255,0.22)", marginBottom: 18 }} />
+
+                      {/* Description */}
+                      <p style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        color: "rgba(255,255,255,0.62)",
+                        fontSize: 13,
+                        lineHeight: 1.75,
+                        marginBottom: 24,
+                        maxWidth: "26ch",
+                      }}>
+                        {item.desc}
+                      </p>
+
+                      {/* Enquire CTA */}
+                      <a
+                        href="#contact"
+                        data-testid={`expertise-enquire-${i}`}
+                        className="inline-flex items-center gap-2"
+                        style={{
+                          color: "#FFFFFF",
+                          fontSize: 9,
+                          fontWeight: 700,
+                          letterSpacing: "0.26em",
+                          textTransform: "uppercase",
+                          textDecoration: "none",
+                          fontFamily: "'Plus Jakarta Sans', sans-serif",
+                          border: "1px solid rgba(255,255,255,0.30)",
+                          padding: "11px 20px",
+                          transition: "background 0.2s, border-color 0.2s",
+                          display: "inline-flex",
+                        }}
+                        onMouseEnter={e => {
+                          (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.12)";
+                          (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.60)";
+                        }}
+                        onMouseLeave={e => {
+                          (e.currentTarget as HTMLElement).style.background = "transparent";
+                          (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.30)";
+                        }}
+                      >
+                        Enquire
+                        <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
+                          <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                        </svg>
+                      </a>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
             );
           })}
-        </motion.div>
+        </div>
+      </div>
 
+      {/* ── MOBILE: Stacked photo rows ── */}
+      <div className="lg:hidden" style={{ paddingTop: 88 }}>
+        {/* Header */}
+        <div style={{ padding: "0 24px 40px" }}>
+          <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.40em", textTransform: "uppercase", color: "#7A84BE", marginBottom: 14 }}>
+            Our Expertise
+          </p>
+          <h2 className="font-heading font-bold" style={{ fontSize: "clamp(1.75rem, 7vw, 2.25rem)", lineHeight: 1.08, letterSpacing: "-0.03em", color: "#FFFFFF" }}>
+            Practice Areas.
+          </h2>
+        </div>
+
+        {EXPERTISE_ITEMS_V18.map((item, i) => {
+          const isActive = active === i;
+          return (
+            <div key={i} style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+              <button
+                onClick={() => { setActive(isActive ? -1 : i); setPaused(true); }}
+                data-testid={`expertise-item-${i}`}
+                style={{
+                  width: "100%",
+                  height: 160,
+                  position: "relative",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  border: "none",
+                  background: "#001050",
+                  display: "block",
+                }}
+              >
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", mixBlendMode: "multiply", opacity: isActive ? 0.80 : 0.55 }}
+                />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,8,50,0.85) 0%, rgba(0,8,50,0.35) 100%)" }} />
+                <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", padding: "0 24px", gap: 16 }}>
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", color: "#7A84BE", flexShrink: 0 }}>
+                    {item.num}
+                  </span>
+                  <span className="font-heading font-bold" style={{ fontSize: "clamp(1rem, 4vw, 1.25rem)", color: "#FFFFFF", flex: 1, textAlign: "left", lineHeight: 1.2 }}>
+                    {item.title}
+                  </span>
+                  <motion.div
+                    animate={{ rotate: isActive ? 45 : 0 }}
+                    transition={{ duration: 0.28 }}
+                    style={{ flexShrink: 0 }}
+                  >
+                    <svg width="18" height="18" fill="none" viewBox="0 0 18 18">
+                      <path d="M9 3v12M3 9h12" stroke="rgba(255,255,255,0.55)" strokeWidth="1.4" strokeLinecap="round" />
+                    </svg>
+                  </motion.div>
+                </div>
+              </button>
+
+              <AnimatePresence initial={false}>
+                {isActive && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                    style={{ overflow: "hidden" }}
+                  >
+                    <div style={{ padding: "20px 24px 28px" }}>
+                      <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.60)", fontSize: 14, lineHeight: 1.75, marginBottom: 20 }}>
+                        {item.desc}
+                      </p>
+                      <a
+                        href="#contact"
+                        style={{
+                          display: "inline-flex", alignItems: "center", gap: 8,
+                          color: "#FFFFFF", fontSize: 9, fontWeight: 700,
+                          letterSpacing: "0.26em", textTransform: "uppercase",
+                          textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif",
+                          border: "1px solid rgba(255,255,255,0.28)", padding: "11px 20px",
+                        }}
+                      >
+                        Enquire
+                        <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
+                          <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                        </svg>
+                      </a>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
