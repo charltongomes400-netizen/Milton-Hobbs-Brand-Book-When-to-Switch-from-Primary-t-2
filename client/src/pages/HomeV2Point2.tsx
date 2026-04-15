@@ -1078,17 +1078,20 @@ function DifferentiatorsV15() {
                 textTransform: "uppercase",
                 textDecoration: "none",
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                border: "1px solid rgba(0,20,137,0.22)",
+                border: "1px solid #001489",
                 padding: "13px 28px",
-                transition: "background 0.2s, border-color 0.2s",
+                background: "transparent",
+                transition: "background 0.25s, color 0.25s",
               }}
               onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.background = "rgba(0,20,137,0.04)";
-                (e.currentTarget as HTMLElement).style.borderColor = "#001489";
+                const el = e.currentTarget as HTMLElement;
+                el.style.background = "#001489";
+                el.style.color = "#FFFFFF";
               }}
               onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.background = "transparent";
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.22)";
+                const el = e.currentTarget as HTMLElement;
+                el.style.background = "transparent";
+                el.style.color = "#001489";
               }}
             >
               <span>{d.learnMore}</span>
@@ -1297,8 +1300,20 @@ function DifferentiatorsV15() {
               textTransform: "uppercase",
               textDecoration: "none",
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              border: "1px solid rgba(0,20,137,0.22)",
+              border: "1px solid #001489",
               padding: "13px 24px",
+              background: "transparent",
+              transition: "background 0.25s, color 0.25s",
+            }}
+            onMouseEnter={e => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = "#001489";
+              el.style.color = "#FFFFFF";
+            }}
+            onMouseLeave={e => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = "transparent";
+              el.style.color = "#001489";
             }}
           >
             <span>{d.learnMore}</span>
@@ -2420,18 +2435,21 @@ function PracticeAreasV18() {
                           textTransform: "uppercase",
                           textDecoration: "none",
                           fontFamily: "'Plus Jakarta Sans', sans-serif",
-                          border: "1px solid rgba(255,255,255,0.30)",
+                          border: "1px solid #FFFFFF",
                           padding: "11px 20px",
-                          transition: "background 0.2s, border-color 0.2s",
+                          background: "transparent",
+                          transition: "background 0.25s, color 0.25s",
                           display: "inline-flex",
                         }}
                         onMouseEnter={e => {
-                          (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.12)";
-                          (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.60)";
+                          const el = e.currentTarget as HTMLElement;
+                          el.style.background = "#FFFFFF";
+                          el.style.color = "#001489";
                         }}
                         onMouseLeave={e => {
-                          (e.currentTarget as HTMLElement).style.background = "transparent";
-                          (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.30)";
+                          const el = e.currentTarget as HTMLElement;
+                          el.style.background = "transparent";
+                          el.style.color = "#FFFFFF";
                         }}
                       >
                         Enquire
@@ -2524,7 +2542,18 @@ function PracticeAreasV18() {
                           color: "#FFFFFF", fontSize: 9, fontWeight: 700,
                           letterSpacing: "0.26em", textTransform: "uppercase",
                           textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif",
-                          border: "1px solid rgba(255,255,255,0.28)", padding: "11px 20px",
+                          border: "1px solid #FFFFFF", padding: "11px 20px",
+                          background: "transparent", transition: "background 0.25s, color 0.25s",
+                        }}
+                        onMouseEnter={e => {
+                          const el = e.currentTarget as HTMLElement;
+                          el.style.background = "#FFFFFF";
+                          el.style.color = "#001489";
+                        }}
+                        onMouseLeave={e => {
+                          const el = e.currentTarget as HTMLElement;
+                          el.style.background = "transparent";
+                          el.style.color = "#FFFFFF";
                         }}
                       >
                         Enquire
