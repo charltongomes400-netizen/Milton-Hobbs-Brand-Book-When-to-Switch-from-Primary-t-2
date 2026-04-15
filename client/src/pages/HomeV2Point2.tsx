@@ -906,7 +906,7 @@ function DifferentiatorsV15() {
       id="firm"
       data-header-theme="light"
       data-testid="differentiators-section"
-      style={{ background: "#FFFFFF", borderTop: "1px solid #E8EDF5" }}
+      style={{ background: "#FFFFFF" }}
       onMouseLeave={() => setPaused(false)}
     >
       {/* ════════════════════════════════════════════════════════════
@@ -924,7 +924,7 @@ function DifferentiatorsV15() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-end",
-            padding: "88px 72px 96px 64px",
+            padding: "160px 72px 180px 64px",
             borderRight: "1px solid #E8EDF5",
           }}
         >
@@ -950,7 +950,7 @@ function DifferentiatorsV15() {
               fontSize: "clamp(2rem, 3.2vw, 3rem)",
               lineHeight: 1.06,
               letterSpacing: "-0.03em",
-              marginBottom: 56,
+              marginBottom: 80,
             }}
           >
             {d.headline}
@@ -1229,7 +1229,7 @@ function DifferentiatorsV15() {
       {/* ════════════════════════════════════════════════════════════
           MOBILE — simple accordion, white throughout
       ════════════════════════════════════════════════════════════ */}
-      <div className="lg:hidden" style={{ padding: "72px 24px 80px" }}>
+      <div className="lg:hidden" style={{ padding: "100px 24px 100px" }}>
         {/* Header */}
         <p
           style={{
@@ -1761,7 +1761,7 @@ function ContactFormV15() {
       data-testid="contact-section"
       style={{ background: "#FFFFFF" }}
     >
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 120, paddingBottom: 120 }}>
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 160, paddingBottom: 160 }}>
 
         {/* ── Section header ── */}
         <motion.div
@@ -1769,7 +1769,7 @@ function ContactFormV15() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65 }}
-          style={{ marginBottom: 72 }}
+          style={{ marginBottom: 88 }}
         >
           <p style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -2584,6 +2584,11 @@ function HomeV2Point2Inner() {
       <main>
         <HeroV15 />
         <DifferentiatorsV15 />
+        <div style={{ background: "#FFFFFF", paddingTop: 40, paddingBottom: 40 }}>
+          <div className="max-w-[1400px] mx-auto px-8">
+            <div style={{ height: 1, background: "rgba(0,20,137,0.06)" }} />
+          </div>
+        </div>
         <PracticeAreasV18 />
         <ContactFormV15 />
       </main>
