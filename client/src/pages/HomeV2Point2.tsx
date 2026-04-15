@@ -506,7 +506,7 @@ function HeroV15() {
                   style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     color: "rgba(0,20,137,0.50)",
-                    fontSize: 9,
+                    fontSize: 18,
                     fontWeight: 700,
                     letterSpacing: "0.32em",
                     textTransform: "uppercase",
