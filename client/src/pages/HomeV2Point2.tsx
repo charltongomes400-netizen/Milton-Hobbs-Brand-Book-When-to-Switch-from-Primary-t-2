@@ -1718,9 +1718,9 @@ function ContactFormV15() {
   return (
     <section
       id="contact"
-      data-header-theme="dark"
+      data-header-theme="light"
       data-testid="contact-section"
-      style={{ background: "#001489" }}
+      style={{ background: "#FFFFFF" }}
     >
       <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 120, paddingBottom: 120 }}>
 
@@ -1738,7 +1738,7 @@ function ContactFormV15() {
             fontWeight: 700,
             letterSpacing: "0.40em",
             textTransform: "uppercase",
-            color: "#7A84BE",
+            color: "#4A58AA",
             marginBottom: 20,
           }}>
             {c.eyebrow}
@@ -1746,11 +1746,11 @@ function ContactFormV15() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-20 items-end">
             <h2
               className="font-heading font-bold"
-              style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#FFFFFF" }}
+              style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#001489" }}
             >
               {c.headline}
             </h2>
-            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.52)", fontSize: 15, lineHeight: 1.78, maxWidth: 440 }}>
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(0,0,0,0.50)", fontSize: 15, lineHeight: 1.78, maxWidth: 440 }}>
               {c.subtext}
             </p>
           </div>
@@ -1763,9 +1763,9 @@ function ContactFormV15() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="grid grid-cols-1 lg:grid-cols-[7fr_4fr]"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+          style={{ borderTop: "1px solid rgba(0,20,137,0.10)" }}
         >
-          {/* ── Form — dark fields ── */}
+          {/* ── Form — blue boxes ── */}
           <div style={{ paddingTop: 48, paddingRight: "clamp(0px, 5vw, 72px)", paddingBottom: 0 }}>
             {submitted ? (
               <motion.div
@@ -1776,19 +1776,19 @@ function ContactFormV15() {
                 className="flex flex-col gap-5"
                 style={{ minHeight: 360, justifyContent: "center" }}
               >
-                <div style={{ width: 52, height: 52, background: "rgba(255,255,255,0.10)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 8 }}>
+                <div style={{ width: 52, height: 52, background: "#001489", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 8 }}>
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 20 20">
                     <path d="M4 10l4 4 8-8" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <h3 className="font-heading font-bold text-white" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)" }}>
+                <h3 className="font-heading font-bold" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)", color: "#001489" }}>
                   {c.successTitle}
                 </h3>
-                <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 14, lineHeight: 1.72 }}>{c.successText}</p>
+                <p style={{ color: "rgba(0,0,0,0.50)", fontSize: 14, lineHeight: 1.72 }}>{c.successText}</p>
               </motion.div>
             ) : (
               <div className="w-full">
-                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#7A84BE", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase", marginBottom: 32 }}>
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase", marginBottom: 32 }}>
                   Send a Message
                 </p>
                 <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-4">
@@ -1796,44 +1796,36 @@ function ContactFormV15() {
                     <input
                       type="text" name="name" required value={form.name} onChange={handleChange}
                       placeholder={c.namePlaceholder} data-testid="input-name"
-                      style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: "#FFFFFF", padding: "14px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                      className="placeholder-[rgba(255,255,255,0.28)]"
-                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.55)"}
-                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)"}
+                      style={{ background: "#001489", border: "none", color: "#FFFFFF", padding: "14px 16px", fontSize: 14, outline: "none", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      className="placeholder-[rgba(255,255,255,0.38)]"
                     />
                     <input
                       type="email" name="email" required value={form.email} onChange={handleChange}
                       placeholder={c.emailPlaceholder} data-testid="input-email"
-                      style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: "#FFFFFF", padding: "14px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                      className="placeholder-[rgba(255,255,255,0.28)]"
-                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.55)"}
-                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)"}
+                      style={{ background: "#001489", border: "none", color: "#FFFFFF", padding: "14px 16px", fontSize: 14, outline: "none", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      className="placeholder-[rgba(255,255,255,0.38)]"
                     />
                   </div>
                   <div className="relative">
                     <select
                       name="subject" required value={form.subject} onChange={handleChange}
                       data-testid="select-subject"
-                      style={{ width: "100%", background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: form.subject ? "#FFFFFF" : "rgba(255,255,255,0.28)", padding: "14px 40px 14px 16px", fontSize: 14, outline: "none", appearance: "none", cursor: "pointer", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.55)"}
-                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)"}
+                      style={{ width: "100%", background: "#001489", border: "none", color: form.subject ? "#FFFFFF" : "rgba(255,255,255,0.38)", padding: "14px 40px 14px 16px", fontSize: 14, outline: "none", appearance: "none", cursor: "pointer", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                     >
                       <option value="" disabled hidden style={{ background: "#001489" }}>{c.subjectPlaceholder}</option>
                       {c.subjectOptions.map((opt, i) => (
-                        <option key={i} value={opt} style={{ background: "#001050", color: "#FFFFFF" }}>{opt}</option>
+                        <option key={i} value={opt} style={{ background: "#001489", color: "#FFFFFF" }}>{opt}</option>
                       ))}
                     </select>
-                    <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3" style={{ color: "rgba(255,255,255,0.35)" }} fill="none" viewBox="0 0 12 12">
+                    <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3" style={{ color: "rgba(255,255,255,0.50)" }} fill="none" viewBox="0 0 12 12">
                       <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                     </svg>
                   </div>
                   <textarea
                     name="message" required rows={5} value={form.message} onChange={handleChange}
                     placeholder={c.messagePlaceholder} data-testid="input-message"
-                    style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: "#FFFFFF", padding: "14px 16px", fontSize: 14, outline: "none", resize: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                    className="placeholder-[rgba(255,255,255,0.28)]"
-                    onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.55)"}
-                    onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)"}
+                    style={{ background: "#001489", border: "none", color: "#FFFFFF", padding: "14px 16px", fontSize: 14, outline: "none", resize: "none", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    className="placeholder-[rgba(255,255,255,0.38)]"
                   />
                   <div className="flex items-center gap-6 mt-2">
                     <button
@@ -1841,8 +1833,8 @@ function ContactFormV15() {
                       disabled={submitting}
                       data-testid="button-submit"
                       style={{
-                        background: "#FFFFFF",
-                        color: "#001489",
+                        background: "#001489",
+                        color: "#FFFFFF",
                         border: "none",
                         padding: "15px 40px",
                         fontSize: 11,
@@ -1851,11 +1843,11 @@ function ContactFormV15() {
                         textTransform: "uppercase",
                         cursor: submitting ? "not-allowed" : "pointer",
                         opacity: submitting ? 0.6 : 1,
-                        transition: "background 0.2s, opacity 0.2s",
+                        transition: "opacity 0.2s, background 0.2s",
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
                       }}
-                      onMouseEnter={e => { if (!submitting) (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.88)"; }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#FFFFFF"; }}
+                      onMouseEnter={e => { if (!submitting) (e.currentTarget as HTMLElement).style.background = "#0019A8"; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#001489"; }}
                     >
                       {submitting ? (
                         <span className="flex items-center gap-2.5">
@@ -1874,7 +1866,7 @@ function ContactFormV15() {
                         </span>
                       )}
                     </button>
-                    <p style={{ color: "rgba(255,255,255,0.28)", fontSize: 12, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    <p style={{ color: "rgba(0,0,0,0.35)", fontSize: 12, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                       Typically replies within 24 hours
                     </p>
                   </div>
@@ -1888,69 +1880,69 @@ function ContactFormV15() {
             style={{
               paddingTop: 48,
               paddingLeft: "clamp(24px, 4vw, 56px)",
-              borderLeft: "1px solid rgba(255,255,255,0.07)",
+              borderLeft: "1px solid rgba(0,20,137,0.10)",
               display: "flex",
               flexDirection: "column",
               gap: 0,
             }}
           >
-            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#7A84BE", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase", marginBottom: 32 }}>
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase", marginBottom: 32 }}>
               {c.officeLabel}
             </p>
 
             {/* Dubai */}
             <div style={{ marginBottom: 32 }}>
-              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#FFFFFF", marginBottom: 10 }}>
+              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
                 {c.dubaiLabel}
               </p>
               {f.dubaiAddr.map((line, i) => (
-                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.45)", fontSize: 13, lineHeight: 1.7 }}>{line}</p>
+                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(0,0,0,0.50)", fontSize: 13, lineHeight: 1.7 }}>{line}</p>
               ))}
               <a
                 href="tel:+97145232421"
                 data-testid="contact-address-phone-dubai"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.35)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 6 }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"}
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(0,20,137,0.45)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 6 }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#001489"}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(0,20,137,0.45)"}
               >
                 +971 4 523 2421
               </a>
             </div>
 
-            <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: 32 }} />
+            <div style={{ height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 32 }} />
 
             {/* Paris */}
             <div style={{ marginBottom: 32 }}>
-              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#FFFFFF", marginBottom: 10 }}>
+              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
                 {c.parisLabel}
               </p>
               {f.parisAddr.map((line, i) => (
-                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.45)", fontSize: 13, lineHeight: 1.7 }}>{line}</p>
+                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(0,0,0,0.50)", fontSize: 13, lineHeight: 1.7 }}>{line}</p>
               ))}
               <a
                 href="tel:+33180270067"
                 data-testid="contact-address-phone-paris"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.35)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 6 }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"}
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(0,20,137,0.45)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 6 }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#001489"}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(0,20,137,0.45)"}
               >
                 +33 1 80 27 00 67
               </a>
             </div>
 
-            <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: 24 }} />
+            <div style={{ height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 24 }} />
 
             {/* Email */}
             <div>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#7A84BE", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase", marginBottom: 8 }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase", marginBottom: 8 }}>
                 Email
               </p>
               <a
                 href={`mailto:${f.email}`}
                 data-testid="contact-email"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.70)", fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.70)"}
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(0,20,137,0.65)", fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#001489"}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(0,20,137,0.65)"}
               >
                 {f.email}
               </a>
