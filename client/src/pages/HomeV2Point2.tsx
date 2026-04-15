@@ -2182,23 +2182,21 @@ function PracticeAreasV18() {
     >
       {/* ── DESKTOP: Vertical photo accordion ── */}
       <div
-        className="hidden lg:block"
-        style={{ height: "100dvh", minHeight: 600, position: "relative" }}
+        className="hidden lg:flex"
+        style={{ height: "100dvh", minHeight: 600, flexDirection: "column" }}
       >
-        {/* Section header — overlaid at top-left */}
+        {/* Section header — dedicated strip above accordion */}
         <div
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 20,
-            padding: "44px 52px",
+            paddingTop: 92,
+            paddingBottom: 40,
+            paddingLeft: 52,
+            paddingRight: 52,
             display: "flex",
-            alignItems: "flex-start",
+            alignItems: "flex-end",
             justifyContent: "space-between",
-            background: "linear-gradient(to bottom, rgba(0,14,80,0.72) 0%, transparent 100%)",
-            pointerEvents: "none",
+            flexShrink: 0,
+            borderBottom: "1px solid rgba(255,255,255,0.06)",
           }}
         >
           <div>
@@ -2221,7 +2219,7 @@ function PracticeAreasV18() {
             </h2>
           </div>
           {/* Counter + dot nav */}
-          <div className="flex items-center gap-4" style={{ pointerEvents: "all" }}>
+          <div className="flex items-center gap-4">
             <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 11, color: "rgba(255,255,255,0.28)", letterSpacing: "0.06em" }}>
               {String(active + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(EXPERTISE_ITEMS_V18.length).padStart(2, "0")}
             </span>
@@ -2237,8 +2235,8 @@ function PracticeAreasV18() {
           </div>
         </div>
 
-        {/* Panels row */}
-        <div style={{ display: "flex", height: "100%" }}>
+        {/* Panels row — fills remaining height */}
+        <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
           {EXPERTISE_ITEMS_V18.map((item, i) => {
             const isActive = active === i;
             return (
