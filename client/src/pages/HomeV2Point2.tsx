@@ -278,7 +278,7 @@ function HeroV15() {
       className="relative min-h-screen overflow-hidden"
       style={{ background: "#001489" }}
     >
-      {/* ── Full-bleed architectural photo — multiply blend over #001489 ── */}
+      {/* ── Full-bleed architectural photo — multiply blend ── */}
       <AnimatePresence>
         <motion.img
           key={bgIndex}
@@ -294,180 +294,110 @@ function HeroV15() {
         />
       </AnimatePresence>
 
-
-      {/* ── Floating background tiles in photo area — multiply blend ─────── */}
+      {/* ── Floating tiles — multiply blend in photo area ─── */}
       {DIAG_TILES.map((tile, i) => (
         <motion.div
           key={i}
           className="absolute pointer-events-none hidden lg:block"
           style={{
-            left:            tile.left,
-            top:             tile.top,
-            width:           DIAG_TILE_SZ,
-            height:          DIAG_TILE_SZ,
-            backgroundColor: tile.col,
-            mixBlendMode:    "multiply",
+            left: tile.left, top: tile.top,
+            width: DIAG_TILE_SZ, height: DIAG_TILE_SZ,
+            backgroundColor: tile.col, mixBlendMode: "multiply",
           }}
           animate={{ opacity: [0, 0, 0.80, 0.80, 0, 0] }}
-          transition={{
-            duration: tile.dur,
-            delay:    tile.delay,
-            repeat:   Infinity,
-            ease:     "easeInOut",
-            times:    [0, 0.12, 0.38, 0.62, 0.88, 1],
-          }}
+          transition={{ duration: tile.dur, delay: tile.delay, repeat: Infinity, ease: "easeInOut", times: [0, 0.12, 0.38, 0.62, 0.88, 1] }}
         />
       ))}
 
-      {/* ════════════════════════════════════════════════════════════════════
-          EDITORIAL PANEL — white, left ~55% width, dramatic diagonal edge
-          Desktop only: hidden on mobile (full-width fallback below)
-      ════════════════════════════════════════════════════════════════════ */}
+      {/* ════════════════════════════════════════════════════════════
+          DESKTOP — Broadsheet editorial bar anchored at bottom
+      ════════════════════════════════════════════════════════════ */}
       <motion.div
-        className="hidden lg:flex absolute top-0 left-0 bottom-0 flex-col z-10"
+        className="hidden lg:grid absolute bottom-0 left-0 right-0 z-10"
         style={{
-          width: "55%",
+          gridTemplateColumns: "55% 45%",
           background: "#FFFFFF",
-          clipPath: "polygon(0 0, 100% 0, 65% 100%, 0 100%)",
+          minHeight: 280,
         }}
-        initial={{ opacity: 0, x: -32 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
       >
-        {/* ── Left-edge animated progress timer bar ─────────────────────── */}
+        {/* Animated progress timer — left edge of the bar */}
         <motion.div
           key={currentIndex}
-          className="absolute left-0 top-0 bottom-0 pointer-events-none"
-          style={{ width: 2, background: "#001489", transformOrigin: "top" }}
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: 2,
+            background: "#001489",
+            transformOrigin: "top",
+            zIndex: 2,
+          }}
           initial={{ scaleY: 1 }}
           animate={{ scaleY: 0 }}
           transition={{ duration: HERO_CYCLE_MS / 1000, ease: "linear" }}
         />
 
-        {/* ── Inner content ──────────────────────────────────────────────── */}
+        {/* ── LEFT: eyebrow + headline + dots ── */}
         <div
-          className="flex flex-col h-full"
-          style={{ paddingLeft: 56, paddingRight: "30%", paddingTop: 132, paddingBottom: 56 }}
+          style={{
+            padding: "44px 0 44px 56px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            borderRight: "1px solid rgba(0,20,137,0.07)",
+            paddingRight: "8%",
+          }}
         >
-          {/* Brand tagline — very top */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: 9,
-              fontWeight: 700,
-              letterSpacing: "0.40em",
-              textTransform: "uppercase",
-              color: "rgba(0,20,137,0.22)",
-              marginBottom: 40,
-            }}
-          >
-            Reason · Rigor · Resolution
-          </motion.p>
-
-          {/* Spacer pushes content to lower half */}
-          <div className="flex-1" />
-
-          {/* ── Animated editorial content ─────────────────────────────── */}
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, y: 28 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -14 }}
-              transition={{ duration: 0.85, ease: "easeOut" }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.75, ease: "easeOut" }}
             >
               {/* Category eyebrow */}
-              <div className="flex items-center gap-4 mb-8" data-testid="hero-eyebrow">
-                <div style={{ width: 24, height: 1.5, background: "#4A58AA", flexShrink: 0 }} />
+              <div className="flex items-center gap-3 mb-5" data-testid="hero-eyebrow">
+                <div style={{ width: 20, height: 1.5, background: "#4A58AA", flexShrink: 0 }} />
                 <p style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   color: "#4A58AA",
-                  fontSize: 10,
+                  fontSize: 9,
                   fontWeight: 700,
-                  letterSpacing: "0.38em",
+                  letterSpacing: "0.40em",
                   textTransform: "uppercase",
                 }}>
                   {featuredArticle?.category}
                 </p>
               </div>
 
-              {/* Headline — large, deep blue on white */}
+              {/* Headline */}
               <h1
                 className="font-heading font-bold"
+                data-testid="hero-headline"
                 style={{
-                  fontSize: "clamp(3rem, 5.5vw, 6rem)",
-                  lineHeight: 1.0,
+                  fontSize: "clamp(1.75rem, 3.6vw, 3.25rem)",
+                  lineHeight: 1.05,
                   letterSpacing: "-0.025em",
                   color: "#001489",
-                  maxWidth: "13ch",
-                  marginBottom: "2.5rem",
+                  maxWidth: "20ch",
                 }}
-                data-testid="hero-headline"
               >
                 {featuredArticle?.title}
               </h1>
-
-              {/* CTA — dark blue on white */}
-              <a
-                href={`/insights/${featuredSlug}`}
-                data-testid="hero-read-link"
-                className="group inline-flex items-center gap-4"
-                style={{ textDecoration: "none" }}
-              >
-                <span
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: 36,
-                    height: 36,
-                    border: "1.5px solid rgba(0,20,137,0.35)",
-                    transition: "border-color 0.25s, background 0.25s",
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.background = "#001489";
-                    (e.currentTarget as HTMLElement).style.borderColor = "#001489";
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.background = "transparent";
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.35)";
-                  }}
-                  className="group-arrow"
-                >
-                  <svg
-                    className="group-hover:translate-x-0.5 transition-transform duration-200"
-                    width="12" height="12" fill="none" viewBox="0 0 12 12"
-                  >
-                    <path d="M1 6h10M6 1l5 5-5 5" stroke="#001489" strokeWidth="1.5" />
-                  </svg>
-                </span>
-                <span style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  color: "rgba(0,20,137,0.45)",
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: "0.30em",
-                  textTransform: "uppercase",
-                  transition: "color 0.25s",
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#001489"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(0,20,137,0.45)"; }}
-                >
-                  {ins.read}
-                </span>
-              </a>
             </motion.div>
           </AnimatePresence>
 
-          {/* ── Navigation dots at bottom ──────────────────────────────── */}
+          {/* Dots */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.1 }}
-            className="flex items-center gap-2 mt-10"
+            className="flex items-center gap-2 mt-6"
             data-testid="hero-dots"
           >
             {ins.articles.map((_, i) => (
@@ -478,27 +408,154 @@ function HeroV15() {
                 aria-label={`Article ${i + 1}`}
                 className="focus:outline-none cursor-pointer transition-all duration-300"
                 style={{
-                  width:           i === currentIndex ? 28 : 7,
-                  height:          2,
-                  backgroundColor: i === currentIndex ? "#001489" : "rgba(0,20,137,0.20)",
+                  width: i === currentIndex ? 28 : 7,
+                  height: 2,
+                  backgroundColor: i === currentIndex ? "#001489" : "rgba(0,20,137,0.18)",
                 }}
               />
             ))}
           </motion.div>
         </div>
+
+        {/* ── RIGHT: date + excerpt + CTA ── */}
+        <div
+          style={{
+            padding: "44px 56px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.75, ease: "easeOut", delay: 0.08 }}
+              style={{ display: "flex", flexDirection: "column", gap: 0 }}
+            >
+              {/* Date · read-time */}
+              <p style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontSize: 9,
+                fontWeight: 700,
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                color: "#848484",
+                marginBottom: 20,
+              }}>
+                {featuredArticle?.date}&ensp;·&ensp;{featuredArticle?.readTime}
+              </p>
+
+              {/* Thin rule */}
+              <div style={{ height: 1, background: "rgba(0,20,137,0.07)", marginBottom: 20 }} />
+
+              {/* Excerpt */}
+              <p style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                color: "#595959",
+                fontSize: 14,
+                lineHeight: 1.78,
+                maxWidth: "38ch",
+                marginBottom: 28,
+              }}>
+                {featuredArticle?.excerpt}
+              </p>
+
+              {/* Read Article CTA */}
+              <a
+                href={`/insights/${featuredSlug}`}
+                data-testid="hero-read-link"
+                className="inline-flex items-center gap-4"
+                style={{ textDecoration: "none" }}
+              >
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: 38,
+                    height: 38,
+                    border: "1.5px solid rgba(0,20,137,0.30)",
+                    transition: "border-color 0.25s, background 0.25s",
+                    flexShrink: 0,
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.background = "#001489";
+                    (e.currentTarget as HTMLElement).style.borderColor = "#001489";
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.background = "transparent";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.30)";
+                  }}
+                >
+                  <svg width="12" height="12" fill="none" viewBox="0 0 12 12">
+                    <path d="M1 6h10M6 1l5 5-5 5" stroke="#001489" strokeWidth="1.5" />
+                  </svg>
+                </span>
+                <span
+                  style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    color: "rgba(0,20,137,0.50)",
+                    fontSize: 9,
+                    fontWeight: 700,
+                    letterSpacing: "0.32em",
+                    textTransform: "uppercase",
+                    transition: "color 0.25s",
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#001489"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(0,20,137,0.50)"; }}
+                >
+                  {ins.read}
+                </span>
+              </a>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </motion.div>
 
-      {/* ════════════════════════════════════════════════════════════════════
-          MOBILE / FALLBACK LAYOUT — full width, bottom-pinned
-      ════════════════════════════════════════════════════════════════════ */}
+      {/* ── Category strip — sits above the white bar, desktop only ── */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          className="hidden lg:flex absolute right-10 z-10 items-center gap-0"
+          style={{ bottom: "calc(280px + 24px)" }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+          data-testid="hero-category-strip"
+        >
+          {otherCategories.map(({ label, index: idx }, i) => (
+            <button
+              key={i}
+              data-testid={`hero-cat-${i}`}
+              onClick={() => goTo(idx)}
+              style={{ background: "none", border: "none", cursor: "pointer", outline: "none", display: "flex", alignItems: "center", gap: 0, padding: 0 }}
+            >
+              {i > 0 && <div style={{ width: 1, height: 10, background: "rgba(255,255,255,0.18)", margin: "0 16px" }} />}
+              <span
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 8, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase", color: "rgba(255,255,255,0.30)", transition: "color 0.2s", whiteSpace: "nowrap" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.75)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.30)"; }}
+              >
+                {label}
+              </span>
+            </button>
+          ))}
+        </motion.div>
+      </AnimatePresence>
+
+      {/* ════════════════════════════════════════════════════════════
+          MOBILE — full-bleed dark gradient, bottom-pinned content
+      ════════════════════════════════════════════════════════════ */}
       <div
         className="lg:hidden relative z-10 flex flex-col min-h-screen"
-        style={{
-          background: "linear-gradient(to top, rgba(0,14,80,0.88) 0%, rgba(0,14,80,0.50) 55%, transparent 100%)",
-        }}
+        style={{ background: "linear-gradient(to top, rgba(0,14,80,0.90) 0%, rgba(0,14,80,0.55) 55%, transparent 100%)" }}
       >
         <div className="flex-1" />
-        <div className="px-8 pb-14 pt-6">
+        <div className="px-6 pb-14 pt-6">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -515,13 +572,16 @@ function HeroV15() {
               </div>
               <h1
                 className="font-heading text-white font-bold"
-                style={{ fontSize: "clamp(2.2rem, 7vw, 3.5rem)", lineHeight: 1.04, letterSpacing: "-0.02em", maxWidth: "16ch", marginBottom: "1.75rem" }}
+                style={{ fontSize: "clamp(2rem, 7vw, 3rem)", lineHeight: 1.06, letterSpacing: "-0.02em", maxWidth: "16ch", marginBottom: "1.5rem" }}
                 data-testid="hero-headline-mobile"
               >
                 {featuredArticle?.title}
               </h1>
-              <a href={`/insights/${featuredSlug}`} data-testid="hero-read-link-mobile" className="group inline-flex items-center gap-3" style={{ textDecoration: "none" }}>
-                <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 30, height: 30, border: "1px solid rgba(255,255,255,0.30)" }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.50)", fontSize: 13, lineHeight: 1.75, maxWidth: "32ch", marginBottom: "1.5rem" }}>
+                {featuredArticle?.excerpt}
+              </p>
+              <a href={`/insights/${featuredSlug}`} data-testid="hero-read-link-mobile" className="inline-flex items-center gap-3" style={{ textDecoration: "none" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, border: "1px solid rgba(255,255,255,0.28)" }}>
                   <svg width="11" height="11" fill="none" viewBox="0 0 12 12"><path d="M1 6h10M6 1l5 5-5 5" stroke="rgba(255,255,255,0.80)" strokeWidth="1.4" /></svg>
                 </span>
                 <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.55)", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase" }}>
@@ -530,77 +590,14 @@ function HeroV15() {
               </a>
             </motion.div>
           </AnimatePresence>
-
-          {/* Mobile dots */}
-          <div className="flex items-center gap-2 mt-8" data-testid="hero-dots">
+          <div className="flex items-center gap-2 mt-7" data-testid="hero-dots">
             {ins.articles.map((_, i) => (
-              <button
-                key={i}
-                data-testid={`hero-dot-${i}`}
-                onClick={() => goTo(i)}
-                aria-label={`Article ${i + 1}`}
-                className="focus:outline-none cursor-pointer transition-all duration-300"
-                style={{
-                  width: i === currentIndex ? 24 : 6,
-                  height: 2,
-                  backgroundColor: i === currentIndex ? "#FFFFFF" : "rgba(255,255,255,0.25)",
-                }}
-              />
+              <button key={i} data-testid={`hero-dot-${i}`} onClick={() => goTo(i)} aria-label={`Article ${i + 1}`} className="focus:outline-none cursor-pointer transition-all duration-300"
+                style={{ width: i === currentIndex ? 24 : 6, height: 2, backgroundColor: i === currentIndex ? "#FFFFFF" : "rgba(255,255,255,0.25)" }} />
             ))}
           </div>
         </div>
       </div>
-
-      {/* ── Right-side category strip — bottom-right, desktop only ──────── */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          className="hidden lg:flex absolute bottom-10 right-10 z-10 items-center gap-0"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          data-testid="hero-category-strip"
-        >
-          {otherCategories.map(({ label, index: idx }, i) => (
-            <button
-              key={i}
-              data-testid={`hero-cat-${i}`}
-              onClick={() => goTo(idx)}
-              style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                outline: "none",
-                display: "flex",
-                alignItems: "center",
-                gap: 0,
-                padding: 0,
-              }}
-            >
-              {i > 0 && (
-                <div style={{ width: 1, height: 10, background: "rgba(255,255,255,0.18)", margin: "0 16px" }} />
-              )}
-              <span
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: 8,
-                  fontWeight: 700,
-                  letterSpacing: "0.30em",
-                  textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.30)",
-                  transition: "color 0.2s",
-                  whiteSpace: "nowrap",
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.75)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.30)"; }}
-              >
-                {label}
-              </span>
-            </button>
-          ))}
-        </motion.div>
-      </AnimatePresence>
     </section>
   );
 }
@@ -1723,59 +1720,55 @@ function ContactFormV15() {
   return (
     <section
       id="contact"
-      data-header-theme="light"
+      data-header-theme="dark"
       data-testid="contact-section"
-      style={{ background: "#FFFFFF", borderTop: "1px solid rgba(0,20,137,0.07)" }}
+      style={{ background: "#001489" }}
     >
-      {/* ── TOP BAND: headline + subtext ── */}
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 130, paddingBottom: 72 }}>
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 120, paddingBottom: 120 }}>
+
+        {/* ── Section header ── */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65 }}
-          className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-20 items-end"
+          style={{ marginBottom: 72 }}
         >
-          <div>
+          <p style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontSize: 9,
+            fontWeight: 700,
+            letterSpacing: "0.40em",
+            textTransform: "uppercase",
+            color: "#7A84BE",
+            marginBottom: 20,
+          }}>
+            {c.eyebrow}
+          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-20 items-end">
             <h2
-              className="font-heading font-bold leading-[1.08]"
-              style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)", color: "#001489" }}
+              className="font-heading font-bold"
+              style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#FFFFFF" }}
             >
               {c.headline}
             </h2>
-          </div>
-          <div style={{ maxWidth: 440 }}>
-            <p
-              style={{
-                color: "#595959",
-                fontSize: 15,
-                lineHeight: 1.75,
-              }}
-            >
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.52)", fontSize: 15, lineHeight: 1.78, maxWidth: 440 }}>
               {c.subtext}
             </p>
           </div>
         </motion.div>
-      </div>
 
-      {/* ── MAIN: form card + office details ── */}
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingBottom: 120 }}>
+        {/* ── Form + offices ── */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-1 lg:grid-cols-[7fr_4fr] gap-0"
+          className="grid grid-cols-1 lg:grid-cols-[7fr_4fr]"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
         >
-          {/* ── Form panel ── */}
-          <div
-            style={{
-              background: "#F9F9F9",
-              padding: "clamp(32px, 4vw, 56px)",
-              border: "1px solid rgba(0,20,137,0.06)",
-              borderRight: "none",
-            }}
-          >
+          {/* ── Form — dark fields ── */}
+          <div style={{ paddingTop: 48, paddingRight: "clamp(0px, 5vw, 72px)", paddingBottom: 0 }}>
             {submitted ? (
               <motion.div
                 data-testid="contact-success"
@@ -1785,81 +1778,86 @@ function ContactFormV15() {
                 className="flex flex-col gap-5"
                 style={{ minHeight: 360, justifyContent: "center" }}
               >
-                <div
-                  className="flex items-center justify-center"
-                  style={{ width: 52, height: 52, background: "#001489", marginBottom: 8 }}
-                >
-                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 20 20">
-                    <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <div style={{ width: 52, height: 52, background: "rgba(255,255,255,0.10)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 8 }}>
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 20 20">
+                    <path d="M4 10l4 4 8-8" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <h3 className="font-heading text-[#001489] font-bold" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)" }}>
+                <h3 className="font-heading font-bold text-white" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)" }}>
                   {c.successTitle}
                 </h3>
-                <p style={{ color: "#595959", fontSize: 14, lineHeight: 1.72 }}>{c.successText}</p>
+                <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 14, lineHeight: 1.72 }}>{c.successText}</p>
               </motion.div>
             ) : (
               <div className="w-full">
-                <p className="font-medium uppercase mb-8" style={{ color: "#4A58AA", fontSize: 11, letterSpacing: "0.2em" }}>
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#7A84BE", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase", marginBottom: 32 }}>
                   Send a Message
                 </p>
-
-                <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <input
                       type="text" name="name" required value={form.name} onChange={handleChange}
                       placeholder={c.namePlaceholder} data-testid="input-name"
-                      className="border text-[#151515] placeholder-[#848484] text-sm px-4 py-4 outline-none transition-colors"
-                      style={{ background: "#F9F9F9", borderColor: "rgba(0,20,137,0.10)" }}
-                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
-                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.10)"}
+                      style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: "#FFFFFF", padding: "14px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      className="placeholder-[rgba(255,255,255,0.28)]"
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.55)"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)"}
                     />
                     <input
                       type="email" name="email" required value={form.email} onChange={handleChange}
                       placeholder={c.emailPlaceholder} data-testid="input-email"
-                      className="border text-[#151515] placeholder-[#848484] text-sm px-4 py-4 outline-none transition-colors"
-                      style={{ background: "#F9F9F9", borderColor: "rgba(0,20,137,0.10)" }}
-                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
-                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.10)"}
+                      style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: "#FFFFFF", padding: "14px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      className="placeholder-[rgba(255,255,255,0.28)]"
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.55)"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)"}
                     />
                   </div>
-
                   <div className="relative">
                     <select
                       name="subject" required value={form.subject} onChange={handleChange}
                       data-testid="select-subject"
-                      className="w-full border text-sm px-4 py-4 outline-none transition-colors appearance-none cursor-pointer"
-                      style={{ background: "#F9F9F9", borderColor: "rgba(0,20,137,0.10)", color: form.subject ? "#151515" : "#848484" }}
-                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
-                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.10)"}
+                      style={{ width: "100%", background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: form.subject ? "#FFFFFF" : "rgba(255,255,255,0.28)", padding: "14px 40px 14px 16px", fontSize: 14, outline: "none", appearance: "none", cursor: "pointer", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.55)"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)"}
                     >
-                      <option value="" disabled hidden>{c.subjectPlaceholder}</option>
+                      <option value="" disabled hidden style={{ background: "#001489" }}>{c.subjectPlaceholder}</option>
                       {c.subjectOptions.map((opt, i) => (
-                        <option key={i} value={opt} style={{ color: "#151515", background: "#fff" }}>{opt}</option>
+                        <option key={i} value={opt} style={{ background: "#001050", color: "#FFFFFF" }}>{opt}</option>
                       ))}
                     </select>
-                    <svg
-                      className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3"
-                      style={{ color: "#848484" }} fill="none" viewBox="0 0 12 12"
-                    >
+                    <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3" style={{ color: "rgba(255,255,255,0.35)" }} fill="none" viewBox="0 0 12 12">
                       <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                     </svg>
                   </div>
-
                   <textarea
                     name="message" required rows={5} value={form.message} onChange={handleChange}
                     placeholder={c.messagePlaceholder} data-testid="input-message"
-                    className="border text-[#151515] placeholder-[#848484] text-sm px-4 py-4 outline-none transition-colors resize-none"
-                    style={{ background: "#F9F9F9", borderColor: "rgba(0,20,137,0.10)" }}
-                    onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
-                    onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.10)"}
+                    style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: "#FFFFFF", padding: "14px 16px", fontSize: 14, outline: "none", resize: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    className="placeholder-[rgba(255,255,255,0.28)]"
+                    onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.55)"}
+                    onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)"}
                   />
-
                   <div className="flex items-center gap-6 mt-2">
                     <button
-                      type="submit" disabled={submitting} data-testid="button-submit"
-                      className="bg-[#001489] text-white uppercase font-semibold px-10 py-4 hover:bg-[#000E45] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-                      style={{ fontSize: 11, letterSpacing: "0.12em" }}
+                      type="submit"
+                      disabled={submitting}
+                      data-testid="button-submit"
+                      style={{
+                        background: "#FFFFFF",
+                        color: "#001489",
+                        border: "none",
+                        padding: "15px 40px",
+                        fontSize: 11,
+                        fontWeight: 700,
+                        letterSpacing: "0.12em",
+                        textTransform: "uppercase",
+                        cursor: submitting ? "not-allowed" : "pointer",
+                        opacity: submitting ? 0.6 : 1,
+                        transition: "background 0.2s, opacity 0.2s",
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      }}
+                      onMouseEnter={e => { if (!submitting) (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.88)"; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#FFFFFF"; }}
                     >
                       {submitting ? (
                         <span className="flex items-center gap-2.5">
@@ -1878,7 +1876,7 @@ function ContactFormV15() {
                         </span>
                       )}
                     </button>
-                    <p style={{ color: "#848484", fontSize: 12 }}>
+                    <p style={{ color: "rgba(255,255,255,0.28)", fontSize: 12, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                       Typically replies within 24 hours
                     </p>
                   </div>
@@ -1887,90 +1885,79 @@ function ContactFormV15() {
             )}
           </div>
 
-          {/* ── Office details sidebar (deep blue) ── */}
+          {/* ── Offices — right column ── */}
           <div
             style={{
-              background: "#001489",
-              padding: "clamp(32px, 4vw, 56px)",
+              paddingTop: 48,
+              paddingLeft: "clamp(24px, 4vw, 56px)",
+              borderLeft: "1px solid rgba(255,255,255,0.07)",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
-              gap: 40,
+              gap: 0,
             }}
           >
-            <div>
-              <p
-                className="font-medium uppercase mb-8"
-                style={{ color: "#7A84BE", fontSize: 11, letterSpacing: "0.2em" }}
-              >
-                {c.officeLabel}
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#7A84BE", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase", marginBottom: 32 }}>
+              {c.officeLabel}
+            </p>
+
+            {/* Dubai */}
+            <div style={{ marginBottom: 32 }}>
+              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#FFFFFF", marginBottom: 10 }}>
+                {c.dubaiLabel}
               </p>
-
-              {/* Dubai */}
-              <div style={{ marginBottom: 32 }}>
-                <p
-                  className="font-heading font-semibold mb-3"
-                  style={{ fontSize: 14, color: "#FFFFFF" }}
-                >
-                  {c.dubaiLabel}
-                </p>
-                {f.dubaiAddr.map((line, i) => (
-                  <p key={i} style={{ color: "rgba(255,255,255,0.50)", fontSize: 13, lineHeight: 1.7 }}>{line}</p>
-                ))}
-                <a
-                  href="tel:+97145232421"
-                  data-testid="contact-address-phone-dubai"
-                  style={{ color: "rgba(255,255,255,0.40)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 4 }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
-                >
-                  +971 4 523 2421
-                </a>
-              </div>
-
-              <div style={{ width: "100%", height: 1, background: "rgba(255,255,255,0.08)", marginBottom: 32 }} />
-
-              {/* Paris */}
-              <div>
-                <p
-                  className="font-heading font-semibold mb-3"
-                  style={{ fontSize: 14, color: "#FFFFFF" }}
-                >
-                  {c.parisLabel}
-                </p>
-                {f.parisAddr.map((line, i) => (
-                  <p key={i} style={{ color: "rgba(255,255,255,0.50)", fontSize: 13, lineHeight: 1.7 }}>{line}</p>
-                ))}
-                <a
-                  href="tel:+33180270067"
-                  data-testid="contact-address-phone-paris"
-                  style={{ color: "rgba(255,255,255,0.40)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 4 }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
-                >
-                  +33 1 80 27 00 67
-                </a>
-              </div>
+              {f.dubaiAddr.map((line, i) => (
+                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.45)", fontSize: 13, lineHeight: 1.7 }}>{line}</p>
+              ))}
+              <a
+                href="tel:+97145232421"
+                data-testid="contact-address-phone-dubai"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.35)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 6 }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"}
+              >
+                +971 4 523 2421
+              </a>
             </div>
+
+            <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: 32 }} />
+
+            {/* Paris */}
+            <div style={{ marginBottom: 32 }}>
+              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#FFFFFF", marginBottom: 10 }}>
+                {c.parisLabel}
+              </p>
+              {f.parisAddr.map((line, i) => (
+                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.45)", fontSize: 13, lineHeight: 1.7 }}>{line}</p>
+              ))}
+              <a
+                href="tel:+33180270067"
+                data-testid="contact-address-phone-paris"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.35)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 6 }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"}
+              >
+                +33 1 80 27 00 67
+              </a>
+            </div>
+
+            <div style={{ height: 1, background: "rgba(255,255,255,0.07)", marginBottom: 24 }} />
 
             {/* Email */}
             <div>
-              <div style={{ width: "100%", height: 1, background: "rgba(255,255,255,0.08)", marginBottom: 20 }} />
-              <p className="font-medium uppercase mb-2" style={{ color: "#7A84BE", fontSize: 11, letterSpacing: "0.2em" }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#7A84BE", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase", marginBottom: 8 }}>
                 Email
               </p>
               <a
                 href={`mailto:${f.email}`}
                 data-testid="contact-email"
-                style={{ color: "#FFFFFF", fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.7)"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.70)", fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.70)"}
               >
                 {f.email}
               </a>
             </div>
           </div>
-
         </motion.div>
       </div>
     </section>
@@ -2010,44 +1997,59 @@ function FooterV15() {
   const parisTime = fmtTime("Europe/Paris");
 
   return (
-    <footer id="footer" data-testid="footer" style={{ background: "#001489" }}>
-      {/* ── Top band: wordmark · nav · contact ── */}
+    <footer id="footer" data-testid="footer" style={{ background: "#001489", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+      {/* ── Motto whisper — very top ── */}
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 40, paddingBottom: 36, borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+        <p style={{
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontSize: 9,
+          fontWeight: 700,
+          letterSpacing: "0.50em",
+          textTransform: "uppercase",
+          color: "rgba(255,255,255,0.09)",
+          textAlign: "center",
+        }}>
+          Reason&ensp;·&ensp;Rigor&ensp;·&ensp;Resolution
+        </p>
+      </div>
+
+      {/* ── Main band: wordmark · nav · contact ── */}
       <div className="max-w-[1400px] mx-auto px-8">
         <div
           className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-12"
-          style={{ paddingTop: 44, paddingBottom: 40, borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+          style={{ paddingTop: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.06)" }}
         >
           {/* Wordmark */}
           <img
             src={miltonHobbsWordmark}
             alt="Milton Hobbs"
             style={{
-              width: "clamp(110px, 12vw, 155px)",
+              width: "clamp(110px, 12vw, 148px)",
               height: "auto",
               filter: "brightness(0) invert(1)",
-              opacity: 0.88,
+              opacity: 0.75,
               display: "block",
               flexShrink: 0,
             }}
           />
 
           {/* Inline nav */}
-          <nav className="flex flex-wrap items-center gap-x-7 gap-y-2">
+          <nav className="flex flex-wrap items-center gap-x-8 gap-y-2">
             {navEntries.map(link => (
               <a
                 key={link.href}
                 href={link.href}
                 style={{
-                  color: "rgba(255,255,255,0.40)",
-                  fontSize: 12,
+                  color: "rgba(255,255,255,0.35)",
+                  fontSize: 11,
                   fontWeight: 600,
-                  letterSpacing: "0.06em",
+                  letterSpacing: "0.08em",
                   textTransform: "uppercase",
                   textDecoration: "none",
                   transition: "color 0.2s",
                 }}
                 onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"}
               >
                 {link.label}
               </a>
@@ -2059,28 +2061,28 @@ function FooterV15() {
             <a
               href={`mailto:${f.email}`}
               data-testid="footer-email"
-              style={{ color: "rgba(255,255,255,0.55)", fontSize: 12, textDecoration: "none", transition: "color 0.2s" }}
+              style={{ color: "rgba(255,255,255,0.50)", fontSize: 12, textDecoration: "none", transition: "color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.55)"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.50)"}
             >
               {f.email}
             </a>
-            <span style={{ width: 1, height: 12, background: "rgba(255,255,255,0.10)", flexShrink: 0 }} />
+            <span style={{ width: 1, height: 12, background: "rgba(255,255,255,0.08)", flexShrink: 0 }} />
             <a
               href={`tel:${f.phone}`}
               data-testid="footer-phone-dubai"
-              style={{ color: "rgba(255,255,255,0.40)", fontSize: 12, textDecoration: "none", transition: "color 0.2s" }}
+              style={{ color: "rgba(255,255,255,0.35)", fontSize: 12, textDecoration: "none", transition: "color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"}
             >
               {f.phone}
             </a>
             <a
               href="tel:+33180270067"
               data-testid="footer-phone-paris"
-              style={{ color: "rgba(255,255,255,0.40)", fontSize: 12, textDecoration: "none", transition: "color 0.2s" }}
+              style={{ color: "rgba(255,255,255,0.35)", fontSize: 12, textDecoration: "none", transition: "color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.40)"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"}
             >
               +33 1 80 27 00 67
             </a>
@@ -2149,28 +2151,9 @@ const EXPERTISE_ITEMS_V18 = [
 
 const PRACTICE_CYCLE_MS = 5000;
 
-function PracticeIcon({ index, size = 32, color = "currentColor" }: { index: number; size?: number; color?: string }) {
-  const icons = [
-    <><rect x="3" y="3" width="8" height="8" rx="1.5" /><rect x="13" y="3" width="8" height="8" rx="1.5" /><rect x="3" y="13" width="8" height="8" rx="1.5" /><rect x="13" y="13" width="8" height="8" rx="1.5" /></>,
-    <><circle cx="12" cy="12" r="8" /><path d="M12 8v4.5" /><path d="M12 12.5l3 1.5" /><circle cx="12" cy="12" r="1" fill={color} stroke="none" /></>,
-    <><path d="M17 2.1a7 7 0 0 1 4.9 4.9" /><path d="M20.9 14.1A9 9 0 0 1 3 12" /><path d="M3 12a9 9 0 0 1 7.1-8.8" /><path d="M14 8l4-4" /><path d="M18 4h-4" /><path d="M18 4v4" /></>,
-    <><path d="M9.5 2L4 6.5V12l8 10 8-10V6.5L14.5 2h-5z" /><path d="M12 22V12" /><path d="M4 12h16" /></>,
-    <><path d="M4 7V4h16v3" /><path d="M9 20h6" /><path d="M12 4v16" /><circle cx="12" cy="11" r="3" /></>,
-    <><path d="M3 20h18" /><path d="M5 20V9.5" /><path d="M19 20V9.5" /><path d="M5 9.5l7-5.5 7 5.5" /><rect x="9" y="14" width="6" height="6" /></>,
-    <><circle cx="9" cy="7" r="3.5" /><path d="M2 20v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1" /><circle cx="18" cy="9" r="2.5" /><path d="M18 14.5a4 4 0 0 1 4 4V20" /></>,
-    <><path d="M12 3v4" /><circle cx="12" cy="9" r="2" /><path d="M6 19l4-6" /><path d="M18 19l-4-6" /><path d="M4 19h16" /><path d="M8 19l-2 2" /><path d="M16 19l2 2" /></>,
-  ];
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
-      {icons[index]}
-    </svg>
-  );
-}
-
 function PracticeAreasV18() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [hovered, setHovered] = useState<number | null>(null);
 
   useEffect(() => {
     if (paused) return;
@@ -2180,354 +2163,250 @@ function PracticeAreasV18() {
     return () => clearInterval(timer);
   }, [active, paused]);
 
-  const item = EXPERTISE_ITEMS_V18[active];
-
   return (
     <section
       id="expertise"
       data-testid="practice-areas-section"
       data-header-theme="light"
-      style={{ background: "#FFFFFF", position: "relative", overflow: "hidden", borderTop: "1px solid rgba(0,20,137,0.06)" }}
-      onMouseLeave={() => { setPaused(false); setHovered(null); }}
+      style={{ background: "#F9F9F9", borderTop: "1px solid #E8EDF5" }}
+      onMouseLeave={() => setPaused(false)}
     >
-      <style>{`
-        @keyframes pa-pulse-ring {
-          0% { transform: scale(1); opacity: 0.4; }
-          100% { transform: scale(2.2); opacity: 0; }
-        }
-        .pa-node-ring {
-          animation: pa-pulse-ring 2s ease-out infinite;
-        }
-        @keyframes pa-line-flow {
-          0% { stroke-dashoffset: 20; }
-          100% { stroke-dashoffset: 0; }
-        }
-      `}</style>
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 100, paddingBottom: 100 }}>
 
-      {/* Subtle dot pattern overlay */}
-      <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.025 }}>
-        <svg width="100%" height="100%">
-          <defs>
-            <pattern id="pa-grid" width="60" height="60" patternUnits="userSpaceOnUse">
-              <circle cx="30" cy="30" r="1" fill="#001489" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#pa-grid)" />
-        </svg>
-      </div>
-
-      <div className="max-w-[1400px] mx-auto px-8 relative z-10" style={{ paddingTop: 100, paddingBottom: 0 }}>
-
-        {/* ── Header ── */}
+        {/* ── Section header ── */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.55 }}
-          style={{ marginBottom: 72 }}
+          transition={{ duration: 0.6 }}
+          className="flex items-end justify-between gap-6 flex-wrap"
+          style={{ marginBottom: 64 }}
         >
-          <div className="flex items-end justify-between gap-6 flex-wrap">
-            <div>
-              <h2
-                className="font-heading font-bold leading-[1.15]"
-                style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", color: "#001489" }}
-              >
-                Areas of Practice
-              </h2>
-            </div>
-            <div className="flex items-center gap-4" style={{ paddingBottom: 4 }}>
-              <span style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 13,
-                color: "rgba(0,20,137,0.20)",
-                letterSpacing: "0.06em",
-              }}>
-                {String(active + 1).padStart(2, "0")} <span style={{ color: "rgba(0,20,137,0.10)" }}>/</span> {String(EXPERTISE_ITEMS_V18.length).padStart(2, "0")}
-              </span>
-              {/* Progress dots */}
-              <div className="flex items-center gap-1.5">
-                {EXPERTISE_ITEMS_V18.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => { setActive(i); setPaused(true); }}
-                    style={{
-                      width: active === i ? 20 : 6,
-                      height: 3,
-                      background: active === i ? "#001489" : "rgba(0,20,137,0.12)",
-                      border: "none",
-                      cursor: "pointer",
-                      transition: "all 0.3s ease",
-                      padding: 0,
-                    }}
-                  />
-                ))}
-              </div>
+          <div>
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 9,
+              fontWeight: 700,
+              letterSpacing: "0.40em",
+              textTransform: "uppercase",
+              color: "#4A58AA",
+              marginBottom: 16,
+            }}>
+              Our Expertise
+            </p>
+            <h2
+              className="font-heading font-bold text-[#001489]"
+              style={{ fontSize: "clamp(2.25rem, 4vw, 3.5rem)", lineHeight: 1.06, letterSpacing: "-0.03em" }}
+            >
+              Practice Areas.
+            </h2>
+          </div>
+          <div className="flex items-center gap-4" style={{ paddingBottom: 6 }}>
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 12, color: "rgba(0,20,137,0.22)", letterSpacing: "0.06em" }}>
+              {String(active + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(EXPERTISE_ITEMS_V18.length).padStart(2, "0")}
+            </span>
+            <div className="flex items-center gap-1.5">
+              {EXPERTISE_ITEMS_V18.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setActive(i); setPaused(true); }}
+                  style={{ width: active === i ? 20 : 6, height: 2, background: active === i ? "#001489" : "rgba(0,20,137,0.12)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }}
+                />
+              ))}
             </div>
           </div>
         </motion.div>
 
-        {/* ── Icon node grid — 4×2 with connecting lines ── */}
+        {/* ── Typographic index list ── */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
+          transition={{ duration: 0.7 }}
+          style={{ borderTop: "1px solid #E8EDF5" }}
         >
-          {/* Connection lines SVG layer */}
-          <svg className="absolute inset-0 pointer-events-none z-0 hidden lg:block" style={{ width: "100%", height: "100%", overflow: "visible" }}>
-            {[
-              { x1: "18%", y1: "42%", x2: "35%", y2: "42%" },
-              { x1: "40%", y1: "42%", x2: "57%", y2: "42%" },
-              { x1: "63%", y1: "42%", x2: "80%", y2: "42%" },
-              { x1: "18%", y1: "62%", x2: "35%", y2: "62%" },
-              { x1: "40%", y1: "62%", x2: "57%", y2: "62%" },
-              { x1: "63%", y1: "62%", x2: "80%", y2: "62%" },
-              { x1: "18%", y1: "46%", x2: "18%", y2: "58%" },
-              { x1: "80%", y1: "46%", x2: "80%", y2: "58%" },
-            ].map((line, i) => (
-              <line key={i} {...line} stroke="rgba(0,20,137,0.05)" strokeWidth="1" strokeDasharray="4 4" style={{ animation: "pa-line-flow 3s linear infinite" }} />
-            ))}
-          </svg>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 lg:gap-8 relative z-10">
-            {EXPERTISE_ITEMS_V18.map((itm, i) => {
-              const isActive = active === i;
-              const isHovered = hovered === i;
-              return (
+          {EXPERTISE_ITEMS_V18.map((item, i) => {
+            const isActive = active === i;
+            return (
+              <div
+                key={i}
+                data-testid={`expertise-item-${i}`}
+                style={{ borderBottom: "1px solid #E8EDF5", position: "relative" }}
+              >
+                {/* Left accent bar */}
                 <motion.div
-                  key={i}
-                  data-testid={`expertise-item-${i}`}
+                  style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 2, background: "#001489", transformOrigin: "top" }}
+                  animate={{ scaleY: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
+                  transition={{ duration: 0.28 }}
+                />
+
+                {/* Row — clickable/hoverable */}
+                <button
                   onClick={() => { setActive(i); setPaused(true); }}
-                  onMouseEnter={() => { setActive(i); setPaused(true); setHovered(i); }}
-                  onMouseLeave={() => setHovered(null)}
-                  variants={{
-                    hidden: { opacity: 0, y: 30, scale: 0.95 },
-                    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: "easeOut" } },
-                  }}
+                  onMouseEnter={() => { setActive(i); setPaused(true); }}
+                  aria-expanded={isActive}
                   style={{
-                    cursor: "pointer",
-                    textAlign: "center",
-                    padding: "clamp(28px, 3vw, 40px) clamp(16px, 2vw, 24px)",
-                    position: "relative",
-                    background: isActive ? "rgba(0,20,137,0.04)" : "#FFFFFF",
-                    border: `1px solid ${isActive ? "rgba(0,20,137,0.12)" : "rgba(0,20,137,0.06)"}`,
-                    transition: "all 0.4s ease",
-                    ...(isHovered ? { transform: "translateY(-4px)" } : {}),
-                  }}
-                >
-                  {/* Icon container with ring */}
-                  <div style={{
-                    width: 64,
-                    height: 64,
-                    margin: "0 auto 20px",
-                    position: "relative",
+                    width: "100%",
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                  }}>
-                    {/* Pulse ring on active */}
-                    {isActive && (
-                      <div style={{
-                        position: "absolute",
-                        inset: -4,
-                        borderRadius: "50%",
-                        border: "1px solid rgba(0,20,137,0.15)",
-                      }} className="pa-node-ring" />
-                    )}
-                    {/* Outer ring */}
-                    <div style={{
-                      position: "absolute",
-                      inset: 0,
-                      borderRadius: "50%",
-                      border: `1.5px solid ${isActive ? "rgba(0,20,137,0.25)" : "rgba(0,20,137,0.08)"}`,
-                      transition: "border-color 0.4s ease",
-                    }} />
-                    {/* Inner icon */}
-                    <motion.div
-                      animate={{
-                        scale: isActive ? [1, 1.08, 1] : 1,
-                      }}
-                      transition={{ duration: 0.5, ease: "easeInOut" }}
-                    >
-                      <PracticeIcon index={i} size={28} color={isActive ? "#001489" : "rgba(0,20,137,0.25)"} />
-                    </motion.div>
-                  </div>
-
-                  {/* Number */}
-                  <p style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: 10,
-                    fontWeight: 700,
-                    color: isActive ? "#4A58AA" : "rgba(0,20,137,0.18)",
-                    letterSpacing: "0.15em",
-                    marginBottom: 8,
-                    transition: "color 0.3s",
-                  }}>
-                    {itm.num}
-                  </p>
-
-                  {/* Title */}
-                  <h3
-                    className="font-heading font-bold"
-                    style={{
-                      fontSize: "clamp(0.8rem, 1.1vw, 0.95rem)",
-                      lineHeight: 1.35,
-                      color: isActive ? "#001489" : "rgba(0,20,137,0.35)",
-                      transition: "color 0.3s",
-                    }}
-                  >
-                    {itm.title}
-                  </h3>
-
-                  {/* Active indicator dot */}
-                  <motion.div
-                    animate={{ scale: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
-                    transition={{ duration: 0.25 }}
-                    style={{
-                      width: 6,
-                      height: 6,
-                      borderRadius: "50%",
-                      background: "#001489",
-                      margin: "14px auto 0",
-                      boxShadow: "0 0 10px rgba(0,20,137,0.25)",
-                    }}
-                  />
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
-      </div>
-
-      {/* ── Cinematic detail panel — full width below nodes ── */}
-      <div style={{ marginTop: 48 }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="grid grid-cols-1 lg:grid-cols-[5fr_4fr]"
-            style={{ minHeight: 380 }}
-          >
-            {/* Image side */}
-            <div className="relative" style={{ background: "#001489", overflow: "hidden", minHeight: 320 }}>
-              <motion.img
-                src={item.img}
-                alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ mixBlendMode: "multiply", opacity: 0.85 }}
-                initial={{ scale: 1.08 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
-              />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(0,12,74,0.85) 0%, rgba(0,12,74,0.20) 50%, rgba(0,12,74,0.60) 100%)" }} />
-
-              {/* Overlay content */}
-              <div className="absolute inset-0 flex flex-col justify-end" style={{ padding: "clamp(24px, 4vw, 48px)" }}>
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.15 }}
+                    gap: 20,
+                    padding: "26px 4px 26px 20px",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    textAlign: "left",
+                    outline: "none",
+                  }}
                 >
-                  {/* Large ghost number */}
+                  {/* Index number */}
                   <span style={{
-                    fontFamily: "'Satoshi', sans-serif",
-                    fontSize: "clamp(4rem, 8vw, 7rem)",
-                    fontWeight: 900,
-                    color: "rgba(255,255,255,0.04)",
-                    lineHeight: 0.85,
-                    display: "block",
-                    letterSpacing: "-0.04em",
-                    marginBottom: -10,
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: 9,
+                    fontWeight: 700,
+                    letterSpacing: "0.28em",
+                    color: isActive ? "#4A58AA" : "rgba(74,88,170,0.30)",
+                    flexShrink: 0,
+                    minWidth: 22,
+                    transition: "color 0.25s",
                   }}>
                     {item.num}
                   </span>
-                  <div className="flex items-center gap-3" style={{ marginBottom: 12 }}>
-                    <div>
-                      <PracticeIcon index={active} size={20} color="rgba(255,255,255,0.60)" />
-                    </div>
-                    <div style={{ height: 1, flex: 1, background: "rgba(255,255,255,0.10)", maxWidth: 80 }} />
-                    <span style={{ color: "#7A84BE", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                      {item.short}
-                    </span>
-                  </div>
-                  <h3 className="font-heading font-bold text-white" style={{ fontSize: "clamp(1.25rem, 2.2vw, 1.75rem)", lineHeight: 1.2 }}>
+
+                  {/* Practice area title */}
+                  <span
+                    className="font-heading font-bold"
+                    style={{
+                      flex: 1,
+                      fontSize: "clamp(1.05rem, 1.8vw, 1.5rem)",
+                      lineHeight: 1.2,
+                      letterSpacing: "-0.015em",
+                      color: isActive ? "#001489" : "rgba(0,20,137,0.30)",
+                      transition: "color 0.25s",
+                    }}
+                  >
                     {item.title}
-                  </h3>
-                </motion.div>
+                  </span>
+
+                  {/* Category tag — right side, hidden on mobile */}
+                  <span
+                    className="hidden sm:block"
+                    style={{
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontSize: 9,
+                      fontWeight: 700,
+                      letterSpacing: "0.28em",
+                      textTransform: "uppercase",
+                      color: isActive ? "#4A58AA" : "rgba(0,20,137,0.20)",
+                      flexShrink: 0,
+                      transition: "color 0.25s",
+                      minWidth: 80,
+                      textAlign: "right",
+                    }}
+                  >
+                    {item.short}
+                  </span>
+
+                  {/* Arrow */}
+                  <motion.div
+                    animate={{ x: isActive ? 3 : 0, opacity: isActive ? 1 : 0.18 }}
+                    transition={{ duration: 0.25 }}
+                    style={{ flexShrink: 0 }}
+                  >
+                    <svg width="15" height="15" fill="none" viewBox="0 0 16 16">
+                      <path d="M3 8h10M8 3l5 5-5 5" stroke="#001489" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </motion.div>
+                </button>
+
+                {/* Progress bar inside active row */}
+                {isActive && (
+                  <motion.div
+                    key={`pa-prog-${active}`}
+                    style={{ position: "absolute", bottom: 0, left: 0, height: 1, background: "#001489", opacity: 0.12 }}
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: PRACTICE_CYCLE_MS / 1000, ease: "linear" }}
+                  />
+                )}
+
+                {/* Description — slides in below when active */}
+                <AnimatePresence initial={false}>
+                  {isActive && (
+                    <motion.div
+                      key={`desc-pa-${i}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <div
+                        style={{
+                          padding: "0 4px 28px 42px",
+                          display: "flex",
+                          alignItems: "flex-end",
+                          justifyContent: "space-between",
+                          gap: 24,
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <motion.p
+                          initial={{ y: 8, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ duration: 0.35, delay: 0.08 }}
+                          style={{
+                            fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            color: "#595959",
+                            fontSize: "0.9375rem",
+                            lineHeight: 1.8,
+                            maxWidth: "58ch",
+                          }}
+                        >
+                          {item.desc}
+                        </motion.p>
+                        <motion.a
+                          href="#contact"
+                          data-testid={`expertise-enquire-${i}`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.3, delay: 0.16 }}
+                          className="inline-flex items-center gap-3"
+                          style={{
+                            color: "#001489",
+                            fontSize: 9,
+                            fontWeight: 700,
+                            letterSpacing: "0.26em",
+                            textTransform: "uppercase",
+                            textDecoration: "none",
+                            fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            border: "1px solid rgba(0,20,137,0.20)",
+                            padding: "11px 22px",
+                            flexShrink: 0,
+                            transition: "background 0.2s, border-color 0.2s",
+                          }}
+                          onMouseEnter={e => {
+                            (e.currentTarget as HTMLElement).style.background = "rgba(0,20,137,0.05)";
+                            (e.currentTarget as HTMLElement).style.borderColor = "#001489";
+                          }}
+                          onMouseLeave={e => {
+                            (e.currentTarget as HTMLElement).style.background = "transparent";
+                            (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.20)";
+                          }}
+                        >
+                          Enquire
+                          <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
+                            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                          </svg>
+                        </motion.a>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
+            );
+          })}
+        </motion.div>
 
-              {/* Progress bar */}
-              <div className="absolute bottom-0 left-0 right-0" style={{ height: 3, background: "rgba(255,255,255,0.06)" }}>
-                <motion.div
-                  key={`prog-${active}-${paused}`}
-                  style={{ height: "100%", background: "rgba(122,132,190,0.50)", transformOrigin: "left" }}
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: paused ? undefined : 1 }}
-                  transition={paused ? undefined : { duration: PRACTICE_CYCLE_MS / 1000, ease: "linear" }}
-                />
-              </div>
-            </div>
-
-            {/* Content side */}
-            <div
-              className="flex flex-col justify-center relative"
-              style={{
-                padding: "clamp(32px, 4vw, 56px) clamp(28px, 4vw, 64px)",
-                background: "#F9F9F9",
-              }}
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <p style={{
-                  color: "rgba(0,20,137,0.50)",
-                  fontSize: 14,
-                  lineHeight: 1.82,
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  maxWidth: "48ch",
-                  marginBottom: 32,
-                }}>
-                  {item.desc}
-                </p>
-
-                <a
-                  href="#contact"
-                  data-testid={`expertise-enquire-${active}`}
-                  className="inline-flex items-center gap-3 group"
-                  style={{
-                    color: "#FFFFFF",
-                    fontSize: 11,
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.12em",
-                    textDecoration: "none",
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    padding: "14px 32px",
-                    background: "#001489",
-                    alignSelf: "flex-start",
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.background = "#192B94";
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.background = "#001489";
-                  }}
-                >
-                  Enquire
-                  <svg width="14" height="14" fill="none" viewBox="0 0 16 16" className="transition-transform group-hover:translate-x-1">
-                    <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-                  </svg>
-                </a>
-              </motion.div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
       </div>
     </section>
   );
