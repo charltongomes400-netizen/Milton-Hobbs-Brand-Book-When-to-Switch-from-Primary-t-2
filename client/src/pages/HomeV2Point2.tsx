@@ -301,7 +301,6 @@ function HeroV15() {
           transition={{ duration: 2.4, ease: "easeInOut" }}
         />
       </AnimatePresence>
-
       {/* ── Floating tiles — multiply blend in photo area ─── */}
       {DIAG_TILES.map((tile, i) => (
         <motion.div
@@ -316,7 +315,6 @@ function HeroV15() {
           transition={{ duration: tile.dur, delay: tile.delay, repeat: Infinity, ease: "easeInOut", times: [0, 0.12, 0.38, 0.62, 0.88, 1] }}
         />
       ))}
-
       {/* ════════════════════════════════════════════════════════════
           DESKTOP — Broadsheet editorial bar anchored at bottom
       ════════════════════════════════════════════════════════════ */}
@@ -475,54 +473,46 @@ function HeroV15() {
               <a
                 href={`/insights/${featuredSlug}`}
                 data-testid="hero-read-link"
-                className="inline-flex items-center gap-4"
-                style={{ textDecoration: "none" }}
+                className="inline-flex items-center gap-2.5 whitespace-nowrap"
+                style={{
+                  border: "1px solid #001489",
+                  color: "#001489",
+                  background: "transparent",
+                  padding: "9px 22px",
+                  fontSize: 10,
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  transition: "background 0.25s, color 0.25s",
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.background = "#001489";
+                  el.style.color = "#FFFFFF";
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.background = "transparent";
+                  el.style.color = "#001489";
+                }}
               >
-                <span
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: 38,
-                    height: 38,
-                    border: "1.5px solid rgba(0,20,137,0.30)",
-                    transition: "border-color 0.25s, background 0.25s",
-                    flexShrink: 0,
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.background = "#001489";
-                    (e.currentTarget as HTMLElement).style.borderColor = "#001489";
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.background = "transparent";
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.30)";
-                  }}
-                >
-                  <svg width="12" height="12" fill="none" viewBox="0 0 12 12">
-                    <path d="M1 6h10M6 1l5 5-5 5" stroke="#001489" strokeWidth="1.5" />
-                  </svg>
-                </span>
-                <span
-                  style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    color: "rgba(0,20,137,0.50)",
-                    fontSize: 18,
-                    fontWeight: 700,
-                    letterSpacing: "0.32em",
-                    textTransform: "uppercase",
-                    transition: "color 0.25s",
-                  }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#001489"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(0,20,137,0.50)"; }}
-                >
-                  {ins.read}
-                </span>
+                {ins.read}
+                <svg width="11" height="11" fill="none" viewBox="0 0 14 14">
+                  <path
+                    d="M2 12L12 2M12 2H5M12 2v7"
+                    stroke="currentColor"
+                    strokeWidth="1.3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-[16px]" />
+                </svg>
               </a>
             </motion.div>
           </AnimatePresence>
         </div>
       </motion.div>
-
       {/* ── Category strip — sits above the white bar, desktop only ── */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -554,7 +544,6 @@ function HeroV15() {
           ))}
         </motion.div>
       </AnimatePresence>
-
       {/* ════════════════════════════════════════════════════════════
           MOBILE — full-bleed dark gradient, bottom-pinned content
       ════════════════════════════════════════════════════════════ */}
