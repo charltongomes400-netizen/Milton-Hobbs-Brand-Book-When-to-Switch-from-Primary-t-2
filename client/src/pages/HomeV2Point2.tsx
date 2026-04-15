@@ -58,13 +58,17 @@ function HeaderV15() {
     if (!sections.length) return;
     const obs = new IntersectionObserver(
       entries => {
+        let best: IntersectionObserverEntry | null = null;
         for (const entry of entries) {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
-            setIsDark((entry.target as HTMLElement).dataset.headerTheme === "dark");
+          if (entry.isIntersecting && (!best || entry.intersectionRatio > best.intersectionRatio)) {
+            best = entry;
           }
         }
+        if (best && best.intersectionRatio >= 0.15) {
+          setIsDark((best.target as HTMLElement).dataset.headerTheme === "dark");
+        }
       },
-      { threshold: 0.3, root: container || undefined }
+      { threshold: [0.15, 0.5, 0.8], root: container || undefined }
     );
     sections.forEach(s => obs.observe(s));
     return () => obs.disconnect();
@@ -331,6 +335,7 @@ function HeroV15() {
     <section
       id="home"
       data-testid="hero-section"
+      data-header-theme="dark"
       className="relative min-h-screen overflow-hidden v2-snap-section"
       style={{ background: "#001489" }}
     >
