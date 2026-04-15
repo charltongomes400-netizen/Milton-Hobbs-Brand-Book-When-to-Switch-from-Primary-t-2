@@ -486,6 +486,7 @@ function HeroV15() {
                   textDecoration: "none",
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   transition: "background 0.25s, color 0.25s",
+                  width: "fit-content",
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLElement;
@@ -500,13 +501,7 @@ function HeroV15() {
               >
                 {ins.read}
                 <svg width="11" height="11" fill="none" viewBox="0 0 14 14">
-                  <path
-                    d="M2 12L12 2M12 2H5M12 2v7"
-                    stroke="currentColor"
-                    strokeWidth="1.3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-[16px]" />
+                  <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
             </motion.div>
