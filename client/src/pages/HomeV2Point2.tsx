@@ -222,22 +222,23 @@ function HeaderV15() {
 
 const HERO_CYCLE_MS = 12000;
 
-// ── Diagonal tile border — clustered along the cut line ───────────────────────
-// The editorial panel uses clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%)
-// on a 42vw-wide div. The diagonal right edge runs from (42%, 0) → (36.1%, 100%).
-// Tiles are placed straddling this line to create a kinetic pixel-border motif.
-const DIAG_TILE_SZ = 100;
+// ── Floating background tiles — scattered in the photo area (right side) ─────
+// Panel is 55% wide with clip-path bottom at 65% = 35.75% of viewport.
+// Tiles are placed in the right photo field and use multiply blend to show
+// as visible deep-blue rectangular masses over the architectural image.
+const DIAG_TILE_SZ = 110;
 const DIAG_TILES: { left: string; top: string; col: string; dur: number; delay: number }[] = [
-  { left: "39.8%", top: "5%",  col: "#001489", dur: 20, delay: 0  },
-  { left: "40.6%", top: "13%", col: "#192B94", dur: 18, delay: 7  },
-  { left: "39.2%", top: "22%", col: "#001050", dur: 24, delay: 3  },
-  { left: "40.0%", top: "31%", col: "#001489", dur: 22, delay: 11 },
-  { left: "38.6%", top: "42%", col: "#192B94", dur: 19, delay: 5  },
-  { left: "39.4%", top: "52%", col: "#001050", dur: 23, delay: 14 },
-  { left: "38.0%", top: "63%", col: "#001489", dur: 21, delay: 8  },
-  { left: "38.8%", top: "74%", col: "#192B94", dur: 20, delay: 2  },
-  { left: "37.4%", top: "84%", col: "#001050", dur: 25, delay: 10 },
-  { left: "38.2%", top: "92%", col: "#001489", dur: 18, delay: 16 },
+  { left: "58%",  top: "6%",  col: "#001489", dur: 20, delay: 0  },
+  { left: "74%",  top: "12%", col: "#001050", dur: 23, delay: 6  },
+  { left: "63%",  top: "26%", col: "#001489", dur: 19, delay: 3  },
+  { left: "82%",  top: "20%", col: "#001050", dur: 26, delay: 10 },
+  { left: "70%",  top: "40%", col: "#001489", dur: 22, delay: 14 },
+  { left: "57%",  top: "54%", col: "#001050", dur: 18, delay: 4  },
+  { left: "78%",  top: "58%", col: "#001489", dur: 24, delay: 8  },
+  { left: "65%",  top: "70%", col: "#001050", dur: 20, delay: 2  },
+  { left: "86%",  top: "75%", col: "#001489", dur: 21, delay: 12 },
+  { left: "60%",  top: "86%", col: "#001050", dur: 23, delay: 7  },
+  { left: "76%",  top: "88%", col: "#001489", dur: 19, delay: 16 },
 ];
 
 function HeroV15() {
@@ -246,7 +247,6 @@ function HeroV15() {
   const totalArticles = ins.articles.length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [timerKey, setTimerKey] = useState(0);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const bgIndex = currentIndex % HERO_BG_IMAGES.length;
 
@@ -295,7 +295,7 @@ function HeroV15() {
       </AnimatePresence>
 
 
-      {/* ── Diagonal kinetic tile border along the editorial panel cut line ── */}
+      {/* ── Floating background tiles in photo area — multiply blend ─────── */}
       {DIAG_TILES.map((tile, i) => (
         <motion.div
           key={i}
@@ -306,9 +306,9 @@ function HeroV15() {
             width:           DIAG_TILE_SZ,
             height:          DIAG_TILE_SZ,
             backgroundColor: tile.col,
-            mixBlendMode:    "screen",
+            mixBlendMode:    "multiply",
           }}
-          animate={{ opacity: [0, 0, 0.55, 0.55, 0, 0] }}
+          animate={{ opacity: [0, 0, 0.80, 0.80, 0, 0] }}
           transition={{
             duration: tile.dur,
             delay:    tile.delay,
@@ -320,17 +320,17 @@ function HeroV15() {
       ))}
 
       {/* ════════════════════════════════════════════════════════════════════
-          EDITORIAL PANEL — left ~42% width, diagonal right edge
+          EDITORIAL PANEL — white, left ~55% width, dramatic diagonal edge
           Desktop only: hidden on mobile (full-width fallback below)
       ════════════════════════════════════════════════════════════════════ */}
       <motion.div
         className="hidden lg:flex absolute top-0 left-0 bottom-0 flex-col z-10"
         style={{
-          width: "42%",
-          background: "rgba(0, 20, 137, 0.91)",
-          clipPath: "polygon(0 0, 100% 0, 86% 100%, 0 100%)",
+          width: "55%",
+          background: "#FFFFFF",
+          clipPath: "polygon(0 0, 100% 0, 65% 100%, 0 100%)",
         }}
-        initial={{ opacity: 0, x: -24 }}
+        initial={{ opacity: 0, x: -32 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
       >
@@ -338,16 +338,16 @@ function HeroV15() {
         <motion.div
           key={currentIndex}
           className="absolute left-0 top-0 bottom-0 pointer-events-none"
-          style={{ width: 2, background: "#4A58AA", transformOrigin: "top" }}
+          style={{ width: 2, background: "#001489", transformOrigin: "top" }}
           initial={{ scaleY: 1 }}
           animate={{ scaleY: 0 }}
           transition={{ duration: HERO_CYCLE_MS / 1000, ease: "linear" }}
         />
 
-        {/* ── Inner padding (left of the panel's diagonal inset) ─────────── */}
+        {/* ── Inner content ──────────────────────────────────────────────── */}
         <div
           className="flex flex-col h-full"
-          style={{ paddingLeft: 48, paddingRight: "22%", paddingTop: 132, paddingBottom: 40 }}
+          style={{ paddingLeft: 56, paddingRight: "30%", paddingTop: 132, paddingBottom: 56 }}
         >
           {/* Brand tagline — very top */}
           <motion.p
@@ -358,9 +358,9 @@ function HeroV15() {
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 9,
               fontWeight: 700,
-              letterSpacing: "0.38em",
+              letterSpacing: "0.40em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.20)",
+              color: "rgba(0,20,137,0.22)",
               marginBottom: 40,
             }}
           >
@@ -374,77 +374,87 @@ function HeroV15() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
+              exit={{ opacity: 0, y: -14 }}
               transition={{ duration: 0.85, ease: "easeOut" }}
             >
               {/* Category eyebrow */}
-              <div className="flex items-center gap-3 mb-7" data-testid="hero-eyebrow">
-                <div style={{ width: 20, height: 1, background: "#4A58AA", flexShrink: 0 }} />
+              <div className="flex items-center gap-4 mb-8" data-testid="hero-eyebrow">
+                <div style={{ width: 24, height: 1.5, background: "#4A58AA", flexShrink: 0 }} />
                 <p style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   color: "#4A58AA",
-                  fontSize: 9,
+                  fontSize: 10,
                   fontWeight: 700,
-                  letterSpacing: "0.36em",
+                  letterSpacing: "0.38em",
                   textTransform: "uppercase",
                 }}>
                   {featuredArticle?.category}
                 </p>
               </div>
 
-              {/* Headline */}
+              {/* Headline — large, deep blue on white */}
               <h1
-                className="font-heading text-white font-bold"
+                className="font-heading font-bold"
                 style={{
-                  fontSize: "clamp(2.75rem, 6.5vw, 5.75rem)",
-                  lineHeight: 1.02,
-                  letterSpacing: "-0.022em",
-                  maxWidth: "14ch",
-                  marginBottom: "2rem",
+                  fontSize: "clamp(3rem, 5.5vw, 6rem)",
+                  lineHeight: 1.0,
+                  letterSpacing: "-0.025em",
+                  color: "#001489",
+                  maxWidth: "13ch",
+                  marginBottom: "2.5rem",
                 }}
                 data-testid="hero-headline"
               >
                 {featuredArticle?.title}
               </h1>
 
-              {/* CTA */}
+              {/* CTA — dark blue on white */}
               <a
                 href={`/insights/${featuredSlug}`}
                 data-testid="hero-read-link"
-                className="group inline-flex items-center gap-3"
+                className="group inline-flex items-center gap-4"
                 style={{ textDecoration: "none" }}
               >
-                <span style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: 32,
-                  height: 32,
-                  border: "1px solid rgba(255,255,255,0.30)",
-                  transition: "border-color 0.25s, background 0.25s",
-                }}
-                className="group-hover:bg-white/10 group-hover:border-white/60"
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: 36,
+                    height: 36,
+                    border: "1.5px solid rgba(0,20,137,0.35)",
+                    transition: "border-color 0.25s, background 0.25s",
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.background = "#001489";
+                    (e.currentTarget as HTMLElement).style.borderColor = "#001489";
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.background = "transparent";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.35)";
+                  }}
+                  className="group-arrow"
                 >
                   <svg
                     className="group-hover:translate-x-0.5 transition-transform duration-200"
-                    width="11" height="11" fill="none" viewBox="0 0 12 12"
+                    width="12" height="12" fill="none" viewBox="0 0 12 12"
                   >
-                    <path d="M1 6h10M6 1l5 5-5 5" stroke="rgba(255,255,255,0.80)" strokeWidth="1.4" />
+                    <path d="M1 6h10M6 1l5 5-5 5" stroke="#001489" strokeWidth="1.5" />
                   </svg>
                 </span>
                 <span style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  color: "rgba(255,255,255,0.50)",
-                  fontSize: 9,
+                  color: "rgba(0,20,137,0.45)",
+                  fontSize: 10,
                   fontWeight: 700,
                   letterSpacing: "0.30em",
                   textTransform: "uppercase",
                   transition: "color 0.25s",
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.90)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.50)"; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#001489"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(0,20,137,0.45)"; }}
                 >
                   {ins.read}
                 </span>
@@ -452,89 +462,28 @@ function HeroV15() {
             </motion.div>
           </AnimatePresence>
 
-          {/* ── Vertical article index ─────────────────────────────────── */}
+          {/* ── Navigation dots at bottom ──────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.9, delay: 1.1 }}
-            style={{ marginTop: 40, borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 24 }}
-            data-testid="hero-article-index"
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="flex items-center gap-2 mt-10"
+            data-testid="hero-dots"
           >
-            {ins.articles.map((article, i) => {
-              const isActive = i === currentIndex;
-              const isHovered = hoveredIndex === i;
-              return (
-                <button
-                  key={i}
-                  data-testid={`hero-index-${i}`}
-                  onClick={() => goTo(i)}
-                  onMouseEnter={() => setHoveredIndex(i)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  aria-label={`Go to article: ${article.title}`}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 14,
-                    width: "100%",
-                    background: "none",
-                    border: "none",
-                    textAlign: "left",
-                    cursor: "pointer",
-                    outline: "none",
-                    padding: "9px 0 9px 0",
-                    position: "relative",
-                    transition: "opacity 0.2s",
-                  }}
-                >
-                  {/* Active indicator bar */}
-                  <motion.div
-                    style={{
-                      position: "absolute",
-                      left: -16,
-                      top: 0,
-                      bottom: 0,
-                      width: 2,
-                      background: "#4A58AA",
-                      transformOrigin: "top",
-                    }}
-                    animate={{ scaleY: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                  />
-
-                  {/* Index number */}
-                  <span style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: 9,
-                    fontWeight: 700,
-                    letterSpacing: "0.22em",
-                    color: isActive ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.18)",
-                    flexShrink: 0,
-                    transition: "color 0.25s",
-                    minWidth: 20,
-                  }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-
-                  {/* Separator */}
-                  <div style={{ width: 1, height: 12, background: isActive ? "rgba(255,255,255,0.20)" : "rgba(255,255,255,0.08)", flexShrink: 0, transition: "background 0.25s" }} />
-
-                  {/* Article title */}
-                  <span style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: 11,
-                    fontWeight: isActive ? 600 : 400,
-                    color: isActive ? "rgba(255,255,255,0.90)" : (isHovered ? "rgba(255,255,255,0.50)" : "rgba(255,255,255,0.28)"),
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    transition: "color 0.25s, font-weight 0.25s",
-                    letterSpacing: "0.01em",
-                  }}>
-                    {article.title}
-                  </span>
-                </button>
-              );
-            })}
+            {ins.articles.map((_, i) => (
+              <button
+                key={i}
+                data-testid={`hero-dot-${i}`}
+                onClick={() => goTo(i)}
+                aria-label={`Article ${i + 1}`}
+                className="focus:outline-none cursor-pointer transition-all duration-300"
+                style={{
+                  width:           i === currentIndex ? 28 : 7,
+                  height:          2,
+                  backgroundColor: i === currentIndex ? "#001489" : "rgba(0,20,137,0.20)",
+                }}
+              />
+            ))}
           </motion.div>
         </div>
       </motion.div>
