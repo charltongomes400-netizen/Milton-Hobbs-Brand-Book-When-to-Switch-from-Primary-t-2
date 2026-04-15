@@ -1172,15 +1172,13 @@ function DifferentiatorsV15() {
             <motion.div
               key={active}
               style={{
-                width: "92%",
-                maxWidth: 480,
-                aspectRatio: "320 / 260",
-                position: "relative",
+                position: "absolute",
+                inset: "6%",
                 zIndex: 1,
               }}
-              initial={{ opacity: 0, scale: 0.92 }}
+              initial={{ opacity: 0, scale: 0.94 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.06 }}
+              exit={{ opacity: 0, scale: 1.05 }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             >
               {(() => { const V = VISUALS[active]; return <V />; })()}
