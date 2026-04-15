@@ -226,7 +226,7 @@ const HERO_CYCLE_MS = 12000;
 // The editorial panel uses clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%)
 // on a 42vw-wide div. The diagonal right edge runs from (42%, 0) → (36.1%, 100%).
 // Tiles are placed straddling this line to create a kinetic pixel-border motif.
-const DIAG_TILE_SZ = 80;
+const DIAG_TILE_SZ = 100;
 const DIAG_TILES: { left: string; top: string; col: string; dur: number; delay: number }[] = [
   { left: "39.8%", top: "5%",  col: "#001489", dur: 20, delay: 0  },
   { left: "40.6%", top: "13%", col: "#192B94", dur: 18, delay: 7  },
@@ -338,7 +338,7 @@ function HeroV15() {
         <motion.div
           key={currentIndex}
           className="absolute left-0 top-0 bottom-0 pointer-events-none"
-          style={{ width: 3, background: "#4A58AA", transformOrigin: "top" }}
+          style={{ width: 2, background: "#4A58AA", transformOrigin: "top" }}
           initial={{ scaleY: 1 }}
           animate={{ scaleY: 0 }}
           transition={{ duration: HERO_CYCLE_MS / 1000, ease: "linear" }}
