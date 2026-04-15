@@ -222,37 +222,23 @@ function HeaderV15() {
 
 const HERO_CYCLE_MS = 12000;
 
-const TILE_SZ = 150; // px — uniform 150×150px squares (50% bigger)
-
-// ── Strict 5×5 grid ──────────────────────────────────────────────────────────
-// Column step ≈ 11.5% (≈ 165px at 1440px wide)
-// Row step    ≈ 18%   (≈ 162px at 900px tall)
-// Each tile occupies exactly one cell — zero overlaps.
-const GRID_COLS = [38, 49.5, 61, 72.5, 84];     // % left values for C0–C4
-const GRID_ROWS = [4,  22,   40, 58,   76];      // % top  values for R0–R4
-
-// (colIdx, rowIdx, color, duration, delay)
-// Cells chosen so no two tiles share a row+col position:
-const TILE_DEFS: [number, number, string, number, number][] = [
-  [0, 0, "#001489", 22.0,  0.0],  // C0·R0 — isolated upper-left
-  [3, 0, "#001050", 24.0,  6.0],  // C3·R0 — top-right solo
-  [2, 1, "#001489", 20.0,  3.0],  // C2·R1 — upper-mid
-  [3, 1, "#001050", 23.0,  9.0],  // C3·R1 — adjacent right of above
-  [4, 2, "#001489", 21.0,  5.0],  // C4·R2 — far-right mid
-  [1, 2, "#001050", 26.0, 12.0],  // C1·R2 — left-mid
-  [1, 3, "#001489", 22.0, 14.0],  // C1·R3 — vertical pair with above
-  [3, 3, "#001050", 20.0,  7.0],  // C3·R3 — right-mid lower
-  [4, 4, "#001489", 24.0,  2.0],  // C4·R4 — bottom-right
+// ── Diagonal tile border — clustered along the cut line ───────────────────────
+// The editorial panel uses clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%)
+// on a 42vw-wide div. The diagonal right edge runs from (42%, 0) → (36.1%, 100%).
+// Tiles are placed straddling this line to create a kinetic pixel-border motif.
+const DIAG_TILE_SZ = 80;
+const DIAG_TILES: { left: string; top: string; col: string; dur: number; delay: number }[] = [
+  { left: "39.8%", top: "5%",  col: "#001489", dur: 20, delay: 0  },
+  { left: "40.6%", top: "13%", col: "#192B94", dur: 18, delay: 7  },
+  { left: "39.2%", top: "22%", col: "#001050", dur: 24, delay: 3  },
+  { left: "40.0%", top: "31%", col: "#001489", dur: 22, delay: 11 },
+  { left: "38.6%", top: "42%", col: "#192B94", dur: 19, delay: 5  },
+  { left: "39.4%", top: "52%", col: "#001050", dur: 23, delay: 14 },
+  { left: "38.0%", top: "63%", col: "#001489", dur: 21, delay: 8  },
+  { left: "38.8%", top: "74%", col: "#192B94", dur: 20, delay: 2  },
+  { left: "37.4%", top: "84%", col: "#001050", dur: 25, delay: 10 },
+  { left: "38.2%", top: "92%", col: "#001489", dur: 18, delay: 16 },
 ];
-
-const ACCENT_TILES = TILE_DEFS.map(([ci, ri, col, dur, delay]) => ({
-  left:  `${GRID_COLS[ci]}%`,
-  top:   `${GRID_ROWS[ri]}%`,
-  col,
-  dur,
-  delay,
-}));
-
 
 function HeroV15() {
   const { t } = useLang();
@@ -260,15 +246,17 @@ function HeroV15() {
   const totalArticles = ins.articles.length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [timerKey, setTimerKey] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const bgIndex = currentIndex % HERO_BG_IMAGES.length;
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex(prev => (prev + 1) % totalArticles);
+      setTimerKey(k => k + 1);
     }, HERO_CYCLE_MS);
     return () => clearInterval(timer);
-  }, [timerKey, totalArticles]);
+  }, [totalArticles]);
 
   function goTo(i: number) {
     setCurrentIndex(i);
@@ -277,6 +265,12 @@ function HeroV15() {
 
   const featuredArticle = ins.articles[currentIndex];
   const featuredSlug = articles[currentIndex]?.slug ?? "";
+
+  const otherCategories = ins.articles
+    .map((a, i) => ({ label: a.category, index: i }))
+    .filter(({ index }) => index !== currentIndex)
+    .filter(({ label }, i, arr) => arr.findIndex(x => x.label === label) === i)
+    .slice(0, 5);
 
   return (
     <section
@@ -301,183 +295,371 @@ function HeroV15() {
         />
       </AnimatePresence>
 
-      {/* ── Grid-aligned accent tiles — uniform squares, fade in/hold/fade out ── */}
-      {ACCENT_TILES.map((tile, i) => (
+      {/* ── Subtle vignette on right side for depth ──────────────────────── */}
+      <div
+        className="absolute inset-0 pointer-events-none hidden lg:block"
+        style={{
+          background: "linear-gradient(to right, transparent 40%, rgba(0,10,60,0.35) 100%)",
+        }}
+      />
+
+      {/* ── Diagonal kinetic tile border along the editorial panel cut line ── */}
+      {DIAG_TILES.map((tile, i) => (
         <motion.div
           key={i}
-          className="absolute pointer-events-none"
+          className="absolute pointer-events-none hidden lg:block"
           style={{
             left:            tile.left,
             top:             tile.top,
-            width:           TILE_SZ,
-            height:          TILE_SZ,
+            width:           DIAG_TILE_SZ,
+            height:          DIAG_TILE_SZ,
             backgroundColor: tile.col,
+            mixBlendMode:    "screen",
           }}
-          animate={{ opacity: [0, 0, 1, 1, 0, 0] }}
+          animate={{ opacity: [0, 0, 0.55, 0.55, 0, 0] }}
           transition={{
             duration: tile.dur,
             delay:    tile.delay,
             repeat:   Infinity,
             ease:     "easeInOut",
-            times:    [0, 0.15, 0.40, 0.60, 0.85, 1],
+            times:    [0, 0.12, 0.38, 0.62, 0.88, 1],
           }}
         />
       ))}
 
-      {/* ── Bottom-left content gradient for legibility ─────────────────── */}
-      <div
-        className="absolute inset-x-0 bottom-0 pointer-events-none"
+      {/* ════════════════════════════════════════════════════════════════════
+          EDITORIAL PANEL — left ~42% width, diagonal right edge
+          Desktop only: hidden on mobile (full-width fallback below)
+      ════════════════════════════════════════════════════════════════════ */}
+      <motion.div
+        className="hidden lg:flex absolute top-0 left-0 bottom-0 flex-col z-10"
         style={{
-          height: "70%",
-          background: "linear-gradient(to top, rgba(0,14,80,0.80) 0%, rgba(0,14,80,0.40) 45%, transparent 100%)",
+          width: "42%",
+          background: "rgba(0, 20, 137, 0.91)",
+          clipPath: "polygon(0 0, 100% 0, 86% 100%, 0 100%)",
         }}
-      />
-
-      {/* ── Left accent line ─────────────────────────────────────────────── */}
-      <motion.div
-        className="absolute left-8 xl:left-14 top-0 bottom-0 z-10 pointer-events-none"
-        style={{ width: 1, background: "rgba(255,255,255,0.10)" }}
-        initial={{ scaleY: 0, originY: 0 }}
-        animate={{ scaleY: 1 }}
-        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-      />
-
-      {/* ── Article counter — top-right ───────────────────────────────────── */}
-      <motion.div
-        className="absolute top-28 right-12 xl:right-24 z-10 flex items-center gap-3"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.6 }}
+        initial={{ opacity: 0, x: -24 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
       >
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={currentIndex}
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 6 }}
-            transition={{ duration: 0.45 }}
+        {/* ── Left-edge animated progress timer bar ─────────────────────── */}
+        <motion.div
+          key={timerKey}
+          className="absolute left-0 top-0 bottom-0 pointer-events-none"
+          style={{ width: 3, background: "#4A58AA", transformOrigin: "top" }}
+          initial={{ scaleY: 1 }}
+          animate={{ scaleY: 0 }}
+          transition={{ duration: HERO_CYCLE_MS / 1000, ease: "linear" }}
+        />
+
+        {/* ── Inner padding (left of the panel's diagonal inset) ─────────── */}
+        <div
+          className="flex flex-col h-full"
+          style={{ paddingLeft: 48, paddingRight: "22%", paddingTop: 132, paddingBottom: 40 }}
+        >
+          {/* Brand tagline — very top */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: 11, fontWeight: 700, letterSpacing: "0.22em",
-              color: "rgba(255,255,255,0.55)",
+              fontSize: 9,
+              fontWeight: 700,
+              letterSpacing: "0.38em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.20)",
+              marginBottom: 40,
             }}
           >
-            {String(currentIndex + 1).padStart(2, "0")}
-          </motion.span>
-        </AnimatePresence>
-        <div style={{ width: 22, height: 1, background: "rgba(255,255,255,0.22)" }} />
-        <span style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontSize: 11, fontWeight: 700, letterSpacing: "0.22em",
-          color: "rgba(255,255,255,0.22)",
-        }}>
-          {String(ins.articles.length).padStart(2, "0")}
-        </span>
+            Reason · Rigor · Resolution
+          </motion.p>
+
+          {/* Spacer pushes content to lower half */}
+          <div className="flex-1" />
+
+          {/* ── Animated editorial content ─────────────────────────────── */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.85, ease: "easeOut" }}
+            >
+              {/* Category eyebrow */}
+              <div className="flex items-center gap-3 mb-7" data-testid="hero-eyebrow">
+                <div style={{ width: 20, height: 1, background: "#4A58AA", flexShrink: 0 }} />
+                <p style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  color: "#4A58AA",
+                  fontSize: 9,
+                  fontWeight: 700,
+                  letterSpacing: "0.36em",
+                  textTransform: "uppercase",
+                }}>
+                  {featuredArticle?.category}
+                </p>
+              </div>
+
+              {/* Headline */}
+              <h1
+                className="font-heading text-white font-bold"
+                style={{
+                  fontSize: "clamp(2rem, 3.8vw, 3.75rem)",
+                  lineHeight: 1.02,
+                  letterSpacing: "-0.022em",
+                  maxWidth: "14ch",
+                  marginBottom: "2rem",
+                }}
+                data-testid="hero-headline"
+              >
+                {featuredArticle?.title}
+              </h1>
+
+              {/* CTA */}
+              <a
+                href={`/insights/${featuredSlug}`}
+                data-testid="hero-read-link"
+                className="group inline-flex items-center gap-3"
+                style={{ textDecoration: "none" }}
+              >
+                <span style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 32,
+                  height: 32,
+                  border: "1px solid rgba(255,255,255,0.30)",
+                  transition: "border-color 0.25s, background 0.25s",
+                }}
+                className="group-hover:bg-white/10 group-hover:border-white/60"
+                >
+                  <svg
+                    className="group-hover:translate-x-0.5 transition-transform duration-200"
+                    width="11" height="11" fill="none" viewBox="0 0 12 12"
+                  >
+                    <path d="M1 6h10M6 1l5 5-5 5" stroke="rgba(255,255,255,0.80)" strokeWidth="1.4" />
+                  </svg>
+                </span>
+                <span style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  color: "rgba(255,255,255,0.50)",
+                  fontSize: 9,
+                  fontWeight: 700,
+                  letterSpacing: "0.30em",
+                  textTransform: "uppercase",
+                  transition: "color 0.25s",
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.90)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.50)"; }}
+                >
+                  {ins.read}
+                </span>
+              </a>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* ── Vertical article index ─────────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.9, delay: 1.1 }}
+            style={{ marginTop: 40, borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 24 }}
+            data-testid="hero-article-index"
+          >
+            {ins.articles.map((article, i) => {
+              const isActive = i === currentIndex;
+              const isHovered = hoveredIndex === i;
+              return (
+                <button
+                  key={i}
+                  data-testid={`hero-index-${i}`}
+                  onClick={() => goTo(i)}
+                  onMouseEnter={() => setHoveredIndex(i)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  aria-label={`Go to article: ${article.title}`}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 14,
+                    width: "100%",
+                    background: "none",
+                    border: "none",
+                    textAlign: "left",
+                    cursor: "pointer",
+                    outline: "none",
+                    padding: "9px 0 9px 0",
+                    position: "relative",
+                    transition: "opacity 0.2s",
+                  }}
+                >
+                  {/* Active indicator bar */}
+                  <motion.div
+                    style={{
+                      position: "absolute",
+                      left: -16,
+                      top: 0,
+                      bottom: 0,
+                      width: 2,
+                      background: "#4A58AA",
+                      transformOrigin: "top",
+                    }}
+                    animate={{ scaleY: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                  />
+
+                  {/* Index number */}
+                  <span style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: 9,
+                    fontWeight: 700,
+                    letterSpacing: "0.22em",
+                    color: isActive ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.18)",
+                    flexShrink: 0,
+                    transition: "color 0.25s",
+                    minWidth: 20,
+                  }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+
+                  {/* Separator */}
+                  <div style={{ width: 1, height: 12, background: isActive ? "rgba(255,255,255,0.20)" : "rgba(255,255,255,0.08)", flexShrink: 0, transition: "background 0.25s" }} />
+
+                  {/* Article title */}
+                  <span style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: 11,
+                    fontWeight: isActive ? 600 : 400,
+                    color: isActive ? "rgba(255,255,255,0.90)" : (isHovered ? "rgba(255,255,255,0.50)" : "rgba(255,255,255,0.28)"),
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    transition: "color 0.25s, font-weight 0.25s",
+                    letterSpacing: "0.01em",
+                  }}>
+                    {article.title}
+                  </span>
+                </button>
+              );
+            })}
+          </motion.div>
+        </div>
       </motion.div>
 
-      {/* ── Main editorial content ────────────────────────────────────────── */}
-      <div className="relative z-10 flex flex-col min-h-screen pl-16 xl:pl-28 pr-12 xl:pr-24 pt-28 pb-16">
-
-        {/* Spacer to push content toward bottom */}
+      {/* ════════════════════════════════════════════════════════════════════
+          MOBILE / FALLBACK LAYOUT — full width, bottom-pinned
+      ════════════════════════════════════════════════════════════════════ */}
+      <div
+        className="lg:hidden relative z-10 flex flex-col min-h-screen"
+        style={{
+          background: "linear-gradient(to top, rgba(0,14,80,0.88) 0%, rgba(0,14,80,0.50) 55%, transparent 100%)",
+        }}
+      >
         <div className="flex-1" />
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndex}
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-          >
-            {/* Category row — tick + label + horizontal rule */}
-            <div className="flex items-center gap-4 mb-8" data-testid="hero-eyebrow">
-              <div style={{ width: 1, height: 28, background: "rgba(255,255,255,0.35)", flexShrink: 0 }} />
-              <p style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                color: "rgba(255,255,255,0.45)",
-                fontSize: 10,
-                fontWeight: 700,
-                letterSpacing: "0.34em",
-                textTransform: "uppercase",
-              }}>
-                {featuredArticle?.category}
-              </p>
-              <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.10)", maxWidth: 120 }} />
-            </div>
-
-            {/* Headline — spans wide, tight leading */}
-            <h1
-              className="font-heading text-white font-bold"
-              style={{
-                fontSize: "clamp(2.75rem, 6.5vw, 5.75rem)",
-                lineHeight: 0.97,
-                letterSpacing: "-0.025em",
-                maxWidth: "15ch",
-                marginBottom: "2.75rem",
-              }}
-              data-testid="hero-headline"
+        <div className="px-8 pb-14 pt-6">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.85, ease: "easeOut" }}
             >
-              {featuredArticle?.title}
-            </h1>
-
-            {/* CTA — circle arrow button + label */}
-            <a
-              href={`/insights/${featuredSlug}`}
-              data-testid="hero-read-link"
-              className="group inline-flex items-center gap-4"
-              style={{ textDecoration: "none" }}
-            >
-              <svg
-                className="group-hover:translate-x-0.5 transition-transform duration-200"
-                width="13" height="13" fill="none" viewBox="0 0 12 12"
+              <div className="flex items-center gap-3 mb-5" data-testid="hero-eyebrow-mobile">
+                <div style={{ width: 16, height: 1, background: "#4A58AA" }} />
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 9, fontWeight: 700, letterSpacing: "0.36em", textTransform: "uppercase" }}>
+                  {featuredArticle?.category}
+                </p>
+              </div>
+              <h1
+                className="font-heading text-white font-bold"
+                style={{ fontSize: "clamp(2.2rem, 7vw, 3.5rem)", lineHeight: 1.04, letterSpacing: "-0.02em", maxWidth: "16ch", marginBottom: "1.75rem" }}
+                data-testid="hero-headline-mobile"
               >
-                <path d="M1 6h10M6 1l5 5-5 5" stroke="rgba(255,255,255,0.75)" strokeWidth="1.4" />
-              </svg>
-              <span style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                color: "rgba(255,255,255,0.55)",
-                fontSize: 10,
-                fontWeight: 700,
-                letterSpacing: "0.28em",
-                textTransform: "uppercase",
-                transition: "color 0.25s",
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.9)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.55)"; }}
-              >
-                {ins.read}
-              </span>
-            </a>
-          </motion.div>
-        </AnimatePresence>
+                {featuredArticle?.title}
+              </h1>
+              <a href={`/insights/${featuredSlug}`} data-testid="hero-read-link-mobile" className="group inline-flex items-center gap-3" style={{ textDecoration: "none" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 30, height: 30, border: "1px solid rgba(255,255,255,0.30)" }}>
+                  <svg width="11" height="11" fill="none" viewBox="0 0 12 12"><path d="M1 6h10M6 1l5 5-5 5" stroke="rgba(255,255,255,0.80)" strokeWidth="1.4" /></svg>
+                </span>
+                <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.55)", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase" }}>
+                  {ins.read}
+                </span>
+              </a>
+            </motion.div>
+          </AnimatePresence>
 
-        {/* Bottom bar — dots left, thin rule right */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.0 }}
-          className="flex items-center gap-6 mt-12"
-          data-testid="hero-dots"
-        >
-          <div className="flex items-center gap-2">
+          {/* Mobile dots */}
+          <div className="flex items-center gap-2 mt-8" data-testid="hero-dots">
             {ins.articles.map((_, i) => (
               <button
                 key={i}
                 data-testid={`hero-dot-${i}`}
                 onClick={() => goTo(i)}
                 aria-label={`Article ${i + 1}`}
-                className="block focus:outline-none cursor-pointer transition-all duration-300"
+                className="focus:outline-none cursor-pointer transition-all duration-300"
                 style={{
-                  width:           i === currentIndex ? 28 : 8,
-                  height:          2,
+                  width: i === currentIndex ? 24 : 6,
+                  height: 2,
                   backgroundColor: i === currentIndex ? "#FFFFFF" : "rgba(255,255,255,0.25)",
                 }}
               />
             ))}
           </div>
-          <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
-        </motion.div>
+        </div>
       </div>
+
+      {/* ── Right-side category strip — bottom-right, desktop only ──────── */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          className="hidden lg:flex absolute bottom-10 right-10 z-10 items-center gap-0"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+          data-testid="hero-category-strip"
+        >
+          {otherCategories.map(({ label, index: idx }, i) => (
+            <button
+              key={i}
+              data-testid={`hero-cat-${i}`}
+              onClick={() => goTo(idx)}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                outline: "none",
+                display: "flex",
+                alignItems: "center",
+                gap: 0,
+                padding: 0,
+              }}
+            >
+              {i > 0 && (
+                <div style={{ width: 1, height: 10, background: "rgba(255,255,255,0.18)", margin: "0 16px" }} />
+              )}
+              <span
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: 8,
+                  fontWeight: 700,
+                  letterSpacing: "0.30em",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.30)",
+                  transition: "color 0.2s",
+                  whiteSpace: "nowrap",
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.75)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.30)"; }}
+              >
+                {label}
+              </span>
+            </button>
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }
