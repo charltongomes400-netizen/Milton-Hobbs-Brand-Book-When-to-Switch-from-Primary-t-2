@@ -1734,9 +1734,9 @@ function ContactFormV15() {
         >
           <p style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontSize: 9,
+            fontSize: 18,
             fontWeight: 700,
-            letterSpacing: "0.40em",
+            letterSpacing: "0.12em",
             textTransform: "uppercase",
             color: "#4A58AA",
             marginBottom: 20,
@@ -1788,7 +1788,7 @@ function ContactFormV15() {
               </motion.div>
             ) : (
               <div className="w-full">
-                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase", marginBottom: 32 }}>
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 32 }}>
                   Send a Message
                 </p>
                 <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-3">
@@ -1894,7 +1894,7 @@ function ContactFormV15() {
               gap: 0,
             }}
           >
-            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase", marginBottom: 32 }}>
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 32 }}>
               {c.officeLabel}
             </p>
 
@@ -1942,7 +1942,7 @@ function ContactFormV15() {
 
             {/* Email */}
             <div>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase", marginBottom: 8 }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 8 }}>
                 Email
               </p>
               <a
