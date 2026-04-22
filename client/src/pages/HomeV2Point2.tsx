@@ -2011,7 +2011,7 @@ function FooterV15() {
           fontWeight: 700,
           letterSpacing: "0.50em",
           textTransform: "uppercase",
-          color: "rgba(255,255,255,0.50)",
+          color: "#FFFFFF",
           textAlign: "center",
         }}>
           Reason&ensp;·&ensp;Rigor&ensp;·&ensp;Resolution
@@ -2032,7 +2032,7 @@ function FooterV15() {
               width: "clamp(110px, 12vw, 148px)",
               height: "auto",
               filter: "brightness(0) invert(1)",
-              opacity: 0.75,
+              opacity: 1,
               display: "block",
               flexShrink: 0,
             }}
@@ -2045,16 +2045,13 @@ function FooterV15() {
                 key={link.href}
                 href={link.href}
                 style={{
-                  color: "rgba(255,255,255,0.35)",
+                  color: "#FFFFFF",
                   fontSize: 11,
                   fontWeight: 600,
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
                   textDecoration: "none",
-                  transition: "color 0.2s",
                 }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"}
               >
                 {link.label}
               </a>
@@ -2066,28 +2063,22 @@ function FooterV15() {
             <a
               href={`mailto:${f.email}`}
               data-testid="footer-email"
-              style={{ color: "rgba(255,255,255,0.50)", fontSize: 12, textDecoration: "none", transition: "color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.50)"}
+              style={{ color: "#FFFFFF", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
             >
               {f.email}
             </a>
-            <span style={{ width: 1, height: 12, background: "rgba(255,255,255,0.08)", flexShrink: 0 }} />
+            <span style={{ width: 1, height: 12, background: "rgba(255,255,255,0.30)", flexShrink: 0 }} />
             <a
               href={`tel:${f.phone}`}
               data-testid="footer-phone-dubai"
-              style={{ color: "rgba(255,255,255,0.35)", fontSize: 12, textDecoration: "none", transition: "color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"}
+              style={{ color: "#FFFFFF", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
             >
               {f.phone}
             </a>
             <a
               href="tel:+33180270067"
               data-testid="footer-phone-paris"
-              style={{ color: "rgba(255,255,255,0.35)", fontSize: 12, textDecoration: "none", transition: "color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#FFFFFF"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"}
+              style={{ color: "#FFFFFF", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
             >
               +33 1 80 27 00 67
             </a>
@@ -2108,31 +2099,25 @@ function FooterV15() {
               { label: "Paris", time: parisTime, dot: "#4A58AA" },
             ].map((o, i) => (
               <div key={o.label} className="flex items-center gap-2">
-                {i > 0 && <span style={{ width: 1, height: 10, background: "rgba(255,255,255,0.08)", marginRight: 6 }} />}
+                {i > 0 && <span style={{ width: 1, height: 10, background: "rgba(255,255,255,0.30)", marginRight: 6 }} />}
                 <span style={{ width: 5, height: 5, borderRadius: "50%", background: o.dot, flexShrink: 0 }} />
-                <span style={{ color: "rgba(255,255,255,0.30)", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>{o.label}</span>
-                <span style={{ color: "rgba(255,255,255,0.40)", fontSize: 11, fontFamily: "'Plus Jakarta Sans', monospace", letterSpacing: "0.04em", minWidth: "6ch" }}>{o.time}</span>
+                <span style={{ color: "#FFFFFF", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>{o.label}</span>
+                <span style={{ color: "#FFFFFF", fontSize: 11, fontFamily: "'Plus Jakarta Sans', monospace", letterSpacing: "0.04em", minWidth: "6ch" }}>{o.time}</span>
               </div>
             ))}
           </div>
 
           {/* Legal */}
           <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-            <span style={{ color: "rgba(255,255,255,0.25)", fontSize: 10 }}>{f.copyright}</span>
-            <a href="#" style={{ color: "rgba(255,255,255,0.25)", fontSize: 10, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.25)"}
-            >{f.privacy}</a>
-            <a href="#" style={{ color: "rgba(255,255,255,0.25)", fontSize: 10, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)"}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.25)"}
-            >{f.cookie}</a>
+            <span style={{ color: "#FFFFFF", fontSize: 10 }}>{f.copyright}</span>
+            <a href="#" style={{ color: "#FFFFFF", fontSize: 10, textDecoration: "none" }}>{f.privacy}</a>
+            <a href="#" style={{ color: "#FFFFFF", fontSize: 10, textDecoration: "none" }}>{f.cookie}</a>
           </div>
         </div>
 
         <p
           data-testid="footer-disclaimer"
-          style={{ color: "rgba(255,255,255,0.15)", fontSize: 9, lineHeight: 1.6, paddingBottom: 18, maxWidth: "85ch" }}
+          style={{ color: "#FFFFFF", fontSize: 9, lineHeight: 1.6, paddingBottom: 18, maxWidth: "85ch" }}
         >
           {f.disclaimer}
         </p>
