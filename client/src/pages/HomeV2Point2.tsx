@@ -1937,9 +1937,7 @@ function ContactFormV15() {
               <a
                 href="tel:+33180270067"
                 data-testid="contact-address-phone-paris"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(0,20,137,0.45)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 6 }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#001489"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(0,20,137,0.45)"}
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 13, textDecoration: "none", display: "inline-block", marginTop: 6 }}
               >
                 +33 1 80 27 00 67
               </a>
