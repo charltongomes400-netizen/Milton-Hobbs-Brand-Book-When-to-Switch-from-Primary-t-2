@@ -1885,7 +1885,7 @@ function ContactFormV15() {
                 {c.dubaiLabel}
               </p>
               {f.dubaiAddr.map((line, i) => (
-                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.55)", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
+                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#FFFFFF", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
               ))}
               <a
                 href="tel:+97145232421"
@@ -1904,7 +1904,7 @@ function ContactFormV15() {
                 {c.parisLabel}
               </p>
               {f.parisAddr.map((line, i) => (
-                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.55)", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
+                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#FFFFFF", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
               ))}
               <a
                 href="tel:+33180270067"
