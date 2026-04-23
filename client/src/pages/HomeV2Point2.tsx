@@ -1984,74 +1984,116 @@ function FooterV15() {
         </p>
       </div>
 
-      {/* ── Main band: wordmark · nav · contact ── */}
+      {/* ── Main band: 3-column grid ── */}
       <div className="max-w-[1400px] mx-auto px-8">
         <div
-          className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-12"
-          style={{ paddingTop: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8"
+          style={{ paddingTop: 52, paddingBottom: 52, borderBottom: "1px solid rgba(255,255,255,0.06)" }}
         >
-          {/* Wordmark */}
-          <img
-            src={miltonHobbsWordmark}
-            alt="Milton Hobbs"
-            style={{
-              width: "clamp(110px, 12vw, 148px)",
-              height: "auto",
-              filter: "brightness(0) invert(1)",
-              opacity: 1,
-              display: "block",
-              flexShrink: 0,
-            }}
-          />
+          {/* LEFT — Wordmark + tagline */}
+          <div className="flex flex-col gap-5">
+            <img
+              src={miltonHobbsWordmark}
+              alt="Milton Hobbs"
+              style={{
+                width: "clamp(110px, 12vw, 148px)",
+                height: "auto",
+                filter: "brightness(0) invert(1)",
+                display: "block",
+              }}
+            />
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 11,
+              color: "rgba(255,255,255,0.40)",
+              lineHeight: 1.7,
+              maxWidth: "28ch",
+            }}>
+              A boutique international law firm headquartered in Dubai, with offices in Paris.
+            </p>
+          </div>
 
-          {/* Inline nav */}
-          <nav className="flex flex-wrap items-center gap-x-8 gap-y-2">
-            {navEntries.map(link => (
-              <a
-                key={link.href}
-                href={link.href}
-                style={{
-                  color: "#FFFFFF",
-                  fontSize: 11,
-                  fontWeight: 600,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  textDecoration: "none",
-                }}
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+          {/* MIDDLE — Navigation */}
+          <div className="flex flex-col gap-4">
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 9,
+              fontWeight: 700,
+              letterSpacing: "0.34em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.30)",
+              marginBottom: 4,
+            }}>
+              Navigation
+            </p>
+            <nav className="flex flex-col gap-3">
+              {navEntries.map(link => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    color: "rgba(255,255,255,0.70)",
+                    fontSize: 12,
+                    fontWeight: 500,
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
+                    textDecoration: "none",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
 
-          {/* Contact cluster */}
-          <div className="flex flex-col gap-3 lg:flex-shrink-0">
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          {/* RIGHT — Contact + Socials */}
+          <div className="flex flex-col gap-4">
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 9,
+              fontWeight: 700,
+              letterSpacing: "0.34em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.30)",
+              marginBottom: 4,
+            }}>
+              Contact
+            </p>
+            <div className="flex flex-col gap-2">
               <a
                 href={`mailto:${f.email}`}
                 data-testid="footer-email"
-                style={{ color: "#FFFFFF", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                style={{ color: "rgba(255,255,255,0.70)", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
               >
                 {f.email}
               </a>
-              <span style={{ width: 1, height: 12, background: "rgba(255,255,255,0.30)", flexShrink: 0 }} />
               <a
                 href={`tel:${f.phone}`}
                 data-testid="footer-phone-dubai"
-                style={{ color: "#FFFFFF", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                style={{ color: "rgba(255,255,255,0.70)", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
               >
-                {f.phone}
+                {f.phone} <span style={{ color: "rgba(255,255,255,0.30)", fontSize: 10, marginLeft: 4 }}>Dubai</span>
               </a>
               <a
                 href="tel:+33180270067"
                 data-testid="footer-phone-paris"
-                style={{ color: "#FFFFFF", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                style={{ color: "rgba(255,255,255,0.70)", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
               >
-                +33 1 80 27 00 67
+                +33 1 80 27 00 67 <span style={{ color: "rgba(255,255,255,0.30)", fontSize: 10, marginLeft: 4 }}>Paris</span>
               </a>
             </div>
             {/* Social icons */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4" style={{ marginTop: 8 }}>
               {[
                 { href: "https://facebook.com", Icon: SiFacebook,  label: "Facebook"  },
                 { href: "https://instagram.com", Icon: SiInstagram, label: "Instagram" },
@@ -2065,9 +2107,9 @@ function FooterV15() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: "rgba(255,255,255,0.45)", transition: "color 0.2s", display: "flex" }}
+                  style={{ color: "rgba(255,255,255,0.40)", transition: "color 0.2s", display: "flex" }}
                   onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.40)")}
                 >
                   <Icon size={15} />
                 </a>
