@@ -325,7 +325,7 @@ function HeroV15() {
         className="hidden lg:grid absolute bottom-0 left-0 right-0 z-10"
         style={{
           gridTemplateColumns: "55% 45%",
-          background: "#10121C",
+          background: "#151515",
           minHeight: 280,
         }}
         initial={{ opacity: 0, y: 20 }}
@@ -834,7 +834,7 @@ function DifferentiatorsV15() {
       data-header-theme="light"
       data-testid="differentiators-section"
       className="v2-snap-section"
-      style={{ background: "#08090F" }}
+      style={{ background: "#151515" }}
       onMouseLeave={() => setPaused(false)}
     >
       {/* ════════════════════════════════════════════════════════════
@@ -1701,7 +1701,7 @@ function ContactFormV15() {
       data-header-theme="light"
       data-testid="contact-section"
       className="v2-snap-section"
-      style={{ background: "#08090F", display: "flex", flexDirection: "column", justifyContent: "center" }}
+      style={{ background: "#151515", display: "flex", flexDirection: "column", justifyContent: "center" }}
     >
       <div className="max-w-[1400px] mx-auto px-8 w-full" style={{ paddingTop: 80, paddingBottom: 80 }}>
 
@@ -1777,7 +1777,7 @@ function ContactFormV15() {
                     <input
                       type="text" name="name" required value={form.name} onChange={handleChange}
                       placeholder={c.namePlaceholder} data-testid="input-name"
-                      style={{ background: "#10121C", border: "1px solid rgba(255,255,255,0.12)", color: "#FFFFFF", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      style={{ background: "#1C1C1C", border: "1px solid rgba(255,255,255,0.12)", color: "#FFFFFF", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                       className="placeholder-[rgba(255,255,255,0.28)]"
                       onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.65)"}
                       onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)"}
@@ -1785,7 +1785,7 @@ function ContactFormV15() {
                     <input
                       type="email" name="email" required value={form.email} onChange={handleChange}
                       placeholder={c.emailPlaceholder} data-testid="input-email"
-                      style={{ background: "#10121C", border: "1px solid rgba(255,255,255,0.12)", color: "#FFFFFF", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      style={{ background: "#1C1C1C", border: "1px solid rgba(255,255,255,0.12)", color: "#FFFFFF", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                       className="placeholder-[rgba(255,255,255,0.28)]"
                       onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.65)"}
                       onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)"}
@@ -1795,7 +1795,7 @@ function ContactFormV15() {
                     <select
                       name="subject" required value={form.subject} onChange={handleChange}
                       data-testid="select-subject"
-                      style={{ width: "100%", background: "#10121C", border: "1px solid rgba(255,255,255,0.12)", color: form.subject ? "#FFFFFF" : "rgba(255,255,255,0.28)", padding: "13px 40px 13px 16px", fontSize: 14, outline: "none", appearance: "none", cursor: "pointer", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      style={{ width: "100%", background: "#1C1C1C", border: "1px solid rgba(255,255,255,0.12)", color: form.subject ? "#FFFFFF" : "rgba(255,255,255,0.28)", padding: "13px 40px 13px 16px", fontSize: 14, outline: "none", appearance: "none", cursor: "pointer", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                       onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.65)"}
                       onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)"}
                     >
@@ -1811,7 +1811,7 @@ function ContactFormV15() {
                   <textarea
                     name="message" required rows={5} value={form.message} onChange={handleChange}
                     placeholder={c.messagePlaceholder} data-testid="input-message"
-                    style={{ background: "#10121C", border: "1px solid rgba(255,255,255,0.12)", color: "#FFFFFF", padding: "13px 16px", fontSize: 14, outline: "none", resize: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    style={{ background: "#1C1C1C", border: "1px solid rgba(255,255,255,0.12)", color: "#FFFFFF", padding: "13px 16px", fontSize: 14, outline: "none", resize: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                     className="placeholder-[rgba(255,255,255,0.28)]"
                     onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.65)"}
                     onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)"}
@@ -2248,7 +2248,7 @@ function PracticeAreasV18() {
             alignItems: "flex-end",
             justifyContent: "space-between",
             flexShrink: 0,
-            background: "#000000",
+            background: "#151515",
             borderBottom: "1px solid rgba(255,255,255,0.08)",
           }}
         >
