@@ -2260,15 +2260,13 @@ function PracticeAreasV18() {
                       style={{
                         position: "absolute",
                         bottom: 28,
-                        left: 0,
-                        right: 0,
+                        left: 12,
+                        right: 12,
                         display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "flex-start",
-                        gap: 8,
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        gap: 6,
                         zIndex: 2,
-                        padding: "0 12px",
                       }}
                     >
                       <span style={{
@@ -2277,7 +2275,6 @@ function PracticeAreasV18() {
                         fontWeight: 700,
                         letterSpacing: "0.24em",
                         color: "rgba(255,255,255,0.38)",
-                        flexShrink: 0,
                       }}>
                         {item.num}
                       </span>
@@ -2291,6 +2288,7 @@ function PracticeAreasV18() {
                           overflow: "hidden",
                           textOverflow: "ellipsis",
                           whiteSpace: "nowrap",
+                          maxWidth: "100%",
                         }}
                       >
                         {item.short}
