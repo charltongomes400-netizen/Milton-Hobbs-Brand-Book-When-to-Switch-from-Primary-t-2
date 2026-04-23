@@ -510,37 +510,6 @@ function HeroV15() {
           </AnimatePresence>
         </div>
       </motion.div>
-      {/* ── Category strip — sits above the white bar, desktop only ── */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          className="hidden lg:flex absolute right-10 z-10 items-center gap-0"
-          style={{ bottom: "calc(280px + 24px)" }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          data-testid="hero-category-strip"
-        >
-          {otherCategories.map(({ label, index: idx }, i) => (
-            <button
-              key={i}
-              data-testid={`hero-cat-${i}`}
-              onClick={() => goTo(idx)}
-              style={{ background: "none", border: "none", cursor: "pointer", outline: "none", display: "flex", alignItems: "center", gap: 0, padding: 0 }}
-            >
-              {i > 0 && <div style={{ width: 1, height: 10, background: "rgba(255,255,255,0.18)", margin: "0 16px" }} />}
-              <span
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 8, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase", color: "rgba(255,255,255,0.30)", transition: "color 0.2s", whiteSpace: "nowrap" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.75)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.30)"; }}
-              >
-                {label}
-              </span>
-            </button>
-          ))}
-        </motion.div>
-      </AnimatePresence>
       {/* ════════════════════════════════════════════════════════════
           MOBILE — full-bleed dark gradient, bottom-pinned content
       ════════════════════════════════════════════════════════════ */}
