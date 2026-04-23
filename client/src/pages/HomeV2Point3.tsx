@@ -1353,11 +1353,11 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
       style={{
         flexShrink: 0,
         width: 280,
-        background: lifted ? "#14172A" : "#10121C",
-        border: `1px solid ${isOpen ? "#7B8FF5" : hovering ? "rgba(123,143,245,0.45)" : "rgba(255,255,255,0.10)"}`,
+        background: lifted ? "#FCFCFC" : "#F9F9F9",
+        border: `1px solid ${isOpen ? "#001B8F" : hovering ? "rgba(0,27,143,0.45)" : "rgba(132,132,132,0.2)"}`,
         boxShadow: lifted
-          ? "0 8px 28px rgba(0,0,0,0.40), 0 2px 8px rgba(0,0,0,0.20)"
-          : "0 2px 8px rgba(0,0,0,0.20), 0 1px 3px rgba(0,0,0,0.10)",
+          ? "0 8px 28px rgba(0,20,137,0.13), 0 2px 8px rgba(0,20,137,0.06)"
+          : "0 2px 8px rgba(0,20,137,0.06), 0 1px 3px rgba(0,20,137,0.03)",
         transform: lifted ? "translateY(-4px)" : "translateY(0)",
         transition: "transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease",
         cursor: "pointer",
@@ -1375,7 +1375,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
           left: 20,
           width: 56,
           height: 3,
-          background: isOpen ? "#7B8FF5" : hovering ? "rgba(123,143,245,0.45)" : "rgba(123,143,245,0.15)",
+          background: isOpen ? "#001B8F" : hovering ? "rgba(0,27,143,0.45)" : "rgba(0,27,143,0.15)",
           transition: "background 0.22s ease",
         }}
       />
@@ -1384,7 +1384,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
       <span
         style={{
           display: "block",
-          color: isOpen || hovering ? "#7B8FF5" : "rgba(123,143,245,0.6)",
+          color: isOpen || hovering ? "#001B8F" : "rgba(0,27,143,0.6)",
           fontSize: 11,
           fontFamily: "'Satoshi', 'Plus Jakarta Sans', sans-serif",
           fontWeight: 700,
@@ -1401,7 +1401,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
       <h3
         className="font-heading"
         style={{
-          color: "#FFFFFF",
+          color: "#001B8F",
           fontWeight: 700,
           fontSize: "clamp(0.88rem, 1.05vw, 1rem)",
           lineHeight: 1.35,
@@ -1414,7 +1414,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
       {/* One-liner brief */}
       <p
         style={{
-          color: "rgba(255,255,255,0.45)",
+          color: "#848484",
           fontSize: "0.775rem",
           lineHeight: 1.65,
         }}
@@ -1431,7 +1431,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
             left: 0,
             right: 0,
             height: 2,
-            background: "#7B8FF5",
+            background: "#001B8F",
           }}
         />
       )}
@@ -1458,7 +1458,7 @@ function CaseFileStripV18() {
       id="expertise"
       data-testid="practice-areas-section"
       className="py-24 overflow-hidden"
-      style={{ background: "#08090F" }}
+      style={{ background: "#F9F9F9" }}
     >
       <div className="max-w-[1400px] mx-auto px-8 w-full">
 
@@ -1472,13 +1472,13 @@ function CaseFileStripV18() {
         >
           <p
             className="uppercase font-medium mb-3"
-            style={{ color: "#7B8FF5", fontSize: 16, letterSpacing: "0.3em", paddingLeft: "calc(3px + 1rem)" }}
+            style={{ color: "#001B8F", fontSize: 16, letterSpacing: "0.3em", paddingLeft: "calc(3px + 1rem)" }}
           >
             Our Expertise
           </p>
           <h2
-            className="font-heading font-semibold text-white leading-[1.25]"
-            style={{ fontSize: "clamp(1rem, 1.8vw, 1.375rem)", paddingLeft: "calc(3px + 1rem)" }}
+            className="font-heading font-semibold leading-[1.25]"
+            style={{ color: "#000000", fontSize: "clamp(1rem, 1.8vw, 1.375rem)", paddingLeft: "calc(3px + 1rem)" }}
           >
             Areas of Practice
           </h2>
@@ -1502,14 +1502,14 @@ function CaseFileStripV18() {
               left: -20,
               top: "50%",
               transform: "translateY(-50%)",
-              background: "#001489",
+              background: "#001B8F",
               borderRadius: "50%",
-              boxShadow: "0 2px 12px rgba(0,20,137,0.22)",
+              boxShadow: "0 2px 12px rgba(0,27,143,0.22)",
               border: "none",
               cursor: "pointer",
             }}
-            onMouseEnter={e => (e.currentTarget.style.background = "#192B94")}
-            onMouseLeave={e => (e.currentTarget.style.background = "#001489")}
+            onMouseEnter={e => (e.currentTarget.style.background = "#001489")}
+            onMouseLeave={e => (e.currentTarget.style.background = "#001B8F")}
           >
             <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
               <path d="M9 2L4 7l5 5" stroke="#FFFFFF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -1547,14 +1547,14 @@ function CaseFileStripV18() {
               right: -20,
               top: "50%",
               transform: "translateY(-50%)",
-              background: "#001489",
+              background: "#001B8F",
               borderRadius: "50%",
-              boxShadow: "0 2px 12px rgba(0,20,137,0.22)",
+              boxShadow: "0 2px 12px rgba(0,27,143,0.22)",
               border: "none",
               cursor: "pointer",
             }}
-            onMouseEnter={e => (e.currentTarget.style.background = "#192B94")}
-            onMouseLeave={e => (e.currentTarget.style.background = "#001489")}
+            onMouseEnter={e => (e.currentTarget.style.background = "#001489")}
+            onMouseLeave={e => (e.currentTarget.style.background = "#001B8F")}
           >
             <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
               <path d="M5 2l5 5-5 5" stroke="#FFFFFF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -1577,8 +1577,8 @@ function CaseFileStripV18() {
                 data-testid="case-file-panel"
                 className="grid grid-cols-1 md:grid-cols-[1fr_300px]"
                 style={{
-                  background: "#001489",
-                  borderTop: "2px solid #4A58AA",
+                  background: "#001B8F",
+                  borderTop: "2px solid rgba(255,255,255,0.15)",
                 }}
               >
                 {/* Text content */}
