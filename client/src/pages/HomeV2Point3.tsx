@@ -1731,7 +1731,7 @@ function ContactFormV15() {
             >
               {c.headline}
             </h2>
-            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.60)", fontSize: 15, lineHeight: 1.78, maxWidth: 440 }}>
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#FFFFFF", fontSize: 15, lineHeight: 1.78, maxWidth: 440 }}>
               {c.subtext}
             </p>
           </div>
