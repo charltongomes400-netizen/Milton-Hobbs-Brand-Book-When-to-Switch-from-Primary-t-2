@@ -51,8 +51,8 @@ function HeaderV15() {
   const mainLinks = navLinks.filter(l => l.href !== "#contact");
   const contactLink = navLinks.find(l => l.href === "#contact")!;
 
-  const textCol   = "rgba(0,20,137,0.55)";
-  const textHover = "#001489";
+  const textCol   = "rgba(255,255,255,0.60)";
+  const textHover = "#FFFFFF";
 
   return (
     <motion.header
@@ -62,8 +62,8 @@ function HeaderV15() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: "#FFFFFF",
-        borderBottom: "1px solid rgba(0,20,137,0.08)",
+        background: "#08090F",
+        borderBottom: "1px solid rgba(255,255,255,0.07)",
       }}
     >
       <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 92 }}>
@@ -116,28 +116,28 @@ function HeaderV15() {
             <button
               onClick={() => setLang("EN")}
               data-testid="lang-en"
-              style={{ color: lang === "EN" ? textHover : "rgba(0,20,137,0.28)", transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+              style={{ color: lang === "EN" ? textHover : "rgba(255,255,255,0.28)", transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
             >EN</button>
-            <span style={{ color: "rgba(0,20,137,0.15)", margin: "0 8px", fontWeight: 300, fontSize: 11 }}>|</span>
+            <span style={{ color: "rgba(255,255,255,0.15)", margin: "0 8px", fontWeight: 300, fontSize: 11 }}>|</span>
             <button
               onClick={() => setLang("FR")}
               data-testid="lang-fr"
-              style={{ color: lang === "FR" ? textHover : "rgba(0,20,137,0.28)", transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+              style={{ color: lang === "FR" ? textHover : "rgba(255,255,255,0.28)", transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
             >FR</button>
           </div>
 
           {/* Thin divider */}
-          <div style={{ width: 1, height: 16, background: "rgba(0,20,137,0.12)" }} />
+          <div style={{ width: 1, height: 16, background: "rgba(255,255,255,0.12)" }} />
 
-          {/* Contact — solid blue */}
+          {/* Contact — outline white */}
           <a
             href={contactLink.href}
             data-testid="nav-link-contact"
             className="inline-flex items-center whitespace-nowrap"
             onClick={e => { e.preventDefault(); snapScrollTo(contactLink.href); }}
             style={{
-              border: "1px solid #001489",
-              color: "#001489",
+              border: "1px solid rgba(255,255,255,0.45)",
+              color: "#FFFFFF",
               background: "transparent",
               padding: "9px 22px",
               fontSize: 10,
@@ -150,13 +150,13 @@ function HeaderV15() {
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = "#001489";
-              el.style.color = "#FFFFFF";
+              el.style.background = "#FFFFFF";
+              el.style.color = "#08090F";
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement;
               el.style.background = "transparent";
-              el.style.color = "#001489";
+              el.style.color = "#FFFFFF";
             }}
           >
             {contactLink.label}
@@ -170,9 +170,9 @@ function HeaderV15() {
           className="lg:hidden flex flex-col gap-[5px] w-8 h-8 items-center justify-center focus:outline-none"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
-          <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "rotate-45 translate-y-[3px]" : ""}`} />
-          <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 ${mobileOpen ? "opacity-0 scale-x-0" : ""}`} />
-          <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "-rotate-45 -translate-y-[3px]" : ""}`} />
+          <span style={{ background: "#FFFFFF" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "rotate-45 translate-y-[3px]" : ""}`} />
+          <span style={{ background: "#FFFFFF" }} className={`block w-5 h-px transition-all duration-300 ${mobileOpen ? "opacity-0 scale-x-0" : ""}`} />
+          <span style={{ background: "#FFFFFF" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "-rotate-45 -translate-y-[3px]" : ""}`} />
         </button>
 
       </div>
@@ -323,7 +323,7 @@ function HeroV15() {
         className="hidden lg:grid absolute bottom-0 left-0 right-0 z-10"
         style={{
           gridTemplateColumns: "55% 45%",
-          background: "#FFFFFF",
+          background: "#10121C",
           minHeight: 280,
         }}
         initial={{ opacity: 0, y: 20 }}
@@ -355,7 +355,7 @@ function HeroV15() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            borderRight: "1px solid rgba(0,20,137,0.07)",
+            borderRight: "1px solid rgba(255,255,255,0.07)",
             paddingRight: "8%",
           }}
         >
@@ -369,10 +369,10 @@ function HeroV15() {
             >
               {/* Category eyebrow */}
               <div className="flex items-center gap-3 mb-5" data-testid="hero-eyebrow">
-                <div style={{ width: 20, height: 1.5, background: "#4A58AA", flexShrink: 0 }} />
+                <div style={{ width: 20, height: 1.5, background: "#7B8FF5", flexShrink: 0 }} />
                 <p style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  color: "#4A58AA",
+                  color: "#7B8FF5",
                   fontSize: 12,
                   fontWeight: 700,
                   letterSpacing: "0.40em",
@@ -390,7 +390,7 @@ function HeroV15() {
                   fontSize: "clamp(1.75rem, 3.6vw, 3.25rem)",
                   lineHeight: 1.05,
                   letterSpacing: "-0.025em",
-                  color: "#001489",
+                  color: "#FFFFFF",
                   maxWidth: "20ch",
                 }}
               >
@@ -417,7 +417,7 @@ function HeroV15() {
                 style={{
                   width: i === currentIndex ? 28 : 7,
                   height: 2,
-                  backgroundColor: i === currentIndex ? "#001489" : "rgba(0,20,137,0.18)",
+                  backgroundColor: i === currentIndex ? "#FFFFFF" : "rgba(255,255,255,0.18)",
                 }}
               />
             ))}
@@ -450,7 +450,7 @@ function HeroV15() {
                   fontWeight: 700,
                   letterSpacing: "0.28em",
                   textTransform: "uppercase",
-                  color: "#848484",
+                  color: "rgba(255,255,255,0.40)",
                   marginBottom: 20,
                 }}
                 className="text-[12px]">
@@ -458,12 +458,12 @@ function HeroV15() {
               </p>
 
               {/* Thin rule */}
-              <div style={{ height: 1, background: "rgba(0,20,137,0.07)", marginBottom: 20 }} />
+              <div style={{ height: 1, background: "rgba(255,255,255,0.08)", marginBottom: 20 }} />
 
               {/* Excerpt */}
               <p style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                color: "#000000",
+                color: "rgba(255,255,255,0.65)",
                 fontSize: 14,
                 lineHeight: 1.78,
                 maxWidth: "38ch",
@@ -478,8 +478,8 @@ function HeroV15() {
                 data-testid="hero-read-link"
                 className="inline-flex items-center gap-2.5 whitespace-nowrap"
                 style={{
-                  border: "1px solid #001489",
-                  color: "#001489",
+                  border: "1px solid rgba(255,255,255,0.40)",
+                  color: "#FFFFFF",
                   background: "transparent",
                   padding: "9px 22px",
                   fontSize: 10,
@@ -493,13 +493,13 @@ function HeroV15() {
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLElement;
-                  el.style.background = "#001489";
-                  el.style.color = "#FFFFFF";
+                  el.style.background = "#FFFFFF";
+                  el.style.color = "#08090F";
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLElement;
                   el.style.background = "transparent";
-                  el.style.color = "#001489";
+                  el.style.color = "#FFFFFF";
                 }}
               >
                 {ins.read}
@@ -832,7 +832,7 @@ function DifferentiatorsV15() {
       data-header-theme="light"
       data-testid="differentiators-section"
       className="v2-snap-section"
-      style={{ background: "#FFFFFF" }}
+      style={{ background: "#08090F" }}
       onMouseLeave={() => setPaused(false)}
     >
       {/* ════════════════════════════════════════════════════════════
@@ -851,7 +851,7 @@ function DifferentiatorsV15() {
             flexDirection: "column",
             justifyContent: "center",
             padding: "80px 72px 80px 64px",
-            borderRight: "1px solid #E8EDF5",
+            borderRight: "1px solid rgba(255,255,255,0.07)",
           }}
         >
           {/* Eyebrow */}
@@ -862,7 +862,7 @@ function DifferentiatorsV15() {
               fontWeight: 700,
               letterSpacing: "0.40em",
               textTransform: "uppercase",
-              color: "#4A58AA",
+              color: "#7B8FF5",
               marginBottom: 20,
             }}>
             {d.eyebrow}
@@ -870,7 +870,7 @@ function DifferentiatorsV15() {
 
           {/* Headline */}
           <h2
-            className="font-heading font-bold text-[#001489]"
+            className="font-heading font-bold text-white"
             style={{
               fontSize: "clamp(2rem, 3.2vw, 3rem)",
               lineHeight: 1.06,
@@ -882,14 +882,14 @@ function DifferentiatorsV15() {
           </h2>
 
           {/* ── Pillar rows ──────────────────────────────────────────── */}
-          <div style={{ borderTop: "1px solid #E8EDF5" }}>
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
             {d.cards.map((card, i) => {
               const isActive = active === i;
               return (
                 <div
                   key={i}
                   data-testid={`diff-row-${i}`}
-                  style={{ borderBottom: "1px solid #E8EDF5", position: "relative" }}
+                  style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", position: "relative" }}
                 >
                   {/* Active left accent bar */}
                   <motion.div
@@ -899,7 +899,7 @@ function DifferentiatorsV15() {
                       top: 0,
                       bottom: 0,
                       width: 2,
-                      background: "#001489",
+                      background: "#FFFFFF",
                       transformOrigin: "top",
                     }}
                     animate={{ scaleY: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
@@ -931,7 +931,7 @@ function DifferentiatorsV15() {
                         fontSize: 9,
                         fontWeight: 700,
                         letterSpacing: "0.30em",
-                        color: isActive ? "#4A58AA" : "rgba(74,88,170,0.35)",
+                        color: isActive ? "#7B8FF5" : "rgba(255,255,255,0.25)",
                         flexShrink: 0,
                         transition: "color 0.3s",
                         minWidth: 22,
@@ -947,7 +947,7 @@ function DifferentiatorsV15() {
                         fontSize: "clamp(1.25rem, 2vw, 1.75rem)",
                         lineHeight: 1.15,
                         letterSpacing: "-0.02em",
-                        color: isActive ? "#001489" : "rgba(0,20,137,0.28)",
+                        color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.28)",
                         flex: 1,
                         transition: "color 0.3s",
                       }}
@@ -962,7 +962,7 @@ function DifferentiatorsV15() {
                       style={{ flexShrink: 0 }}
                     >
                       <svg width="16" height="16" fill="none" viewBox="0 0 16 16">
-                        <path d="M3 8h10M8 3l5 5-5 5" stroke="#001489" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M3 8h10M8 3l5 5-5 5" stroke="#FFFFFF" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </motion.div>
                   </button>
@@ -1003,7 +1003,7 @@ function DifferentiatorsV15() {
                           transition={{ duration: 0.35, delay: 0.1 }}
                           style={{
                             fontFamily: "'Plus Jakarta Sans', sans-serif",
-                            color: "#000000",
+                            color: "rgba(255,255,255,0.60)",
                             fontSize: "0.9375rem",
                             lineHeight: 1.82,
                             padding: "0 0 28px 42px",
@@ -1027,27 +1027,27 @@ function DifferentiatorsV15() {
               data-testid="diff-cta"
               className="inline-flex items-center gap-3"
               style={{
-                color: "#001489",
+                color: "#FFFFFF",
                 fontSize: 9,
                 fontWeight: 700,
                 letterSpacing: "0.28em",
                 textTransform: "uppercase",
                 textDecoration: "none",
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                border: "1px solid #001489",
+                border: "1px solid rgba(255,255,255,0.40)",
                 padding: "13px 28px",
                 background: "transparent",
                 transition: "background 0.25s, color 0.25s",
               }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.background = "#001489";
-                el.style.color = "#FFFFFF";
+                el.style.background = "#FFFFFF";
+                el.style.color = "#08090F";
               }}
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLElement;
                 el.style.background = "transparent";
-                el.style.color = "#001489";
+                el.style.color = "#FFFFFF";
               }}
             >
               <span>{d.learnMore}</span>
@@ -1165,14 +1165,14 @@ function DifferentiatorsV15() {
             fontWeight: 700,
             letterSpacing: "0.40em",
             textTransform: "uppercase",
-            color: "#4A58AA",
+            color: "#7B8FF5",
             marginBottom: 16,
           }}
         >
           {d.eyebrow}
         </p>
         <h2
-          className="font-heading font-bold text-[#001489]"
+          className="font-heading font-bold text-white"
           style={{
             fontSize: "clamp(1.75rem, 7vw, 2.25rem)",
             lineHeight: 1.1,
@@ -1184,11 +1184,11 @@ function DifferentiatorsV15() {
         </h2>
 
         {/* Pillar accordion */}
-        <div style={{ borderTop: "1px solid #E8EDF5" }}>
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
           {d.cards.map((card, i) => {
             const isActive = active === i;
             return (
-              <div key={i} style={{ borderBottom: "1px solid #E8EDF5" }}>
+              <div key={i} style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
                 <button
                   onClick={() => { setActive(i); setPaused(true); }}
                   data-testid={`diff-mobile-${i}`}
@@ -1205,10 +1205,10 @@ function DifferentiatorsV15() {
                     outline: "none",
                   }}
                 >
-                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", color: "#4A58AA", flexShrink: 0 }}>
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", color: "#7B8FF5", flexShrink: 0 }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="font-heading font-bold flex-1" style={{ fontSize: "1.05rem", lineHeight: 1.2, color: isActive ? "#001489" : "rgba(0,20,137,0.45)", transition: "color 0.25s" }}>
+                  <span className="font-heading font-bold flex-1" style={{ fontSize: "1.05rem", lineHeight: 1.2, color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.45)", transition: "color 0.25s" }}>
                     {card.title}
                   </span>
                   <motion.svg
@@ -1217,7 +1217,7 @@ function DifferentiatorsV15() {
                     width="16" height="16" fill="none" viewBox="0 0 16 16"
                     style={{ flexShrink: 0 }}
                   >
-                    <path d="M8 3v10M3 8h10" stroke="#001489" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M8 3v10M3 8h10" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
                   </motion.svg>
                 </button>
                 <AnimatePresence initial={false}>
@@ -1229,7 +1229,7 @@ function DifferentiatorsV15() {
                       transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                       style={{ overflow: "hidden" }}
                     >
-                      <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: "0.9rem", lineHeight: 1.8, paddingBottom: 24 }}>
+                      <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.60)", fontSize: "0.9rem", lineHeight: 1.8, paddingBottom: 24 }}>
                         {card.description}
                       </p>
                     </motion.div>
@@ -1249,27 +1249,27 @@ function DifferentiatorsV15() {
               display: "inline-flex",
               alignItems: "center",
               gap: 10,
-              color: "#001489",
+              color: "#FFFFFF",
               fontSize: 9,
               fontWeight: 700,
               letterSpacing: "0.28em",
               textTransform: "uppercase",
               textDecoration: "none",
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              border: "1px solid #001489",
+              border: "1px solid rgba(255,255,255,0.40)",
               padding: "13px 24px",
               background: "transparent",
               transition: "background 0.25s, color 0.25s",
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = "#001489";
-              el.style.color = "#FFFFFF";
+              el.style.background = "#FFFFFF";
+              el.style.color = "#08090F";
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement;
               el.style.background = "transparent";
-              el.style.color = "#001489";
+              el.style.color = "#FFFFFF";
             }}
           >
             <span>{d.learnMore}</span>
@@ -1351,11 +1351,11 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
       style={{
         flexShrink: 0,
         width: 280,
-        background: lifted ? "#FCFCFC" : "#F9F9F9",
-        border: `1px solid ${isOpen ? "#4A58AA" : hovering ? "rgba(74,88,170,0.45)" : "rgba(132,132,132,0.2)"}`,
+        background: lifted ? "#14172A" : "#10121C",
+        border: `1px solid ${isOpen ? "#7B8FF5" : hovering ? "rgba(123,143,245,0.45)" : "rgba(255,255,255,0.10)"}`,
         boxShadow: lifted
-          ? "0 8px 28px rgba(0,20,137,0.13), 0 2px 8px rgba(0,20,137,0.06)"
-          : "0 2px 8px rgba(0,20,137,0.06), 0 1px 3px rgba(0,20,137,0.03)",
+          ? "0 8px 28px rgba(0,0,0,0.40), 0 2px 8px rgba(0,0,0,0.20)"
+          : "0 2px 8px rgba(0,0,0,0.20), 0 1px 3px rgba(0,0,0,0.10)",
         transform: lifted ? "translateY(-4px)" : "translateY(0)",
         transition: "transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease",
         cursor: "pointer",
@@ -1373,7 +1373,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
           left: 20,
           width: 56,
           height: 3,
-          background: isOpen ? "#4A58AA" : hovering ? "rgba(74,88,170,0.45)" : "rgba(74,88,170,0.15)",
+          background: isOpen ? "#7B8FF5" : hovering ? "rgba(123,143,245,0.45)" : "rgba(123,143,245,0.15)",
           transition: "background 0.22s ease",
         }}
       />
@@ -1382,7 +1382,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
       <span
         style={{
           display: "block",
-          color: isOpen || hovering ? "#4A58AA" : "rgba(74,88,170,0.6)",
+          color: isOpen || hovering ? "#7B8FF5" : "rgba(123,143,245,0.6)",
           fontSize: 11,
           fontFamily: "'Satoshi', 'Plus Jakarta Sans', sans-serif",
           fontWeight: 700,
@@ -1399,7 +1399,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
       <h3
         className="font-heading"
         style={{
-          color: "#001489",
+          color: "#FFFFFF",
           fontWeight: 700,
           fontSize: "clamp(0.88rem, 1.05vw, 1rem)",
           lineHeight: 1.35,
@@ -1412,7 +1412,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
       {/* One-liner brief */}
       <p
         style={{
-          color: "#848484",
+          color: "rgba(255,255,255,0.45)",
           fontSize: "0.775rem",
           lineHeight: 1.65,
         }}
@@ -1429,7 +1429,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
             left: 0,
             right: 0,
             height: 2,
-            background: "#4A58AA",
+            background: "#7B8FF5",
           }}
         />
       )}
@@ -1456,7 +1456,7 @@ function CaseFileStripV18() {
       id="expertise"
       data-testid="practice-areas-section"
       className="py-24 overflow-hidden"
-      style={{ background: "#F9F9F9" }}
+      style={{ background: "#08090F" }}
     >
       <div className="max-w-[1400px] mx-auto px-8 w-full">
 
@@ -1470,12 +1470,12 @@ function CaseFileStripV18() {
         >
           <p
             className="uppercase font-medium mb-3"
-            style={{ color: "#4A58AA", fontSize: 16, letterSpacing: "0.3em", paddingLeft: "calc(3px + 1rem)" }}
+            style={{ color: "#7B8FF5", fontSize: 16, letterSpacing: "0.3em", paddingLeft: "calc(3px + 1rem)" }}
           >
             Our Expertise
           </p>
           <h2
-            className="font-heading font-semibold text-[#001489] leading-[1.25]"
+            className="font-heading font-semibold text-white leading-[1.25]"
             style={{ fontSize: "clamp(1rem, 1.8vw, 1.375rem)", paddingLeft: "calc(3px + 1rem)" }}
           >
             Areas of Practice
@@ -1699,7 +1699,7 @@ function ContactFormV15() {
       data-header-theme="light"
       data-testid="contact-section"
       className="v2-snap-section"
-      style={{ background: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "center" }}
+      style={{ background: "#08090F", display: "flex", flexDirection: "column", justifyContent: "center" }}
     >
       <div className="max-w-[1400px] mx-auto px-8 w-full" style={{ paddingTop: 80, paddingBottom: 80 }}>
 
@@ -1717,7 +1717,7 @@ function ContactFormV15() {
             fontWeight: 700,
             letterSpacing: "0.12em",
             textTransform: "uppercase",
-            color: "#4A58AA",
+            color: "#7B8FF5",
             marginBottom: 20,
           }}>
             {c.eyebrow}
@@ -1725,11 +1725,11 @@ function ContactFormV15() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-20 items-end">
             <h2
               className="font-heading font-bold"
-              style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#001489" }}
+              style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#FFFFFF" }}
             >
               {c.headline}
             </h2>
-            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 15, lineHeight: 1.78, maxWidth: 440 }}>
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.60)", fontSize: 15, lineHeight: 1.78, maxWidth: 440 }}>
               {c.subtext}
             </p>
           </div>
@@ -1742,7 +1742,7 @@ function ContactFormV15() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="grid grid-cols-1 lg:grid-cols-[7fr_4fr]"
-          style={{ borderTop: "1px solid rgba(0,20,137,0.10)" }}
+          style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
         >
           {/* ── Form — blue boxes ── */}
           <div style={{ paddingTop: 48, paddingRight: "clamp(0px, 5vw, 72px)", paddingBottom: 0 }}>
@@ -1755,19 +1755,19 @@ function ContactFormV15() {
                 className="flex flex-col gap-5"
                 style={{ minHeight: 360, justifyContent: "center" }}
               >
-                <div style={{ width: 52, height: 52, background: "#001489", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 8 }}>
+                <div style={{ width: 52, height: 52, background: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 8 }}>
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 20 20">
-                    <path d="M4 10l4 4 8-8" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M4 10l4 4 8-8" stroke="#08090F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <h3 className="font-heading font-bold" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)", color: "#001489" }}>
+                <h3 className="font-heading font-bold" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)", color: "#FFFFFF" }}>
                   {c.successTitle}
                 </h3>
-                <p style={{ color: "rgba(0,0,0,0.50)", fontSize: 14, lineHeight: 1.72 }}>{c.successText}</p>
+                <p style={{ color: "rgba(255,255,255,0.50)", fontSize: 14, lineHeight: 1.72 }}>{c.successText}</p>
               </motion.div>
             ) : (
               <div className="w-full">
-                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 32 }}>
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#7B8FF5", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 32 }}>
                   Send a Message
                 </p>
                 <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-3">
@@ -1775,44 +1775,44 @@ function ContactFormV15() {
                     <input
                       type="text" name="name" required value={form.name} onChange={handleChange}
                       placeholder={c.namePlaceholder} data-testid="input-name"
-                      style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                      className="placeholder-[rgba(0,0,0,0.30)]"
-                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
-                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
+                      style={{ background: "#10121C", border: "1px solid rgba(255,255,255,0.12)", color: "#FFFFFF", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      className="placeholder-[rgba(255,255,255,0.28)]"
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.65)"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)"}
                     />
                     <input
                       type="email" name="email" required value={form.email} onChange={handleChange}
                       placeholder={c.emailPlaceholder} data-testid="input-email"
-                      style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                      className="placeholder-[rgba(0,0,0,0.30)]"
-                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
-                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
+                      style={{ background: "#10121C", border: "1px solid rgba(255,255,255,0.12)", color: "#FFFFFF", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      className="placeholder-[rgba(255,255,255,0.28)]"
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.65)"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)"}
                     />
                   </div>
                   <div className="relative">
                     <select
                       name="subject" required value={form.subject} onChange={handleChange}
                       data-testid="select-subject"
-                      style={{ width: "100%", background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: form.subject ? "#0A0A1A" : "rgba(0,0,0,0.30)", padding: "13px 40px 13px 16px", fontSize: 14, outline: "none", appearance: "none", cursor: "pointer", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
-                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
+                      style={{ width: "100%", background: "#10121C", border: "1px solid rgba(255,255,255,0.12)", color: form.subject ? "#FFFFFF" : "rgba(255,255,255,0.28)", padding: "13px 40px 13px 16px", fontSize: 14, outline: "none", appearance: "none", cursor: "pointer", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.65)"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)"}
                     >
                       <option value="" disabled hidden>{c.subjectPlaceholder}</option>
                       {c.subjectOptions.map((opt, i) => (
                         <option key={i} value={opt}>{opt}</option>
                       ))}
                     </select>
-                    <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3" style={{ color: "rgba(0,20,137,0.40)" }} fill="none" viewBox="0 0 12 12">
+                    <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3" style={{ color: "rgba(255,255,255,0.40)" }} fill="none" viewBox="0 0 12 12">
                       <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                     </svg>
                   </div>
                   <textarea
                     name="message" required rows={5} value={form.message} onChange={handleChange}
                     placeholder={c.messagePlaceholder} data-testid="input-message"
-                    style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", resize: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                    className="placeholder-[rgba(0,0,0,0.30)]"
-                    onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
-                    onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
+                    style={{ background: "#10121C", border: "1px solid rgba(255,255,255,0.12)", color: "#FFFFFF", padding: "13px 16px", fontSize: 14, outline: "none", resize: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    className="placeholder-[rgba(255,255,255,0.28)]"
+                    onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.65)"}
+                    onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)"}
                   />
                   <div className="flex items-center gap-6 mt-2">
                     <button
@@ -1820,8 +1820,8 @@ function ContactFormV15() {
                       disabled={submitting}
                       data-testid="button-submit"
                       style={{
-                        background: "#001489",
-                        color: "#FFFFFF",
+                        background: "#FFFFFF",
+                        color: "#08090F",
                         border: "none",
                         padding: "15px 40px",
                         fontSize: 11,
@@ -1833,8 +1833,8 @@ function ContactFormV15() {
                         transition: "opacity 0.2s, background 0.2s",
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
                       }}
-                      onMouseEnter={e => { if (!submitting) (e.currentTarget as HTMLElement).style.background = "#0019A8"; }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#001489"; }}
+                      onMouseEnter={e => { if (!submitting) (e.currentTarget as HTMLElement).style.background = "#E8E8E8"; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#FFFFFF"; }}
                     >
                       {submitting ? (
                         <span className="flex items-center gap-2.5">
@@ -1853,7 +1853,7 @@ function ContactFormV15() {
                         </span>
                       )}
                     </button>
-                    <p style={{ color: "rgba(0,0,0,0.35)", fontSize: 12, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                    <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 12, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                       Typically replies within 24 hours
                     </p>
                   </div>
@@ -1867,63 +1867,63 @@ function ContactFormV15() {
             style={{
               paddingTop: 48,
               paddingLeft: "clamp(24px, 4vw, 56px)",
-              borderLeft: "1px solid rgba(0,20,137,0.10)",
+              borderLeft: "1px solid rgba(255,255,255,0.08)",
               display: "flex",
               flexDirection: "column",
               gap: 0,
             }}
           >
-            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 32 }}>
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#7B8FF5", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 32 }}>
               {c.officeLabel}
             </p>
 
             {/* Dubai */}
             <div style={{ marginBottom: 32 }}>
-              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
+              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#FFFFFF", marginBottom: 10 }}>
                 {c.dubaiLabel}
               </p>
               {f.dubaiAddr.map((line, i) => (
-                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
+                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.55)", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
               ))}
               <a
                 href="tel:+97145232421"
                 data-testid="contact-address-phone-dubai"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 13, textDecoration: "none", display: "inline-block", marginTop: 6 }}
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#FFFFFF", fontSize: 13, textDecoration: "none", display: "inline-block", marginTop: 6 }}
               >
                 +971 4 523 2421
               </a>
             </div>
 
-            <div style={{ height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 32 }} />
+            <div style={{ height: 1, background: "rgba(255,255,255,0.08)", marginBottom: 32 }} />
 
             {/* Paris */}
             <div style={{ marginBottom: 32 }}>
-              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
+              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#FFFFFF", marginBottom: 10 }}>
                 {c.parisLabel}
               </p>
               {f.parisAddr.map((line, i) => (
-                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
+                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.55)", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
               ))}
               <a
                 href="tel:+33180270067"
                 data-testid="contact-address-phone-paris"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 13, textDecoration: "none", display: "inline-block", marginTop: 6 }}
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#FFFFFF", fontSize: 13, textDecoration: "none", display: "inline-block", marginTop: 6 }}
               >
                 +33 1 80 27 00 67
               </a>
             </div>
 
-            <div style={{ height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 24 }} />
+            <div style={{ height: 1, background: "rgba(255,255,255,0.08)", marginBottom: 24 }} />
 
             {/* Email */}
             <div>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 8 }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#7B8FF5", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 8 }}>
                 Email
               </p>
               <a
                 href={`mailto:${f.email}`}
                 data-testid="contact-email"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 14, textDecoration: "none" }}
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#FFFFFF", fontSize: 14, textDecoration: "none" }}
               >
                 {f.email}
               </a>
