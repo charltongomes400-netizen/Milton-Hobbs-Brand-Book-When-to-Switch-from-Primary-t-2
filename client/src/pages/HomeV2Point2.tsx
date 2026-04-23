@@ -2017,11 +2017,11 @@ function FooterV15() {
           <div className="flex flex-col gap-4">
             <p style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: 9,
+              fontSize: 12,
               fontWeight: 700,
               letterSpacing: "0.34em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.30)",
+              color: "#FFFFFF",
               marginBottom: 4,
             }}>
               Navigation
@@ -2054,11 +2054,11 @@ function FooterV15() {
           <div className="flex flex-col gap-4">
             <p style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: 9,
+              fontSize: 12,
               fontWeight: 700,
               letterSpacing: "0.34em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.30)",
+              color: "#FFFFFF",
               marginBottom: 4,
             }}>
               Contact
