@@ -2194,8 +2194,8 @@ function PracticeAreasV18() {
                 onMouseEnter={() => { setActive(i); setPaused(true); }}
                 onClick={() => { setActive(i); setPaused(true); }}
                 style={{
-                  flex: isActive ? 5 : 0.65,
-                  transition: "flex 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+                  flex: isActive ? 5 : 0.7,
+                  transition: "flex 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                   position: "relative",
                   overflow: "hidden",
                   cursor: "pointer",
@@ -2249,23 +2249,23 @@ function PracticeAreasV18() {
                   />
                 )}
 
-                {/* COLLAPSED LABEL — vertical rotated text, bottom-center */}
+                {/* COLLAPSED LABEL — horizontal text, bottom-center */}
                 <AnimatePresence>
                   {!isActive && (
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      transition={{ duration: 0.22 }}
+                      transition={{ duration: 0.3 }}
                       style={{
                         position: "absolute",
                         bottom: 28,
-                        left: "50%",
-                        transform: "translateX(-50%)",
+                        left: 0,
+                        right: 0,
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
-                        gap: 10,
+                        gap: 6,
                         zIndex: 2,
                       }}
                     >
@@ -2273,22 +2273,23 @@ function PracticeAreasV18() {
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
                         fontSize: 8,
                         fontWeight: 700,
-                        letterSpacing: "0.30em",
+                        letterSpacing: "0.24em",
                         color: "rgba(255,255,255,0.38)",
-                        writingMode: "vertical-rl",
-                        transform: "rotate(180deg)",
+                        textAlign: "center",
                       }}>
                         {item.num}
                       </span>
                       <span
                         className="font-heading font-bold"
                         style={{
-                          fontSize: "0.72rem",
+                          fontSize: "0.65rem",
                           color: "rgba(255,255,255,0.55)",
-                          writingMode: "vertical-rl",
-                          transform: "rotate(180deg)",
-                          whiteSpace: "nowrap",
+                          textAlign: "center",
                           letterSpacing: "0.04em",
+                          lineHeight: 1.2,
+                          padding: "0 4px",
+                          wordBreak: "break-word",
+                          hyphens: "auto",
                         }}
                       >
                         {item.short}
