@@ -372,7 +372,7 @@ function HeroV15() {
                 <p style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   color: "#4A58AA",
-                  fontSize: 9,
+                  fontSize: 12,
                   fontWeight: 700,
                   letterSpacing: "0.40em",
                   textTransform: "uppercase",
