@@ -1916,9 +1916,7 @@ function ContactFormV15() {
               <a
                 href="tel:+97145232421"
                 data-testid="contact-address-phone-dubai"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(0,20,137,0.45)", fontSize: 13, textDecoration: "none", transition: "color 0.2s", display: "inline-block", marginTop: 6 }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#001489"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(0,20,137,0.45)"}
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 13, textDecoration: "none", display: "inline-block", marginTop: 6 }}
               >
                 +971 4 523 2421
               </a>
@@ -1953,9 +1951,7 @@ function ContactFormV15() {
               <a
                 href={`mailto:${f.email}`}
                 data-testid="contact-email"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(0,20,137,0.65)", fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = "#001489"}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = "rgba(0,20,137,0.65)"}
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 14, textDecoration: "none" }}
               >
                 {f.email}
               </a>
