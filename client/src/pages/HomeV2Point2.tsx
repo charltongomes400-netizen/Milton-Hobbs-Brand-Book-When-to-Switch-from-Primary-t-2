@@ -4,14 +4,14 @@ import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { articles } from "@/data/articles";
 import miltonHobbsLogo from "@assets/Milton_hobbs_logo_1775554832004.png";
 import miltonHobbsWordmark from "@assets/image_1776101259071.png";
-import imgCorp   from "@assets/sean-pollock-PhYq704ffdA-unsplash_1776241615811.jpg";
-import imgTax    from "@assets/phil-desforges-ow1mML1sOi0-unsplash_1776241615811.jpg";
-import imgBank   from "@assets/marc-olivier-jodoin--HIiNFXcbtQ-unsplash_1776241615811.jpg";
-import imgTech   from "@assets/donny-jiang-42gFAgdIUC8-unsplash_1776241615811.jpg";
-import imgIp     from "@assets/simone-hutsch-iDSfeuoxM0o-unsplash_1776241615811.jpg";
-import imgEstate from "@assets/alexander-abero-OypnYfdiQgg-unsplash_1776241615811.jpg";
-import imgEmploy from "@assets/daniele-colucci-Xt48I3ps6Pg-unsplash_1776241615811.jpg";
-import imgLitig  from "@assets/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
+import imgCorp   from "@assets/optimized/sean-pollock-PhYq704ffdA-unsplash_1776241615811.jpg";
+import imgTax    from "@assets/optimized/phil-desforges-ow1mML1sOi0-unsplash_1776241615811.jpg";
+import imgBank   from "@assets/optimized/marc-olivier-jodoin--HIiNFXcbtQ-unsplash_1776241615811.jpg";
+import imgTech   from "@assets/optimized/donny-jiang-42gFAgdIUC8-unsplash_1776241615811.jpg";
+import imgIp     from "@assets/optimized/simone-hutsch-iDSfeuoxM0o-unsplash_1776241615811.jpg";
+import imgEstate from "@assets/optimized/alexander-abero-OypnYfdiQgg-unsplash_1776241615811.jpg";
+import imgEmploy from "@assets/optimized/daniele-colucci-Xt48I3ps6Pg-unsplash_1776241615811.jpg";
+import imgLitig  from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
 import heroBg0 from "@assets/verne-ho-0LAJfSNa-xQ-unsplash_1775562755413.jpg";
 import heroBg1 from "@assets/tim-stief-dH6IjhWHNQQ-unsplash_1775562755413.jpg";
 import heroBg2 from "@assets/joakim-nadell-K67sBVqLLuw-unsplash_1775562755414.jpg";
@@ -2130,6 +2130,7 @@ function PracticeAreasV18() {
     EXPERTISE_ITEMS_V18.forEach(item => {
       const img = new Image();
       img.src = item.img;
+      if (img.decode) img.decode().catch(() => {});
     });
   }, []);
 
@@ -2231,6 +2232,8 @@ function PracticeAreasV18() {
                 <img
                   src={item.img}
                   alt={item.title}
+                  loading="eager"
+                  decoding="async"
                   style={{
                     position: "absolute",
                     inset: 0,
