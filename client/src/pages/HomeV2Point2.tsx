@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, animate } from "framer-motion";
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
+import { SiFacebook, SiInstagram, SiX, SiLinkedin, SiWhatsapp } from "react-icons/si";
 import { articles } from "@/data/articles";
 import miltonHobbsLogo from "@assets/Milton_hobbs_logo_1775554832004.png";
 import miltonHobbsWordmark from "@assets/image_1776101259071.png";
@@ -2069,6 +2070,30 @@ function FooterV15() {
                 <span style={{ color: "#FFFFFF", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>{o.label}</span>
                 <span style={{ color: "#FFFFFF", fontSize: 11, fontFamily: "'Plus Jakarta Sans', monospace", letterSpacing: "0.04em", minWidth: "6ch" }}>{o.time}</span>
               </div>
+            ))}
+          </div>
+
+          {/* Social icons */}
+          <div className="flex items-center gap-4">
+            {[
+              { href: "https://facebook.com", Icon: SiFacebook,  label: "Facebook"  },
+              { href: "https://instagram.com", Icon: SiInstagram, label: "Instagram" },
+              { href: "https://x.com",         Icon: SiX,         label: "X"         },
+              { href: "https://linkedin.com",  Icon: SiLinkedin,  label: "LinkedIn"  },
+              { href: "https://wa.me",         Icon: SiWhatsapp,  label: "WhatsApp"  },
+            ].map(({ href, Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                aria-label={label}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "rgba(255,255,255,0.45)", transition: "color 0.2s", display: "flex" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
+              >
+                <Icon size={14} />
+              </a>
             ))}
           </div>
 
