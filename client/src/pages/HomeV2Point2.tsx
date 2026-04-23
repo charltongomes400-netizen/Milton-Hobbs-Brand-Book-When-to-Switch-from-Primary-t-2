@@ -2109,6 +2109,22 @@ const PRACTICE_CYCLE_MS = 5000;
 function PracticeAreasV18() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handlePanelEnter = (i: number) => {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+    hoverTimer.current = setTimeout(() => {
+      setActive(i);
+      setPaused(true);
+    }, 120);
+  };
+
+  const handlePanelLeave = () => {
+    if (hoverTimer.current) {
+      clearTimeout(hoverTimer.current);
+      hoverTimer.current = null;
+    }
+  };
 
   useEffect(() => {
     if (paused) return;
@@ -2191,8 +2207,9 @@ function PracticeAreasV18() {
               <div
                 key={i}
                 data-testid={`expertise-item-${i}`}
-                onMouseEnter={() => { setActive(i); setPaused(true); }}
-                onClick={() => { setActive(i); setPaused(true); }}
+                onMouseEnter={() => handlePanelEnter(i)}
+                onMouseLeave={handlePanelLeave}
+                onClick={() => { handlePanelLeave(); setActive(i); setPaused(true); }}
                 style={{
                   flex: isActive ? 5 : 0.7,
                   transition: "flex 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
