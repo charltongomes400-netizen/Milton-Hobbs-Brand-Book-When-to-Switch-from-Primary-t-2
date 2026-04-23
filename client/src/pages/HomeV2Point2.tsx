@@ -2116,7 +2116,7 @@ function PracticeAreasV18() {
     hoverTimer.current = setTimeout(() => {
       setActive(i);
       setPaused(true);
-    }, 120);
+    }, 150);
   };
 
   const handlePanelLeave = () => {
@@ -2125,6 +2125,13 @@ function PracticeAreasV18() {
       hoverTimer.current = null;
     }
   };
+
+  useEffect(() => {
+    EXPERTISE_ITEMS_V18.forEach(item => {
+      const img = new Image();
+      img.src = item.img;
+    });
+  }, []);
 
   useEffect(() => {
     if (paused) return;
@@ -2230,6 +2237,7 @@ function PracticeAreasV18() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
+                    willChange: "transform",
                     transition: "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                     transform: isActive ? "scale(1.04)" : "scale(1)",
                   }}
