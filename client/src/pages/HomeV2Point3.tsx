@@ -371,10 +371,10 @@ function HeroV15() {
             >
               {/* Category eyebrow */}
               <div className="flex items-center gap-3 mb-5" data-testid="hero-eyebrow">
-                <div style={{ width: 20, height: 1.5, background: "#001489", flexShrink: 0 }} />
+                <div style={{ width: 20, height: 1.5, background: "#FFFFFF", flexShrink: 0 }} />
                 <p style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  color: "#001489",
+                  color: "#FFFFFF",
                   fontSize: 12,
                   fontWeight: 700,
                   letterSpacing: "0.40em",
@@ -864,7 +864,7 @@ function DifferentiatorsV15() {
               fontWeight: 700,
               letterSpacing: "0.40em",
               textTransform: "uppercase",
-              color: "#001489",
+              color: "#FFFFFF",
               marginBottom: 20,
             }}>
             {d.eyebrow}
@@ -1167,7 +1167,7 @@ function DifferentiatorsV15() {
             fontWeight: 700,
             letterSpacing: "0.40em",
             textTransform: "uppercase",
-            color: "#001489",
+            color: "#FFFFFF",
             marginBottom: 16,
           }}
         >
@@ -1207,7 +1207,7 @@ function DifferentiatorsV15() {
                     outline: "none",
                   }}
                 >
-                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", color: "#001489", flexShrink: 0 }}>
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", color: "#FFFFFF", flexShrink: 0 }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="font-heading font-bold flex-1" style={{ fontSize: "1.05rem", lineHeight: 1.2, color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.45)", transition: "color 0.25s" }}>
@@ -1719,7 +1719,7 @@ function ContactFormV15() {
             fontWeight: 700,
             letterSpacing: "0.12em",
             textTransform: "uppercase",
-            color: "#001489",
+            color: "#FFFFFF",
             marginBottom: 20,
           }}>
             {c.eyebrow}
@@ -1769,7 +1769,7 @@ function ContactFormV15() {
               </motion.div>
             ) : (
               <div className="w-full">
-                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 32 }}>
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#FFFFFF", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 32 }}>
                   Send a Message
                 </p>
                 <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-3">
@@ -1875,7 +1875,7 @@ function ContactFormV15() {
               gap: 0,
             }}
           >
-            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 32 }}>
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#FFFFFF", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 32 }}>
               {c.officeLabel}
             </p>
 
@@ -1919,7 +1919,7 @@ function ContactFormV15() {
 
             {/* Email */}
             <div>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 8 }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#FFFFFF", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 8 }}>
                 Email
               </p>
               <a
