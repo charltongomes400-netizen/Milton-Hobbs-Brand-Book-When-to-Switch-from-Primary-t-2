@@ -341,7 +341,7 @@ function HeroV15() {
             top: 0,
             bottom: 0,
             width: 2,
-            background: "#FFFFFF",
+            background: "rgba(255,255,255,0.30)",
             transformOrigin: "top",
             zIndex: 2,
           }}
