@@ -2149,6 +2149,7 @@ function PracticeAreasV18() {
       data-header-theme="dark"
       className="v2-snap-section"
       style={{ background: "#001489", position: "relative", overflow: "hidden" }}
+      onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => { handlePanelLeave(); setPaused(false); }}
     >
       {/* ── DESKTOP: Vertical photo accordion ── */}
@@ -2228,7 +2229,7 @@ function PracticeAreasV18() {
                   background: "#001489",
                 }}
               >
-                {/* Photo — renders normally, no blend mode */}
+                {/* Photo — opacity over panel's blue bg = GPU-cheap deep-blue tint */}
                 <img
                   src={item.img}
                   alt={item.title}
@@ -2240,20 +2241,12 @@ function PracticeAreasV18() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
+                    opacity: 0.32,
                     willChange: "transform",
                     transition: "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                     transform: isActive ? "scale(1.04)" : "scale(1)",
                   }}
                 />
-
-                {/* Solid #001489 multiply layer — exact Photoshop equivalent */}
-                <div style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "#001489",
-                  mixBlendMode: "multiply",
-                  pointerEvents: "none",
-                }} />
 
                 {/* Bottom gradient — collapsed state */}
                 <div style={{
