@@ -442,15 +442,17 @@ function HeroV15() {
               style={{ display: "flex", flexDirection: "column", gap: 0 }}
             >
               {/* Date · read-time */}
-              <p style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 9,
-                fontWeight: 700,
-                letterSpacing: "0.28em",
-                textTransform: "uppercase",
-                color: "#848484",
-                marginBottom: 20,
-              }}>
+              <p
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: 9,
+                  fontWeight: 700,
+                  letterSpacing: "0.28em",
+                  textTransform: "uppercase",
+                  color: "#848484",
+                  marginBottom: 20,
+                }}
+                className="text-[12px]">
                 {featuredArticle?.date}&ensp;·&ensp;{featuredArticle?.readTime}
               </p>
 
@@ -460,7 +462,7 @@ function HeroV15() {
               {/* Excerpt */}
               <p style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                color: "#595959",
+                color: "#000000",
                 fontSize: 14,
                 lineHeight: 1.78,
                 maxWidth: "38ch",
