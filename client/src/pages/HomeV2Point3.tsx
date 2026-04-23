@@ -62,8 +62,10 @@ function HeaderV15() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: "#08090F",
-        borderBottom: "1px solid rgba(255,255,255,0.07)",
+        background: "rgba(8,9,15,0.55)",
+        backdropFilter: "blur(18px)",
+        WebkitBackdropFilter: "blur(18px)",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
       }}
     >
       <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 92 }}>
