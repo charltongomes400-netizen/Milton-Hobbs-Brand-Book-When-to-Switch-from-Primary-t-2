@@ -2073,10 +2073,20 @@ function FooterV15() {
           </div>
 
           {/* Legal */}
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-            <span style={{ color: "#FFFFFF", fontSize: 10 }}>{f.copyright}</span>
-            <a href="#" style={{ color: "#FFFFFF", fontSize: 10, textDecoration: "none" }}>{f.privacy}</a>
-            <a href="#" style={{ color: "#FFFFFF", fontSize: 10, textDecoration: "none" }}>{f.cookie}</a>
+          <div className="flex flex-col items-start sm:items-end gap-1.5">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:justify-end">
+              <a href="/privacy-policy" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>{f.privacy}</a>
+              <a href="/cookies" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>{f.cookie}</a>
+              <a href="/terms-of-use" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Terms of Use</a>
+              <a href="/not-legal-advice" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Not Legal Advice</a>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:justify-end">
+              <a href="/attorney-client-disclaimer" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Attorney-Client Disclaimer</a>
+              <a href="/jurisdictional-statements" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Jurisdictional Statements</a>
+              <a href="/conflict-checks" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Conflict Checks</a>
+              <a href="/confidentiality-notice" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Confidentiality Notice</a>
+            </div>
+            <span style={{ color: "rgba(255,255,255,0.35)", fontSize: 10, letterSpacing: "0.04em" }}>{f.copyright}</span>
           </div>
         </div>
 
