@@ -2259,7 +2259,8 @@ function PracticeAreasV18() {
                       transition={{ duration: 0.3 }}
                       style={{
                         position: "absolute",
-                        bottom: 28,
+                        top: "50%",
+                        transform: "translateY(-50%)",
                         left: 12,
                         right: 12,
                         display: "flex",
