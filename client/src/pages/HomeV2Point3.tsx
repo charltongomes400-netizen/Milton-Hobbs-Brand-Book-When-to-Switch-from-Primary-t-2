@@ -1989,7 +1989,7 @@ function FooterV15() {
       {/* ── Main band: 3-column grid ── */}
       <div className="max-w-[1400px] mx-auto px-8">
         <div
-          className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8"
+          className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-6"
           style={{ paddingTop: 52, paddingBottom: 52, borderBottom: "1px solid rgba(255,255,255,0.06)" }}
         >
           {/* LEFT — Wordmark + tagline */}
@@ -2047,6 +2047,51 @@ function FooterV15() {
                   onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
                 >
                   {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          {/* PRACTICE AREAS */}
+          <div className="flex flex-col gap-4">
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: "0.34em",
+              textTransform: "uppercase",
+              color: "#FFFFFF",
+              marginBottom: 4,
+            }}>
+              Practice Areas
+            </p>
+            <nav className="flex flex-col gap-3">
+              {[
+                "Corporate & Commercial",
+                "Tax & Compliance",
+                "Mergers & Acquisitions",
+                "Startups & Venture Capital",
+                "IP & Technology",
+                "Real Estate & Property",
+                "Employment & Labor",
+                "Litigation & Disputes",
+              ].map(area => (
+                <a
+                  key={area}
+                  href="#expertise"
+                  style={{
+                    color: "rgba(255,255,255,0.70)",
+                    fontSize: 12,
+                    fontWeight: 500,
+                    letterSpacing: "0.04em",
+                    textDecoration: "none",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+                >
+                  {area}
                 </a>
               ))}
             </nav>
