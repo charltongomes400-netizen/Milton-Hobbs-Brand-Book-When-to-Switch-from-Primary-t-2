@@ -2135,7 +2135,7 @@ function PracticeAreasV18() {
         {/* Section header — white strip above accordion */}
         <div
           style={{
-            paddingTop: 92,
+            paddingTop: 132,
             paddingBottom: 40,
             paddingLeft: 52,
             paddingRight: 52,
