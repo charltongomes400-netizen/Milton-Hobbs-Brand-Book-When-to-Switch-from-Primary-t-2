@@ -1031,7 +1031,7 @@ function DifferentiatorsV15() {
                           transition={{ duration: 0.35, delay: 0.1 }}
                           style={{
                             fontFamily: "'Plus Jakarta Sans', sans-serif",
-                            color: "#595959",
+                            color: "#000000",
                             fontSize: "0.9375rem",
                             lineHeight: 1.82,
                             padding: "0 0 28px 42px",
@@ -1257,7 +1257,7 @@ function DifferentiatorsV15() {
                       transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                       style={{ overflow: "hidden" }}
                     >
-                      <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#595959", fontSize: "0.9rem", lineHeight: 1.8, paddingBottom: 24 }}>
+                      <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: "0.9rem", lineHeight: 1.8, paddingBottom: 24 }}>
                         {card.description}
                       </p>
                     </motion.div>
