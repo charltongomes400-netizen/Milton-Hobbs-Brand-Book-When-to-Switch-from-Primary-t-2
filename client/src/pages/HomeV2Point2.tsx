@@ -2141,7 +2141,7 @@ function PracticeAreasV18() {
       data-header-theme="dark"
       className="v2-snap-section"
       style={{ background: "#001489", position: "relative", overflow: "hidden" }}
-      onMouseLeave={() => setPaused(false)}
+      onMouseLeave={() => { handlePanelLeave(); setPaused(false); }}
     >
       {/* ── DESKTOP: Vertical photo accordion ── */}
       <div
@@ -2230,7 +2230,7 @@ function PracticeAreasV18() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    transition: "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
+                    transition: "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                     transform: isActive ? "scale(1.04)" : "scale(1)",
                   }}
                 />
@@ -2244,14 +2244,22 @@ function PracticeAreasV18() {
                   pointerEvents: "none",
                 }} />
 
-                {/* Bottom gradient for text legibility — sits above multiply layer */}
+                {/* Bottom gradient — collapsed state */}
                 <div style={{
                   position: "absolute",
                   inset: 0,
-                  background: isActive
-                    ? "linear-gradient(to bottom, transparent 30%, rgba(0,0,20,0.68) 60%, rgba(0,0,20,0.90) 100%)"
-                    : "linear-gradient(to bottom, transparent 20%, rgba(0,0,20,0.72) 100%)",
-                  transition: "background 0.5s ease",
+                  background: "linear-gradient(to bottom, transparent 20%, rgba(0,0,20,0.72) 100%)",
+                  opacity: isActive ? 0 : 1,
+                  transition: "opacity 0.6s ease",
+                  pointerEvents: "none",
+                }} />
+                {/* Bottom gradient — expanded state */}
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to bottom, transparent 30%, rgba(0,0,20,0.68) 60%, rgba(0,0,20,0.92) 100%)",
+                  opacity: isActive ? 1 : 0,
+                  transition: "opacity 0.6s ease",
                   pointerEvents: "none",
                 }} />
 
