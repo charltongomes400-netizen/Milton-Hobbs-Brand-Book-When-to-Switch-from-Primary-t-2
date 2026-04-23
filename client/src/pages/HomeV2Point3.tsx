@@ -2248,8 +2248,8 @@ function PracticeAreasV18() {
             alignItems: "flex-end",
             justifyContent: "space-between",
             flexShrink: 0,
-            background: "#FFFFFF",
-            borderBottom: "1px solid rgba(0,20,137,0.08)",
+            background: "#000000",
+            borderBottom: "1px solid rgba(255,255,255,0.08)",
           }}
         >
           <div>
@@ -2259,21 +2259,21 @@ function PracticeAreasV18() {
               fontWeight: 700,
               letterSpacing: "0.42em",
               textTransform: "uppercase",
-              color: "#4A58AA",
+              color: "rgba(255,255,255,0.45)",
               marginBottom: 14,
             }}>
               Our Expertise
             </p>
             <h2
               className="font-heading font-bold"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#001489" }}
+              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#FFFFFF" }}
             >
               Practice Areas.
             </h2>
           </div>
           {/* Counter + dot nav */}
           <div className="flex items-center gap-4">
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 11, color: "rgba(0,20,137,0.28)", letterSpacing: "0.06em" }}>
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 11, color: "rgba(255,255,255,0.30)", letterSpacing: "0.06em" }}>
               {String(active + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(EXPERTISE_ITEMS_V18.length).padStart(2, "0")}
             </span>
             <div className="flex items-center gap-1.5">
@@ -2281,7 +2281,7 @@ function PracticeAreasV18() {
                 <button
                   key={i}
                   onClick={() => { setActive(i); setPaused(true); }}
-                  style={{ width: active === i ? 20 : 5, height: 2, background: active === i ? "#001489" : "rgba(0,20,137,0.18)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }}
+                  style={{ width: active === i ? 20 : 5, height: 2, background: active === i ? "#FFFFFF" : "rgba(255,255,255,0.22)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }}
                 />
               ))}
             </div>
