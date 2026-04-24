@@ -864,7 +864,7 @@ function DifferentiatorsV15() {
               fontWeight: 700,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "#001489",
+              color: "#000000",
               marginBottom: 20,
             }}>
             {d.eyebrow}
@@ -872,7 +872,7 @@ function DifferentiatorsV15() {
 
           {/* Headline */}
           <h2
-            className="font-heading font-bold text-[#001489]"
+            className="font-heading font-bold text-[#000000]"
             style={{
               fontSize: "clamp(2rem, 3.2vw, 3rem)",
               lineHeight: 1.06,
@@ -901,7 +901,7 @@ function DifferentiatorsV15() {
                       top: 0,
                       bottom: 0,
                       width: 2,
-                      background: "#001489",
+                      background: "#000000",
                       transformOrigin: "top",
                     }}
                     animate={{ scaleY: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
@@ -933,7 +933,7 @@ function DifferentiatorsV15() {
                         fontSize: 9,
                         fontWeight: 700,
                         letterSpacing: "0.30em",
-                        color: isActive ? "#4A58AA" : "rgba(74,88,170,0.35)",
+                        color: isActive ? "#000000" : "rgba(0,0,0,0.28)",
                         flexShrink: 0,
                         transition: "color 0.3s",
                         minWidth: 22,
@@ -949,7 +949,7 @@ function DifferentiatorsV15() {
                         fontSize: "clamp(1.25rem, 2vw, 1.75rem)",
                         lineHeight: 1.15,
                         letterSpacing: "-0.02em",
-                        color: isActive ? "#001489" : "rgba(0,20,137,0.28)",
+                        color: isActive ? "#000000" : "rgba(0,0,0,0.28)",
                         flex: 1,
                         transition: "color 0.3s",
                       }}
@@ -964,7 +964,7 @@ function DifferentiatorsV15() {
                       style={{ flexShrink: 0 }}
                     >
                       <svg width="16" height="16" fill="none" viewBox="0 0 16 16">
-                        <path d="M3 8h10M8 3l5 5-5 5" stroke="#001489" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M3 8h10M8 3l5 5-5 5" stroke="#000000" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </motion.div>
                   </button>
@@ -978,7 +978,7 @@ function DifferentiatorsV15() {
                         bottom: 0,
                         left: 0,
                         height: 2,
-                        background: "#001489",
+                        background: "#000000",
                         opacity: 0.15,
                       }}
                       initial={{ width: "0%" }}
@@ -1029,27 +1029,27 @@ function DifferentiatorsV15() {
               data-testid="diff-cta"
               className="inline-flex items-center gap-3"
               style={{
-                color: "#001489",
+                color: "#000000",
                 fontSize: 9,
                 fontWeight: 700,
                 letterSpacing: "0.28em",
                 textTransform: "uppercase",
                 textDecoration: "none",
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                border: "1px solid #001489",
+                border: "1px solid #000000",
                 padding: "13px 28px",
                 background: "transparent",
                 transition: "background 0.25s, color 0.25s",
               }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLElement;
-                el.style.background = "#001489";
+                el.style.background = "#000000";
                 el.style.color = "#FFFFFF";
               }}
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLElement;
                 el.style.background = "transparent";
-                el.style.color = "#001489";
+                el.style.color = "#000000";
               }}
             >
               <span>{d.learnMore}</span>
@@ -1130,14 +1130,14 @@ function DifferentiatorsV15() {
             fontWeight: 700,
             letterSpacing: "0.40em",
             textTransform: "uppercase",
-                      color: "#001489",
+            color: "#000000",
             marginBottom: 16,
           }}
         >
           {d.eyebrow}
         </p>
         <h2
-          className="font-heading font-bold text-[#001489]"
+          className="font-heading font-bold text-[#000000]"
           style={{
             fontSize: "clamp(1.75rem, 7vw, 2.25rem)",
             lineHeight: 1.1,
@@ -1170,10 +1170,10 @@ function DifferentiatorsV15() {
                     outline: "none",
                   }}
                 >
-                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", color: "#4A58AA", flexShrink: 0 }}>
+                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", color: isActive ? "#000000" : "rgba(0,0,0,0.35)", flexShrink: 0 }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="font-heading font-bold flex-1" style={{ fontSize: "1.05rem", lineHeight: 1.2, color: isActive ? "#001489" : "rgba(0,20,137,0.45)", transition: "color 0.25s" }}>
+                  <span className="font-heading font-bold flex-1" style={{ fontSize: "1.05rem", lineHeight: 1.2, color: isActive ? "#000000" : "rgba(0,0,0,0.40)", transition: "color 0.25s" }}>
                     {card.title}
                   </span>
                   <motion.svg
@@ -1182,7 +1182,7 @@ function DifferentiatorsV15() {
                     width="16" height="16" fill="none" viewBox="0 0 16 16"
                     style={{ flexShrink: 0 }}
                   >
-                    <path d="M8 3v10M3 8h10" stroke="#001489" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M8 3v10M3 8h10" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" />
                   </motion.svg>
                 </button>
                 <AnimatePresence initial={false}>
@@ -1214,27 +1214,27 @@ function DifferentiatorsV15() {
               display: "inline-flex",
               alignItems: "center",
               gap: 10,
-              color: "#001489",
+              color: "#000000",
               fontSize: 9,
               fontWeight: 700,
               letterSpacing: "0.28em",
               textTransform: "uppercase",
               textDecoration: "none",
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              border: "1px solid #001489",
+              border: "1px solid #000000",
               padding: "13px 24px",
               background: "transparent",
               transition: "background 0.25s, color 0.25s",
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = "#001489";
+              el.style.background = "#000000";
               el.style.color = "#FFFFFF";
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement;
               el.style.background = "transparent";
-              el.style.color = "#001489";
+              el.style.color = "#000000";
             }}
           >
             <span>{d.learnMore}</span>
