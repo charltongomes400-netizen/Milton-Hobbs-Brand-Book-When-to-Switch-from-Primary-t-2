@@ -862,7 +862,7 @@ function DifferentiatorsV15() {
               fontWeight: 700,
               letterSpacing: "0.40em",
               textTransform: "uppercase",
-              color: "#4A58AA",
+                  color: "#001489",
               marginBottom: 20,
             }}>
             {d.eyebrow}
