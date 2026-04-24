@@ -486,7 +486,7 @@ function HeroV15() {
               {/* Excerpt */}
               <p style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                color: "rgba(255,255,255,0.65)",
+                color: "#FFFFFF",
                 fontSize: 14,
                 lineHeight: 1.78,
                 maxWidth: "38ch",
