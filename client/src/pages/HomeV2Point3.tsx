@@ -2339,7 +2339,7 @@ function PracticeAreasV18() {
               fontWeight: 700,
               letterSpacing: "0.42em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.45)",
+              color: "#FFFFFF",
               marginBottom: 14,
             }}>
               Our Expertise
