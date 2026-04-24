@@ -2210,8 +2210,8 @@ function FooterV15() {
           {/* Live clocks */}
           <div className="flex items-center gap-5">
             {[
-              { label: "Dubai", time: dubaiTime, dot: "#7A84BE" },
-              { label: "Paris", time: parisTime, dot: "#4A58AA" },
+              { label: "Dubai", time: dubaiTime, dot: "#FFFFFF" },
+              { label: "Paris", time: parisTime, dot: "#FFFFFF" },
             ].map((o, i) => (
               <div key={o.label} className="flex items-center gap-2">
                 {i > 0 && <span style={{ width: 1, height: 10, background: "rgba(255,255,255,0.30)", marginRight: 6 }} />}
