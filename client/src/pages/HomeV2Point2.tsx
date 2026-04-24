@@ -372,7 +372,7 @@ function HeroV15() {
                 <div style={{ width: 20, height: 1.5, background: "#4A58AA", flexShrink: 0 }} />
                 <p style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  color: "#4A58AA",
+                  color: "#001489",
                   fontSize: 12,
                   fontWeight: 700,
                   letterSpacing: "0.40em",
