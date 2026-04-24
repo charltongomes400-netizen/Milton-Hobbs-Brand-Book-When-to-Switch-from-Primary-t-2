@@ -2335,9 +2335,9 @@ function PracticeAreasV18() {
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 18,
               fontWeight: 700,
-              letterSpacing: "0.42em",
+              letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "#4A58AA",
+              color: "#001489",
               marginBottom: 14,
             }}>
               Our Expertise
