@@ -586,7 +586,7 @@ function FounderVisual() {
         return (
           <motion.line
             key={i} x1={x1} y1={y1} x2={x2} y2={y2}
-            stroke="#FFFFFF" strokeWidth={1}
+            stroke="#000000" strokeWidth={1}
             animate={{ strokeOpacity: [0.15, 0.6, 0.15] }}
             transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -599,18 +599,18 @@ function FounderVisual() {
         return (
           <motion.circle
             key={i} cx={x} cy={y} r={3}
-            fill="#FFFFFF" fillOpacity={0.5}
+            fill="#000000" fillOpacity={0.5}
             animate={{ fillOpacity: [0.2, 0.8, 0.2] }}
             transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
           />
         );
       })}
-      <circle cx={cx} cy={cy} r={outerR} stroke="#FFFFFF" strokeOpacity={0.12} strokeWidth={1} fill="none" />
-      <circle cx={cx} cy={cy} r={innerR} stroke="#FFFFFF" strokeOpacity={0.22} strokeWidth={1} fill="none" />
-      <circle cx={cx} cy={cy} r={8} fill="#FFFFFF" fillOpacity={0.9} />
+      <circle cx={cx} cy={cy} r={outerR} stroke="#000000" strokeOpacity={0.12} strokeWidth={1} fill="none" />
+      <circle cx={cx} cy={cy} r={innerR} stroke="#000000" strokeOpacity={0.22} strokeWidth={1} fill="none" />
+      <circle cx={cx} cy={cy} r={8} fill="#000000" fillOpacity={0.9} />
       <motion.circle
         cx={cx} cy={cy} r={innerR}
-        stroke="#FFFFFF" strokeWidth={1} fill="none"
+        stroke="#000000" strokeWidth={1} fill="none"
         animate={{ scale: [1, 1.6, 1], opacity: [0.5, 0, 0.5] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
         style={{ transformOrigin: `${cx}px ${cy}px` }}
@@ -669,16 +669,16 @@ function PrecisionVisual() {
       {[88, 64, 44].map((r, i) => (
         <circle
           key={i} cx={CX} cy={CY} r={r} fill="none"
-          stroke="#FFFFFF"
+          stroke="#000000"
           strokeOpacity={locked ? 0.20 + i * 0.10 : 0.10 + i * 0.06}
           strokeWidth={1}
           style={{ transition: "stroke-opacity 0.4s" }}
         />
       ))}
-      <line x1={CX} y1={30} x2={CX} y2={230} stroke="#FFFFFF" strokeOpacity={0.14} strokeWidth={1} />
-      <line x1={40} y1={CY} x2={280} y2={CY} stroke="#FFFFFF" strokeOpacity={0.14} strokeWidth={1} />
+      <line x1={CX} y1={30} x2={CX} y2={230} stroke="#000000" strokeOpacity={0.14} strokeWidth={1} />
+      <line x1={40} y1={CY} x2={280} y2={CY} stroke="#000000" strokeOpacity={0.14} strokeWidth={1} />
       <circle cx={CX} cy={CY} r={4}
-        fill="#FFFFFF"
+        fill="#000000"
         fillOpacity={locked ? 1 : 0.65}
         style={{ transition: "fill-opacity 0.3s" }}
       />
@@ -687,7 +687,7 @@ function PrecisionVisual() {
           <motion.circle
             key={flashKey}
             cx={CX} cy={CY} r={22}
-            stroke="#FFFFFF" strokeWidth={2} fill="none"
+            stroke="#000000" strokeWidth={2} fill="none"
             initial={{ scale: 1, opacity: 0.85 }}
             animate={{ scale: 2.2, opacity: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
@@ -696,18 +696,18 @@ function PrecisionVisual() {
         </AnimatePresence>
       )}
       <motion.g style={{ x: rx, y: ry }}>
-        <circle cx={CX} cy={CY} r={22} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
-        <path d={`M${CX-22} ${CY-9} L${CX-22} ${CY-22} L${CX-9} ${CY-22}`} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
-        <path d={`M${CX+9} ${CY-22} L${CX+22} ${CY-22} L${CX+22} ${CY-9}`} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
-        <path d={`M${CX+22} ${CY+9} L${CX+22} ${CY+22} L${CX+9} ${CY+22}`} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
-        <path d={`M${CX-9} ${CY+22} L${CX-22} ${CY+22} L${CX-22} ${CY+9}`} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
-        <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="#FFFFFF" strokeWidth={1} strokeOpacity={0.5} />
-        <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="#FFFFFF" strokeWidth={1} strokeOpacity={0.5} />
+        <circle cx={CX} cy={CY} r={22} stroke="#000000" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX-22} ${CY-9} L${CX-22} ${CY-22} L${CX-9} ${CY-22}`} stroke="#000000" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX+9} ${CY-22} L${CX+22} ${CY-22} L${CX+22} ${CY-9}`} stroke="#000000" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX+22} ${CY+9} L${CX+22} ${CY+22} L${CX+9} ${CY+22}`} stroke="#000000" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX-9} ${CY+22} L${CX-22} ${CY+22} L${CX-22} ${CY+9}`} stroke="#000000" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="#000000" strokeWidth={1} strokeOpacity={0.5} />
+        <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="#000000" strokeWidth={1} strokeOpacity={0.5} />
       </motion.g>
       {locked && (
         <motion.text
           x={CX + 30} y={CY - 28}
-          fill="rgba(255,255,255,0.65)" fontSize="8" fontFamily="'Satoshi', sans-serif" letterSpacing="0.15em"
+          fill="rgba(0,0,0,0.65)" fontSize="8" fontFamily="'Satoshi', sans-serif" letterSpacing="0.15em"
           initial={{ opacity: 0 }} animate={{ opacity: [0, 0.8, 0.8, 0] }}
           transition={{ duration: 2.2, times: [0, 0.15, 0.85, 1] }}
         >
@@ -736,7 +736,7 @@ function CrossBorderVisual() {
       {paths.map((p, i) => (
         <motion.path
           key={i} d={p.d}
-          stroke="#FFFFFF"
+          stroke="#000000"
           strokeOpacity={i < 2 ? 0.6 : 0.3}
           strokeWidth={i < 2 ? 1.2 : 1}
           strokeDasharray="220"
@@ -746,17 +746,17 @@ function CrossBorderVisual() {
       ))}
       {nodes.map((n, i) => (
         <g key={i}>
-          <circle cx={n.cx} cy={n.cy} r={5} fill="#FFFFFF" fillOpacity={0.7} />
+          <circle cx={n.cx} cy={n.cy} r={5} fill="#000000" fillOpacity={0.7} />
           <text x={n.cx} y={n.cy + (i < 2 ? -12 : 18)}
-            fill="#FFFFFF" fillOpacity={0.5} fontSize="8"
+            fill="#000000" fillOpacity={0.5} fontSize="8"
             fontFamily="'Plus Jakarta Sans', sans-serif" textAnchor="middle"
           >{n.label}</text>
         </g>
       ))}
-      <circle cx={160} cy={130} r={7} fill="#FFFFFF" fillOpacity={0.9} />
+      <circle cx={160} cy={130} r={7} fill="#000000" fillOpacity={0.9} />
       <motion.circle
         cx={160} cy={130} r={18}
-        stroke="#FFFFFF" strokeWidth={1} fill="none"
+        stroke="#000000" strokeWidth={1} fill="none"
         animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
         style={{ transformOrigin: "160px 130px" }}
@@ -776,7 +776,7 @@ function DiscretionVisual() {
         return (
           <motion.circle
             key={i} cx={cx} cy={cy} r={r}
-            stroke="#FFFFFF"
+            stroke="#000000"
             strokeOpacity={i === rings.length - 1 ? 0.7 : 0.12 + i * 0.07}
             strokeWidth={1}
             strokeDasharray={`${circumference * (1 - gap)} ${circumference * gap}`}
@@ -789,13 +789,13 @@ function DiscretionVisual() {
       })}
       <motion.rect
         x={cx - 7} y={cy - 4} width={14} height={11}
-        stroke="#FFFFFF" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
+        stroke="#000000" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
         animate={{ opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.path
         d={`M${cx-4} ${cy-4} Q${cx-4} ${cy-11} ${cx} ${cy-11} Q${cx+4} ${cy-11} ${cx+4} ${cy-4}`}
-        stroke="#FFFFFF" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
+        stroke="#000000" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
         animate={{ opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -1060,14 +1060,13 @@ function DifferentiatorsV15() {
           </div>
         </motion.div>
 
-        {/* ── RIGHT: fixed dark animation window ─────────────────────────── */}
+        {/* ── RIGHT: animation window ─────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.0, delay: 0.2 }}
           style={{
-            background: "linear-gradient(145deg, #001489 0%, #001050 100%)",
             position: "relative",
             overflow: "hidden",
             display: "flex",
@@ -1075,42 +1074,6 @@ function DifferentiatorsV15() {
             justifyContent: "center",
           }}
         >
-          {/* Caustic shimmer — always running */}
-          <motion.div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(125deg, rgba(255,255,255,0.07) 0%, transparent 20%, rgba(255,255,255,0.04) 45%, transparent 60%, rgba(255,255,255,0.06) 80%, transparent 95%)",
-              backgroundSize: "200% 200%",
-              pointerEvents: "none",
-            }}
-            animate={{ backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"] }}
-            transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-          />
-
-          {/* Top specular edge highlight */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: "8%",
-              right: "8%",
-              height: 1,
-              background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.28) 30%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.28) 70%, transparent)",
-              pointerEvents: "none",
-            }}
-          />
-
-          {/* Subtle inner depth glow */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "radial-gradient(ellipse at 35% 25%, rgba(255,255,255,0.07) 0%, transparent 55%)",
-              pointerEvents: "none",
-            }}
-          />
-
           {/* Pillar label — fades in, anchored bottom-left */}
           <AnimatePresence mode="wait">
             <motion.p
@@ -1128,7 +1091,7 @@ function DifferentiatorsV15() {
                 fontWeight: 700,
                 letterSpacing: "0.36em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.30)",
+                color: "rgba(0,0,0,0.30)",
                 zIndex: 2,
               }}
             >
