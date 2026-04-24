@@ -1701,7 +1701,7 @@ function ContactFormV15() {
       className="v2-snap-section"
       style={{ background: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "center" }}
     >
-      <div className="max-w-[1400px] mx-auto px-8 w-full" style={{ paddingTop: 80, paddingBottom: 80 }}>
+	      <div className="max-w-[1400px] mx-auto px-8 w-full" style={{ paddingTop: 80, paddingBottom: 80, textAlign: "left" }}>
 
         {/* ── Section header ── */}
         <motion.div
@@ -1722,14 +1722,14 @@ function ContactFormV15() {
           }}>
             {c.eyebrow}
           </p>
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-20 items-end">
+	          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-20 items-end">
             <h2
               className="font-heading font-bold"
               style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#001489" }}
             >
               {c.headline}
             </h2>
-	            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 15, lineHeight: 1.78, maxWidth: 440, marginTop: 6 }}>
+                    <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 15, lineHeight: 1.78, maxWidth: 440, marginTop: 6 }}>
               {c.subtext}
             </p>
           </div>
