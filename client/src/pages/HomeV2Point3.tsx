@@ -1683,14 +1683,14 @@ function ContactFormV15() {
             fontWeight: 700,
             letterSpacing: "0.12em",
             textTransform: "uppercase",
-            color: "#001489",
+            color: "#000000",
             marginBottom: 20,
           }}>
             {c.eyebrow}
           </p>
           <h2
             className="font-heading font-bold"
-            style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#001489", marginBottom: 24 }}
+            style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#000000", marginBottom: 24 }}
           >
             {c.headline}
           </h2>
@@ -1724,14 +1724,14 @@ function ContactFormV15() {
                     <path d="M4 10l4 4 8-8" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <h3 className="font-heading font-bold" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)", color: "#001489" }}>
+                <h3 className="font-heading font-bold" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)", color: "#000000" }}>
                   {c.successTitle}
                 </h3>
                 <p style={{ color: "rgba(0,0,0,0.50)", fontSize: 14, lineHeight: 1.72 }}>{c.successText}</p>
               </motion.div>
             ) : (
               <div className="w-full">
-                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 32 }}>
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 32 }}>
                   Send a Message
                 </p>
                 <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-3">
@@ -1837,13 +1837,13 @@ function ContactFormV15() {
               gap: 0,
             }}
           >
-            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 32 }}>
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 32 }}>
               {c.officeLabel}
             </p>
 
             {/* Dubai */}
             <div style={{ marginBottom: 32 }}>
-              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
+              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#000000", marginBottom: 10 }}>
                 {c.dubaiLabel}
               </p>
               {f.dubaiAddr.map((line, i) => (
@@ -1862,7 +1862,7 @@ function ContactFormV15() {
 
             {/* Paris */}
             <div style={{ marginBottom: 32 }}>
-              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
+              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#000000", marginBottom: 10 }}>
                 {c.parisLabel}
               </p>
               {f.parisAddr.map((line, i) => (
@@ -1881,7 +1881,7 @@ function ContactFormV15() {
 
             {/* Email */}
             <div>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
                 Email
               </p>
               <a
