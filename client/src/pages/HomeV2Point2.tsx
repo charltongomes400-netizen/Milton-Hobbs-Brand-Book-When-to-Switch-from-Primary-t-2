@@ -297,9 +297,8 @@ function HeaderV15() {
                     lineHeight: 1.75,
                     color: "#000000",
                     marginBottom: 36,
-                  }}>
-                    Eight practice areas. One firm with precision counsel across the UAE, Europe and beyond.
-                  </p>
+                  }}>Eight practice areas. One firm with precision counsel 
+                  across the UAE, Europe and beyond.</p>
                 </div>
                 <a
                   href="#expertise"
@@ -400,7 +399,6 @@ function HeaderV15() {
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
