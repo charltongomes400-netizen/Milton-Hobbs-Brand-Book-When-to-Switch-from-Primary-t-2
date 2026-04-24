@@ -299,7 +299,7 @@ function HeaderV15() {
                     maxWidth: "24ch",
                     marginBottom: 36,
                   }}>
-                    Eight practice areas. One firm. Precision counsel across the UAE, Europe and beyond.
+                    Eight practice areas. One firm with precision counsel across the UAE, Europe and beyond.
                   </p>
                 </div>
                 <a
