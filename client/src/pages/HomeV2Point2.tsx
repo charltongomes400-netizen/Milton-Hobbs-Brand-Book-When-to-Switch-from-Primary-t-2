@@ -1931,8 +1931,9 @@ function ContactFormV15() {
         </motion.div>
       </div>
 
-      {/* ── Right: image panel with muly overlay ── */}
-      <div className="hidden lg:block relative overflow-hidden">
+      {/* ── Right: image panel with blue multiply effect ── */}
+      <div className="hidden lg:block relative overflow-hidden" style={{ isolation: "isolate" }}>
+        {/* Photo */}
         <img
           src={imgCorp}
           alt=""
@@ -1944,25 +1945,23 @@ function ContactFormV15() {
             height: "100%",
             objectFit: "cover",
             objectPosition: "center",
-            opacity: 0.55,
           }}
         />
-        {/* White-fade gradient so image blends into the white left column */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to right, #FFFFFF 0%, rgba(255,255,255,0.15) 40%, transparent 70%)",
-          }}
-        />
-        {/* Subtle blue tint at top/bottom edges */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to bottom, rgba(0,20,137,0.12) 0%, transparent 30%, transparent 70%, rgba(0,20,137,0.12) 100%)",
-          }}
-        />
+        {/* Exact same multiply layer as Practice Areas */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "#001489",
+          mixBlendMode: "multiply",
+          pointerEvents: "none",
+        }} />
+        {/* Left-edge fade so it blends into the white content */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to right, #FFFFFF 0%, transparent 35%)",
+          pointerEvents: "none",
+        }} />
       </div>
     </section>
   );
