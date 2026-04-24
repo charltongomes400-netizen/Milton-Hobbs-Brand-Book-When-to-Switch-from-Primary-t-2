@@ -99,7 +99,7 @@ function HeaderV15() {
               onMouseEnter={e => { e.currentTarget.style.color = textHover; e.currentTarget.style.textDecoration = "underline"; e.currentTarget.style.textUnderlineOffset = "4px"; }}
               onMouseLeave={e => { e.currentTarget.style.color = textCol; e.currentTarget.style.textDecoration = "none"; }}
             >
-              {link.label}
+              {link.label.toUpperCase()}
             </a>
           ))}
         </nav>
