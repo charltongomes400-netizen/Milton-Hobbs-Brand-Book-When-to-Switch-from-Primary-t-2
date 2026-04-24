@@ -2042,7 +2042,7 @@ function FooterV15() {
             <p style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 11,
-              color: "rgba(255,255,255,0.40)",
+              color: "#FFFFFF",
               lineHeight: 1.7,
               maxWidth: "28ch",
             }}>
