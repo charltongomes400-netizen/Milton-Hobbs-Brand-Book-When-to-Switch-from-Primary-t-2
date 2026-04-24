@@ -38,16 +38,24 @@ function snapScrollTo(hash: string) {
 function HeaderV15() {
   const { lang, setLang, t } = useLang();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [contactVisible, setContactVisible] = useState(false);
+  const [solidHeader, setSolidHeader] = useState(false);
 
   useEffect(() => {
-    const el = document.getElementById("contact");
-    if (!el) return;
+    const container = document.querySelector(".v2-snap-container") as Element | null;
+    const sections = ["firm", "contact"].map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    if (!sections.length) return;
+    const visible = new Set<string>();
     const observer = new IntersectionObserver(
-      ([entry]) => setContactVisible(entry.isIntersecting),
-      { threshold: 0.15 }
+      (entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) visible.add((e.target as HTMLElement).id);
+          else visible.delete((e.target as HTMLElement).id);
+        });
+        setSolidHeader(visible.size > 0);
+      },
+      { root: container, threshold: 0.15 }
     );
-    observer.observe(el);
+    sections.forEach(el => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
@@ -74,9 +82,9 @@ function HeaderV15() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: contactVisible ? "#000000" : "rgba(8,9,15,0.55)",
-        backdropFilter: contactVisible ? "none" : "blur(18px)",
-        WebkitBackdropFilter: contactVisible ? "none" : "blur(18px)",
+        background: solidHeader ? "#000000" : "rgba(8,9,15,0.55)",
+        backdropFilter: solidHeader ? "none" : "blur(18px)",
+        WebkitBackdropFilter: solidHeader ? "none" : "blur(18px)",
         borderBottom: "1px solid rgba(255,255,255,0.08)",
         transition: "background 0.4s ease",
       }}
