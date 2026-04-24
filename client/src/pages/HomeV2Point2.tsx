@@ -1698,10 +1698,11 @@ function ContactFormV15() {
       id="contact"
       data-header-theme="light"
       data-testid="contact-section"
-      className="v2-snap-section"
-      style={{ background: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "center" }}
+      className="v2-snap-section lg:grid"
+      style={{ background: "#FFFFFF", gridTemplateColumns: "1fr clamp(260px, 30vw, 480px)", minHeight: "100dvh" }}
     >
-      <div className="max-w-[1400px] mx-auto px-8 w-full ml-[20px] mr-[20px]" style={{ paddingTop: 80, paddingBottom: 80 }}>
+      {/* ── Left: content ── */}
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 80, paddingBottom: 80, paddingLeft: "clamp(32px, 5vw, 80px)", paddingRight: "clamp(24px, 4vw, 64px)" }}>
 
         {/* ── Section header ── */}
         <motion.div
@@ -1928,6 +1929,40 @@ function ContactFormV15() {
             </div>
           </div>
         </motion.div>
+      </div>
+
+      {/* ── Right: image panel with muly overlay ── */}
+      <div className="hidden lg:block relative overflow-hidden">
+        <img
+          src={imgCorp}
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+            opacity: 0.55,
+          }}
+        />
+        {/* White-fade gradient so image blends into the white left column */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(to right, #FFFFFF 0%, rgba(255,255,255,0.15) 40%, transparent 70%)",
+          }}
+        />
+        {/* Subtle blue tint at top/bottom edges */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(to bottom, rgba(0,20,137,0.12) 0%, transparent 30%, transparent 70%, rgba(0,20,137,0.12) 100%)",
+          }}
+        />
       </div>
     </section>
   );
