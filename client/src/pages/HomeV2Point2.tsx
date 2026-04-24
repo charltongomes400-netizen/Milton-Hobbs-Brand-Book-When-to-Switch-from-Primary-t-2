@@ -88,7 +88,7 @@ function HeaderV15() {
               style={{
                 color: textCol,
                 fontSize: 16,
-                fontWeight: 600,
+                fontWeight: 700,
                 letterSpacing: "0.10em",
                 textTransform: "uppercase",
                 textDecoration: "none",
