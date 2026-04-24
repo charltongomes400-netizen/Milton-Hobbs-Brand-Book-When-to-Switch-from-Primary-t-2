@@ -338,7 +338,7 @@ function HeaderV15() {
                   fontWeight: 700,
                   letterSpacing: "0.28em",
                   textTransform: "uppercase",
-                  color: "rgba(0,20,137,0.38)",
+                  color: "#001489",
                   marginBottom: 16,
                   paddingBottom: 14,
                   borderBottom: "1px solid rgba(0,20,137,0.10)",
