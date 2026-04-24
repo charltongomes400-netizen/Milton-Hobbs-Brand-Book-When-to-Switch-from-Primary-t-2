@@ -1717,7 +1717,7 @@ function ContactFormV15() {
             fontWeight: 700,
             letterSpacing: "0.12em",
             textTransform: "uppercase",
-	              color: "#001489",
+                      color: "#001489",
             marginBottom: 20,
           }}>
             {c.eyebrow}
@@ -1729,7 +1729,7 @@ function ContactFormV15() {
             >
               {c.headline}
             </h2>
-            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 15, lineHeight: 1.78, maxWidth: 440 }}>
+	            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 15, lineHeight: 1.78, maxWidth: 440, marginTop: 6 }}>
               {c.subtext}
             </p>
           </div>
