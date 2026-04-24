@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, animate } from "framer-motion";
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
-import { SiFacebook, SiInstagram, SiX, SiLinkedin, SiWhatsapp } from "react-icons/si";
+import { SiInstagram, SiLinkedin, SiWhatsapp } from "react-icons/si";
 import { articles } from "@/data/articles";
 import miltonHobbsLogo from "@assets/Milton_hobbs_logo_1775554832004.png";
 import miltonHobbsWordmark from "@assets/image_1776101259071.png";
@@ -2397,9 +2397,7 @@ function FooterV15() {
             {/* Social icons */}
             <div className="flex items-center gap-4" style={{ marginTop: 8 }}>
               {[
-                { href: "https://facebook.com", Icon: SiFacebook,  label: "Facebook"  },
                 { href: "https://instagram.com", Icon: SiInstagram, label: "Instagram" },
-                { href: "https://x.com",         Icon: SiX,         label: "X"         },
                 { href: "https://linkedin.com",  Icon: SiLinkedin,  label: "LinkedIn"  },
                 { href: "https://wa.me",         Icon: SiWhatsapp,  label: "WhatsApp"  },
               ].map(({ href, Icon, label }) => (
