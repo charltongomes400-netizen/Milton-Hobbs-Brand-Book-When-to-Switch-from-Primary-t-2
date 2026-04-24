@@ -1805,21 +1805,21 @@ function ContactFormV15() {
                       disabled={submitting}
                       data-testid="button-submit"
                       style={{
-                        background: "#001489",
-                        color: "#FFFFFF",
-                        border: "none",
-                        padding: "15px 40px",
-                        fontSize: 11,
+                        background: "transparent",
+                        color: "#000000",
+                        border: "1px solid rgba(0,0,0,0.45)",
+                        padding: "13px 32px",
+                        fontSize: 10,
                         fontWeight: 700,
                         letterSpacing: "0.12em",
                         textTransform: "uppercase",
                         cursor: submitting ? "not-allowed" : "pointer",
                         opacity: submitting ? 0.6 : 1,
-                        transition: "opacity 0.2s, background 0.2s",
+                        transition: "background 0.25s, color 0.25s, border-color 0.25s",
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
                       }}
-                      onMouseEnter={e => { if (!submitting) (e.currentTarget as HTMLElement).style.background = "#0019A8"; }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#001489"; }}
+                      onMouseEnter={e => { if (!submitting) { const el = e.currentTarget as HTMLElement; el.style.background = "#000000"; el.style.color = "#FFFFFF"; el.style.borderColor = "#000000"; } }}
+                      onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = "transparent"; el.style.color = "#000000"; el.style.borderColor = "rgba(0,0,0,0.45)"; }}
                     >
                       {submitting ? (
                         <span className="flex items-center gap-2.5">
