@@ -860,9 +860,9 @@ function DifferentiatorsV15() {
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 18,
               fontWeight: 700,
-              letterSpacing: "0.40em",
+              letterSpacing: "0.12em",
               textTransform: "uppercase",
-                  color: "#001489",
+              color: "#001489",
               marginBottom: 20,
             }}>
             {d.eyebrow}
