@@ -1701,7 +1701,7 @@ function ContactFormV15() {
       className="v2-snap-section"
       style={{ background: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "center" }}
     >
-      <div className="max-w-[1400px] mx-auto px-8 w-full" style={{ paddingTop: 80, paddingBottom: 80 }}>
+      <div className="max-w-[1400px] mx-auto px-8 w-full ml-[20px] mr-[20px]" style={{ paddingTop: 80, paddingBottom: 80 }}>
 
         {/* ── Section header ── */}
         <motion.div
@@ -1739,7 +1739,7 @@ function ContactFormV15() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-1 lg:grid-cols-[1fr_1fr]"
+          className="grid grid-cols-1 lg:grid-cols-[7fr_4fr]"
           style={{ borderTop: "1px solid rgba(0,20,137,0.10)" }}
         >
           {/* ── Form — blue boxes ── */}
@@ -1864,20 +1864,19 @@ function ContactFormV15() {
           <div
             style={{
               paddingTop: 48,
-              paddingBottom: 48,
               paddingLeft: "clamp(24px, 4vw, 56px)",
               borderLeft: "1px solid rgba(0,20,137,0.10)",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
+              gap: 0,
             }}
           >
-            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase" }}>
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 32 }}>
               {c.officeLabel}
             </p>
 
             {/* Dubai */}
-            <div>
+            <div style={{ marginBottom: 32 }}>
               <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
                 {c.dubaiLabel}
               </p>
@@ -1893,10 +1892,10 @@ function ContactFormV15() {
               </a>
             </div>
 
-            <div style={{ height: 1, background: "rgba(0,20,137,0.08)" }} />
+            <div style={{ height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 32 }} />
 
             {/* Paris */}
-            <div>
+            <div style={{ marginBottom: 32 }}>
               <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
                 {c.parisLabel}
               </p>
@@ -1912,11 +1911,11 @@ function ContactFormV15() {
               </a>
             </div>
 
-            <div style={{ height: 1, background: "rgba(0,20,137,0.08)" }} />
+            <div style={{ height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 24 }} />
 
             {/* Email */}
             <div>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 8 }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#4A58AA", fontSize: 18, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase", marginBottom: 8 }}>
                 Email
               </p>
               <a
