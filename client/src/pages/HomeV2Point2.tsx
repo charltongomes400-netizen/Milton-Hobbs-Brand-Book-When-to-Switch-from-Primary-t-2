@@ -272,7 +272,7 @@ function HeaderV15() {
                     fontWeight: 700,
                     letterSpacing: "0.30em",
                     textTransform: "uppercase",
-                    color: "rgba(0,20,137,0.38)",
+                    color: "#001489",
                     marginBottom: 20,
                   }}>
                     Our Expertise
