@@ -2226,7 +2226,7 @@ function FooterV15() {
   const parisTime = fmtTime("Europe/Paris");
 
   return (
-    <footer id="footer" data-testid="footer" className="v2-snap-end" style={{ background: "#0019a8", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+    <footer id="footer" data-testid="footer" className="v2-snap-end" style={{ background: "#001489", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       {/* ── Motto whisper — very top ── */}
       <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 40, paddingBottom: 36, borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <p style={{
