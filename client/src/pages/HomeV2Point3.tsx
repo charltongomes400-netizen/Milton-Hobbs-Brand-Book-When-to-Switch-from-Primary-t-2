@@ -725,16 +725,6 @@ function PrecisionVisual() {
         <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="#000000" strokeWidth={1} strokeOpacity={0.5} />
         <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="#000000" strokeWidth={1} strokeOpacity={0.5} />
       </motion.g>
-      {locked && (
-        <motion.text
-          x={CX + 30} y={CY - 28}
-          fill="rgba(0,0,0,0.65)" fontSize="8" fontFamily="'Satoshi', sans-serif" letterSpacing="0.15em"
-          initial={{ opacity: 0 }} animate={{ opacity: [0, 0.8, 0.8, 0] }}
-          transition={{ duration: 2.2, times: [0, 0.15, 0.85, 1] }}
-        >
-          LOCKED
-        </motion.text>
-      )}
     </svg>
   );
 }
