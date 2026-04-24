@@ -373,9 +373,9 @@ function HeroV15() {
                 <p style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   color: "#001489",
-                  fontSize: 12,
+                  fontSize: 18,
                   fontWeight: 700,
-                  letterSpacing: "0.40em",
+                  letterSpacing: "0.12em",
                   textTransform: "uppercase",
                 }}>
                   {featuredArticle?.category}
