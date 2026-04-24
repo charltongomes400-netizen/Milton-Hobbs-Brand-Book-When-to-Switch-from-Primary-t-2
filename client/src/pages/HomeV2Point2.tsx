@@ -369,7 +369,7 @@ function HeroV15() {
             >
               {/* Category eyebrow */}
               <div className="flex items-center gap-3 mb-5" data-testid="hero-eyebrow">
-                <div style={{ width: 20, height: 1.5, background: "#4A58AA", flexShrink: 0 }} />
+                <div style={{ width: 20, height: 1.5, background: "#001489", flexShrink: 0 }} />
                 <p style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   color: "#001489",
