@@ -1964,7 +1964,7 @@ function ContactFormV15() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="grid grid-cols-1 lg:grid-cols-[7fr_4fr]"
-          style={{ borderTop: "1px solid rgba(0,20,137,0.10)" }}
+          style={{ borderTop: "1px solid rgba(0,20,137,0.10)", marginLeft: -20 }}
         >
           {/* ── Form — blue boxes ── */}
           <div style={{ paddingTop: 48, paddingRight: "clamp(0px, 5vw, 72px)", paddingBottom: 0 }}>
