@@ -268,7 +268,7 @@ function HeaderV15() {
                 <div>
                   <p style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: 9,
+                    fontSize: 12,
                     fontWeight: 700,
                     letterSpacing: "0.30em",
                     textTransform: "uppercase",
