@@ -1739,7 +1739,7 @@ function ContactFormV15() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-1 lg:grid-cols-[7fr_4fr]"
+          className="grid grid-cols-1 lg:grid-cols-[1fr_1fr]"
           style={{ borderTop: "1px solid rgba(0,20,137,0.10)" }}
         >
           {/* ── Form — blue boxes ── */}
