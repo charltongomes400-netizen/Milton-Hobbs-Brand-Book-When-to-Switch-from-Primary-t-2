@@ -1934,7 +1934,11 @@ function ContactFormV15() {
       {/* ── Right: image panel with blue multiply effect ── */}
       <div
         className="hidden lg:block relative overflow-hidden"
-        style={{ isolation: "isolate", borderLeft: "1px solid rgba(0,20,137,0.10)" }}
+        style={{
+          isolation: "isolate",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 28%)",
+          maskImage: "linear-gradient(to right, transparent 0%, black 28%)",
+        }}
       >
         {/* Photo */}
         <img
