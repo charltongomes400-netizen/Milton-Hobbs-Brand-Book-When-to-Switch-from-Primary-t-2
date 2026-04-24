@@ -51,7 +51,7 @@ function HeaderV15() {
   const mainLinks = navLinks.filter(l => l.href !== "#contact");
   const contactLink = navLinks.find(l => l.href === "#contact")!;
 
-  const textCol   = "rgba(0,20,137,0.55)";
+  const textCol   = "#001489";
   const textHover = "#001489";
 
   return (
@@ -96,8 +96,8 @@ function HeaderV15() {
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
               }}
               onClick={e => { if (link.href.startsWith("#")) { e.preventDefault(); snapScrollTo(link.href); } }}
-              onMouseEnter={e => (e.currentTarget.style.color = textHover)}
-              onMouseLeave={e => (e.currentTarget.style.color = textCol)}
+              onMouseEnter={e => { e.currentTarget.style.color = textHover; e.currentTarget.style.textDecoration = "underline"; e.currentTarget.style.textUnderlineOffset = "4px"; }}
+              onMouseLeave={e => { e.currentTarget.style.color = textCol; e.currentTarget.style.textDecoration = "none"; }}
             >
               {link.label}
             </a>
