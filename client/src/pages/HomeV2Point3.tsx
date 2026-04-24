@@ -251,7 +251,7 @@ function HeaderV15() {
 
 /* ─── HERO ─────────────────────────────────────────────────────────────── */
 
-const HERO_CYCLE_MS = 12000;
+const HERO_CYCLE_MS = 5000;
 
 // ── Floating background tiles — scattered in the photo area (right side) ─────
 // Panel is 55% wide with clip-path bottom at 65% = 35.75% of viewport.
