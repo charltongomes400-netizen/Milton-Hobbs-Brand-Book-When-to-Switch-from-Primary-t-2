@@ -295,7 +295,7 @@ function HeaderV15() {
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     fontSize: 14,
                     lineHeight: 1.75,
-                    color: "rgba(0,0,0,0.55)",
+                    color: "#000000",
                     maxWidth: "24ch",
                     marginBottom: 36,
                   }}>
