@@ -296,7 +296,7 @@ function HeaderV15() {
                     fontSize: 14,
                     lineHeight: 1.75,
                     color: "#000000",
-                    maxWidth: "24ch",
+                    maxWidth: "44ch",
                     marginBottom: 36,
                   }}>
                     Eight practice areas. One firm with precision counsel across the UAE, Europe and beyond.
