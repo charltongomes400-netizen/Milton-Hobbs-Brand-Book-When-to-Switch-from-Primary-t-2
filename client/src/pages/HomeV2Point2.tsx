@@ -1932,7 +1932,10 @@ function ContactFormV15() {
       </div>
 
       {/* ── Right: image panel with blue multiply effect ── */}
-      <div className="hidden lg:block relative overflow-hidden" style={{ isolation: "isolate" }}>
+      <div
+        className="hidden lg:block relative overflow-hidden"
+        style={{ isolation: "isolate", borderLeft: "1px solid rgba(0,20,137,0.10)" }}
+      >
         {/* Photo */}
         <img
           src={imgCorp}
@@ -1947,7 +1950,7 @@ function ContactFormV15() {
             objectPosition: "center",
           }}
         />
-        {/* Exact same multiply layer as Practice Areas */}
+        {/* Blue multiply — exact same as Practice Areas */}
         <div style={{
           position: "absolute",
           inset: 0,
@@ -1955,11 +1958,11 @@ function ContactFormV15() {
           mixBlendMode: "multiply",
           pointerEvents: "none",
         }} />
-        {/* Left-edge fade so it blends into the white content */}
+        {/* Bottom-to-top dark vignette for depth */}
         <div style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(to right, #FFFFFF 0%, transparent 35%)",
+          background: "linear-gradient(to top, rgba(0,0,20,0.55) 0%, transparent 50%)",
           pointerEvents: "none",
         }} />
       </div>
