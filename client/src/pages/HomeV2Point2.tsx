@@ -1165,7 +1165,7 @@ function DifferentiatorsV15() {
             fontWeight: 700,
             letterSpacing: "0.40em",
             textTransform: "uppercase",
-	              color: "#001489",
+                      color: "#001489",
             marginBottom: 16,
           }}
         >
@@ -1717,7 +1717,7 @@ function ContactFormV15() {
             fontWeight: 700,
             letterSpacing: "0.12em",
             textTransform: "uppercase",
-            color: "#4A58AA",
+	              color: "#001489",
             marginBottom: 20,
           }}>
             {c.eyebrow}
