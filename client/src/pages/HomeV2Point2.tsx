@@ -2241,7 +2241,6 @@ function FooterV15() {
           Reason&ensp;·&ensp;Rigor&ensp;·&ensp;Resolution
         </p>
       </div>
-
       {/* ── Main band: 3-column grid ── */}
       <div className="max-w-[1400px] mx-auto px-8">
         <div
@@ -2421,7 +2420,6 @@ function FooterV15() {
           </div>
         </div>
       </div>
-
       {/* ── Bottom band: clocks · copyright · legal ── */}
       <div className="max-w-[1400px] mx-auto px-8">
         <div
@@ -2436,7 +2434,9 @@ function FooterV15() {
             ].map((o, i) => (
               <div key={o.label} className="flex items-center gap-2">
                 {i > 0 && <span style={{ width: 1, height: 10, background: "rgba(255,255,255,0.30)", marginRight: 6 }} />}
-                <span style={{ width: 5, height: 5, borderRadius: "50%", background: o.dot, flexShrink: 0 }} />
+                <span
+                  style={{ width: 5, height: 5, borderRadius: "50%", background: o.dot, flexShrink: 0 }}
+                  className="bg-[#ffffff]" />
                 <span style={{ color: "#FFFFFF", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>{o.label}</span>
                 <span style={{ color: "#FFFFFF", fontSize: 11, fontFamily: "'Plus Jakarta Sans', monospace", letterSpacing: "0.04em", minWidth: "6ch" }}>{o.time}</span>
               </div>
