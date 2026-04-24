@@ -450,7 +450,7 @@ function HeroV15() {
                   fontWeight: 700,
                   letterSpacing: "0.28em",
                   textTransform: "uppercase",
-                  color: "#848484",
+                  color: "#001489",
                   marginBottom: 20,
                 }}
                 className="text-[12px]">
