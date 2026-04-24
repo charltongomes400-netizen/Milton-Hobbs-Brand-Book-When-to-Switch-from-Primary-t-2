@@ -1701,7 +1701,7 @@ function ContactFormV15() {
       className="v2-snap-section"
       style={{ background: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "center" }}
     >
-      <div className="w-full max-w-[1400px]" style={{ paddingTop: 80, paddingBottom: 80, paddingLeft: "clamp(32px, 5vw, 80px)", paddingRight: "clamp(32px, 5vw, 80px)" }}>
+      <div className="max-w-[1400px] mx-auto px-8 w-full" style={{ paddingTop: 80, paddingBottom: 80 }}>
 
         {/* ── Section header ── */}
         <motion.div
