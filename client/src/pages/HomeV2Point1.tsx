@@ -370,22 +370,27 @@ function HeroV15() {
               {featuredArticle?.title}
             </h1>
 
-            {/* Article excerpt */}
-            {featuredArticle?.excerpt && (
-              <p
-                data-testid="hero-excerpt"
-                style={{
-                  color: "rgba(255,255,255,0.60)",
-                  fontSize: "1rem",
-                  lineHeight: 1.65,
-                  marginBottom: "2.25rem",
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  maxWidth: "52ch",
-                }}
-              >
-                {featuredArticle.excerpt}
-              </p>
-            )}
+            {/* Article excerpt — derived from lead paragraph of full article data */}
+            {(() => {
+              const rawLead = (articles[currentIndex]?.body.find(s => s.type === "lead") as { type: "lead"; text: string } | undefined)?.text ?? "";
+              const leadExcerpt = rawLead.length > 160 ? rawLead.slice(0, 160).replace(/\s+\S*$/, "") + "…" : rawLead;
+              return leadExcerpt ? (
+                <p
+                  data-testid="hero-excerpt"
+                  style={{
+                    color: "rgba(255,255,255,0.60)",
+                    fontSize: "1rem",
+                    lineHeight: 1.65,
+                    marginTop: "1.25rem",
+                    marginBottom: "2.25rem",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    maxWidth: "52ch",
+                  }}
+                >
+                  {leadExcerpt}
+                </p>
+              ) : null;
+            })()}
 
             {/* Read Article link */}
             <a
