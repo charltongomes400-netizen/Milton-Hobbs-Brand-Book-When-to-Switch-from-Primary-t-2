@@ -381,8 +381,8 @@ function HeroV15() {
                     color: "rgba(255,255,255,0.60)",
                     fontSize: "1rem",
                     lineHeight: 1.65,
-                    marginTop: "1.25rem",
-                    marginBottom: "2.25rem",
+                    marginTop: "2.5rem",
+                    marginBottom: "2.75rem",
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     maxWidth: "52ch",
                   }}
