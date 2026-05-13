@@ -1,0 +1,77 @@
+Here is a comprehensive Master Project Info Doc that you can copy and paste directly into Replit.
+
+You can either paste this into Replit's main prompt box, give it to the Replit AI chat as context, or save it as a file called PROJECT_BRIEF.md inside your Replit workspace so the AI can always read it.
+
+COPY AND PASTE BELOW THIS LINE
+Project Overview: Milton Hobbs Website Build
+1. Core Identity
+
+Client Name: Milton Hobbs
+
+Industry: Boutique Corporate Law Firm
+
+Tagline: "Reason. Rigor. Resolution."
+
+Target Audience: Premium corporate clients, cross-border businesses (UAE ↔ France).
+
+Brand Vibe: Global authority meets boutique exclusivity. Formal, modern, and highly sophisticated.
+
+Design Inspiration: Think McKinsey & Company or Hogan Lovells. Heavy focus on thought leadership and clean, structural authority.
+
+Strict Visual Ban: Do NOT use any cliché legal imagery under any circumstances. No gavels, no scales of justice, no pillars, and no law books.
+
+2. Tech Stack Requirements
+
+Framework: Next.js (React)
+
+Styling: Tailwind CSS
+
+Animations: Framer Motion (and Three.js for 3D backgrounds if applicable)
+
+Localization: i18n support for English and French
+
+3. Brand Guidelines & Color Palette
+
+Primary Background: Crisp White (#FFFFFF). The UI must be white-dominant to avoid feeling flat or heavy.
+
+Typography & Primary Accents: Deep Blue (#001489) and Black.
+
+Action Accent: Yellow (Use for key highlights, buttons, or hover states to provide high contrast against the blue).
+
+Typography Style: Clean, geometric sans-serif (e.g., Inter, Roobert, or similar).
+
+Shapes: The brand relies on "Rigor." Use sharp, clean lines and square/geometric elements. Avoid heavily rounded corners.
+
+4. Animation & Interaction Rules
+
+Backgrounds: Use subtle, slow-moving 3D geometric grids or rotating glass-like square structures.
+
+Layouts: Heavily utilize asymmetrical "Bento Box" (masonry square) grids for practice areas and content.
+
+Micro-interactions: Implement square border-tracing animations. On hover, a crisp accent-colored line should animate around the square perimeter of cards or buttons.
+
+5. Localization (Bilingual Requirements)
+
+The site must fully support English (EN) and French (FR).
+
+Include a functional EN/FR language toggle in the global header.
+
+Structural Rule: All text containers and UI elements must be built with 20% extra padding/breathing room to naturally accommodate French text expansion without breaking the layout.
+
+6. Sitemap & Architecture
+
+Header Navigation: Home, Our Firm, Our Expertise, Publications & Insights, Careers, Contact.
+
+"Our Expertise" Mega-Menu: Must contain these 10 items: Corporate & Commercial, Real Estate & Property, Litigation & Dispute Resolution, Arbitration & Mediation, Employment & Labour, Banking & Finance, Tax, Intellectual Property, Technology / Startups, Immigration.
+
+Hidden Architecture (Critical): Build the URL routes for /our-people and /our-people/amir-fardoun. These must exist in the code but remain completely unlinked and hidden from the live UI navigation.
+
+Footer: Must include two location columns (Dubai & Paris), contact info (contact@miltonhobbs.com), a Cookie Consent banner, and standard legal links (Privacy Policy, Cookies, Legal Disclaimers).
+
+7. Key Page Elements (Home Page)
+
+Hero: Geometric 3D background, tagline, and two buttons (Book a consultation / Contact us).
+
+Differentiators Grid: 4 points (Boutique model, Trilingual fluency, Cross-border structuring, European savoir-faire).
+
+Thought Leadership (Instead of Case Studies): A section featuring 4 custom law articles (e.g., "Navigating Cross-Border Compliance in the Gulf").
