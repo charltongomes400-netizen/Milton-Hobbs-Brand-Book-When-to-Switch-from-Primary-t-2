@@ -2112,9 +2112,9 @@ function FooterV15() {
   const parisTime = fmtTime("Europe/Paris");
 
   return (
-    <footer id="footer" data-testid="footer" className="v2-snap-end" style={{ background: "#001489", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+    <footer id="footer" data-testid="footer" className="v2-snap-end" style={{ background: "#001489" }}>
       {/* ── Motto whisper — very top ── */}
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 40, paddingBottom: 36, borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 40, paddingBottom: 36 }}>
         <p style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",
           fontSize: 9,
@@ -2131,7 +2131,7 @@ function FooterV15() {
       <div className="max-w-[1400px] mx-auto px-8">
         <div
           className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-6"
-          style={{ paddingTop: 52, paddingBottom: 52, borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ paddingTop: 52, paddingBottom: 52 }}
         >
           {/* LEFT — Wordmark + tagline */}
           <div className="flex flex-col gap-5">
