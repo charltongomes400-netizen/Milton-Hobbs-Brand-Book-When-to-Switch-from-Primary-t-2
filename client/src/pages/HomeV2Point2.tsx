@@ -2817,7 +2817,7 @@ function PracticeAreasV18() {
 
 function HomeV2Point2Inner() {
   return (
-    <div className="bg-[#FCFCFC] min-h-screen v2-snap-container" data-testid="home-v1-5-page">
+    <div className="bg-[#001489] min-h-screen v2-snap-container" data-testid="home-v1-5-page">
       <HeaderV15 />
       <main>
         <HeroV15 />
