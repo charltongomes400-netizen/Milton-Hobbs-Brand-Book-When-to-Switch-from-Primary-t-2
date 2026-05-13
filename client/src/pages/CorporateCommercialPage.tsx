@@ -430,14 +430,6 @@ function CorporateCommercialInner() {
         data-header-theme="dark"
         className="relative min-h-screen bg-[#001489] flex items-center overflow-hidden pt-20"
       >
-        {/* Mesh grid background */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.032]"
-          style={{
-            backgroundImage: "linear-gradient(rgba(128,153,255,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(128,153,255,0.9) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-          }}
-        />
 
 
 
