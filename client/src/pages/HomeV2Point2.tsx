@@ -509,6 +509,50 @@ function HeroV15() {
       className="relative min-h-screen overflow-hidden v2-snap-section"
       style={{ background: "#001489" }}
     >
+      <AnimatePresence>
+        <motion.img
+          key={bgIndex}
+          src={HERO_BG_IMAGES[bgIndex]}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ objectPosition: "center 30%", mixBlendMode: "multiply" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 2.4, ease: "easeInOut" }}
+        />
+      </AnimatePresence>
+
+      {ACCENT_TILES.map((tile, i) => (
+        <motion.div
+          key={i}
+          className="absolute pointer-events-none"
+          style={{
+            left:            tile.left,
+            top:             tile.top,
+            width:           TILE_SZ,
+            height:          TILE_SZ,
+            backgroundColor: tile.col,
+          }}
+          animate={{ opacity: [0, 0, 1, 1, 0, 0] }}
+          transition={{
+            duration: tile.dur,
+            delay:    tile.delay,
+            repeat:   Infinity,
+            ease:     "easeInOut",
+            times:    [0, 0.15, 0.40, 0.60, 0.85, 1],
+          }}
+        />
+      ))}
+
+      <div
+        className="absolute inset-x-0 bottom-0 pointer-events-none"
+        style={{
+          height: "70%",
+          background: "linear-gradient(to top, rgba(0,14,80,0.80) 0%, rgba(0,14,80,0.40) 45%, transparent 100%)",
+        }}
+      />
 
       <div className="relative z-10 flex flex-col justify-end min-h-screen px-12 xl:px-24 pb-16 pt-28"
         style={{ maxWidth: "1200px" }}>
