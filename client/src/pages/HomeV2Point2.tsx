@@ -36,14 +36,14 @@ function snapScrollTo(hash: string) {
 /* ─── HEADER ────────────────────────────────────────────────────────────── */
 
 const EXPERTISE_MENU_ITEMS = [
-  { num: "01", title: "Corporate & Commercial"         },
-  { num: "02", title: "Tax & Compliance"               },
-  { num: "03", title: "Mergers & Acquisitions"         },
-  { num: "04", title: "Startups & Venture Capital"     },
-  { num: "05", title: "IP & Technology"                },
-  { num: "06", title: "Real Estate & Property"         },
-  { num: "07", title: "Employment & Labor"             },
-  { num: "08", title: "Litigation & Disputes"          },
+  { num: "01", title: "Corporate & Commercial",         href: "/expertise/corporate-commercial" },
+  { num: "02", title: "Tax & Compliance",               href: null },
+  { num: "03", title: "Mergers & Acquisitions",         href: null },
+  { num: "04", title: "Startups & Venture Capital",     href: null },
+  { num: "05", title: "IP & Technology",                href: null },
+  { num: "06", title: "Real Estate & Property",         href: null },
+  { num: "07", title: "Employment & Labor",             href: null },
+  { num: "08", title: "Litigation & Disputes",          href: null },
 ];
 
 function HeaderV15() {
@@ -347,9 +347,9 @@ function HeaderV15() {
                   {EXPERTISE_MENU_ITEMS.map((area, i) => (
                     <a
                       key={i}
-                      href="#expertise"
+                      href={area.href ?? "#expertise"}
                       data-testid={`megamenu-area-${area.num}`}
-                      onClick={e => { e.preventDefault(); setExpertiseOpen(false); snapScrollTo("#expertise"); }}
+                      onClick={e => { if (!area.href) { e.preventDefault(); setExpertiseOpen(false); snapScrollTo("#expertise"); } else { setExpertiseOpen(false); } }}
                       className="group flex items-center gap-4"
                       style={{
                         padding: "15px 0",
@@ -1400,6 +1400,7 @@ const CASE_FILE_ITEMS = [
     brief: "Cross-border transactions, joint ventures, and commercial agreements.",
     desc:  "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors. We advise on the full lifecycle of corporate matters, from entity formation to complex multi-party deals.",
     img: imgCorp,
+    pageHref: "/expertise/corporate-commercial",
   },
   {
     num: "02", title: "Tax & Compliance",                   tag: "Advisory",
@@ -1721,28 +1722,54 @@ function CaseFileStripV18() {
                   >
                     {activeItem.desc}
                   </p>
-                  <a
-                    href="#contact"
-                    data-testid="case-file-enquire-cta"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 10,
-                      color: "rgba(255,255,255,0.85)",
-                      fontSize: 11,
-                      fontWeight: 600,
-                      letterSpacing: "0.2em",
-                      textTransform: "uppercase",
-                      textDecoration: "none",
-                      borderBottom: "1px solid rgba(255,255,255,0.3)",
-                      paddingBottom: 2,
-                    }}
-                  >
-                    Enquire About This Area
-                    <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-                      <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </a>
+                  <div style={{ display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
+                    <a
+                      href="#contact"
+                      data-testid="case-file-enquire-cta"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 10,
+                        color: "rgba(255,255,255,0.85)",
+                        fontSize: 11,
+                        fontWeight: 600,
+                        letterSpacing: "0.2em",
+                        textTransform: "uppercase",
+                        textDecoration: "none",
+                        borderBottom: "1px solid rgba(255,255,255,0.3)",
+                        paddingBottom: 2,
+                      }}
+                    >
+                      Enquire About This Area
+                      <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
+                        <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </a>
+                    {activeItem.pageHref && (
+                      <a
+                        href={activeItem.pageHref}
+                        data-testid="case-file-view-page-cta"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 8,
+                          color: "#D4AF36",
+                          fontSize: 11,
+                          fontWeight: 600,
+                          letterSpacing: "0.2em",
+                          textTransform: "uppercase",
+                          textDecoration: "none",
+                          borderBottom: "1px solid rgba(212,175,54,0.4)",
+                          paddingBottom: 2,
+                        }}
+                      >
+                        View Practice Area
+                        <svg width="12" height="12" fill="none" viewBox="0 0 12 12">
+                          <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
                 </div>
 
                 {/* Panel image */}
@@ -2377,7 +2404,7 @@ function FooterV15() {
 /* ─── PRACTICE AREAS ────────────────────────────────────────────────────── */
 
 const EXPERTISE_ITEMS_V18 = [
-  { num: "01", short: "Corporate",   title: "Corporate & Commercial",             desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors.",                               img: imgCorp   },
+  { num: "01", short: "Corporate",   title: "Corporate & Commercial",             desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors.",                               img: imgCorp,   pageHref: "/expertise/corporate-commercial" },
   { num: "02", short: "Tax",         title: "Tax & Compliance",                   desc: "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals.",                    img: imgTax    },
   { num: "03", short: "M&A",         title: "Mergers & Acquisitions",             desc: "End-to-end advisory on M&A transactions, due diligence, valuations, and seamless post-merger integration across sectors.",                                      img: imgBank   },
   { num: "04", short: "Startups",    title: "Startups & Venture Capital",         desc: "Funding rounds, term sheets, shareholder agreements, and robust legal infrastructure for founders, operators, and investors.",                                  img: imgTech   },
@@ -2680,41 +2707,71 @@ function PracticeAreasV18() {
                         {item.desc}
                       </p>
 
-                      {/* Enquire CTA */}
-                      <a
-                        href="#contact"
-                        data-testid={`expertise-enquire-${i}`}
-                        className="inline-flex items-center gap-2"
-                        style={{
-                          color: "#001489",
-                          fontSize: 9,
-                          fontWeight: 700,
-                          letterSpacing: "0.26em",
-                          textTransform: "uppercase",
-                          textDecoration: "none",
-                          fontFamily: "'Plus Jakarta Sans', sans-serif",
-                          border: "1px solid #001489",
-                          padding: "11px 20px",
-                          background: "transparent",
-                          transition: "background 0.25s, color 0.25s",
-                          display: "inline-flex",
-                        }}
-                        onMouseEnter={e => {
-                          const el = e.currentTarget as HTMLElement;
-                          el.style.background = "#001489";
-                          el.style.color = "#FFFFFF";
-                        }}
-                        onMouseLeave={e => {
-                          const el = e.currentTarget as HTMLElement;
-                          el.style.background = "transparent";
-                          el.style.color = "#001489";
-                        }}
-                      >
-                        Enquire
-                        <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
-                          <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-                        </svg>
-                      </a>
+                      {/* Enquire + View Page CTAs */}
+                      <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+                        <a
+                          href="#contact"
+                          data-testid={`expertise-enquire-${i}`}
+                          className="inline-flex items-center gap-2"
+                          style={{
+                            color: "#001489",
+                            fontSize: 9,
+                            fontWeight: 700,
+                            letterSpacing: "0.26em",
+                            textTransform: "uppercase",
+                            textDecoration: "none",
+                            fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            border: "1px solid #001489",
+                            padding: "11px 20px",
+                            background: "transparent",
+                            transition: "background 0.25s, color 0.25s",
+                            display: "inline-flex",
+                          }}
+                          onMouseEnter={e => {
+                            const el = e.currentTarget as HTMLElement;
+                            el.style.background = "#001489";
+                            el.style.color = "#FFFFFF";
+                          }}
+                          onMouseLeave={e => {
+                            const el = e.currentTarget as HTMLElement;
+                            el.style.background = "transparent";
+                            el.style.color = "#001489";
+                          }}
+                        >
+                          Enquire
+                          <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
+                            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                          </svg>
+                        </a>
+                        {item.pageHref && (
+                          <a
+                            href={item.pageHref}
+                            data-testid={`expertise-view-page-${i}`}
+                            style={{
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: 6,
+                              color: "#D4AF36",
+                              fontSize: 9,
+                              fontWeight: 700,
+                              letterSpacing: "0.26em",
+                              textTransform: "uppercase",
+                              textDecoration: "none",
+                              fontFamily: "'Plus Jakarta Sans', sans-serif",
+                              padding: "11px 0",
+                              borderBottom: "1px solid rgba(212,175,54,0.45)",
+                              transition: "opacity 0.2s",
+                            }}
+                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "0.7"; }}
+                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }}
+                          >
+                            View Practice Area
+                            <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
+                              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
