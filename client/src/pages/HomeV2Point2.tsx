@@ -2036,6 +2036,24 @@ function ContactFormV15() {
                 {f.email}
               </a>
             </div>
+
+            <div style={{ height: 1, background: "rgba(0,20,137,0.08)", margin: "24px 0" }} />
+
+            {/* WhatsApp */}
+            <div>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
+                WhatsApp
+              </p>
+              <a
+                href="https://wa.me/971561234567"
+                data-testid="contact-whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 14, textDecoration: "none" }}
+              >
+                +971 56 123 4567
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>
