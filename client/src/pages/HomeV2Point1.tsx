@@ -359,7 +359,7 @@ function HeroV15() {
 
             {/* Large article headline */}
             <h1
-              className="font-heading text-white font-bold mb-9"
+              className="font-heading text-white font-bold mb-6"
               style={{
                 fontSize: "clamp(2.25rem, 5.5vw, 4.75rem)",
                 lineHeight: 1.04,
@@ -369,6 +369,23 @@ function HeroV15() {
             >
               {featuredArticle?.title}
             </h1>
+
+            {/* Article excerpt */}
+            {featuredArticle?.excerpt && (
+              <p
+                data-testid="hero-excerpt"
+                style={{
+                  color: "rgba(255,255,255,0.60)",
+                  fontSize: "1rem",
+                  lineHeight: 1.65,
+                  marginBottom: "2.25rem",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  maxWidth: "52ch",
+                }}
+              >
+                {featuredArticle.excerpt}
+              </p>
+            )}
 
             {/* Read Article link */}
             <a
