@@ -474,7 +474,7 @@ function CorporateCommercialInner() {
               >
                 {tx.heroH1Line1}
                 <br />
-                <span className="text-[#8099FF] whitespace-nowrap">{tx.heroH1Line2}</span>
+                <span className="text-white whitespace-nowrap">{tx.heroH1Line2}</span>
               </motion.h1>
 
               {/* Rule */}
