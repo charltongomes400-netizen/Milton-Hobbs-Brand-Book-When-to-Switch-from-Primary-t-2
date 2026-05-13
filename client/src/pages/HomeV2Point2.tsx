@@ -506,7 +506,7 @@ function HeroV15() {
     <section
       id="home"
       data-testid="hero-section"
-      className="relative min-h-screen overflow-hidden"
+      className="relative min-h-screen overflow-hidden v2-snap-section"
       style={{ background: "#001489" }}
     >
       <AnimatePresence>
