@@ -385,6 +385,10 @@ function HeroV15() {
                     marginBottom: "2.25rem",
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     maxWidth: "52ch",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
                   }}
                 >
                   {leadExcerpt}
