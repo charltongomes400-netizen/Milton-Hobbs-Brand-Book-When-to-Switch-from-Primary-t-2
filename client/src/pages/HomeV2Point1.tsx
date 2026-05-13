@@ -335,7 +335,7 @@ function HeroV15() {
 
       {/* ── Editorial content — bottom-left ─────────────────────────────── */}
       <div className="relative z-10 flex flex-col justify-end min-h-screen px-12 xl:px-24 pb-16 pt-28"
-        style={{ maxWidth: "860px" }}>
+        style={{ maxWidth: "1200px" }}>
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -381,8 +381,8 @@ function HeroV15() {
                     color: "rgba(255,255,255,0.60)",
                     fontSize: "1rem",
                     lineHeight: 1.65,
-                    marginTop: "2.5rem",
-                    marginBottom: "2.75rem",
+                    marginTop: "1.25rem",
+                    marginBottom: "2.25rem",
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     maxWidth: "52ch",
                   }}
