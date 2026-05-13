@@ -2751,7 +2751,7 @@ function PracticeAreasV18() {
                               display: "inline-flex",
                               alignItems: "center",
                               gap: 6,
-                              color: "#D4AF36",
+                              color: "#8099FF",
                               fontSize: 9,
                               fontWeight: 700,
                               letterSpacing: "0.26em",
@@ -2759,7 +2759,7 @@ function PracticeAreasV18() {
                               textDecoration: "none",
                               fontFamily: "'Plus Jakarta Sans', sans-serif",
                               padding: "11px 0",
-                              borderBottom: "1px solid rgba(212,175,54,0.45)",
+                              borderBottom: "1px solid rgba(128,153,255,0.45)",
                               transition: "opacity 0.2s",
                             }}
                             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "0.7"; }}
