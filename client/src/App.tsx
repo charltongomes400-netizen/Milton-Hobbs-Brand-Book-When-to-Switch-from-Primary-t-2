@@ -24,6 +24,7 @@ import HomeObsidian from "@/pages/HomeObsidian";
 import HomeClaret from "@/pages/HomeClaret";
 import ArticlePage from "@/pages/ArticlePage";
 import ImmigrationPage from "@/pages/ImmigrationPage";
+import CorporateCommercialPage from "@/pages/CorporateCommercialPage";
 import OurFirmPage from "@/pages/OurFirmPage";
 import CareersPage from "@/pages/CareersPage";
 
@@ -52,6 +53,7 @@ function Router() {
       <Route path="/careers" component={CareersPage} />
       <Route path="/insights/:slug" component={ArticlePage} />
       <Route path="/expertise/immigration" component={ImmigrationPage} />
+      <Route path="/expertise/corporate-commercial" component={CorporateCommercialPage} />
       <Route component={NotFound} />
     </Switch>
   );

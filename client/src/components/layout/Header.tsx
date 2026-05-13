@@ -7,7 +7,7 @@ const practiceAreas = [
   {
     title: "Corporate & Commercial",
     slug: "corporate-commercial",
-    available: false,
+    available: true,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
         <rect x="2" y="7" width="20" height="14" rx="1" stroke="currentColor" strokeWidth="1.4" />
