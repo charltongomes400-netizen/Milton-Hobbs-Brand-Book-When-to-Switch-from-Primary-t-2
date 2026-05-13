@@ -2514,12 +2514,14 @@ function PracticeAreasV18() {
                   }}
                 />
 
-                {/* Solid #001489 multiply layer — exact Photoshop equivalent */}
+                {/* Solid #001489 multiply layer — collapsed only */}
                 <div style={{
                   position: "absolute",
                   inset: 0,
                   background: "#001489",
                   mixBlendMode: "multiply",
+                  opacity: isActive ? 0 : 1,
+                  transition: "opacity 0.55s ease",
                   pointerEvents: "none",
                 }} />
 
@@ -2532,13 +2534,13 @@ function PracticeAreasV18() {
                   transition: "opacity 0.6s ease",
                   pointerEvents: "none",
                 }} />
-                {/* Bottom gradient — expanded state */}
+                {/* White overlay — expanded state */}
                 <div style={{
                   position: "absolute",
                   inset: 0,
-                  background: "linear-gradient(to bottom, transparent 30%, rgba(0,0,20,0.68) 60%, rgba(0,0,20,0.92) 100%)",
+                  background: "linear-gradient(to bottom, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.82) 38%, rgba(255,255,255,0.97) 100%)",
                   opacity: isActive ? 1 : 0,
-                  transition: "opacity 0.6s ease",
+                  transition: "opacity 0.55s ease",
                   pointerEvents: "none",
                 }} />
 
@@ -2625,7 +2627,7 @@ function PracticeAreasV18() {
                         fontWeight: 700,
                         letterSpacing: "0.34em",
                         textTransform: "uppercase",
-                        color: "#7A84BE",
+                        color: "rgba(0,20,137,0.45)",
                         marginBottom: 10,
                       }}>
                         {item.num}
@@ -2638,7 +2640,7 @@ function PracticeAreasV18() {
                           fontSize: "clamp(1.15rem, 1.6vw, 1.6rem)",
                           lineHeight: 1.12,
                           letterSpacing: "-0.02em",
-                          color: "#FFFFFF",
+                          color: "#001489",
                           marginBottom: 18,
                         }}
                       >
@@ -2646,12 +2648,12 @@ function PracticeAreasV18() {
                       </h3>
 
                       {/* Thin rule */}
-                      <div style={{ width: 28, height: 1, background: "rgba(255,255,255,0.22)", marginBottom: 18 }} />
+                      <div style={{ width: 28, height: 1, background: "rgba(0,20,137,0.18)", marginBottom: 18 }} />
 
                       {/* Description */}
                       <p style={{
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        color: "rgba(255,255,255,0.62)",
+                        color: "rgba(0,0,30,0.62)",
                         fontSize: 13,
                         lineHeight: 1.75,
                         marginBottom: 24,
@@ -2666,14 +2668,14 @@ function PracticeAreasV18() {
                         data-testid={`expertise-enquire-${i}`}
                         className="inline-flex items-center gap-2"
                         style={{
-                          color: "#FFFFFF",
+                          color: "#001489",
                           fontSize: 9,
                           fontWeight: 700,
                           letterSpacing: "0.26em",
                           textTransform: "uppercase",
                           textDecoration: "none",
                           fontFamily: "'Plus Jakarta Sans', sans-serif",
-                          border: "1px solid #FFFFFF",
+                          border: "1px solid #001489",
                           padding: "11px 20px",
                           background: "transparent",
                           transition: "background 0.25s, color 0.25s",
@@ -2681,13 +2683,13 @@ function PracticeAreasV18() {
                         }}
                         onMouseEnter={e => {
                           const el = e.currentTarget as HTMLElement;
-                          el.style.background = "#FFFFFF";
-                          el.style.color = "#001489";
+                          el.style.background = "#001489";
+                          el.style.color = "#FFFFFF";
                         }}
                         onMouseLeave={e => {
                           const el = e.currentTarget as HTMLElement;
                           el.style.background = "transparent";
-                          el.style.color = "#FFFFFF";
+                          el.style.color = "#001489";
                         }}
                       >
                         Enquire
