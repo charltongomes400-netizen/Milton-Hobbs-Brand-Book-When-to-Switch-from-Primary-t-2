@@ -734,7 +734,7 @@ function CorporateCommercialInner() {
               viewport={{ once: true }}
               transition={{ duration: 0.65 }}
             >
-              <p className="text-[#8099FF] text-[11px] tracking-[0.35em] uppercase font-bold mb-4">{tx.bannerEyebrow}</p>
+              <p className="text-white text-[11px] tracking-[0.35em] uppercase font-bold mb-4">{tx.bannerEyebrow}</p>
               <h2 className="font-heading text-white font-bold text-[clamp(1.6rem,3vw,2.4rem)] tracking-tight leading-tight mb-3">
                 {tx.bannerH2}
               </h2>
