@@ -30,7 +30,7 @@ import CareersPage from "@/pages/CareersPage";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      <Route path="/" component={HomeV2Point2} />
       <Route path="/home-v1" component={HomeV1} />
       <Route path="/home-v2" component={HomeV2} />
       <Route path="/home-v3" component={HomeV3} />
