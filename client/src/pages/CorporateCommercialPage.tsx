@@ -71,218 +71,194 @@ const PAGE_TEXT = {
   },
 };
 
-/* ─── 3D CORPORATE BRIEFCASE ────────────────────────────────────────────────── */
+/* ─── WINDOW CELL (animated building window) ───────────────────────────────── */
 
-function Corporate3D() {
+const LIT_WINDOWS = new Set([1, 4, 6, 9, 11, 14, 17, 19, 22, 24, 26, 29, 32, 35, 37, 40, 43, 46, 48]);
+
+function WindowCell({ index }: { index: number }) {
+  const isLit = LIT_WINDOWS.has(index);
+  const delay = (index * 0.37) % 7;
   return (
-    <div className="relative flex items-center justify-center" style={{ perspective: "1100px" }}>
-
-      {/* Subtle radial glow */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-15"
-        style={{ background: "radial-gradient(circle at 50% 55%, rgba(128,153,255,0.55) 0%, transparent 65%)" }}
-      />
-
-      {/* Main briefcase body */}
-      <motion.div
-        animate={{ rotateY: [-18, -10, -18], rotateX: [7, 3, 7] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        style={{ transformStyle: "preserve-3d" }}
-        className="relative w-[210px] h-[168px]"
-      >
-        {/* Front face */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(145deg, #002090 0%, #001489 55%, #000A4F 100%)",
-            boxShadow: "10px 20px 52px rgba(0,0,0,0.70), -4px 0 18px rgba(0,10,79,0.85), inset 1px 1px 0 rgba(255,255,255,0.06)",
-          }}
-        >
-          {/* Outer frame */}
-          <div className="absolute inset-[9px] border border-[#8099FF]/40 pointer-events-none" />
-          {/* Inner frame */}
-          <div className="absolute inset-[14px] border border-[#8099FF]/18 pointer-events-none" />
-
-          {/* Centre clasp line */}
-          <div className="absolute left-[9px] right-[9px]" style={{ top: "50%", height: 1, background: "rgba(128,153,255,0.22)" }} />
-
-          {/* Clasp icon — centred square */}
-          <div
-            className="absolute"
-            style={{
-              left: "50%",
-              top: "50%",
-              width: 18,
-              height: 18,
-              transform: "translate(-50%, -50%)",
-              border: "1px solid rgba(128,153,255,0.55)",
-              background: "rgba(0,20,137,0.9)",
-            }}
-          >
-            <div className="absolute inset-[3px] border border-[#8099FF]/30" />
-          </div>
-
-          {/* Top-left MH */}
-          <div className="absolute top-5 left-5 flex flex-col gap-1">
-            <span className="font-heading text-[#8099FF] font-bold text-[11px] tracking-[0.30em]">MH</span>
-            <div className="h-px w-6 bg-[#8099FF]/35" />
-          </div>
-
-          {/* Bottom-right label */}
-          <div className="absolute bottom-4 right-5 text-right">
-            <p className="text-[#8099FF]/55 text-[7px] tracking-[0.3em] uppercase font-medium">Corporate</p>
-            <p className="text-white/25 text-[6px] tracking-[0.2em] uppercase mt-0.5">Law</p>
-          </div>
-
-          {/* Subtle grid texture on lower half */}
-          <div
-            className="absolute left-[9px] right-[9px] bottom-[9px] pointer-events-none opacity-[0.08]"
-            style={{
-              top: "calc(50% + 1px)",
-              backgroundImage: "linear-gradient(rgba(128,153,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(128,153,255,1) 1px, transparent 1px)",
-              backgroundSize: "16px 16px",
-            }}
-          />
-        </div>
-
-        {/* Right side edge — 3D depth */}
-        <div
-          className="absolute top-0 bottom-0 right-0"
-          style={{
-            width: 16,
-            transform: "rotateY(90deg) translateZ(-2px)",
-            transformOrigin: "right",
-            background: "linear-gradient(to right, #000A4F, #001070)",
-          }}
-        />
-
-        {/* Bottom edge — 3D depth */}
-        <div
-          className="absolute bottom-0 left-0 right-0"
-          style={{
-            height: 12,
-            transform: "rotateX(-90deg) translateZ(-2px)",
-            transformOrigin: "bottom",
-            background: "linear-gradient(to bottom, #00104A, #000A4F)",
-          }}
-        />
-      </motion.div>
-
-      {/* Handle on top — floats above briefcase */}
-      <motion.div
-        animate={{ rotateY: [-18, -10, -18], rotateX: [7, 3, 7] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute"
-        style={{ top: "calc(50% - 84px - 28px)", left: "50%", transform: "translateX(-50%)", width: 70, height: 28, borderTop: "2px solid rgba(128,153,255,0.5)", borderLeft: "2px solid rgba(128,153,255,0.5)", borderRight: "2px solid rgba(128,153,255,0.5)", borderRadius: "8px 8px 0 0" }}
-      />
-
-      {/* Floating badge: DUBAI (top-right) */}
-      <motion.div
-        animate={{ y: [-5, 5, -5], rotate: [-8, -5, -8] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-        className="absolute"
-        style={{ top: "8%", right: "4%" }}
-      >
-        <div
-          className="w-[80px] h-[80px] rounded-full flex flex-col items-center justify-center"
-          style={{
-            border: "2px solid #8099FF",
-            background: "rgba(0,20,137,0.92)",
-            boxShadow: "0 4px 22px rgba(128,153,255,0.3)",
-          }}
-        >
-          <p className="text-[#8099FF] text-[7px] font-bold tracking-[0.3em] uppercase">DUBAI</p>
-          <div className="w-9 h-px bg-[#8099FF]/50 my-1" />
-          <p className="text-white/70 text-[7px] tracking-[0.2em] uppercase">U.A.E.</p>
-          <p className="text-white/35 text-[6px] tracking-wider mt-0.5">Gulf</p>
-        </div>
-      </motion.div>
-
-      {/* Floating badge: PARIS (bottom-left) */}
-      <motion.div
-        animate={{ y: [5, -5, 5], rotate: [12, 8, 12] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.8 }}
-        className="absolute"
-        style={{ bottom: "10%", left: "2%" }}
-      >
-        <div
-          className="w-[68px] h-[68px] rounded-full flex flex-col items-center justify-center"
-          style={{
-            border: "2px solid rgba(255,255,255,0.28)",
-            background: "rgba(0,16,112,0.88)",
-            boxShadow: "0 4px 18px rgba(0,0,0,0.35)",
-          }}
-        >
-          <p className="text-white/70 text-[6px] font-bold tracking-[0.25em] uppercase">PARIS</p>
-          <div className="w-7 h-px bg-white/30 my-0.5" />
-          <p className="text-white/50 text-[6px] tracking-[0.15em] uppercase">France</p>
-        </div>
-      </motion.div>
-
-      {/* Floating chip: M&A — tilted */}
-      <motion.div
-        animate={{ opacity: [0.65, 1, 0.65] }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute"
-        style={{ top: "36%", left: "0%", transform: "rotate(-14deg)" }}
-      >
-        <div
-          className="px-3 py-[5px]"
-          style={{ border: "2px solid rgba(128,153,255,0.65)", boxShadow: "0 0 12px rgba(128,153,255,0.2)" }}
-        >
-          <p className="text-[#8099FF] text-[9px] font-bold tracking-[0.35em] uppercase">M&A</p>
-        </div>
-      </motion.div>
-
-      {/* Floating chip: CORPORATE — tilted other way */}
-      <motion.div
-        animate={{ opacity: [1, 0.55, 1] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
-        className="absolute"
-        style={{ bottom: "28%", right: "2%", transform: "rotate(10deg)" }}
-      >
-        <div
-          className="px-2 py-[4px]"
-          style={{ border: "1.5px solid rgba(255,255,255,0.2)", boxShadow: "0 0 8px rgba(0,0,0,0.3)" }}
-        >
-          <p className="text-white/45 text-[8px] font-semibold tracking-[0.3em] uppercase">Corporate</p>
-        </div>
-      </motion.div>
-    </div>
+    <motion.div
+      animate={isLit
+        ? { opacity: [0.15, 0.9, 0.45, 0.9, 0.15], boxShadow: ["0 0 0px transparent", "0 0 8px rgba(128,153,255,0.8)", "0 0 4px rgba(128,153,255,0.4)", "0 0 8px rgba(128,153,255,0.8)", "0 0 0px transparent"] }
+        : { opacity: [0.06, 0.18, 0.06] }}
+      transition={{ duration: isLit ? 6 : 10, repeat: Infinity, delay, ease: "easeInOut" }}
+      style={{ height: 9, background: isLit ? "#8099FF" : "rgba(128,153,255,0.55)" }}
+    />
   );
 }
 
-/* Orbital ring in blue */
-function OrbitalRingBlue() {
+/* ─── 3D CORPORATE TOWER ────────────────────────────────────────────────────── */
+
+function Corporate3D() {
   return (
-    <motion.div
-      animate={{ rotateZ: [0, 360] }}
-      transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
-      className="absolute pointer-events-none"
-      style={{
-        top: "6%",
-        right: "3%",
-        width: 300,
-        height: 100,
-        borderRadius: "50%",
-        border: "1px solid rgba(128,153,255,0.22)",
-        transformStyle: "preserve-3d",
-        transform: "rotateX(72deg)",
-      }}
-    >
+    <div className="relative w-full h-full flex items-center justify-center" style={{ perspective: "1400px" }}>
+
+      {/* Radial atmosphere glow */}
       <div
-        className="absolute rounded-full"
-        style={{
-          width: 9,
-          height: 9,
-          top: -4.5,
-          left: "50%",
-          marginLeft: -4.5,
-          background: "#8099FF",
-          boxShadow: "0 0 12px 3px rgba(128,153,255,0.55)",
-        }}
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 75% 75% at 55% 50%, rgba(128,153,255,0.10) 0%, transparent 68%)" }}
       />
-    </motion.div>
+
+      {/* SVG connecting lines — behind everything */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ opacity: 0.18 }}>
+        <line x1="75%" y1="12%" x2="55%" y2="35%" stroke="#8099FF" strokeWidth="0.8" strokeDasharray="4 6" />
+        <line x1="25%" y1="88%" x2="45%" y2="65%" stroke="rgba(255,255,255,0.5)" strokeWidth="0.8" strokeDasharray="4 6" />
+        <line x1="12%" y1="35%" x2="38%" y2="50%" stroke="#8099FF" strokeWidth="0.6" strokeDasharray="3 7" />
+        <line x1="88%" y1="58%" x2="62%" y2="50%" stroke="#8099FF" strokeWidth="0.6" strokeDasharray="3 7" />
+      </svg>
+
+      {/* Outer orbital ring */}
+      <motion.div
+        animate={{ rotateZ: [0, 360] }}
+        transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
+        className="absolute pointer-events-none"
+        style={{ width: 480, height: 140, borderRadius: "50%", border: "1px solid rgba(128,153,255,0.14)", transform: "rotateX(72deg)", transformStyle: "preserve-3d", top: "50%", left: "50%", marginTop: -70, marginLeft: -240 }}
+      >
+        <div style={{ position: "absolute", width: 10, height: 10, borderRadius: "50%", background: "#8099FF", top: -5, left: "50%", marginLeft: -5, boxShadow: "0 0 14px 4px rgba(128,153,255,0.65)" }} />
+      </motion.div>
+
+      {/* Inner counter-rotating ring */}
+      <motion.div
+        animate={{ rotateZ: [360, 0] }}
+        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        className="absolute pointer-events-none"
+        style={{ width: 360, height: 96, borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.07)", transform: "rotateX(68deg)", transformStyle: "preserve-3d", top: "50%", left: "50%", marginTop: -48, marginLeft: -180 }}
+      >
+        <div style={{ position: "absolute", width: 6, height: 6, borderRadius: "50%", background: "rgba(255,255,255,0.55)", top: -3, left: "50%", marginLeft: -3, boxShadow: "0 0 8px 2px rgba(255,255,255,0.3)" }} />
+      </motion.div>
+
+      {/* ── MAIN BUILDING TOWER ── */}
+      <motion.div
+        animate={{ rotateY: [-16, -8, -16], rotateX: [5, 2, 5] }}
+        transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
+        style={{ transformStyle: "preserve-3d", position: "relative", width: 180, height: 330, zIndex: 10 }}
+      >
+        {/* Front face */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(165deg, #0033DD 0%, #001489 42%, #000A4F 100%)",
+          boxShadow: "18px 36px 90px rgba(0,0,0,0.80), -8px 0 28px rgba(0,10,79,0.95), inset 0 1px 0 rgba(255,255,255,0.07)",
+        }}>
+          {/* Outer frame */}
+          <div style={{ position: "absolute", inset: 8, border: "1px solid rgba(128,153,255,0.28)", pointerEvents: "none" }} />
+
+          {/* Window grid — 5 cols × 11 rows */}
+          <div style={{ padding: "16px 12px 0", display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "5px 7px" }}>
+            {Array.from({ length: 55 }).map((_, i) => <WindowCell key={i} index={i} />)}
+          </div>
+
+          {/* Nameplate strip */}
+          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "10px 14px", borderTop: "1px solid rgba(128,153,255,0.18)", background: "rgba(0,8,48,0.70)" }}>
+            <p style={{ color: "rgba(128,153,255,0.85)", fontSize: 7, fontWeight: 700, letterSpacing: "0.45em", textTransform: "uppercase", marginBottom: 2 }}>MILTON HOBBS</p>
+            <p style={{ color: "rgba(255,255,255,0.28)", fontSize: 6, fontWeight: 600, letterSpacing: "0.32em", textTransform: "uppercase" }}>CORPORATE LAW</p>
+          </div>
+        </div>
+
+        {/* Right side face — 3D depth */}
+        <div style={{
+          position: "absolute", top: 0, left: "100%", width: 56, height: 330,
+          background: "linear-gradient(to right, #000630, #000A4F)",
+          transform: "rotateY(90deg)", transformOrigin: "left center",
+          boxShadow: "inset -1px 0 0 rgba(128,153,255,0.06)",
+        }}>
+          <div style={{ position: "absolute", inset: 0, border: "1px solid rgba(128,153,255,0.06)" }} />
+        </div>
+
+        {/* Top face — roof */}
+        <div style={{
+          position: "absolute", top: -38, left: 0, width: 180, height: 38,
+          background: "linear-gradient(to bottom, #001488, #000A4F)",
+          transform: "rotateX(90deg)", transformOrigin: "bottom center",
+          display: "flex", alignItems: "center", justifyContent: "center",
+        }}>
+          <span style={{ color: "rgba(128,153,255,0.75)", fontSize: 12, fontWeight: 700, letterSpacing: "0.28em", fontFamily: "'Satoshi', sans-serif" }}>MH</span>
+        </div>
+
+        {/* Spire */}
+        <div style={{ position: "absolute", top: -38 - 72, left: "50%", marginLeft: -1, width: 2, height: 72, background: "linear-gradient(to top, rgba(128,153,255,0.75), rgba(128,153,255,0.2), transparent)" }}>
+          <motion.div
+            animate={{ opacity: [0.6, 1, 0.6], boxShadow: ["0 0 8px 3px rgba(128,153,255,0.5)", "0 0 18px 6px rgba(128,153,255,0.85)", "0 0 8px 3px rgba(128,153,255,0.5)"] }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+            style={{ position: "absolute", top: 0, left: "50%", marginLeft: -5, width: 10, height: 10, borderRadius: "50%", background: "#8099FF" }}
+          />
+        </div>
+      </motion.div>
+
+      {/* ── FLOATING ELEMENTS ── */}
+
+      {/* DUBAI — large circle badge top-right */}
+      <motion.div
+        animate={{ y: [-9, 9, -9] }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+        style={{ position: "absolute", top: "4%", right: "1%", zIndex: 20 }}
+      >
+        <div style={{ width: 112, height: 112, borderRadius: "50%", border: "2px solid #8099FF", background: "rgba(0,18,130,0.93)", boxShadow: "0 8px 36px rgba(128,153,255,0.40)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
+          <p style={{ color: "#8099FF", fontSize: 9, fontWeight: 700, letterSpacing: "0.40em", textTransform: "uppercase" }}>DUBAI</p>
+          <div style={{ width: 44, height: 1, background: "rgba(128,153,255,0.45)" }} />
+          <p style={{ color: "rgba(255,255,255,0.72)", fontSize: 8, letterSpacing: "0.22em", textTransform: "uppercase" }}>U.A.E.</p>
+          <p style={{ color: "rgba(255,255,255,0.32)", fontSize: 7, letterSpacing: "0.15em", marginTop: 1 }}>Gulf Region</p>
+        </div>
+      </motion.div>
+
+      {/* PARIS — circle badge bottom-left */}
+      <motion.div
+        animate={{ y: [9, -9, 9] }}
+        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
+        style={{ position: "absolute", bottom: "5%", left: "1%", zIndex: 20 }}
+      >
+        <div style={{ width: 96, height: 96, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.22)", background: "rgba(0,14,105,0.92)", boxShadow: "0 6px 28px rgba(0,0,0,0.45)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
+          <p style={{ color: "rgba(255,255,255,0.76)", fontSize: 8, fontWeight: 700, letterSpacing: "0.38em", textTransform: "uppercase" }}>PARIS</p>
+          <div style={{ width: 34, height: 1, background: "rgba(255,255,255,0.22)" }} />
+          <p style={{ color: "rgba(255,255,255,0.44)", fontSize: 7, letterSpacing: "0.18em", textTransform: "uppercase" }}>France</p>
+        </div>
+      </motion.div>
+
+      {/* M&A — large chip left-center */}
+      <motion.div
+        animate={{ opacity: [0.72, 1, 0.72], y: [-5, 5, -5] }}
+        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+        style={{ position: "absolute", top: "30%", left: "0%", transform: "rotate(-11deg)", zIndex: 20 }}
+      >
+        <div style={{ padding: "13px 22px", border: "2px solid rgba(128,153,255,0.72)", boxShadow: "0 0 22px rgba(128,153,255,0.22), inset 0 0 22px rgba(0,18,137,0.45)", background: "rgba(0,8,52,0.65)" }}>
+          <p style={{ color: "#8099FF", fontSize: 15, fontWeight: 700, letterSpacing: "0.38em", textTransform: "uppercase" }}>M&A</p>
+        </div>
+      </motion.div>
+
+      {/* JOINT VENTURES — chip upper-left */}
+      <motion.div
+        animate={{ opacity: [0.5, 0.92, 0.5], y: [4, -4, 4] }}
+        transition={{ duration: 5.0, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
+        style={{ position: "absolute", top: "14%", left: "7%", transform: "rotate(-7deg)", zIndex: 20 }}
+      >
+        <div style={{ padding: "9px 16px", border: "1.5px solid rgba(128,153,255,0.42)", background: "rgba(0,8,52,0.45)" }}>
+          <p style={{ color: "rgba(128,153,255,0.75)", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase" }}>Joint Ventures</p>
+        </div>
+      </motion.div>
+
+      {/* CORPORATE — chip bottom-right */}
+      <motion.div
+        animate={{ opacity: [0.8, 0.42, 0.8] }}
+        transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1.3 }}
+        style={{ position: "absolute", bottom: "26%", right: "2%", transform: "rotate(9deg)", zIndex: 20 }}
+      >
+        <div style={{ padding: "11px 18px", border: "1.5px solid rgba(255,255,255,0.18)", background: "rgba(0,8,52,0.50)" }}>
+          <p style={{ color: "rgba(255,255,255,0.50)", fontSize: 12, fontWeight: 700, letterSpacing: "0.32em", textTransform: "uppercase" }}>Corporate</p>
+        </div>
+      </motion.div>
+
+      {/* GOVERNANCE — chip right-center */}
+      <motion.div
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 2.1 }}
+        style={{ position: "absolute", top: "44%", right: "1%", transform: "rotate(7deg)", zIndex: 20 }}
+      >
+        <div style={{ padding: "9px 15px", border: "1.5px solid rgba(128,153,255,0.36)", background: "rgba(0,8,52,0.42)" }}>
+          <p style={{ color: "rgba(128,153,255,0.65)", fontSize: 9, fontWeight: 600, letterSpacing: "0.26em", textTransform: "uppercase" }}>Governance</p>
+        </div>
+      </motion.div>
+    </div>
   );
 }
 
@@ -471,7 +447,6 @@ function CorporateCommercialInner() {
           }}
         />
 
-        <OrbitalRingBlue />
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-8 py-20 w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -584,7 +559,7 @@ function CorporateCommercialInner() {
               initial={{ opacity: 0, scale: 0.92 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.1, delay: 0.5 }}
-              className="relative hidden lg:flex items-center justify-center h-[480px]"
+              className="relative hidden lg:flex items-center justify-center h-[620px]"
             >
               <Corporate3D />
             </motion.div>
