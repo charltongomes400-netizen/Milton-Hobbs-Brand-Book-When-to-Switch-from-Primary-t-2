@@ -494,7 +494,7 @@ function ArticleCTA({ onContact }: { onContact: () => void }) {
         <button
           onClick={onContact}
           data-testid="article-cta"
-          className="flex-shrink-0 inline-flex items-center gap-3 bg-[#D4AF36] text-[#001489] text-xs tracking-[0.18em] uppercase font-bold px-8 py-4 hover:bg-[#C4A030] transition-colors"
+          className="flex-shrink-0 inline-flex items-center gap-3 bg-white text-[#001489] text-xs tracking-[0.18em] uppercase font-bold px-8 py-4 hover:bg-white/90 transition-colors"
         >
           <span>Speak to a Partner</span>
           <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
