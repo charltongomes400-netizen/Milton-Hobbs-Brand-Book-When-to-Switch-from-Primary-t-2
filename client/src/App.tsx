@@ -35,6 +35,14 @@ import EmploymentLaborPage from "@/pages/EmploymentLaborPage";
 import LitigationDisputesPage from "@/pages/LitigationDisputesPage";
 import OurFirmPage from "@/pages/OurFirmPage";
 import CareersPage from "@/pages/CareersPage";
+import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage";
+import CookieNoticePage from "@/pages/CookieNoticePage";
+import TermsOfUsePage from "@/pages/TermsOfUsePage";
+import NotLegalAdvicePage from "@/pages/NotLegalAdvicePage";
+import AttorneyClientDisclaimerPage from "@/pages/AttorneyClientDisclaimerPage";
+import JurisdictionalStatementsPage from "@/pages/JurisdictionalStatementsPage";
+import ConflictChecksPage from "@/pages/ConflictChecksPage";
+import ConfidentialityNoticePage from "@/pages/ConfidentialityNoticePage";
 
 function Router() {
   return (
@@ -70,6 +78,14 @@ function Router() {
       <Route path="/expertise/real-estate-property" component={RealEstatePropertyPage} />
       <Route path="/expertise/employment-labor" component={EmploymentLaborPage} />
       <Route path="/expertise/litigation-disputes" component={LitigationDisputesPage} />
+      <Route path="/privacy-policy" component={PrivacyPolicyPage} />
+      <Route path="/cookies" component={CookieNoticePage} />
+      <Route path="/terms-of-use" component={TermsOfUsePage} />
+      <Route path="/not-legal-advice" component={NotLegalAdvicePage} />
+      <Route path="/attorney-client-disclaimer" component={AttorneyClientDisclaimerPage} />
+      <Route path="/jurisdictional-statements" component={JurisdictionalStatementsPage} />
+      <Route path="/conflict-checks" component={ConflictChecksPage} />
+      <Route path="/confidentiality-notice" component={ConfidentialityNoticePage} />
       <Route component={NotFound} />
     </Switch>
   );
