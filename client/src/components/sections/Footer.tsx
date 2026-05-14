@@ -50,7 +50,7 @@ export function Footer() {
   return (
     <footer id="footer" data-testid="footer" style={{ background: "#001489" }}>
       {/* Motto whisper */}
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 40, paddingBottom: 36 }}>
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 28, paddingBottom: 24 }}>
         <p style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",
           fontSize: 9,
@@ -58,7 +58,7 @@ export function Footer() {
           letterSpacing: "0.50em",
           textTransform: "uppercase",
           color: "#FFFFFF",
-          textAlign: "center",
+          textAlign: "left",
         }}>
           Reason&ensp;·&ensp;Rigor&ensp;·&ensp;Resolution
         </p>
@@ -67,8 +67,8 @@ export function Footer() {
       {/* Main 4-column grid */}
       <div className="max-w-[1400px] mx-auto px-8">
         <div
-          className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-6"
-          style={{ paddingTop: 52, paddingBottom: 52, borderTop: "1px solid rgba(255,255,255,0.08)" }}
+          className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-4"
+          style={{ paddingTop: 36, paddingBottom: 36, borderTop: "1px solid rgba(255,255,255,0.08)" }}
         >
           {/* Col 1: Wordmark + tagline */}
           <div className="flex flex-col gap-5">
@@ -106,7 +106,7 @@ export function Footer() {
             }}>
               Navigation
             </p>
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-col gap-2">
               {navEntries.map(link => (
                 <a
                   key={link.href}
@@ -143,7 +143,7 @@ export function Footer() {
             }}>
               Practice Areas
             </p>
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-col gap-2">
               {practiceAreas.map(area => (
                 <a
                   key={area}
@@ -236,8 +236,8 @@ export function Footer() {
       {/* Bottom band: clocks · legal */}
       <div className="max-w-[1400px] mx-auto px-8">
         <div
-          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
-          style={{ padding: "16px 0 18px", borderTop: "1px solid rgba(255,255,255,0.08)" }}
+          className="flex flex-row items-center gap-8"
+          style={{ padding: "12px 0 14px", borderTop: "1px solid rgba(255,255,255,0.08)" }}
         >
           {/* Live clocks */}
           <div className="flex items-center gap-5">
@@ -255,14 +255,14 @@ export function Footer() {
           </div>
 
           {/* Legal links + copyright */}
-          <div className="flex flex-col items-start sm:items-end gap-1.5">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:justify-end">
+          <div className="flex flex-col items-start gap-1.5">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
               <a href="/privacy-policy" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>{f.privacy}</a>
               <a href="/cookies" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>{f.cookie}</a>
               <a href="/terms-of-use" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Terms of Use</a>
               <a href="/not-legal-advice" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Not Legal Advice</a>
             </div>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:justify-end">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
               <a href="/attorney-client-disclaimer" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Attorney-Client Disclaimer</a>
               <a href="/jurisdictional-statements" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Jurisdictional Statements</a>
               <a href="/conflict-checks" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Conflict Checks</a>
@@ -274,7 +274,7 @@ export function Footer() {
 
         <p
           data-testid="footer-disclaimer"
-          style={{ color: "rgba(255,255,255,0.35)", fontSize: 9, lineHeight: 1.6, paddingBottom: 18, maxWidth: "85ch" }}
+          style={{ color: "rgba(255,255,255,0.35)", fontSize: 9, lineHeight: 1.6, paddingBottom: 14, maxWidth: "85ch" }}
         >
           {f.disclaimer}
         </p>
