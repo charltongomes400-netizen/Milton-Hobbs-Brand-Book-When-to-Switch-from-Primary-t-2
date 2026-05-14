@@ -4,6 +4,7 @@ import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
 import { articles } from "@/data/articles";
+import { ContactModal } from "@/components/ContactModal";
 import imgCompliance from "@assets/generated_images/insight-compliance.png";
 import imgFamilyBusiness from "@assets/generated_images/insight-family-business.png";
 import imgDigitalPrivacy from "@assets/generated_images/insight-digital-privacy.png";
@@ -47,6 +48,12 @@ function InsightsInner() {
   const tx = PAGE_TEXT[lang];
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = modalOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [modalOpen]);
 
   const [activeFilter, setActiveFilter] = useState("All");
 
@@ -276,21 +283,21 @@ function InsightsInner() {
             <p className="text-white text-[11px] tracking-[0.35em] uppercase font-bold mb-3">Speak with a Partner</p>
             <p className="text-white text-sm leading-relaxed max-w-[42ch]">Every publication reflects lived experience on complex matters. Discuss yours directly with a partner.</p>
           </div>
-          <a
-            href="/#contact"
+          <button
+            onClick={() => setModalOpen(true)}
             data-testid="insights-contact-cta"
-            className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-white transition-colors flex-shrink-0"
-            style={{ textDecoration: "none" }}
+            className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-white transition-colors flex-shrink-0 cursor-pointer"
           >
             Book a Consultation
             <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
               <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
             </svg>
-          </a>
+          </button>
         </div>
       </section>
 
       <Footer />
+      <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} practiceArea="Publications & Insights" />
     </div>
   );
 }
