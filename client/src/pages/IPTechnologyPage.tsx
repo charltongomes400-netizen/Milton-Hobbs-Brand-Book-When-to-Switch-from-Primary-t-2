@@ -756,6 +756,7 @@ function IPTechnologyInner() {
       </section>
 
       <Footer />
+      <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} practiceArea="IP & Technology" />
     </div>
   );
 }

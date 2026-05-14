@@ -808,6 +808,7 @@ function MergersAcquisitionsInner() {
       </section>
 
       <Footer />
+      <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} practiceArea="Mergers & Acquisitions" />
     </div>
   );
 }
