@@ -6,13 +6,13 @@ import miltonHobbsLogo from "@assets/Milton_hobbs_logo_1775554832004.png";
 
 const PRACTICE_AREAS = [
   { num: "01", title: "Corporate & Commercial",     href: "/expertise/corporate-commercial" },
-  { num: "02", title: "Tax & Compliance",           href: null },
+  { num: "02", title: "Tax & Compliance",           href: "/expertise/tax-compliance" },
   { num: "03", title: "Mergers & Acquisitions",     href: "/expertise/mergers-acquisitions" },
   { num: "04", title: "IP & Technology",             href: "/expertise/ip-technology" },
-  { num: "05", title: "Startups & Venture Capital", href: null },
-  { num: "06", title: "Real Estate & Property",     href: null },
-  { num: "07", title: "Employment & Labor",         href: null },
-  { num: "08", title: "Litigation & Disputes",      href: null },
+  { num: "05", title: "Startups & Venture Capital", href: "/expertise/startups-venture-capital" },
+  { num: "06", title: "Real Estate & Property",     href: "/expertise/real-estate-property" },
+  { num: "07", title: "Employment & Labor",         href: "/expertise/employment-labor" },
+  { num: "08", title: "Litigation & Disputes",      href: "/expertise/litigation-disputes" },
 ];
 
 export function Header() {
