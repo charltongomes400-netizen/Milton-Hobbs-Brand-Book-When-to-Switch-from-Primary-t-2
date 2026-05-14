@@ -118,7 +118,7 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
         <div className="lg:w-[45%] flex-shrink-0 bg-[#000A4F] p-10 flex flex-col gap-6">
           <button
             onClick={onClose}
-            className="self-start text-white/40 hover:text-white transition-colors text-xs tracking-widest uppercase flex items-center gap-2"
+            className="self-start text-white hover:text-white transition-colors text-xs tracking-widest uppercase flex items-center gap-2"
             data-testid="modal-close"
           >
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 14 14">
@@ -128,40 +128,40 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
           </button>
 
           <div>
-            <p className="text-white/60 text-[10px] tracking-[0.35em] uppercase font-bold mb-3">Open Position</p>
+            <p className="text-white text-[10px] tracking-[0.35em] uppercase font-bold mb-3">Open Position</p>
             <h2 className="font-heading text-white text-2xl xl:text-3xl font-bold leading-tight tracking-tight mb-4">
               {job.title}
             </h2>
             <div className="flex flex-wrap gap-2 mb-6">
-              <span className="flex items-center gap-1.5 text-white/60 text-xs tracking-wide">
-                <svg className="w-3.5 h-3.5 text-white/60" fill="none" viewBox="0 0 24 24">
+              <span className="flex items-center gap-1.5 text-white text-xs tracking-wide">
+                <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" strokeWidth="1.4" />
                   <circle cx="12" cy="9" r="2.5" stroke="currentColor" strokeWidth="1.3" />
                 </svg>
                 {job.location}
               </span>
-              <span className="text-white/30">·</span>
-              <span className="text-white/60 text-xs tracking-wide">{job.type}</span>
-              <span className="text-white/30">·</span>
-              <span className="text-white/60 text-xs tracking-wide">{job.level}</span>
+              <span className="text-white">·</span>
+              <span className="text-white text-xs tracking-wide">{job.type}</span>
+              <span className="text-white">·</span>
+              <span className="text-white text-xs tracking-wide">{job.level}</span>
             </div>
-            <div className="border-t border-white/10 pt-5">
-              <p className="text-[10px] text-white/60 tracking-[0.3em] uppercase font-bold mb-3">Department</p>
-              <p className="text-white/75 text-sm font-medium">{job.department}</p>
+            <div className="border-t border-white pt-5">
+              <p className="text-[10px] text-white tracking-[0.3em] uppercase font-bold mb-3">Department</p>
+              <p className="text-white text-sm font-medium">{job.department}</p>
             </div>
           </div>
 
-          <div className="border-t border-white/10 pt-5 flex-1 overflow-y-auto">
-            <p className="text-[10px] text-white/60 tracking-[0.3em] uppercase font-bold mb-3">About the Role</p>
-            <div className="text-white/65 text-sm leading-relaxed whitespace-pre-line">
+          <div className="border-t border-white pt-5 flex-1 overflow-y-auto">
+            <p className="text-[10px] text-white tracking-[0.3em] uppercase font-bold mb-3">About the Role</p>
+            <div className="text-white text-sm leading-relaxed whitespace-pre-line">
               {job.description}
             </div>
 
-            <p className="text-[10px] text-white/60 tracking-[0.3em] uppercase font-bold mt-6 mb-3">Requirements</p>
-            <div className="text-white/65 text-sm leading-relaxed">
+            <p className="text-[10px] text-white tracking-[0.3em] uppercase font-bold mt-6 mb-3">Requirements</p>
+            <div className="text-white text-sm leading-relaxed">
               {job.requirements.split("\n").filter(Boolean).map((req, i) => (
                 <div key={i} className="flex gap-2.5 mb-2">
-                  <span className="text-white/60 mt-[3px] flex-shrink-0">—</span>
+                  <span className="text-white mt-[3px] flex-shrink-0">—</span>
                   <span>{req.replace(/^[-–—]\s*/, "")}</span>
                 </div>
               ))}
@@ -173,7 +173,7 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
         <div className="flex-1 p-10 flex flex-col">
           {submitted ? (
             <div className="flex-1 flex flex-col items-center justify-center text-center gap-5">
-              <div className="w-16 h-16 border-2 border-white/60 flex items-center justify-center">
+              <div className="w-16 h-16 border-2 border-white flex items-center justify-center">
                 <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24">
                   <path d="M5 12l5 5L20 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -259,7 +259,7 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
                   <div
                     onClick={() => fileRef.current?.click()}
                     className={`border-2 border-dashed px-5 py-6 flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors ${
-                      cvFile ? "border-[#001489] bg-[#001489]/4" : "border-gray-200 hover:border-[#001489]/40"
+                      cvFile ? "border-[#001489] bg-[#001489]" : "border-gray-200 hover:border-[#001489]"
                     }`}
                     data-testid="cv-upload-zone"
                   >
@@ -503,7 +503,7 @@ function SpontaneousApplyModal({ onClose }: { onClose: () => void }) {
                 <div
                   onClick={() => fileRef.current?.click()}
                   className={`border-2 border-dashed px-5 py-5 flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors ${
-                    cvFile ? "border-[#001489] bg-[#001489]/4" : "border-gray-200 hover:border-[#001489]/40"
+                    cvFile ? "border-[#001489] bg-[#001489]" : "border-gray-200 hover:border-[#001489]"
                   }`}
                   data-testid="spontaneous-cv-upload-zone"
                 >
@@ -671,7 +671,7 @@ function CareersPageInner() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-white/60 text-[10px] tracking-[0.45em] uppercase font-bold mb-5"
+              className="text-white text-[10px] tracking-[0.45em] uppercase font-bold mb-5"
             >
               Careers at Milton Hobbs
             </motion.p>
@@ -688,7 +688,7 @@ function CareersPageInner() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1 }}
-              className="text-white/55 text-base leading-relaxed max-w-lg"
+              className="text-white text-base leading-relaxed max-w-lg"
             >
               We are a boutique firm with global ambition. If you are driven by precision, motivated by complexity, and committed to clients who trust you with what matters most — we want to hear from you.
             </motion.p>
@@ -706,7 +706,7 @@ function CareersPageInner() {
             ].map(({ num, label }) => (
               <div key={label} className="flex flex-col">
                 <span className="font-heading text-white text-4xl font-bold">{num}</span>
-                <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase mt-1">{label}</span>
+                <span className="text-white text-[10px] tracking-[0.3em] uppercase mt-1">{label}</span>
               </div>
             ))}
           </motion.div>

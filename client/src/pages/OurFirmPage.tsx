@@ -479,7 +479,7 @@ function ValueCard({ value, lang, index }: { value: typeof coreValues[0]; lang: 
       transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group relative border border-[#001489]/10 p-8 cursor-default overflow-hidden"
+      className="group relative border border-[#001489] p-8 cursor-default overflow-hidden"
       style={{
         background: hovered ? "linear-gradient(145deg, #001489 0%, #000A4F 100%)" : "#ffffff",
         borderColor: hovered ? "transparent" : "rgba(0,20,137,0.1)",
@@ -534,7 +534,7 @@ function ConsultModal({ open, onClose }: { open: boolean; onClose: () => void })
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  const inputCls = "w-full bg-[#000A4F] border border-white/15 text-white text-sm px-4 py-3 placeholder:text-white/30 focus:outline-none focus:border-white/60 transition-colors";
+  const inputCls = "w-full bg-[#000A4F] border border-white text-white text-sm px-4 py-3 placeholder:text-white focus:outline-none focus:border-white transition-colors";
 
   return (
     <AnimatePresence>
@@ -566,7 +566,7 @@ function ConsultModal({ open, onClose }: { open: boolean; onClose: () => void })
                 <button
                   data-testid="modal-close"
                   onClick={onClose}
-                  className="text-white/40 hover:text-white transition-colors mt-1"
+                  className="text-white hover:text-white transition-colors mt-1"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 20 20">
                     <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
@@ -586,7 +586,7 @@ function ConsultModal({ open, onClose }: { open: boolean; onClose: () => void })
                       </svg>
                     </div>
                     <p className="text-white text-xs tracking-[0.3em] uppercase font-bold mb-2">Message Sent</p>
-                    <p className="text-white/60 text-sm">A partner will be in touch shortly.</p>
+                    <p className="text-white text-sm">A partner will be in touch shortly.</p>
                   </motion.div>
                 ) : (
                   <motion.form
@@ -731,7 +731,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={heroInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.8 }}
-                  className="text-white/55 text-base leading-relaxed max-w-md mb-12"
+                  className="text-white text-base leading-relaxed max-w-md mb-12"
                 >
                   At Milton Hobbs, we are committed to delivering legal counsel that is clear, composed, and commercially astute. In a fast-moving and increasingly complex environment, our clients rely on us to provide not only sound legal advice, but strategic perspective that empowers action.
                 </motion.p>
@@ -755,7 +755,7 @@ export default function OurFirmPage() {
                   <a
                     href="#values"
                     data-testid="hero-cta-values"
-                    className="inline-flex items-center gap-3 border border-white/25 text-white/70 text-xs tracking-[0.2em] uppercase font-bold px-8 py-4 hover:border-white/50 hover:text-white transition-colors"
+                    className="inline-flex items-center gap-3 border border-white text-white text-xs tracking-[0.2em] uppercase font-bold px-8 py-4 hover:border-white hover:text-white transition-colors"
                   >
                     Our Values
                   </a>
@@ -793,7 +793,7 @@ export default function OurFirmPage() {
                     {["Dubai, UAE", "Paris, France"].map((city, i) => (
                       <div key={i} className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 bg-white rounded-full" />
-                        <span className="text-white/60 text-[9px] tracking-[0.3em] uppercase font-medium">{city}</span>
+                        <span className="text-white text-[9px] tracking-[0.3em] uppercase font-medium">{city}</span>
                       </div>
                     ))}
                   </div>
@@ -803,7 +803,7 @@ export default function OurFirmPage() {
           </div>
 
           <div className="relative z-10 max-w-[1400px] mx-auto px-8 w-full pb-16">
-            <div className="border-t border-white/8 pt-12 grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="border-t border-white pt-12 grid grid-cols-2 lg:grid-cols-4 gap-8">
               {stats.map((s, i) => (
                 <motion.div
                   key={i}
@@ -815,7 +815,7 @@ export default function OurFirmPage() {
                   <div className="font-heading text-white font-bold mb-1" style={{ fontSize: "clamp(2rem,3.5vw,2.8rem)", lineHeight: 1 }}>
                     <AnimatedNumber target={s.value} suffix={s.suffix} />
                   </div>
-                  <p className="text-white/40 text-[10px] tracking-[0.25em] uppercase font-medium">{lang === "FR" ? s.labelFR : s.label}</p>
+                  <p className="text-white text-[10px] tracking-[0.25em] uppercase font-medium">{lang === "FR" ? s.labelFR : s.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -868,7 +868,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.5 }}
-                  className="text-[#000A4F]/60 text-base leading-relaxed mb-6"
+                  className="text-[#000A4F] text-base leading-relaxed mb-6"
                 >
                   At Milton Hobbs, we are committed to delivering legal counsel that is clear, composed, and commercially astute. In a fast-moving and increasingly complex environment, our clients rely on us to provide not only sound legal advice, but strategic perspective that empowers action.
                 </motion.p>
@@ -876,7 +876,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.55 }}
-                  className="text-[#000A4F]/60 text-base leading-relaxed mb-6"
+                  className="text-[#000A4F] text-base leading-relaxed mb-6"
                 >
                   We operate with intention — every word, every argument, and every interaction is considered and purposeful. Our approach is marked by discretion, clarity, and quiet confidence, offering clients a seamless experience across multiple legal systems and cultural contexts.
                 </motion.p>
@@ -884,7 +884,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.6 }}
-                  className="text-[#000A4F]/60 text-base leading-relaxed"
+                  className="text-[#000A4F] text-base leading-relaxed"
                 >
                   As a boutique firm, we prioritise depth over volume. Our model ensures direct access to experienced counsel, fluent in English, French, and Arabic, with deep knowledge of the regulatory frameworks that shape the UAE, France, and the broader Gulf region.
                 </motion.p>
@@ -898,7 +898,7 @@ export default function OurFirmPage() {
                   className="bg-[#001489] p-8"
                 >
                   <div className="w-8 h-px bg-white mb-5" />
-                  <p className="text-white/70 text-[9px] tracking-[0.35em] uppercase font-bold mb-3">This is Our Promise</p>
+                  <p className="text-white text-[9px] tracking-[0.35em] uppercase font-bold mb-3">This is Our Promise</p>
                   <p className="font-heading text-white font-semibold text-lg leading-snug tracking-tight mb-4">
                     To Bring Precision to Complexity, Composure to Challenge, and a Client-First Mindset to Every Engagement.
                   </p>
@@ -907,7 +907,7 @@ export default function OurFirmPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/40 mt-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#001489] mt-20">
               {[
                 { num: "01", title: "Boutique Precision", body: "No delegation chains. The partners who pitch the matter are the partners who execute it. Every mandate receives the firm's highest attention." },
                 { num: "02", title: "Dual-Jurisdiction DNA", body: "With offices in Dubai and Paris, we carry two legal traditions and two regulatory cultures — unified in one coherent approach for your matter." },
@@ -924,7 +924,7 @@ export default function OurFirmPage() {
                 >
                   <p className="text-white text-xs tracking-[0.3em] font-bold mb-4">{item.num}</p>
                   <h3 className="font-heading text-[#000A4F] group-hover:text-white font-bold text-xl tracking-tight mb-3 transition-colors duration-300">{item.title}</h3>
-                  <p className="text-[#000A4F]/55 group-hover:text-white/55 text-sm leading-relaxed transition-colors duration-300">{item.body}</p>
+                  <p className="text-[#000A4F] group-hover:text-white text-sm leading-relaxed transition-colors duration-300">{item.body}</p>
                 </motion.div>
               ))}
             </div>
@@ -965,7 +965,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 14 }}
                   animate={missionInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.3 }}
-                  className="text-white/60 text-sm leading-relaxed mb-5"
+                  className="text-white text-sm leading-relaxed mb-5"
                 >
                   At Milton Hobbs, we believe the strongest ideas are the simplest ones — delivered with clarity, grounded in purpose, and designed to endure. The name brings together two powerful intellectual legacies:
                 </motion.p>
@@ -974,12 +974,12 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 14 }}
                   animate={missionInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.38 }}
-                  className="space-y-3 mb-6 pl-4 border-l border-white/30"
+                  className="space-y-3 mb-6 pl-4 border-l border-white"
                 >
-                  <p className="text-white/80 text-sm leading-relaxed">
+                  <p className="text-white text-sm leading-relaxed">
                     <span className="text-white font-semibold">John Milton</span> — the voice of liberty, human dignity, and moral conviction.
                   </p>
-                  <p className="text-white/80 text-sm leading-relaxed">
+                  <p className="text-white text-sm leading-relaxed">
                     <span className="text-white font-semibold">Thomas Hobbes</span> — the architect of legal order, realism, and rational governance.
                   </p>
                 </motion.div>
@@ -988,12 +988,12 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 14 }}
                   animate={missionInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.45 }}
-                  className="text-white/60 text-sm leading-relaxed mb-10"
+                  className="text-white text-sm leading-relaxed mb-10"
                 >
                   While their philosophies diverged, together they represent the necessary balance between justice and control, between empathy and authority. At Milton Hobbs, we embrace this duality — true clarity lies not in choosing one over the other, but in navigating the tension between them with purpose.
                 </motion.p>
 
-                <div className="grid grid-cols-2 gap-px bg-white/8">
+                <div className="grid grid-cols-2 gap-px bg-[#001489]">
                   {[
                     {
                       label: "Strategic",
@@ -1022,7 +1022,7 @@ export default function OurFirmPage() {
                     >
                       <div className="w-6 h-px bg-white mb-4 group-hover:w-10 transition-all duration-300" />
                       <p className="font-heading text-white font-bold text-base tracking-tight mb-2">{v.label}</p>
-                      <p className="text-white/45 text-xs leading-relaxed">{v.body}</p>
+                      <p className="text-white text-xs leading-relaxed">{v.body}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -1075,13 +1075,13 @@ export default function OurFirmPage() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={valuesInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-[#000A4F]/55 text-base leading-relaxed max-w-xl self-end"
+                className="text-[#000A4F] text-base leading-relaxed max-w-xl self-end"
               >
                 We are strategic in our thinking, approachable in our manner, client-centric in our model, and principled in everything we do. These are not aspirations — they are the standards we hold ourselves to on every instruction, for every client.
               </motion.p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#001489]/8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#001489]">
               {coreValues.map((value, i) => (
                 <ValueCard key={value.id} value={value} lang={lang} index={i} />
               ))}
@@ -1132,7 +1132,7 @@ export default function OurFirmPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: 0.2 }}
-                  className="text-white/55 text-base leading-relaxed mb-10 max-w-md"
+                  className="text-white text-base leading-relaxed mb-10 max-w-md"
                 >
                   Whether you need immediate counsel or are planning ahead, our partners are ready to assist you. We offer direct access to experienced advisors, fluent in English, French, and Arabic, across our Dubai and Paris offices.
                 </motion.p>
@@ -1140,15 +1140,15 @@ export default function OurFirmPage() {
                   <div className="flex items-center gap-3">
                     <div className="w-1.5 h-1.5 bg-white" />
                     <div>
-                      <p className="text-white/35 text-[9px] tracking-[0.35em] uppercase font-medium">Dubai</p>
-                      <p className="text-white/70 text-sm">+971 4 523 2421</p>
+                      <p className="text-white text-[9px] tracking-[0.35em] uppercase font-medium">Dubai</p>
+                      <p className="text-white text-sm">+971 4 523 2421</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-1.5 h-1.5 bg-white" />
                     <div>
-                      <p className="text-white/35 text-[9px] tracking-[0.35em] uppercase font-medium">Paris</p>
-                      <p className="text-white/70 text-sm">contact@miltonhobbs.com</p>
+                      <p className="text-white text-[9px] tracking-[0.35em] uppercase font-medium">Paris</p>
+                      <p className="text-white text-sm">contact@miltonhobbs.com</p>
                     </div>
                   </div>
                 </div>
@@ -1159,7 +1159,7 @@ export default function OurFirmPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="bg-[#001489]/60 border border-white/10 p-10 relative"
+                className="bg-[#001489] border border-white p-10 relative"
               >
                 <div className="absolute top-0 left-0 right-0 h-px bg-white" />
                 <CTAForm onSuccess={() => {}} />
@@ -1179,7 +1179,7 @@ export default function OurFirmPage() {
 function CTAForm({ onSuccess }: { onSuccess: () => void }) {
   const [form, setForm] = useState({ name: "", email: "", area: "" });
   const [submitted, setSubmitted] = useState(false);
-  const inputCls = "w-full bg-[#000A4F]/60 border border-white/12 text-white text-sm px-4 py-3 placeholder:text-white/30 focus:outline-none focus:border-white/50 transition-colors";
+  const inputCls = "w-full bg-[#000A4F] border border-white text-white text-sm px-4 py-3 placeholder:text-white focus:outline-none focus:border-white transition-colors";
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
@@ -1197,7 +1197,7 @@ function CTAForm({ onSuccess }: { onSuccess: () => void }) {
           </svg>
         </div>
         <p className="text-white text-xs tracking-[0.3em] uppercase font-bold mb-2">Request Received</p>
-        <p className="text-white/50 text-sm">A partner will be in touch shortly.</p>
+        <p className="text-white text-sm">A partner will be in touch shortly.</p>
       </div>
     );
   }

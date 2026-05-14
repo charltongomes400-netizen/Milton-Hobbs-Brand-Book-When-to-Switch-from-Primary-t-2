@@ -48,7 +48,7 @@ export default function ArticlePage() {
       <LanguageProvider>
         <div className="min-h-screen bg-[#001489] flex items-center justify-center">
           <div className="text-center">
-            <p className="text-white/50 text-sm mb-4">Article not found</p>
+            <p className="text-white text-sm mb-4">Article not found</p>
             <a href="/" className="text-white text-sm hover:underline">← Back to home</a>
           </div>
         </div>
@@ -95,7 +95,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
         <>
           <motion.div
             key="backdrop"
-            className="fixed inset-0 z-50 bg-[#000A4F]/80 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-[#000A4F] backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -119,20 +119,20 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
               <div className="bg-[#001489] px-8 py-7">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-white/60 text-[9px] tracking-[0.3em] uppercase font-bold mb-1.5">
+                    <p className="text-white text-[9px] tracking-[0.3em] uppercase font-bold mb-1.5">
                       Milton Hobbs
                     </p>
                     <h3 className="font-heading text-white text-lg font-bold tracking-tight">
                       Speak to a Partner
                     </h3>
-                    <p className="text-white/40 text-xs mt-1 leading-snug max-w-xs">
+                    <p className="text-white text-xs mt-1 leading-snug max-w-xs">
                       Re: {articleTitle}
                     </p>
                   </div>
                   <button
                     onClick={handleClose}
                     data-testid="modal-close"
-                    className="text-white/40 hover:text-white transition-colors mt-0.5 flex-shrink-0"
+                    className="text-white hover:text-white transition-colors mt-0.5 flex-shrink-0"
                     aria-label="Close"
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 20 20">
@@ -155,14 +155,14 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                       data-testid="modal-success"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="w-8 h-8 bg-[#001489]/10 flex items-center justify-center flex-shrink-0">
+                        <span className="w-8 h-8 bg-[#001489] flex items-center justify-center flex-shrink-0">
                           <svg className="w-4 h-4 text-[#001489]" fill="none" viewBox="0 0 16 16">
                             <path d="M2 8l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </span>
                         <h4 className="font-heading text-[#001489] font-bold text-base">Message received</h4>
                       </div>
-                      <p className="text-[#001489]/60 text-sm leading-relaxed">
+                      <p className="text-[#001489] text-sm leading-relaxed">
                         Thank you for reaching out. One of our partners will be in touch within one business day.
                       </p>
                       <button
@@ -192,7 +192,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                           onChange={handleChange}
                           placeholder="Full Name"
                           data-testid="modal-input-name"
-                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#001489]/60 transition-colors"
+                          className="col-span-2 sm:col-span-1 bg-[#001489] border border-[#001489] text-[#001489] placeholder-[#001489] text-sm px-4 py-3 outline-none focus:border-[#001489] transition-colors"
                         />
                         <input
                           type="email"
@@ -202,7 +202,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                           onChange={handleChange}
                           placeholder="Email Address"
                           data-testid="modal-input-email"
-                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#001489]/60 transition-colors"
+                          className="col-span-2 sm:col-span-1 bg-[#001489] border border-[#001489] text-[#001489] placeholder-[#001489] text-sm px-4 py-3 outline-none focus:border-[#001489] transition-colors"
                         />
                       </div>
 
@@ -213,7 +213,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                           value={form.area}
                           onChange={handleChange}
                           data-testid="modal-select-area"
-                          className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3 outline-none focus:border-[#001489]/60 transition-colors appearance-none cursor-pointer"
+                          className="w-full bg-[#001489] border border-[#001489] text-sm px-4 py-3 outline-none focus:border-[#001489] transition-colors appearance-none cursor-pointer"
                           style={{ color: form.area ? "#001489" : "rgba(0,20,137,0.3)" }}
                         >
                           <option value="" disabled hidden>Practice Area</option>
@@ -221,7 +221,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                             <option key={a} value={a} style={{ color: "#001489", background: "#fff" }}>{a}</option>
                           ))}
                         </select>
-                        <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-[#001489]/30" fill="none" viewBox="0 0 12 12">
+                        <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-[#001489]" fill="none" viewBox="0 0 12 12">
                           <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                         </svg>
                       </div>
@@ -234,7 +234,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                         onChange={handleChange}
                         placeholder="Briefly describe your matter"
                         data-testid="modal-input-message"
-                        className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#001489]/60 transition-colors resize-none"
+                        className="bg-[#001489] border border-[#001489] text-[#001489] placeholder-[#001489] text-sm px-4 py-3 outline-none focus:border-[#001489] transition-colors resize-none"
                       />
 
                       <button
@@ -248,7 +248,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                         </svg>
                       </button>
 
-                      <p className="text-[#001489]/30 text-[10px] text-center leading-relaxed">
+                      <p className="text-[#001489] text-[10px] text-center leading-relaxed">
                         All enquiries are treated in strict confidence.
                       </p>
                     </motion.form>
@@ -278,7 +278,7 @@ function ArticleHero({ article, heroImg }: { article: ArticleData; heroImg?: str
           style={{ opacity: 0.12, mixBlendMode: "luminosity" }}
         />
       )}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#001489] via-[#001489]/85 to-[#001489]/60" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#001489] via-[#001489] to-[#001489]" />
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.04]"
         style={{
@@ -292,7 +292,7 @@ function ArticleHero({ article, heroImg }: { article: ArticleData; heroImg?: str
           initial={{ opacity: 0, x: -16 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 text-white/70 text-xs tracking-[0.2em] uppercase font-medium hover:text-white hover:gap-3 transition-all mb-12"
+          className="inline-flex items-center gap-2 text-white text-xs tracking-[0.2em] uppercase font-medium hover:text-white hover:gap-3 transition-all mb-12"
           data-testid="back-to-insights"
         >
           <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
@@ -308,11 +308,11 @@ function ArticleHero({ article, heroImg }: { article: ArticleData; heroImg?: str
           className="max-w-[860px]"
         >
           <div className="flex items-center gap-4 mb-7">
-            <span className="text-[10px] font-bold tracking-[0.22em] uppercase px-3 py-1 text-white bg-white/15">
+            <span className="text-[10px] font-bold tracking-[0.22em] uppercase px-3 py-1 text-white bg-white">
               {article.category}
             </span>
             <span className="text-white text-xs">{article.date}</span>
-            <span className="text-white/50 text-xs">·</span>
+            <span className="text-white text-xs">·</span>
             <span className="text-white text-xs">{article.readTime}</span>
           </div>
 
@@ -328,12 +328,12 @@ function ArticleHero({ article, heroImg }: { article: ArticleData; heroImg?: str
           />
 
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-white/15 flex items-center justify-center">
+            <div className="w-8 h-8 bg-white flex items-center justify-center">
               <span className="text-white text-xs font-bold">MH</span>
             </div>
             <div>
               <p className="text-white text-sm font-medium">{article.author}</p>
-              <p className="text-white/40 text-xs">{article.authorTitle}</p>
+              <p className="text-white text-xs">{article.authorTitle}</p>
             </div>
           </div>
         </motion.div>
@@ -382,7 +382,7 @@ function ArticleContent({ article, onContact }: { article: ArticleData; onContac
                       key={h.id}
                       href={`#${h.id}`}
                       className={`group flex items-start gap-3 py-2.5 border-b border-[#001489]/[0.06] last:border-b-0 transition-colors ${
-                        activeId === h.id ? "text-[#001489]" : "text-[#001489]/35 hover:text-[#001489]/65"
+                        activeId === h.id ? "text-[#001489]" : "text-[#001489] hover:text-[#001489]"
                       }`}
                     >
                       <span className={`mt-1 w-0.5 h-3.5 flex-shrink-0 transition-colors ${activeId === h.id ? "bg-[#001489]" : "bg-transparent"}`} />
@@ -392,11 +392,11 @@ function ArticleContent({ article, onContact }: { article: ArticleData; onContac
                 </nav>
               </div>
 
-              <div className="border-t border-[#001489]/10 pt-8">
+              <div className="border-t border-[#001489] pt-8">
                 <p className="text-[#001489] text-sm font-semibold mb-2 leading-snug">
                   Discuss this matter with our team
                 </p>
-                <p className="text-[#001489]/50 text-sm leading-relaxed mb-5">
+                <p className="text-[#001489] text-sm leading-relaxed mb-5">
                   Our partners are available for a confidential discussion.
                 </p>
                 <button
@@ -480,18 +480,18 @@ function ArticleCTA({ onContact }: { onContact: () => void }) {
     <section className="bg-[#001489] py-20 px-8">
       <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         <div>
-          <p className="text-white/60 text-[10px] tracking-[0.3em] uppercase font-medium mb-3">Expert Counsel</p>
+          <p className="text-white text-[10px] tracking-[0.3em] uppercase font-medium mb-3">Expert Counsel</p>
           <h3 className="font-heading text-white text-[clamp(1.4rem,2.5vw,2rem)] font-bold tracking-tight max-w-lg leading-snug">
             Need expert counsel on this matter?
           </h3>
-          <p className="text-white/50 text-sm mt-3 max-w-md leading-relaxed">
+          <p className="text-white text-sm mt-3 max-w-md leading-relaxed">
             Our partners are available for a confidential discussion across our Dubai and Paris offices.
           </p>
         </div>
         <button
           onClick={onContact}
           data-testid="article-cta"
-          className="flex-shrink-0 inline-flex items-center gap-3 bg-white text-[#001489] text-xs tracking-[0.18em] uppercase font-bold px-8 py-4 hover:bg-white/90 transition-colors"
+          className="flex-shrink-0 inline-flex items-center gap-3 bg-white text-[#001489] text-xs tracking-[0.18em] uppercase font-bold px-8 py-4 hover:bg-white transition-colors"
         >
           <span>Speak to a Partner</span>
           <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
@@ -531,7 +531,7 @@ function RelatedArticles({ slug }: { slug: string }) {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <svg className="w-8 h-8 text-[#8099FF]/50" fill="none" viewBox="0 0 48 48" stroke="currentColor" strokeWidth="1.4">
+                    <svg className="w-8 h-8 text-[#8099FF]" fill="none" viewBox="0 0 48 48" stroke="currentColor" strokeWidth="1.4">
                       <line x1="24" y1="6" x2="24" y2="42" strokeLinecap="round" />
                       <line x1="14" y1="42" x2="34" y2="42" strokeLinecap="round" />
                       <line x1="8" y1="14" x2="40" y2="14" strokeLinecap="round" />

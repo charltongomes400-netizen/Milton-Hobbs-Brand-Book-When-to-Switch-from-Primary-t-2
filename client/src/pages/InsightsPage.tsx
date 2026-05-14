@@ -127,7 +127,7 @@ function InsightsInner() {
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 />
                 {/* Dark overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#000A4F]/60 via-[#000A4F]/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#000A4F] via-[#000A4F] to-transparent" />
                 {/* Category badge over image */}
                 <div className="absolute top-6 left-6">
                   <span className="text-[9px] font-bold tracking-[0.25em] uppercase px-3 py-1.5 bg-white text-[#001489]">
@@ -184,7 +184,7 @@ function InsightsInner() {
                   className={`text-[9px] tracking-[0.22em] uppercase font-bold px-4 py-2 border transition-colors duration-150 ${
                     activeFilter === f
                       ? "bg-[#001489] text-white border-[#001489]"
-                      : "border-[#001489]/20 text-[#001489]/50 hover:border-[#001489]/50 hover:text-[#001489]"
+                      : "border-[#001489] text-[#001489] hover:border-[#001489] hover:text-[#001489]"
                   }`}
                 >
                   {f}
@@ -209,7 +209,7 @@ function InsightsInner() {
                 >
                   <a
                     href={`/insights/${article.slug}`}
-                    className="group flex flex-col h-full border border-[#E8ECF5] hover:border-[#001489]/30 transition-colors duration-200 overflow-hidden"
+                    className="group flex flex-col h-full border border-[#E8ECF5] hover:border-[#001489] transition-colors duration-200 overflow-hidden"
                     style={{ textDecoration: "none" }}
                   >
                     {/* Image */}
@@ -219,7 +219,7 @@ function InsightsInner() {
                         alt={article.coverAlt}
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-600 group-hover:scale-[1.04]"
                       />
-                      <div className="absolute inset-0 bg-[#000A4F]/10 group-hover:bg-[#000A4F]/0 transition-colors duration-300" />
+                      <div className="absolute inset-0 bg-[#000A4F] group-hover:bg-[#000A4F]/0 transition-colors duration-300" />
                       <div className="absolute top-4 left-4">
                         <span className="text-[8px] font-bold tracking-[0.22em] uppercase px-2.5 py-1 bg-white text-[#001489]">
                           {article.category}
@@ -279,7 +279,7 @@ function InsightsInner() {
           <a
             href="/#contact"
             data-testid="insights-contact-cta"
-            className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-white/90 transition-colors flex-shrink-0"
+            className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-white transition-colors flex-shrink-0"
             style={{ textDecoration: "none" }}
           >
             Book a Consultation

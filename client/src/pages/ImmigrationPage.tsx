@@ -36,11 +36,11 @@ function Passport3D() {
             boxShadow: "8px 16px 48px rgba(0,0,0,0.7), -4px 0 16px rgba(0,10,79,0.8), inset 1px 1px 0 rgba(255,255,255,0.05)",
           }}
         >
-          <div className="absolute inset-[10px] border border-white/35 pointer-events-none" />
-          <div className="absolute inset-[14px] border border-white/15 pointer-events-none" />
+          <div className="absolute inset-[10px] border border-white pointer-events-none" />
+          <div className="absolute inset-[14px] border border-white pointer-events-none" />
 
           <div className="absolute top-6 left-0 right-0 flex justify-center">
-            <p className="text-white/60 text-[8px] tracking-[0.5em] uppercase font-medium">
+            <p className="text-white text-[8px] tracking-[0.5em] uppercase font-medium">
               مكتب ميلتون هوبز
             </p>
           </div>
@@ -48,7 +48,7 @@ function Passport3D() {
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-4">
             <div className="relative w-[72px] h-[72px]">
               <div className="absolute inset-0 rounded-full border-2 border-white" />
-              <div className="absolute inset-[5px] rounded-full border border-white/40" />
+              <div className="absolute inset-[5px] rounded-full border border-white" />
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 72 72">
                 <ellipse cx="36" cy="36" rx="14" ry="31" stroke="white" strokeWidth="0.7" fill="none" opacity="0.5" />
                 <ellipse cx="36" cy="36" rx="25" ry="31" stroke="white" strokeWidth="0.5" fill="none" opacity="0.3" />
@@ -63,17 +63,17 @@ function Passport3D() {
 
             <div className="text-center">
               <p className="text-white text-[9px] tracking-[0.45em] uppercase font-bold">Milton Hobbs</p>
-              <p className="text-white/40 text-[7px] tracking-[0.25em] uppercase mt-1">Legal Services</p>
+              <p className="text-white text-[7px] tracking-[0.25em] uppercase mt-1">Legal Services</p>
             </div>
 
-            <div className="border-t border-white/30 pt-3 w-full text-center">
+            <div className="border-t border-white pt-3 w-full text-center">
               <p className="text-white font-heading text-sm font-bold tracking-[0.35em] uppercase">Passport</p>
             </div>
           </div>
 
           <div className="absolute bottom-5 left-0 right-0 px-5">
-            <p className="text-white/50 text-[7px] tracking-[0.18em] font-mono">MH&lt;&lt;LEGAL&lt;&lt;SERVICES&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
-            <p className="text-white/50 text-[7px] tracking-[0.18em] font-mono mt-1">UAE&lt;FR&lt;2026&lt;5&lt;CORP</p>
+            <p className="text-white text-[7px] tracking-[0.18em] font-mono">MH&lt;&lt;LEGAL&lt;&lt;SERVICES&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
+            <p className="text-white text-[7px] tracking-[0.18em] font-mono mt-1">UAE&lt;FR&lt;2026&lt;5&lt;CORP</p>
           </div>
         </div>
 
@@ -102,9 +102,9 @@ function Passport3D() {
           }}
         >
           <p className="text-white text-[7px] font-bold tracking-[0.3em] uppercase">ADMITTED</p>
-          <div className="w-9 h-px bg-white/60 my-1" />
-          <p className="text-white/80 text-[7px] tracking-[0.2em] uppercase">U.A.E.</p>
-          <p className="text-white/40 text-[6px] tracking-wider mt-0.5">DUBAI</p>
+          <div className="w-9 h-px bg-white my-1" />
+          <p className="text-white text-[7px] tracking-[0.2em] uppercase">U.A.E.</p>
+          <p className="text-white text-[6px] tracking-wider mt-0.5">DUBAI</p>
         </div>
       </motion.div>
 
@@ -123,8 +123,8 @@ function Passport3D() {
           }}
         >
           <p className="text-[#8099FF] text-[6px] font-bold tracking-[0.25em] uppercase">ENTRÉE</p>
-          <div className="w-7 h-px bg-[#8099FF]/50 my-0.5" />
-          <p className="text-white/70 text-[6px] tracking-[0.15em] uppercase">France</p>
+          <div className="w-7 h-px bg-[#8099FF] my-0.5" />
+          <p className="text-white text-[6px] tracking-[0.15em] uppercase">France</p>
         </div>
       </motion.div>
 
@@ -293,8 +293,8 @@ const jurisdictions = [
     country: "United Arab Emirates",
     city: "Dubai",
     color: "white",
-    border: "border-white/30",
-    tag: "bg-white/10 text-white",
+    border: "border-white",
+    tag: "bg-white text-white",
     areas: [
       "UAE Golden Visa (10-year)",
       "Investor Residency Visa",
@@ -310,8 +310,8 @@ const jurisdictions = [
     country: "France",
     city: "Paris",
     color: "#8099FF",
-    border: "border-[#8099FF]/30",
-    tag: "bg-[#8099FF]/10 text-[#8099FF]",
+    border: "border-[#8099FF]",
+    tag: "bg-[#8099FF] text-[#8099FF]",
     areas: [
       "Talent Passport (4-year)",
       "Long-Stay Visa — Employee",
@@ -361,7 +361,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
         <>
           <motion.div
             key="backdrop"
-            className="fixed inset-0 z-[60] bg-[#000A4F]/85 backdrop-blur-sm"
+            className="fixed inset-0 z-[60] bg-[#000A4F] backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -392,14 +392,14 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                     <h3 className="font-heading text-white text-xl font-bold tracking-tight">
                       Speak to a Partner
                     </h3>
-                    <p className="text-white/40 text-xs mt-1 leading-snug">
+                    <p className="text-white text-xs mt-1 leading-snug">
                       Confidential consultation — Dubai & Paris offices
                     </p>
                   </div>
                   <button
                     onClick={handleClose}
                     data-testid="modal-close"
-                    className="text-white/40 hover:text-white transition-colors mt-0.5 flex-shrink-0"
+                    className="text-white hover:text-white transition-colors mt-0.5 flex-shrink-0"
                     aria-label="Close"
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 20 20">
@@ -422,14 +422,14 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                       data-testid="modal-success"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="w-9 h-9 bg-white/15 flex items-center justify-center flex-shrink-0">
+                        <span className="w-9 h-9 bg-white flex items-center justify-center flex-shrink-0">
                           <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 16 16">
                             <path d="M2 8l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </span>
                         <h4 className="font-heading text-[#001489] font-bold text-base">Message received</h4>
                       </div>
-                      <p className="text-[#001489]/60 text-sm leading-relaxed">
+                      <p className="text-[#001489] text-sm leading-relaxed">
                         Thank you for reaching out. One of our immigration partners will be in touch within one business day.
                       </p>
                       <button
@@ -459,7 +459,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                           onChange={handleChange}
                           placeholder="Full Name"
                           data-testid="modal-input-name"
-                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-white/60 transition-colors"
+                          className="col-span-2 sm:col-span-1 bg-[#001489] border border-[#001489] text-[#001489] placeholder-[#001489] text-sm px-4 py-3 outline-none focus:border-white transition-colors"
                         />
                         <input
                           type="email"
@@ -469,7 +469,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                           onChange={handleChange}
                           placeholder="Email Address"
                           data-testid="modal-input-email"
-                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-white/60 transition-colors"
+                          className="col-span-2 sm:col-span-1 bg-[#001489] border border-[#001489] text-[#001489] placeholder-[#001489] text-sm px-4 py-3 outline-none focus:border-white transition-colors"
                         />
                       </div>
 
@@ -480,7 +480,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                           value={form.area}
                           onChange={handleChange}
                           data-testid="modal-select-area"
-                          className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3 outline-none focus:border-white/60 transition-colors appearance-none cursor-pointer"
+                          className="w-full bg-[#001489] border border-[#001489] text-sm px-4 py-3 outline-none focus:border-white transition-colors appearance-none cursor-pointer"
                           style={{ color: form.area ? "#001489" : "rgba(0,20,137,0.3)" }}
                         >
                           <option value="" disabled hidden>Immigration Service</option>
@@ -488,7 +488,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                             <option key={a} value={a} style={{ color: "#001489", background: "#fff" }}>{a}</option>
                           ))}
                         </select>
-                        <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-[#001489]/30" fill="none" viewBox="0 0 12 12">
+                        <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 text-[#001489]" fill="none" viewBox="0 0 12 12">
                           <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                         </svg>
                       </div>
@@ -501,7 +501,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                         onChange={handleChange}
                         placeholder="Briefly describe your immigration matter"
                         data-testid="modal-input-message"
-                        className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-white/60 transition-colors resize-none"
+                        className="bg-[#001489] border border-[#001489] text-[#001489] placeholder-[#001489] text-sm px-4 py-3 outline-none focus:border-white transition-colors resize-none"
                       />
 
                       <button
@@ -515,7 +515,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                         </svg>
                       </button>
 
-                      <p className="text-[#001489]/30 text-[10px] text-center leading-relaxed">
+                      <p className="text-[#001489] text-[10px] text-center leading-relaxed">
                         All enquiries are treated in strict confidence.
                       </p>
                     </motion.form>
@@ -592,7 +592,7 @@ export default function ImmigrationPage() {
                     </svg>
                     Our Expertise
                   </a>
-                  <span className="text-white/20">·</span>
+                  <span className="text-white">·</span>
                   <span className="text-[#8099FF] text-[10px] tracking-[0.3em] uppercase font-semibold">Immigration Law</span>
                 </motion.div>
 
@@ -620,7 +620,7 @@ export default function ImmigrationPage() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.9 }}
-                  className="text-white/60 text-base leading-relaxed max-w-[500px] mb-10"
+                  className="text-white text-base leading-relaxed max-w-[500px] mb-10"
                 >
                   UAE residency, investor visas, talent visas, immigration appeals, and cross-border mobility strategies — for executives, founders, and families across the UAE and France.
                 </motion.p>
@@ -644,7 +644,7 @@ export default function ImmigrationPage() {
                   <a
                     href="#services"
                     data-testid="immigration-cta-secondary"
-                    className="inline-flex items-center gap-3 border border-white/25 text-white text-xs font-semibold tracking-[0.18em] uppercase px-8 py-4 hover:border-white/50 transition-colors"
+                    className="inline-flex items-center gap-3 border border-white text-white text-xs font-semibold tracking-[0.18em] uppercase px-8 py-4 hover:border-white transition-colors"
                   >
                     View Services
                   </a>
@@ -654,7 +654,7 @@ export default function ImmigrationPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.4 }}
-                  className="grid grid-cols-3 gap-6 border-t border-white/10 pt-8"
+                  className="grid grid-cols-3 gap-6 border-t border-white pt-8"
                 >
                   {[
                     { n: 500, suffix: "+", label: "Visas filed" },
@@ -665,7 +665,7 @@ export default function ImmigrationPage() {
                       <p className="font-heading text-white font-bold text-2xl">
                         <AnimatedNumber target={s.n} suffix={s.suffix} />
                       </p>
-                      <p className="text-white/40 text-xs tracking-wider mt-1">{s.label}</p>
+                      <p className="text-white text-xs tracking-wider mt-1">{s.label}</p>
                     </div>
                   ))}
                 </motion.div>
@@ -697,9 +697,9 @@ export default function ImmigrationPage() {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2.2, repeat: Infinity }}
-              className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent"
+              className="w-px h-10 bg-gradient-to-b from-white to-transparent"
             />
-            <span className="text-white/30 text-[10px] tracking-[0.25em] uppercase">Scroll</span>
+            <span className="text-white text-[10px] tracking-[0.25em] uppercase">Scroll</span>
           </motion.div>
         </section>
 
@@ -723,7 +723,7 @@ export default function ImmigrationPage() {
                 <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight">
                   Immigration services.
                 </h2>
-                <p className="text-[#001489]/50 text-sm max-w-xs leading-relaxed">
+                <p className="text-[#001489] text-sm max-w-xs leading-relaxed">
                   Comprehensive support across all UAE and French immigration pathways.
                 </p>
               </div>
@@ -744,7 +744,7 @@ export default function ImmigrationPage() {
                   <div className="w-10 h-10 mb-6">{svc.icon}</div>
 
                   {svc.tag && (
-                    <span className="inline-block text-[9px] tracking-[0.22em] uppercase font-bold bg-white/10 text-white px-2 py-1 mb-4 self-start">
+                    <span className="inline-block text-[9px] tracking-[0.22em] uppercase font-bold bg-white text-white px-2 py-1 mb-4 self-start">
                       {svc.tag}
                     </span>
                   )}
@@ -785,7 +785,7 @@ export default function ImmigrationPage() {
             </motion.div>
 
             <div className="relative">
-              <div className="hidden lg:block absolute top-[52px] left-0 right-0 h-px bg-white/20" />
+              <div className="hidden lg:block absolute top-[52px] left-0 right-0 h-px bg-white" />
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {steps.map((step, i) => (
@@ -798,12 +798,12 @@ export default function ImmigrationPage() {
                     data-testid={`process-step-${i}`}
                     className="relative flex flex-col"
                   >
-                    <div className="relative z-10 w-[104px] h-[104px] border border-white/40 flex items-center justify-center mb-6 bg-[#001489]">
-                      <div className="absolute inset-[5px] border border-white/20" />
+                    <div className="relative z-10 w-[104px] h-[104px] border border-white flex items-center justify-center mb-6 bg-[#001489]">
+                      <div className="absolute inset-[5px] border border-white" />
                       <span className="font-heading text-white font-bold text-3xl">{step.num}</span>
                     </div>
                     <h3 className="font-heading text-white font-bold text-lg mb-3 leading-snug">{step.title}</h3>
-                    <p className="text-white/50 text-sm leading-relaxed">{step.desc}</p>
+                    <p className="text-white text-sm leading-relaxed">{step.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -829,7 +829,7 @@ export default function ImmigrationPage() {
               </h2>
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-px bg-white/10">
+            <div className="grid lg:grid-cols-2 gap-px bg-white">
               {jurisdictions.map((j, i) => (
                 <motion.div
                   key={i}
@@ -857,10 +857,10 @@ export default function ImmigrationPage() {
                     </div>
                   </div>
 
-                  <p className="text-white/50 text-sm leading-relaxed mb-8">{j.body}</p>
+                  <p className="text-white text-sm leading-relaxed mb-8">{j.body}</p>
 
                   <div className={`border-t pt-8 ${j.border}`}>
-                    <p className="text-white/30 text-[9px] tracking-[0.3em] uppercase mb-4 font-semibold">Visa categories</p>
+                    <p className="text-white text-[9px] tracking-[0.3em] uppercase mb-4 font-semibold">Visa categories</p>
                     <div className="grid grid-cols-2 gap-y-3 gap-x-4">
                       {j.areas.map((a) => (
                         <div key={a} className="flex items-start gap-2">
@@ -868,7 +868,7 @@ export default function ImmigrationPage() {
                             className="mt-[6px] w-1 h-1 flex-shrink-0 rounded-full"
                             style={{ backgroundColor: j.color }}
                           />
-                          <span className="text-white/65 text-xs leading-snug">{a}</span>
+                          <span className="text-white text-xs leading-snug">{a}</span>
                         </div>
                       ))}
                     </div>
@@ -966,7 +966,7 @@ export default function ImmigrationPage() {
                 <h3 className="font-heading text-white font-bold text-[clamp(1.6rem,3vw,2.4rem)] tracking-tight leading-snug max-w-lg">
                   Ready to start your immigration matter?
                 </h3>
-                <p className="text-white/45 text-sm mt-3 leading-relaxed max-w-md">
+                <p className="text-white text-sm mt-3 leading-relaxed max-w-md">
                   Contact our Dubai or Paris office for a confidential first consultation.
                 </p>
               </div>
@@ -983,7 +983,7 @@ export default function ImmigrationPage() {
                 </button>
                 <a
                   href="/#expertise"
-                  className="inline-flex items-center gap-3 border border-white/25 text-white text-xs font-semibold tracking-[0.18em] uppercase px-8 py-4 hover:border-white/50 transition-colors"
+                  className="inline-flex items-center gap-3 border border-white text-white text-xs font-semibold tracking-[0.18em] uppercase px-8 py-4 hover:border-white transition-colors"
                 >
                   All Practice Areas
                 </a>
