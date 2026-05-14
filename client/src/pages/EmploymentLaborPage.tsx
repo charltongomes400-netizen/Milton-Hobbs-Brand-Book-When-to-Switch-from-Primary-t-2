@@ -4,6 +4,7 @@ import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
 import { ContactModal } from "@/components/ContactModal";
+import imgEmploy from "@assets/optimized/daniele-colucci-Xt48I3ps6Pg-unsplash_1776241615811.jpg";
 
 const PAGE_TEXT = {
   EN: {
@@ -106,6 +107,28 @@ const DIFFERENTIATORS_FR = [
   { label: "Pragmatisme commercial", body: "Les litiges sociaux peuvent distraire du business. Notre objectif est de résoudre les dossiers rapidement, discrètement et commercialement." },
 ];
 
+const TILE_SZ = 150;
+const GRID_COLS = [38, 49.5, 61, 72.5, 84];
+const GRID_ROWS = [4,  22,   40, 58,   76];
+const TILE_DEFS: [number, number, string, number, number][] = [
+  [0, 0, "#001489", 22.0,  0.0],
+  [3, 0, "#001050", 24.0,  6.0],
+  [2, 1, "#001489", 20.0,  3.0],
+  [3, 1, "#001050", 23.0,  9.0],
+  [4, 2, "#001489", 21.0,  5.0],
+  [1, 2, "#001050", 26.0, 12.0],
+  [1, 3, "#001489", 22.0, 14.0],
+  [3, 3, "#001050", 20.0,  7.0],
+  [4, 4, "#001489", 24.0,  2.0],
+];
+const ACCENT_TILES = TILE_DEFS.map(([ci, ri, col, dur, delay]) => ({
+  left:  `${GRID_COLS[ci]}%`,
+  top:   `${GRID_ROWS[ri]}%`,
+  col,
+  dur,
+  delay,
+}));
+
 function EmploymentLaborInner() {
   const { lang } = useLang();
   const tx = PAGE_TEXT[lang];
@@ -129,6 +152,48 @@ function EmploymentLaborInner() {
       <Header />
 
       <section id="home" data-testid="employment-hero" data-header-theme="dark" className="relative min-h-screen bg-[#001489] flex items-center overflow-hidden pt-20">
+
+        {/* Full-bleed photo — multiply blends against #001489 bg */}
+        <img
+          src={imgEmploy}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ objectPosition: "center 30%", mixBlendMode: "multiply" }}
+        />
+
+        {/* Animated accent tiles */}
+        {ACCENT_TILES.map((tile, i) => (
+          <motion.div
+            key={i}
+            className="absolute pointer-events-none"
+            style={{
+              left:            tile.left,
+              top:             tile.top,
+              width:           TILE_SZ,
+              height:          TILE_SZ,
+              backgroundColor: tile.col,
+            }}
+            animate={{ opacity: [0, 0, 1, 1, 0, 0] }}
+            transition={{
+              duration: tile.dur,
+              delay:    tile.delay,
+              repeat:   Infinity,
+              ease:     "easeInOut",
+              times:    [0, 0.15, 0.40, 0.60, 0.85, 1],
+            }}
+          />
+        ))}
+
+        {/* Bottom vignette */}
+        <div
+          className="absolute inset-x-0 bottom-0 pointer-events-none"
+          style={{
+            height: "70%",
+            background: "linear-gradient(to top, rgba(0,14,80,0.80) 0%, rgba(0,14,80,0.40) 45%, transparent 100%)",
+          }}
+        />
+
         <div className="relative z-10 max-w-[1400px] mx-auto px-8 py-20 w-full">
           <div className="grid lg:grid-cols-1 items-center">
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: "easeOut" }}>
