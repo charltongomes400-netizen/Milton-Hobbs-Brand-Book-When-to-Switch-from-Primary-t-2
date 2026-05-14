@@ -463,11 +463,11 @@ function SectionBlock({ section }: { section: ArticleSection }) {
   if (section.type === "keypoints") {
     return (
       <div className="my-10 bg-[#F5F7FF] p-8">
-        <p className="text-[#D4AF36] text-[9px] tracking-[0.3em] uppercase font-bold mb-5">{section.title}</p>
+        <p className="text-[#001489] text-[9px] tracking-[0.3em] uppercase font-bold mb-5">{section.title}</p>
         <ul className="flex flex-col gap-3.5">
           {section.points.map((point, i) => (
             <li key={i} className="flex items-start gap-4">
-              <span className="mt-[6px] w-1.5 h-1.5 flex-shrink-0 bg-[#D4AF36]" />
+              <span className="mt-[6px] w-1.5 h-1.5 flex-shrink-0 bg-[#001489]" />
               <span className="text-[#001489] text-sm leading-relaxed">{point}</span>
             </li>
           ))}
