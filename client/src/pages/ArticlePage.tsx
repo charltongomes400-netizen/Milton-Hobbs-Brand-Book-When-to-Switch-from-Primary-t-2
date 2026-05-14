@@ -292,7 +292,7 @@ function ArticleHero({ article, heroImg }: { article: ArticleData; heroImg?: str
           initial={{ opacity: 0, x: -16 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 text-[#D4AF36] text-xs tracking-[0.2em] uppercase font-medium hover:gap-3 transition-all mb-12"
+          className="inline-flex items-center gap-2 text-white/70 text-xs tracking-[0.2em] uppercase font-medium hover:text-white hover:gap-3 transition-all mb-12"
           data-testid="back-to-insights"
         >
           <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
