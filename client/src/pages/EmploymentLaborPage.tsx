@@ -173,7 +173,7 @@ function EmploymentLaborInner() {
               height:          TILE_SZ,
               backgroundColor: tile.col,
             }}
-            animate={{ opacity: [0, 0, 1, 1, 0, 0] }}
+            animate={{ opacity: [0, 0, 0.12, 0.12, 0, 0] }}
             transition={{
               duration: tile.dur,
               delay:    tile.delay,
