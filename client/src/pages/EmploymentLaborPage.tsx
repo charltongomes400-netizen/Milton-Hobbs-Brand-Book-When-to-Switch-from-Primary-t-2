@@ -4,6 +4,7 @@ import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
 import { ContactModal } from "@/components/ContactModal";
+import imgEmploy from "@assets/optimized/daniele-colucci-Xt48I3ps6Pg-unsplash_1776241615811.jpg";
 
 const PAGE_TEXT = {
   EN: {
@@ -69,118 +70,6 @@ const PAGE_TEXT = {
     bannerCta: "Prendre Rendez-vous",
   },
 };
-
-function EmploymentIllustration() {
-  return (
-    <div className="relative w-full h-full flex items-center justify-center" style={{ perspective: "1400px" }}>
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 68% 68% at 52% 50%, rgba(255,255,255,0.05) 0%, transparent 65%)" }} />
-
-      {/* Connected people network */}
-      <motion.div
-        animate={{ rotateY: [-10, 4, -10] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        style={{ transformStyle: "preserve-3d", position: "relative", zIndex: 10 }}
-      >
-        <svg width="280" height="220" viewBox="0 0 280 220" fill="none">
-          {/* Connection lines */}
-          <line x1="70" y1="80" x2="140" y2="50" stroke="rgba(255,255,255,0.25)" strokeWidth="1" strokeDasharray="4 3" />
-          <line x1="210" y1="80" x2="140" y2="50" stroke="rgba(255,255,255,0.25)" strokeWidth="1" strokeDasharray="4 3" />
-          <line x1="40" y1="160" x2="70" y2="80" stroke="rgba(255,255,255,0.18)" strokeWidth="1" strokeDasharray="4 3" />
-          <line x1="100" y1="160" x2="70" y2="80" stroke="rgba(255,255,255,0.18)" strokeWidth="1" strokeDasharray="4 3" />
-          <line x1="180" y1="160" x2="210" y2="80" stroke="rgba(255,255,255,0.18)" strokeWidth="1" strokeDasharray="4 3" />
-          <line x1="240" y1="160" x2="210" y2="80" stroke="rgba(255,255,255,0.18)" strokeWidth="1" strokeDasharray="4 3" />
-
-          {/* Center top — CEO */}
-          <circle cx="140" cy="44" r="16" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5" />
-          <circle cx="140" cy="38" r="5" fill="rgba(255,255,255,0.8)" />
-          <path d="M130 56c0-5 2.5-8 10-8s10 3 10 8" fill="rgba(255,255,255,0.6)" />
-          <text x="140" y="74" textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="7" letterSpacing="0.15em" fontFamily="sans-serif">EXECUTIVE</text>
-
-          {/* Left mid — Manager */}
-          <circle cx="70" cy="80" r="13" fill="rgba(128,153,255,0.18)" stroke="rgba(128,153,255,0.65)" strokeWidth="1.3" />
-          <circle cx="70" cy="74" r="4" fill="rgba(255,255,255,0.7)" />
-          <path d="M62 90c0-4 2-6 8-6s8 2.4 8 6" fill="rgba(255,255,255,0.5)" />
-
-          {/* Right mid — Manager */}
-          <circle cx="210" cy="80" r="13" fill="rgba(128,153,255,0.18)" stroke="rgba(128,153,255,0.65)" strokeWidth="1.3" />
-          <circle cx="210" cy="74" r="4" fill="rgba(255,255,255,0.7)" />
-          <path d="M202 90c0-4 2-6 8-6s8 2.4 8 6" fill="rgba(255,255,255,0.5)" />
-
-          {/* Bottom row — employees */}
-          {[40, 100, 180, 240].map((x, i) => (
-            <g key={i}>
-              <circle cx={x} cy="160" r="11" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.40)" strokeWidth="1.1" />
-              <circle cx={x} cy="155" r="3.5" fill="rgba(255,255,255,0.6)" />
-              <path d={`M${x-7} 170c0-3.5 1.8-5 7-5s7 1.8 7 5`} fill="rgba(255,255,255,0.4)" />
-            </g>
-          ))}
-
-          {/* Contract document */}
-          <rect x="114" y="100" width="52" height="68" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.35)" strokeWidth="1.2" rx="1" />
-          <line x1="122" y1="114" x2="158" y2="114" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
-          <line x1="122" y1="122" x2="158" y2="122" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
-          <line x1="122" y1="130" x2="148" y2="130" stroke="rgba(255,255,255,0.14)" strokeWidth="1" />
-          <path d="M122 150l4 4 8-8" stroke="rgba(128,153,255,0.8)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-          <line x1="135" y1="153" x2="158" y2="153" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
-        </svg>
-      </motion.div>
-
-      {/* Floating chips */}
-      <motion.div
-        animate={{ opacity: [0.85, 1, 0.85], y: [-8, 8, -8] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        style={{ position: "absolute", top: "4%", right: "3%", zIndex: 20 }}
-      >
-        <div style={{ width: 104, height: 104, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 10px 36px rgba(0,0,0,0.22)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
-          <p style={{ color: "#001489", fontSize: 9, fontWeight: 800, letterSpacing: "0.3em", textTransform: "uppercase" }}>DUBAI</p>
-          <div style={{ width: 32, height: 1, background: "#001489", opacity: 0.22 }} />
-          <p style={{ color: "#001489", fontSize: 7, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.5 }}>UAE Labor</p>
-        </div>
-      </motion.div>
-
-      <motion.div
-        animate={{ y: [8, -8, 8] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
-        style={{ position: "absolute", bottom: "6%", left: "2%", zIndex: 20 }}
-      >
-        <div style={{ width: 90, height: 90, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 8px 28px rgba(0,0,0,0.18)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
-          <p style={{ color: "#001489", fontSize: 8, fontWeight: 800, letterSpacing: "0.28em", textTransform: "uppercase" }}>PARIS</p>
-          <div style={{ width: 28, height: 1, background: "#001489", opacity: 0.22 }} />
-          <p style={{ color: "#001489", fontSize: 7, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.5 }}>Droit Social</p>
-        </div>
-      </motion.div>
-
-      <motion.div
-        animate={{ opacity: [0.85, 1, 0.85], y: [-5, 5, -5] }}
-        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-        style={{ position: "absolute", top: "22%", left: "1%", transform: "rotate(-9deg)", zIndex: 20 }}
-      >
-        <div style={{ padding: "11px 18px", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 4px 20px rgba(0,0,0,0.18)" }}>
-          <p style={{ color: "#001489", fontSize: 10, fontWeight: 800, letterSpacing: "0.28em", textTransform: "uppercase" }}>ESOP</p>
-        </div>
-      </motion.div>
-
-      <motion.div
-        animate={{ opacity: [0.80, 1, 0.80] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        style={{ position: "absolute", bottom: "25%", right: "1%", transform: "rotate(7deg)", zIndex: 20 }}
-      >
-        <div style={{ padding: "10px 16px", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
-          <p style={{ color: "#001489", fontSize: 9, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase" }}>C-Suite</p>
-        </div>
-      </motion.div>
-
-      <motion.div
-        animate={{ rotateZ: [0, 360] }}
-        transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
-        className="absolute pointer-events-none"
-        style={{ width: 450, height: 128, borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.13)", transform: "rotateX(70deg)", top: "50%", left: "50%", marginTop: -64, marginLeft: -225 }}
-      >
-        <div style={{ position: "absolute", width: 8, height: 8, borderRadius: "50%", background: "#8099FF", top: -4, left: "50%", marginLeft: -4, boxShadow: "0 0 10px 3px rgba(128,153,255,0.7)" }} />
-      </motion.div>
-    </div>
-  );
-}
 
 const SERVICES_EN = [
   { num: "01", title: "Employment Contracts", description: "Drafting and reviewing UAE labor contracts (MOHRE-compliant), fixed-term and unlimited contracts, French contrats de travail (CDI, CDD), and offer letter packages for senior hires.", icon: (<svg viewBox="0 0 40 40" fill="none" className="w-full h-full"><rect x="8" y="6" width="24" height="30" stroke="#8099FF" strokeWidth="1.5"/><line x1="13" y1="14" x2="27" y2="14" stroke="rgba(255,255,255,0.28)" strokeWidth="1"/><line x1="13" y1="19" x2="27" y2="19" stroke="rgba(255,255,255,0.28)" strokeWidth="1"/><path d="M13 25l2 2 4-4" stroke="rgba(255,255,255,0.55)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>) },
@@ -284,8 +173,70 @@ function EmploymentLaborInner() {
               </motion.div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.1, delay: 0.5 }} className="relative hidden lg:flex items-center justify-center h-[620px]">
-              <EmploymentIllustration />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.1, delay: 0.5 }}
+              className="relative hidden lg:flex items-center justify-center h-[620px] overflow-hidden"
+            >
+              {/* Background photo ── blends with #001489 parent via multiply */}
+              <img
+                src={imgEmploy}
+                alt="Employment & Labor"
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                style={{ objectPosition: "center 30%", mixBlendMode: "multiply" }}
+              />
+              {/* Bottom vignette for depth */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: "linear-gradient(to bottom, transparent 40%, rgba(0,10,60,0.55) 100%)",
+                }}
+              />
+              {/* Floating chips ── retained from original */}
+              <motion.div
+                animate={{ opacity: [0.85, 1, 0.85], y: [-8, 8, -8] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                style={{ position: "absolute", top: "4%", right: "3%", zIndex: 20 }}
+              >
+                <div style={{ width: 104, height: 104, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 10px 36px rgba(0,0,0,0.22)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
+                  <p style={{ color: "#001489", fontSize: 9, fontWeight: 800, letterSpacing: "0.3em", textTransform: "uppercase" }}>DUBAI</p>
+                  <div style={{ width: 32, height: 1, background: "#001489", opacity: 0.22 }} />
+                  <p style={{ color: "#001489", fontSize: 7, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.5 }}>UAE Labor</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [8, -8, 8] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
+                style={{ position: "absolute", bottom: "6%", left: "2%", zIndex: 20 }}
+              >
+                <div style={{ width: 90, height: 90, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 8px 28px rgba(0,0,0,0.18)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
+                  <p style={{ color: "#001489", fontSize: 8, fontWeight: 800, letterSpacing: "0.28em", textTransform: "uppercase" }}>PARIS</p>
+                  <div style={{ width: 28, height: 1, background: "#001489", opacity: 0.22 }} />
+                  <p style={{ color: "#001489", fontSize: 7, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.5 }}>Droit Social</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                animate={{ opacity: [0.85, 1, 0.85], y: [-5, 5, -5] }}
+                transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+                style={{ position: "absolute", top: "22%", left: "1%", transform: "rotate(-9deg)", zIndex: 20 }}
+              >
+                <div style={{ padding: "11px 18px", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 4px 20px rgba(0,0,0,0.18)" }}>
+                  <p style={{ color: "#001489", fontSize: 10, fontWeight: 800, letterSpacing: "0.28em", textTransform: "uppercase" }}>ESOP</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                animate={{ opacity: [0.80, 1, 0.80] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                style={{ position: "absolute", bottom: "25%", right: "1%", transform: "rotate(7deg)", zIndex: 20 }}
+              >
+                <div style={{ padding: "10px 16px", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
+                  <p style={{ color: "#001489", fontSize: 9, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase" }}>C-Suite</p>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
