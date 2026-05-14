@@ -314,9 +314,9 @@ function ArticleHero({ article, heroImg }: { article: ArticleData; heroImg?: str
             >
               {article.category}
             </span>
-            <span className="text-white/35 text-xs">{article.date}</span>
-            <span className="text-white/20 text-xs">·</span>
-            <span className="text-white/35 text-xs">{article.readTime}</span>
+            <span className="text-white text-xs">{article.date}</span>
+            <span className="text-white/50 text-xs">·</span>
+            <span className="text-white text-xs">{article.readTime}</span>
           </div>
 
           <h1 className="font-heading text-white font-bold text-[clamp(2.4rem,4.5vw,4rem)] leading-[1.08] tracking-tight mb-9">
@@ -327,12 +327,12 @@ function ArticleHero({ article, heroImg }: { article: ArticleData; heroImg?: str
             initial={{ width: 0 }}
             animate={{ width: "72px" }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="h-[2px] bg-[#D4AF36] mb-9"
+            className="h-[2px] bg-white/30 mb-9"
           />
 
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-[#D4AF36]/20 flex items-center justify-center">
-              <span className="text-[#D4AF36] text-xs font-bold">MH</span>
+            <div className="w-8 h-8 bg-white/15 flex items-center justify-center">
+              <span className="text-white text-xs font-bold">MH</span>
             </div>
             <div>
               <p className="text-white text-sm font-medium">{article.author}</p>
