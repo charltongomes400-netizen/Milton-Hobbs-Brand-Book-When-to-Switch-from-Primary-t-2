@@ -816,7 +816,7 @@ function CareersPageInner() {
       <section className="bg-[#F7F8FC] border-t border-gray-100" data-header-theme="light">
         <div className="max-w-[1400px] mx-auto px-8 py-20 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
           <div className="max-w-lg">
-            <p className="text-[#8099FF] text-[10px] tracking-[0.4em] uppercase font-bold mb-4">Don't See Your Role?</p>
+            <p className="text-[#001489] text-[10px] tracking-[0.4em] uppercase font-bold mb-4">Don't See Your Role?</p>
             <h2 className="font-heading text-[#001489] text-3xl font-bold tracking-tight leading-tight mb-4">
               We are always open to exceptional talent.
             </h2>
