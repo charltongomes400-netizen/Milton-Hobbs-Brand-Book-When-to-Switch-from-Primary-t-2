@@ -308,7 +308,7 @@ function ArticleHero({ article, heroImg }: { article: ArticleData; heroImg?: str
           className="max-w-[860px]"
         >
           <div className="flex items-center gap-4 mb-7">
-            <span className="text-[10px] font-bold tracking-[0.22em] uppercase px-3 py-1 text-white bg-white">
+            <span className="text-[10px] font-bold tracking-[0.22em] uppercase px-3 py-1 text-[#001489] bg-white">
               {article.category}
             </span>
             <span className="text-white text-xs">{article.date}</span>
