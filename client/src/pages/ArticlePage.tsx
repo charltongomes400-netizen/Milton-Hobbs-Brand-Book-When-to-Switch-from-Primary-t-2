@@ -329,7 +329,7 @@ function ArticleHero({ article, heroImg }: { article: ArticleData; heroImg?: str
 
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-white flex items-center justify-center">
-              <span className="text-white text-xs font-bold">MH</span>
+              <span className="text-[#001489] text-xs font-bold">MH</span>
             </div>
             <div>
               <p className="text-white text-sm font-medium">{article.author}</p>
