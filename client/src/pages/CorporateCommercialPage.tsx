@@ -642,7 +642,6 @@ function CorporateCommercialInner() {
   return (
     <div className="bg-[#001489] min-h-screen">
       <Header />
-
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section
         id="home"
@@ -671,7 +670,7 @@ function CorporateCommercialInner() {
               >
                 <a
                   href="/#expertise"
-                  className="flex items-center gap-2 text-[#8099FF] text-[10px] tracking-[0.3em] uppercase font-semibold hover:opacity-80 transition-opacity"
+                  className="flex items-center gap-2 text-[#8099FF] text-[18px] tracking-[0.3em] uppercase font-semibold hover:opacity-80 transition-opacity"
                 >
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
                     <path d="M11 6H1M6 1L1 6l5 5" stroke="currentColor" strokeWidth="1.3" />
@@ -679,7 +678,7 @@ function CorporateCommercialInner() {
                   {tx.breadcrumb}
                 </a>
                 <span className="text-white/20">·</span>
-                <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase font-medium">Corporate & Commercial</span>
+                <span className="text-white/40 text-[18px] tracking-[0.3em] uppercase font-medium">Corporate & Commercial</span>
               </motion.div>
 
               {/* Headline */}
@@ -786,7 +785,6 @@ function CorporateCommercialInner() {
           <span className="text-white/30 text-[10px] tracking-[0.25em] uppercase">{tx.scroll}</span>
         </motion.div>
       </section>
-
       {/* ── PRACTICE OVERVIEW ─────────────────────────────────────────────── */}
       <section
         id="overview"
@@ -803,7 +801,7 @@ function CorporateCommercialInner() {
               viewport={{ once: true }}
               transition={{ duration: 0.65 }}
             >
-              <p className="text-[#8099FF] text-[11px] tracking-[0.35em] uppercase font-bold mb-5">{tx.overviewEyebrow}</p>
+              <p className="text-[#8099FF] tracking-[0.35em] uppercase font-bold mb-5 text-[18px]">{tx.overviewEyebrow}</p>
               <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.2vw,2.6rem)] tracking-tight leading-tight mb-8">{tx.overviewH2}</h2>
               <div className="h-[2px] w-16 bg-[#001489]/30 mb-8" />
               <p className="text-[#001489]/65 text-base leading-[1.85] max-w-[58ch] mb-6">{tx.overviewP1}</p>
@@ -847,7 +845,6 @@ function CorporateCommercialInner() {
           </div>
         </div>
       </section>
-
       {/* ── KEY SERVICES ─────────────────────────────────────────────────── */}
       <section
         id="services"
@@ -896,7 +893,6 @@ function CorporateCommercialInner() {
           </div>
         </div>
       </section>
-
       {/* ── WHY MILTON HOBBS ──────────────────────────────────────────────── */}
       <section
         data-testid="corporate-differentiators"
@@ -937,7 +933,6 @@ function CorporateCommercialInner() {
           </div>
         </div>
       </section>
-
       {/* ── CTA BANNER ────────────────────────────────────────────────────── */}
       <section
         data-testid="corporate-cta-banner"
@@ -986,7 +981,6 @@ function CorporateCommercialInner() {
           </div>
         </div>
       </section>
-
       <Footer />
       <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
