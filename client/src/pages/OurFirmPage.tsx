@@ -1150,7 +1150,7 @@ export default function OurFirmPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="bg-[#F6F7FB] p-10 relative border border-[#001489]"
+                className="bg-[#001489] p-10 relative"
               >
                 <CTAForm onSuccess={() => {}} />
               </motion.div>
@@ -1169,7 +1169,7 @@ export default function OurFirmPage() {
 function CTAForm({ onSuccess }: { onSuccess: () => void }) {
   const [form, setForm] = useState({ name: "", email: "", area: "" });
   const [submitted, setSubmitted] = useState(false);
-  const inputCls = "w-full bg-white border border-[#001489] text-[#001489] text-sm px-4 py-3 placeholder:text-[#001489] focus:outline-none focus:border-[#000A4F] transition-colors";
+  const inputCls = "w-full bg-white border border-[#001489] text-[#001489] text-sm px-4 py-3 placeholder:text-[#8099FF] focus:outline-none focus:border-[#000A4F] transition-colors";
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
@@ -1181,13 +1181,13 @@ function CTAForm({ onSuccess }: { onSuccess: () => void }) {
   if (submitted) {
     return (
       <div className="py-8 text-center">
-        <div className="w-10 h-10 mx-auto mb-4 border border-[#001489] flex items-center justify-center">
-          <svg className="w-4 h-4 text-[#001489]" fill="none" viewBox="0 0 16 16">
+        <div className="w-10 h-10 mx-auto mb-4 border border-white flex items-center justify-center">
+          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 16 16">
             <path d="M3 8l4 4 6-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-        <p className="text-[#001489] text-xs tracking-[0.3em] uppercase font-bold mb-2">Request Received</p>
-        <p className="text-[#001489] text-sm">A partner will be in touch shortly.</p>
+        <p className="text-white text-xs tracking-[0.3em] uppercase font-bold mb-2">Request Received</p>
+        <p className="text-white text-sm">A partner will be in touch shortly.</p>
       </div>
     );
   }
