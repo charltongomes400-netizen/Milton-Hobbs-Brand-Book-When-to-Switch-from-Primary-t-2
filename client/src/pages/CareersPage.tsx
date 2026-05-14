@@ -817,7 +817,7 @@ function CareersPageInner() {
         <div className="max-w-[1400px] mx-auto px-8 py-20 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
           <div className="max-w-lg">
             <p className="text-[#8099FF] text-[10px] tracking-[0.4em] uppercase font-bold mb-4">Don't See Your Role?</p>
-            <h2 className="font-heading text-[#000A4F] text-3xl font-bold tracking-tight leading-tight mb-4">
+            <h2 className="font-heading text-[#001489] text-3xl font-bold tracking-tight leading-tight mb-4">
               We are always open to exceptional talent.
             </h2>
             <p className="text-gray-500 text-sm leading-relaxed">
