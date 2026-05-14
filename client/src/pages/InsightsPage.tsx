@@ -84,7 +84,7 @@ function InsightsInner() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="text-white/45 text-sm leading-relaxed max-w-[44ch] lg:pb-1"
+            className="text-white text-sm leading-relaxed max-w-[44ch] lg:pb-1"
           >
             {tx.sub}
           </motion.p>
@@ -263,7 +263,7 @@ function InsightsInner() {
         <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
           <div>
             <p className="text-white text-[11px] tracking-[0.35em] uppercase font-bold mb-3">Speak with a Partner</p>
-            <p className="text-white/45 text-sm leading-relaxed max-w-[42ch]">Every publication reflects lived experience on complex matters. Discuss yours directly with a partner.</p>
+            <p className="text-white text-sm leading-relaxed max-w-[42ch]">Every publication reflects lived experience on complex matters. Discuss yours directly with a partner.</p>
           </div>
           <a
             href="/#contact"
