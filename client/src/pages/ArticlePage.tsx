@@ -156,7 +156,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                     >
                       <div className="flex items-center gap-3">
                         <span className="w-8 h-8 bg-[#001489] flex items-center justify-center flex-shrink-0">
-                          <svg className="w-4 h-4 text-[#001489]" fill="none" viewBox="0 0 16 16">
+                          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 16 16">
                             <path d="M2 8l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </span>
@@ -192,7 +192,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                           onChange={handleChange}
                           placeholder="Full Name"
                           data-testid="modal-input-name"
-                          className="col-span-2 sm:col-span-1 bg-[#001489] border border-[#001489] text-[#001489] placeholder-[#001489] text-sm px-4 py-3 outline-none focus:border-[#001489] transition-colors"
+                          className="col-span-2 sm:col-span-1 bg-white border border-[#E5E9F0] text-[#001489] placeholder-[#8099FF] text-sm px-4 py-3 outline-none focus:border-[#001489] transition-colors"
                         />
                         <input
                           type="email"
@@ -202,7 +202,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                           onChange={handleChange}
                           placeholder="Email Address"
                           data-testid="modal-input-email"
-                          className="col-span-2 sm:col-span-1 bg-[#001489] border border-[#001489] text-[#001489] placeholder-[#001489] text-sm px-4 py-3 outline-none focus:border-[#001489] transition-colors"
+                          className="col-span-2 sm:col-span-1 bg-white border border-[#E5E9F0] text-[#001489] placeholder-[#8099FF] text-sm px-4 py-3 outline-none focus:border-[#001489] transition-colors"
                         />
                       </div>
 
@@ -213,8 +213,8 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                           value={form.area}
                           onChange={handleChange}
                           data-testid="modal-select-area"
-                          className="w-full bg-[#001489] border border-[#001489] text-sm px-4 py-3 outline-none focus:border-[#001489] transition-colors appearance-none cursor-pointer"
-                          style={{ color: form.area ? "#001489" : "rgba(0,20,137,0.3)" }}
+                          className="w-full bg-white border border-[#E5E9F0] text-sm px-4 py-3 outline-none focus:border-[#001489] transition-colors appearance-none cursor-pointer"
+                          style={{ color: form.area ? "#001489" : "#8099FF" }}
                         >
                           <option value="" disabled hidden>Practice Area</option>
                           {PRACTICE_AREAS.map(a => (
@@ -234,7 +234,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                         onChange={handleChange}
                         placeholder="Briefly describe your matter"
                         data-testid="modal-input-message"
-                        className="bg-[#001489] border border-[#001489] text-[#001489] placeholder-[#001489] text-sm px-4 py-3 outline-none focus:border-[#001489] transition-colors resize-none"
+                        className="bg-white border border-[#E5E9F0] text-[#001489] placeholder-[#8099FF] text-sm px-4 py-3 outline-none focus:border-[#001489] transition-colors resize-none"
                       />
 
                       <button
@@ -248,7 +248,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                         </svg>
                       </button>
 
-                      <p className="text-[#001489] text-[10px] text-center leading-relaxed">
+                      <p className="text-[#8099FF] text-[10px] text-center leading-relaxed">
                         All enquiries are treated in strict confidence.
                       </p>
                     </motion.form>
