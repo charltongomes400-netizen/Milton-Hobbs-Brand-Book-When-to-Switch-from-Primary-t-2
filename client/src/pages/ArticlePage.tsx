@@ -376,7 +376,7 @@ function ArticleContent({ article, onContact }: { article: ArticleData; onContac
           <aside className="hidden lg:block w-[240px] xl:w-[280px] flex-shrink-0">
             <div className="sticky top-28 flex flex-col gap-8">
               <div>
-                <p className="text-[#D4AF36] text-[9px] tracking-[0.3em] uppercase font-bold mb-5">
+                <p className="text-[#001489] text-[9px] tracking-[0.3em] uppercase font-bold mb-5">
                   In this article
                 </p>
                 <nav className="flex flex-col">
@@ -388,7 +388,7 @@ function ArticleContent({ article, onContact }: { article: ArticleData; onContac
                         activeId === h.id ? "text-[#001489]" : "text-[#001489]/35 hover:text-[#001489]/65"
                       }`}
                     >
-                      <span className={`mt-1 w-0.5 h-3.5 flex-shrink-0 transition-colors ${activeId === h.id ? "bg-[#D4AF36]" : "bg-transparent"}`} />
+                      <span className={`mt-1 w-0.5 h-3.5 flex-shrink-0 transition-colors ${activeId === h.id ? "bg-[#001489]" : "bg-transparent"}`} />
                       <span className="text-xs leading-snug font-medium">{h.text}</span>
                     </a>
                   ))}
