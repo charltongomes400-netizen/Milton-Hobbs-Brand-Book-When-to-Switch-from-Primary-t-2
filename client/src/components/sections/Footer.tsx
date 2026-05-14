@@ -249,7 +249,7 @@ export function Footer() {
                 {i > 0 && <span style={{ width: 1, height: 10, background: "rgba(255,255,255,0.30)", marginRight: 6 }} />}
                 <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#FFFFFF", flexShrink: 0, display: "inline-block" }} />
                 <span style={{ color: "#FFFFFF", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>{o.label}</span>
-                <span style={{ color: "#FFFFFF", fontSize: 11, fontFamily: "ui-monospace, 'Courier New', monospace", letterSpacing: "0.04em", width: "6ch", display: "inline-block", fontVariantNumeric: "tabular-nums" }}>{o.time}</span>
+                <span style={{ color: "#FFFFFF", fontSize: 11, fontFamily: "ui-monospace, 'Courier New', monospace", letterSpacing: "0.04em", minWidth: "8ch", display: "inline-block", fontVariantNumeric: "tabular-nums" }}>{o.time}</span>
               </div>
             ))}
           </div>
