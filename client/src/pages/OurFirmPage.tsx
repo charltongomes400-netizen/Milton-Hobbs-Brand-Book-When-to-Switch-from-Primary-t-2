@@ -534,7 +534,7 @@ function ConsultModal({ open, onClose }: { open: boolean; onClose: () => void })
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  const inputCls = "w-full bg-[#000A4F] border border-white text-white text-sm px-4 py-3 placeholder:text-white focus:outline-none focus:border-white transition-colors";
+  const inputCls = "w-full bg-[#001489] border border-white text-white text-sm px-4 py-3 placeholder:text-white focus:outline-none focus:border-white transition-colors";
 
   return (
     <AnimatePresence>
@@ -649,13 +649,13 @@ export default function OurFirmPage() {
 
   return (
     <LanguageProvider>
-      <div className="bg-[#000A4F] min-h-screen" data-testid="our-firm-page">
+      <div className="bg-[#001489] min-h-screen" data-testid="our-firm-page">
         <Header />
 
         {/* ── HERO ── */}
         <section
           ref={heroRef}
-          className="relative min-h-screen flex flex-col overflow-hidden bg-[#000A4F]"
+          className="relative min-h-screen flex flex-col overflow-hidden bg-[#001489]"
           data-testid="firm-hero"
         >
           <div className="absolute inset-0 pointer-events-none">
@@ -1018,7 +1018,7 @@ export default function OurFirmPage() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={missionInView ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }}
-                      className="bg-[#001489] p-7 group hover:bg-[#000A4F] transition-colors duration-300"
+                      className="bg-[#001489] p-7 group hover:bg-[#0A1E6E] transition-colors duration-300"
                     >
                       <div className="w-6 h-px bg-white mb-4 group-hover:w-10 transition-all duration-300" />
                       <p className="font-heading text-white font-bold text-base tracking-tight mb-2">{v.label}</p>
@@ -1033,7 +1033,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, scale: 0.92 }}
                   animate={missionInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.9, delay: 0.4 }}
-                  className="relative bg-[#000A4F] h-[360px] overflow-hidden"
+                  className="relative bg-[#001489] h-[360px] overflow-hidden"
                 >
                   <MissionOrbit />
                 </motion.div>
@@ -1207,7 +1207,7 @@ function CTAForm({ onSuccess }: { onSuccess: () => void }) {
       <button
         data-testid="cta-submit"
         type="submit"
-        className="w-full bg-[#001489] text-white text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#000A4F] transition-colors"
+        className="w-full bg-[#001489] text-white text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#0A1E6E] transition-colors"
       >
         Request a Consultation
         <svg className="inline-block ml-3 w-3 h-3" fill="none" viewBox="0 0 12 12">
