@@ -1091,18 +1091,9 @@ export default function OurFirmPage() {
 
         {/* ── BOOK A CONSULTATION ── */}
         <section
-          className="bg-[#001489] py-28 px-8 overflow-hidden relative"
+          className="bg-white py-28 px-8 overflow-hidden relative"
           data-testid="firm-cta"
         >
-          <div className="absolute inset-0 pointer-events-none">
-            <motion.div
-              className="absolute -right-40 -top-40 w-[600px] h-[600px] rounded-full"
-              style={{ background: "radial-gradient(circle, rgba(0,20,137,0.5) 0%, transparent 70%)" }}
-              animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
-
           <div className="relative z-10 max-w-[1400px] mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
@@ -1112,7 +1103,7 @@ export default function OurFirmPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="text-white text-[10px] tracking-[0.4em] uppercase font-bold mb-6"
+                  className="text-[#001489] text-[10px] tracking-[0.4em] uppercase font-bold mb-6"
                 >
                   Book a Consultation
                 </motion.p>
@@ -1121,34 +1112,34 @@ export default function OurFirmPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: 0.1 }}
-                  className="font-heading text-white font-bold leading-tight tracking-tight mb-6"
+                  className="font-heading text-[#001489] font-bold leading-tight tracking-tight mb-6"
                   style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
                 >
                   Let's discuss<br />
-                  <span className="text-white">your matter.</span>
+                  <span className="text-[#001489]">your matter.</span>
                 </motion.h2>
                 <motion.p
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: 0.2 }}
-                  className="text-white text-base leading-relaxed mb-10 max-w-md"
+                  className="text-[#001489] text-base leading-relaxed mb-10 max-w-md"
                 >
                   Whether you need immediate counsel or are planning ahead, our partners are ready to assist you. We offer direct access to experienced advisors, fluent in English, French, and Arabic, across our Dubai and Paris offices.
                 </motion.p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 bg-white" />
+                    <div className="w-1.5 h-1.5 bg-[#001489]" />
                     <div>
-                      <p className="text-white text-[9px] tracking-[0.35em] uppercase font-medium">Dubai</p>
-                      <p className="text-white text-sm">+971 4 523 2421</p>
+                      <p className="text-[#001489] text-[9px] tracking-[0.35em] uppercase font-medium">Dubai</p>
+                      <p className="text-[#001489] text-sm">+971 4 523 2421</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 bg-white" />
+                    <div className="w-1.5 h-1.5 bg-[#001489]" />
                     <div>
-                      <p className="text-white text-[9px] tracking-[0.35em] uppercase font-medium">Paris</p>
-                      <p className="text-white text-sm">contact@miltonhobbs.com</p>
+                      <p className="text-[#001489] text-[9px] tracking-[0.35em] uppercase font-medium">Paris</p>
+                      <p className="text-[#001489] text-sm">contact@miltonhobbs.com</p>
                     </div>
                   </div>
                 </div>
@@ -1159,9 +1150,8 @@ export default function OurFirmPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="bg-white p-10 relative"
+                className="bg-[#F6F7FB] p-10 relative border border-[#001489]"
               >
-                <div className="absolute top-0 left-0 right-0 h-px bg-[#001489]" />
                 <CTAForm onSuccess={() => {}} />
               </motion.div>
             </div>
