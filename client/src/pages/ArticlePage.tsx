@@ -396,10 +396,10 @@ function ArticleContent({ article, onContact }: { article: ArticleData; onContac
               </div>
 
               <div className="border-t border-[#001489]/10 pt-8">
-                <p className="text-[#001489] text-xs font-semibold mb-2 leading-snug">
+                <p className="text-[#001489] text-sm font-semibold mb-2 leading-snug">
                   Discuss this matter with our team
                 </p>
-                <p className="text-[#001489]/50 text-xs leading-relaxed mb-5">
+                <p className="text-[#001489]/50 text-sm leading-relaxed mb-5">
                   Our partners are available for a confidential discussion.
                 </p>
                 <button
