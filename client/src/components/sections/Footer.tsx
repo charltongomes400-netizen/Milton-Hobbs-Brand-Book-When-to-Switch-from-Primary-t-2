@@ -233,40 +233,43 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom band: legal links row + clocks/copyright row */}
+      {/* Bottom band: clocks · legal */}
       <div className="max-w-[1400px] mx-auto px-8">
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", padding: "12px 0 0" }}>
-
-          {/* Row 1: Legal links — static, never moves */}
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-1" style={{ marginBottom: 8 }}>
-            <a href="/privacy-policy" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>{f.privacy}</a>
-            <a href="/cookies" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>{f.cookie}</a>
-            <a href="/terms-of-use" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Terms of Use</a>
-            <a href="/not-legal-advice" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Not Legal Advice</a>
-            <a href="/attorney-client-disclaimer" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Attorney-Client Disclaimer</a>
-            <a href="/jurisdictional-statements" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Jurisdictional Statements</a>
-            <a href="/conflict-checks" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Conflict Checks</a>
-            <a href="/confidentiality-notice" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Confidentiality Notice</a>
+        <div
+          className="flex flex-row items-center gap-8"
+          style={{ padding: "12px 0 14px", borderTop: "1px solid rgba(255,255,255,0.08)" }}
+        >
+          {/* Live clocks */}
+          <div className="flex items-center gap-5">
+            {[
+              { label: "Dubai", time: dubaiTime },
+              { label: "Paris", time: parisTime },
+            ].map((o, i) => (
+              <div key={o.label} className="flex items-center gap-2">
+                {i > 0 && <span style={{ width: 1, height: 10, background: "rgba(255,255,255,0.30)", marginRight: 6 }} />}
+                <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#FFFFFF", flexShrink: 0, display: "inline-block" }} />
+                <span style={{ color: "#FFFFFF", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>{o.label}</span>
+                <span style={{ color: "#FFFFFF", fontSize: 11, fontFamily: "'Plus Jakarta Sans', monospace", letterSpacing: "0.04em", minWidth: "6ch" }}>{o.time}</span>
+              </div>
+            ))}
           </div>
 
-          {/* Row 2: Clocks (isolated) + copyright — clocks update independently */}
-          <div className="flex items-center justify-between" style={{ paddingBottom: 14 }}>
-            <div className="flex items-center gap-5">
-              {[
-                { label: "Dubai", time: dubaiTime },
-                { label: "Paris", time: parisTime },
-              ].map((o, i) => (
-                <div key={o.label} className="flex items-center gap-2">
-                  {i > 0 && <span style={{ width: 1, height: 10, background: "rgba(255,255,255,0.30)", marginRight: 4, display: "inline-block" }} />}
-                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#FFFFFF", flexShrink: 0, display: "inline-block" }} />
-                  <span style={{ color: "#FFFFFF", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>{o.label}</span>
-                  <span style={{ color: "#FFFFFF", fontSize: 11, fontFamily: "ui-monospace, 'Courier New', monospace", fontVariantNumeric: "tabular-nums", letterSpacing: "0.04em", display: "inline-block", minWidth: "8ch" }}>{o.time}</span>
-                </div>
-              ))}
+          {/* Legal links + copyright */}
+          <div className="flex flex-col items-start gap-1.5">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+              <a href="/privacy-policy" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>{f.privacy}</a>
+              <a href="/cookies" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>{f.cookie}</a>
+              <a href="/terms-of-use" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Terms of Use</a>
+              <a href="/not-legal-advice" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Not Legal Advice</a>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+              <a href="/attorney-client-disclaimer" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Attorney-Client Disclaimer</a>
+              <a href="/jurisdictional-statements" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Jurisdictional Statements</a>
+              <a href="/conflict-checks" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Conflict Checks</a>
+              <a href="/confidentiality-notice" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Confidentiality Notice</a>
             </div>
             <span style={{ color: "rgba(255,255,255,0.35)", fontSize: 10, letterSpacing: "0.04em" }}>{f.copyright}</span>
           </div>
-
         </div>
 
         <p
