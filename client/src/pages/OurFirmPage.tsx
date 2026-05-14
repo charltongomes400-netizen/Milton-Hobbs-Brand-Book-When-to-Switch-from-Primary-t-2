@@ -93,13 +93,13 @@ function FirmCrest3D() {
               background: face.gold
                 ? "linear-gradient(145deg, rgba(0,10,79,0.97) 0%, rgba(0,20,80,0.98) 100%)"
                 : "linear-gradient(145deg, rgba(0,10,79,0.92) 0%, rgba(0,20,137,0.95) 100%)",
-              border: `1px solid rgba(212,175,54,${face.gold ? 0.45 : 0.18})`,
+              border: `1px solid ${face.gold ? "rgba(0,20,137,0.45)" : "rgba(0,20,137,0.18)"}`,
             }}
           >
             {face.gold && (
               <div
                 className="absolute inset-[8px] pointer-events-none"
-                style={{ border: "1px solid rgba(212,175,54,0.2)" }}
+                style={{ border: "1px solid rgba(0,20,137,0.2)" }}
               />
             )}
             {!face.isEmpty && (
@@ -121,7 +121,7 @@ function FirmCrest3D() {
                 </p>
                 <p
                   className="text-[7px] tracking-[0.22em] uppercase"
-                  style={{ color: "rgba(212,175,54,0.55)" }}
+                  style={{ color: "rgba(0,20,137,0.55)" }}
                 >
                   {face.sub}
                 </p>
@@ -138,7 +138,7 @@ function FirmCrest3D() {
           style={{
             width: r,
             height: r,
-            border: `1px solid ${i === 1 ? "rgba(212,175,54,0.22)" : "rgba(128,153,255,0.1)"}`,
+            border: `1px solid ${i === 1 ? "rgba(0,20,137,0.22)" : "rgba(128,153,255,0.1)"}`,
           }}
           animate={{ rotate: i % 2 === 0 ? [0, 360] : [360, 0] }}
           transition={{ duration: 22 + i * 9, repeat: Infinity, ease: "linear" }}
@@ -327,7 +327,7 @@ const coreValues = [
           stroke={active ? "white" : "#8099FF"}
           strokeOpacity={active ? 0.7 : 0.3}
           strokeWidth={1.2}
-          fill={active ? "rgba(212,175,54,0.06)" : "none"}
+          fill={active ? "rgba(0,20,137,0.06)" : "none"}
           animate={{ strokeOpacity: active ? [0.5, 0.9, 0.5] : [0.2, 0.4, 0.2] }}
           transition={{ duration: 2.5, repeat: Infinity }}
         />
@@ -482,7 +482,7 @@ function ValueCard({ value, lang, index }: { value: typeof coreValues[0]; lang: 
       className="group relative border border-[#001489] p-8 cursor-default overflow-hidden"
       style={{
         background: hovered ? "linear-gradient(145deg, #001489 0%, #000A4F 100%)" : "#ffffff",
-        borderColor: hovered ? "transparent" : "rgba(0,20,137,0.1)",
+        borderColor: hovered ? "transparent" : "#001489",
         transition: "background 0.4s ease, border-color 0.4s ease",
       }}
     >
@@ -504,7 +504,7 @@ function ValueCard({ value, lang, index }: { value: typeof coreValues[0]; lang: 
       </motion.p>
       <motion.p
         className="text-sm leading-relaxed"
-        animate={{ color: hovered ? "rgba(255,255,255,0.7)" : "rgba(0,10,79,0.6)" }}
+        animate={{ color: hovered ? "#FFFFFF" : "#001489" }}
         transition={{ duration: 0.3 }}
       >
         {lang === "FR" ? value.descFR : value.desc}
@@ -717,7 +717,7 @@ export default function OurFirmPage() {
                         className="font-heading font-bold leading-none block"
                         style={{
                           fontSize: "clamp(2.8rem, 5.5vw, 5.2rem)",
-                          color: i % 2 === 0 ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.5)",
+                          color: "#FFFFFF",
                           letterSpacing: "-0.02em",
                         }}
                       >
@@ -823,7 +823,7 @@ export default function OurFirmPage() {
 
           <motion.div
             className="absolute bottom-0 left-0 right-0 h-px"
-            style={{ background: "linear-gradient(to right, transparent, rgba(212,175,54,0.3) 50%, transparent)" }}
+            style={{ background: "linear-gradient(to right, transparent, rgba(0,20,137,0.3) 50%, transparent)" }}
             animate={{ opacity: [0.4, 0.8, 0.4] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           />
