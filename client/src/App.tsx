@@ -26,6 +26,7 @@ import ArticlePage from "@/pages/ArticlePage";
 import ImmigrationPage from "@/pages/ImmigrationPage";
 import CorporateCommercialPage from "@/pages/CorporateCommercialPage";
 import MergersAcquisitionsPage from "@/pages/MergersAcquisitionsPage";
+import IPTechnologyPage from "@/pages/IPTechnologyPage";
 import OurFirmPage from "@/pages/OurFirmPage";
 import CareersPage from "@/pages/CareersPage";
 
@@ -56,6 +57,7 @@ function Router() {
       <Route path="/expertise/immigration" component={ImmigrationPage} />
       <Route path="/expertise/corporate-commercial" component={CorporateCommercialPage} />
       <Route path="/expertise/mergers-acquisitions" component={MergersAcquisitionsPage} />
+      <Route path="/expertise/ip-technology" component={IPTechnologyPage} />
       <Route component={NotFound} />
     </Switch>
   );
