@@ -1150,7 +1150,7 @@ export default function OurFirmPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="bg-[#001489] p-10 relative"
+                className="p-10 relative"
               >
                 <CTAForm onSuccess={() => {}} />
               </motion.div>
@@ -1169,7 +1169,7 @@ export default function OurFirmPage() {
 function CTAForm({ onSuccess }: { onSuccess: () => void }) {
   const [form, setForm] = useState({ name: "", email: "", area: "" });
   const [submitted, setSubmitted] = useState(false);
-  const inputCls = "w-full bg-white border border-[#001489] text-[#001489] text-sm px-4 py-3 placeholder:text-[#8099FF] focus:outline-none focus:border-[#000A4F] transition-colors";
+  const inputCls = "w-full bg-[#001489] border border-[#000A4F] text-white text-sm px-4 py-3 placeholder:text-[#8099FF] focus:outline-none focus:border-[#000A4F] transition-colors";
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
@@ -1206,7 +1206,7 @@ function CTAForm({ onSuccess }: { onSuccess: () => void }) {
       <button
         data-testid="cta-submit"
         type="submit"
-        className="w-full bg-white text-[#001489] text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#001489] hover:text-white transition-colors"
+        className="w-full bg-[#001489] text-white text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#000A4F] transition-colors"
       >
         Request a Consultation
         <svg className="inline-block ml-3 w-3 h-3" fill="none" viewBox="0 0 12 12">
