@@ -5,16 +5,14 @@ import { useLang } from "@/contexts/LanguageContext";
 import miltonHobbsLogo from "@assets/Milton_hobbs_logo_1775554832004.png";
 
 const PRACTICE_AREAS = [
-  { num: "01", title: "Corporate & Commercial", href: "/expertise/corporate-commercial" },
-  { num: "02", title: "Tax & Compliance",        href: null },
-  { num: "03", title: "Mergers & Acquisitions",  href: null },
+  { num: "01", title: "Corporate & Commercial",     href: "/expertise/corporate-commercial" },
+  { num: "02", title: "Tax & Compliance",           href: null },
+  { num: "03", title: "Mergers & Acquisitions",     href: null },
   { num: "04", title: "Startups & Venture Capital", href: null },
-  { num: "05", title: "IP & Technology",         href: null },
-  { num: "06", title: "Real Estate & Property",  href: null },
-  { num: "07", title: "Employment & Labor",      href: null },
-  { num: "08", title: "Litigation & Disputes",   href: null },
-  { num: "09", title: "Immigration",             href: "/expertise/immigration" },
-  { num: "10", title: "Arbitration & Mediation", href: null },
+  { num: "05", title: "IP & Technology",            href: null },
+  { num: "06", title: "Real Estate & Property",     href: null },
+  { num: "07", title: "Employment & Labor",         href: null },
+  { num: "08", title: "Litigation & Disputes",      href: null },
 ];
 
 export function Header() {
@@ -281,7 +279,7 @@ export function Header() {
                     color: "#000000",
                     marginBottom: 36,
                   }}>
-                    Ten practice areas. One firm with precision counsel across the UAE, Europe and beyond.
+                    Eight practice areas. One firm with precision counsel across the UAE, Europe and beyond.
                   </p>
                 </div>
                 <a
@@ -333,13 +331,13 @@ export function Header() {
                       key={i}
                       href={area.href ?? `${prefix}#expertise`}
                       data-testid={`mega-item-${area.num}`}
-                      onClick={() => setExpertiseOpen(false)}
+                      onClick={e => { if (!area.href) { e.preventDefault(); } setExpertiseOpen(false); }}
                       className="group flex items-center gap-4"
                       style={{
                         padding: "15px 0",
                         borderBottom: "1px solid rgba(0,20,137,0.06)",
                         textDecoration: "none",
-                        transition: "padding-left 0.15s",
+                        transition: "background 0.15s",
                       }}
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.paddingLeft = "8px"; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.paddingLeft = "0px"; }}
@@ -361,25 +359,20 @@ export function Header() {
                         style={{
                           fontSize: "0.9375rem",
                           letterSpacing: "-0.01em",
-                          color: area.href ? "#001489" : "rgba(0,20,137,0.38)",
+                          color: "#001489",
                           lineHeight: 1.25,
                           transition: "color 0.2s",
                         }}
                       >
                         {area.title}
-                        {!area.href && (
-                          <span style={{ display: "block", fontSize: 8, fontWeight: 600, letterSpacing: "0.2em", color: "rgba(0,20,137,0.22)", marginTop: 2, textTransform: "uppercase" }}>Soon</span>
-                        )}
                       </span>
-                      {area.href && (
-                        <svg
-                          width="10" height="10" viewBox="0 0 12 12" fill="none"
-                          style={{ opacity: 0, flexShrink: 0, transition: "opacity 0.2s" }}
-                          className="group-hover:opacity-100"
-                        >
-                          <path d="M2 10L10 2M10 2H4M10 2v6" stroke="#001489" strokeWidth="1.2" strokeLinecap="round" />
-                        </svg>
-                      )}
+                      <svg
+                        width="10" height="10" viewBox="0 0 12 12" fill="none"
+                        style={{ opacity: 0, flexShrink: 0, transition: "opacity 0.2s" }}
+                        className="group-hover:opacity-100"
+                      >
+                        <path d="M2 10L10 2M10 2H4M10 2v6" stroke="#001489" strokeWidth="1.2" strokeLinecap="round" />
+                      </svg>
                     </a>
                   ))}
                 </div>
