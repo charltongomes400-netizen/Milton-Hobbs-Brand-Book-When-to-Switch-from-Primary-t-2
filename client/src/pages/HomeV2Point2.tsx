@@ -2405,13 +2405,13 @@ function FooterV15() {
 
 const EXPERTISE_ITEMS_V18 = [
   { num: "01", short: "Corporate",   title: "Corporate & Commercial",             desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors.",                               img: imgCorp,   pageHref: "/expertise/corporate-commercial" },
-  { num: "02", short: "Tax",         title: "Tax & Compliance",                   desc: "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals.",                    img: imgTax    },
-  { num: "03", short: "M&A",         title: "Mergers & Acquisitions",             desc: "End-to-end advisory on M&A transactions, due diligence, valuations, and seamless post-merger integration across sectors.",                                      img: imgBank   },
-  { num: "04", short: "Startups",    title: "Startups & Venture Capital",         desc: "Funding rounds, term sheets, shareholder agreements, and robust legal infrastructure for founders, operators, and investors.",                                  img: imgTech   },
-  { num: "05", short: "IP & Tech",   title: "Intellectual Property & Technology", desc: "Patent strategy, trademark registration, licensing structures, and data protection compliance across jurisdictions.",                                          img: imgIp     },
-  { num: "06", short: "Real Estate", title: "Real Estate & Property Law",         desc: "Cross-border property acquisitions, development financing, and sophisticated real estate structuring in the UAE and Europe.",                                   img: imgEstate },
-  { num: "07", short: "Employment",  title: "Employment & Labor Law",             desc: "Employment contracts, executive compensation structures, workforce restructuring, and workplace dispute resolution.",                                           img: imgEmploy },
-  { num: "08", short: "Litigation",  title: "Litigation & Dispute Resolution",    desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums.",                                          img: imgLitig  },
+  { num: "02", short: "Tax",         title: "Tax & Compliance",                   desc: "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals.",                    img: imgTax,    pageHref: "/expertise/tax-compliance" },
+  { num: "03", short: "M&A",         title: "Mergers & Acquisitions",             desc: "End-to-end advisory on M&A transactions, due diligence, valuations, and seamless post-merger integration across sectors.",                                      img: imgBank,   pageHref: "/expertise/mergers-acquisitions" },
+  { num: "04", short: "Startups",    title: "Startups & Venture Capital",         desc: "Funding rounds, term sheets, shareholder agreements, and robust legal infrastructure for founders, operators, and investors.",                                  img: imgTech,   pageHref: "/expertise/startups-venture-capital" },
+  { num: "05", short: "IP & Tech",   title: "Intellectual Property & Technology", desc: "Patent strategy, trademark registration, licensing structures, and data protection compliance across jurisdictions.",                                          img: imgIp,     pageHref: "/expertise/ip-technology" },
+  { num: "06", short: "Real Estate", title: "Real Estate & Property Law",         desc: "Cross-border property acquisitions, development financing, and sophisticated real estate structuring in the UAE and Europe.",                                   img: imgEstate, pageHref: "/expertise/real-estate-property" },
+  { num: "07", short: "Employment",  title: "Employment & Labor Law",             desc: "Employment contracts, executive compensation structures, workforce restructuring, and workplace dispute resolution.",                                           img: imgEmploy, pageHref: "/expertise/employment-labor" },
+  { num: "08", short: "Litigation",  title: "Litigation & Dispute Resolution",    desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums.",                                          img: imgLitig,  pageHref: "/expertise/litigation-disputes" },
 ];
 
 const PRACTICE_CYCLE_MS = 5000;
@@ -2750,24 +2750,33 @@ function PracticeAreasV18() {
                             style={{
                               display: "inline-flex",
                               alignItems: "center",
-                              gap: 6,
-                              color: "#8099FF",
-                              fontSize: 9,
-                              fontWeight: 700,
-                              letterSpacing: "0.26em",
+                              gap: 8,
+                              color: "#001489",
+                              fontSize: 10,
+                              fontWeight: 800,
+                              letterSpacing: "0.22em",
                               textTransform: "uppercase",
                               textDecoration: "none",
                               fontFamily: "'Plus Jakarta Sans', sans-serif",
-                              padding: "11px 0",
-                              borderBottom: "1px solid rgba(128,153,255,0.45)",
-                              transition: "opacity 0.2s",
+                              padding: "11px 22px",
+                              border: "1.5px solid #001489",
+                              background: "transparent",
+                              transition: "background 0.25s, color 0.25s",
                             }}
-                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "0.7"; }}
-                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }}
+                            onMouseEnter={e => {
+                              const el = e.currentTarget as HTMLElement;
+                              el.style.background = "#001489";
+                              el.style.color = "#FFFFFF";
+                            }}
+                            onMouseLeave={e => {
+                              const el = e.currentTarget as HTMLElement;
+                              el.style.background = "transparent";
+                              el.style.color = "#001489";
+                            }}
                           >
                             View Practice Area
                             <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
-                              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.5" />
                             </svg>
                           </a>
                         )}
@@ -2850,32 +2859,62 @@ function PracticeAreasV18() {
                       <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.60)", fontSize: 14, lineHeight: 1.75, marginBottom: 20 }}>
                         {item.desc}
                       </p>
-                      <a
-                        href="#contact"
-                        style={{
-                          display: "inline-flex", alignItems: "center", gap: 8,
-                          color: "#FFFFFF", fontSize: 9, fontWeight: 700,
-                          letterSpacing: "0.26em", textTransform: "uppercase",
-                          textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif",
-                          border: "1px solid #FFFFFF", padding: "11px 20px",
-                          background: "transparent", transition: "background 0.25s, color 0.25s",
-                        }}
-                        onMouseEnter={e => {
-                          const el = e.currentTarget as HTMLElement;
-                          el.style.background = "#FFFFFF";
-                          el.style.color = "#001489";
-                        }}
-                        onMouseLeave={e => {
-                          const el = e.currentTarget as HTMLElement;
-                          el.style.background = "transparent";
-                          el.style.color = "#FFFFFF";
-                        }}
-                      >
-                        Enquire
-                        <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
-                          <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-                        </svg>
-                      </a>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+                        <a
+                          href="#contact"
+                          style={{
+                            display: "inline-flex", alignItems: "center", gap: 8,
+                            color: "#FFFFFF", fontSize: 9, fontWeight: 700,
+                            letterSpacing: "0.26em", textTransform: "uppercase",
+                            textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            border: "1px solid #FFFFFF", padding: "11px 20px",
+                            background: "transparent", transition: "background 0.25s, color 0.25s",
+                          }}
+                          onMouseEnter={e => {
+                            const el = e.currentTarget as HTMLElement;
+                            el.style.background = "#FFFFFF";
+                            el.style.color = "#001489";
+                          }}
+                          onMouseLeave={e => {
+                            const el = e.currentTarget as HTMLElement;
+                            el.style.background = "transparent";
+                            el.style.color = "#FFFFFF";
+                          }}
+                        >
+                          Enquire
+                          <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
+                            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                          </svg>
+                        </a>
+                        {item.pageHref && (
+                          <a
+                            href={item.pageHref}
+                            style={{
+                              display: "inline-flex", alignItems: "center", gap: 8,
+                              color: "#001489", fontSize: 10, fontWeight: 800,
+                              letterSpacing: "0.22em", textTransform: "uppercase",
+                              textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif",
+                              border: "1.5px solid #001489", padding: "11px 22px",
+                              background: "#FFFFFF", transition: "background 0.25s, color 0.25s",
+                            }}
+                            onMouseEnter={e => {
+                              const el = e.currentTarget as HTMLElement;
+                              el.style.background = "#001489";
+                              el.style.color = "#FFFFFF";
+                            }}
+                            onMouseLeave={e => {
+                              const el = e.currentTarget as HTMLElement;
+                              el.style.background = "#FFFFFF";
+                              el.style.color = "#001489";
+                            }}
+                          >
+                            View Practice Area
+                            <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
+                              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.5" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </motion.div>
                 )}
