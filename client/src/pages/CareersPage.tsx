@@ -650,15 +650,15 @@ function CareersPageInner() {
       </LanguageProvider>
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #000A4F 0%, #001489 60%, #001870 100%)", minHeight: 520 }}>
+      <section className="relative overflow-hidden" style={{ background: "#001B8F", minHeight: 520 }}>
         {/* Grid overlay */}
         <div className="absolute inset-0 pointer-events-none" style={{
           backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
           backgroundSize: "60px 60px",
         }} />
 
-        {/* Gold accent line */}
-        <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: "linear-gradient(90deg, #D4AF36 0%, #F0C94F 50%, #D4AF36 100%)" }} />
+        {/* Top accent line */}
+        <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: "rgba(255,255,255,0.18)" }} />
 
         {/* Decorative orb */}
         <div className="absolute right-0 top-0 bottom-0 w-1/2 pointer-events-none" style={{
@@ -671,7 +671,7 @@ function CareersPageInner() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-[#D4AF36] text-[10px] tracking-[0.45em] uppercase font-bold mb-5"
+              className="text-white/60 text-[10px] tracking-[0.45em] uppercase font-bold mb-5"
             >
               Careers at Milton Hobbs
             </motion.p>
@@ -682,7 +682,7 @@ function CareersPageInner() {
               className="font-heading text-white text-5xl xl:text-6xl font-bold tracking-tight leading-[1.08] mb-6"
             >
               Build Something<br />
-              <span style={{ color: "#D4AF36" }}>That Matters.</span>
+              <span style={{ color: "white" }}>That Matters.</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
@@ -816,7 +816,7 @@ function CareersPageInner() {
       <section className="bg-[#F7F8FC] border-t border-gray-100" data-header-theme="light">
         <div className="max-w-[1400px] mx-auto px-8 py-20 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
           <div className="max-w-lg">
-            <p className="text-[#D4AF36] text-[10px] tracking-[0.4em] uppercase font-bold mb-4">Don't See Your Role?</p>
+            <p className="text-[#8099FF] text-[10px] tracking-[0.4em] uppercase font-bold mb-4">Don't See Your Role?</p>
             <h2 className="font-heading text-[#000A4F] text-3xl font-bold tracking-tight leading-tight mb-4">
               We are always open to exceptional talent.
             </h2>
