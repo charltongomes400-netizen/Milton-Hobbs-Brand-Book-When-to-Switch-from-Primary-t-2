@@ -95,7 +95,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
         <>
           <motion.div
             key="backdrop"
-            className="fixed inset-0 z-50 bg-[#000A4F] backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-[#000A4F]/75 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
