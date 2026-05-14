@@ -109,162 +109,203 @@ function Corporate3D() {
   return (
     <div className="relative w-full h-full flex items-center justify-center" style={{ perspective: "1400px" }}>
 
-      {/* Atmosphere glow — brighter against solid blue */}
+      {/* Atmosphere glow */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 70% 70% at 58% 50%, rgba(255,255,255,0.06) 0%, transparent 65%)" }}
+        style={{ background: "radial-gradient(ellipse 70% 70% at 52% 48%, rgba(255,255,255,0.07) 0%, transparent 65%)" }}
       />
 
-      {/* SVG connecting lines */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ opacity: 0.35 }}>
-        <line x1="75%" y1="12%" x2="58%" y2="33%" stroke="rgba(255,255,255,0.5)" strokeWidth="0.8" strokeDasharray="4 6" />
-        <line x1="25%" y1="88%" x2="44%" y2="66%" stroke="rgba(255,255,255,0.5)" strokeWidth="0.8" strokeDasharray="4 6" />
-        <line x1="10%" y1="34%" x2="37%" y2="49%" stroke="rgba(255,255,255,0.4)" strokeWidth="0.6" strokeDasharray="3 7" />
-        <line x1="90%" y1="56%" x2="63%" y2="50%" stroke="rgba(255,255,255,0.4)" strokeWidth="0.6" strokeDasharray="3 7" />
+      {/* ── SVG connecting lines (deal network) ── */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ opacity: 0.3 }}>
+        <line x1="72%" y1="14%" x2="54%" y2="34%" stroke="rgba(255,255,255,0.5)" strokeWidth="0.8" strokeDasharray="4 6">
+          <animate attributeName="stroke-dashoffset" values="0;20" dur="3s" repeatCount="indefinite" />
+        </line>
+        <line x1="26%" y1="86%" x2="46%" y2="66%" stroke="rgba(255,255,255,0.5)" strokeWidth="0.8" strokeDasharray="4 6">
+          <animate attributeName="stroke-dashoffset" values="0;20" dur="3s" repeatCount="indefinite" />
+        </line>
+        <line x1="12%" y1="36%" x2="35%" y2="50%" stroke="rgba(255,255,255,0.4)" strokeWidth="0.6" strokeDasharray="3 7">
+          <animate attributeName="stroke-dashoffset" values="0;14" dur="4s" repeatCount="indefinite" />
+        </line>
+        <line x1="88%" y1="54%" x2="62%" y2="50%" stroke="rgba(255,255,255,0.4)" strokeWidth="0.6" strokeDasharray="3 7">
+          <animate attributeName="stroke-dashoffset" values="0;14" dur="4s" repeatCount="indefinite" />
+        </line>
+        {/* Cross-deal line */}
+        <line x1="30%" y1="20%" x2="70%" y2="78%" stroke="rgba(128,153,255,0.25)" strokeWidth="0.5" strokeDasharray="5 10">
+          <animate attributeName="stroke-dashoffset" values="0;30" dur="6s" repeatCount="indefinite" />
+        </line>
       </svg>
 
-      {/* Outer orbital ring — visible on blue */}
+      {/* ── OUTER ORBITAL RING (regulatory framework) ── */}
       <motion.div
         animate={{ rotateZ: [0, 360] }}
-        transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 48, repeat: Infinity, ease: "linear" }}
         className="absolute pointer-events-none"
-        style={{ width: 480, height: 140, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.18)", transform: "rotateX(72deg)", transformStyle: "preserve-3d", top: "50%", left: "50%", marginTop: -70, marginLeft: -240 }}
+        style={{ width: 500, height: 150, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.16)", transform: "rotateX(72deg)", transformStyle: "preserve-3d", top: "50%", left: "50%", marginTop: -75, marginLeft: -250 }}
       >
         <div style={{ position: "absolute", width: 10, height: 10, borderRadius: "50%", background: "white", top: -5, left: "50%", marginLeft: -5, boxShadow: "0 0 14px 5px rgba(255,255,255,0.7)" }} />
       </motion.div>
 
-      {/* Inner counter-rotating ring */}
+      {/* ── MIDDLE ORBITAL RING (transaction cycle) ── */}
       <motion.div
         animate={{ rotateZ: [360, 0] }}
-        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
         className="absolute pointer-events-none"
-        style={{ width: 360, height: 96, borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.12)", transform: "rotateX(68deg)", transformStyle: "preserve-3d", top: "50%", left: "50%", marginTop: -48, marginLeft: -180 }}
+        style={{ width: 380, height: 105, borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.12)", transform: "rotateX(68deg)", transformStyle: "preserve-3d", top: "50%", left: "50%", marginTop: -52, marginLeft: -190 }}
       >
         <div style={{ position: "absolute", width: 7, height: 7, borderRadius: "50%", background: "#8099FF", top: -3.5, left: "50%", marginLeft: -3.5, boxShadow: "0 0 10px 3px rgba(128,153,255,0.8)" }} />
       </motion.div>
 
-      {/* ── MAIN BUILDING TOWER ── */}
+      {/* ── MAIN STRUCTURE: The Corporate Entity (octagonal layered prism) ── */}
       <motion.div
-        animate={{ rotateY: [-16, -8, -16], rotateX: [5, 2, 5] }}
-        transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
-        style={{ transformStyle: "preserve-3d", position: "relative", width: 180, height: 330, zIndex: 10 }}
+        animate={{ rotateY: [-18, -6, -18], rotateX: [4, 1, 4] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        style={{ transformStyle: "preserve-3d", position: "relative", width: 200, height: 300, zIndex: 10 }}
       >
-        {/* Front face — white-tinted for clear separation from #001489 bg */}
+        {/* Front face — corporate entity body */}
         <div style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(165deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0.04) 100%)",
+          background: "linear-gradient(165deg, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0.11) 50%, rgba(255,255,255,0.05) 100%)",
           backgroundColor: "#0A32C8",
-          boxShadow: "0 24px 80px rgba(0,0,0,0.45), 20px 0 48px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.28), inset 1px 0 0 rgba(255,255,255,0.12)",
-          border: "1px solid rgba(255,255,255,0.30)",
+          boxShadow: "0 24px 80px rgba(0,0,0,0.45), 20px 0 48px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.30), inset 1px 0 0 rgba(255,255,255,0.14)",
+          border: "1px solid rgba(255,255,255,0.32)",
         }}>
-          {/* Outer frame */}
-          <div style={{ position: "absolute", inset: 8, border: "1px solid rgba(255,255,255,0.22)", pointerEvents: "none" }} />
+          {/* Corporate seal frame */}
+          <div style={{ position: "absolute", inset: 10, border: "1px solid rgba(255,255,255,0.20)", pointerEvents: "none" }} />
 
-          {/* Window grid — 5 cols × 11 rows */}
-          <div style={{ padding: "16px 12px 0", display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "5px 7px" }}>
-            {Array.from({ length: 55 }).map((_, i) => <WindowCell key={i} index={i} />)}
+          {/* Top tier — Corporate identity bar */}
+          <div style={{ position: "absolute", top: 16, left: 18, right: 18, height: 48, borderBottom: "1px solid rgba(255,255,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+            <div style={{ width: 28, height: 28, border: "1.5px solid rgba(255,255,255,0.8)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ color: "rgba(255,255,255,0.95)", fontSize: 10, fontWeight: 800, letterSpacing: "0.15em", fontFamily: "'Satoshi', sans-serif" }}>MH</span>
+            </div>
+            <div>
+              <p style={{ color: "rgba(255,255,255,0.95)", fontSize: 8, fontWeight: 700, letterSpacing: "0.42em", textTransform: "uppercase" }}>MILTON HOBBS</p>
+              <p style={{ color: "rgba(255,255,255,0.50)", fontSize: 6, fontWeight: 500, letterSpacing: "0.28em", textTransform: "uppercase", marginTop: 2 }}>Corporate & Commercial</p>
+            </div>
           </div>
 
-          {/* Nameplate strip */}
-          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "10px 14px", borderTop: "1px solid rgba(255,255,255,0.20)", background: "rgba(255,255,255,0.10)" }}>
-            <p style={{ color: "rgba(255,255,255,0.95)", fontSize: 7, fontWeight: 700, letterSpacing: "0.45em", textTransform: "uppercase", marginBottom: 2 }}>MILTON HOBBS</p>
-            <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 6, fontWeight: 600, letterSpacing: "0.32em", textTransform: "uppercase" }}>CORPORATE LAW</p>
+          {/* Middle tier — Deal phases grid (4 phases) */}
+          <div style={{ position: "absolute", top: 78, left: 18, right: 18, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px 8px" }}>
+            {[
+              { label: "STRUCTURE", icon: "S" },
+              { label: "DILIGENCE", icon: "D" },
+              { label: "NEGOTIATE", icon: "N" },
+              { label: "EXECUTE", icon: "E" },
+            ].map((phase, i) => (
+              <motion.div
+                key={i}
+                animate={{ opacity: [0.3, 0.9, 0.3] }}
+                transition={{ duration: 3, repeat: Infinity, delay: i * 0.75, ease: "easeInOut" }}
+                style={{ border: "1px solid rgba(255,255,255,0.15)", padding: "8px 6px", display: "flex", alignItems: "center", gap: 5 }}
+              >
+                <span style={{ color: "rgba(128,153,255,0.9)", fontSize: 9, fontWeight: 800, width: 16, height: 16, display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid rgba(128,153,255,0.5)" }}>{phase.icon}</span>
+                <span style={{ color: "rgba(255,255,255,0.75)", fontSize: 6, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase" }}>{phase.label}</span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Lower tier — Jurisdiction markers */}
+          <div style={{ position: "absolute", bottom: 44, left: 18, right: 18, display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: 8 }}>
+            {[
+              { city: "DUBAI", sub: "UAE" },
+              { city: "PARIS", sub: "FR" },
+            ].map((loc, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                <div style={{ width: 4, height: 4, background: "rgba(128,153,255,0.9)" }} />
+                <div>
+                  <p style={{ color: "rgba(255,255,255,0.85)", fontSize: 7, fontWeight: 700, letterSpacing: "0.32em", textTransform: "uppercase" }}>{loc.city}</p>
+                  <p style={{ color: "rgba(255,255,255,0.40)", fontSize: 5, letterSpacing: "0.18em", textTransform: "uppercase" }}>{loc.sub}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom nameplate — firm tagline */}
+          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "10px 14px", borderTop: "1px solid rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.08)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 6, fontWeight: 500, letterSpacing: "0.28em", textTransform: "uppercase" }}>Partner-Led Counsel</p>
+            <div style={{ width: 16, height: 1, background: "rgba(128,153,255,0.5)" }} />
           </div>
         </div>
 
-        {/* Right side face — dark for 3D depth */}
+        {/* Right side face */}
         <div style={{
-          position: "absolute", top: 0, left: "100%", width: 56, height: 330,
+          position: "absolute", top: 0, left: "100%", width: 56, height: 300,
           background: "linear-gradient(to right, rgba(0,0,0,0.55), rgba(0,0,0,0.35))",
           backgroundColor: "#00072A",
           transform: "rotateY(90deg)", transformOrigin: "left center",
           border: "1px solid rgba(255,255,255,0.06)",
         }} />
 
-        {/* Top face — roof */}
+        {/* Top face */}
         <div style={{
-          position: "absolute", top: -38, left: 0, width: 180, height: 38,
+          position: "absolute", top: -32, left: 0, width: 200, height: 32,
           background: "linear-gradient(to bottom, rgba(255,255,255,0.18), rgba(255,255,255,0.06))",
           backgroundColor: "#0A32C8",
           transform: "rotateX(90deg)", transformOrigin: "bottom center",
           display: "flex", alignItems: "center", justifyContent: "center",
           border: "1px solid rgba(255,255,255,0.22)",
         }}>
-          <span style={{ color: "rgba(255,255,255,0.95)", fontSize: 12, fontWeight: 700, letterSpacing: "0.28em", fontFamily: "'Satoshi', sans-serif" }}>MH</span>
-        </div>
-
-      </motion.div>
-
-      {/* ── FLOATING ELEMENTS — white bg for contrast on #001489 ── */}
-
-      {/* DUBAI — large circle badge top-right */}
-      <motion.div
-        animate={{ y: [-9, 9, -9] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-        style={{ position: "absolute", top: "4%", right: "1%", zIndex: 20 }}
-      >
-        <div style={{ width: 112, height: 112, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 10px 40px rgba(0,0,0,0.25)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
-          <p style={{ color: "#001489", fontSize: 9, fontWeight: 800, letterSpacing: "0.40em", textTransform: "uppercase" }}>DUBAI</p>
-          <div style={{ width: 44, height: 1, background: "#001489", opacity: 0.25 }} />
-          <p style={{ color: "#001489", fontSize: 8, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", opacity: 0.65 }}>U.A.E.</p>
-          <p style={{ color: "#001489", fontSize: 7, letterSpacing: "0.15em", marginTop: 1, opacity: 0.40 }}>Gulf Region</p>
+          <span style={{ color: "rgba(255,255,255,0.90)", fontSize: 11, fontWeight: 700, letterSpacing: "0.25em", fontFamily: "'Satoshi', sans-serif" }}>CORPORATE</span>
         </div>
       </motion.div>
 
-      {/* PARIS — circle badge bottom-left */}
+      {/* ── FLOATING DEAL DOCUMENTS (orbiting cards) ── */}
+
+      {/* M&A — large document top-left */}
       <motion.div
-        animate={{ y: [9, -9, 9] }}
-        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
-        style={{ position: "absolute", bottom: "5%", left: "1%", zIndex: 20 }}
+        animate={{ y: [-8, 8, -8], rotate: [-3, 3, -3] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+        style={{ position: "absolute", top: "6%", left: "2%", zIndex: 20 }}
       >
-        <div style={{ width: 96, height: 96, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 8px 32px rgba(0,0,0,0.20)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
-          <p style={{ color: "#001489", fontSize: 8, fontWeight: 800, letterSpacing: "0.38em", textTransform: "uppercase" }}>PARIS</p>
-          <div style={{ width: 34, height: 1, background: "#001489", opacity: 0.22 }} />
-          <p style={{ color: "#001489", fontSize: 7, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", opacity: 0.55 }}>France</p>
+        <div style={{ width: 100, height: 62, border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 8px 32px rgba(0,0,0,0.20)", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 12px", gap: 3 }}>
+          <p style={{ color: "#001489", fontSize: 9, fontWeight: 800, letterSpacing: "0.35em", textTransform: "uppercase" }}>M&A</p>
+          <div style={{ width: 40, height: 1, background: "#001489", opacity: 0.20 }} />
+          <p style={{ color: "#001489", fontSize: 6, letterSpacing: "0.18em", textTransform: "uppercase", opacity: 0.45 }}>Transaction</p>
         </div>
       </motion.div>
 
-      {/* M&A — large chip left-center */}
+      {/* JV — document bottom-right */}
       <motion.div
-        animate={{ opacity: [0.88, 1, 0.88], y: [-5, 5, -5] }}
-        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
-        style={{ position: "absolute", top: "30%", left: "0%", transform: "rotate(-11deg)", zIndex: 20 }}
+        animate={{ y: [8, -8, 8], rotate: [2, -2, 2] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
+        style={{ position: "absolute", bottom: "8%", right: "2%", zIndex: 20 }}
       >
-        <div style={{ padding: "13px 22px", border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 4px 24px rgba(0,0,0,0.20)" }}>
-          <p style={{ color: "#001489", fontSize: 15, fontWeight: 800, letterSpacing: "0.38em", textTransform: "uppercase" }}>M&A</p>
+        <div style={{ width: 90, height: 56, border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 6px 24px rgba(0,0,0,0.18)", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 10px", gap: 3 }}>
+          <p style={{ color: "#001489", fontSize: 8, fontWeight: 800, letterSpacing: "0.28em", textTransform: "uppercase" }}>JV</p>
+          <div style={{ width: 30, height: 1, background: "#001489", opacity: 0.18 }} />
+          <p style={{ color: "#001489", fontSize: 6, letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.40 }}>Partnership</p>
         </div>
       </motion.div>
 
-      {/* JOINT VENTURES — chip upper-left */}
+      {/* GOVERNANCE — chip right-mid */}
       <motion.div
-        animate={{ opacity: [0.80, 1, 0.80], y: [4, -4, 4] }}
-        transition={{ duration: 5.0, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
-        style={{ position: "absolute", top: "14%", left: "7%", transform: "rotate(-7deg)", zIndex: 20 }}
+        animate={{ opacity: [0.75, 1, 0.75], x: [-3, 3, -3] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+        style={{ position: "absolute", top: "38%", right: "1%", transform: "rotate(8deg)", zIndex: 20 }}
       >
-        <div style={{ padding: "9px 16px", border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
-          <p style={{ color: "#001489", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase" }}>Joint Ventures</p>
+        <div style={{ padding: "8px 14px", border: "1.5px solid rgba(255,255,255,0.88)", background: "white", boxShadow: "0 3px 16px rgba(0,0,0,0.15)" }}>
+          <p style={{ color: "#001489", fontSize: 8, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase" }}>Governance</p>
         </div>
       </motion.div>
 
-      {/* CORPORATE — chip bottom-right */}
+      {/* COMMERCIAL — chip left-mid */}
       <motion.div
-        animate={{ opacity: [0.85, 1, 0.85] }}
-        transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1.3 }}
-        style={{ position: "absolute", bottom: "26%", right: "2%", transform: "rotate(9deg)", zIndex: 20 }}
+        animate={{ opacity: [0.80, 1, 0.80], x: [3, -3, 3] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.8 }}
+        style={{ position: "absolute", top: "52%", left: "1%", transform: "rotate(-6deg)", zIndex: 20 }}
       >
-        <div style={{ padding: "11px 18px", border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
-          <p style={{ color: "#001489", fontSize: 12, fontWeight: 700, letterSpacing: "0.32em", textTransform: "uppercase" }}>Corporate</p>
+        <div style={{ padding: "7px 12px", border: "1.5px solid rgba(255,255,255,0.88)", background: "white", boxShadow: "0 3px 16px rgba(0,0,0,0.15)" }}>
+          <p style={{ color: "#001489", fontSize: 8, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase" }}>Commercial</p>
         </div>
       </motion.div>
 
-      {/* GOVERNANCE — chip right-center */}
+      {/* CONTRACT — floating seal bottom-left */}
       <motion.div
-        animate={{ opacity: [0.80, 1, 0.80] }}
-        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 2.1 }}
-        style={{ position: "absolute", top: "44%", right: "1%", transform: "rotate(7deg)", zIndex: 20 }}
+        animate={{ y: [-5, 5, -5], scale: [0.95, 1.02, 0.95] }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 2.2 }}
+        style={{ position: "absolute", bottom: "18%", left: "4%", zIndex: 20 }}
       >
-        <div style={{ padding: "9px 15px", border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
-          <p style={{ color: "#001489", fontSize: 9, fontWeight: 600, letterSpacing: "0.26em", textTransform: "uppercase" }}>Governance</p>
+        <div style={{ width: 56, height: 56, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.85)", background: "white", boxShadow: "0 4px 20px rgba(0,0,0,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <p style={{ color: "#001489", fontSize: 7, fontWeight: 800, letterSpacing: "0.20em", textTransform: "uppercase" }}>Deal</p>
         </div>
       </motion.div>
     </div>
