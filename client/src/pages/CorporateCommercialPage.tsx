@@ -179,14 +179,6 @@ function Corporate3D() {
           <span style={{ color: "rgba(255,255,255,0.95)", fontSize: 12, fontWeight: 700, letterSpacing: "0.28em", fontFamily: "'Satoshi', sans-serif" }}>MH</span>
         </div>
 
-        {/* Spire */}
-        <div style={{ position: "absolute", top: -38 - 72, left: "50%", marginLeft: -1, width: 2, height: 72, background: "linear-gradient(to top, rgba(255,255,255,0.8), rgba(255,255,255,0.25), transparent)" }}>
-          <motion.div
-            animate={{ opacity: [0.7, 1, 0.7], boxShadow: ["0 0 10px 4px rgba(128,153,255,0.6)", "0 0 22px 7px rgba(128,153,255,0.95)", "0 0 10px 4px rgba(128,153,255,0.6)"] }}
-            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-            style={{ position: "absolute", top: 0, left: "50%", marginLeft: -5, width: 10, height: 10, borderRadius: "50%", background: "#8099FF" }}
-          />
-        </div>
       </motion.div>
 
       {/* ── FLOATING ELEMENTS — white bg for contrast on #001489 ── */}
