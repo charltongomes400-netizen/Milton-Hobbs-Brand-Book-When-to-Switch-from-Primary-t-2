@@ -213,10 +213,7 @@ function InsightsInner() {
                       />
                       <div className="absolute inset-0 bg-[#000A4F]/10 group-hover:bg-[#000A4F]/0 transition-colors duration-300" />
                       <div className="absolute top-4 left-4">
-                        <span
-                          className="text-[8px] font-bold tracking-[0.22em] uppercase px-2.5 py-1 bg-white"
-                          style={{ color: article.categoryColor }}
-                        >
+                        <span className="text-[8px] font-bold tracking-[0.22em] uppercase px-2.5 py-1 bg-white text-[#001489]">
                           {article.category}
                         </span>
                       </div>
