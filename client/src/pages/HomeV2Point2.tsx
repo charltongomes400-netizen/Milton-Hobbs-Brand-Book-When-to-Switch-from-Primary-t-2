@@ -2159,7 +2159,7 @@ function FooterV15() {
   return (
     <footer id="footer" data-testid="footer" className="v2-snap-end" style={{ background: "#001489" }}>
       {/* ── Motto whisper — very top ── */}
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 40, paddingBottom: 36 }}>
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 20, paddingBottom: 16 }}>
         <p style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",
           fontSize: 9,
@@ -2175,8 +2175,8 @@ function FooterV15() {
       {/* ── Main band: 3-column grid ── */}
       <div className="max-w-[1400px] mx-auto px-8">
         <div
-          className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-6"
-          style={{ paddingTop: 52, paddingBottom: 52 }}
+          className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-4"
+          style={{ paddingTop: 28, paddingBottom: 28 }}
         >
           {/* LEFT — Wordmark + tagline */}
           <div className="flex flex-col gap-5">
@@ -2214,7 +2214,7 @@ function FooterV15() {
             }}>
               Navigation
             </p>
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-col gap-2">
               {navEntries.map(link => (
                 <a
                   key={link.href}
@@ -2251,7 +2251,7 @@ function FooterV15() {
             }}>
               Practice Areas
             </p>
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-col gap-2">
               {[
                 "Corporate & Commercial",
                 "Tax & Compliance",
@@ -2353,7 +2353,7 @@ function FooterV15() {
       <div className="max-w-[1400px] mx-auto px-8">
         <div
           className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
-          style={{ padding: "16px 0 18px" }}
+          style={{ padding: "10px 0 12px" }}
         >
           {/* Live clocks */}
           <div className="flex items-center gap-5">

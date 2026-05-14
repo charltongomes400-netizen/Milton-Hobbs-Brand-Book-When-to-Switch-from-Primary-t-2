@@ -50,7 +50,7 @@ export function Footer() {
   return (
     <footer id="footer" data-testid="footer" style={{ background: "#001489" }}>
       {/* Motto whisper */}
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 28, paddingBottom: 24 }}>
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 16, paddingBottom: 12 }}>
         <p style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",
           fontSize: 9,
@@ -68,7 +68,7 @@ export function Footer() {
       <div className="max-w-[1400px] mx-auto px-8">
         <div
           className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-4"
-          style={{ paddingTop: 36, paddingBottom: 36, borderTop: "1px solid rgba(255,255,255,0.08)" }}
+          style={{ paddingTop: 24, paddingBottom: 24, borderTop: "1px solid rgba(255,255,255,0.08)" }}
         >
           {/* Col 1: Wordmark + tagline */}
           <div className="flex flex-col gap-5">
@@ -106,7 +106,7 @@ export function Footer() {
             }}>
               Navigation
             </p>
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-1.5">
               {navEntries.map(link => (
                 <a
                   key={link.href}
