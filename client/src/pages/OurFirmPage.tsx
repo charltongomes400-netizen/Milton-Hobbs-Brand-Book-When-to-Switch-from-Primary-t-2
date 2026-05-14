@@ -105,14 +105,14 @@ function FirmCrest3D() {
             {!face.isEmpty && (
               <div className="text-center">
                 <div
-                  className="w-4 h-px bg-[#D4AF36] mx-auto mb-3"
+                  className="w-4 h-px bg-white mx-auto mb-3"
                   style={{ opacity: face.gold ? 0.8 : 0.5 }}
                 />
                 <p
                   className="font-heading font-bold leading-tight tracking-tight mb-2"
                   style={{
                     fontSize: "clamp(10px, 1.1vw, 13px)",
-                    color: face.gold ? "#D4AF36" : "#ffffff",
+                    color: "white",
                     opacity: face.gold ? 0.95 : 0.9,
                     letterSpacing: "-0.01em",
                   }}
@@ -146,7 +146,7 @@ function FirmCrest3D() {
           <div
             className="absolute w-2 h-2 rounded-full"
             style={{
-              background: i === 1 ? "#D4AF36" : "#8099FF",
+              background: i === 1 ? "white" : "#8099FF",
               opacity: i === 1 ? 0.85 : 0.45,
               top: 0,
               left: "50%",
@@ -186,9 +186,9 @@ function MissionOrbit() {
   const lbl3 = useRef<SVGTextElement>(null);
 
   const rings = [
-    { rx: 158, ry: 20,  speed: 0.24, phase: 0,            color: "#D4AF36", rRange: [2.5, 5.5], label: "PRECISION"    },
+    { rx: 158, ry: 20,  speed: 0.24, phase: 0,            color: "white", rRange: [2.5, 5.5], label: "PRECISION"    },
     { rx: 112, ry: 46,  speed: 0.38, phase: Math.PI * 0.7, color: "#8099FF", rRange: [2,   4.5], label: "COMPOSURE"    },
-    { rx: 66,  ry: 61,  speed: 0.6,  phase: Math.PI,       color: "#D4AF36", rRange: [1.5, 3.5], label: "CLIENT·FIRST" },
+    { rx: 66,  ry: 61,  speed: 0.6,  phase: Math.PI,       color: "white", rRange: [1.5, 3.5], label: "CLIENT·FIRST" },
   ];
 
   useAnimationFrame((t) => {
@@ -223,7 +223,7 @@ function MissionOrbit() {
     <svg viewBox="0 0 420 300" fill="none" className="w-full h-full">
       <defs>
         <radialGradient id="orbitGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#D4AF36" stopOpacity="0.1" />
+          <stop offset="0%" stopColor="white" stopOpacity="0.1" />
           <stop offset="100%" stopColor="#000A4F" stopOpacity="0" />
         </radialGradient>
       </defs>
@@ -256,33 +256,33 @@ function MissionOrbit() {
       ))}
 
       {/* === TRAVELING DOTS (driven by useAnimationFrame) === */}
-      <circle ref={dot1} cx={CX + 158} cy={CY} r={4} fill="#D4AF36" />
+      <circle ref={dot1} cx={CX + 158} cy={CY} r={4} fill="white" />
       <circle ref={dot2} cx={CX + 112} cy={CY} r={3} fill="#8099FF" />
-      <circle ref={dot3} cx={CX + 66}  cy={CY} r={3} fill="#D4AF36" />
+      <circle ref={dot3} cx={CX + 66}  cy={CY} r={3} fill="white" />
 
       {/* === FLOATING LABELS (appear as dot nears viewer) === */}
-      <text ref={lbl1} fontSize="6.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.3em" fill="#D4AF36" opacity="0">PRECISION</text>
+      <text ref={lbl1} fontSize="6.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.3em" fill="white" opacity="0">PRECISION</text>
       <text ref={lbl2} fontSize="6.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.3em" fill="#8099FF" opacity="0">COMPOSURE</text>
-      <text ref={lbl3} fontSize="6.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.3em" fill="#D4AF36" opacity="0">CLIENT·FIRST</text>
+      <text ref={lbl3} fontSize="6.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.3em" fill="white" opacity="0">CLIENT·FIRST</text>
 
       {/* === CENTRE CORE === */}
       <motion.circle
         cx={CX} cy={CY} r={32}
-        stroke="#D4AF36" strokeWidth={0.8} strokeOpacity={0.35}
-        fill="#D4AF36" fillOpacity={0.04}
+        stroke="white" strokeWidth={0.8} strokeOpacity={0.35}
+        fill="white" fillOpacity={0.04}
         animate={{ scale: [1, 1.06, 1] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
         style={{ transformOrigin: `${CX}px ${CY}px` }}
       />
       <motion.circle
         cx={CX} cy={CY} r={52}
-        stroke="#D4AF36" strokeWidth={0.5} strokeOpacity={0.1}
+        stroke="white" strokeWidth={0.5} strokeOpacity={0.1}
         fill="none"
         animate={{ scale: [1, 1.55, 1], opacity: [0.4, 0, 0.4] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: "easeOut" }}
         style={{ transformOrigin: `${CX}px ${CY}px` }}
       />
-      <text x={CX} y={CY + 5} fill="#D4AF36" fontSize="13" textAnchor="middle"
+      <text x={CX} y={CY + 5} fill="white" fontSize="13" textAnchor="middle"
         fontFamily="var(--font-heading)" fontWeight="800" letterSpacing="0.14em">M·H</text>
     </svg>
   );
@@ -300,7 +300,7 @@ const coreValues = [
         {[28, 20, 13].map((r, i) => (
           <motion.circle
             key={i} cx={32} cy={32} r={r}
-            stroke={active ? "#D4AF36" : "#001489"}
+            stroke={active ? "white" : "#8099FF"}
             strokeOpacity={active ? 0.2 + i * 0.15 : 0.06 + i * 0.04}
             strokeWidth={1}
             fill="none"
@@ -309,7 +309,7 @@ const coreValues = [
             style={{ transformOrigin: "32px 32px" }}
           />
         ))}
-        <motion.circle cx={32} cy={32} r={5} fill={active ? "#D4AF36" : "#001489"} fillOpacity={active ? 1 : 0.4}
+        <motion.circle cx={32} cy={32} r={5} fill={active ? "white" : "#8099FF"} fillOpacity={active ? 1 : 0.4}
           animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }} />
       </svg>
     ),
@@ -324,7 +324,7 @@ const coreValues = [
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
         <motion.path
           d="M32 8 L54 20 L54 38 Q54 52 32 58 Q10 52 10 38 L10 20 Z"
-          stroke={active ? "#D4AF36" : "#001489"}
+          stroke={active ? "white" : "#8099FF"}
           strokeOpacity={active ? 0.7 : 0.3}
           strokeWidth={1.2}
           fill={active ? "rgba(212,175,54,0.06)" : "none"}
@@ -333,7 +333,7 @@ const coreValues = [
         />
         <motion.path
           d="M22 32 L29 39 L42 26"
-          stroke={active ? "#D4AF36" : "#001489"}
+          stroke={active ? "white" : "#8099FF"}
           strokeOpacity={active ? 0.9 : 0.4}
           strokeWidth={1.5}
           strokeLinecap="round" strokeLinejoin="round"
@@ -352,20 +352,20 @@ const coreValues = [
     descFR: "Pas d'ambiguïté, pas de vague. Une analyse juridique claire, décisive et commercialement ancrée à chaque fois.",
     icon: (active: boolean) => (
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
-        <line x1={32} y1={6} x2={32} y2={58} stroke={active ? "#D4AF36" : "#001489"} strokeOpacity={0.12} strokeWidth={1} />
-        <line x1={6} y1={32} x2={58} y2={32} stroke={active ? "#D4AF36" : "#001489"} strokeOpacity={0.12} strokeWidth={1} />
+        <line x1={32} y1={6} x2={32} y2={58} stroke={active ? "white" : "#8099FF"} strokeOpacity={0.12} strokeWidth={1} />
+        <line x1={6} y1={32} x2={58} y2={32} stroke={active ? "white" : "#8099FF"} strokeOpacity={0.12} strokeWidth={1} />
         {[22, 14].map((r, i) => (
-          <circle key={i} cx={32} cy={32} r={r} stroke={active ? "#D4AF36" : "#001489"} strokeOpacity={active ? 0.2 + i * 0.1 : 0.06 + i * 0.04} strokeWidth={1} fill="none" />
+          <circle key={i} cx={32} cy={32} r={r} stroke={active ? "white" : "#8099FF"} strokeOpacity={active ? 0.2 + i * 0.1 : 0.06 + i * 0.04} strokeWidth={1} fill="none" />
         ))}
         <motion.circle cx={32} cy={32} r={22}
-          stroke={active ? "#D4AF36" : "#8099FF"}
+          stroke={active ? "white" : "#8099FF"}
           strokeWidth={1.5} strokeOpacity={0.8} fill="none"
           strokeDasharray="4 4"
           animate={{ rotate: [0, 360] }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
           style={{ transformOrigin: "32px 32px" }}
         />
-        <circle cx={32} cy={32} r={4} fill={active ? "#D4AF36" : "#001489"} fillOpacity={active ? 1 : 0.5} />
+        <circle cx={32} cy={32} r={4} fill={active ? "white" : "#8099FF"} fillOpacity={active ? 1 : 0.5} />
       </svg>
     ),
   },
@@ -379,7 +379,7 @@ const coreValues = [
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
         <motion.path
           d="M32 10 L36 28 L54 32 L36 36 L32 54 L28 36 L10 32 L28 28 Z"
-          stroke={active ? "#D4AF36" : "#001489"}
+          stroke={active ? "white" : "#8099FF"}
           strokeOpacity={active ? 0.8 : 0.3}
           strokeWidth={1.2}
           fill={active ? "rgba(212,175,54,0.08)" : "none"}
@@ -387,7 +387,7 @@ const coreValues = [
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           style={{ transformOrigin: "32px 32px" }}
         />
-        <circle cx={32} cy={32} r={5} fill={active ? "#D4AF36" : "#001489"} fillOpacity={active ? 1 : 0.4} />
+        <circle cx={32} cy={32} r={5} fill={active ? "white" : "#8099FF"} fillOpacity={active ? 1 : 0.4} />
       </svg>
     ),
   },
@@ -399,11 +399,11 @@ const coreValues = [
     descFR: "Deux systèmes juridiques, deux cultures, une équipe unifiée. Notre ADN bi-juridictionnel est un avantage stratégique.",
     icon: (active: boolean) => (
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
-        <circle cx={20} cy={32} r={10} stroke={active ? "#D4AF36" : "#001489"} strokeOpacity={active ? 0.6 : 0.25} strokeWidth={1} fill="none" />
-        <circle cx={44} cy={32} r={10} stroke={active ? "#D4AF36" : "#001489"} strokeOpacity={active ? 0.6 : 0.25} strokeWidth={1} fill="none" />
+        <circle cx={20} cy={32} r={10} stroke={active ? "white" : "#8099FF"} strokeOpacity={active ? 0.6 : 0.25} strokeWidth={1} fill="none" />
+        <circle cx={44} cy={32} r={10} stroke={active ? "white" : "#8099FF"} strokeOpacity={active ? 0.6 : 0.25} strokeWidth={1} fill="none" />
         <motion.path
           d="M20 25 Q32 18 44 25"
-          stroke={active ? "#D4AF36" : "#8099FF"}
+          stroke={active ? "white" : "#8099FF"}
           strokeOpacity={active ? 0.8 : 0.3}
           strokeWidth={1.2}
           strokeDasharray="40"
@@ -413,7 +413,7 @@ const coreValues = [
         />
         <motion.path
           d="M20 39 Q32 46 44 39"
-          stroke={active ? "#D4AF36" : "#8099FF"}
+          stroke={active ? "white" : "#8099FF"}
           strokeOpacity={active ? 0.5 : 0.18}
           strokeWidth={1}
           strokeDasharray="40"
@@ -421,8 +421,8 @@ const coreValues = [
           animate={{ strokeDashoffset: [-40, 0, 40] }}
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
-        <circle cx={20} cy={32} r={3} fill={active ? "#D4AF36" : "#001489"} fillOpacity={active ? 0.9 : 0.4} />
-        <circle cx={44} cy={32} r={3} fill={active ? "#D4AF36" : "#001489"} fillOpacity={active ? 0.9 : 0.4} />
+        <circle cx={20} cy={32} r={3} fill={active ? "white" : "#8099FF"} fillOpacity={active ? 0.9 : 0.4} />
+        <circle cx={44} cy={32} r={3} fill={active ? "white" : "#8099FF"} fillOpacity={active ? 0.9 : 0.4} />
       </svg>
     ),
   },
@@ -437,7 +437,7 @@ const coreValues = [
         {[26, 20, 14, 9].map((r, i) => (
           <motion.circle
             key={i} cx={32} cy={32} r={r}
-            stroke={i === 3 ? (active ? "#D4AF36" : "#001489") : (active ? "#D4AF36" : "#8099FF")}
+            stroke={i === 3 ? (active ? "white" : "#8099FF") : (active ? "white" : "#8099FF")}
             strokeOpacity={i === 3 ? (active ? 0.85 : 0.4) : (active ? 0.12 + i * 0.07 : 0.05 + i * 0.04)}
             strokeWidth={1}
             strokeDasharray={`${2 * Math.PI * r * 0.8} ${2 * Math.PI * r * 0.2}`}
@@ -449,14 +449,14 @@ const coreValues = [
         ))}
         <motion.rect
           x={27} y={30} width={10} height={8}
-          stroke={active ? "#D4AF36" : "#001489"} strokeWidth={1} fill="none"
+          stroke={active ? "white" : "#8099FF"} strokeWidth={1} fill="none"
           strokeOpacity={active ? 0.9 : 0.5}
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2.5, repeat: Infinity }}
         />
         <motion.path
           d="M29 30 Q29 25 32 25 Q35 25 35 30"
-          stroke={active ? "#D4AF36" : "#001489"} strokeWidth={1} fill="none"
+          stroke={active ? "white" : "#8099FF"} strokeWidth={1} fill="none"
           strokeOpacity={active ? 0.9 : 0.5}
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2.5, repeat: Infinity }}
@@ -487,7 +487,7 @@ function ValueCard({ value, lang, index }: { value: typeof coreValues[0]; lang: 
       }}
     >
       <motion.div
-        className="absolute top-0 left-0 w-full h-0.5 bg-[#D4AF36]"
+        className="absolute top-0 left-0 w-full h-0.5 bg-white"
         animate={{ scaleX: hovered ? 1 : 0 }}
         style={{ transformOrigin: "left" }}
         transition={{ duration: 0.4, ease: "easeOut" }}
@@ -497,7 +497,7 @@ function ValueCard({ value, lang, index }: { value: typeof coreValues[0]; lang: 
       </div>
       <motion.p
         className="text-[10px] tracking-[0.35em] uppercase font-bold mb-2"
-        animate={{ color: hovered ? "#D4AF36" : "#001489" }}
+        animate={{ color: hovered ? "white" : "#8099FF" }}
         transition={{ duration: 0.3 }}
       >
         {lang === "FR" ? value.titleFR : value.title}
@@ -534,7 +534,7 @@ function ConsultModal({ open, onClose }: { open: boolean; onClose: () => void })
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  const inputCls = "w-full bg-[#000A4F] border border-white/15 text-white text-sm px-4 py-3 placeholder:text-white/30 focus:outline-none focus:border-[#D4AF36]/60 transition-colors";
+  const inputCls = "w-full bg-[#000A4F] border border-white/15 text-white text-sm px-4 py-3 placeholder:text-white/30 focus:outline-none focus:border-white/60 transition-colors";
 
   return (
     <AnimatePresence>
@@ -556,11 +556,11 @@ function ConsultModal({ open, onClose }: { open: boolean; onClose: () => void })
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
           >
-            <div className="absolute top-0 left-0 right-0 h-px bg-[#D4AF36]" />
+            <div className="absolute top-0 left-0 right-0 h-px bg-white" />
             <div className="p-8">
               <div className="flex items-start justify-between mb-8">
                 <div>
-                  <p className="text-[#D4AF36] text-[10px] tracking-[0.35em] uppercase font-bold mb-1">Milton Hobbs</p>
+                  <p className="text-white text-[10px] tracking-[0.35em] uppercase font-bold mb-1">Milton Hobbs</p>
                   <h3 className="font-heading text-white text-2xl font-semibold tracking-tight">Book a Consultation</h3>
                 </div>
                 <button
@@ -580,12 +580,12 @@ function ConsultModal({ open, onClose }: { open: boolean; onClose: () => void })
                     initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
                     className="py-12 text-center"
                   >
-                    <div className="w-12 h-12 mx-auto mb-6 border border-[#D4AF36] flex items-center justify-center">
-                      <svg className="w-5 h-5 text-[#D4AF36]" fill="none" viewBox="0 0 20 20">
+                    <div className="w-12 h-12 mx-auto mb-6 border border-white flex items-center justify-center">
+                      <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 20 20">
                         <path d="M4 10l5 5 7-9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
-                    <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-bold mb-2">Message Sent</p>
+                    <p className="text-white text-xs tracking-[0.3em] uppercase font-bold mb-2">Message Sent</p>
                     <p className="text-white/60 text-sm">A partner will be in touch shortly.</p>
                   </motion.div>
                 ) : (
@@ -607,7 +607,7 @@ function ConsultModal({ open, onClose }: { open: boolean; onClose: () => void })
                     <button
                       data-testid="modal-submit"
                       type="submit"
-                      className="w-full bg-[#D4AF36] text-[#001489] text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#C4A030] transition-colors mt-2"
+                      className="w-full bg-white text-[#001489] text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#C4A030] transition-colors mt-2"
                     >
                       Send Message
                     </button>
@@ -700,7 +700,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={heroInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.2 }}
-                  className="text-[#D4AF36] text-[10px] tracking-[0.45em] uppercase font-bold mb-10"
+                  className="text-white text-[10px] tracking-[0.45em] uppercase font-bold mb-10"
                 >
                   Our Firm
                 </motion.p>
@@ -717,7 +717,7 @@ export default function OurFirmPage() {
                         className="font-heading font-bold leading-none block"
                         style={{
                           fontSize: "clamp(2.8rem, 5.5vw, 5.2rem)",
-                          color: i % 2 === 0 ? "rgba(255,255,255,0.92)" : "#D4AF36",
+                          color: i % 2 === 0 ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.5)",
                           letterSpacing: "-0.02em",
                         }}
                       >
@@ -745,7 +745,7 @@ export default function OurFirmPage() {
                   <button
                     data-testid="hero-cta-consult"
                     onClick={() => setModalOpen(true)}
-                    className="inline-flex items-center gap-3 bg-[#D4AF36] text-[#001489] text-xs tracking-[0.2em] uppercase font-bold px-8 py-4 hover:bg-[#C4A030] transition-colors"
+                    className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs tracking-[0.2em] uppercase font-bold px-8 py-4 hover:bg-[#C4A030] transition-colors"
                   >
                     Book a Consultation
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
@@ -779,7 +779,7 @@ export default function OurFirmPage() {
                     return (
                       <motion.div
                         key={i}
-                        className="absolute w-0.5 h-0.5 bg-[#D4AF36] rounded-full"
+                        className="absolute w-0.5 h-0.5 bg-white rounded-full"
                         style={{ left: `${x}%`, top: `${y}%` }}
                         animate={{ opacity: [0, 0.8, 0], scale: [0.5, 1.5, 0.5] }}
                         transition={{ duration: 2.5, delay: i * 0.2, repeat: Infinity }}
@@ -792,8 +792,8 @@ export default function OurFirmPage() {
                   <div className="flex gap-4">
                     {["Dubai, UAE", "Paris, France"].map((city, i) => (
                       <div key={i} className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 bg-[#D4AF36] rounded-full" />
-                        <span className="text-[#D4AF36]/60 text-[9px] tracking-[0.3em] uppercase font-medium">{city}</span>
+                        <div className="w-1.5 h-1.5 bg-white rounded-full" />
+                        <span className="text-white/60 text-[9px] tracking-[0.3em] uppercase font-medium">{city}</span>
                       </div>
                     ))}
                   </div>
@@ -844,7 +844,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={philosophyInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-[#D4AF36] text-[10px] tracking-[0.4em] uppercase font-bold mb-8"
+                  className="text-white text-[10px] tracking-[0.4em] uppercase font-bold mb-8"
                 >
                   Our Philosophy & Purpose
                 </motion.p>
@@ -862,7 +862,7 @@ export default function OurFirmPage() {
                   initial={{ scaleX: 0 }}
                   animate={philosophyInView ? { scaleX: 1 } : {}}
                   transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                  className="w-16 h-0.5 bg-[#D4AF36] mb-10 origin-left"
+                  className="w-16 h-0.5 bg-white mb-10 origin-left"
                 />
                 <motion.p
                   initial={{ opacity: 0, y: 16 }}
@@ -897,17 +897,17 @@ export default function OurFirmPage() {
                   transition={{ duration: 0.8, delay: 0.4 }}
                   className="bg-[#001489] p-8"
                 >
-                  <div className="w-8 h-px bg-[#D4AF36] mb-5" />
-                  <p className="text-[#D4AF36]/70 text-[9px] tracking-[0.35em] uppercase font-bold mb-3">This is Our Promise</p>
+                  <div className="w-8 h-px bg-white mb-5" />
+                  <p className="text-white/70 text-[9px] tracking-[0.35em] uppercase font-bold mb-3">This is Our Promise</p>
                   <p className="font-heading text-white font-semibold text-lg leading-snug tracking-tight mb-4">
                     To Bring Precision to Complexity, Composure to Challenge, and a Client-First Mindset to Every Engagement.
                   </p>
-                  <p className="text-[#D4AF36] text-[10px] tracking-[0.35em] uppercase font-bold">Milton Hobbs — Brand Promise</p>
+                  <p className="text-white text-[10px] tracking-[0.35em] uppercase font-bold">Milton Hobbs — Brand Promise</p>
                 </motion.blockquote>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#D4AF36]/40 mt-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/40 mt-20">
               {[
                 { num: "01", title: "Boutique Precision", body: "No delegation chains. The partners who pitch the matter are the partners who execute it. Every mandate receives the firm's highest attention." },
                 { num: "02", title: "Dual-Jurisdiction DNA", body: "With offices in Dubai and Paris, we carry two legal traditions and two regulatory cultures — unified in one coherent approach for your matter." },
@@ -922,7 +922,7 @@ export default function OurFirmPage() {
                   transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
                   className="bg-white p-10 group hover:bg-[#001489] transition-colors duration-400"
                 >
-                  <p className="text-[#D4AF36] text-xs tracking-[0.3em] font-bold mb-4">{item.num}</p>
+                  <p className="text-white text-xs tracking-[0.3em] font-bold mb-4">{item.num}</p>
                   <h3 className="font-heading text-[#000A4F] group-hover:text-white font-bold text-xl tracking-tight mb-3 transition-colors duration-300">{item.title}</h3>
                   <p className="text-[#000A4F]/55 group-hover:text-white/55 text-sm leading-relaxed transition-colors duration-300">{item.body}</p>
                 </motion.div>
@@ -945,7 +945,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={missionInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-[#D4AF36] text-[10px] tracking-[0.4em] uppercase font-bold mb-8"
+                  className="text-white text-[10px] tracking-[0.4em] uppercase font-bold mb-8"
                 >
                   Brand Story & Mission
                 </motion.p>
@@ -958,7 +958,7 @@ export default function OurFirmPage() {
                   style={{ fontSize: "clamp(1.9rem, 3vw, 2.8rem)" }}
                 >
                   The name behind<br />
-                  <span className="text-[#D4AF36]">the firm.</span>
+                  <span className="text-white">the firm.</span>
                 </motion.h2>
 
                 <motion.p
@@ -974,13 +974,13 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 14 }}
                   animate={missionInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.38 }}
-                  className="space-y-3 mb-6 pl-4 border-l border-[#D4AF36]/30"
+                  className="space-y-3 mb-6 pl-4 border-l border-white/30"
                 >
                   <p className="text-white/80 text-sm leading-relaxed">
-                    <span className="text-[#D4AF36] font-semibold">John Milton</span> — the voice of liberty, human dignity, and moral conviction.
+                    <span className="text-white font-semibold">John Milton</span> — the voice of liberty, human dignity, and moral conviction.
                   </p>
                   <p className="text-white/80 text-sm leading-relaxed">
-                    <span className="text-[#D4AF36] font-semibold">Thomas Hobbes</span> — the architect of legal order, realism, and rational governance.
+                    <span className="text-white font-semibold">Thomas Hobbes</span> — the architect of legal order, realism, and rational governance.
                   </p>
                 </motion.div>
 
@@ -1020,7 +1020,7 @@ export default function OurFirmPage() {
                       transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }}
                       className="bg-[#001489] p-7 group hover:bg-[#000A4F] transition-colors duration-300"
                     >
-                      <div className="w-6 h-px bg-[#D4AF36] mb-4 group-hover:w-10 transition-all duration-300" />
+                      <div className="w-6 h-px bg-white mb-4 group-hover:w-10 transition-all duration-300" />
                       <p className="font-heading text-white font-bold text-base tracking-tight mb-2">{v.label}</p>
                       <p className="text-white/45 text-xs leading-relaxed">{v.body}</p>
                     </motion.div>
@@ -1057,7 +1057,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={valuesInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6 }}
-                  className="text-[#D4AF36] text-[10px] tracking-[0.4em] uppercase font-bold mb-6"
+                  className="text-white text-[10px] tracking-[0.4em] uppercase font-bold mb-6"
                 >
                   Core Values
                 </motion.p>
@@ -1112,7 +1112,7 @@ export default function OurFirmPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="text-[#D4AF36] text-[10px] tracking-[0.4em] uppercase font-bold mb-6"
+                  className="text-white text-[10px] tracking-[0.4em] uppercase font-bold mb-6"
                 >
                   Book a Consultation
                 </motion.p>
@@ -1125,7 +1125,7 @@ export default function OurFirmPage() {
                   style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
                 >
                   Let's discuss<br />
-                  <span className="text-[#D4AF36]">your matter.</span>
+                  <span className="text-white">your matter.</span>
                 </motion.h2>
                 <motion.p
                   initial={{ opacity: 0, y: 16 }}
@@ -1138,14 +1138,14 @@ export default function OurFirmPage() {
                 </motion.p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 bg-[#D4AF36]" />
+                    <div className="w-1.5 h-1.5 bg-white" />
                     <div>
                       <p className="text-white/35 text-[9px] tracking-[0.35em] uppercase font-medium">Dubai</p>
                       <p className="text-white/70 text-sm">+971 4 523 2421</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 bg-[#D4AF36]" />
+                    <div className="w-1.5 h-1.5 bg-white" />
                     <div>
                       <p className="text-white/35 text-[9px] tracking-[0.35em] uppercase font-medium">Paris</p>
                       <p className="text-white/70 text-sm">contact@miltonhobbs.com</p>
@@ -1161,7 +1161,7 @@ export default function OurFirmPage() {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="bg-[#001489]/60 border border-white/10 p-10 relative"
               >
-                <div className="absolute top-0 left-0 right-0 h-px bg-[#D4AF36]" />
+                <div className="absolute top-0 left-0 right-0 h-px bg-white" />
                 <CTAForm onSuccess={() => {}} />
               </motion.div>
             </div>
@@ -1179,7 +1179,7 @@ export default function OurFirmPage() {
 function CTAForm({ onSuccess }: { onSuccess: () => void }) {
   const [form, setForm] = useState({ name: "", email: "", area: "" });
   const [submitted, setSubmitted] = useState(false);
-  const inputCls = "w-full bg-[#000A4F]/60 border border-white/12 text-white text-sm px-4 py-3 placeholder:text-white/30 focus:outline-none focus:border-[#D4AF36]/50 transition-colors";
+  const inputCls = "w-full bg-[#000A4F]/60 border border-white/12 text-white text-sm px-4 py-3 placeholder:text-white/30 focus:outline-none focus:border-white/50 transition-colors";
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
@@ -1191,12 +1191,12 @@ function CTAForm({ onSuccess }: { onSuccess: () => void }) {
   if (submitted) {
     return (
       <div className="py-8 text-center">
-        <div className="w-10 h-10 mx-auto mb-4 border border-[#D4AF36] flex items-center justify-center">
-          <svg className="w-4 h-4 text-[#D4AF36]" fill="none" viewBox="0 0 16 16">
+        <div className="w-10 h-10 mx-auto mb-4 border border-white flex items-center justify-center">
+          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 16 16">
             <path d="M3 8l4 4 6-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-        <p className="text-[#D4AF36] text-xs tracking-[0.3em] uppercase font-bold mb-2">Request Received</p>
+        <p className="text-white text-xs tracking-[0.3em] uppercase font-bold mb-2">Request Received</p>
         <p className="text-white/50 text-sm">A partner will be in touch shortly.</p>
       </div>
     );
@@ -1216,7 +1216,7 @@ function CTAForm({ onSuccess }: { onSuccess: () => void }) {
       <button
         data-testid="cta-submit"
         type="submit"
-        className="w-full bg-[#D4AF36] text-[#001489] text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#C4A030] transition-colors"
+        className="w-full bg-white text-[#001489] text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#C4A030] transition-colors"
       >
         Request a Consultation
         <svg className="inline-block ml-3 w-3 h-3" fill="none" viewBox="0 0 12 12">

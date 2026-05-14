@@ -36,44 +36,44 @@ function Passport3D() {
             boxShadow: "8px 16px 48px rgba(0,0,0,0.7), -4px 0 16px rgba(0,10,79,0.8), inset 1px 1px 0 rgba(255,255,255,0.05)",
           }}
         >
-          <div className="absolute inset-[10px] border border-[#D4AF36]/35 pointer-events-none" />
-          <div className="absolute inset-[14px] border border-[#D4AF36]/15 pointer-events-none" />
+          <div className="absolute inset-[10px] border border-white/35 pointer-events-none" />
+          <div className="absolute inset-[14px] border border-white/15 pointer-events-none" />
 
           <div className="absolute top-6 left-0 right-0 flex justify-center">
-            <p className="text-[#D4AF36]/60 text-[8px] tracking-[0.5em] uppercase font-medium">
+            <p className="text-white/60 text-[8px] tracking-[0.5em] uppercase font-medium">
               مكتب ميلتون هوبز
             </p>
           </div>
 
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-4">
             <div className="relative w-[72px] h-[72px]">
-              <div className="absolute inset-0 rounded-full border-2 border-[#D4AF36]" />
-              <div className="absolute inset-[5px] rounded-full border border-[#D4AF36]/40" />
+              <div className="absolute inset-0 rounded-full border-2 border-white" />
+              <div className="absolute inset-[5px] rounded-full border border-white/40" />
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 72 72">
-                <ellipse cx="36" cy="36" rx="14" ry="31" stroke="#D4AF36" strokeWidth="0.7" fill="none" opacity="0.5" />
-                <ellipse cx="36" cy="36" rx="25" ry="31" stroke="#D4AF36" strokeWidth="0.5" fill="none" opacity="0.3" />
-                <line x1="5" y1="36" x2="67" y2="36" stroke="#D4AF36" strokeWidth="0.7" opacity="0.5" />
-                <line x1="8" y1="22" x2="64" y2="22" stroke="#D4AF36" strokeWidth="0.4" opacity="0.3" />
-                <line x1="8" y1="50" x2="64" y2="50" stroke="#D4AF36" strokeWidth="0.4" opacity="0.3" />
+                <ellipse cx="36" cy="36" rx="14" ry="31" stroke="white" strokeWidth="0.7" fill="none" opacity="0.5" />
+                <ellipse cx="36" cy="36" rx="25" ry="31" stroke="white" strokeWidth="0.5" fill="none" opacity="0.3" />
+                <line x1="5" y1="36" x2="67" y2="36" stroke="white" strokeWidth="0.7" opacity="0.5" />
+                <line x1="8" y1="22" x2="64" y2="22" stroke="white" strokeWidth="0.4" opacity="0.3" />
+                <line x1="8" y1="50" x2="64" y2="50" stroke="white" strokeWidth="0.4" opacity="0.3" />
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-heading text-[#D4AF36] font-bold text-base">MH</span>
+                <span className="font-heading text-white font-bold text-base">MH</span>
               </div>
             </div>
 
             <div className="text-center">
-              <p className="text-[#D4AF36] text-[9px] tracking-[0.45em] uppercase font-bold">Milton Hobbs</p>
+              <p className="text-white text-[9px] tracking-[0.45em] uppercase font-bold">Milton Hobbs</p>
               <p className="text-white/40 text-[7px] tracking-[0.25em] uppercase mt-1">Legal Services</p>
             </div>
 
-            <div className="border-t border-[#D4AF36]/30 pt-3 w-full text-center">
+            <div className="border-t border-white/30 pt-3 w-full text-center">
               <p className="text-white font-heading text-sm font-bold tracking-[0.35em] uppercase">Passport</p>
             </div>
           </div>
 
           <div className="absolute bottom-5 left-0 right-0 px-5">
-            <p className="text-[#D4AF36]/50 text-[7px] tracking-[0.18em] font-mono">MH&lt;&lt;LEGAL&lt;&lt;SERVICES&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
-            <p className="text-[#D4AF36]/50 text-[7px] tracking-[0.18em] font-mono mt-1">UAE&lt;FR&lt;2026&lt;5&lt;CORP</p>
+            <p className="text-white/50 text-[7px] tracking-[0.18em] font-mono">MH&lt;&lt;LEGAL&lt;&lt;SERVICES&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
+            <p className="text-white/50 text-[7px] tracking-[0.18em] font-mono mt-1">UAE&lt;FR&lt;2026&lt;5&lt;CORP</p>
           </div>
         </div>
 
@@ -96,13 +96,13 @@ function Passport3D() {
         <div
           className="w-[82px] h-[82px] rounded-full flex flex-col items-center justify-center"
           style={{
-            border: "2px solid #D4AF36",
+            border: "2px solid white",
             background: "rgba(0,20,137,0.92)",
             boxShadow: "0 4px 24px rgba(212,175,54,0.3)",
           }}
         >
-          <p className="text-[#D4AF36] text-[7px] font-bold tracking-[0.3em] uppercase">ADMITTED</p>
-          <div className="w-9 h-px bg-[#D4AF36]/60 my-1" />
+          <p className="text-white text-[7px] font-bold tracking-[0.3em] uppercase">ADMITTED</p>
+          <div className="w-9 h-px bg-white/60 my-1" />
           <p className="text-white/80 text-[7px] tracking-[0.2em] uppercase">U.A.E.</p>
           <p className="text-white/40 text-[6px] tracking-wider mt-0.5">DUBAI</p>
         </div>
@@ -138,7 +138,7 @@ function Passport3D() {
           className="px-3 py-[5px]"
           style={{ border: "2px solid rgba(212,175,54,0.8)", boxShadow: "0 0 12px rgba(212,175,54,0.2)" }}
         >
-          <p className="text-[#D4AF36] text-[9px] font-bold tracking-[0.35em] uppercase">APPROVED</p>
+          <p className="text-white text-[9px] font-bold tracking-[0.35em] uppercase">APPROVED</p>
         </div>
       </motion.div>
     </div>
@@ -152,16 +152,16 @@ function GlobeMesh() {
       viewBox="0 0 600 600"
       style={{ opacity: 0.055 }}
     >
-      <circle cx="300" cy="300" r="280" stroke="#D4AF36" strokeWidth="1" fill="none" />
+      <circle cx="300" cy="300" r="280" stroke="white" strokeWidth="1" fill="none" />
       {[60, 120, 180, 240, 300, 360, 420, 480, 540].map((y, i) => {
         const ry = Math.abs(y - 300);
         const rx = Math.sqrt(Math.max(0, 280 * 280 - ry * ry));
         return rx > 0 ? (
-          <ellipse key={i} cx="300" cy={y} rx={rx} ry={rx * 0.28} stroke="#D4AF36" strokeWidth="0.6" fill="none" />
+          <ellipse key={i} cx="300" cy={y} rx={rx} ry={rx * 0.28} stroke="white" strokeWidth="0.6" fill="none" />
         ) : null;
       })}
       {[0, 30, 60, 90, 120, 150].map((angle) => (
-        <ellipse key={angle} cx="300" cy="300" rx="38" ry="280" stroke="#D4AF36" strokeWidth="0.5" fill="none"
+        <ellipse key={angle} cx="300" cy="300" rx="38" ry="280" stroke="white" strokeWidth="0.5" fill="none"
           transform={`rotate(${angle} 300 300)`} />
       ))}
     </svg>
@@ -186,7 +186,7 @@ function OrbitalRing() {
       }}
     >
       <div
-        className="absolute rounded-full bg-[#D4AF36]"
+        className="absolute rounded-full bg-white"
         style={{
           width: 10,
           height: 10,
@@ -204,11 +204,11 @@ const services = [
   {
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
-        <rect x="6" y="8" width="28" height="24" rx="2" stroke="#D4AF36" strokeWidth="1.5" />
-        <rect x="10" y="4" width="20" height="8" rx="1" stroke="#D4AF36" strokeWidth="1.2" />
-        <line x1="10" y1="18" x2="30" y2="18" stroke="#D4AF36" strokeWidth="1" opacity="0.6" />
-        <line x1="10" y1="22" x2="24" y2="22" stroke="#D4AF36" strokeWidth="1" opacity="0.4" />
-        <line x1="10" y1="26" x2="22" y2="26" stroke="#D4AF36" strokeWidth="1" opacity="0.4" />
+        <rect x="6" y="8" width="28" height="24" rx="2" stroke="white" strokeWidth="1.5" />
+        <rect x="10" y="4" width="20" height="8" rx="1" stroke="white" strokeWidth="1.2" />
+        <line x1="10" y1="18" x2="30" y2="18" stroke="white" strokeWidth="1" opacity="0.6" />
+        <line x1="10" y1="22" x2="24" y2="22" stroke="white" strokeWidth="1" opacity="0.4" />
+        <line x1="10" y1="26" x2="22" y2="26" stroke="white" strokeWidth="1" opacity="0.4" />
         <circle cx="32" cy="30" r="5" stroke="#8099FF" strokeWidth="1.2" />
         <path d="M30 30l1.5 1.5 2.5-2.5" stroke="#8099FF" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
@@ -222,8 +222,8 @@ const services = [
   {
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
-        <path d="M20 6L8 12v10c0 8 5 13 12 16 7-3 12-8 12-16V12L20 6z" stroke="#D4AF36" strokeWidth="1.5" />
-        <path d="M14 20l4 4 8-8" stroke="#D4AF36" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M20 6L8 12v10c0 8 5 13 12 16 7-3 12-8 12-16V12L20 6z" stroke="white" strokeWidth="1.5" />
+        <path d="M14 20l4 4 8-8" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     title: "Immigration Appeals",
@@ -235,10 +235,10 @@ const services = [
   {
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
-        <circle cx="20" cy="20" r="13" stroke="#D4AF36" strokeWidth="1.5" />
-        <circle cx="20" cy="20" r="6" stroke="#D4AF36" strokeWidth="1" opacity="0.5" />
-        <path d="M20 7v4M20 29v4M7 20h4M29 20h4" stroke="#D4AF36" strokeWidth="1.3" strokeLinecap="round" opacity="0.6" />
-        <circle cx="20" cy="20" r="2" fill="#D4AF36" />
+        <circle cx="20" cy="20" r="13" stroke="white" strokeWidth="1.5" />
+        <circle cx="20" cy="20" r="6" stroke="white" strokeWidth="1" opacity="0.5" />
+        <path d="M20 7v4M20 29v4M7 20h4M29 20h4" stroke="white" strokeWidth="1.3" strokeLinecap="round" opacity="0.6" />
+        <circle cx="20" cy="20" r="2" fill="white" />
       </svg>
     ),
     title: "Residency & Investor Visas",
@@ -250,10 +250,10 @@ const services = [
   {
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-full h-full">
-        <rect x="8" y="14" width="24" height="18" rx="1.5" stroke="#D4AF36" strokeWidth="1.5" />
-        <path d="M14 14v-3a6 6 0 0112 0v3" stroke="#D4AF36" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="20" cy="23" r="3" stroke="#D4AF36" strokeWidth="1.2" />
-        <line x1="20" y1="26" x2="20" y2="29" stroke="#D4AF36" strokeWidth="1.2" strokeLinecap="round" />
+        <rect x="8" y="14" width="24" height="18" rx="1.5" stroke="white" strokeWidth="1.5" />
+        <path d="M14 14v-3a6 6 0 0112 0v3" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="20" cy="23" r="3" stroke="white" strokeWidth="1.2" />
+        <line x1="20" y1="26" x2="20" y2="29" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
     ),
     title: "Employer Sponsorship",
@@ -292,9 +292,9 @@ const jurisdictions = [
     flag: "🇦🇪",
     country: "United Arab Emirates",
     city: "Dubai",
-    color: "#D4AF36",
-    border: "border-[#D4AF36]/30",
-    tag: "bg-[#D4AF36]/10 text-[#D4AF36]",
+    color: "white",
+    border: "border-white/30",
+    tag: "bg-white/10 text-white",
     areas: [
       "UAE Golden Visa (10-year)",
       "Investor Residency Visa",
@@ -386,7 +386,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
               <div className="bg-[#001489] px-8 py-7">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-[#D4AF36] text-[9px] tracking-[0.35em] uppercase font-bold mb-1.5">
+                    <p className="text-white text-[9px] tracking-[0.35em] uppercase font-bold mb-1.5">
                       Immigration Law
                     </p>
                     <h3 className="font-heading text-white text-xl font-bold tracking-tight">
@@ -422,8 +422,8 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                       data-testid="modal-success"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="w-9 h-9 bg-[#D4AF36]/15 flex items-center justify-center flex-shrink-0">
-                          <svg className="w-4 h-4 text-[#D4AF36]" fill="none" viewBox="0 0 16 16">
+                        <span className="w-9 h-9 bg-white/15 flex items-center justify-center flex-shrink-0">
+                          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 16 16">
                             <path d="M2 8l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </span>
@@ -434,7 +434,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                       </p>
                       <button
                         onClick={handleClose}
-                        className="mt-2 text-[#001489] text-xs tracking-[0.15em] uppercase font-semibold hover:text-[#D4AF36] transition-colors"
+                        className="mt-2 text-[#001489] text-xs tracking-[0.15em] uppercase font-semibold hover:text-white transition-colors"
                       >
                         Close
                       </button>
@@ -459,7 +459,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                           onChange={handleChange}
                           placeholder="Full Name"
                           data-testid="modal-input-name"
-                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors"
+                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-white/60 transition-colors"
                         />
                         <input
                           type="email"
@@ -469,7 +469,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                           onChange={handleChange}
                           placeholder="Email Address"
                           data-testid="modal-input-email"
-                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors"
+                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-white/60 transition-colors"
                         />
                       </div>
 
@@ -480,7 +480,7 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                           value={form.area}
                           onChange={handleChange}
                           data-testid="modal-select-area"
-                          className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors appearance-none cursor-pointer"
+                          className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3 outline-none focus:border-white/60 transition-colors appearance-none cursor-pointer"
                           style={{ color: form.area ? "#001489" : "rgba(0,20,137,0.3)" }}
                         >
                           <option value="" disabled hidden>Immigration Service</option>
@@ -501,13 +501,13 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
                         onChange={handleChange}
                         placeholder="Briefly describe your immigration matter"
                         data-testid="modal-input-message"
-                        className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors resize-none"
+                        className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-white/60 transition-colors resize-none"
                       />
 
                       <button
                         type="submit"
                         data-testid="modal-submit"
-                        className="w-full bg-[#D4AF36] text-[#001489] text-xs tracking-[0.18em] uppercase font-bold py-4 hover:bg-[#C4A030] transition-colors flex items-center justify-center gap-2.5"
+                        className="w-full bg-white text-[#001489] text-xs tracking-[0.18em] uppercase font-bold py-4 hover:bg-[#0028B8] hover:text-white transition-colors flex items-center justify-center gap-2.5"
                       >
                         <span>Send Enquiry</span>
                         <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
@@ -586,7 +586,7 @@ export default function ImmigrationPage() {
                   transition={{ delay: 0.3 }}
                   className="inline-flex items-center gap-3 mb-8"
                 >
-                  <a href="/#expertise" className="flex items-center gap-2 text-[#D4AF36] text-[10px] tracking-[0.3em] uppercase font-semibold hover:opacity-80 transition-opacity">
+                  <a href="/#expertise" className="flex items-center gap-2 text-white text-[10px] tracking-[0.3em] uppercase font-semibold hover:opacity-80 transition-opacity">
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
                       <path d="M11 6H1M6 1L1 6l5 5" stroke="currentColor" strokeWidth="1.3" />
                     </svg>
@@ -604,7 +604,7 @@ export default function ImmigrationPage() {
                 >
                   Borders are
                   <br />
-                  <span className="text-[#D4AF36]">legal problems</span>
+                  <span className="text-white">legal problems</span>
                   <br />
                   we solve.
                 </motion.h1>
@@ -613,7 +613,7 @@ export default function ImmigrationPage() {
                   initial={{ width: 0 }}
                   animate={{ width: "64px" }}
                   transition={{ delay: 0.8, duration: 0.7 }}
-                  className="h-[2px] bg-[#D4AF36] mb-8"
+                  className="h-[2px] bg-white mb-8"
                 />
 
                 <motion.p
@@ -634,7 +634,7 @@ export default function ImmigrationPage() {
                   <button
                     onClick={openModal}
                     data-testid="immigration-cta-primary"
-                    className="inline-flex items-center gap-3 bg-[#D4AF36] text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-[#C4A030] transition-colors"
+                    className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-[#0028B8] hover:text-white transition-colors"
                   >
                     <span>Book a Consultation</span>
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
@@ -718,7 +718,7 @@ export default function ImmigrationPage() {
               transition={{ duration: 0.6 }}
               className="mb-14"
             >
-              <p className="text-[#D4AF36] text-[11px] tracking-[0.35em] uppercase font-bold mb-4">What We Do</p>
+              <p className="text-white text-[11px] tracking-[0.35em] uppercase font-bold mb-4">What We Do</p>
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight">
                   Immigration services.
@@ -744,7 +744,7 @@ export default function ImmigrationPage() {
                   <div className="w-10 h-10 mb-6">{svc.icon}</div>
 
                   {svc.tag && (
-                    <span className="inline-block text-[9px] tracking-[0.22em] uppercase font-bold bg-[#D4AF36]/10 text-[#D4AF36] px-2 py-1 mb-4 self-start">
+                    <span className="inline-block text-[9px] tracking-[0.22em] uppercase font-bold bg-white/10 text-white px-2 py-1 mb-4 self-start">
                       {svc.tag}
                     </span>
                   )}
@@ -778,14 +778,14 @@ export default function ImmigrationPage() {
               transition={{ duration: 0.6 }}
               className="mb-14"
             >
-              <p className="text-[#D4AF36] text-[11px] tracking-[0.35em] uppercase font-bold mb-4">How We Work</p>
+              <p className="text-white text-[11px] tracking-[0.35em] uppercase font-bold mb-4">How We Work</p>
               <h2 className="font-heading text-white font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight">
                 Your path to residency.
               </h2>
             </motion.div>
 
             <div className="relative">
-              <div className="hidden lg:block absolute top-[52px] left-0 right-0 h-px bg-[#D4AF36]/20" />
+              <div className="hidden lg:block absolute top-[52px] left-0 right-0 h-px bg-white/20" />
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {steps.map((step, i) => (
@@ -798,9 +798,9 @@ export default function ImmigrationPage() {
                     data-testid={`process-step-${i}`}
                     className="relative flex flex-col"
                   >
-                    <div className="relative z-10 w-[104px] h-[104px] border border-[#D4AF36]/40 flex items-center justify-center mb-6 bg-[#001489]">
-                      <div className="absolute inset-[5px] border border-[#D4AF36]/20" />
-                      <span className="font-heading text-[#D4AF36] font-bold text-3xl">{step.num}</span>
+                    <div className="relative z-10 w-[104px] h-[104px] border border-white/40 flex items-center justify-center mb-6 bg-[#001489]">
+                      <div className="absolute inset-[5px] border border-white/20" />
+                      <span className="font-heading text-white font-bold text-3xl">{step.num}</span>
                     </div>
                     <h3 className="font-heading text-white font-bold text-lg mb-3 leading-snug">{step.title}</h3>
                     <p className="text-white/50 text-sm leading-relaxed">{step.desc}</p>
@@ -823,7 +823,7 @@ export default function ImmigrationPage() {
               viewport={{ once: true }}
               className="mb-14"
             >
-              <p className="text-[#D4AF36] text-[11px] tracking-[0.35em] uppercase font-bold mb-4">Where We Practice</p>
+              <p className="text-white text-[11px] tracking-[0.35em] uppercase font-bold mb-4">Where We Practice</p>
               <h2 className="font-heading text-white font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight">
                 Two jurisdictions. One team.
               </h2>
@@ -892,7 +892,7 @@ export default function ImmigrationPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <p className="text-[#D4AF36] text-[11px] tracking-[0.35em] uppercase font-bold mb-5">Our Commitment</p>
+                <p className="text-white text-[11px] tracking-[0.35em] uppercase font-bold mb-5">Our Commitment</p>
                 <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight mb-6">
                   Immigration handled with the same rigour as a corporate deal.
                 </h2>
@@ -936,7 +936,7 @@ export default function ImmigrationPage() {
                     data-testid={`commitment-${i}`}
                     className="bg-[#F5F7FF] p-6 border border-[#E8EDF8]"
                   >
-                    <div className="w-2 h-2 bg-[#D4AF36] mb-4" />
+                    <div className="w-2 h-2 bg-white mb-4" />
                     <h4 className="font-heading text-[#001489] font-bold text-base mb-2">{item.title}</h4>
                     <p className="text-[#4A5568] text-sm leading-relaxed">{item.body}</p>
                   </motion.div>
@@ -962,7 +962,7 @@ export default function ImmigrationPage() {
           <div className="max-w-[1400px] mx-auto relative z-10">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
               <div>
-                <p className="text-[#D4AF36] text-[10px] tracking-[0.3em] uppercase font-medium mb-3">Begin Today</p>
+                <p className="text-white text-[10px] tracking-[0.3em] uppercase font-medium mb-3">Begin Today</p>
                 <h3 className="font-heading text-white font-bold text-[clamp(1.6rem,3vw,2.4rem)] tracking-tight leading-snug max-w-lg">
                   Ready to start your immigration matter?
                 </h3>
@@ -974,7 +974,7 @@ export default function ImmigrationPage() {
                 <button
                   onClick={openModal}
                   data-testid="immigration-final-cta"
-                  className="inline-flex items-center gap-3 bg-[#D4AF36] text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-[#C4A030] transition-colors"
+                  className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-[#0028B8] hover:text-white transition-colors"
                 >
                   <span>Book a Consultation</span>
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">

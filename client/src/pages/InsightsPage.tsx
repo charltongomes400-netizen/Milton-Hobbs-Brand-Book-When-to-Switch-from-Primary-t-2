@@ -119,10 +119,7 @@ function InsightsInner() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#000A4F]/60 via-[#000A4F]/10 to-transparent" />
                 {/* Category badge over image */}
                 <div className="absolute top-6 left-6">
-                  <span
-                    className="text-[9px] font-bold tracking-[0.25em] uppercase px-3 py-1.5 bg-white"
-                    style={{ color: featured.categoryColor }}
-                  >
+                  <span className="text-[9px] font-bold tracking-[0.25em] uppercase px-3 py-1.5 bg-white text-[#001489]">
                     {featured.category}
                   </span>
                 </div>

@@ -128,13 +128,13 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
           </button>
 
           <div>
-            <p className="text-[#D4AF36] text-[10px] tracking-[0.35em] uppercase font-bold mb-3">Open Position</p>
+            <p className="text-white/60 text-[10px] tracking-[0.35em] uppercase font-bold mb-3">Open Position</p>
             <h2 className="font-heading text-white text-2xl xl:text-3xl font-bold leading-tight tracking-tight mb-4">
               {job.title}
             </h2>
             <div className="flex flex-wrap gap-2 mb-6">
               <span className="flex items-center gap-1.5 text-white/60 text-xs tracking-wide">
-                <svg className="w-3.5 h-3.5 text-[#D4AF36]" fill="none" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 text-white/60" fill="none" viewBox="0 0 24 24">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" strokeWidth="1.4" />
                   <circle cx="12" cy="9" r="2.5" stroke="currentColor" strokeWidth="1.3" />
                 </svg>
@@ -146,22 +146,22 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
               <span className="text-white/60 text-xs tracking-wide">{job.level}</span>
             </div>
             <div className="border-t border-white/10 pt-5">
-              <p className="text-[10px] text-[#D4AF36] tracking-[0.3em] uppercase font-bold mb-3">Department</p>
+              <p className="text-[10px] text-white/60 tracking-[0.3em] uppercase font-bold mb-3">Department</p>
               <p className="text-white/75 text-sm font-medium">{job.department}</p>
             </div>
           </div>
 
           <div className="border-t border-white/10 pt-5 flex-1 overflow-y-auto">
-            <p className="text-[10px] text-[#D4AF36] tracking-[0.3em] uppercase font-bold mb-3">About the Role</p>
+            <p className="text-[10px] text-white/60 tracking-[0.3em] uppercase font-bold mb-3">About the Role</p>
             <div className="text-white/65 text-sm leading-relaxed whitespace-pre-line">
               {job.description}
             </div>
 
-            <p className="text-[10px] text-[#D4AF36] tracking-[0.3em] uppercase font-bold mt-6 mb-3">Requirements</p>
+            <p className="text-[10px] text-white/60 tracking-[0.3em] uppercase font-bold mt-6 mb-3">Requirements</p>
             <div className="text-white/65 text-sm leading-relaxed">
               {job.requirements.split("\n").filter(Boolean).map((req, i) => (
                 <div key={i} className="flex gap-2.5 mb-2">
-                  <span className="text-[#D4AF36] mt-[3px] flex-shrink-0">—</span>
+                  <span className="text-white/60 mt-[3px] flex-shrink-0">—</span>
                   <span>{req.replace(/^[-–—]\s*/, "")}</span>
                 </div>
               ))}
@@ -173,8 +173,8 @@ function ApplyModal({ job, onClose }: { job: Job; onClose: () => void }) {
         <div className="flex-1 p-10 flex flex-col">
           {submitted ? (
             <div className="flex-1 flex flex-col items-center justify-center text-center gap-5">
-              <div className="w-16 h-16 border-2 border-[#D4AF36] flex items-center justify-center">
-                <svg className="w-8 h-8 text-[#D4AF36]" fill="none" viewBox="0 0 24 24">
+              <div className="w-16 h-16 border-2 border-white/60 flex items-center justify-center">
+                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24">
                   <path d="M5 12l5 5L20 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
@@ -405,8 +405,8 @@ function SpontaneousApplyModal({ onClose }: { onClose: () => void }) {
       >
         {submitted ? (
           <div className="flex flex-col items-center justify-center text-center gap-5 p-14">
-            <div className="w-16 h-16 border-2 border-[#D4AF36] flex items-center justify-center">
-              <svg className="w-8 h-8 text-[#D4AF36]" fill="none" viewBox="0 0 24 24">
+            <div className="w-16 h-16 border-2 border-[#001489] flex items-center justify-center">
+              <svg className="w-8 h-8 text-[#001489]" fill="none" viewBox="0 0 24 24">
                 <path d="M5 12l5 5L20 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
@@ -428,7 +428,7 @@ function SpontaneousApplyModal({ onClose }: { onClose: () => void }) {
           <div className="p-10">
             <div className="flex items-start justify-between mb-7">
               <div>
-                <p className="text-[#D4AF36] text-[10px] tracking-[0.35em] uppercase font-bold mb-1.5">General Application</p>
+                <p className="text-[#001489] text-[10px] tracking-[0.35em] uppercase font-bold mb-1.5">General Application</p>
                 <h3 className="font-heading text-[#000A4F] text-2xl font-bold tracking-tight">Send Your Profile</h3>
                 <p className="text-gray-500 text-sm mt-1.5">All fields marked with * are required.</p>
               </div>

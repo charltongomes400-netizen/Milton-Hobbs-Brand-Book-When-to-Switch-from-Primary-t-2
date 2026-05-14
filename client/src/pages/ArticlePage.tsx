@@ -49,7 +49,7 @@ export default function ArticlePage() {
         <div className="min-h-screen bg-[#001489] flex items-center justify-center">
           <div className="text-center">
             <p className="text-white/50 text-sm mb-4">Article not found</p>
-            <a href="/" className="text-[#D4AF36] text-sm hover:underline">← Back to home</a>
+            <a href="/" className="text-white text-sm hover:underline">← Back to home</a>
           </div>
         </div>
       </LanguageProvider>
@@ -119,7 +119,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
               <div className="bg-[#001489] px-8 py-7">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-[#D4AF36] text-[9px] tracking-[0.3em] uppercase font-bold mb-1.5">
+                    <p className="text-white/60 text-[9px] tracking-[0.3em] uppercase font-bold mb-1.5">
                       Milton Hobbs
                     </p>
                     <h3 className="font-heading text-white text-lg font-bold tracking-tight">
@@ -155,8 +155,8 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                       data-testid="modal-success"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="w-8 h-8 bg-[#D4AF36]/15 flex items-center justify-center flex-shrink-0">
-                          <svg className="w-4 h-4 text-[#D4AF36]" fill="none" viewBox="0 0 16 16">
+                        <span className="w-8 h-8 bg-[#001489]/10 flex items-center justify-center flex-shrink-0">
+                          <svg className="w-4 h-4 text-[#001489]" fill="none" viewBox="0 0 16 16">
                             <path d="M2 8l4 4 8-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </span>
@@ -167,7 +167,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                       </p>
                       <button
                         onClick={handleClose}
-                        className="mt-2 text-[#001489] text-xs tracking-[0.15em] uppercase font-semibold hover:text-[#D4AF36] transition-colors"
+                        className="mt-2 text-[#001489] text-xs tracking-[0.15em] uppercase font-semibold hover:text-[#0028B8] transition-colors"
                       >
                         Close
                       </button>
@@ -192,7 +192,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                           onChange={handleChange}
                           placeholder="Full Name"
                           data-testid="modal-input-name"
-                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors"
+                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#001489]/60 transition-colors"
                         />
                         <input
                           type="email"
@@ -202,7 +202,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                           onChange={handleChange}
                           placeholder="Email Address"
                           data-testid="modal-input-email"
-                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors"
+                          className="col-span-2 sm:col-span-1 bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#001489]/60 transition-colors"
                         />
                       </div>
 
@@ -213,7 +213,7 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                           value={form.area}
                           onChange={handleChange}
                           data-testid="modal-select-area"
-                          className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors appearance-none cursor-pointer"
+                          className="w-full bg-[#001489]/[0.03] border border-[#001489]/15 text-sm px-4 py-3 outline-none focus:border-[#001489]/60 transition-colors appearance-none cursor-pointer"
                           style={{ color: form.area ? "#001489" : "rgba(0,20,137,0.3)" }}
                         >
                           <option value="" disabled hidden>Practice Area</option>
@@ -234,13 +234,13 @@ function ContactModal({ open, onClose, articleTitle }: { open: boolean; onClose:
                         onChange={handleChange}
                         placeholder="Briefly describe your matter"
                         data-testid="modal-input-message"
-                        className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#D4AF36]/60 transition-colors resize-none"
+                        className="bg-[#001489]/[0.03] border border-[#001489]/15 text-[#001489] placeholder-[#001489]/30 text-sm px-4 py-3 outline-none focus:border-[#001489]/60 transition-colors resize-none"
                       />
 
                       <button
                         type="submit"
                         data-testid="modal-submit"
-                        className="w-full bg-[#D4AF36] text-[#001489] text-xs tracking-[0.18em] uppercase font-bold py-4 hover:bg-[#C4A030] transition-colors flex items-center justify-center gap-2.5"
+                        className="w-full bg-[#001489] text-white text-xs tracking-[0.18em] uppercase font-bold py-4 hover:bg-[#0028B8] transition-colors flex items-center justify-center gap-2.5"
                       >
                         <span>Send Message</span>
                         <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
@@ -547,7 +547,7 @@ function RelatedArticles({ slug }: { slug: string }) {
                 <h4 className="font-heading text-[#001489] text-sm font-bold leading-snug group-hover:text-[#0028B8] transition-colors">{a.title}</h4>
                 <div className="mt-auto pt-3 border-t border-[#F0F4FB] flex items-center justify-between">
                   <span className="text-[#9CA3AF] text-[11px]">{a.date}</span>
-                  <div className="flex items-center gap-1.5 text-[#001489] group-hover:text-[#D4AF36] transition-colors">
+                  <div className="flex items-center gap-1.5 text-[#001489] group-hover:text-[#0028B8] transition-colors">
                     <span className="text-[11px] font-medium">Read</span>
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
                       <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
