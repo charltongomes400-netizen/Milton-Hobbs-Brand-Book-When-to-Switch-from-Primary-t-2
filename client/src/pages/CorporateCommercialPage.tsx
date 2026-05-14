@@ -677,7 +677,7 @@ function CorporateCommercialInner() {
                   </svg>
                   {tx.breadcrumb}
                 </a>
-                <span className="text-white/20">·</span>
+                <span className="text-white/20">-</span>
                 <span className="text-white/40 text-[16px] tracking-[0.3em] uppercase font-medium">Corporate & Commercial</span>
               </motion.div>
 
