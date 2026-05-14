@@ -950,7 +950,7 @@ function CorporateCommercialInner() {
               <h2 className="font-heading text-white font-bold text-[clamp(1.6rem,3vw,2.4rem)] tracking-tight leading-tight mb-3">
                 {tx.bannerH2}
               </h2>
-              <p className="text-white/45 text-sm leading-relaxed max-w-[44ch]">{tx.bannerSub}</p>
+              <p className="text-white text-sm leading-relaxed max-w-[44ch]">{tx.bannerSub}</p>
             </motion.div>
 
             <motion.div
