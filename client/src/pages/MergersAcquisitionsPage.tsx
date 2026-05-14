@@ -71,178 +71,231 @@ const PAGE_TEXT = {
   },
 };
 
-/* ─── 3D M&A ILLUSTRATION ───────────────────────────────────────────────────── */
+/* ─── M&A DEAL-CONVERGENCE ILLUSTRATION ────────────────────────────────────── */
 
-const LIT_WINDOWS = new Set([2, 5, 8, 11, 13, 16, 20, 23, 25, 28, 31, 34, 38, 41, 44, 47, 50]);
-
-function WindowCell({ index }: { index: number }) {
-  const isLit = LIT_WINDOWS.has(index);
-  const delay = (index * 0.41) % 7;
+/* Animated dot that travels along the SVG path — native SMIL, no motion.circle */
+function FlowDot({ delay, dur = 3.6 }: { delay: number; dur?: number }) {
   return (
-    <motion.div
-      animate={isLit
-        ? { opacity: [0.15, 0.9, 0.45, 0.9, 0.15], boxShadow: ["0 0 0px transparent", "0 0 8px rgba(128,153,255,0.8)", "0 0 4px rgba(128,153,255,0.4)", "0 0 8px rgba(128,153,255,0.8)", "0 0 0px transparent"] }
-        : { opacity: [0.06, 0.18, 0.06] }}
-      transition={{ duration: isLit ? 6 : 10, repeat: Infinity, delay, ease: "easeInOut" }}
-      style={{ height: 9, background: isLit ? "#8099FF" : "rgba(128,153,255,0.55)" }}
-    />
+    <circle r="3.5" fill="#8099FF">
+      <animateMotion
+        dur={`${dur}s`}
+        begin={`${delay}s`}
+        repeatCount="indefinite"
+        path="M 0 0 C 80 -70, 220 -70, 300 0"
+      />
+      <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.08;0.85;1"
+        dur={`${dur}s`} begin={`${delay}s`} repeatCount="indefinite" />
+    </circle>
   );
 }
 
-function MA3D() {
+function FlowDotReverse({ delay, dur = 3.6 }: { delay: number; dur?: number }) {
   return (
-    <div className="relative w-full h-full flex items-center justify-center" style={{ perspective: "1400px" }}>
-
-      {/* Atmosphere glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 70% 70% at 58% 50%, rgba(255,255,255,0.06) 0%, transparent 65%)" }}
+    <circle r="3.5" fill="#8099FF">
+      <animateMotion
+        dur={`${dur}s`}
+        begin={`${delay}s`}
+        repeatCount="indefinite"
+        path="M 300 0 C 220 70, 80 70, 0 0"
       />
+      <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.08;0.85;1"
+        dur={`${dur}s`} begin={`${delay}s`} repeatCount="indefinite" />
+    </circle>
+  );
+}
 
-      {/* SVG connecting lines */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ opacity: 0.35 }}>
-        <line x1="78%" y1="18%" x2="60%" y2="36%" stroke="rgba(255,255,255,0.5)" strokeWidth="0.8" strokeDasharray="4 6" />
-        <line x1="22%" y1="82%" x2="42%" y2="64%" stroke="rgba(255,255,255,0.5)" strokeWidth="0.8" strokeDasharray="4 6" />
-        <line x1="8%"  y1="40%" x2="36%" y2="52%" stroke="rgba(255,255,255,0.4)" strokeWidth="0.6" strokeDasharray="3 7" />
-        <line x1="92%" y1="58%" x2="65%" y2="50%" stroke="rgba(255,255,255,0.4)" strokeWidth="0.6" strokeDasharray="3 7" />
+function MADealScene() {
+  return (
+    <div className="relative w-full h-full flex items-center justify-center select-none">
+
+      {/* ── Soft glow backdrop ── */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(ellipse 65% 55% at 50% 46%, rgba(128,153,255,0.09) 0%, transparent 70%)",
+      }} />
+
+      {/* ── ENTITY BLOCKS (BUYER left, TARGET right) ── */}
+
+      {/* BUYER */}
+      <motion.div
+        animate={{ y: [-5, 5, -5] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        style={{ position: "absolute", left: "3%", top: "22%", zIndex: 20, width: 148 }}
+      >
+        <div style={{
+          background: "linear-gradient(145deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.06) 100%)",
+          backgroundColor: "#0A32C8",
+          border: "1px solid rgba(255,255,255,0.28)",
+          boxShadow: "0 16px 56px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.22)",
+          padding: "20px 18px 16px",
+        }}>
+          {/* Mini bar chart representing buyer metrics */}
+          <div style={{ display: "flex", alignItems: "flex-end", gap: 4, height: 36, marginBottom: 14 }}>
+            {[0.5, 0.7, 0.45, 0.9, 0.65, 0.8].map((h, i) => (
+              <motion.div
+                key={i}
+                animate={{ height: [`${h * 36}px`, `${(h * 0.85) * 36}px`, `${h * 36}px`] }}
+                transition={{ duration: 3 + i * 0.4, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
+                style={{ flex: 1, background: i === 3 ? "#8099FF" : "rgba(255,255,255,0.28)" }}
+              />
+            ))}
+          </div>
+          <div style={{ height: 1, background: "rgba(255,255,255,0.15)", marginBottom: 10 }} />
+          <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 7, fontWeight: 700, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 4 }}>Acquirer</p>
+          <p style={{ color: "rgba(255,255,255,0.95)", fontSize: 10, fontWeight: 800, letterSpacing: "0.22em", textTransform: "uppercase" }}>BUYER</p>
+        </div>
+        {/* Connector dot at right edge */}
+        <div style={{ position: "absolute", right: -6, top: "50%", marginTop: -6, width: 12, height: 12, borderRadius: "50%", background: "#8099FF", border: "2px solid rgba(255,255,255,0.5)", boxShadow: "0 0 10px 3px rgba(128,153,255,0.7)" }} />
+      </motion.div>
+
+      {/* TARGET */}
+      <motion.div
+        animate={{ y: [5, -5, 5] }}
+        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+        style={{ position: "absolute", right: "3%", top: "22%", zIndex: 20, width: 148 }}
+      >
+        <div style={{
+          background: "linear-gradient(145deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)",
+          backgroundColor: "#000A4F",
+          border: "1px solid rgba(255,255,255,0.18)",
+          boxShadow: "0 16px 56px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.14)",
+          padding: "20px 18px 16px",
+        }}>
+          {/* Mini pie / ring representing target valuation */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 36, marginBottom: 14 }}>
+            <svg viewBox="0 0 40 40" style={{ width: 36, height: 36 }}>
+              <circle cx="20" cy="20" r="14" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="6" />
+              <motion.circle
+                cx="20" cy="20" r="14" fill="none" stroke="#8099FF" strokeWidth="6"
+                strokeDasharray="52 36"
+                strokeLinecap="butt"
+                style={{ transformOrigin: "20px 20px", rotate: "-90deg" }}
+                animate={{ strokeDasharray: ["52 36", "64 24", "52 36"] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <circle cx="20" cy="20" r="7" fill="rgba(255,255,255,0.06)" />
+            </svg>
+          </div>
+          <div style={{ height: 1, background: "rgba(255,255,255,0.10)", marginBottom: 10 }} />
+          <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 7, fontWeight: 700, letterSpacing: "0.32em", textTransform: "uppercase", marginBottom: 4 }}>Acquisition</p>
+          <p style={{ color: "rgba(255,255,255,0.90)", fontSize: 10, fontWeight: 800, letterSpacing: "0.22em", textTransform: "uppercase" }}>TARGET</p>
+        </div>
+        {/* Connector dot at left edge */}
+        <div style={{ position: "absolute", left: -6, top: "50%", marginTop: -6, width: 12, height: 12, borderRadius: "50%", background: "#8099FF", border: "2px solid rgba(255,255,255,0.5)", boxShadow: "0 0 10px 3px rgba(128,153,255,0.7)" }} />
+      </motion.div>
+
+      {/* ── ANIMATED FLOW ARCS (SVG) ── */}
+      <svg
+        className="absolute"
+        style={{ width: "78%", left: "11%", top: "18%", height: 160, overflow: "visible", zIndex: 10 }}
+        viewBox="0 0 300 100"
+        fill="none"
+      >
+        {/* Upper arc */}
+        <path d="M 0 50 C 80 -30, 220 -30, 300 50" stroke="rgba(128,153,255,0.22)" strokeWidth="1" />
+        {/* Lower arc */}
+        <path d="M 0 50 C 80 130, 220 130, 300 50" stroke="rgba(128,153,255,0.15)" strokeWidth="1" />
+        {/* Centre straight */}
+        <path d="M 0 50 L 300 50" stroke="rgba(255,255,255,0.08)" strokeWidth="0.8" strokeDasharray="4 8" />
+
+        {/* Flow dots — upper arc left→right */}
+        <FlowDot delay={0}    dur={3.2} />
+        <FlowDot delay={1.1}  dur={3.2} />
+        <FlowDot delay={2.2}  dur={3.2} />
+        {/* Flow dots — lower arc right→left */}
+        <FlowDotReverse delay={0.6}  dur={3.8} />
+        <FlowDotReverse delay={1.9}  dur={3.8} />
+
+        {/* Centre convergence node — SMIL only, no motion.circle */}
+        <circle cx="150" cy="50" fill="#001489" stroke="#8099FF" strokeWidth="1.5">
+          <animate attributeName="r" values="7;9;7" dur="2.8s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.9;1;0.9" dur="2.8s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="150" cy="50" fill="none" stroke="rgba(128,153,255,0.35)" strokeWidth="0.8">
+          <animate attributeName="r" values="14;22;14" dur="2.8s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.5;0;0.5" dur="2.8s" repeatCount="indefinite" />
+        </circle>
       </svg>
 
-      {/* Outer orbital ring */}
-      <motion.div
-        animate={{ rotateZ: [0, 360] }}
-        transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
-        className="absolute pointer-events-none"
-        style={{ width: 480, height: 140, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.18)", transform: "rotateX(72deg)", transformStyle: "preserve-3d", top: "50%", left: "50%", marginTop: -70, marginLeft: -240 }}
-      >
-        <div style={{ position: "absolute", width: 10, height: 10, borderRadius: "50%", background: "white", top: -5, left: "50%", marginLeft: -5, boxShadow: "0 0 14px 5px rgba(255,255,255,0.7)" }} />
-      </motion.div>
-
-      {/* Inner counter-rotating ring */}
-      <motion.div
-        animate={{ rotateZ: [360, 0] }}
-        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-        className="absolute pointer-events-none"
-        style={{ width: 360, height: 96, borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.12)", transform: "rotateX(68deg)", transformStyle: "preserve-3d", top: "50%", left: "50%", marginTop: -48, marginLeft: -180 }}
-      >
-        <div style={{ position: "absolute", width: 7, height: 7, borderRadius: "50%", background: "#8099FF", top: -3.5, left: "50%", marginLeft: -3.5, boxShadow: "0 0 10px 3px rgba(128,153,255,0.8)" }} />
-      </motion.div>
-
-      {/* ── MAIN BUILDING TOWER ── */}
-      <motion.div
-        animate={{ rotateY: [-16, -8, -16], rotateX: [5, 2, 5] }}
-        transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
-        style={{ transformStyle: "preserve-3d", position: "relative", width: 180, height: 330, zIndex: 10 }}
-      >
-        {/* Front face */}
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(165deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0.04) 100%)",
-          backgroundColor: "#0A32C8",
-          boxShadow: "0 24px 80px rgba(0,0,0,0.45), 20px 0 48px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.28), inset 1px 0 0 rgba(255,255,255,0.12)",
-          border: "1px solid rgba(255,255,255,0.30)",
-        }}>
-          <div style={{ position: "absolute", inset: 8, border: "1px solid rgba(255,255,255,0.22)", pointerEvents: "none" }} />
-          <div style={{ padding: "16px 12px 0", display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "5px 7px" }}>
-            {Array.from({ length: 55 }).map((_, i) => <WindowCell key={i} index={i} />)}
-          </div>
-          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "10px 14px", borderTop: "1px solid rgba(255,255,255,0.20)", background: "rgba(255,255,255,0.10)" }}>
-            <p style={{ color: "rgba(255,255,255,0.95)", fontSize: 7, fontWeight: 700, letterSpacing: "0.45em", textTransform: "uppercase", marginBottom: 2 }}>MILTON HOBBS</p>
-            <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 6, fontWeight: 600, letterSpacing: "0.32em", textTransform: "uppercase" }}>M&A LAW</p>
-          </div>
+      {/* ── DEAL STAGE TIMELINE (horizontal strip, lower section) ── */}
+      <div style={{ position: "absolute", bottom: "10%", left: "5%", right: "5%", zIndex: 20 }}>
+        {/* Connector line */}
+        <div style={{ position: "relative", height: 1, background: "rgba(255,255,255,0.08)", marginBottom: 16 }}>
+          <motion.div
+            style={{ position: "absolute", top: 0, left: 0, height: "100%", background: "linear-gradient(to right, transparent, #8099FF, transparent)" }}
+            animate={{ left: ["-30%", "110%"] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-[30%]"
+          />
         </div>
-
-        {/* Right side face */}
-        <div style={{
-          position: "absolute", top: 0, left: "100%", width: 56, height: 330,
-          background: "linear-gradient(to right, rgba(0,0,0,0.55), rgba(0,0,0,0.35))",
-          backgroundColor: "#00072A",
-          transform: "rotateY(90deg)", transformOrigin: "left center",
-          border: "1px solid rgba(255,255,255,0.06)",
-        }} />
-
-        {/* Top face — roof */}
-        <div style={{
-          position: "absolute", top: -38, left: 0, width: 180, height: 38,
-          background: "linear-gradient(to bottom, rgba(255,255,255,0.18), rgba(255,255,255,0.06))",
-          backgroundColor: "#0A32C8",
-          transform: "rotateX(90deg)", transformOrigin: "bottom center",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          border: "1px solid rgba(255,255,255,0.22)",
-        }}>
-          <span style={{ color: "rgba(255,255,255,0.95)", fontSize: 12, fontWeight: 700, letterSpacing: "0.28em", fontFamily: "'Satoshi', sans-serif" }}>MH</span>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          {[
+            { stage: "01", label: "Origination" },
+            { stage: "02", label: "Due Diligence" },
+            { stage: "03", label: "SPA Signed" },
+            { stage: "04", label: "Closing" },
+          ].map((s, i) => (
+            <motion.div
+              key={s.stage}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 + i * 0.15, duration: 0.5 }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}
+            >
+              <motion.div
+                style={{ width: 6, height: 6, background: "#8099FF", borderRadius: "50%", marginBottom: 6 }}
+                animate={{ boxShadow: ["0 0 0px rgba(128,153,255,0)", "0 0 8px rgba(128,153,255,0.9)", "0 0 0px rgba(128,153,255,0)"] }}
+                transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}
+              />
+              <p style={{ color: "rgba(128,153,255,0.55)", fontSize: 7, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase" }}>{s.stage}</p>
+              <p style={{ color: "rgba(255,255,255,0.50)", fontSize: 8, fontWeight: 600, letterSpacing: "0.12em", whiteSpace: "nowrap" }}>{s.label}</p>
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
+      </div>
 
-      {/* ── FLOATING CHIPS — M&A themed ── */}
+      {/* ── FLOATING DEAL-TERM CHIPS ── */}
 
-      {/* DUBAI — top-right */}
+      {/* DUE DILIGENCE — upper-left float */}
       <motion.div
-        animate={{ y: [-9, 9, -9] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-        style={{ position: "absolute", top: "4%", right: "1%", zIndex: 20 }}
-      >
-        <div style={{ width: 112, height: 112, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 10px 40px rgba(0,0,0,0.25)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
-          <p style={{ color: "#001489", fontSize: 9, fontWeight: 800, letterSpacing: "0.40em", textTransform: "uppercase" }}>DUBAI</p>
-          <div style={{ width: 44, height: 1, background: "#001489", opacity: 0.25 }} />
-          <p style={{ color: "#001489", fontSize: 8, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", opacity: 0.65 }}>U.A.E.</p>
-          <p style={{ color: "#001489", fontSize: 7, letterSpacing: "0.15em", marginTop: 1, opacity: 0.40 }}>Gulf Region</p>
-        </div>
-      </motion.div>
-
-      {/* PARIS — bottom-left */}
-      <motion.div
-        animate={{ y: [9, -9, 9] }}
-        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
-        style={{ position: "absolute", bottom: "5%", left: "1%", zIndex: 20 }}
-      >
-        <div style={{ width: 96, height: 96, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 8px 32px rgba(0,0,0,0.20)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
-          <p style={{ color: "#001489", fontSize: 8, fontWeight: 800, letterSpacing: "0.38em", textTransform: "uppercase" }}>PARIS</p>
-          <div style={{ width: 34, height: 1, background: "#001489", opacity: 0.22 }} />
-          <p style={{ color: "#001489", fontSize: 7, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", opacity: 0.55 }}>France</p>
-        </div>
-      </motion.div>
-
-      {/* DUE DILIGENCE — large chip left-center */}
-      <motion.div
-        animate={{ opacity: [0.88, 1, 0.88], y: [-5, 5, -5] }}
-        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
-        style={{ position: "absolute", top: "30%", left: "0%", transform: "rotate(-11deg)", zIndex: 20 }}
-      >
-        <div style={{ padding: "11px 18px", border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 4px 24px rgba(0,0,0,0.20)" }}>
-          <p style={{ color: "#001489", fontSize: 9, fontWeight: 800, letterSpacing: "0.30em", textTransform: "uppercase" }}>Due Diligence</p>
-        </div>
-      </motion.div>
-
-      {/* CLOSING — chip upper-left */}
-      <motion.div
-        animate={{ opacity: [0.80, 1, 0.80], y: [4, -4, 4] }}
+        animate={{ opacity: [0.80, 1, 0.80], y: [-4, 4, -4] }}
         transition={{ duration: 5.0, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
-        style={{ position: "absolute", top: "14%", left: "7%", transform: "rotate(-7deg)", zIndex: 20 }}
+        style={{ position: "absolute", top: "6%", left: "10%", transform: "rotate(-5deg)", zIndex: 30 }}
       >
-        <div style={{ padding: "9px 16px", border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
-          <p style={{ color: "#001489", fontSize: 9, fontWeight: 700, letterSpacing: "0.30em", textTransform: "uppercase" }}>Closing</p>
+        <div style={{ padding: "9px 16px", border: "1.5px solid rgba(255,255,255,0.85)", background: "white", boxShadow: "0 4px 20px rgba(0,0,0,0.22)" }}>
+          <p style={{ color: "#001489", fontSize: 8, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase" }}>Due Diligence</p>
         </div>
       </motion.div>
 
-      {/* VALUATION — chip bottom-right */}
+      {/* SPA — upper-right float */}
       <motion.div
-        animate={{ opacity: [0.85, 1, 0.85] }}
-        transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 1.3 }}
-        style={{ position: "absolute", bottom: "26%", right: "2%", transform: "rotate(9deg)", zIndex: 20 }}
+        animate={{ opacity: [0.85, 1, 0.85], y: [5, -5, 5] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
+        style={{ position: "absolute", top: "6%", right: "8%", transform: "rotate(6deg)", zIndex: 30 }}
       >
-        <div style={{ padding: "11px 18px", border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
-          <p style={{ color: "#001489", fontSize: 10, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase" }}>Valuation</p>
+        <div style={{ padding: "12px 20px", border: "1.5px solid rgba(255,255,255,0.85)", background: "white", boxShadow: "0 4px 20px rgba(0,0,0,0.22)" }}>
+          <p style={{ color: "#001489", fontSize: 13, fontWeight: 800, letterSpacing: "0.35em", textTransform: "uppercase" }}>SPA</p>
         </div>
       </motion.div>
 
-      {/* SPA — chip right-center */}
+      {/* VALUATION — mid-right */}
       <motion.div
-        animate={{ opacity: [0.80, 1, 0.80] }}
-        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 2.1 }}
-        style={{ position: "absolute", top: "44%", right: "1%", transform: "rotate(7deg)", zIndex: 20 }}
+        animate={{ opacity: [0.78, 1, 0.78] }}
+        transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 2.0 }}
+        style={{ position: "absolute", top: "50%", right: "0%", transform: "translateY(-50%) rotate(8deg)", zIndex: 30 }}
       >
-        <div style={{ padding: "13px 22px", border: "1.5px solid rgba(255,255,255,0.90)", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
-          <p style={{ color: "#001489", fontSize: 15, fontWeight: 800, letterSpacing: "0.38em", textTransform: "uppercase" }}>SPA</p>
+        <div style={{ padding: "10px 16px", border: "1.5px solid rgba(255,255,255,0.85)", background: "white", boxShadow: "0 4px 16px rgba(0,0,0,0.18)" }}>
+          <p style={{ color: "#001489", fontSize: 9, fontWeight: 700, letterSpacing: "0.26em", textTransform: "uppercase" }}>Valuation</p>
+        </div>
+      </motion.div>
+
+      {/* REGULATORY — mid-left */}
+      <motion.div
+        animate={{ opacity: [0.78, 1, 0.78], y: [-3, 3, -3] }}
+        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        style={{ position: "absolute", top: "52%", left: "0%", transform: "rotate(-8deg)", zIndex: 30 }}
+      >
+        <div style={{ padding: "9px 14px", border: "1.5px solid rgba(255,255,255,0.85)", background: "white", boxShadow: "0 4px 16px rgba(0,0,0,0.18)" }}>
+          <p style={{ color: "#001489", fontSize: 8, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" }}>Regulatory</p>
         </div>
       </motion.div>
     </div>
@@ -527,7 +580,7 @@ function MergersAcquisitionsInner() {
               transition={{ duration: 1.1, delay: 0.5 }}
               className="relative hidden lg:flex items-center justify-center h-[620px]"
             >
-              <MA3D />
+              <MADealScene />
             </motion.div>
           </div>
         </div>
