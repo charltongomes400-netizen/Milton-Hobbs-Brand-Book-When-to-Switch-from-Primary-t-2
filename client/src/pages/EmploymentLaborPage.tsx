@@ -280,7 +280,7 @@ function EmploymentLaborInner() {
       <section id="services" data-testid="employment-services" className="bg-[#001489] px-8 py-24">
         <div className="max-w-[1400px] mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-14">
-            <p className="text-[#8099FF] text-[11px] tracking-[0.35em] uppercase font-bold mb-4">{tx.servicesEyebrow}</p>
+            <p className="text-[#8099FF] tracking-[0.35em] uppercase font-bold mb-4 text-[16px]">{tx.servicesEyebrow}</p>
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
               <h2 className="font-heading text-white font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight">{tx.servicesH2}</h2>
               <p className="text-white/40 text-sm max-w-xs leading-relaxed">{tx.servicesSub}</p>
