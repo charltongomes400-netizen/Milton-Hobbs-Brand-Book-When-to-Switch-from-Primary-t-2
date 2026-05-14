@@ -25,6 +25,7 @@ import HomeClaret from "@/pages/HomeClaret";
 import ArticlePage from "@/pages/ArticlePage";
 import ImmigrationPage from "@/pages/ImmigrationPage";
 import CorporateCommercialPage from "@/pages/CorporateCommercialPage";
+import MergersAcquisitionsPage from "@/pages/MergersAcquisitionsPage";
 import OurFirmPage from "@/pages/OurFirmPage";
 import CareersPage from "@/pages/CareersPage";
 
@@ -54,6 +55,7 @@ function Router() {
       <Route path="/insights/:slug" component={ArticlePage} />
       <Route path="/expertise/immigration" component={ImmigrationPage} />
       <Route path="/expertise/corporate-commercial" component={CorporateCommercialPage} />
+      <Route path="/expertise/mergers-acquisitions" component={MergersAcquisitionsPage} />
       <Route component={NotFound} />
     </Switch>
   );

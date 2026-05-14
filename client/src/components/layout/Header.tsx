@@ -7,7 +7,7 @@ import miltonHobbsLogo from "@assets/Milton_hobbs_logo_1775554832004.png";
 const PRACTICE_AREAS = [
   { num: "01", title: "Corporate & Commercial",     href: "/expertise/corporate-commercial" },
   { num: "02", title: "Tax & Compliance",           href: null },
-  { num: "03", title: "Mergers & Acquisitions",     href: null },
+  { num: "03", title: "Mergers & Acquisitions",     href: "/expertise/mergers-acquisitions" },
   { num: "04", title: "Startups & Venture Capital", href: null },
   { num: "05", title: "IP & Technology",            href: null },
   { num: "06", title: "Real Estate & Property",     href: null },
