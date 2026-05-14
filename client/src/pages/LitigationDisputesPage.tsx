@@ -69,119 +69,172 @@ const PAGE_TEXT = {
   },
 };
 
-function LitigationIllustration() {
+/* Dot that travels along a straight SVG path via SMIL */
+function ProcDot({ x1, y1, x2, y2, delay, dur = 3.2 }: { x1: number; y1: number; x2: number; y2: number; delay: number; dur?: number }) {
+  const path = `M ${x1} ${y1} L ${x2} ${y2}`;
   return (
-    <div className="relative w-full h-full flex items-center justify-center" style={{ perspective: "1400px" }}>
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 70% at 54% 50%, rgba(255,255,255,0.05) 0%, transparent 65%)" }} />
+    <circle r="3.5" fill="#8099FF">
+      <animateMotion dur={`${dur}s`} begin={`${delay}s`} repeatCount="indefinite" path={path} />
+      <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.82;1"
+        dur={`${dur}s`} begin={`${delay}s`} repeatCount="indefinite" />
+    </circle>
+  );
+}
 
-      {/* Scales of justice + gavel */}
-      <motion.div
-        animate={{ rotateY: [-12, 2, -12] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        style={{ transformStyle: "preserve-3d", position: "relative", zIndex: 10 }}
+function LitigationIllustration() {
+  /* Procedural timeline stages */
+  const stages = ["FILED", "HEARING", "AWARD", "ENFORCED"];
+  /* Timeline x positions for 4 nodes, spread across the SVG */
+  const stageX = [60, 160, 260, 360];
+  const timelineY = 310;
+
+  return (
+    <div className="relative w-full h-full flex items-center justify-center select-none">
+
+      {/* Radial glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(ellipse 65% 65% at 50% 44%, rgba(128,153,255,0.09) 0%, transparent 70%)",
+      }} />
+
+      {/* ── MAIN SVG: entity cards, arrows, tribunal node, timeline ── */}
+      <svg
+        className="absolute"
+        style={{ width: "100%", height: "100%", overflow: "visible", zIndex: 10 }}
+        viewBox="0 0 480 380"
+        fill="none"
       >
-        <svg width="280" height="240" viewBox="0 0 280 240" fill="none">
-          {/* Base */}
-          <rect x="116" y="218" width="48" height="6" fill="rgba(255,255,255,0.35)" rx="1" />
-          <rect x="128" y="210" width="24" height="10" fill="rgba(255,255,255,0.25)" />
+        {/* ─── CLAIMANT CARD (left) ─── */}
+        <rect x="18" y="100" width="118" height="90" fill="#000A4F" stroke="rgba(255,255,255,0.22)" strokeWidth="1" />
+        {/* card header bar */}
+        <rect x="18" y="100" width="118" height="22" fill="rgba(255,255,255,0.07)" />
+        <text x="77" y="115" textAnchor="middle" fill="rgba(255,255,255,0.38)" fontSize="7" letterSpacing="0.22em" fontFamily="sans-serif" fontWeight="700">PARTY</text>
+        {/* person icon */}
+        <circle cx="77" cy="147" r="10" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="1" />
+        <circle cx="77" cy="143" r="4.5" fill="rgba(255,255,255,0.45)" />
+        <path d="M65 157c0-6.6 5.4-10 12-10s12 3.4 12 10" fill="rgba(255,255,255,0.22)" />
+        {/* label */}
+        <text x="77" y="181" textAnchor="middle" fill="rgba(255,255,255,0.85)" fontSize="8.5" letterSpacing="0.22em" fontFamily="sans-serif" fontWeight="800">CLAIMANT</text>
 
-          {/* Central pillar */}
-          <line x1="140" y1="210" x2="140" y2="60" stroke="rgba(255,255,255,0.8)" strokeWidth="3" />
+        {/* ─── RESPONDENT CARD (right) ─── */}
+        <rect x="344" y="100" width="118" height="90" fill="#000A4F" stroke="rgba(255,255,255,0.22)" strokeWidth="1" />
+        <rect x="344" y="100" width="118" height="22" fill="rgba(255,255,255,0.07)" />
+        <text x="403" y="115" textAnchor="middle" fill="rgba(255,255,255,0.38)" fontSize="7" letterSpacing="0.22em" fontFamily="sans-serif" fontWeight="700">PARTY</text>
+        <circle cx="403" cy="147" r="10" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="1" />
+        <circle cx="403" cy="143" r="4.5" fill="rgba(255,255,255,0.45)" />
+        <path d="M391 157c0-6.6 5.4-10 12-10s12 3.4 12 10" fill="rgba(255,255,255,0.22)" />
+        <text x="403" y="181" textAnchor="middle" fill="rgba(255,255,255,0.85)" fontSize="8.5" letterSpacing="0.22em" fontFamily="sans-serif" fontWeight="800">RESPONDENT</text>
 
-          {/* Top orb */}
-          <circle cx="140" cy="56" r="7" fill="white" fillOpacity="0.9" />
+        {/* ─── CONNECTOR LINES: both cards → tribunal hexagon ─── */}
+        {/* Left: claimant → tribunal */}
+        <line x1="136" y1="145" x2="208" y2="145" stroke="rgba(128,153,255,0.25)" strokeWidth="1" strokeDasharray="4 5" />
+        {/* Right: tribunal → respondent */}
+        <line x1="272" y1="145" x2="344" y2="145" stroke="rgba(128,153,255,0.25)" strokeWidth="1" strokeDasharray="4 5" />
+        {/* Arrow heads */}
+        <path d="M204 140l6 5-6 5" stroke="rgba(128,153,255,0.55)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M276 140l-6 5 6 5" stroke="rgba(128,153,255,0.55)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
 
-          {/* Horizontal beam */}
-          <rect x="60" y="76" width="160" height="4" fill="rgba(255,255,255,0.75)" rx="1" />
+        {/* Animated dots — claimant → tribunal */}
+        <ProcDot x1={136} y1={145} x2={208} y2={145} delay={0}   dur={3.0} />
+        <ProcDot x1={136} y1={145} x2={208} y2={145} delay={1.5} dur={3.0} />
+        {/* Animated dots — respondent → tribunal */}
+        <ProcDot x1={344} y1={145} x2={272} y2={145} delay={0.6} dur={3.0} />
+        <ProcDot x1={344} y1={145} x2={272} y2={145} delay={2.1} dur={3.0} />
 
-          {/* Left chain */}
-          <line x1="80" y1="80" x2="80" y2="148" stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" strokeDasharray="5 3" />
-          {/* Right chain */}
-          <line x1="200" y1="80" x2="200" y2="132" stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" strokeDasharray="5 3" />
+        {/* ─── TRIBUNAL HEXAGON (centre) ─── */}
+        {/* Hexagon: cx=240 cy=145 r=38 */}
+        <polygon
+          points="240,107 273,126 273,164 240,183 207,164 207,126"
+          fill="#0A1E6E"
+          stroke="rgba(255,255,255,0.30)"
+          strokeWidth="1.2"
+        />
+        {/* Outer pulse ring */}
+        <polygon points="240,107 273,126 273,164 240,183 207,164 207,126"
+          fill="none" stroke="rgba(128,153,255,0.18)" strokeWidth="6">
+          <animate attributeName="stroke-width" values="6;18;6" dur="3.4s" repeatCount="indefinite" />
+          <animate attributeName="stroke-opacity" values="0.18;0;0.18" dur="3.4s" repeatCount="indefinite" />
+        </polygon>
+        {/* Gavel icon inside hex */}
+        {/* gavel head */}
+        <rect x="226" y="132" width="26" height="12" rx="1.5" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.55)" strokeWidth="1" />
+        {/* gavel handle */}
+        <line x1="252" y1="138" x2="268" y2="158" stroke="rgba(255,255,255,0.50)" strokeWidth="3" strokeLinecap="round" />
+        {/* sound block */}
+        <rect x="222" y="150" width="20" height="8" rx="1" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.30)" strokeWidth="0.8" />
+        {/* TRIBUNAL label */}
+        <text x="240" y="178" textAnchor="middle" fill="rgba(255,255,255,0.42)" fontSize="6.5" letterSpacing="0.22em" fontFamily="sans-serif" fontWeight="700">TRIBUNAL</text>
 
-          {/* Left pan — lower (weighted) */}
-          <path d="M56 148 Q80 158 104 148" stroke="rgba(255,255,255,0.65)" strokeWidth="1.5" fill="rgba(255,255,255,0.08)" />
-          <line x1="56" y1="148" x2="104" y2="148" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
-          <text x="80" y="145" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="7.5" letterSpacing="0.15em" fontFamily="sans-serif">LAW</text>
+        {/* ─── PROCEDURAL TIMELINE STRIP ─── */}
+        {/* Background rail */}
+        <rect x="40" y={timelineY - 1} width="400" height="2" fill="rgba(255,255,255,0.10)" />
+        {/* Animated progress line */}
+        <rect x="40" y={timelineY - 1} width="0" height="2" fill="#8099FF" opacity="0.7">
+          <animate attributeName="width" values="0;400;400;0" keyTimes="0;0.55;0.9;1" dur="7s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.3;0.8;0.4;0.2" keyTimes="0;0.55;0.9;1" dur="7s" repeatCount="indefinite" />
+        </rect>
 
-          {/* Right pan — upper (lighter) */}
-          <path d="M176 132 Q200 142 224 132" stroke="rgba(255,255,255,0.65)" strokeWidth="1.5" fill="rgba(255,255,255,0.08)" />
-          <line x1="176" y1="132" x2="224" y2="132" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
-          <text x="200" y="129" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="7.5" letterSpacing="0.15em" fontFamily="sans-serif">FACT</text>
+        {/* Stage nodes + labels */}
+        {stages.map((label, i) => (
+          <g key={i}>
+            {/* node circle */}
+            <circle cx={stageX[i]} cy={timelineY} r="7" fill="#000A4F" stroke="rgba(255,255,255,0.28)" strokeWidth="1.2">
+              <animate attributeName="stroke" values="rgba(255,255,255,0.28);rgba(128,153,255,0.9);rgba(255,255,255,0.28)"
+                keyTimes={`0;${(0.1 + i * 0.22).toFixed(2)};1`} dur="7s" repeatCount="indefinite" />
+            </circle>
+            {/* inner dot */}
+            <circle cx={stageX[i]} cy={timelineY} r="2.5" fill="rgba(255,255,255,0.45)">
+              <animate attributeName="fill" values="rgba(255,255,255,0.35);rgba(128,153,255,1);rgba(255,255,255,0.35)"
+                keyTimes={`0;${(0.1 + i * 0.22).toFixed(2)};1`} dur="7s" repeatCount="indefinite" />
+            </circle>
+            {/* stage label below */}
+            <text x={stageX[i]} y={timelineY + 22} textAnchor="middle"
+              fill="rgba(255,255,255,0.38)" fontSize="6.5" letterSpacing="0.20em" fontFamily="sans-serif" fontWeight="700">{label}</text>
+          </g>
+        ))}
+        {/* Connector: tribunal → timeline via vertical drop */}
+        <line x1="240" y1="183" x2="240" y2={timelineY - 7}
+          stroke="rgba(128,153,255,0.20)" strokeWidth="1" strokeDasharray="3 5" />
+      </svg>
 
-          {/* Gavel */}
-          <rect x="28" y="170" width="50" height="18" rx="2" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.55)" strokeWidth="1.3" />
-          <rect x="33" y="175" width="40" height="8" rx="1" fill="rgba(255,255,255,0.2)" />
-          <line x1="78" y1="179" x2="108" y2="205" stroke="rgba(255,255,255,0.55)" strokeWidth="4" strokeLinecap="round" />
-
-          {/* Columns in background */}
-          <rect x="196" y="165" width="10" height="50" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)" strokeWidth="0.8" />
-          <rect x="212" y="165" width="10" height="50" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)" strokeWidth="0.8" />
-          <rect x="228" y="165" width="10" height="50" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)" strokeWidth="0.8" />
-          <rect x="193" y="162" width="48" height="5" fill="rgba(255,255,255,0.12)" />
-          <rect x="193" y="215" width="48" height="5" fill="rgba(255,255,255,0.12)" />
-
-          {/* Court document */}
-          <rect x="150" y="170" width="38" height="48" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
-          <line x1="155" y1="180" x2="183" y2="180" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8" />
-          <line x1="155" y1="186" x2="183" y2="186" stroke="rgba(255,255,255,0.15)" strokeWidth="0.8" />
-          <line x1="155" y1="192" x2="175" y2="192" stroke="rgba(255,255,255,0.1)" strokeWidth="0.8" />
-          <path d="M155 205l2.5 2.5 5-5" stroke="rgba(128,153,255,0.8)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </motion.div>
-
-      {/* Floating chips */}
+      {/* ── FLOATING CONTEXT CHIPS ── */}
       <motion.div
-        animate={{ opacity: [0.85, 1, 0.85], y: [-8, 8, -8] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        style={{ position: "absolute", top: "4%", right: "2%", zIndex: 20 }}
+        animate={{ opacity: [0.80, 1, 0.80], y: [-5, 5, -5] }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+        style={{ position: "absolute", top: "5%", left: "14%", transform: "rotate(-6deg)", zIndex: 30 }}
       >
-        <div style={{ width: 108, height: 108, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 10px 38px rgba(0,0,0,0.22)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
-          <p style={{ color: "#001489", fontSize: 9, fontWeight: 800, letterSpacing: "0.3em", textTransform: "uppercase" }}>DUBAI</p>
-          <div style={{ width: 32, height: 1, background: "#001489", opacity: 0.22 }} />
-          <p style={{ color: "#001489", fontSize: 7, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.5 }}>DIFC Courts</p>
+        <div style={{ padding: "10px 18px", border: "1.5px solid rgba(255,255,255,0.88)", background: "white", boxShadow: "0 6px 22px rgba(0,0,0,0.22)" }}>
+          <p style={{ color: "#001489", fontSize: 8.5, fontWeight: 800, letterSpacing: "0.26em", textTransform: "uppercase" }}>DIFC Courts</p>
         </div>
       </motion.div>
 
       <motion.div
-        animate={{ y: [8, -8, 8] }}
-        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-        style={{ position: "absolute", bottom: "5%", left: "2%", zIndex: 20 }}
+        animate={{ opacity: [0.82, 1, 0.82], y: [6, -6, 6] }}
+        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+        style={{ position: "absolute", top: "5%", right: "8%", transform: "rotate(7deg)", zIndex: 30 }}
       >
-        <div style={{ width: 90, height: 90, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 8px 28px rgba(0,0,0,0.18)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
-          <p style={{ color: "#001489", fontSize: 8, fontWeight: 800, letterSpacing: "0.28em", textTransform: "uppercase" }}>PARIS</p>
-          <div style={{ width: 28, height: 1, background: "#001489", opacity: 0.22 }} />
-          <p style={{ color: "#001489", fontSize: 7, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", opacity: 0.5 }}>Tribunal</p>
+        <div style={{ padding: "10px 18px", border: "1.5px solid rgba(255,255,255,0.88)", background: "white", boxShadow: "0 6px 22px rgba(0,0,0,0.22)" }}>
+          <p style={{ color: "#001489", fontSize: 8.5, fontWeight: 800, letterSpacing: "0.26em", textTransform: "uppercase" }}>ICC · LCIA</p>
         </div>
       </motion.div>
 
       <motion.div
-        animate={{ opacity: [0.85, 1, 0.85], y: [-6, 6, -6] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-        style={{ position: "absolute", top: "18%", left: "1%", transform: "rotate(-9deg)", zIndex: 20 }}
+        animate={{ opacity: [0.78, 1, 0.78], y: [-4, 4, -4] }}
+        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 2.4 }}
+        style={{ position: "absolute", bottom: "4%", right: "10%", transform: "rotate(5deg)", zIndex: 30 }}
       >
-        <div style={{ padding: "12px 20px", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 4px 20px rgba(0,0,0,0.18)" }}>
-          <p style={{ color: "#001489", fontSize: 10, fontWeight: 800, letterSpacing: "0.28em", textTransform: "uppercase" }}>ICC · LCIA</p>
+        <div style={{ padding: "9px 14px", border: "1.5px solid rgba(255,255,255,0.88)", background: "white", boxShadow: "0 4px 16px rgba(0,0,0,0.18)" }}>
+          <p style={{ color: "#001489", fontSize: 8, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" }}>NY Convention</p>
         </div>
       </motion.div>
 
       <motion.div
         animate={{ opacity: [0.80, 1, 0.80] }}
-        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 2.2 }}
-        style={{ position: "absolute", bottom: "24%", right: "1%", transform: "rotate(8deg)", zIndex: 20 }}
+        transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+        style={{ position: "absolute", bottom: "4%", left: "8%", transform: "rotate(-8deg)", zIndex: 30 }}
       >
-        <div style={{ padding: "10px 16px", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
-          <p style={{ color: "#001489", fontSize: 9, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase" }}>Arbitration</p>
+        <div style={{ padding: "9px 14px", border: "1.5px solid rgba(255,255,255,0.88)", background: "white", boxShadow: "0 4px 16px rgba(0,0,0,0.18)" }}>
+          <p style={{ color: "#001489", fontSize: 8, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" }}>Paris Tribunal</p>
         </div>
-      </motion.div>
-
-      <motion.div
-        animate={{ rotateZ: [0, 360] }}
-        transition={{ duration: 46, repeat: Infinity, ease: "linear" }}
-        className="absolute pointer-events-none"
-        style={{ width: 460, height: 128, borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.13)", transform: "rotateX(70deg)", top: "50%", left: "50%", marginTop: -64, marginLeft: -230 }}
-      >
-        <div style={{ position: "absolute", width: 8, height: 8, borderRadius: "50%", background: "#8099FF", top: -4, left: "50%", marginLeft: -4, boxShadow: "0 0 10px 3px rgba(128,153,255,0.7)" }} />
       </motion.div>
     </div>
   );
