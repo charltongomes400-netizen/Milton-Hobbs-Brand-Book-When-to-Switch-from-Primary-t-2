@@ -389,7 +389,7 @@ function ArticleContent({ article, onContact }: { article: ArticleData; onContac
                       }`}
                     >
                       <span className={`mt-1 w-0.5 h-3.5 flex-shrink-0 transition-colors ${activeId === h.id ? "bg-[#001489]" : "bg-transparent"}`} />
-                      <span className="text-xs leading-snug font-medium">{h.text}</span>
+                      <span className="text-sm leading-snug font-medium">{h.text}</span>
                     </a>
                   ))}
                 </nav>
