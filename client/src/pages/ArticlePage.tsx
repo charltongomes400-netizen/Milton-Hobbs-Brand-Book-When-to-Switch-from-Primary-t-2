@@ -544,7 +544,7 @@ function RelatedArticles({ slug }: { slug: string }) {
               </div>
               <div className="p-6 flex flex-col gap-3 flex-1">
                 <div className="flex items-center gap-3">
-                  <span className="text-[9px] font-bold tracking-[0.18em] uppercase" style={{ color: a.categoryColor }}>{a.category}</span>
+                  <span className="text-[9px] font-bold tracking-[0.18em] uppercase text-[#001489]">{a.category}</span>
                   <span className="text-[#9CA3AF] text-[11px]">{a.readTime}</span>
                 </div>
                 <h4 className="font-heading text-[#001489] text-sm font-bold leading-snug group-hover:text-[#0028B8] transition-colors">{a.title}</h4>
