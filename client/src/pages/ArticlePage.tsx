@@ -438,7 +438,7 @@ function ArticleContent({ article, onContact }: { article: ArticleData; onContac
 function SectionBlock({ section }: { section: ArticleSection }) {
   if (section.type === "lead") {
     return (
-      <p className="text-[#001489] text-[1.15rem] leading-relaxed font-medium mb-10 border-l-4 border-[#D4AF36] pl-6">
+      <p className="text-[#001489] text-[1.15rem] leading-relaxed font-medium mb-10 border-l-4 border-[#001489] pl-6">
         {section.text}
       </p>
     );
@@ -455,7 +455,7 @@ function SectionBlock({ section }: { section: ArticleSection }) {
   }
   if (section.type === "quote") {
     return (
-      <blockquote className="my-10 pl-8 border-l-[3px] border-[#D4AF36]">
+      <blockquote className="my-10 pl-8 border-l-[3px] border-[#001489]">
         <p className="text-[#001489] text-xl font-heading font-medium leading-snug italic tracking-tight">"{section.text}"</p>
       </blockquote>
     );
