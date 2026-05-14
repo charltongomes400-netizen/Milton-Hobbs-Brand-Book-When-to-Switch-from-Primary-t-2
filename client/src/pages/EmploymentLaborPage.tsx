@@ -4,7 +4,6 @@ import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
 import { ContactModal } from "@/components/ContactModal";
-import imgEmploy from "@assets/optimized/daniele-colucci-Xt48I3ps6Pg-unsplash_1776241615811.jpg";
 
 const PAGE_TEXT = {
   EN: {
@@ -173,34 +172,9 @@ function EmploymentLaborInner() {
               </motion.div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.1, delay: 0.5 }}
-              className="relative hidden lg:flex items-center justify-center h-[620px] overflow-hidden"
-            >
-              {/* Background photo ── blends with #001489 parent via multiply */}
-              <img
-                src={imgEmploy}
-                alt="Employment & Labor"
-                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                style={{ objectPosition: "center 30%", mixBlendMode: "multiply" }}
-              />
-              {/* Bottom vignette for depth */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: "linear-gradient(to bottom, transparent 40%, rgba(0,10,60,0.55) 100%)",
-                }}
-              />
-            </motion.div>
           </div>
         </div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="absolute bottom-10 left-8 flex items-center gap-3 pointer-events-none">
-          <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2.2, repeat: Infinity }} className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent" />
-          <span className="text-white/30 text-[10px] tracking-[0.25em] uppercase">{tx.scroll}</span>
-        </motion.div>
       </section>
 
       <section id="overview" data-testid="employment-overview" data-header-theme="light" className="bg-white px-8 py-24">
