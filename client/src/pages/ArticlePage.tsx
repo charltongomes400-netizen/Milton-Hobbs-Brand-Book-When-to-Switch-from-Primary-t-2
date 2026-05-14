@@ -327,7 +327,7 @@ function ArticleHero({ article, heroImg }: { article: ArticleData; heroImg?: str
             initial={{ width: 0 }}
             animate={{ width: "72px" }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="h-[2px] bg-white/30 mb-9"
+            className="h-[2px] bg-white mb-9"
           />
 
           <div className="flex items-center gap-3">
