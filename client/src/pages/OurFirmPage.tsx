@@ -1091,7 +1091,7 @@ export default function OurFirmPage() {
 
         {/* ── BOOK A CONSULTATION ── */}
         <section
-          className="bg-white py-28 px-8 overflow-hidden relative"
+          className="bg-[#F6F7FB] py-28 px-8 overflow-hidden relative"
           data-testid="firm-cta"
         >
           <div className="relative z-10 max-w-[1400px] mx-auto">
@@ -1150,8 +1150,9 @@ export default function OurFirmPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="p-10 relative"
+                className="bg-white p-10 relative border border-[#E5E9F0]"
               >
+                <div className="absolute top-0 left-0 right-0 h-1 bg-[#001489]" />
                 <CTAForm onSuccess={() => {}} />
               </motion.div>
             </div>
@@ -1169,7 +1170,7 @@ export default function OurFirmPage() {
 function CTAForm({ onSuccess }: { onSuccess: () => void }) {
   const [form, setForm] = useState({ name: "", email: "", area: "" });
   const [submitted, setSubmitted] = useState(false);
-  const inputCls = "w-full bg-[#001489] border border-[#000A4F] text-white text-sm px-4 py-3 placeholder:text-[#8099FF] focus:outline-none focus:border-[#000A4F] transition-colors";
+  const inputCls = "w-full bg-white border border-[#E5E9F0] text-[#001489] text-sm px-4 py-3 placeholder:text-[#8099FF] focus:outline-none focus:border-[#001489] transition-colors";
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
@@ -1181,13 +1182,13 @@ function CTAForm({ onSuccess }: { onSuccess: () => void }) {
   if (submitted) {
     return (
       <div className="py-8 text-center">
-        <div className="w-10 h-10 mx-auto mb-4 border border-white flex items-center justify-center">
-          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 16 16">
+        <div className="w-10 h-10 mx-auto mb-4 border border-[#001489] flex items-center justify-center">
+          <svg className="w-4 h-4 text-[#001489]" fill="none" viewBox="0 0 16 16">
             <path d="M3 8l4 4 6-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-        <p className="text-white text-xs tracking-[0.3em] uppercase font-bold mb-2">Request Received</p>
-        <p className="text-white text-sm">A partner will be in touch shortly.</p>
+        <p className="text-[#001489] text-xs tracking-[0.3em] uppercase font-bold mb-2">Request Received</p>
+        <p className="text-[#001489] text-sm">A partner will be in touch shortly.</p>
       </div>
     );
   }
