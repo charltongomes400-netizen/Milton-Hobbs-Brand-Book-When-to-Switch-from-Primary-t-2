@@ -429,7 +429,7 @@ function CorporateCommercialInner() {
 
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-8 py-20 w-full">
-          <div className="grid lg:grid-cols-2 gap-32 items-center">
+          <div className="grid lg:grid-cols-[1fr_1.35fr] gap-20 items-center">
 
             {/* ── Left: Text ── */}
             <motion.div
