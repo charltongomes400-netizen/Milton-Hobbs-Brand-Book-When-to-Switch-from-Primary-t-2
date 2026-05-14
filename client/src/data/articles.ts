@@ -14,6 +14,8 @@ export type ArticleData = {
   readTime: string;
   author: string;
   authorTitle: string;
+  coverImage: string;
+  coverAlt: string;
   body: ArticleSection[];
 };
 
@@ -27,6 +29,8 @@ export const articles: ArticleData[] = [
     readTime: "7 min read",
     author: "Milton Hobbs",
     authorTitle: "Senior Partner, Dubai",
+    coverImage: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
+    coverAlt: "Dubai financial district skyline at dusk",
     body: [
       {
         type: "lead",
@@ -93,6 +97,8 @@ export const articles: ArticleData[] = [
     readTime: "9 min read",
     author: "Milton Hobbs",
     authorTitle: "Managing Partner, Paris & Dubai",
+    coverImage: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80",
+    coverAlt: "Business professionals in a boardroom discussion",
     body: [
       {
         type: "lead",
@@ -155,6 +161,8 @@ export const articles: ArticleData[] = [
     readTime: "6 min read",
     author: "Milton Hobbs",
     authorTitle: "Partner, Technology & Data",
+    coverImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+    coverAlt: "Close-up of electronic circuit board representing digital technology",
     body: [
       {
         type: "lead",
@@ -217,6 +225,8 @@ export const articles: ArticleData[] = [
     readTime: "8 min read",
     author: "Milton Hobbs",
     authorTitle: "Partner, Corporate & M&A",
+    coverImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=80",
+    coverAlt: "Corporate professionals reviewing documents for a deal",
     body: [
       {
         type: "lead",
