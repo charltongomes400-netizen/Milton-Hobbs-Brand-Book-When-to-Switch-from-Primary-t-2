@@ -57,7 +57,7 @@ function HeaderV15() {
 
   const navLinks = [
     { label: t.nav.home,      href: "#home" },
-    { label: t.nav.firm,      href: "#firm" },
+    { label: t.nav.firm,      href: "/firm" },
     { label: t.nav.expertise, href: "#expertise" },
     { label: t.nav.insights,  href: "/insights" },
     { label: t.nav.careers,   href: "/careers" },
