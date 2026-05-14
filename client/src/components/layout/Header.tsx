@@ -32,7 +32,7 @@ export function Header() {
     { label: t.nav.home,      href: `${prefix}#home`,      isMega: false },
     { label: t.nav.firm,      href: "/firm",               isMega: false },
     { label: t.nav.expertise, href: `${prefix}#expertise`, isMega: true  },
-    { label: t.nav.insights,  href: `${prefix}#insights`,  isMega: false },
+    { label: t.nav.insights,  href: "/insights",            isMega: false },
     { label: t.nav.careers,   href: "/careers",             isMega: false },
   ];
   const contactHref = `${prefix}#contact`;

@@ -59,7 +59,7 @@ function HeaderV15() {
     { label: t.nav.home,      href: "#home" },
     { label: t.nav.firm,      href: "#firm" },
     { label: t.nav.expertise, href: "#expertise" },
-    { label: t.nav.insights,  href: "#insights" },
+    { label: t.nav.insights,  href: "/insights" },
     { label: t.nav.careers,   href: "/careers" },
     { label: t.nav.contact,   href: "#contact" },
   ];
@@ -2133,7 +2133,7 @@ function FooterV15() {
     { label: t.nav.home,      href: "#home" },
     { label: t.nav.firm,      href: "#firm" },
     { label: t.nav.expertise, href: "#expertise" },
-    { label: t.nav.insights,  href: "#insights" },
+    { label: t.nav.insights,  href: "/insights" },
     { label: t.nav.careers,   href: "#careers" },
     { label: t.nav.contact,   href: "#contact" },
   ];

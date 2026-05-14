@@ -27,6 +27,7 @@ import ImmigrationPage from "@/pages/ImmigrationPage";
 import CorporateCommercialPage from "@/pages/CorporateCommercialPage";
 import MergersAcquisitionsPage from "@/pages/MergersAcquisitionsPage";
 import IPTechnologyPage from "@/pages/IPTechnologyPage";
+import InsightsPage from "@/pages/InsightsPage";
 import TaxCompliancePage from "@/pages/TaxCompliancePage";
 import StartupsVentureCapitalPage from "@/pages/StartupsVentureCapitalPage";
 import RealEstatePropertyPage from "@/pages/RealEstatePropertyPage";
@@ -58,6 +59,7 @@ function Router() {
       <Route path="/home-v7" component={HomeClaret} />
       <Route path="/firm" component={OurFirmPage} />
       <Route path="/careers" component={CareersPage} />
+      <Route path="/insights" component={InsightsPage} />
       <Route path="/insights/:slug" component={ArticlePage} />
       <Route path="/expertise/immigration" component={ImmigrationPage} />
       <Route path="/expertise/corporate-commercial" component={CorporateCommercialPage} />
