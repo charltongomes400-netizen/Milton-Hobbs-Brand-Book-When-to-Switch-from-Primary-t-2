@@ -607,7 +607,7 @@ function ConsultModal({ open, onClose }: { open: boolean; onClose: () => void })
                     <button
                       data-testid="modal-submit"
                       type="submit"
-                      className="w-full bg-white text-[#001489] text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#C4A030] transition-colors mt-2"
+                      className="w-full bg-white text-[#001489] text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#001489] hover:text-white transition-colors mt-2"
                     >
                       Send Message
                     </button>
@@ -745,7 +745,7 @@ export default function OurFirmPage() {
                   <button
                     data-testid="hero-cta-consult"
                     onClick={() => setModalOpen(true)}
-                    className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs tracking-[0.2em] uppercase font-bold px-8 py-4 hover:bg-[#C4A030] transition-colors"
+                    className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs tracking-[0.2em] uppercase font-bold px-8 py-4 hover:bg-[#001489] hover:text-white transition-colors"
                   >
                     Book a Consultation
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
@@ -852,7 +852,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={philosophyInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.2 }}
-                  className="font-heading text-[#000A4F] font-bold leading-[1.05] tracking-tight mb-10"
+                  className="font-heading text-[#001489] font-bold leading-[1.05] tracking-tight mb-10"
                   style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
                 >
                   Complexity demands<br />
@@ -868,7 +868,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.5 }}
-                  className="text-[#000A4F] text-base leading-relaxed mb-6"
+                  className="text-[#001489] text-base leading-relaxed mb-6"
                 >
                   At Milton Hobbs, we are committed to delivering legal counsel that is clear, composed, and commercially astute. In a fast-moving and increasingly complex environment, our clients rely on us to provide not only sound legal advice, but strategic perspective that empowers action.
                 </motion.p>
@@ -876,7 +876,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.55 }}
-                  className="text-[#000A4F] text-base leading-relaxed mb-6"
+                  className="text-[#001489] text-base leading-relaxed mb-6"
                 >
                   We operate with intention — every word, every argument, and every interaction is considered and purposeful. Our approach is marked by discretion, clarity, and quiet confidence, offering clients a seamless experience across multiple legal systems and cultural contexts.
                 </motion.p>
@@ -884,7 +884,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.6 }}
-                  className="text-[#000A4F] text-base leading-relaxed"
+                  className="text-[#001489] text-base leading-relaxed"
                 >
                   As a boutique firm, we prioritise depth over volume. Our model ensures direct access to experienced counsel, fluent in English, French, and Arabic, with deep knowledge of the regulatory frameworks that shape the UAE, France, and the broader Gulf region.
                 </motion.p>
@@ -922,9 +922,9 @@ export default function OurFirmPage() {
                   transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
                   className="bg-white p-10 group hover:bg-[#001489] transition-colors duration-400"
                 >
-                  <p className="text-white text-xs tracking-[0.3em] font-bold mb-4">{item.num}</p>
-                  <h3 className="font-heading text-[#000A4F] group-hover:text-white font-bold text-xl tracking-tight mb-3 transition-colors duration-300">{item.title}</h3>
-                  <p className="text-[#000A4F] group-hover:text-white text-sm leading-relaxed transition-colors duration-300">{item.body}</p>
+                  <p className="text-[#001489] text-xs tracking-[0.3em] font-bold mb-4">{item.num}</p>
+                  <h3 className="font-heading text-[#001489] group-hover:text-white font-bold text-xl tracking-tight mb-3 transition-colors duration-300">{item.title}</h3>
+                  <p className="text-[#001489] group-hover:text-white text-sm leading-relaxed transition-colors duration-300">{item.body}</p>
                 </motion.div>
               ))}
             </div>
@@ -1065,7 +1065,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={valuesInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.7, delay: 0.1 }}
-                  className="font-heading text-[#000A4F] font-bold leading-tight tracking-tight"
+                  className="font-heading text-[#001489] font-bold leading-tight tracking-tight"
                   style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
                 >
                   What drives<br />every decision.
@@ -1075,7 +1075,7 @@ export default function OurFirmPage() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={valuesInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-[#000A4F] text-base leading-relaxed max-w-xl self-end"
+                className="text-[#001489] text-base leading-relaxed max-w-xl self-end"
               >
                 We are strategic in our thinking, approachable in our manner, client-centric in our model, and principled in everything we do. These are not aspirations — they are the standards we hold ourselves to on every instruction, for every client.
               </motion.p>
@@ -1216,7 +1216,7 @@ function CTAForm({ onSuccess }: { onSuccess: () => void }) {
       <button
         data-testid="cta-submit"
         type="submit"
-        className="w-full bg-white text-[#001489] text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#C4A030] transition-colors"
+        className="w-full bg-white text-[#001489] text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#001489] hover:text-white transition-colors"
       >
         Request a Consultation
         <svg className="inline-block ml-3 w-3 h-3" fill="none" viewBox="0 0 12 12">
