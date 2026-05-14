@@ -670,7 +670,7 @@ function CorporateCommercialInner() {
               >
                 <a
                   href="/#expertise"
-                  className="flex items-center gap-2 text-[#8099FF] text-[18px] tracking-[0.3em] uppercase font-semibold hover:opacity-80 transition-opacity"
+                  className="flex items-center gap-2 text-[#8099FF] text-[16px] tracking-[0.3em] uppercase font-semibold hover:opacity-80 transition-opacity"
                 >
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
                     <path d="M11 6H1M6 1L1 6l5 5" stroke="currentColor" strokeWidth="1.3" />
@@ -678,7 +678,7 @@ function CorporateCommercialInner() {
                   {tx.breadcrumb}
                 </a>
                 <span className="text-white/20">·</span>
-                <span className="text-white/40 text-[18px] tracking-[0.3em] uppercase font-medium">Corporate & Commercial</span>
+                <span className="text-white/40 text-[16px] tracking-[0.3em] uppercase font-medium">Corporate & Commercial</span>
               </motion.div>
 
               {/* Headline */}
