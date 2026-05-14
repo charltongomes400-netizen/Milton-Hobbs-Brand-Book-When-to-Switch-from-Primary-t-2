@@ -308,7 +308,7 @@ function EmploymentLaborInner() {
       <section data-testid="employment-differentiators" data-header-theme="light" className="bg-white px-8 py-24">
         <div className="max-w-[1400px] mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-14">
-            <p className="text-[#001489] text-[11px] tracking-[0.35em] uppercase font-bold mb-4">{tx.whyEyebrow}</p>
+            <p className="text-[#001489] tracking-[0.35em] uppercase font-bold mb-4 text-[16px]">{tx.whyEyebrow}</p>
             <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight">{tx.whyH2}</h2>
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#E4E9F5]">
