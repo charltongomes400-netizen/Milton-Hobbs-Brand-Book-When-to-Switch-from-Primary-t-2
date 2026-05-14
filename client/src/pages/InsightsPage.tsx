@@ -4,6 +4,17 @@ import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
 import { articles } from "@/data/articles";
+import imgCompliance from "@assets/generated_images/insight-compliance.png";
+import imgFamilyBusiness from "@assets/generated_images/insight-family-business.png";
+import imgDigitalPrivacy from "@assets/generated_images/insight-digital-privacy.png";
+import imgMA from "@assets/generated_images/insight-ma-structuring.png";
+
+const slugImageMap: Record<string, string> = {
+  "navigating-cross-border-compliance-gulf": imgCompliance,
+  "family-business-succession-uae": imgFamilyBusiness,
+  "digital-transformation-data-privacy-gcc": imgDigitalPrivacy,
+  "strategic-ma-structuring-2026": imgMA,
+};
 
 const PAGE_TEXT = {
   EN: {
@@ -111,7 +122,7 @@ function InsightsInner() {
               {/* Left — image */}
               <div className="relative overflow-hidden" style={{ minHeight: 420 }}>
                 <img
-                  src={featured.coverImage}
+                  src={slugImageMap[featured.slug] ?? featured.coverImage}
                   alt={featured.coverAlt}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 />
@@ -204,7 +215,7 @@ function InsightsInner() {
                     {/* Image */}
                     <div className="relative overflow-hidden" style={{ paddingBottom: "56.25%" }}>
                       <img
-                        src={article.coverImage}
+                        src={slugImageMap[article.slug] ?? article.coverImage}
                         alt={article.coverAlt}
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-600 group-hover:scale-[1.04]"
                       />
