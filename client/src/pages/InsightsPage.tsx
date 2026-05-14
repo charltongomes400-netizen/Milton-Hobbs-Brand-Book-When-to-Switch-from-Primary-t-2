@@ -128,7 +128,7 @@ function InsightsInner() {
               {/* Right — content */}
               <div className="bg-white p-10 lg:p-12 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-3 mb-6 text-[10px] text-[#001489]/40 tracking-wider">
+                  <div className="flex items-center gap-3 mb-6 text-[10px] text-[#001489] tracking-wider">
                     <span>{featured.date}</span>
                     <span>·</span>
                     <span>{featured.readTime}</span>
@@ -136,14 +136,14 @@ function InsightsInner() {
                   <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.4rem,2.2vw,2rem)] leading-tight tracking-tight mb-5 group-hover:opacity-75 transition-opacity duration-200">
                     {featured.title}
                   </h2>
-                  <div className="h-[2px] w-10 bg-[#001489]/15 mb-5 group-hover:bg-[#8099FF] transition-colors duration-300" />
-                  <p className="text-[#001489]/55 text-sm leading-[1.9]">{featuredExcerpt}</p>
+                  <div className="h-[2px] w-10 bg-[#001489] mb-5 group-hover:bg-[#8099FF] transition-colors duration-300" />
+                  <p className="text-[#001489] text-sm leading-[1.9]">{featuredExcerpt}</p>
                 </div>
 
-                <div className="mt-10 flex items-center justify-between border-t border-[#001489]/08 pt-6">
+                <div className="mt-10 flex items-center justify-between border-t border-[#001489] pt-6">
                   <div>
                     <p className="text-[#001489] font-semibold text-sm">{featured.author}</p>
-                    <p className="text-[#001489]/40 text-[11px] mt-0.5">{featured.authorTitle}</p>
+                    <p className="text-[#001489] text-[11px] mt-0.5">{featured.authorTitle}</p>
                   </div>
                   <div className="inline-flex items-center gap-2 text-[#001489] text-[10px] font-bold tracking-[0.2em] uppercase group-hover:gap-3 transition-all duration-200">
                     {tx.read}
@@ -218,7 +218,7 @@ function InsightsInner() {
 
                     {/* Content */}
                     <div className="flex flex-col flex-1 p-6">
-                      <div className="flex items-center gap-2 text-[#001489]/35 text-[10px] tracking-wider mb-4">
+                      <div className="flex items-center gap-2 text-[#001489] text-[10px] tracking-wider mb-4">
                         <span>{article.date}</span>
                         <span>·</span>
                         <span>{article.readTime}</span>
@@ -226,10 +226,10 @@ function InsightsInner() {
                       <h3 className="font-heading text-[#001489] font-bold text-[1rem] leading-snug tracking-tight mb-3 group-hover:opacity-70 transition-opacity duration-200 flex-1">
                         {article.title}
                       </h3>
-                      <p className="text-[#001489]/45 text-[0.82rem] leading-[1.8] mb-5">{excerpt}</p>
+                      <p className="text-[#001489] text-[0.82rem] leading-[1.8] mb-5">{excerpt}</p>
 
-                      <div className="flex items-center justify-between pt-4 border-t border-[#001489]/06">
-                        <span className="text-[#001489]/50 text-[11px]">{article.author}</span>
+                      <div className="flex items-center justify-between pt-4 border-t border-[#001489]">
+                        <span className="text-[#001489] text-[11px]">{article.author}</span>
                         <span className="inline-flex items-center gap-1.5 text-[#001489] text-[9px] font-bold tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                           {tx.read}
                           <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 10 10">
