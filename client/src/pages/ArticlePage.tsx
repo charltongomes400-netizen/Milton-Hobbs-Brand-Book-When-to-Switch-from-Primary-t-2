@@ -483,7 +483,7 @@ function ArticleCTA({ onContact }: { onContact: () => void }) {
     <section className="bg-[#001489] py-20 px-8">
       <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         <div>
-          <p className="text-[#D4AF36] text-[10px] tracking-[0.3em] uppercase font-medium mb-3">Expert Counsel</p>
+          <p className="text-white/60 text-[10px] tracking-[0.3em] uppercase font-medium mb-3">Expert Counsel</p>
           <h3 className="font-heading text-white text-[clamp(1.4rem,2.5vw,2rem)] font-bold tracking-tight max-w-lg leading-snug">
             Need expert counsel on this matter?
           </h3>
