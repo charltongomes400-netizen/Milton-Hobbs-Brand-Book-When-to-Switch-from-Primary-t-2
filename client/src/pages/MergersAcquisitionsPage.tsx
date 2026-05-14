@@ -465,7 +465,6 @@ function MergersAcquisitionsInner() {
   return (
     <div className="bg-[#001489] min-h-screen">
       <Header />
-
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section
         id="home"
@@ -606,7 +605,6 @@ function MergersAcquisitionsInner() {
           <span className="text-white/30 text-[10px] tracking-[0.25em] uppercase">{tx.scroll}</span>
         </motion.div>
       </section>
-
       {/* ── PRACTICE OVERVIEW ─────────────────────────────────────────────── */}
       <section
         id="overview"
@@ -654,11 +652,11 @@ function MergersAcquisitionsInner() {
                 <div className="h-px w-10 bg-[#8099FF]/60 mt-4" />
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div className="border border-[#001489]/12 p-6">
+                <div className="border border-[#001489]/12 p-6 border-t-[#001489] border-r-[#001489] border-b-[#001489] border-l-[#001489]">
                   <p className="font-heading text-[#001489] font-bold text-xl">{tx.overviewDubai}</p>
                   <p className="text-[#001489]/40 text-[10px] tracking-wider uppercase mt-1.5">{tx.overviewDubaiSub}</p>
                 </div>
-                <div className="border border-[#001489]/12 p-6">
+                <div className="border border-[#001489]/12 p-6 border-t-[#001489] border-r-[#001489] border-b-[#001489] border-l-[#001489]">
                   <p className="font-heading text-[#001489] font-bold text-xl">{tx.overviewParis}</p>
                   <p className="text-[#001489]/40 text-[10px] tracking-wider uppercase mt-1.5">{tx.overviewParisSub}</p>
                 </div>
@@ -667,7 +665,6 @@ function MergersAcquisitionsInner() {
           </div>
         </div>
       </section>
-
       {/* ── KEY SERVICES ─────────────────────────────────────────────────── */}
       <section
         id="services"
@@ -716,7 +713,6 @@ function MergersAcquisitionsInner() {
           </div>
         </div>
       </section>
-
       {/* ── WHY MILTON HOBBS ──────────────────────────────────────────────── */}
       <section
         data-testid="ma-differentiators"
@@ -757,7 +753,6 @@ function MergersAcquisitionsInner() {
           </div>
         </div>
       </section>
-
       {/* ── CTA BANNER ────────────────────────────────────────────────────── */}
       <section
         data-testid="ma-cta-banner"
@@ -806,7 +801,6 @@ function MergersAcquisitionsInner() {
           </div>
         </div>
       </section>
-
       <Footer />
       <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} practiceArea="Mergers & Acquisitions" />
     </div>
