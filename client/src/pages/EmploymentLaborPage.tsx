@@ -193,50 +193,6 @@ function EmploymentLaborInner() {
                   background: "linear-gradient(to bottom, transparent 40%, rgba(0,10,60,0.55) 100%)",
                 }}
               />
-              {/* Floating chips ── retained from original */}
-              <motion.div
-                animate={{ opacity: [0.85, 1, 0.85], y: [-8, 8, -8] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                style={{ position: "absolute", top: "4%", right: "3%", zIndex: 20 }}
-              >
-                <div style={{ width: 104, height: 104, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 10px 36px rgba(0,0,0,0.22)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
-                  <p style={{ color: "#001489", fontSize: 9, fontWeight: 800, letterSpacing: "0.3em", textTransform: "uppercase" }}>DUBAI</p>
-                  <div style={{ width: 32, height: 1, background: "#001489", opacity: 0.22 }} />
-                  <p style={{ color: "#001489", fontSize: 7, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.5 }}>UAE Labor</p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [8, -8, 8] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
-                style={{ position: "absolute", bottom: "6%", left: "2%", zIndex: 20 }}
-              >
-                <div style={{ width: 90, height: 90, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 8px 28px rgba(0,0,0,0.18)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 3 }}>
-                  <p style={{ color: "#001489", fontSize: 8, fontWeight: 800, letterSpacing: "0.28em", textTransform: "uppercase" }}>PARIS</p>
-                  <div style={{ width: 28, height: 1, background: "#001489", opacity: 0.22 }} />
-                  <p style={{ color: "#001489", fontSize: 7, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.5 }}>Droit Social</p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                animate={{ opacity: [0.85, 1, 0.85], y: [-5, 5, -5] }}
-                transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-                style={{ position: "absolute", top: "22%", left: "1%", transform: "rotate(-9deg)", zIndex: 20 }}
-              >
-                <div style={{ padding: "11px 18px", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 4px 20px rgba(0,0,0,0.18)" }}>
-                  <p style={{ color: "#001489", fontSize: 10, fontWeight: 800, letterSpacing: "0.28em", textTransform: "uppercase" }}>ESOP</p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                animate={{ opacity: [0.80, 1, 0.80] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                style={{ position: "absolute", bottom: "25%", right: "1%", transform: "rotate(7deg)", zIndex: 20 }}
-              >
-                <div style={{ padding: "10px 16px", border: "1.5px solid rgba(255,255,255,0.9)", background: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
-                  <p style={{ color: "#001489", fontSize: 9, fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase" }}>C-Suite</p>
-                </div>
-              </motion.div>
             </motion.div>
           </div>
         </div>
