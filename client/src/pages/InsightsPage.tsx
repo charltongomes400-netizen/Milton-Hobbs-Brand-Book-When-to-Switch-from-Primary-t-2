@@ -94,7 +94,7 @@ function InsightsInner() {
       {/* ── FEATURED ARTICLE ──────────────────────────────────────────────── */}
       <section data-testid="insights-featured" className="px-8 pt-14 pb-0 bg-white">
         <div className="max-w-[1400px] mx-auto">
-          <p className="text-[#001489]/30 text-[10px] tracking-[0.35em] uppercase font-bold mb-6">{tx.featured}</p>
+          <p className="text-[#001489] text-[10px] tracking-[0.35em] uppercase font-bold mb-6">{tx.featured}</p>
 
           <a
             href={`/insights/${featured.slug}`}
@@ -164,7 +164,7 @@ function InsightsInner() {
 
           {/* Header + filter row */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 mb-10">
-            <p className="text-[#001489]/30 text-[10px] tracking-[0.35em] uppercase font-bold">{tx.all}</p>
+            <p className="text-[#001489] text-[10px] tracking-[0.35em] uppercase font-bold">{tx.all}</p>
             <div className="flex items-center gap-2 flex-wrap">
               {tx.filters.map(f => (
                 <button
