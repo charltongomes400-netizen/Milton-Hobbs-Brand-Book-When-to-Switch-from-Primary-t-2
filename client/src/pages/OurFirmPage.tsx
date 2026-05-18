@@ -1065,7 +1065,7 @@ export default function OurFirmPage() {
 function CTAForm({ onSuccess }: { onSuccess: () => void }) {
   const [form, setForm] = useState({ name: "", email: "", area: "" });
   const [submitted, setSubmitted] = useState(false);
-  const inputCls = "w-full bg-white border border-[#E5E9F0] text-[#001489] text-sm px-4 py-3 placeholder:text-[#8099FF] focus:outline-none focus:border-[#001489] transition-colors";
+  const inputCls = "w-full bg-white border border-[#E5E9F0] text-[#001489] text-sm px-4 py-3 placeholder:text-[#001489] focus:outline-none focus:border-[#001489] transition-colors";
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
