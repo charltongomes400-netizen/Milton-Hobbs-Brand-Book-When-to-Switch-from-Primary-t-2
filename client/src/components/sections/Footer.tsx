@@ -191,7 +191,7 @@ export function Footer() {
                 onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
                 onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
               >
-                {f.phone} <span style={{ color: "rgba(255,255,255,0.30)", fontSize: 10, marginLeft: 4 }}>Dubai</span>
+                {f.phone} <span style={{ color: "#FFFFFF", fontSize: 10, marginLeft: 4 }}>Dubai</span>
               </a>
               <a
                 href="tel:+33180270067"
@@ -200,7 +200,7 @@ export function Footer() {
                 onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
                 onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
               >
-                +33 1 80 27 00 67 <span style={{ color: "rgba(255,255,255,0.30)", fontSize: 10, marginLeft: 4 }}>Paris</span>
+                +33 1 80 27 00 67 <span style={{ color: "#FFFFFF", fontSize: 10, marginLeft: 4 }}>Paris</span>
               </a>
             </div>
             {/* Social icons */}
@@ -216,9 +216,9 @@ export function Footer() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: "rgba(255,255,255,0.40)", transition: "color 0.2s", display: "flex" }}
+                  style={{ color: "#FFFFFF", transition: "color 0.2s", display: "flex" }}
                   onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.40)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "#FFFFFF")}
                 >
                   <Icon size={15} />
                 </a>
