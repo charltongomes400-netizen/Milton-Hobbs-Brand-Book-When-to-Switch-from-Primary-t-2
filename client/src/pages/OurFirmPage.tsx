@@ -300,7 +300,7 @@ const coreValues = [
         {[28, 20, 13].map((r, i) => (
           <motion.circle
             key={i} cx={32} cy={32} r={r}
-            stroke={active ? "white" : "#8099FF"}
+            stroke={active ? "white" : "#001489"}
             strokeOpacity={active ? 0.2 + i * 0.15 : 0.06 + i * 0.04}
             strokeWidth={1}
             fill="none"
@@ -309,7 +309,7 @@ const coreValues = [
             style={{ transformOrigin: "32px 32px" }}
           />
         ))}
-        <motion.circle cx={32} cy={32} r={5} fill={active ? "white" : "#8099FF"} fillOpacity={active ? 1 : 0.4}
+        <motion.circle cx={32} cy={32} r={5} fill={active ? "white" : "#001489"} fillOpacity={active ? 1 : 0.4}
           animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }} />
       </svg>
     ),
@@ -324,7 +324,7 @@ const coreValues = [
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
         <motion.path
           d="M32 8 L54 20 L54 38 Q54 52 32 58 Q10 52 10 38 L10 20 Z"
-          stroke={active ? "white" : "#8099FF"}
+          stroke={active ? "white" : "#001489"}
           strokeOpacity={active ? 0.7 : 0.3}
           strokeWidth={1.2}
           fill={active ? "rgba(0,20,137,0.06)" : "none"}
@@ -333,7 +333,7 @@ const coreValues = [
         />
         <motion.path
           d="M22 32 L29 39 L42 26"
-          stroke={active ? "white" : "#8099FF"}
+          stroke={active ? "white" : "#001489"}
           strokeOpacity={active ? 0.9 : 0.4}
           strokeWidth={1.5}
           strokeLinecap="round" strokeLinejoin="round"
@@ -352,20 +352,20 @@ const coreValues = [
     descFR: "Pas d'ambiguïté, pas de vague. Une analyse juridique claire, décisive et commercialement ancrée à chaque fois.",
     icon: (active: boolean) => (
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
-        <line x1={32} y1={6} x2={32} y2={58} stroke={active ? "white" : "#8099FF"} strokeOpacity={0.12} strokeWidth={1} />
-        <line x1={6} y1={32} x2={58} y2={32} stroke={active ? "white" : "#8099FF"} strokeOpacity={0.12} strokeWidth={1} />
+        <line x1={32} y1={6} x2={32} y2={58} stroke={active ? "white" : "#001489"} strokeOpacity={0.12} strokeWidth={1} />
+        <line x1={6} y1={32} x2={58} y2={32} stroke={active ? "white" : "#001489"} strokeOpacity={0.12} strokeWidth={1} />
         {[22, 14].map((r, i) => (
-          <circle key={i} cx={32} cy={32} r={r} stroke={active ? "white" : "#8099FF"} strokeOpacity={active ? 0.2 + i * 0.1 : 0.06 + i * 0.04} strokeWidth={1} fill="none" />
+          <circle key={i} cx={32} cy={32} r={r} stroke={active ? "white" : "#001489"} strokeOpacity={active ? 0.2 + i * 0.1 : 0.06 + i * 0.04} strokeWidth={1} fill="none" />
         ))}
         <motion.circle cx={32} cy={32} r={22}
-          stroke={active ? "white" : "#8099FF"}
+          stroke={active ? "white" : "#001489"}
           strokeWidth={1.5} strokeOpacity={0.8} fill="none"
           strokeDasharray="4 4"
           animate={{ rotate: [0, 360] }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
           style={{ transformOrigin: "32px 32px" }}
         />
-        <circle cx={32} cy={32} r={4} fill={active ? "white" : "#8099FF"} fillOpacity={active ? 1 : 0.5} />
+        <circle cx={32} cy={32} r={4} fill={active ? "white" : "#001489"} fillOpacity={active ? 1 : 0.5} />
       </svg>
     ),
   },
@@ -379,7 +379,7 @@ const coreValues = [
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
         <motion.path
           d="M32 10 L36 28 L54 32 L36 36 L32 54 L28 36 L10 32 L28 28 Z"
-          stroke={active ? "white" : "#8099FF"}
+          stroke={active ? "white" : "#001489"}
           strokeOpacity={active ? 0.8 : 0.3}
           strokeWidth={1.2}
           fill={active ? "rgba(212,175,54,0.08)" : "none"}
@@ -387,7 +387,7 @@ const coreValues = [
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           style={{ transformOrigin: "32px 32px" }}
         />
-        <circle cx={32} cy={32} r={5} fill={active ? "white" : "#8099FF"} fillOpacity={active ? 1 : 0.4} />
+        <circle cx={32} cy={32} r={5} fill={active ? "white" : "#001489"} fillOpacity={active ? 1 : 0.4} />
       </svg>
     ),
   },
@@ -399,11 +399,11 @@ const coreValues = [
     descFR: "Deux systèmes juridiques, deux cultures, une équipe unifiée. Notre ADN bi-juridictionnel est un avantage stratégique.",
     icon: (active: boolean) => (
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
-        <circle cx={20} cy={32} r={10} stroke={active ? "white" : "#8099FF"} strokeOpacity={active ? 0.6 : 0.25} strokeWidth={1} fill="none" />
-        <circle cx={44} cy={32} r={10} stroke={active ? "white" : "#8099FF"} strokeOpacity={active ? 0.6 : 0.25} strokeWidth={1} fill="none" />
+        <circle cx={20} cy={32} r={10} stroke={active ? "white" : "#001489"} strokeOpacity={active ? 0.6 : 0.25} strokeWidth={1} fill="none" />
+        <circle cx={44} cy={32} r={10} stroke={active ? "white" : "#001489"} strokeOpacity={active ? 0.6 : 0.25} strokeWidth={1} fill="none" />
         <motion.path
           d="M20 25 Q32 18 44 25"
-          stroke={active ? "white" : "#8099FF"}
+          stroke={active ? "white" : "#001489"}
           strokeOpacity={active ? 0.8 : 0.3}
           strokeWidth={1.2}
           strokeDasharray="40"
@@ -413,7 +413,7 @@ const coreValues = [
         />
         <motion.path
           d="M20 39 Q32 46 44 39"
-          stroke={active ? "white" : "#8099FF"}
+          stroke={active ? "white" : "#001489"}
           strokeOpacity={active ? 0.5 : 0.18}
           strokeWidth={1}
           strokeDasharray="40"
@@ -421,8 +421,8 @@ const coreValues = [
           animate={{ strokeDashoffset: [-40, 0, 40] }}
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
-        <circle cx={20} cy={32} r={3} fill={active ? "white" : "#8099FF"} fillOpacity={active ? 0.9 : 0.4} />
-        <circle cx={44} cy={32} r={3} fill={active ? "white" : "#8099FF"} fillOpacity={active ? 0.9 : 0.4} />
+        <circle cx={20} cy={32} r={3} fill={active ? "white" : "#001489"} fillOpacity={active ? 0.9 : 0.4} />
+        <circle cx={44} cy={32} r={3} fill={active ? "white" : "#001489"} fillOpacity={active ? 0.9 : 0.4} />
       </svg>
     ),
   },
@@ -437,7 +437,7 @@ const coreValues = [
         {[26, 20, 14, 9].map((r, i) => (
           <motion.circle
             key={i} cx={32} cy={32} r={r}
-            stroke={i === 3 ? (active ? "white" : "#8099FF") : (active ? "white" : "#8099FF")}
+            stroke={i === 3 ? (active ? "white" : "#001489") : (active ? "white" : "#001489")}
             strokeOpacity={i === 3 ? (active ? 0.85 : 0.4) : (active ? 0.12 + i * 0.07 : 0.05 + i * 0.04)}
             strokeWidth={1}
             strokeDasharray={`${2 * Math.PI * r * 0.8} ${2 * Math.PI * r * 0.2}`}
@@ -449,14 +449,14 @@ const coreValues = [
         ))}
         <motion.rect
           x={27} y={30} width={10} height={8}
-          stroke={active ? "white" : "#8099FF"} strokeWidth={1} fill="none"
+          stroke={active ? "white" : "#001489"} strokeWidth={1} fill="none"
           strokeOpacity={active ? 0.9 : 0.5}
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2.5, repeat: Infinity }}
         />
         <motion.path
           d="M29 30 Q29 25 32 25 Q35 25 35 30"
-          stroke={active ? "white" : "#8099FF"} strokeWidth={1} fill="none"
+          stroke={active ? "white" : "#001489"} strokeWidth={1} fill="none"
           strokeOpacity={active ? 0.9 : 0.5}
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2.5, repeat: Infinity }}
@@ -497,7 +497,7 @@ function ValueCard({ value, lang, index }: { value: typeof coreValues[0]; lang: 
       </div>
       <motion.p
         className="text-[10px] tracking-[0.35em] uppercase font-bold mb-2"
-        animate={{ color: hovered ? "white" : "#8099FF" }}
+        animate={{ color: hovered ? "white" : "#001489" }}
         transition={{ duration: 0.3 }}
       >
         {lang === "FR" ? value.titleFR : value.title}
@@ -755,7 +755,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={philosophyInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-[#001489] text-[10px] tracking-[0.4em] uppercase font-bold mb-8"
+                  className="text-[#001489] tracking-[0.4em] uppercase font-bold mb-8 text-[18px]"
                 >
                   Our Philosophy & Purpose
                 </motion.p>
