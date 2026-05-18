@@ -1033,22 +1033,6 @@ function DifferentiatorsV15() {
                       padding: "28px 0 28px 20px",
                     }}
                   >
-                    {/* Number */}
-                    <span
-                      style={{
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        fontSize: 9,
-                        fontWeight: 700,
-                        letterSpacing: "0.30em",
-                        color: isActive ? "#4A58AA" : "rgba(74,88,170,0.35)",
-                        flexShrink: 0,
-                        transition: "color 0.3s",
-                        minWidth: 22,
-                      }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-
                     {/* Title */}
                     <span
                       className="font-heading font-bold"
@@ -1115,7 +1099,7 @@ function DifferentiatorsV15() {
                             color: "#000000",
                             fontSize: "0.9375rem",
                             lineHeight: 1.82,
-                            padding: "0 0 28px 42px",
+                            padding: "0 0 28px 20px",
                             maxWidth: 460,
                           }}
                         >
@@ -1314,9 +1298,6 @@ function DifferentiatorsV15() {
                     outline: "none",
                   }}
                 >
-                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", color: "#4A58AA", flexShrink: 0 }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
                   <span className="font-heading font-bold flex-1" style={{ fontSize: "1.05rem", lineHeight: 1.2, color: isActive ? "#001489" : "rgba(0,20,137,0.45)", transition: "color 0.25s" }}>
                     {card.title}
                   </span>
