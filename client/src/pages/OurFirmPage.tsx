@@ -943,7 +943,7 @@ function OurFirmContent() {
               >
                 <div className="w-6 h-px bg-[#001489] mb-4" />
                 <p className="font-heading text-[#001489] font-bold text-base tracking-tight mb-2">{ct(v.title, l)}</p>
-                <p className="text-[#001489] text-xs leading-relaxed">{ct(v.body, l)}</p>
+                <p className="text-[#001489] text-[14px]">{ct(v.body, l)}</p>
               </motion.div>
             ))}
           </div>
