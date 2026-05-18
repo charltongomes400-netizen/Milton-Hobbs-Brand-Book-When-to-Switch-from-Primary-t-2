@@ -998,7 +998,7 @@ export default function OurFirmPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="text-[#001489] text-[10px] tracking-[0.4em] uppercase font-bold mb-6"
+                  className="text-[#001489] tracking-[0.4em] uppercase font-bold mb-6 text-[18px]"
                 >
                   Book a Consultation
                 </motion.p>
