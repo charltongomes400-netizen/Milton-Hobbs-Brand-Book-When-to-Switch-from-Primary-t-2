@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
-import { articles } from "@/data/articles";
+import { insightsCopy, ct } from "@/data/insightsCopy";
 import { ContactModal } from "@/components/ContactModal";
 import imgCompliance from "@assets/generated_images/insight-compliance.png";
 import imgFamilyBusiness from "@assets/generated_images/insight-family-business.png";
@@ -17,62 +17,86 @@ const slugImageMap: Record<string, string> = {
   "strategic-ma-structuring-2026": imgMA,
 };
 
-const PAGE_TEXT = {
-  EN: {
-    eyebrow: "Publications & Insights",
-    headline: "Latest thinking\nfrom our lawyers.",
-    sub: "Partner-authored analysis on corporate law, M&A, compliance, IP, and emerging legal issues across the UAE, France, and beyond.",
-    read: "Read article",
-    featured: "Featured",
-    all: "All insights",
-    filters: ["All", "Compliance", "Corporate", "Technology", "M&A"],
-  },
-  FR: {
-    eyebrow: "Publications & Perspectives",
-    headline: "Les dernières analyses\nde nos avocats.",
-    sub: "Analyses rédigées par nos associés sur le droit des sociétés, les F&A, la conformité, la PI et les enjeux juridiques émergents aux EAU, en France et au-delà.",
-    read: "Lire l'article",
-    featured: "À la une",
-    all: "Toutes les analyses",
-    filters: ["Tous", "Conformité", "Corporate", "Technologie", "F&A"],
-  },
-};
-
-const CATEGORY_MAP: Record<string, Record<string, string>> = {
-  EN: { Compliance: "Compliance", Corporate: "Corporate", Technology: "Technology", "M&A": "M&A" },
-  FR: { Compliance: "Conformité", Corporate: "Corporate", Technology: "Technologie", "M&A": "F&A" },
-};
+const { indexPage } = insightsCopy;
 
 function InsightsInner() {
   const { lang } = useLang();
-  const tx = PAGE_TEXT[lang];
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
-  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = modalOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [modalOpen]);
 
-  const [activeFilter, setActiveFilter] = useState("All");
+  const isFr = lang === "FR";
+  const meta = isFr ? indexPage.meta.fr : indexPage.meta.en;
 
-  const [featured, ...rest] = articles;
+  useEffect(() => {
+    document.title = meta.title;
 
-  const filtered = activeFilter === "All" || activeFilter === "Tous"
-    ? rest
-    : rest.filter(a => {
-        const mapped = CATEGORY_MAP[lang]?.[a.category] ?? a.category;
-        return mapped === activeFilter || a.category === activeFilter;
-      });
+    const setMeta = (name: string, content: string) => {
+      let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
+      if (!el) { el = document.createElement("meta"); el.setAttribute("name", name); document.head.appendChild(el); }
+      el.setAttribute("content", content);
+    };
+    const setOg = (prop: string, content: string) => {
+      let el = document.querySelector(`meta[property="${prop}"]`) as HTMLMetaElement | null;
+      if (!el) { el = document.createElement("meta"); el.setAttribute("property", prop); document.head.appendChild(el); }
+      el.setAttribute("content", content);
+    };
 
-  const featuredLead = (featured.body.find(s => s.type === "lead") as { type: "lead"; text: string } | undefined)?.text ?? "";
-  const featuredExcerpt = featuredLead.length > 180 ? featuredLead.slice(0, 180).replace(/\s+\S*$/, "") + "…" : featuredLead;
+    setMeta("description", meta.description);
+    setMeta("keywords", meta.keywords);
+    setOg("og:title", meta.ogTitle);
+    setOg("og:description", meta.ogDescription);
+
+    const hreflangs = [
+      { hreflang: "en", href: "https://miltonhobbs.com/insights" },
+      { hreflang: "fr", href: "https://miltonhobbs.com/fr/publications" },
+      { hreflang: "x-default", href: "https://miltonhobbs.com/insights" },
+    ];
+    const linkEls: HTMLLinkElement[] = [];
+    hreflangs.forEach(({ hreflang, href }) => {
+      const el = document.createElement("link");
+      el.rel = "alternate";
+      el.setAttribute("hreflang", hreflang);
+      el.setAttribute("href", href);
+      document.head.appendChild(el);
+      linkEls.push(el);
+    });
+
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": meta.title,
+      "description": meta.description,
+      "url": isFr ? "https://miltonhobbs.com/fr/publications" : "https://miltonhobbs.com/insights",
+      "hasPart": insightsCopy.articles.map(a => ({
+        "@type": "Article",
+        "headline": isFr ? a.title.fr : a.title.en,
+        "url": `https://miltonhobbs.com/insights/${a.slug}`,
+        "datePublished": "2026-05-01",
+        "author": { "@type": "Organization", "name": "Milton Hobbs" },
+      })),
+    };
+    const scriptEl = document.createElement("script");
+    scriptEl.type = "application/ld+json";
+    scriptEl.textContent = JSON.stringify(jsonLd);
+    document.head.appendChild(scriptEl);
+
+    return () => {
+      linkEls.forEach(el => el.parentNode?.removeChild(el));
+      scriptEl.parentNode?.removeChild(scriptEl);
+    };
+  }, [lang]);
 
   return (
     <div className="bg-white min-h-screen font-body">
       <Header />
-      {/* ── HERO ──────────────────────────────────────────────────────────── */}
+
+      {/* ── HERO ── */}
       <section
         data-testid="insights-header"
         data-header-theme="dark"
@@ -86,15 +110,15 @@ function InsightsInner() {
               transition={{ duration: 0.5 }}
               className="text-white text-[10px] tracking-[0.38em] uppercase font-bold mb-5"
             >
-              {tx.eyebrow}
+              {ct(indexPage.hero.eyebrow, lang)}
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.1 }}
-              className="font-heading text-white font-bold text-[clamp(2rem,4vw,3.5rem)] leading-[1.06] tracking-tight whitespace-pre-line"
+              className="font-heading text-white font-bold text-[clamp(2rem,4vw,3.5rem)] leading-[1.06] tracking-tight"
             >
-              {tx.headline}
+              {ct(indexPage.hero.h1, lang)}
             </motion.h1>
           </div>
           <motion.p
@@ -103,130 +127,47 @@ function InsightsInner() {
             transition={{ delay: 0.5 }}
             className="text-white text-sm leading-relaxed max-w-[44ch] lg:pb-1"
           >
-            {tx.sub}
+            {ct(indexPage.hero.subheadline, lang)}
           </motion.p>
         </div>
       </section>
-      {/* ── FEATURED ARTICLE ──────────────────────────────────────────────── */}
-      <section data-testid="insights-featured" className="px-8 pt-14 pb-0 bg-white">
-        <div className="max-w-[1400px] mx-auto">
-          <p className="text-[#001489] text-[10px] tracking-[0.35em] uppercase font-bold mb-6">{tx.featured}</p>
 
-          <a
-            href={`/insights/${featured.slug}`}
-            data-testid="featured-article-link"
-            className="group block"
-            style={{ textDecoration: "none" }}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="grid lg:grid-cols-[1fr_420px] overflow-hidden border border-[#E8ECF5]"
-            >
-              {/* Left — image */}
-              <div className="relative overflow-hidden" style={{ minHeight: 420 }}>
-                <img
-                  src={slugImageMap[featured.slug] ?? featured.coverImage}
-                  alt={featured.coverAlt}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-                {/* Dark overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#000A4F] via-[#000A4F] to-transparent" />
-                {/* Category badge over image */}
-                <div className="absolute top-6 left-6">
-                  <span className="text-[9px] font-bold tracking-[0.25em] uppercase px-3 py-1.5 bg-white text-[#001489]">
-                    {featured.category}
-                  </span>
-                </div>
-              </div>
-
-              {/* Right — content */}
-              <div className="bg-white p-10 lg:p-12 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-3 mb-6 text-[10px] text-[#001489] tracking-wider">
-                    <span>{featured.date}</span>
-                    <span>·</span>
-                    <span>{featured.readTime}</span>
-                  </div>
-                  <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.4rem,2.2vw,2rem)] leading-tight tracking-tight mb-5 group-hover:opacity-75 transition-opacity duration-200">
-                    {featured.title}
-                  </h2>
-                  <div className="h-[2px] w-10 bg-[#001489] mb-5 group-hover:bg-[#8099FF] transition-colors duration-300" />
-                  <p className="text-[#001489] text-sm leading-[1.9]">{featuredExcerpt}</p>
-                </div>
-
-                <div className="mt-10 flex items-center justify-between border-t border-[#001489] pt-6">
-                  <div>
-                    <p className="text-[#001489] font-semibold text-sm">{featured.author}</p>
-                    <p className="text-[#001489] text-[11px] mt-0.5">{featured.authorTitle}</p>
-                  </div>
-                  <div className="inline-flex items-center gap-2 text-[#001489] text-[10px] font-bold tracking-[0.2em] uppercase group-hover:gap-3 transition-all duration-200">
-                    {tx.read}
-                    <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
-                      <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </a>
-        </div>
-      </section>
-      {/* ── ALL ARTICLES ──────────────────────────────────────────────────── */}
+      {/* ── CARDS GRID ── */}
       <section data-testid="insights-grid" className="px-8 pt-16 pb-20 bg-white">
         <div className="max-w-[1400px] mx-auto">
-
-          {/* Header + filter row */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 mb-10">
-            <p className="text-[#001489] text-[10px] tracking-[0.35em] uppercase font-bold">{tx.all}</p>
-            <div className="flex items-center gap-2 flex-wrap">
-              {tx.filters.map(f => (
-                <button
-                  key={f}
-                  onClick={() => setActiveFilter(f)}
-                  className={`text-[9px] tracking-[0.22em] uppercase font-bold px-4 py-2 border transition-colors duration-150 ${
-                    activeFilter === f
-                      ? "bg-[#001489] text-white border-[#001489]"
-                      : "border-[#001489] text-[#001489] hover:border-[#001489] hover:text-[#001489]"
-                  }`}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Cards grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map((article, i) => {
-              const lead = (article.body.find(s => s.type === "lead") as { type: "lead"; text: string } | undefined)?.text ?? "";
-              const excerpt = lead.length > 120 ? lead.slice(0, 120).replace(/\s+\S*$/, "") + "…" : lead;
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {indexPage.cards.map((card, i) => {
+              const href = isFr
+                ? `/fr/publications/${card.slugFr}`
+                : `/insights/${card.slug}`;
+              const img = slugImageMap[card.slug];
               return (
                 <motion.div
-                  key={article.slug}
+                  key={card.slug}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.07 }}
-                  data-testid={`article-card-${article.slug}`}
+                  data-testid={`article-card-${card.slug}`}
                 >
                   <a
-                    href={`/insights/${article.slug}`}
+                    href={href}
                     className="group flex flex-col h-full border border-[#E8ECF5] hover:border-[#001489] transition-colors duration-200 overflow-hidden"
                     style={{ textDecoration: "none" }}
                   >
                     {/* Image */}
                     <div className="relative overflow-hidden" style={{ paddingBottom: "56.25%" }}>
-                      <img
-                        src={slugImageMap[article.slug] ?? article.coverImage}
-                        alt={article.coverAlt}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-600 group-hover:scale-[1.04]"
-                      />
-                      <div className="absolute inset-0 bg-[#000A4F] group-hover:bg-[#000A4F]/0 transition-colors duration-300" />
+                      {img && (
+                        <img
+                          src={img}
+                          alt={ct(card.title, lang)}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-600 group-hover:scale-[1.04]"
+                        />
+                      )}
+                      <div className="absolute inset-0 bg-[#000A4F]/40 group-hover:bg-[#000A4F]/10 transition-colors duration-300" />
                       <div className="absolute top-4 left-4">
                         <span className="text-[8px] font-bold tracking-[0.22em] uppercase px-2.5 py-1 bg-white text-[#001489]">
-                          {article.category}
+                          {ct(card.category, lang)}
                         </span>
                       </div>
                     </div>
@@ -234,19 +175,18 @@ function InsightsInner() {
                     {/* Content */}
                     <div className="flex flex-col flex-1 p-6">
                       <div className="flex items-center gap-2 text-[#001489] text-[10px] tracking-wider mb-4">
-                        <span>{article.date}</span>
+                        <span>{ct(card.date, lang)}</span>
                         <span>·</span>
-                        <span>{article.readTime}</span>
+                        <span>{card.readMin} min</span>
                       </div>
                       <h3 className="font-heading text-[#001489] font-bold text-[1rem] leading-snug tracking-tight mb-3 group-hover:opacity-70 transition-opacity duration-200 flex-1">
-                        {article.title}
+                        {ct(card.title, lang)}
                       </h3>
-                      <p className="text-[#001489] text-[0.82rem] leading-[1.8] mb-5">{excerpt}</p>
 
                       <div className="flex items-center justify-between pt-4 border-t border-[#001489]">
-                        <span className="text-[#001489] text-[11px]">{article.author}</span>
+                        <span className="text-[#001489] text-[11px]">Milton Hobbs</span>
                         <span className="inline-flex items-center gap-1.5 text-[#001489] text-[9px] font-bold tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                          {tx.read}
+                          {ct(card.cta, lang)}
                           <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 10 10">
                             <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" strokeWidth="1.2" />
                           </svg>
@@ -258,39 +198,33 @@ function InsightsInner() {
               );
             })}
           </div>
-
-          {filtered.length === 0 && (
-            <div className="py-24 flex flex-col items-center gap-4 text-center">
-              <p className="font-heading text-[#001489] font-bold text-lg">No articles in this category yet.</p>
-              <button
-                onClick={() => setActiveFilter("All")}
-                className="text-[10px] tracking-[0.2em] uppercase font-bold text-[#001489] border border-[#001489] px-6 py-2.5 hover:bg-[#001489] hover:text-white transition-colors"
-              >
-                View All
-              </button>
-            </div>
-          )}
         </div>
       </section>
-      {/* ── CTA STRIP ─────────────────────────────────────────────────────── */}
+
+      {/* ── SPEAK WITH A PARTNER CTA ── */}
       <section className="bg-[#001489] px-8 py-16">
         <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
           <div>
-            <p className="text-white tracking-[0.35em] uppercase font-bold mb-3 text-[16px]">Speak with a Partner</p>
-            <p className="text-white text-sm leading-relaxed max-w-[42ch]">Every publication reflects lived experience on complex matters. Discuss yours directly with a partner.</p>
+            <p className="text-white tracking-[0.35em] uppercase font-bold mb-3 text-[10px]">
+              {ct(indexPage.speakWithPartner.eyebrow, lang)}
+            </p>
+            <p className="text-white font-heading font-bold text-[clamp(1.1rem,2vw,1.4rem)] leading-snug max-w-[52ch]">
+              {ct(indexPage.speakWithPartner.heading, lang)}
+            </p>
           </div>
           <button
             onClick={() => setModalOpen(true)}
             data-testid="insights-contact-cta"
             className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-white transition-colors flex-shrink-0 cursor-pointer"
           >
-            Book a Consultation
+            {ct(indexPage.speakWithPartner.cta, lang)}
             <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
               <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
             </svg>
           </button>
         </div>
       </section>
+
       <Footer />
       <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} practiceArea="Publications & Insights" />
     </div>

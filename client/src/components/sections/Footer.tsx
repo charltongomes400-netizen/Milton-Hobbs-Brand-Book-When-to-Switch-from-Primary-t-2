@@ -1,20 +1,32 @@
 import { useState, useEffect } from "react";
 import { SiInstagram, SiLinkedin, SiWhatsapp } from "react-icons/si";
 import { useLang } from "@/contexts/LanguageContext";
+import { insightsCopy, ct } from "@/data/insightsCopy";
 import miltonHobbsWordmark from "@assets/image_1776101259071.png";
 
-export function Footer() {
-  const { t } = useLang();
-  const f = t.footer;
+const navHrefs = ["/", "/firm", "/#expertise", "/insights", "/careers", "/#contact"];
+const practiceAreaHrefs = [
+  "/expertise/corporate-commercial",
+  "/expertise/tax-compliance",
+  "/expertise/mergers-acquisitions",
+  "/expertise/startups-venture-capital",
+  "/expertise/ip-technology",
+  "/expertise/real-estate-property",
+  "/expertise/employment-labor",
+  "/expertise/litigation-disputes",
+];
 
-  const navEntries = [
-    { label: t.nav.home,      href: "/" },
-    { label: t.nav.firm,      href: "/firm" },
-    { label: t.nav.expertise, href: "/#expertise" },
-    { label: t.nav.insights,  href: "/#insights" },
-    { label: t.nav.careers,   href: "/careers" },
-    { label: t.nav.contact,   href: "/#contact" },
-  ];
+const socialLinks = [
+  { name: "Instagram", href: "https://instagram.com", Icon: SiInstagram },
+  { name: "LinkedIn",  href: "https://linkedin.com",  Icon: SiLinkedin  },
+  { name: "WhatsApp",  href: "https://wa.me",         Icon: SiWhatsapp  },
+];
+
+const legalHrefs = ["/privacy-policy", "/cookies", "/terms-of-use", "/not-legal-advice"];
+
+export function Footer() {
+  const { lang, t } = useLang();
+  const f = insightsCopy.footer;
 
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
@@ -36,7 +48,7 @@ export function Footer() {
 
   return (
     <footer id="footer" data-testid="footer" style={{ background: "#001489" }}>
-      {/* ── Motto whisper ── */}
+      {/* ── Tagline whisper ── */}
       <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 20, paddingBottom: 16 }}>
         <p style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -47,17 +59,17 @@ export function Footer() {
           color: "#FFFFFF",
           textAlign: "center",
         }}>
-          Reason&ensp;·&ensp;Rigor&ensp;·&ensp;Resolution
+          {ct(f.tagline, lang)}
         </p>
       </div>
 
-      {/* ── Main band: 4-column grid ── */}
+      {/* ── Main 4-column grid ── */}
       <div className="max-w-[1400px] mx-auto px-8">
         <div
           className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-4"
           style={{ paddingTop: 28, paddingBottom: 28 }}
         >
-          {/* Col 1: Wordmark + tagline */}
+          {/* Col 1: Wordmark + description */}
           <div className="flex flex-col gap-5">
             <img
               src={miltonHobbsWordmark}
@@ -76,7 +88,7 @@ export function Footer() {
               lineHeight: 1.7,
               maxWidth: "28ch",
             }}>
-              A boutique international law firm headquartered in Dubai, with offices in Paris.
+              {ct(f.description, lang)}
             </p>
           </div>
 
@@ -91,13 +103,13 @@ export function Footer() {
               color: "#FFFFFF",
               marginBottom: 4,
             }}>
-              Navigation
+              {ct(f.navigation.label, lang)}
             </p>
             <nav className="flex flex-col gap-2">
-              {navEntries.map(link => (
+              {f.navigation.items.map((item, i) => (
                 <a
-                  key={link.href}
-                  href={link.href}
+                  key={i}
+                  href={navHrefs[i] ?? "/"}
                   style={{
                     color: "rgba(255,255,255,0.70)",
                     fontSize: 12,
@@ -110,7 +122,7 @@ export function Footer() {
                   onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
                   onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
                 >
-                  {link.label}
+                  {ct(item, lang)}
                 </a>
               ))}
             </nav>
@@ -127,22 +139,13 @@ export function Footer() {
               color: "#FFFFFF",
               marginBottom: 4,
             }}>
-              Practice Areas
+              {ct(f.practiceAreas.label, lang)}
             </p>
             <nav className="flex flex-col gap-2">
-              {[
-                "Corporate & Commercial",
-                "Tax & Compliance",
-                "Mergers & Acquisitions",
-                "Startups & Venture Capital",
-                "IP & Technology",
-                "Real Estate & Property",
-                "Employment & Labor",
-                "Litigation & Disputes",
-              ].map(area => (
+              {f.practiceAreas.items.map((item, i) => (
                 <a
-                  key={area}
-                  href="/#expertise"
+                  key={i}
+                  href={practiceAreaHrefs[i] ?? "/#expertise"}
                   style={{
                     color: "rgba(255,255,255,0.70)",
                     fontSize: 12,
@@ -155,13 +158,13 @@ export function Footer() {
                   onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
                   onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
                 >
-                  {area}
+                  {ct(item, lang)}
                 </a>
               ))}
             </nav>
           </div>
 
-          {/* Col 4: Contact + Socials */}
+          {/* Col 4: Contact + Social */}
           <div className="flex flex-col gap-4">
             <p style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -172,53 +175,42 @@ export function Footer() {
               color: "#FFFFFF",
               marginBottom: 4,
             }}>
-              Contact
+              {ct(f.contact.label, lang)}
             </p>
             <div className="flex flex-col gap-2">
               <a
-                href={`mailto:${f.email}`}
+                href={`mailto:${f.contact.email}`}
                 data-testid="footer-email"
                 style={{ color: "rgba(255,255,255,0.70)", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "color 0.2s" }}
                 onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
                 onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
               >
-                {f.email}
+                {f.contact.email}
               </a>
-              <a
-                href={`tel:${f.phone}`}
-                data-testid="footer-phone-dubai"
-                style={{ color: "rgba(255,255,255,0.70)", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "color 0.2s" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
-              >
-                {f.phone} <span style={{ color: "#FFFFFF", fontSize: 10, marginLeft: 4 }}>Dubai</span>
-              </a>
-              <a
-                href="tel:+33180270067"
-                data-testid="footer-phone-paris"
-                style={{ color: "rgba(255,255,255,0.70)", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "color 0.2s" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
-              >
-                +33 1 80 27 00 67 <span style={{ color: "#FFFFFF", fontSize: 10, marginLeft: 4 }}>Paris</span>
-              </a>
+              {f.contact.phones.map((phone, i) => (
+                <a
+                  key={i}
+                  href={`tel:${phone.value.replace(/\s/g, "")}`}
+                  data-testid={`footer-phone-${phone.label.en.toLowerCase()}`}
+                  style={{ color: "rgba(255,255,255,0.70)", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "color 0.2s" }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+                >
+                  {phone.value}
+                  <span style={{ color: "#FFFFFF", fontSize: 10, marginLeft: 4 }}>{ct(phone.label, lang)}</span>
+                </a>
+              ))}
             </div>
             {/* Social icons */}
             <div className="flex items-center gap-4" style={{ marginTop: 8 }}>
-              {[
-                { href: "https://instagram.com", Icon: SiInstagram, label: "Instagram" },
-                { href: "https://linkedin.com",  Icon: SiLinkedin,  label: "LinkedIn"  },
-                { href: "https://wa.me",         Icon: SiWhatsapp,  label: "WhatsApp"  },
-              ].map(({ href, Icon, label }) => (
+              {socialLinks.map(({ name, href, Icon }) => (
                 <a
-                  key={label}
+                  key={name}
                   href={href}
-                  aria-label={label}
+                  aria-label={name}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: "#FFFFFF", transition: "color 0.2s", display: "flex" }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "#FFFFFF")}
                 >
                   <Icon size={15} />
                 </a>
@@ -237,8 +229,8 @@ export function Footer() {
           {/* Live clocks */}
           <div className="flex items-center gap-5">
             {[
-              { label: "Dubai", time: dubaiTime },
-              { label: "Paris", time: parisTime },
+              { label: ct(f.contact.phones[0].label, lang), time: dubaiTime },
+              { label: ct(f.contact.phones[1].label, lang), time: parisTime },
             ].map((o, i) => (
               <div key={o.label} className="flex items-center gap-2">
                 {i > 0 && <span style={{ width: 1, height: 10, background: "rgba(255,255,255,0.30)", marginRight: 6 }} />}
@@ -251,19 +243,26 @@ export function Footer() {
 
           {/* Legal links + copyright */}
           <div className="flex flex-col items-start sm:items-end gap-1.5">
+            {/* Row 1: JSON legal links */}
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:justify-end">
-              <a href="/privacy-policy" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>{f.privacy}</a>
-              <a href="/cookies" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>{f.cookie}</a>
-              <a href="/terms-of-use" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Terms of Use</a>
-              <a href="/not-legal-advice" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Not Legal Advice</a>
+              {f.legal.map((item, i) => (
+                <a
+                  key={i}
+                  href={legalHrefs[i] ?? "#"}
+                  style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}
+                >
+                  {ct(item, lang)}
+                </a>
+              ))}
             </div>
+            {/* Row 2: additional legal pages */}
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:justify-end">
               <a href="/attorney-client-disclaimer" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Attorney-Client Disclaimer</a>
               <a href="/jurisdictional-statements" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Jurisdictional Statements</a>
               <a href="/conflict-checks" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Conflict Checks</a>
               <a href="/confidentiality-notice" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Confidentiality Notice</a>
             </div>
-            <span style={{ color: "#FFFFFF", fontSize: 10, letterSpacing: "0.04em" }}>{f.copyright}</span>
+            <span style={{ color: "#FFFFFF", fontSize: 10, letterSpacing: "0.04em" }}>{ct(f.copyright, lang)}</span>
           </div>
         </div>
 
@@ -271,7 +270,7 @@ export function Footer() {
           data-testid="footer-disclaimer"
           style={{ color: "#FFFFFF", fontSize: 9, lineHeight: 1.6, paddingBottom: 18, maxWidth: "85ch" }}
         >
-          {f.disclaimer}
+          {t.footer.disclaimer}
         </p>
       </div>
     </footer>

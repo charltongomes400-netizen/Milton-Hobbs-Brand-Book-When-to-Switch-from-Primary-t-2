@@ -70,6 +70,8 @@ function Router() {
       <Route path="/careers" component={CareersPage} />
       <Route path="/insights" component={InsightsPage} />
       <Route path="/insights/:slug" component={ArticlePage} />
+      <Route path="/fr/publications" component={InsightsPage} />
+      <Route path="/fr/publications/:slug" component={ArticlePage} />
       <Route path="/expertise/immigration" component={ImmigrationPage} />
       <Route path="/expertise/corporate-commercial" component={CorporateCommercialPage} />
       <Route path="/expertise/mergers-acquisitions" component={MergersAcquisitionsPage} />
