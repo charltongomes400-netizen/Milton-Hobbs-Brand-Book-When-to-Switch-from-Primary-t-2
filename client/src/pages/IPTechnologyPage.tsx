@@ -488,7 +488,7 @@ function IPTechnologyInner() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9 }}
                 className="text-base leading-relaxed max-w-[500px] mb-10"
-                style={{ color: "rgba(255,255,255,0.58)" }}
+                style={{ color: "rgba(255,255,255,1)" }}
               >
                 {tx.heroSub}
               </motion.p>

@@ -716,8 +716,7 @@ function CorporateCommercialInner() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9 }}
-                className="text-white/58 text-base leading-relaxed max-w-[500px] mb-10"
-                style={{ color: "rgba(255,255,255,0.58)" }}
+                className="text-white text-base leading-relaxed max-w-[500px] mb-10"
               >
                 {tx.heroSub}
               </motion.p>
