@@ -810,10 +810,10 @@ export default function OurFirmPage() {
                 >
                   <div className="w-8 h-px bg-white mb-5" />
                   <p className="text-white text-[9px] tracking-[0.35em] uppercase font-bold mb-3">This is Our Promise</p>
-                  <p className="text-white text-base leading-relaxed mb-4">
+                  <p className="text-white mb-4 text-[18px]">
                     To Bring Precision to Complexity, Composure to Challenge, and a Client-First Mindset to Every Engagement.
                   </p>
-                  <p className="text-white text-[10px] tracking-[0.35em] uppercase font-bold">Milton Hobbs — Brand Promise</p>
+                  <p className="text-white tracking-[0.35em] uppercase font-bold text-[12px]">Milton Hobbs — Brand Promise</p>
                 </motion.blockquote>
               </div>
             </div>
