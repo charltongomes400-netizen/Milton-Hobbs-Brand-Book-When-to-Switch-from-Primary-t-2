@@ -708,7 +708,7 @@ function CorporateCommercialInner() {
                 initial={{ width: 0 }}
                 animate={{ width: "64px" }}
                 transition={{ delay: 0.8, duration: 0.7 }}
-                className="h-[2px] bg-[#8099FF] mb-8"
+                className="h-[2px] bg-white mb-8"
               />
 
               {/* Sub-copy */}
