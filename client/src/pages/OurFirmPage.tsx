@@ -952,7 +952,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={valuesInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6 }}
-                  className="tracking-[0.4em] uppercase font-bold mb-6 text-[001489] text-[18px]"
+                  className="tracking-[0.4em] uppercase font-bold mb-6 text-[#001489] text-[18px]"
                 >
                   Core Values
                 </motion.p>
