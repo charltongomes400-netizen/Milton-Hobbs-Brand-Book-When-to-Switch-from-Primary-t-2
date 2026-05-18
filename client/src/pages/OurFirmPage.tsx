@@ -659,10 +659,10 @@ export default function OurFirmPage() {
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             style={{
               position: "absolute",
-              top: "-8%",
+              top: "-10%",
               left: "-5%",
               width: "110%",
-              height: "116%",
+              height: "130%",
               border: 0,
               pointerEvents: "none",
             }}
