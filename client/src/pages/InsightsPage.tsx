@@ -311,7 +311,7 @@ function InsightsInner() {
       <section className="bg-[#001489] px-8 py-16">
         <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
           <div>
-            <p className="text-white tracking-[0.35em] uppercase font-bold mb-3 text-[10px]">
+            <p className="text-white tracking-[0.35em] uppercase font-bold mb-3 text-[15px]">
               {ct(indexPage.speakWithPartner.eyebrow, lang)}
             </p>
             <p className="text-white font-heading font-bold text-[clamp(1.1rem,2vw,1.4rem)] leading-snug max-w-[52ch]">
