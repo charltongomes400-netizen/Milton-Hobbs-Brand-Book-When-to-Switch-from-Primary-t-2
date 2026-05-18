@@ -345,7 +345,7 @@ export function Header() {
                       <span
                         className="font-heading font-bold flex-1"
                         style={{
-                          fontSize: "0.9375rem",
+                          fontSize: 16,
                           letterSpacing: "-0.01em",
                           color: "#001489",
                           lineHeight: 1.25,
