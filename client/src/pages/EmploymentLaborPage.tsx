@@ -261,13 +261,7 @@ function EmploymentLaborInner() {
           </div>
         </div>
       </section>
-      <section className="bg-[#001489] px-8 py-5">
-          <div className="max-w-[1400px] mx-auto flex items-center justify-between">
-            <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold">Milton Hobbs</p>
-            <p className="text-white/70 text-sm tracking-[0.2em] uppercase hidden sm:block">Reason. Rigor. Resolution.</p>
-          </div>
-        </section>
-        <section id="services" data-testid="employment-services" className="bg-white px-8 py-24">
+      <section id="services" data-testid="employment-services" className="bg-white px-8 py-24">
         <div className="max-w-[1400px] mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-14">
             <p className="text-[#001489] tracking-[0.35em] uppercase font-bold mb-4 text-[16px]">{tx.servicesEyebrow}</p>
