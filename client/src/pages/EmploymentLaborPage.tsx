@@ -231,8 +231,8 @@ function EmploymentLaborInner() {
               <p className="tracking-[0.35em] uppercase font-bold mb-5 text-[#001489] text-[16px]">{tx.overviewEyebrow}</p>
               <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.2vw,2.6rem)] tracking-tight leading-tight mb-8">{tx.overviewH2}</h2>
               <div className="h-[2px] w-16 bg-[#001489]/30 mb-8" />
-              <p className="text-[#001489]/65 text-base leading-[1.85] max-w-[58ch] mb-6">{tx.overviewP1}</p>
-              <p className="text-[#001489]/65 text-base leading-[1.85] max-w-[58ch] mb-10">{tx.overviewP2}</p>
+              <p className="text-[#001489] text-base leading-[1.85] max-w-[58ch] mb-6">{tx.overviewP1}</p>
+              <p className="text-[#001489] text-base leading-[1.85] max-w-[58ch] mb-10">{tx.overviewP2}</p>
               <div className="flex flex-wrap gap-3">
                 {tx.chips.map(chip => (
                   <span key={chip} className="inline-flex items-center gap-2 border border-[#001489]/15 text-[#001489] text-[16px] tracking-[0.18em] uppercase font-semibold px-4 py-2">
@@ -250,11 +250,11 @@ function EmploymentLaborInner() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="border border-[#001489]/12 p-6">
                   <p className="font-heading text-[#001489] font-bold text-xl">{tx.overviewDubai}</p>
-                  <p className="text-[#001489]/40 text-[16px] tracking-wider uppercase mt-1.5">{tx.overviewDubaiSub}</p>
+                  <p className="text-[#001489] text-[16px] tracking-wider uppercase mt-1.5">{tx.overviewDubaiSub}</p>
                 </div>
                 <div className="border border-[#001489]/12 p-6">
                   <p className="font-heading text-[#001489] font-bold text-xl">{tx.overviewParis}</p>
-                  <p className="text-[#001489]/40 text-[16px] tracking-wider uppercase mt-1.5">{tx.overviewParisSub}</p>
+                  <p className="text-[#001489] text-[16px] tracking-wider uppercase mt-1.5">{tx.overviewParisSub}</p>
                 </div>
               </div>
             </motion.div>
@@ -277,7 +277,7 @@ function EmploymentLaborInner() {
                 <p className="text-[#001489] text-[16px] tracking-[0.28em] uppercase font-bold mb-3 group-hover:text-white transition-colors">{svc.num}</p>
                 <h3 className="font-heading text-[#001489] font-bold text-[1.05rem] leading-snug mb-4 group-hover:text-white transition-colors">{svc.title}</h3>
                 <div className="h-px w-8 bg-[#001489]/20 mb-4 group-hover:bg-white/30 transition-colors" />
-                <p className="text-sm leading-relaxed flex-1 text-[#001489]/70 group-hover:text-white/80 transition-colors">{svc.description}</p>
+                <p className="text-sm leading-relaxed flex-1 text-[#001489] group-hover:text-white transition-colors">{svc.description}</p>
                 <div className="mt-6 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <button onClick={() => setModalOpen(true)} className="text-[#001489] text-[16px] tracking-[0.2em] uppercase font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all cursor-pointer bg-transparent border-0 p-0 group-hover:text-white">
                     {tx.hoverCta}<svg className="w-3 h-3" fill="none" viewBox="0 0 12 12"><path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" /></svg>
@@ -302,7 +302,7 @@ function EmploymentLaborInner() {
                 </div>
                 <h3 className="font-heading text-[#001489] font-bold text-base leading-snug mb-4">{d.label}</h3>
                 <div className="h-px w-8 bg-[#8099FF]/45 mb-4" />
-                <p className="text-[#001489]/55 text-sm leading-relaxed">{d.body}</p>
+                <p className="text-[#001489] text-sm leading-relaxed">{d.body}</p>
               </motion.div>
             ))}
           </div>
