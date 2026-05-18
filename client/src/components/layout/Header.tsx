@@ -314,7 +314,7 @@ export function Header() {
               <div>
                 <p style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: 12,
+                  fontSize: 16,
                   fontWeight: 700,
                   letterSpacing: "0.28em",
                   textTransform: "uppercase",
