@@ -510,7 +510,7 @@ function MergersAcquisitionsInner() {
                   {tx.breadcrumb}
                 </a>
                 <span className="text-white/20">·</span>
-                <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase font-medium">Mergers & Acquisitions</span>
+                <span className="text-white text-[16px] tracking-[0.3em] uppercase font-medium">Mergers & Acquisitions</span>
               </motion.div>
 
               {/* Headline */}

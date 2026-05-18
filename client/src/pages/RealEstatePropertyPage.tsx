@@ -274,7 +274,7 @@ function RealEstatePropertyInner() {
                   {tx.breadcrumb}
                 </a>
                 <span className="text-white/20">·</span>
-                <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase font-medium">Real Estate & Property</span>
+                <span className="text-white text-[16px] tracking-[0.3em] uppercase font-medium">Real Estate & Property</span>
               </motion.div>
 
               <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8 }} className="font-heading text-white font-bold text-[clamp(2.6rem,5vw,4.5rem)] leading-[1.06] tracking-tight mb-8">
