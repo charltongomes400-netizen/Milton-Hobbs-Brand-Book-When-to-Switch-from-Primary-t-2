@@ -777,7 +777,7 @@ function CorporateCommercialInner() {
                 {tx.chips.map(chip => (
                   <span
                     key={chip}
-                    className="inline-flex items-center gap-2 border border-[#001489]/15 text-[#001489] text-[11px] tracking-[0.18em] uppercase font-semibold px-4 py-2"
+                    className="inline-flex items-center gap-2 border border-[#001489]/15 text-[#001489] text-[16px] tracking-[0.18em] uppercase font-semibold px-4 py-2"
                   >
                     <span className="w-1.5 h-1.5 bg-[#8099FF] flex-shrink-0" />
                     {chip}
@@ -874,7 +874,7 @@ function CorporateCommercialInner() {
             transition={{ duration: 0.6 }}
             className="mb-14"
           >
-            <p className="text-[#001489] text-[11px] tracking-[0.35em] uppercase font-bold mb-4">{tx.whyEyebrow}</p>
+            <p className="text-[#001489] text-[16px] tracking-[0.35em] uppercase font-bold mb-4">{tx.whyEyebrow}</p>
             <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight">{tx.whyH2}</h2>
           </motion.div>
 
@@ -913,7 +913,7 @@ function CorporateCommercialInner() {
               viewport={{ once: true }}
               transition={{ duration: 0.65 }}
             >
-              <p className="text-white text-[11px] tracking-[0.35em] uppercase font-bold mb-4">{tx.bannerEyebrow}</p>
+              <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold mb-4">{tx.bannerEyebrow}</p>
               <h2 className="font-heading text-white font-bold text-[clamp(1.6rem,3vw,2.4rem)] tracking-tight leading-tight mb-3">
                 {tx.bannerH2}
               </h2>

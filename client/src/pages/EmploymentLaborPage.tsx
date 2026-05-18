@@ -220,7 +220,7 @@ function EmploymentLaborInner() {
               <p className="text-[#001489]/65 text-base leading-[1.85] max-w-[58ch] mb-10">{tx.overviewP2}</p>
               <div className="flex flex-wrap gap-3">
                 {tx.chips.map(chip => (
-                  <span key={chip} className="inline-flex items-center gap-2 border border-[#001489]/15 text-[#001489] text-[11px] tracking-[0.18em] uppercase font-semibold px-4 py-2">
+                  <span key={chip} className="inline-flex items-center gap-2 border border-[#001489]/15 text-[#001489] text-[16px] tracking-[0.18em] uppercase font-semibold px-4 py-2">
                     <span className="w-1.5 h-1.5 bg-[#8099FF] flex-shrink-0" />{chip}
                   </span>
                 ))}
@@ -298,7 +298,7 @@ function EmploymentLaborInner() {
         <div className="max-w-[1400px] mx-auto">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65 }}>
-              <p className="text-white text-[11px] tracking-[0.35em] uppercase font-bold mb-4">{tx.bannerEyebrow}</p>
+              <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold mb-4">{tx.bannerEyebrow}</p>
               <h2 className="font-heading text-white font-bold text-[clamp(1.6rem,3vw,2.4rem)] tracking-tight leading-tight mb-3">{tx.bannerH2}</h2>
               <p className="text-white/45 text-sm leading-relaxed max-w-[44ch]">{tx.bannerSub}</p>
             </motion.div>
