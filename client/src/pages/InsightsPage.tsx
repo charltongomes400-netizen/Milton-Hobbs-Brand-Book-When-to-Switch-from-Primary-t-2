@@ -129,7 +129,7 @@ function InsightsInner() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-white text-[10px] tracking-[0.38em] uppercase font-bold mb-4"
+              className="text-white tracking-[0.38em] uppercase font-bold mb-4 text-[16px]"
             >
               {ct(indexPage.hero.eyebrow, lang)}
             </motion.p>
