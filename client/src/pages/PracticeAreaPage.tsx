@@ -7,7 +7,7 @@ import { ContactModal } from "@/components/ContactModal";
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { practiceAreas, c } from "@/data/practiceAreasCopy";
 
-import imgCorporate from "@assets/kir-simakov-1y5PkTZOMbQ-unsplash_1779148053949.jpg";
+import imgCorporate from "@assets/expertisecorporate-commercial_1779148705273.png";
 import imgTax from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
 import imgMA from "@assets/optimized/marc-olivier-jodoin--HIiNFXcbtQ-unsplash_1776241615811.jpg";
 import imgStartups from "@assets/optimized/donny-jiang-42gFAgdIUC8-unsplash_1776241615811.jpg";
@@ -148,7 +148,6 @@ function PracticeAreaPageInner() {
     <div className="bg-[#001489] min-h-screen">
       <Header />
 
-      {/* ── HERO ─────────────────────────────────────────────────────────────────── */}
       <section
         id="home"
         data-testid="pa-hero"
@@ -176,7 +175,6 @@ function PracticeAreaPageInner() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: "easeOut" }}
             >
-              {/* Breadcrumb */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -198,7 +196,6 @@ function PracticeAreaPageInner() {
                 </span>
               </motion.div>
 
-              {/* H1 */}
               <motion.h1
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -214,7 +211,6 @@ function PracticeAreaPageInner() {
                 )}
               </motion.h1>
 
-              {/* Rule */}
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: "64px" }}
@@ -222,7 +218,6 @@ function PracticeAreaPageInner() {
                 className="h-[2px] bg-white mb-8"
               />
 
-              {/* Body */}
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -232,7 +227,6 @@ function PracticeAreaPageInner() {
                 {c(pa.hero.body, effectiveLang)}
               </motion.p>
 
-              {/* CTAs */}
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -258,7 +252,6 @@ function PracticeAreaPageInner() {
                 </a>
               </motion.div>
 
-              {/* Hreflang language switcher hint (hidden, for SEO link rel) */}
               <div className="hidden" aria-hidden="true">
                 <a href={enPath} hrefLang="en">EN</a>
                 <a href={frPath} hrefLang="fr">FR</a>
@@ -267,7 +260,6 @@ function PracticeAreaPageInner() {
           </div>
         </div>
 
-        {/* Scroll hint */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -285,7 +277,6 @@ function PracticeAreaPageInner() {
         </motion.div>
       </section>
 
-      {/* ── PRACTICE OVERVIEW ─────────────────────────────────────────────────────── */}
       <section
         id="overview"
         data-testid="pa-overview"
@@ -294,8 +285,6 @@ function PracticeAreaPageInner() {
       >
         <div className="max-w-[1400px] mx-auto">
           <div className="grid lg:grid-cols-[1fr_400px] gap-20 items-start">
-
-            {/* Left: text */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -316,7 +305,6 @@ function PracticeAreaPageInner() {
               ))}
             </motion.div>
 
-            {/* Right: practiceCard */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -325,7 +313,6 @@ function PracticeAreaPageInner() {
               className="relative hidden lg:flex flex-col gap-0"
               style={{ minHeight: 360 }}
             >
-              {/* Heading box (navy) */}
               <div
                 className="w-full flex flex-col items-start justify-end p-10"
                 style={{ background: "#001489", minHeight: 180 }}
@@ -336,7 +323,6 @@ function PracticeAreaPageInner() {
                 <div className="h-px w-10 bg-[#8099FF]/60 mt-4" />
               </div>
 
-              {/* Who We Advise box (white, bordered) */}
               <div className="border border-[#001489]/12 p-8">
                 <p className="text-[#001489] text-[11px] tracking-[0.35em] uppercase font-bold mb-5">
                   {c(pa.practiceCard.whoLabel, effectiveLang)}
@@ -355,13 +341,11 @@ function PracticeAreaPageInner() {
         </div>
       </section>
 
-      {/* ── KEY SERVICES ──────────────────────────────────────────────────────────── */}
       <section
         id="services"
         data-testid="pa-services"
         className="bg-white"
       >
-        {/* Navy header band */}
         <div className="bg-[#001489] px-8 py-16">
           <div className="max-w-[1400px] mx-auto">
             <motion.div
@@ -385,7 +369,6 @@ function PracticeAreaPageInner() {
           </div>
         </div>
 
-        {/* Service cards grid */}
         <div className="px-8 py-16">
           <div className="max-w-[1400px] mx-auto">
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#E4E9F5]">
@@ -427,7 +410,6 @@ function PracticeAreaPageInner() {
         </div>
       </section>
 
-      {/* ── THIN TAGLINE BAND ─────────────────────────────────────────────────────── */}
       <section className="bg-[#001489] px-8 py-5">
         <div className="max-w-[1400px] mx-auto flex items-center justify-between">
           <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold">Milton Hobbs</p>
@@ -437,7 +419,6 @@ function PracticeAreaPageInner() {
         </div>
       </section>
 
-      {/* ── WHAT SETS THIS PRACTICE APART ─────────────────────────────────────────── */}
       <section
         data-testid="pa-differentiators"
         data-header-theme="light"
@@ -482,7 +463,6 @@ function PracticeAreaPageInner() {
         </div>
       </section>
 
-      {/* ── CLOSING CTA BANNER ────────────────────────────────────────────────────── */}
       <section
         data-testid="pa-cta-banner"
         className="bg-[#001489] px-8 py-20"
