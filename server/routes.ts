@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import multer from "multer";
+import rateLimit from "express-rate-limit";
 import path from "path";
 import fs from "fs";
 import { storage } from "./storage";
@@ -11,19 +12,36 @@ const uploadsDir = path.join(process.cwd(), "uploads");
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 
 const upload = multer({
-  storage: multer.diskStorage({
-    destination: (_req, _file, cb) => cb(null, uploadsDir),
-    filename: (_req, file, cb) => {
-      const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-      cb(null, `${unique}${path.extname(file.originalname)}`);
-    },
-  }),
+  storage: multer.memoryStorage(),
   limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (_req, file, cb) => {
     const allowed = [".pdf", ".doc", ".docx"];
     const ext = path.extname(file.originalname).toLowerCase();
     cb(null, allowed.includes(ext));
   },
+});
+
+const uploadRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Too many requests. Please try again later." },
+});
+
+function saveUploadedFile(buffer: Buffer, originalname: string): { filename: string; filePath: string } {
+  const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+  const filename = `${unique}${path.extname(originalname)}`;
+  const filePath = path.join(uploadsDir, filename);
+  fs.writeFileSync(filePath, buffer);
+  return { filename, filePath };
+}
+
+const bodySchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  phone: z.string().min(5),
+  coverLetter: z.string().optional(),
 });
 
 export async function registerRoutes(httpServer: Server, app: Express): Promise<Server> {
@@ -41,7 +59,7 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     res.json(job);
   });
 
-  app.post("/api/jobs/:id/apply", upload.single("cv"), async (req, res) => {
+  app.post("/api/jobs/:id/apply", uploadRateLimit, upload.single("cv"), async (req, res) => {
     const jobId = parseInt(req.params.id);
     if (isNaN(jobId)) return res.status(400).json({ error: "Invalid job id" });
 
@@ -50,59 +68,55 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
 
     if (!req.file) return res.status(400).json({ error: "CV file is required" });
 
-    const bodySchema = z.object({
-      name: z.string().min(2),
-      email: z.string().email(),
-      phone: z.string().min(5),
-      coverLetter: z.string().optional(),
-    });
-
     const parsed = bodySchema.safeParse(req.body);
     if (!parsed.success) {
-      fs.unlinkSync(req.file.path);
       return res.status(400).json({ error: "Invalid form data", details: parsed.error.flatten() });
     }
 
-    const application = await storage.createApplication({
-      jobId,
-      name: parsed.data.name,
-      email: parsed.data.email,
-      phone: parsed.data.phone,
-      coverLetter: parsed.data.coverLetter ?? null,
-      cvFilename: req.file.originalname,
-      cvPath: req.file.path,
-    });
+    const { filename, filePath } = saveUploadedFile(req.file.buffer, req.file.originalname);
 
-    res.json({ success: true, id: application.id });
+    try {
+      const application = await storage.createApplication({
+        jobId,
+        name: parsed.data.name,
+        email: parsed.data.email,
+        phone: parsed.data.phone,
+        coverLetter: parsed.data.coverLetter ?? null,
+        cvFilename: filename,
+        cvPath: filePath,
+      });
+      res.json({ success: true, id: application.id });
+    } catch (err) {
+      fs.unlink(filePath, () => {});
+      throw err;
+    }
   });
 
-  app.post("/api/spontaneous-apply", upload.single("cv"), async (req, res) => {
+  app.post("/api/spontaneous-apply", uploadRateLimit, upload.single("cv"), async (req, res) => {
     if (!req.file) return res.status(400).json({ error: "CV file is required" });
-
-    const bodySchema = z.object({
-      name: z.string().min(2),
-      email: z.string().email(),
-      phone: z.string().min(5),
-      coverLetter: z.string().optional(),
-    });
 
     const parsed = bodySchema.safeParse(req.body);
     if (!parsed.success) {
-      fs.unlinkSync(req.file.path);
       return res.status(400).json({ error: "Invalid form data", details: parsed.error.flatten() });
     }
 
-    const application = await storage.createApplication({
-      jobId: null,
-      name: parsed.data.name,
-      email: parsed.data.email,
-      phone: parsed.data.phone,
-      coverLetter: parsed.data.coverLetter ?? null,
-      cvFilename: req.file.originalname,
-      cvPath: req.file.path,
-    });
+    const { filename, filePath } = saveUploadedFile(req.file.buffer, req.file.originalname);
 
-    res.json({ success: true, id: application.id });
+    try {
+      const application = await storage.createApplication({
+        jobId: null,
+        name: parsed.data.name,
+        email: parsed.data.email,
+        phone: parsed.data.phone,
+        coverLetter: parsed.data.coverLetter ?? null,
+        cvFilename: filename,
+        cvPath: filePath,
+      });
+      res.json({ success: true, id: application.id });
+    } catch (err) {
+      fs.unlink(filePath, () => {});
+      throw err;
+    }
   });
 
   return httpServer;
