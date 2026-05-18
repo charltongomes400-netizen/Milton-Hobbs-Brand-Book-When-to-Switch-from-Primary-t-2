@@ -345,14 +345,6 @@ function LitigationDisputesInner() {
                 </a>
               </motion.div>
 
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }} className="grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
-                {[{ stat: tx.stat1Val, label: tx.stat1Label }, { stat: tx.stat2Val, label: tx.stat2Label }, { stat: tx.stat3Val, label: tx.stat3Label }].map(s => (
-                  <div key={s.label}>
-                    <p className="font-heading text-white font-bold text-base leading-tight mb-1">{s.stat}</p>
-                    <p className="text-white/40 text-[10px] tracking-wider uppercase">{s.label}</p>
-                  </div>
-                ))}
-              </motion.div>
             </motion.div>
 
           </div>
