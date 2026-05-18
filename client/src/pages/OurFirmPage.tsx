@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type CSSProperties } from "react";
 import { motion, AnimatePresence, useInView, useMotionValue, useSpring, useAnimationFrame } from "framer-motion";
-import { LanguageProvider } from "@/contexts/LanguageContext";
+import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
+import { ourFirmCopy, ct, type OurFirmLang } from "@/data/ourFirmCopy";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
 
@@ -198,7 +199,7 @@ function MissionOrbit() {
       const angle = (t / 1000) * o.speed + o.phase;
       const x = CX + o.rx * Math.cos(angle);
       const y = CY + o.ry * Math.sin(angle);
-      const depth = Math.sin(angle); // -1 far, +1 near
+      const depth = Math.sin(angle);
       const r = o.rRange[0] + (o.rRange[1] - o.rRange[0]) * ((depth + 1) / 2);
       const opacity = (0.15 + 0.85 * ((depth + 1) / 2)).toFixed(2);
 
@@ -228,24 +229,19 @@ function MissionOrbit() {
         </radialGradient>
       </defs>
 
-      {/* Ambient glow behind centre */}
       <ellipse cx={CX} cy={CY} rx={185} ry={130} fill="url(#orbitGlow)" />
 
-      {/* Subtle background cross-hair */}
       <line x1={CX} y1={20} x2={CX} y2={280} stroke="#8099FF" strokeOpacity={0.06} strokeWidth={0.6} />
       <line x1={20} y1={CY} x2={400} y2={CY} stroke="#8099FF" strokeOpacity={0.06} strokeWidth={0.6} />
 
-      {/* === ORBIT RINGS — back half dimmer, front half brighter === */}
       {rings.map((o, i) => (
         <g key={i}>
-          {/* back arc (top of ellipse — further from viewer) */}
           <path
             d={`M ${CX - o.rx} ${CY} A ${o.rx} ${o.ry} 0 0 1 ${CX + o.rx} ${CY}`}
             stroke={o.color}
             strokeOpacity={0.1}
             strokeWidth={0.7}
           />
-          {/* front arc (bottom of ellipse — closer to viewer) */}
           <path
             d={`M ${CX + o.rx} ${CY} A ${o.rx} ${o.ry} 0 0 1 ${CX - o.rx} ${CY}`}
             stroke={o.color}
@@ -255,17 +251,14 @@ function MissionOrbit() {
         </g>
       ))}
 
-      {/* === TRAVELING DOTS (driven by useAnimationFrame) === */}
       <circle ref={dot1} cx={CX + 158} cy={CY} r={4} fill="white" />
       <circle ref={dot2} cx={CX + 112} cy={CY} r={3} fill="#8099FF" />
       <circle ref={dot3} cx={CX + 66}  cy={CY} r={3} fill="white" />
 
-      {/* === FLOATING LABELS (appear as dot nears viewer) === */}
       <text ref={lbl1} fontSize="6.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.3em" fill="white" opacity="0">PRECISION</text>
       <text ref={lbl2} fontSize="6.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.3em" fill="#8099FF" opacity="0">COMPOSURE</text>
       <text ref={lbl3} fontSize="6.5" textAnchor="middle" fontFamily="monospace" letterSpacing="0.3em" fill="white" opacity="0">CLIENT·FIRST</text>
 
-      {/* === CENTRE CORE === */}
       <motion.circle
         cx={CX} cy={CY} r={32}
         stroke="white" strokeWidth={0.8} strokeOpacity={0.35}
@@ -291,10 +284,6 @@ function MissionOrbit() {
 const coreValues = [
   {
     id: "excellence",
-    title: "Excellence",
-    titleFR: "Excellence",
-    desc: "We hold ourselves to the highest professional standards — every brief, every negotiation, every outcome.",
-    descFR: "Nous nous tenons aux normes professionnelles les plus exigeantes — chaque dossier, chaque négociation, chaque résultat.",
     icon: (active: boolean) => (
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
         {[28, 20, 13].map((r, i) => (
@@ -316,10 +305,6 @@ const coreValues = [
   },
   {
     id: "integrity",
-    title: "Integrity",
-    titleFR: "Intégrité",
-    desc: "Our counsel is built on honesty and transparency. We never compromise your trust for expediency.",
-    descFR: "Notre conseil repose sur l'honnêteté et la transparence. Nous ne sacrifions jamais votre confiance pour l'opportunité.",
     icon: (active: boolean) => (
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
         <motion.path
@@ -346,10 +331,6 @@ const coreValues = [
   },
   {
     id: "precision",
-    title: "Precision",
-    titleFR: "Précision",
-    desc: "No ambiguity, no vagueness. Clear, decisive, and commercially-grounded legal analysis every time.",
-    descFR: "Pas d'ambiguïté, pas de vague. Une analyse juridique claire, décisive et commercialement ancrée à chaque fois.",
     icon: (active: boolean) => (
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
         <line x1={32} y1={6} x2={32} y2={58} stroke={active ? "white" : "#001489"} strokeOpacity={0.12} strokeWidth={1} />
@@ -371,10 +352,6 @@ const coreValues = [
   },
   {
     id: "boldness",
-    title: "Boldness",
-    titleFR: "Audace",
-    desc: "We are not risk-averse — we are risk-intelligent. We act with strategic courage when it matters most.",
-    descFR: "Nous ne sommes pas frileux — nous sommes intelligents face au risque. Nous agissons avec courage stratégique.",
     icon: (active: boolean) => (
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
         <motion.path
@@ -393,10 +370,6 @@ const coreValues = [
   },
   {
     id: "crossborder",
-    title: "Cross-Border Mastery",
-    titleFR: "Maîtrise Transfrontalière",
-    desc: "Two legal systems, two cultures, one unified team. Our dual-jurisdiction DNA is a strategic advantage.",
-    descFR: "Deux systèmes juridiques, deux cultures, une équipe unifiée. Notre ADN bi-juridictionnel est un avantage stratégique.",
     icon: (active: boolean) => (
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
         <circle cx={20} cy={32} r={10} stroke={active ? "white" : "#001489"} strokeOpacity={active ? 0.6 : 0.25} strokeWidth={1} fill="none" />
@@ -428,16 +401,12 @@ const coreValues = [
   },
   {
     id: "discretion",
-    title: "Discretion",
-    titleFR: "Discrétion",
-    desc: "Trusted with the most sensitive mandates. Absolute confidentiality is not a courtesy — it is a commitment.",
-    descFR: "Confiés des mandats les plus sensibles. La confidentialité absolue n'est pas une politesse — c'est un engagement.",
     icon: (active: boolean) => (
       <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
         {[26, 20, 14, 9].map((r, i) => (
           <motion.circle
             key={i} cx={32} cy={32} r={r}
-            stroke={i === 3 ? (active ? "white" : "#001489") : (active ? "white" : "#001489")}
+            stroke={active ? "white" : "#001489"}
             strokeOpacity={i === 3 ? (active ? 0.85 : 0.4) : (active ? 0.12 + i * 0.07 : 0.05 + i * 0.04)}
             strokeWidth={1}
             strokeDasharray={`${2 * Math.PI * r * 0.8} ${2 * Math.PI * r * 0.2}`}
@@ -466,7 +435,7 @@ const coreValues = [
   },
 ];
 
-function ValueCard({ value, lang, index }: { value: typeof coreValues[0]; lang: string; index: number }) {
+function ValueCard({ value, label, body, index }: { value: typeof coreValues[0]; label: string; body: string; index: number }) {
   const [hovered, setHovered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -500,14 +469,14 @@ function ValueCard({ value, lang, index }: { value: typeof coreValues[0]; lang: 
         animate={{ color: hovered ? "white" : "#001489" }}
         transition={{ duration: 0.3 }}
       >
-        {lang === "FR" ? value.titleFR : value.title}
+        {label}
       </motion.p>
       <motion.p
         className="text-sm leading-relaxed"
         animate={{ color: hovered ? "#FFFFFF" : "#001489" }}
         transition={{ duration: 0.3 }}
       >
-        {lang === "FR" ? value.descFR : value.desc}
+        {body}
       </motion.p>
     </motion.div>
   );
@@ -623,8 +592,19 @@ function ConsultModal({ open, onClose }: { open: boolean; onClose: () => void })
 }
 
 export default function OurFirmPage() {
+  return (
+    <LanguageProvider>
+      <OurFirmContent />
+    </LanguageProvider>
+  );
+}
+
+function OurFirmContent() {
+  const { lang } = useLang();
+  const l: OurFirmLang = lang === "FR" ? "fr" : "en";
+  const copy = ourFirmCopy;
+
   const [modalOpen, setModalOpen] = useState(false);
-  const [lang] = useState<"EN" | "FR">("EN");
 
   const philosophyRef = useRef<HTMLDivElement>(null);
   const philosophyInView = useInView(philosophyRef, { once: true, margin: "-80px" });
@@ -638,41 +618,95 @@ export default function OurFirmPage() {
   const ytDivRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const LOOP_AT = 135; // 2 min 15 sec
+    const meta = copy.meta[l];
+    document.title = meta.title;
+
+    const setMeta = (nameOrProp: string, content: string, isProp = false) => {
+      const attr = isProp ? "property" : "name";
+      let el = document.querySelector(`meta[${attr}="${nameOrProp}"]`) as HTMLMetaElement | null;
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, nameOrProp);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
+
+    setMeta("description", meta.description);
+    setMeta("keywords", meta.keywords);
+    setMeta("og:title", meta.ogTitle, true);
+    setMeta("og:description", meta.ogDescription, true);
+    setMeta("og:type", "website", true);
+
+    const setHreflang = (hreflang: string, href: string) => {
+      const sel = `link[rel="alternate"][hreflang="${hreflang}"]`;
+      let el = document.querySelector(sel) as HTMLLinkElement | null;
+      if (!el) {
+        el = document.createElement("link");
+        el.setAttribute("rel", "alternate");
+        el.setAttribute("hreflang", hreflang);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("href", href);
+    };
+    const origin = window.location.origin;
+    setHreflang("en", `${origin}/firm`);
+    setHreflang("fr", `${origin}/fr/cabinet`);
+    setHreflang("x-default", `${origin}/firm`);
+
+    const ldId = "firm-jsonld";
+    let ldEl = document.getElementById(ldId) as HTMLScriptElement | null;
+    if (!ldEl) {
+      ldEl = document.createElement("script");
+      ldEl.id = ldId;
+      ldEl.setAttribute("type", "application/ld+json");
+      document.head.appendChild(ldEl);
+    }
+    ldEl.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": meta.ogTitle,
+      "description": meta.ogDescription,
+      "url": `${origin}/firm`,
+      "inLanguage": l === "fr" ? "fr-FR" : "en-GB",
+      "publisher": {
+        "@type": "LegalService",
+        "name": "Milton Hobbs",
+        "url": origin,
+        "address": [
+          { "@type": "PostalAddress", "addressLocality": "Dubai", "addressCountry": "AE" },
+          { "@type": "PostalAddress", "addressLocality": "Paris", "addressCountry": "FR" },
+        ],
+      },
+    });
+
+    return () => {
+      const ldScript = document.getElementById(ldId);
+      if (ldScript) ldScript.remove();
+    };
+  }, [l]);
+
+  useEffect(() => {
+    const LOOP_AT = 135;
 
     const initPlayer = () => {
       if (!ytDivRef.current) return;
-      const player = new (window as any).YT.Player(ytDivRef.current, {
+      new (window as any).YT.Player(ytDivRef.current, {
         videoId: "MnUh9nVYqjg",
         playerVars: {
-          autoplay: 1,
-          mute: 1,
-          controls: 0,
-          rel: 0,
-          modestbranding: 1,
-          playsinline: 1,
-          iv_load_policy: 3,
-          showinfo: 0,
-          disablekb: 1,
-          fs: 0,
-          enablejsapi: 1,
+          autoplay: 1, mute: 1, controls: 0, rel: 0,
+          modestbranding: 1, playsinline: 1,
+          iv_load_policy: 3, showinfo: 0, disablekb: 1, fs: 0, enablejsapi: 1,
         },
         events: {
           onReady: (e: any) => {
             e.target.playVideo();
             const interval = setInterval(() => {
-              try {
-                if (e.target.getCurrentTime() >= LOOP_AT) {
-                  e.target.seekTo(0, true);
-                }
-              } catch (_) {}
+              try { if (e.target.getCurrentTime() >= LOOP_AT) e.target.seekTo(0, true); } catch (_) {}
             }, 500);
             return () => clearInterval(interval);
           },
-          onStateChange: (e: any) => {
-            // YT.PlayerState.ENDED = 0
-            if (e.data === 0) e.target.seekTo(0, true);
-          },
+          onStateChange: (e: any) => { if (e.data === 0) e.target.seekTo(0, true); },
         },
       });
     };
@@ -695,374 +729,383 @@ export default function OurFirmPage() {
   ];
 
   return (
-    <LanguageProvider>
-      <div className="bg-[#001489] min-h-screen" data-testid="our-firm-page">
-        <Header />
+    <div className="bg-[#001489] min-h-screen" data-testid="our-firm-page">
+      <Header />
 
-        {/* ── HERO — full-screen YouTube video ── */}
-        <section
-          className="relative h-screen overflow-hidden"
-          data-testid="firm-hero"
+      {/* ── HERO — full-screen YouTube video ── */}
+      <section
+        className="relative h-screen overflow-hidden"
+        data-testid="firm-hero"
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: "-20%",
+            left: "-5%",
+            width: "110%",
+            height: "140%",
+            pointerEvents: "none",
+            overflow: "hidden",
+          }}
         >
-          {/* YT IFrame API target — oversized to crop title bar and bottom bar */}
-          <div
-            style={{
-              position: "absolute",
-              top: "-20%",
-              left: "-5%",
-              width: "110%",
-              height: "140%",
-              pointerEvents: "none",
-              overflow: "hidden",
-            }}
+          <div ref={ytDivRef} style={{ width: "100%", height: "100%" }} />
+        </div>
+
+        <div className="absolute bottom-8 left-0 right-0 z-10 flex justify-center pointer-events-none">
+          <motion.div
+            animate={{ y: [0, 7, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-2"
           >
-            <div
-              ref={ytDivRef}
-              style={{ width: "100%", height: "100%" }}
-            />
-          </div>
+            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, letterSpacing: "0.32em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)", fontWeight: 600 }}>
+              Scroll
+            </span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M7 2v10M2 7l5 5 5-5" stroke="rgba(255,255,255,0.55)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </motion.div>
+        </div>
+      </section>
 
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-0 right-0 z-10 flex justify-center pointer-events-none">
-            <motion.div
-              animate={{ y: [0, 7, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="flex flex-col items-center gap-2"
-            >
-              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, letterSpacing: "0.32em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)", fontWeight: 600 }}>
-                Scroll
-              </span>
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M7 2v10M2 7l5 5 5-5" stroke="rgba(255,255,255,0.55)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </motion.div>
-          </div>
-        </section>
+      {/* ── PHILOSOPHY & PURPOSE ── */}
+      <section
+        id="philosophy"
+        ref={philosophyRef}
+        data-header-theme="light"
+        className="bg-white py-32 px-8"
+        data-testid="firm-philosophy"
+      >
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
-        {/* ── PHILOSOPHY & PURPOSE ── */}
-        <section
-          id="philosophy"
-          ref={philosophyRef}
-          data-header-theme="light"
-          className="bg-white py-32 px-8"
-          data-testid="firm-philosophy"
-        >
-          <div className="max-w-[1400px] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-
-              <div>
-                <motion.p
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={philosophyInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-[#001489] tracking-[0.4em] uppercase font-bold mb-8 text-[18px]"
-                >
-                  Our Philosophy & Purpose
-                </motion.p>
-                <motion.h2
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={philosophyInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.2 }}
-                  className="font-heading text-[#001489] font-bold leading-[1.05] tracking-tight mb-10"
-                  style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
-                >
-                  Complexity demands<br />
-                  <span className="text-[#001489]">clarity.</span>
-                </motion.h2>
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  animate={philosophyInView ? { scaleX: 1 } : {}}
-                  transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                  className="w-16 h-0.5 bg-[#001489] mb-10 origin-left"
-                />
-                <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.5 }}
-                  className="text-[#001489] text-base leading-relaxed mb-6"
-                >
-                  At Milton Hobbs, we are committed to delivering legal counsel that is clear, composed, and commercially astute. In a fast-moving and increasingly complex environment, our clients rely on us to provide not only sound legal advice, but strategic perspective that empowers action.
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.55 }}
-                  className="text-[#001489] text-base leading-relaxed mb-6"
-                >
-                  We operate with intention — every word, every argument, and every interaction is considered and purposeful. Our approach is marked by discretion, clarity, and quiet confidence, offering clients a seamless experience across multiple legal systems and cultural contexts.
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.6 }}
-                  className="text-[#001489] text-base leading-relaxed"
-                >
-                  As a boutique firm, we prioritise depth over volume. Our model ensures direct access to experienced counsel, fluent in English, French, and Arabic, with deep knowledge of the regulatory frameworks that shape the UAE, France, and the broader Gulf region.
-                </motion.p>
-              </div>
-
-              <div>
-                <motion.blockquote
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  className="bg-[#001489] p-8"
-                >
-                  <div className="w-8 h-px bg-white mb-5" />
-                  <p className="text-white text-[9px] tracking-[0.35em] uppercase font-bold mb-3">This is Our Promise</p>
-                  <p className="text-white mb-4 text-[18px]">
-                    To Bring Precision to Complexity, Composure to Challenge, and a Client-First Mindset to Every Engagement.
-                  </p>
-                  <p className="text-white tracking-[0.35em] uppercase font-bold text-[12px]">Milton Hobbs — Brand Promise</p>
-                </motion.blockquote>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#001489] mt-20">
-              {[
-                { num: "01", title: "Boutique Precision", body: "No delegation chains. The partners who pitch the matter are the partners who execute it. Every mandate receives the firm's highest attention." },
-                { num: "02", title: "Dual-Jurisdiction DNA", body: "With offices in Dubai and Paris, we carry two legal traditions and two regulatory cultures — unified in one coherent approach for your matter." },
-                { num: "03", title: "Commercial Alignment", body: "We understand your business objectives before your legal ones. Our counsel is always aligned with your commercial outcomes, not just legal technicalities." },
-                { num: "04", title: "Long-Term Partnership", body: "We do not operate transactionally. Our aim is to become your trusted legal counsel across years and mandates — not just across documents." },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  data-testid={`philosophy-card-${i}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
-                  className="bg-white p-10"
-                >
-                  <h3 className="font-heading text-[#001489] font-bold text-xl tracking-tight mb-3">{item.title}</h3>
-                  <p className="text-[#001489] text-sm leading-relaxed">{item.body}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── BRAND STORY & MISSION ── */}
-        <section
-          ref={missionRef}
-          className="flex flex-col lg:flex-row overflow-hidden"
-          data-testid="firm-mission"
-        >
-          {/* Left — white panel */}
-          <div className="w-full lg:w-1/2 bg-white py-32 px-12 xl:px-20">
-            <motion.p
-              initial={{ opacity: 0, x: -20 }}
-              animate={missionInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-[#001489] tracking-[0.4em] uppercase font-bold mb-8 text-[18px]"
-            >
-              Brand Story & Mission
-            </motion.p>
-
-            <motion.h2
-              initial={{ opacity: 0, x: -20 }}
-              animate={missionInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="font-heading text-[#001489] font-bold leading-tight tracking-tight mb-8"
-              style={{ fontSize: "clamp(1.9rem, 3vw, 2.8rem)" }}
-            >
-              The name behind<br />
-              <span className="text-[#001489]">the firm.</span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={missionInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="text-[#001489] text-sm leading-relaxed mb-5"
-            >
-              At Milton Hobbs, we believe the strongest ideas are the simplest ones — delivered with clarity, grounded in purpose, and designed to endure. The name brings together two powerful intellectual legacies:
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={missionInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.38 }}
-              className="space-y-3 mb-6 pl-4 border-l border-[#001489]"
-            >
-              <p className="text-[#001489] text-sm leading-relaxed">
-                <span className="text-[#001489] font-semibold">John Milton</span> — the voice of liberty, human dignity, and moral conviction.
-              </p>
-              <p className="text-[#001489] text-sm leading-relaxed">
-                <span className="text-[#001489] font-semibold">Thomas Hobbes</span> — the architect of legal order, realism, and rational governance.
-              </p>
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={missionInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.45 }}
-              className="text-[#001489] text-sm leading-relaxed mb-10"
-            >
-              While their philosophies diverged, together they represent the necessary balance between justice and control, between empathy and authority. At Milton Hobbs, we embrace this duality — true clarity lies not in choosing one over the other, but in navigating the tension between them with purpose.
-            </motion.p>
-
-            <div className="grid grid-cols-2 gap-px bg-[#001489]">
-              {[
-                { label: "Strategic", body: "Every engagement is approached with long-term commercial logic. We think three moves ahead — so you are never caught off guard." },
-                { label: "Approachable", body: "Elite counsel should not feel distant. We communicate with clarity and warmth, treating every client as a genuine partner." },
-                { label: "Client-Centric", body: "Your objectives shape everything we do. Our model is built around your matter, your timeline, and your preferred outcome." },
-                { label: "Principled", body: "We do not cut corners or compromise on ethics. Our integrity is the foundation every piece of advice is built upon." },
-              ].map((v, i) => (
-                <motion.div
-                  key={i}
-                  data-testid={`brand-value-${i}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={missionInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }}
-                  className="bg-white p-7"
-                >
-                  <div className="w-6 h-px bg-[#001489] mb-4" />
-                  <p className="font-heading text-[#001489] font-bold text-base tracking-tight mb-2">{v.label}</p>
-                  <p className="text-[#001489] text-xs leading-relaxed">{v.body}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right — blue panel */}
-          <div className="w-full lg:w-1/2 bg-[#001489] flex items-center justify-center py-32 px-12 xl:px-20">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={missionInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.9, delay: 0.4 }}
-              className="relative w-full h-[360px] overflow-hidden"
-            >
-              <MissionOrbit />
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ── CORE VALUES ── */}
-        <section
-          id="values"
-          ref={valuesRef}
-          data-header-theme="light"
-          className="bg-[#F6F7FB] py-32 px-8"
-          data-testid="firm-values"
-        >
-          <div className="max-w-[1400px] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 mb-20 items-end">
-              <div>
-                <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={valuesInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6 }}
-                  className="tracking-[0.4em] uppercase font-bold mb-6 text-[#001489] text-[18px]"
-                >
-                  Core Values
-                </motion.p>
-                <motion.h2
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={valuesInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.1 }}
-                  className="font-heading text-[#001489] font-bold leading-tight tracking-tight"
-                  style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
-                >
-                  What drives<br />every decision.
-                </motion.h2>
-              </div>
+            <div>
+              <motion.p
+                initial={{ opacity: 0, x: -20 }}
+                animate={philosophyInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-[#001489] tracking-[0.4em] uppercase font-bold mb-8 text-[18px]"
+              >
+                {ct(copy.ourPhilosophy.eyebrow, l)}
+              </motion.p>
+              <motion.h2
+                initial={{ opacity: 0, x: -20 }}
+                animate={philosophyInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="font-heading text-[#001489] font-bold leading-[1.05] tracking-tight mb-10"
+                style={{ fontSize: "clamp(2rem, 3.5vw, 3.2rem)" }}
+              >
+                {ct(copy.ourPhilosophy.h1, l)}
+              </motion.h2>
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={philosophyInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                className="w-16 h-0.5 bg-[#001489] mb-10 origin-left"
+              />
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
-                animate={valuesInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="text-[#001489] text-base leading-relaxed max-w-xl self-end"
+                animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.5 }}
+                className="text-[#001489] text-base leading-relaxed mb-6"
               >
-                We are strategic in our thinking, approachable in our manner, client-centric in our model, and principled in everything we do. These are not aspirations — they are the standards we hold ourselves to on every instruction, for every client.
+                {ct(copy.ourPhilosophy.leftColumn.paragraph1, l)}
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.55 }}
+                className="text-[#001489] text-base leading-relaxed mb-6"
+              >
+                {ct(copy.ourPhilosophy.leftColumn.paragraph2, l)}
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.6 }}
+                className="text-[#001489] text-base leading-relaxed"
+              >
+                {ct(copy.ourPhilosophy.leftColumn.paragraph3, l)}
               </motion.p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#001489]">
-              {coreValues.map((value, i) => (
-                <ValueCard key={value.id} value={value} lang={lang} index={i} />
-              ))}
+            <div>
+              <motion.blockquote
+                initial={{ opacity: 0, y: 20 }}
+                animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="bg-[#001489] p-8"
+              >
+                <div className="w-8 h-px bg-white mb-5" />
+                <p className="text-white text-[9px] tracking-[0.35em] uppercase font-bold mb-3">
+                  {ct(copy.ourPhilosophy.promiseCard.eyebrow, l)}
+                </p>
+                <p className="text-white mb-4 text-[18px]">
+                  {ct(copy.ourPhilosophy.promiseCard.body, l)}
+                </p>
+                <p className="text-white tracking-[0.35em] uppercase font-bold text-[12px]">
+                  {ct(copy.ourPhilosophy.promiseCard.sourceLine, l)}
+                </p>
+              </motion.blockquote>
             </div>
           </div>
-        </section>
 
-        {/* ── BOOK A CONSULTATION ── */}
-        <section
-          className="bg-[#F6F7FB] py-28 px-8 overflow-hidden relative"
-          data-testid="firm-cta"
-        >
-          <div className="relative z-10 max-w-[1400px] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#001489] mt-20">
+            {copy.ourPhilosophy.supportGrid.map((item, i) => (
+              <motion.div
+                key={i}
+                data-testid={`philosophy-card-${i}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
+                className="bg-white p-10"
+              >
+                <h3 className="font-heading text-[#001489] font-bold text-xl tracking-tight mb-3">
+                  {ct(item.title, l)}
+                </h3>
+                <p className="text-[#001489] text-sm leading-relaxed">{ct(item.body, l)}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-              <div>
-                <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="text-[#001489] tracking-[0.4em] uppercase font-bold mb-6 text-[18px]"
-                >
-                  Book a Consultation
-                </motion.p>
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: 0.1 }}
-                  className="font-heading text-[#001489] font-bold leading-tight tracking-tight mb-6"
-                  style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
-                >
-                  Let's discuss<br />
-                  <span className="text-[#001489]">your matter.</span>
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: 0.2 }}
-                  className="text-[#001489] text-base leading-relaxed mb-10 max-w-md"
-                >
-                  Whether you need immediate counsel or are planning ahead, our partners are ready to assist you. We offer direct access to experienced advisors, fluent in English, French, and Arabic, across our Dubai and Paris offices.
-                </motion.p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 bg-[#001489]" />
-                    <div>
-                      <p className="text-[#001489] text-[9px] tracking-[0.35em] uppercase font-medium">Dubai</p>
-                      <p className="text-[#001489] text-sm">+971 4 523 2421</p>
-                    </div>
+      {/* ── BRAND STORY & MISSION ── */}
+      <section
+        ref={missionRef}
+        className="flex flex-col lg:flex-row overflow-hidden"
+        data-testid="firm-mission"
+      >
+        {/* Left — white panel */}
+        <div className="w-full lg:w-1/2 bg-white py-32 px-12 xl:px-20">
+          <motion.p
+            initial={{ opacity: 0, x: -20 }}
+            animate={missionInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-[#001489] tracking-[0.4em] uppercase font-bold mb-8 text-[18px]"
+          >
+            {ct(copy.brandStory.eyebrow, l)}
+          </motion.p>
+
+          <motion.h2
+            initial={{ opacity: 0, x: -20 }}
+            animate={missionInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="font-heading text-[#001489] font-bold leading-tight tracking-tight mb-8"
+            style={{ fontSize: "clamp(1.9rem, 3vw, 2.8rem)" }}
+          >
+            {ct(copy.brandStory.h2, l)}
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            animate={missionInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="text-[#001489] text-sm leading-relaxed mb-5"
+          >
+            {ct(copy.brandStory.openingParagraph, l)}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={missionInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.38 }}
+            className="space-y-3 mb-6 pl-4 border-l border-[#001489]"
+          >
+            <p className="text-[#001489] text-sm leading-relaxed">
+              <span className="text-[#001489] font-semibold">
+                {ct(copy.brandStory.pullQuote.milton.nameBold, l)}
+              </span>
+              {ct(copy.brandStory.pullQuote.milton.description, l)}
+            </p>
+            <p className="text-[#001489] text-sm leading-relaxed">
+              <span className="text-[#001489] font-semibold">
+                {ct(copy.brandStory.pullQuote.hobbes.nameBold, l)}
+              </span>
+              {ct(copy.brandStory.pullQuote.hobbes.description, l)}
+            </p>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            animate={missionInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.45 }}
+            className="text-[#001489] text-sm leading-relaxed mb-10"
+          >
+            {ct(copy.brandStory.closingParagraph, l)}
+          </motion.p>
+
+          <div className="grid grid-cols-2 gap-px bg-[#001489]">
+            {copy.brandStory.brandTraits.map((v, i) => (
+              <motion.div
+                key={i}
+                data-testid={`brand-value-${i}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={missionInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }}
+                className="bg-white p-7"
+              >
+                <div className="w-6 h-px bg-[#001489] mb-4" />
+                <p className="font-heading text-[#001489] font-bold text-base tracking-tight mb-2">{ct(v.title, l)}</p>
+                <p className="text-[#001489] text-xs leading-relaxed">{ct(v.body, l)}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right — blue panel */}
+        <div className="w-full lg:w-1/2 bg-[#001489] flex items-center justify-center py-32 px-12 xl:px-20">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={missionInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.9, delay: 0.4 }}
+            className="relative w-full h-[360px] overflow-hidden"
+          >
+            <MissionOrbit />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── CORE VALUES ── */}
+      <section
+        id="values"
+        ref={valuesRef}
+        data-header-theme="light"
+        className="bg-[#F6F7FB] py-32 px-8"
+        data-testid="firm-values"
+      >
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 mb-20 items-end">
+            <div>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={valuesInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6 }}
+                className="tracking-[0.4em] uppercase font-bold mb-6 text-[#001489] text-[18px]"
+              >
+                {ct(copy.coreValues.eyebrow, l)}
+              </motion.p>
+              <motion.h2
+                initial={{ opacity: 0, y: 16 }}
+                animate={valuesInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                className="font-heading text-[#001489] font-bold leading-tight tracking-tight"
+                style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
+              >
+                {ct(copy.coreValues.h2, l)}
+              </motion.h2>
+            </div>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={valuesInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="text-[#001489] text-base leading-relaxed max-w-xl self-end"
+            >
+              {ct(copy.coreValues.intro, l)}
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#001489]">
+            {copy.coreValues.values.map((jv, i) => {
+              const valueEntry = coreValues.find(
+                v => v.id === jv.slug || (v.id === "crossborder" && jv.slug === "cross-border-mastery")
+              );
+              if (!valueEntry) return null;
+              return (
+                <ValueCard
+                  key={jv.slug}
+                  value={valueEntry}
+                  label={ct(jv.label, l)}
+                  body={ct(jv.body, l)}
+                  index={i}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── BOOK A CONSULTATION ── */}
+      <section
+        className="bg-[#F6F7FB] py-28 px-8 overflow-hidden relative"
+        data-testid="firm-cta"
+      >
+        <div className="relative z-10 max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            <div>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-[#001489] tracking-[0.4em] uppercase font-bold mb-6 text-[18px]"
+              >
+                {ct(copy.bookConsultation.eyebrow, l)}
+              </motion.p>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                className="font-heading text-[#001489] font-bold leading-tight tracking-tight mb-6"
+                style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
+              >
+                {ct(copy.bookConsultation.h2, l)}
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="text-[#001489] text-base leading-relaxed mb-10 max-w-md"
+              >
+                {ct(copy.bookConsultation.body, l)}
+              </motion.p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-1.5 h-1.5 bg-[#001489]" />
+                  <div>
+                    <p className="text-[#001489] text-[9px] tracking-[0.35em] uppercase font-medium">
+                      {ct(copy.bookConsultation.contactDetails.dubai.label, l)}
+                    </p>
+                    <p className="text-[#001489] text-sm">{copy.bookConsultation.contactDetails.dubai.value}</p>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 bg-[#001489]" />
-                    <div>
-                      <p className="text-[#001489] text-[9px] tracking-[0.35em] uppercase font-medium">Paris</p>
-                      <p className="text-[#001489] text-sm">contact@miltonhobbs.com</p>
-                    </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-1.5 h-1.5 bg-[#001489]" />
+                  <div>
+                    <p className="text-[#001489] text-[9px] tracking-[0.35em] uppercase font-medium">
+                      {ct(copy.bookConsultation.contactDetails.paris.label, l)}
+                    </p>
+                    <p className="text-[#001489] text-sm">{copy.bookConsultation.contactDetails.paris.value}</p>
                   </div>
                 </div>
               </div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="bg-white p-10 relative border border-[#E5E9F0]"
-              >
-                <div className="absolute top-0 left-0 right-0 h-1 bg-[#001489]" />
-                <CTAForm onSuccess={() => {}} />
-              </motion.div>
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="bg-white p-10 relative border border-[#E5E9F0]"
+            >
+              <div className="absolute top-0 left-0 right-0 h-1 bg-[#001489]" />
+              <CTAForm lang={l} onSuccess={() => {}} />
+            </motion.div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <Footer />
+      <Footer />
 
-        <ConsultModal open={modalOpen} onClose={() => setModalOpen(false)} />
-      </div>
-    </LanguageProvider>
+      <ConsultModal open={modalOpen} onClose={() => setModalOpen(false)} />
+    </div>
   );
 }
 
-function CTAForm({ onSuccess }: { onSuccess: () => void }) {
+function CTAForm({ lang, onSuccess }: { lang: OurFirmLang; onSuccess: () => void }) {
+  const copy = ourFirmCopy;
   const [form, setForm] = useState({ name: "", email: "", area: "" });
   const [submitted, setSubmitted] = useState(false);
   const inputCls = "w-full bg-white border border-[#E5E9F0] text-[#001489] text-sm px-4 py-3 placeholder:text-[#001489] focus:outline-none focus:border-[#001489] transition-colors";
@@ -1083,20 +1126,44 @@ function CTAForm({ onSuccess }: { onSuccess: () => void }) {
           </svg>
         </div>
         <p className="text-[#001489] text-xs tracking-[0.3em] uppercase font-bold mb-2">Request Received</p>
-        <p className="text-[#001489] text-sm">A partner will be in touch shortly.</p>
+        <p className="text-[#001489] text-sm">{ct(copy.bookConsultation.form.autoReply, lang)}</p>
       </div>
     );
   }
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
-        <input data-testid="cta-name" name="name" value={form.name} onChange={handleChange} placeholder="Full Name" required className={inputCls} />
-        <input data-testid="cta-email" name="email" type="email" value={form.email} onChange={handleChange} placeholder="Email Address" required className={inputCls} />
+        <input
+          data-testid="cta-name"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          placeholder={ct(copy.bookConsultation.form.fields.fullName.placeholder, lang)}
+          required
+          className={inputCls}
+        />
+        <input
+          data-testid="cta-email"
+          name="email"
+          type="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder={ct(copy.bookConsultation.form.fields.email.placeholder, lang)}
+          required
+          className={inputCls}
+        />
       </div>
-      <select data-testid="cta-area" name="area" value={form.area} onChange={handleChange} required className={`${inputCls} appearance-none`}>
-        <option value="">Area of Interest</option>
-        {["Corporate & Commercial", "Real Estate", "Litigation", "Arbitration", "Employment", "Banking & Finance", "Tax", "Immigration", "IP", "Technology", "Other"].map(o => (
-          <option key={o} value={o}>{o}</option>
+      <select
+        data-testid="cta-area"
+        name="area"
+        value={form.area}
+        onChange={handleChange}
+        required
+        className={`${inputCls} appearance-none`}
+      >
+        <option value="">{ct(copy.bookConsultation.form.fields.areaOfInterest.placeholder, lang)}</option>
+        {copy.bookConsultation.form.fields.areaOfInterest.options.map(o => (
+          <option key={o.value} value={o.value}>{ct(o.label, lang)}</option>
         ))}
       </select>
       <button
@@ -1104,11 +1171,14 @@ function CTAForm({ onSuccess }: { onSuccess: () => void }) {
         type="submit"
         className="w-full bg-[#001489] text-white text-xs tracking-[0.2em] uppercase font-bold py-4 hover:bg-[#0A1E6E] transition-colors"
       >
-        Request a Consultation
+        {ct(copy.bookConsultation.form.submitButton, lang)}
         <svg className="inline-block ml-3 w-3 h-3" fill="none" viewBox="0 0 12 12">
           <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
         </svg>
       </button>
+      <p className="text-[#001489] text-[10px] leading-relaxed opacity-60">
+        {ct(copy.bookConsultation.form.confidentialityNotice, lang)}
+      </p>
     </form>
   );
 }

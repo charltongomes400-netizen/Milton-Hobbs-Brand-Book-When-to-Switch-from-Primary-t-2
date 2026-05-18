@@ -66,6 +66,7 @@ function Router() {
       <Route path="/home-v6" component={HomeObsidian} />
       <Route path="/home-v7" component={HomeClaret} />
       <Route path="/firm" component={OurFirmPage} />
+      <Route path="/fr/cabinet" component={OurFirmPage} />
       <Route path="/careers" component={CareersPage} />
       <Route path="/insights" component={InsightsPage} />
       <Route path="/insights/:slug" component={ArticlePage} />
