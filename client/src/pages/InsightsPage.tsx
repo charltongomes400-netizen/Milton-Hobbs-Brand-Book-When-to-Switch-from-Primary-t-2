@@ -3,8 +3,7 @@ import { motion } from "framer-motion";
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
-import { insightsCopy, ct } from "@/data/insightsCopy";
-import { ContactModal } from "@/components/ContactModal";
+import { insightsCopy, ct, type InsightCard } from "@/data/insightsCopy";
 import imgCompliance from "@assets/generated_images/insight-compliance.png";
 import imgFamilyBusiness from "@assets/generated_images/insight-family-business.png";
 import imgDigitalPrivacy from "@assets/generated_images/insight-digital-privacy.png";
@@ -19,9 +18,19 @@ const slugImageMap: Record<string, string> = {
 
 const { indexPage } = insightsCopy;
 
+const FILTER_LABELS: Record<string, { en: string; fr: string }> = {
+  ALL:        { en: "ALL",        fr: "TOUT"        },
+  COMPLIANCE: { en: "COMPLIANCE", fr: "CONFORMITÉ"  },
+  CORPORATE:  { en: "CORPORATE",  fr: "CORPORATE"   },
+  TECHNOLOGY: { en: "TECHNOLOGY", fr: "TECHNOLOGIE" },
+  "M&A":      { en: "M&A",        fr: "M&A"         },
+};
+
 function InsightsInner() {
   const { lang } = useLang();
+  const [filter, setFilter] = useState<string>("ALL");
   const [modalOpen, setModalOpen] = useState(false);
+  const isFr = lang === "FR";
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -30,7 +39,6 @@ function InsightsInner() {
     return () => { document.body.style.overflow = ""; };
   }, [modalOpen]);
 
-  const isFr = lang === "FR";
   const meta = isFr ? indexPage.meta.fr : indexPage.meta.en;
 
   useEffect(() => {
@@ -92,6 +100,20 @@ function InsightsInner() {
     };
   }, [lang]);
 
+  const featured = indexPage.cards[0];
+  const rest = indexPage.cards.slice(1);
+
+  const filterKeys = Object.keys(FILTER_LABELS);
+  const filteredCards = filter === "ALL"
+    ? rest
+    : rest.filter(c => c.category.en === filter);
+
+  const cardHref = (card: InsightCard) =>
+    isFr ? `/fr/publications/${card.slugFr}` : `/insights/${card.slug}`;
+
+  const featuredArticle = insightsCopy.articles[0];
+  const featuredLead = ct(featuredArticle.lead, lang).slice(0, 200).replace(/\s\w+$/, "") + " …";
+
   return (
     <div className="bg-white min-h-screen font-body">
       <Header />
@@ -100,15 +122,15 @@ function InsightsInner() {
       <section
         data-testid="insights-header"
         data-header-theme="dark"
-        className="bg-[#001489] pt-36 pb-16 px-8"
+        className="bg-[#001489] pt-32 pb-14 px-8"
       >
-        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <div>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-white text-[10px] tracking-[0.38em] uppercase font-bold mb-5"
+              className="text-white text-[10px] tracking-[0.38em] uppercase font-bold mb-4"
             >
               {ct(indexPage.hero.eyebrow, lang)}
             </motion.p>
@@ -116,7 +138,7 @@ function InsightsInner() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.1 }}
-              className="font-heading text-white font-bold text-[clamp(2rem,4vw,3.5rem)] leading-[1.06] tracking-tight"
+              className="font-heading text-white font-bold text-[clamp(2rem,3.8vw,3.2rem)] leading-[1.08] tracking-tight"
             >
               {ct(indexPage.hero.h1, lang)}
             </motion.h1>
@@ -125,21 +147,104 @@ function InsightsInner() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="text-white text-sm leading-relaxed max-w-[44ch] lg:pb-1"
+            className="text-white text-sm leading-relaxed max-w-[40ch] lg:pb-1"
           >
             {ct(indexPage.hero.subheadline, lang)}
           </motion.p>
         </div>
       </section>
 
-      {/* ── CARDS GRID ── */}
-      <section data-testid="insights-grid" className="px-8 pt-16 pb-20 bg-white">
+      {/* ── FEATURED ── */}
+      <section data-testid="insights-featured" className="px-8 pt-12 pb-6">
         <div className="max-w-[1400px] mx-auto">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {indexPage.cards.map((card, i) => {
-              const href = isFr
-                ? `/fr/publications/${card.slugFr}`
-                : `/insights/${card.slug}`;
+          <p className="text-[#001489] text-[10px] tracking-[0.38em] uppercase font-bold mb-6">
+            {isFr ? "À LA UNE" : "FEATURED"}
+          </p>
+          <a
+            href={cardHref(featured)}
+            className="group flex flex-col lg:flex-row border border-[#E8ECF5] hover:border-[#001489] transition-colors duration-200 overflow-hidden"
+            style={{ textDecoration: "none" }}
+            data-testid={`featured-article-${featured.slug}`}
+          >
+            {/* Image — ~58% */}
+            <div className="relative flex-shrink-0 lg:w-[58%] overflow-hidden" style={{ minHeight: 280 }}>
+              <img
+                src={slugImageMap[featured.slug]}
+                alt={ct(featured.title, lang)}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              />
+              <div className="absolute inset-0 bg-[#000A4F]/45 group-hover:bg-[#000A4F]/20 transition-colors duration-300" />
+              <div className="absolute top-5 left-5">
+                <span className="text-[9px] font-bold tracking-[0.22em] uppercase px-3 py-1.5 bg-white text-[#001489]">
+                  {ct(featured.category, lang)}
+                </span>
+              </div>
+            </div>
+
+            {/* Content — ~42% */}
+            <div className="flex flex-col justify-center gap-5 p-10 lg:p-12">
+              <div className="flex items-center gap-2 text-[#001489] text-[11px]">
+                <span>{ct(featured.date, lang)}</span>
+                <span>·</span>
+                <span>{featured.readMin} {isFr ? "min de lecture" : "min read"}</span>
+              </div>
+
+              <div>
+                <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.4rem,2.2vw,1.9rem)] leading-[1.12] tracking-tight mb-4">
+                  {ct(featured.title, lang)}
+                </h2>
+                <div className="w-12 h-[2px] bg-[#001489] mb-5" />
+                <p className="text-[#3D4D6A] text-sm leading-relaxed">
+                  {featuredLead}
+                </p>
+              </div>
+
+              <div className="flex items-end justify-between border-t border-[#E8ECF5] pt-5 mt-auto">
+                <div>
+                  <p className="text-[#001489] text-sm font-semibold">{featuredArticle.author.name}</p>
+                  <p className="text-[#3D4D6A] text-xs mt-0.5">{ct(featuredArticle.author.title, lang)}</p>
+                </div>
+                <span className="inline-flex items-center gap-2 text-[#001489] text-[10px] font-bold tracking-[0.2em] uppercase">
+                  {isFr ? "LIRE L'ARTICLE" : "READ ARTICLE"}
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+                    <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      {/* ── ALL INSIGHTS ── */}
+      <section data-testid="insights-grid" className="px-8 pt-10 pb-20">
+        <div className="max-w-[1400px] mx-auto">
+          {/* Row: label + filter tabs */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <p className="text-[#001489] text-[10px] tracking-[0.38em] uppercase font-bold">
+              {isFr ? "TOUTES LES ANALYSES" : "ALL INSIGHTS"}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {filterKeys.map(key => (
+                <button
+                  key={key}
+                  onClick={() => setFilter(key)}
+                  data-testid={`filter-${key}`}
+                  className={`text-[10px] font-bold tracking-[0.18em] uppercase px-4 py-1.5 border transition-colors duration-150 ${
+                    filter === key
+                      ? "bg-[#001489] text-white border-[#001489]"
+                      : "bg-white text-[#001489] border-[#001489] hover:bg-[#001489]/[0.06]"
+                  }`}
+                >
+                  {FILTER_LABELS[key][lang === "FR" ? "fr" : "en"]}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredCards.map((card, i) => {
               const img = slugImageMap[card.slug];
               return (
                 <motion.div
@@ -147,16 +252,16 @@ function InsightsInner() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.07 }}
+                  transition={{ duration: 0.45, delay: i * 0.07 }}
                   data-testid={`article-card-${card.slug}`}
                 >
                   <a
-                    href={href}
+                    href={cardHref(card)}
                     className="group flex flex-col h-full border border-[#E8ECF5] hover:border-[#001489] transition-colors duration-200 overflow-hidden"
                     style={{ textDecoration: "none" }}
                   >
                     {/* Image */}
-                    <div className="relative overflow-hidden" style={{ paddingBottom: "56.25%" }}>
+                    <div className="relative overflow-hidden" style={{ paddingBottom: "58%" }}>
                       {img && (
                         <img
                           src={img}
@@ -164,29 +269,28 @@ function InsightsInner() {
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-600 group-hover:scale-[1.04]"
                         />
                       )}
-                      <div className="absolute inset-0 bg-[#000A4F]/40 group-hover:bg-[#000A4F]/10 transition-colors duration-300" />
+                      <div className="absolute inset-0 bg-[#000A4F]/45 group-hover:bg-[#000A4F]/15 transition-colors duration-300" />
                       <div className="absolute top-4 left-4">
-                        <span className="text-[8px] font-bold tracking-[0.22em] uppercase px-2.5 py-1 bg-white text-[#001489]">
+                        <span className="text-[9px] font-bold tracking-[0.22em] uppercase px-2.5 py-1 bg-white text-[#001489]">
                           {ct(card.category, lang)}
                         </span>
                       </div>
                     </div>
 
                     {/* Content */}
-                    <div className="flex flex-col flex-1 p-6">
-                      <div className="flex items-center gap-2 text-[#001489] text-[10px] tracking-wider mb-4">
+                    <div className="flex flex-col flex-1 p-7">
+                      <div className="flex items-center gap-2 text-[#001489] text-[10px] tracking-wide mb-3">
                         <span>{ct(card.date, lang)}</span>
                         <span>·</span>
                         <span>{card.readMin} min</span>
                       </div>
-                      <h3 className="font-heading text-[#001489] font-bold text-[1rem] leading-snug tracking-tight mb-3 group-hover:opacity-70 transition-opacity duration-200 flex-1">
+                      <h3 className="font-heading text-[#001489] font-bold text-[1rem] leading-snug tracking-tight mb-4 flex-1">
                         {ct(card.title, lang)}
                       </h3>
-
-                      <div className="flex items-center justify-between pt-4 border-t border-[#001489]">
-                        <span className="text-[#001489] text-[11px]">Milton Hobbs</span>
-                        <span className="inline-flex items-center gap-1.5 text-[#001489] text-[9px] font-bold tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                          {ct(card.cta, lang)}
+                      <div className="flex items-center justify-between pt-4 border-t border-[#E8ECF5]">
+                        <span className="text-[#3D4D6A] text-[11px]">Milton Hobbs</span>
+                        <span className="inline-flex items-center gap-1.5 text-[#001489] text-[9px] font-bold tracking-[0.2em] uppercase">
+                          {isFr ? "Lire" : "Read"}
                           <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 10 10">
                             <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" strokeWidth="1.2" />
                           </svg>
@@ -198,10 +302,16 @@ function InsightsInner() {
               );
             })}
           </div>
+
+          {filteredCards.length === 0 && (
+            <p className="text-[#8099FF] text-sm py-12 text-center">
+              {isFr ? "Aucun article dans cette catégorie." : "No articles in this category."}
+            </p>
+          )}
         </div>
       </section>
 
-      {/* ── SPEAK WITH A PARTNER CTA ── */}
+      {/* ── SPEAK WITH A PARTNER ── */}
       <section className="bg-[#001489] px-8 py-16">
         <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
           <div>
@@ -212,21 +322,20 @@ function InsightsInner() {
               {ct(indexPage.speakWithPartner.heading, lang)}
             </p>
           </div>
-          <button
-            onClick={() => setModalOpen(true)}
+          <a
+            href="/#contact"
             data-testid="insights-contact-cta"
-            className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-white transition-colors flex-shrink-0 cursor-pointer"
+            className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-white transition-colors flex-shrink-0"
           >
             {ct(indexPage.speakWithPartner.cta, lang)}
             <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
               <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
             </svg>
-          </button>
+          </a>
         </div>
       </section>
 
       <Footer />
-      <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} practiceArea="Publications & Insights" />
     </div>
   );
 }
