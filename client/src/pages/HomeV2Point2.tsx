@@ -2608,15 +2608,6 @@ function PracticeAreasV18() {
                         zIndex: 2,
                       }}
                     >
-                      <span style={{
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        fontSize: 8,
-                        fontWeight: 700,
-                        letterSpacing: "0.24em",
-                        color: "rgba(255,255,255,0.38)",
-                      }}>
-                        {item.num}
-                      </span>
                       <span
                         className="font-heading font-bold"
                         style={{
@@ -2653,19 +2644,6 @@ function PracticeAreasV18() {
                         zIndex: 2,
                       }}
                     >
-                      {/* Number */}
-                      <p style={{
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        fontSize: 8,
-                        fontWeight: 700,
-                        letterSpacing: "0.34em",
-                        textTransform: "uppercase",
-                        color: "rgba(0,20,137,0.45)",
-                        marginBottom: 10,
-                      }}>
-                        {item.num}
-                      </p>
-
                       {/* Title */}
                       <h3
                         className="font-heading font-bold"
@@ -2816,9 +2794,6 @@ function PracticeAreasV18() {
                 <div style={{ position: "absolute", inset: 0, background: "#001489", mixBlendMode: "multiply" }} />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,20,0.75) 0%, transparent 100%)" }} />
                 <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", padding: "0 24px", gap: 16 }}>
-                  <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", color: "#7A84BE", flexShrink: 0 }}>
-                    {item.num}
-                  </span>
                   <span className="font-heading font-bold" style={{ fontSize: "clamp(1rem, 4vw, 1.25rem)", color: "#FFFFFF", flex: 1, textAlign: "left", lineHeight: 1.2 }}>
                     {item.title}
                   </span>
