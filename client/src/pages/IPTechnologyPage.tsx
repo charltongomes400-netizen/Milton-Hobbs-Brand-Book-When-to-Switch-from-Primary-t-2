@@ -422,7 +422,7 @@ function IPTechnologyInner() {
         className="relative min-h-screen bg-[#001489] flex items-center overflow-hidden pt-20"
       >
         <div className="relative z-10 max-w-[1400px] mx-auto px-8 py-20 w-full">
-          <div className="grid lg:grid-cols-[1fr_1.35fr] gap-20 items-center">
+          <div className="grid items-center">
 
             {/* ── Left: Text ── */}
             <motion.div
@@ -527,15 +527,6 @@ function IPTechnologyInner() {
               </motion.div>
             </motion.div>
 
-            {/* ── Right: IP Network Illustration ── */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.1, delay: 0.5 }}
-              className="relative hidden lg:flex items-center justify-center h-[620px]"
-            >
-              <IPNetworkScene />
-            </motion.div>
           </div>
         </div>
 

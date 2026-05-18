@@ -161,29 +161,6 @@ function EmploymentLaborInner() {
           style={{ objectPosition: "center 30%", mixBlendMode: "multiply" }}
         />
 
-        {/* Animated accent tiles */}
-        {ACCENT_TILES.map((tile, i) => (
-          <motion.div
-            key={i}
-            className="absolute pointer-events-none"
-            style={{
-              left:            tile.left,
-              top:             tile.top,
-              width:           TILE_SZ,
-              height:          TILE_SZ,
-              backgroundColor: tile.col,
-            }}
-            animate={{ opacity: [0, 0, 0.12, 0.12, 0, 0] }}
-            transition={{
-              duration: tile.dur,
-              delay:    tile.delay,
-              repeat:   Infinity,
-              ease:     "easeInOut",
-              times:    [0, 0.15, 0.40, 0.60, 0.85, 1],
-            }}
-          />
-        ))}
-
         {/* Bottom vignette */}
         <div
           className="absolute inset-x-0 bottom-0 pointer-events-none"

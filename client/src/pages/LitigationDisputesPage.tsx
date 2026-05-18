@@ -301,7 +301,7 @@ function LitigationDisputesInner() {
 
       <section id="home" data-testid="litigation-hero" data-header-theme="dark" className="relative min-h-screen bg-[#001489] flex items-center overflow-hidden pt-20">
         <div className="relative z-10 max-w-[1400px] mx-auto px-8 py-20 w-full">
-          <div className="grid lg:grid-cols-[1fr_1.35fr] gap-20 items-center">
+          <div className="grid items-center">
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: "easeOut" }}>
               <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }} className="inline-flex items-center gap-3 mb-8">
                 <a href="/#expertise" className="flex items-center gap-2 text-[#8099FF] text-[10px] tracking-[0.3em] uppercase font-semibold hover:opacity-80 transition-opacity">
@@ -343,9 +343,6 @@ function LitigationDisputesInner() {
               </motion.div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.1, delay: 0.5 }} className="relative hidden lg:flex items-center justify-center h-[620px]">
-              <LitigationIllustration />
-            </motion.div>
           </div>
         </div>
 

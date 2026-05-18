@@ -653,7 +653,7 @@ function CorporateCommercialInner() {
 
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-8 py-20 w-full">
-          <div className="grid lg:grid-cols-[1fr_1.35fr] gap-20 items-center">
+          <div className="grid items-center">
 
             {/* ── Left: Text ── */}
             <motion.div
@@ -758,15 +758,6 @@ function CorporateCommercialInner() {
               </motion.div>
             </motion.div>
 
-            {/* ── Right: 3D Corporate Briefcase ── */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.1, delay: 0.5 }}
-              className="relative hidden lg:flex items-center justify-center h-[620px]"
-            >
-              <Corporate3D />
-            </motion.div>
           </div>
         </div>
 
