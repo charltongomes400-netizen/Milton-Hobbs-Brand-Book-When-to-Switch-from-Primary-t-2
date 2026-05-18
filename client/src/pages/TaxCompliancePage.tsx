@@ -344,23 +344,21 @@ function TaxComplianceInner() {
           </div>
         </div>
       </section>
-      <section className="bg-[#001489] px-8 py-5">
-        <div className="max-w-[1400px] mx-auto flex items-center justify-between">
-          <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold">Milton Hobbs</p>
-          <p className="text-white/70 text-sm tracking-[0.2em] uppercase hidden sm:block">Reason. Rigor. Resolution.</p>
+      <section id="services" data-testid="tax-services" className="bg-white">
+        <div className="bg-[#001489] px-8 py-16">
+          <div className="max-w-[1400px] mx-auto">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+              <p className="text-white/70 text-[16px] tracking-[0.35em] uppercase font-bold mb-4">{tx.servicesEyebrow}</p>
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <h2 className="font-heading text-white font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight">{tx.servicesH2}</h2>
+                <p className="text-white/70 text-sm max-w-xs leading-relaxed">{tx.servicesSub}</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </section>
-      <section id="services" data-testid="tax-services" className="bg-white px-8 py-24">
-        <div className="max-w-[1400px] mx-auto">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-14">
-            <p className="text-[#001489] text-[16px] tracking-[0.35em] uppercase font-bold mb-4">{tx.servicesEyebrow}</p>
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-              <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight">{tx.servicesH2}</h2>
-              <p className="text-[#001489] text-sm max-w-xs leading-relaxed">{tx.servicesSub}</p>
-            </div>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#E4E9F5]">
+        <div className="px-8 py-16">
+          <div className="max-w-[1400px] mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#E4E9F5]">
             {services.map((svc, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55, delay: i * 0.06 }} data-testid={`service-card-${i}`} className="group bg-white p-8 flex flex-col hover:bg-[#001489] transition-colors duration-300">
                 <h3 className="font-heading text-[#001489] font-bold text-[1.05rem] leading-snug mb-4 group-hover:text-white transition-colors">{svc.title}</h3>
@@ -374,6 +372,7 @@ function TaxComplianceInner() {
               </motion.div>
             ))}
           </div>
+        </div>
         </div>
       </section>
       <section className="bg-[#001489] px-8 py-5">
