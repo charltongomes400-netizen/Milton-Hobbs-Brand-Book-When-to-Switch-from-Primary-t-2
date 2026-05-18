@@ -844,111 +844,96 @@ export default function OurFirmPage() {
         {/* ── BRAND STORY & MISSION ── */}
         <section
           ref={missionRef}
-          className="bg-[#001489] py-32 px-8 overflow-hidden"
+          className="flex flex-col lg:flex-row overflow-hidden"
           data-testid="firm-mission"
         >
-          <div className="max-w-[1400px] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          {/* Left — white panel */}
+          <div className="w-full lg:w-1/2 bg-white py-32 px-12 xl:px-20">
+            <motion.p
+              initial={{ opacity: 0, x: -20 }}
+              animate={missionInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-[#001489] text-[10px] tracking-[0.4em] uppercase font-bold mb-8"
+            >
+              Brand Story & Mission
+            </motion.p>
 
-              <div>
-                <motion.p
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={missionInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-white text-[10px] tracking-[0.4em] uppercase font-bold mb-8"
-                >
-                  Brand Story & Mission
-                </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, x: -20 }}
+              animate={missionInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="font-heading text-[#001489] font-bold leading-tight tracking-tight mb-8"
+              style={{ fontSize: "clamp(1.9rem, 3vw, 2.8rem)" }}
+            >
+              The name behind<br />
+              <span className="text-[#001489]">the firm.</span>
+            </motion.h2>
 
-                <motion.h2
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={missionInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.2 }}
-                  className="font-heading text-white font-bold leading-tight tracking-tight mb-8"
-                  style={{ fontSize: "clamp(1.9rem, 3vw, 2.8rem)" }}
-                >
-                  The name behind<br />
-                  <span className="text-white">the firm.</span>
-                </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={missionInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="text-[#001489] text-sm leading-relaxed mb-5"
+            >
+              At Milton Hobbs, we believe the strongest ideas are the simplest ones — delivered with clarity, grounded in purpose, and designed to endure. The name brings together two powerful intellectual legacies:
+            </motion.p>
 
-                <motion.p
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={missionInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.3 }}
-                  className="text-white text-sm leading-relaxed mb-5"
-                >
-                  At Milton Hobbs, we believe the strongest ideas are the simplest ones — delivered with clarity, grounded in purpose, and designed to endure. The name brings together two powerful intellectual legacies:
-                </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={missionInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.38 }}
+              className="space-y-3 mb-6 pl-4 border-l border-[#001489]"
+            >
+              <p className="text-[#001489] text-sm leading-relaxed">
+                <span className="text-[#001489] font-semibold">John Milton</span> — the voice of liberty, human dignity, and moral conviction.
+              </p>
+              <p className="text-[#001489] text-sm leading-relaxed">
+                <span className="text-[#001489] font-semibold">Thomas Hobbes</span> — the architect of legal order, realism, and rational governance.
+              </p>
+            </motion.div>
 
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={missionInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.45 }}
+              className="text-[#001489] text-sm leading-relaxed mb-10"
+            >
+              While their philosophies diverged, together they represent the necessary balance between justice and control, between empathy and authority. At Milton Hobbs, we embrace this duality — true clarity lies not in choosing one over the other, but in navigating the tension between them with purpose.
+            </motion.p>
+
+            <div className="grid grid-cols-2 gap-px bg-[#001489]">
+              {[
+                { label: "Strategic", body: "Every engagement is approached with long-term commercial logic. We think three moves ahead — so you are never caught off guard." },
+                { label: "Approachable", body: "Elite counsel should not feel distant. We communicate with clarity and warmth, treating every client as a genuine partner." },
+                { label: "Client-Centric", body: "Your objectives shape everything we do. Our model is built around your matter, your timeline, and your preferred outcome." },
+                { label: "Principled", body: "We do not cut corners or compromise on ethics. Our integrity is the foundation every piece of advice is built upon." },
+              ].map((v, i) => (
                 <motion.div
-                  initial={{ opacity: 0, y: 14 }}
+                  key={i}
+                  data-testid={`brand-value-${i}`}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={missionInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.38 }}
-                  className="space-y-3 mb-6 pl-4 border-l border-white"
+                  transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }}
+                  className="bg-white p-7"
                 >
-                  <p className="text-white text-sm leading-relaxed">
-                    <span className="text-white font-semibold">John Milton</span> — the voice of liberty, human dignity, and moral conviction.
-                  </p>
-                  <p className="text-white text-sm leading-relaxed">
-                    <span className="text-white font-semibold">Thomas Hobbes</span> — the architect of legal order, realism, and rational governance.
-                  </p>
+                  <div className="w-6 h-px bg-[#001489] mb-4" />
+                  <p className="font-heading text-[#001489] font-bold text-base tracking-tight mb-2">{v.label}</p>
+                  <p className="text-[#001489] text-xs leading-relaxed">{v.body}</p>
                 </motion.div>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={missionInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.45 }}
-                  className="text-white text-sm leading-relaxed mb-10"
-                >
-                  While their philosophies diverged, together they represent the necessary balance between justice and control, between empathy and authority. At Milton Hobbs, we embrace this duality — true clarity lies not in choosing one over the other, but in navigating the tension between them with purpose.
-                </motion.p>
-
-                <div className="grid grid-cols-2 gap-px bg-[#001489]">
-                  {[
-                    {
-                      label: "Strategic",
-                      body: "Every engagement is approached with long-term commercial logic. We think three moves ahead — so you are never caught off guard.",
-                    },
-                    {
-                      label: "Approachable",
-                      body: "Elite counsel should not feel distant. We communicate with clarity and warmth, treating every client as a genuine partner.",
-                    },
-                    {
-                      label: "Client-Centric",
-                      body: "Your objectives shape everything we do. Our model is built around your matter, your timeline, and your preferred outcome.",
-                    },
-                    {
-                      label: "Principled",
-                      body: "We do not cut corners or compromise on ethics. Our integrity is the foundation every piece of advice is built upon.",
-                    },
-                  ].map((v, i) => (
-                    <motion.div
-                      key={i}
-                      data-testid={`brand-value-${i}`}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={missionInView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }}
-                      className="bg-[#001489] p-7 group hover:bg-[#0A1E6E] transition-colors duration-300"
-                    >
-                      <div className="w-6 h-px bg-white mb-4 group-hover:w-10 transition-all duration-300" />
-                      <p className="font-heading text-white font-bold text-base tracking-tight mb-2">{v.label}</p>
-                      <p className="text-white text-xs leading-relaxed">{v.body}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.92 }}
-                  animate={missionInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.9, delay: 0.4 }}
-                  className="relative bg-[#001489] h-[360px] overflow-hidden"
-                >
-                  <MissionOrbit />
-                </motion.div>
-              </div>
+              ))}
             </div>
+          </div>
+
+          {/* Right — blue panel */}
+          <div className="w-full lg:w-1/2 bg-[#001489] flex items-center justify-center py-32 px-12 xl:px-20">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={missionInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.9, delay: 0.4 }}
+              className="relative w-full h-[360px] overflow-hidden"
+            >
+              <MissionOrbit />
+            </motion.div>
           </div>
         </section>
 
