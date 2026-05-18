@@ -117,7 +117,6 @@ function InsightsInner() {
   return (
     <div className="bg-white min-h-screen font-body">
       <Header />
-
       {/* ── HERO ── */}
       <section
         data-testid="insights-header"
@@ -153,11 +152,10 @@ function InsightsInner() {
           </motion.p>
         </div>
       </section>
-
       {/* ── FEATURED ── */}
       <section data-testid="insights-featured" className="px-8 pt-12 pb-6">
         <div className="max-w-[1400px] mx-auto">
-          <p className="text-[#001489] text-[10px] tracking-[0.38em] uppercase font-bold mb-6">
+          <p className="text-[#001489] tracking-[0.38em] uppercase font-bold mb-6 text-[16px]">
             {isFr ? "À LA UNE" : "FEATURED"}
           </p>
           <a
@@ -167,7 +165,7 @@ function InsightsInner() {
             data-testid={`featured-article-${featured.slug}`}
           >
             {/* Image — ~58% */}
-            <div className="relative flex-shrink-0 lg:w-[58%] overflow-hidden" style={{ minHeight: 280 }}>
+            <div className="relative flex-shrink-0 lg:w-[58%] overflow-hidden" style={{ minHeight: 290 }}>
               <img
                 src={slugImageMap[featured.slug]}
                 alt={ct(featured.title, lang)}
@@ -215,7 +213,6 @@ function InsightsInner() {
           </a>
         </div>
       </section>
-
       {/* ── ALL INSIGHTS ── */}
       <section data-testid="insights-grid" className="px-8 pt-10 pb-20">
         <div className="max-w-[1400px] mx-auto">
@@ -310,7 +307,6 @@ function InsightsInner() {
           )}
         </div>
       </section>
-
       {/* ── SPEAK WITH A PARTNER ── */}
       <section className="bg-[#001489] px-8 py-16">
         <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
@@ -334,7 +330,6 @@ function InsightsInner() {
           </a>
         </div>
       </section>
-
       <Footer />
     </div>
   );
