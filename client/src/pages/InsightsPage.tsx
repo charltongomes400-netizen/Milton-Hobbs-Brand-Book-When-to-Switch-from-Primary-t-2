@@ -72,7 +72,6 @@ function InsightsInner() {
   return (
     <div className="bg-white min-h-screen font-body">
       <Header />
-
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section
         data-testid="insights-header"
@@ -108,7 +107,6 @@ function InsightsInner() {
           </motion.p>
         </div>
       </section>
-
       {/* ── FEATURED ARTICLE ──────────────────────────────────────────────── */}
       <section data-testid="insights-featured" className="px-8 pt-14 pb-0 bg-white">
         <div className="max-w-[1400px] mx-auto">
@@ -175,7 +173,6 @@ function InsightsInner() {
           </a>
         </div>
       </section>
-
       {/* ── ALL ARTICLES ──────────────────────────────────────────────────── */}
       <section data-testid="insights-grid" className="px-8 pt-16 pb-20 bg-white">
         <div className="max-w-[1400px] mx-auto">
@@ -275,12 +272,11 @@ function InsightsInner() {
           )}
         </div>
       </section>
-
       {/* ── CTA STRIP ─────────────────────────────────────────────────────── */}
       <section className="bg-[#001489] px-8 py-16">
         <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
           <div>
-            <p className="text-white text-[11px] tracking-[0.35em] uppercase font-bold mb-3">Speak with a Partner</p>
+            <p className="text-white tracking-[0.35em] uppercase font-bold mb-3 text-[16px]">Speak with a Partner</p>
             <p className="text-white text-sm leading-relaxed max-w-[42ch]">Every publication reflects lived experience on complex matters. Discuss yours directly with a partner.</p>
           </div>
           <button
@@ -295,7 +291,6 @@ function InsightsInner() {
           </button>
         </div>
       </section>
-
       <Footer />
       <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} practiceArea="Publications & Insights" />
     </div>
