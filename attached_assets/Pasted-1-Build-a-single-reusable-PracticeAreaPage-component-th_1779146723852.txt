@@ -1,0 +1,41 @@
+1. **Build a single reusable PracticeAreaPage component** that iterates over the JSON structure and renders the same layout for all 8 practice areas. Each practice area's content comes from its entry in `practiceAreas[]`.
+
+2. **Wire URL routing** — each practice area is reachable at `/expertise/{slug}` (EN) and `/fr/expertise/{slugFr}` (FR). The eight slugs are:
+   - corporate-commercial
+   - tax-compliance
+   - mergers-acquisitions
+   - startups-venture-capital
+   - ip-technology
+   - real-estate-property
+   - employment-labor
+   - litigation-disputes
+
+3. **Right-side card on Practice Overview** — replace the previous Dubai PRIMARY OFFICE / Paris EUROPEAN OFFICE boxes with the new `practiceCard.whoItems` (4 client archetypes per practice). Keep the navy heading box at the top using `practiceCard.heading`.
+
+4. **What Sets This Practice Apart** — replace the previous four cards (Boutique model / Dual-qualified counsel / UAE·France·EU coverage / Trilingual fluency) with the four cards from `whatSetsApart.cards`. These vary per practice area and describe how each discipline is actually practised.
+
+5. **Reuse the global footer** from `insights-copy.json`. Do not re-implement.
+
+6. **Schema.org JSON-LD** on each practice area page:
+   ```json
+   {
+     "@context": "https://schema.org",
+     "@type": "Service",
+     "name": "{title.en}",
+     "provider": {
+       "@type": "LegalService",
+       "name": "Milton Hobbs",
+       "url": "https://miltonhobbs.com"
+     },
+     "areaServed": ["AE","FR","SA","QA","KW","BH","OM"],
+     "url": "https://miltonhobbs.com/expertise/{slug}",
+     "inLanguage": ["en","fr"]
+   }
+   ```
+
+7. **Hreflang tags** on each page, both languages:
+   - `<link rel="alternate" hreflang="en" href="https://miltonhobbs.com/expertise/{slug}" />`
+   - `<link rel="alternate" hreflang="fr" href="https://miltonhobbs.com/fr/expertise/{slugFr}" />`
+   - `<link rel="alternate" hreflang="x-default" href="https://miltonhobbs.com/expertise/{slug}" />`
+
+8. **Internal linking** — the home page Practice Areas grid and the footer Practice Areas column should both link to the appropriate `/expertise/{slug}` route. Verify all links are updated.
