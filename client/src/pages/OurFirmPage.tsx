@@ -626,9 +626,6 @@ export default function OurFirmPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [lang] = useState<"EN" | "FR">("EN");
 
-  const heroRef = useRef<HTMLDivElement>(null);
-  const heroInView = useInView(heroRef, { once: true });
-
   const philosophyRef = useRef<HTMLDivElement>(null);
   const philosophyInView = useInView(philosophyRef, { once: true, margin: "-80px" });
 
@@ -645,8 +642,6 @@ export default function OurFirmPage() {
     { value: 50, suffix: "+", label: "Jurisdictions Served", labelFR: "Juridictions Couvertes" },
   ];
 
-  const headlines = ["Built on", "Principle.", "Driven by", "Purpose."];
-
   return (
     <LanguageProvider>
       <div className="bg-[#001489] min-h-screen" data-testid="our-firm-page">
@@ -654,7 +649,6 @@ export default function OurFirmPage() {
 
         {/* ── HERO ── */}
         <section
-          ref={heroRef}
           className="relative min-h-screen flex flex-col overflow-hidden bg-[#001489]"
           data-testid="firm-hero"
         >
@@ -692,112 +686,37 @@ export default function OurFirmPage() {
             ))}
           </div>
 
-          <div className="relative z-10 flex-1 flex items-center">
-            <div className="max-w-[1400px] mx-auto px-8 w-full pt-24 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-              <div>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.2 }}
-                  className="text-white text-[10px] tracking-[0.45em] uppercase font-bold mb-10"
-                >
-                  Our Firm
-                </motion.p>
-
-                <div className="mb-10">
-                  {headlines.map((word, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={heroInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ duration: 0.8, delay: 0.3 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <span
-                        className="font-heading font-bold leading-none block"
-                        style={{
-                          fontSize: "clamp(2.8rem, 5.5vw, 5.2rem)",
-                          color: "#FFFFFF",
-                          letterSpacing: "-0.02em",
-                        }}
-                      >
-                        {word}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.8 }}
-                  className="text-white text-base leading-relaxed max-w-md mb-12"
-                >
-                  At Milton Hobbs, we are committed to delivering legal counsel that is clear, composed, and commercially astute. In a fast-moving and increasingly complex environment, our clients rely on us to provide not only sound legal advice, but strategic perspective that empowers action.
-                </motion.p>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 1.0 }}
-                  className="flex flex-wrap gap-4"
-                >
-                  <button
-                    data-testid="hero-cta-consult"
-                    onClick={() => setModalOpen(true)}
-                    className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs tracking-[0.2em] uppercase font-bold px-8 py-4 hover:bg-[#001489] hover:text-white transition-colors"
-                  >
-                    Book a Consultation
-                    <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
-                      <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
-                    </svg>
-                  </button>
-                  <a
-                    href="#values"
-                    data-testid="hero-cta-values"
-                    className="inline-flex items-center gap-3 border border-white text-white text-xs tracking-[0.2em] uppercase font-bold px-8 py-4 hover:border-white hover:text-white transition-colors"
-                  >
-                    Our Values
-                  </a>
-                </motion.div>
+          {/* YouTube Video Hero */}
+          <div className="relative z-10 flex-1 flex flex-col pt-24">
+            <div className="flex-1 relative overflow-hidden" style={{ minHeight: "55vh" }}>
+              {/* Overflow-hidden wrapper crops the YouTube title bar */}
+              <div className="absolute inset-0" style={{ top: -60 }}>
+                <iframe
+                  src="https://www.youtube.com/embed/MnUh9nVYqjg?autoplay=1&mute=1&loop=1&playlist=MnUh9nVYqjg&controls=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&showinfo=0&start=0"
+                  title="Milton Hobbs — Our Firm"
+                  allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                  className="w-full h-full"
+                  style={{ border: 0 }}
+                />
               </div>
+              {/* Subtle overlay for depth */}
+              <div className="absolute inset-0 bg-[#001489]/20 pointer-events-none" />
+            </div>
 
+            {/* Scroll prompt */}
+            <div className="relative z-20 flex justify-center pb-6 pt-4">
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={heroInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 1.0, delay: 0.5, ease: "easeOut" }}
-                className="relative h-[460px] hidden lg:block"
+                animate={{ y: [0, 6, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="flex flex-col items-center gap-2 cursor-pointer"
+                onClick={() => document.getElementById('philosophy')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                <FirmCrest3D />
-
-                <div className="absolute inset-0 pointer-events-none">
-                  {Array.from({ length: 12 }).map((_, i) => {
-                    const angle = (i / 12) * Math.PI * 2;
-                    const r = 42 + (i % 3) * 8;
-                    const x = 50 + r * Math.cos(angle);
-                    const y = 50 + r * Math.sin(angle);
-                    return (
-                      <motion.div
-                        key={i}
-                        className="absolute w-0.5 h-0.5 bg-white rounded-full"
-                        style={{ left: `${x}%`, top: `${y}%` }}
-                        animate={{ opacity: [0, 0.8, 0], scale: [0.5, 1.5, 0.5] }}
-                        transition={{ duration: 2.5, delay: i * 0.2, repeat: Infinity }}
-                      />
-                    );
-                  })}
-                </div>
-
-                <div className="absolute bottom-8 left-8 right-8">
-                  <div className="flex gap-4">
-                    {["Dubai, UAE", "Paris, France"].map((city, i) => (
-                      <div key={i} className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 bg-white rounded-full" />
-                        <span className="text-white text-[9px] tracking-[0.3em] uppercase font-medium">{city}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <span className="text-white text-[10px] tracking-[0.3em] uppercase font-medium opacity-50">
+                  Scroll to explore
+                </span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white opacity-50">
+                  <path d="M8 3v10M3 8l5 5 5-5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </motion.div>
             </div>
           </div>
@@ -809,8 +728,9 @@ export default function OurFirmPage() {
                   key={i}
                   data-testid={`stat-${i}`}
                   initial={{ opacity: 0, y: 24 }}
-                  animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 1.1 + i * 0.1 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
                 >
                   <div className="font-heading text-white font-bold mb-1" style={{ fontSize: "clamp(2rem,3.5vw,2.8rem)", lineHeight: 1 }}>
                     <AnimatedNumber target={s.value} suffix={s.suffix} />
@@ -831,6 +751,7 @@ export default function OurFirmPage() {
 
         {/* ── PHILOSOPHY & PURPOSE ── */}
         <section
+          id="philosophy"
           ref={philosophyRef}
           data-header-theme="light"
           className="bg-white py-32 px-8"
