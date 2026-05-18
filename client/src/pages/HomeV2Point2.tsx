@@ -36,14 +36,14 @@ function snapScrollTo(hash: string) {
 /* ─── HEADER ────────────────────────────────────────────────────────────── */
 
 const EXPERTISE_MENU_ITEMS = [
-  { num: "01", title: "Corporate & Commercial",         href: "/expertise/corporate-commercial" },
-  { num: "02", title: "Tax & Compliance",               href: "/expertise/tax-compliance" },
-  { num: "03", title: "Mergers & Acquisitions",         href: "/expertise/mergers-acquisitions" },
-  { num: "04", title: "IP & Technology",               href: "/expertise/ip-technology" },
-  { num: "05", title: "Startups & Venture Capital",     href: "/expertise/startups-venture-capital" },
-  { num: "06", title: "Real Estate & Property",         href: "/expertise/real-estate-property" },
-  { num: "07", title: "Employment & Labor",             href: "/expertise/employment-labor" },
-  { num: "08", title: "Litigation & Disputes",          href: "/expertise/litigation-disputes" },
+  { title: "Corporate & Commercial",         href: "/expertise/corporate-commercial" },
+  { title: "Tax & Compliance",               href: "/expertise/tax-compliance" },
+  { title: "Mergers & Acquisitions",         href: "/expertise/mergers-acquisitions" },
+  { title: "IP & Technology",               href: "/expertise/ip-technology" },
+  { title: "Startups & Venture Capital",     href: "/expertise/startups-venture-capital" },
+  { title: "Real Estate & Property",         href: "/expertise/real-estate-property" },
+  { title: "Employment & Labor",             href: "/expertise/employment-labor" },
+  { title: "Litigation & Disputes",          href: "/expertise/litigation-disputes" },
 ];
 
 function HeaderV15() {
@@ -348,7 +348,7 @@ function HeaderV15() {
                     <a
                       key={i}
                       href={area.href ?? "#expertise"}
-                      data-testid={`megamenu-area-${area.num}`}
+                      data-testid={`megamenu-area-${i}`}
                       onClick={e => { if (!area.href) { e.preventDefault(); setExpertiseOpen(false); snapScrollTo("#expertise"); } else { setExpertiseOpen(false); } }}
                       className="group flex items-center gap-4"
                       style={{
@@ -360,18 +360,6 @@ function HeaderV15() {
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.paddingLeft = "8px"; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.paddingLeft = "0px"; }}
                     >
-                      <span style={{
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        fontSize: 8,
-                        fontWeight: 700,
-                        letterSpacing: "0.24em",
-                        color: "rgba(0,20,137,0.28)",
-                        minWidth: 22,
-                        flexShrink: 0,
-                        transition: "color 0.2s",
-                      }}>
-                        {area.num}
-                      </span>
                       <span
                         className="font-heading font-bold flex-1"
                         style={{
@@ -1377,50 +1365,50 @@ function DifferentiatorsV15() {
 
 const CASE_FILE_ITEMS = [
   {
-    num: "01", title: "Corporate & Commercial",             tag: "Transactional",
+    title: "Corporate & Commercial",             tag: "Transactional",
     brief: "Cross-border transactions, joint ventures, and commercial agreements.",
     desc:  "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors. We advise on the full lifecycle of corporate matters, from entity formation to complex multi-party deals.",
     img: imgCorp,
     pageHref: "/expertise/corporate-commercial",
   },
   {
-    num: "02", title: "Tax & Compliance",                   tag: "Advisory",
+    title: "Tax & Compliance",                   tag: "Advisory",
     brief: "Strategic tax planning and regulatory advisory across jurisdictions.",
     desc:  "Strategic tax planning, regulatory compliance, and advisory services to keep businesses aligned with evolving legal frameworks. Our team delivers forward-looking counsel across domestic and international tax environments.",
     img: imgTax,
   },
   {
-    num: "03", title: "Mergers & Acquisitions",             tag: "Strategic",
+    title: "Mergers & Acquisitions",             tag: "Strategic",
     brief: "End-to-end M&A counsel from structuring through post-closing integration.",
     desc:  "End-to-end counsel on acquisitions, disposals, restructurings, and due diligence for domestic and cross-border deals. We guide clients through every phase — from initial structuring to seamless post-merger integration.",
     img: imgBank,
   },
   {
-    num: "04", title: "Startups & Venture Capital",         tag: "Emerging",
+    title: "Startups & Venture Capital",         tag: "Emerging",
     brief: "Legal frameworks for founders, investors, and scaling ventures.",
     desc:  "Legal frameworks for fundraising rounds, equity structuring, founder agreements, and scaling ventures. We partner with entrepreneurs and investors at every stage of the startup lifecycle.",
     img: imgTech,
   },
   {
-    num: "05", title: "Intellectual Property & Technology", tag: "Innovation",
+    title: "Intellectual Property & Technology", tag: "Innovation",
     brief: "Protecting IP portfolios and advising on licensing and data law.",
     desc:  "Protecting trademarks, patents, copyrights, trade secrets, and advising on technology licensing and data regulations. We build and defend the intellectual assets that define competitive advantage.",
     img: imgIp,
   },
   {
-    num: "06", title: "Real Estate & Property Law",         tag: "Property",
+    title: "Real Estate & Property Law",         tag: "Property",
     brief: "Acquisitions, development projects, and portfolio management.",
     desc:  "Advising on acquisitions, leasing, development projects, title disputes, and property portfolio management. Our practice spans residential, commercial, and mixed-use real estate across the UAE and Europe.",
     img: imgEstate,
   },
   {
-    num: "07", title: "Employment & Labor Law",             tag: "Workforce",
+    title: "Employment & Labor Law",             tag: "Workforce",
     brief: "Navigating workforce regulations and employment dispute resolution.",
     desc:  "Navigating workforce regulations, employment contracts, terminations, and workplace dispute resolution. We advise employers and executives on the full spectrum of employment law obligations across jurisdictions.",
     img: imgEmploy,
   },
   {
-    num: "08", title: "Litigation & Dispute Resolution",    tag: "Disputes",
+    title: "Litigation & Dispute Resolution",    tag: "Disputes",
     brief: "Strategic advocacy in civil, commercial, and arbitration proceedings.",
     desc:  "Representing clients in civil and commercial disputes, arbitration, and enforcement proceedings across jurisdictions. Our litigators combine rigorous strategy with efficient resolution across forums including DIFC and ICC.",
     img: imgLitig,
@@ -1438,7 +1426,7 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
       onClick={onClick}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      data-testid={`case-file-tab-${item.num}`}
+      data-testid={`case-file-tab-${item.title}`}
       style={{
         flexShrink: 0,
         width: 280,
@@ -1468,23 +1456,6 @@ function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: bool
           transition: "background 0.22s ease",
         }}
       />
-
-      {/* Gold foil number */}
-      <span
-        style={{
-          display: "block",
-          color: isOpen || hovering ? "#4A58AA" : "rgba(74,88,170,0.6)",
-          fontSize: 11,
-          fontFamily: "'Satoshi', 'Plus Jakarta Sans', sans-serif",
-          fontWeight: 700,
-          letterSpacing: "0.22em",
-          marginBottom: 14,
-          marginTop: 6,
-          transition: "color 0.22s ease",
-        }}
-      >
-        {item.num}
-      </span>
 
       {/* Practice area name */}
       <h3
@@ -2384,14 +2355,14 @@ function FooterV15() {
 /* ─── PRACTICE AREAS ────────────────────────────────────────────────────── */
 
 const EXPERTISE_ITEMS_STATIC = [
-  { num: "01", short: "Corporate",   img: imgCorp,   pageHref: "/expertise/corporate-commercial" },
-  { num: "02", short: "Tax",         img: imgTax,    pageHref: "/expertise/tax-compliance" },
-  { num: "03", short: "M&A",         img: imgBank,   pageHref: "/expertise/mergers-acquisitions" },
-  { num: "04", short: "Startups",    img: imgTech,   pageHref: "/expertise/startups-venture-capital" },
-  { num: "05", short: "IP & Tech",   img: imgIp,     pageHref: "/expertise/ip-technology" },
-  { num: "06", short: "Real Estate", img: imgEstate, pageHref: "/expertise/real-estate-property" },
-  { num: "07", short: "Employment",  img: imgEmploy, pageHref: "/expertise/employment-labor" },
-  { num: "08", short: "Litigation",  img: imgLitig,  pageHref: "/expertise/litigation-disputes" },
+  { short: "Corporate",   img: imgCorp,   pageHref: "/expertise/corporate-commercial" },
+  { short: "Tax",         img: imgTax,    pageHref: "/expertise/tax-compliance" },
+  { short: "M&A",         img: imgBank,   pageHref: "/expertise/mergers-acquisitions" },
+  { short: "Startups",    img: imgTech,   pageHref: "/expertise/startups-venture-capital" },
+  { short: "IP & Tech",   img: imgIp,     pageHref: "/expertise/ip-technology" },
+  { short: "Real Estate", img: imgEstate, pageHref: "/expertise/real-estate-property" },
+  { short: "Employment",  img: imgEmploy, pageHref: "/expertise/employment-labor" },
+  { short: "Litigation",  img: imgLitig,  pageHref: "/expertise/litigation-disputes" },
 ];
 
 const PRACTICE_CYCLE_MS = 5000;
@@ -2489,20 +2460,15 @@ function PracticeAreasV18() {
               {p.headline}
             </h2>
           </div>
-          {/* Counter + dot nav */}
-          <div className="flex items-center gap-4">
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 11, color: "rgba(0,20,137,0.28)", letterSpacing: "0.06em" }}>
-              {String(active + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(items.length).padStart(2, "0")}
-            </span>
-            <div className="flex items-center gap-1.5">
-              {items.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => { setActive(i); setPaused(true); }}
-                  style={{ width: active === i ? 20 : 5, height: 2, background: active === i ? "#001489" : "rgba(0,20,137,0.18)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }}
-                />
-              ))}
-            </div>
+          {/* Dot nav */}
+          <div className="flex items-center gap-1.5">
+            {items.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => { setActive(i); setPaused(true); }}
+                style={{ width: active === i ? 20 : 5, height: 2, background: active === i ? "#001489" : "rgba(0,20,137,0.18)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }}
+              />
+            ))}
           </div>
         </div>
 
