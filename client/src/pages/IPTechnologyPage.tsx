@@ -524,20 +524,6 @@ function IPTechnologyInner() {
           </div>
         </div>
 
-        {/* Scroll hint */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="absolute bottom-10 left-8 flex items-center gap-3 pointer-events-none"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2.2, repeat: Infinity }}
-            className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent"
-          />
-          <span className="text-white/30 text-[10px] tracking-[0.25em] uppercase">{tx.scroll}</span>
-        </motion.div>
       </section>
 
       {/* ── PRACTICE OVERVIEW ─────────────────────────────────────────────── */}
