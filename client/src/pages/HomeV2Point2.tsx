@@ -13,7 +13,7 @@ import imgIp     from "@assets/optimized/simone-hutsch-iDSfeuoxM0o-unsplash_1776
 import imgEstate from "@assets/optimized/alexander-abero-OypnYfdiQgg-unsplash_1776241615811.jpg";
 import imgEmploy from "@assets/optimized/daniele-colucci-Xt48I3ps6Pg-unsplash_1776241615811.jpg";
 import imgLitig  from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
-import heroBg0 from "@assets/verne-ho-0LAJfSNa-xQ-unsplash_1775562755413.jpg";
+import heroBg0 from "@assets/kir-simakov-1y5PkTZOMbQ-unsplash_1779148053949.jpg";
 import heroBg1 from "@assets/tim-stief-dH6IjhWHNQQ-unsplash_1775562755413.jpg";
 import heroBg2 from "@assets/joakim-nadell-K67sBVqLLuw-unsplash_1775562755414.jpg";
 import heroBg3 from "@assets/maarten-deckers-T5nXYXCf50I-unsplash_1775562755414.jpg";
