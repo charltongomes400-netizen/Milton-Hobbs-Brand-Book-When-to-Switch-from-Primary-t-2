@@ -2385,7 +2385,7 @@ function FooterV15() {
               <a href="/conflict-checks" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Conflict Checks</a>
               <a href="/confidentiality-notice" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Confidentiality Notice</a>
             </div>
-            <span style={{ color: "rgba(255,255,255,0.35)", fontSize: 10, letterSpacing: "0.04em" }}>{f.copyright}</span>
+            <span style={{ color: "#FFFFFF", fontSize: 10, letterSpacing: "0.04em" }}>{f.copyright}</span>
           </div>
         </div>
 
