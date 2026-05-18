@@ -2402,20 +2402,28 @@ function FooterV15() {
 
 /* ─── PRACTICE AREAS ────────────────────────────────────────────────────── */
 
-const EXPERTISE_ITEMS_V18 = [
-  { num: "01", short: "Corporate",   title: "Corporate & Commercial",             desc: "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors.",                               img: imgCorp,   pageHref: "/expertise/corporate-commercial" },
-  { num: "02", short: "Tax",         title: "Tax & Compliance",                   desc: "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals.",                    img: imgTax,    pageHref: "/expertise/tax-compliance" },
-  { num: "03", short: "M&A",         title: "Mergers & Acquisitions",             desc: "End-to-end advisory on M&A transactions, due diligence, valuations, and seamless post-merger integration across sectors.",                                      img: imgBank,   pageHref: "/expertise/mergers-acquisitions" },
-  { num: "04", short: "Startups",    title: "Startups & Venture Capital",         desc: "Funding rounds, term sheets, shareholder agreements, and robust legal infrastructure for founders, operators, and investors.",                                  img: imgTech,   pageHref: "/expertise/startups-venture-capital" },
-  { num: "05", short: "IP & Tech",   title: "Intellectual Property & Technology", desc: "Patent strategy, trademark registration, licensing structures, and data protection compliance across jurisdictions.",                                          img: imgIp,     pageHref: "/expertise/ip-technology" },
-  { num: "06", short: "Real Estate", title: "Real Estate & Property Law",         desc: "Cross-border property acquisitions, development financing, and sophisticated real estate structuring in the UAE and Europe.",                                   img: imgEstate, pageHref: "/expertise/real-estate-property" },
-  { num: "07", short: "Employment",  title: "Employment & Labor Law",             desc: "Employment contracts, executive compensation structures, workforce restructuring, and workplace dispute resolution.",                                           img: imgEmploy, pageHref: "/expertise/employment-labor" },
-  { num: "08", short: "Litigation",  title: "Litigation & Dispute Resolution",    desc: "Strategic advocacy in commercial litigation, DIFC arbitration, and international dispute proceedings across forums.",                                          img: imgLitig,  pageHref: "/expertise/litigation-disputes" },
+const EXPERTISE_ITEMS_STATIC = [
+  { num: "01", short: "Corporate",   img: imgCorp,   pageHref: "/expertise/corporate-commercial" },
+  { num: "02", short: "Tax",         img: imgTax,    pageHref: "/expertise/tax-compliance" },
+  { num: "03", short: "M&A",         img: imgBank,   pageHref: "/expertise/mergers-acquisitions" },
+  { num: "04", short: "Startups",    img: imgTech,   pageHref: "/expertise/startups-venture-capital" },
+  { num: "05", short: "IP & Tech",   img: imgIp,     pageHref: "/expertise/ip-technology" },
+  { num: "06", short: "Real Estate", img: imgEstate, pageHref: "/expertise/real-estate-property" },
+  { num: "07", short: "Employment",  img: imgEmploy, pageHref: "/expertise/employment-labor" },
+  { num: "08", short: "Litigation",  img: imgLitig,  pageHref: "/expertise/litigation-disputes" },
 ];
 
 const PRACTICE_CYCLE_MS = 5000;
 
 function PracticeAreasV18() {
+  const { t } = useLang();
+  const p = t.practices;
+  const items = EXPERTISE_ITEMS_STATIC.map((s, i) => ({
+    ...s,
+    title: p.items[i]?.title ?? s.short,
+    desc:  p.items[i]?.description ?? "",
+  }));
+
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -2436,7 +2444,7 @@ function PracticeAreasV18() {
   };
 
   useEffect(() => {
-    EXPERTISE_ITEMS_V18.forEach(item => {
+    items.forEach(item => {
       const img = new Image();
       img.src = item.img;
       if (img.decode) img.decode().catch(() => {});
@@ -2446,7 +2454,7 @@ function PracticeAreasV18() {
   useEffect(() => {
     if (paused) return;
     const timer = setInterval(() => {
-      setActive(prev => (prev + 1) % EXPERTISE_ITEMS_V18.length);
+      setActive(prev => (prev + 1) % items.length);
     }, PRACTICE_CYCLE_MS);
     return () => clearInterval(timer);
   }, [active, paused]);
@@ -2491,22 +2499,22 @@ function PracticeAreasV18() {
               color: "#001489",
               marginBottom: 14,
             }}>
-              Our Expertise
+              {p.eyebrow}
             </p>
             <h2
               className="font-heading font-bold"
               style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#001489" }}
             >
-              Practice Areas.
+              {p.headline}
             </h2>
           </div>
           {/* Counter + dot nav */}
           <div className="flex items-center gap-4">
             <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 11, color: "rgba(0,20,137,0.28)", letterSpacing: "0.06em" }}>
-              {String(active + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(EXPERTISE_ITEMS_V18.length).padStart(2, "0")}
+              {String(active + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(items.length).padStart(2, "0")}
             </span>
             <div className="flex items-center gap-1.5">
-              {EXPERTISE_ITEMS_V18.map((_, i) => (
+              {items.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => { setActive(i); setPaused(true); }}
@@ -2519,7 +2527,7 @@ function PracticeAreasV18() {
 
         {/* Panels row — fills remaining height */}
         <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
-          {EXPERTISE_ITEMS_V18.map((item, i) => {
+          {items.map((item, i) => {
             const isActive = active === i;
             return (
               <div
@@ -2534,7 +2542,7 @@ function PracticeAreasV18() {
                   position: "relative",
                   overflow: "hidden",
                   cursor: "pointer",
-                  borderRight: i < EXPERTISE_ITEMS_V18.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none",
+                  borderRight: i < items.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none",
                   background: "#001489",
                   isolation: "isolate",
                   contain: "layout paint",
@@ -2737,7 +2745,7 @@ function PracticeAreasV18() {
                             el.style.color = "#001489";
                           }}
                         >
-                          Enquire
+                          {p.ctaEnquire}
                           <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
                             <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
                           </svg>
@@ -2773,7 +2781,7 @@ function PracticeAreasV18() {
                               el.style.color = "#001489";
                             }}
                           >
-                            View Practice Area
+                            {p.ctaViewPracticeArea}
                             <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
                               <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.5" />
                             </svg>
@@ -2794,14 +2802,14 @@ function PracticeAreasV18() {
         {/* Header */}
         <div style={{ padding: "0 24px 40px" }}>
           <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.40em", textTransform: "uppercase", color: "#7A84BE", marginBottom: 14 }}>
-            Our Expertise
+            {p.eyebrow}
           </p>
           <h2 className="font-heading font-bold" style={{ fontSize: "clamp(1.75rem, 7vw, 2.25rem)", lineHeight: 1.08, letterSpacing: "-0.03em", color: "#FFFFFF" }}>
-            Practice Areas.
+            {p.headline}
           </h2>
         </div>
 
-        {EXPERTISE_ITEMS_V18.map((item, i) => {
+        {items.map((item, i) => {
           const isActive = active === i;
           return (
             <div key={i} style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
@@ -2880,7 +2888,7 @@ function PracticeAreasV18() {
                             el.style.color = "#FFFFFF";
                           }}
                         >
-                          Enquire
+                          {p.ctaEnquire}
                           <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
                             <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
                           </svg>
@@ -2907,7 +2915,7 @@ function PracticeAreasV18() {
                               el.style.color = "#001489";
                             }}
                           >
-                            View Practice Area
+                            {p.ctaViewPracticeArea}
                             <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
                               <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.5" />
                             </svg>
@@ -2929,6 +2937,105 @@ function PracticeAreasV18() {
 /* ─── PAGE ───────────────────────────────────────────────────────────────── */
 
 function HomeV2Point2Inner() {
+  const { lang } = useLang();
+
+  useEffect(() => {
+    const isEN = lang === "EN";
+
+    document.title = isEN
+      ? "Milton Hobbs | Boutique Corporate Law — Dubai & Paris"
+      : "Milton Hobbs | Cabinet d'Avocats Corporate — Dubaï & Paris";
+
+    const setMeta = (name: string, content: string, attr = "name") => {
+      let el = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
+
+    const descEN = "Milton Hobbs is a boutique corporate law firm with offices in Dubai and Paris. We provide expert counsel in corporate, M&A, tax, IP, real estate, employment, and dispute resolution across the UAE, France, and the GCC.";
+    const descFR = "Milton Hobbs est un cabinet d'avocats corporate boutique avec des bureaux à Dubaï et Paris. Conseil en droit des sociétés, fusions-acquisitions, fiscalité, PI, immobilier, droit du travail et contentieux — EAU, France et CCG.";
+    const desc = isEN ? descEN : descFR;
+
+    setMeta("description", desc);
+    setMeta("og:type", "website", "property");
+    setMeta("og:site_name", "Milton Hobbs", "property");
+    setMeta("og:title", document.title, "property");
+    setMeta("og:description", desc, "property");
+    setMeta("og:url", "https://www.miltonhobbs.com/", "property");
+    setMeta("og:locale", isEN ? "en_GB" : "fr_FR", "property");
+    setMeta("twitter:card", "summary_large_image");
+    setMeta("twitter:title", document.title);
+    setMeta("twitter:description", desc);
+
+    const removeHreflangs = () => {
+      document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
+    };
+    removeHreflangs();
+    const addHreflang = (hl: string, href: string) => {
+      const link = document.createElement("link");
+      link.setAttribute("rel", "alternate");
+      link.setAttribute("hreflang", hl);
+      link.setAttribute("href", href);
+      document.head.appendChild(link);
+    };
+    addHreflang("en", "https://www.miltonhobbs.com/");
+    addHreflang("fr", "https://www.miltonhobbs.com/fr/");
+    addHreflang("x-default", "https://www.miltonhobbs.com/");
+
+    const schemaId = "schema-json-ld-home";
+    const existing = document.getElementById(schemaId);
+    if (existing) existing.remove();
+    const script = document.createElement("script");
+    script.id = schemaId;
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LegalService",
+      name: "Milton Hobbs",
+      description: descEN,
+      url: "https://www.miltonhobbs.com",
+      telephone: "+97145232421",
+      email: "contact@miltonhobbs.com",
+      areaServed: ["AE", "FR", "EU", "GCC"],
+      availableLanguage: ["English", "French", "Arabic"],
+      knowsAbout: [
+        "Corporate Law",
+        "Mergers and Acquisitions",
+        "Tax and Compliance",
+        "Intellectual Property",
+        "Real Estate Law",
+        "Employment Law",
+        "Commercial Litigation",
+        "Startups and Venture Capital",
+      ],
+      address: [
+        {
+          "@type": "PostalAddress",
+          streetAddress: "Level 2, The Offices 1, One Central, Dubai World Trade Centre",
+          addressLocality: "Dubai",
+          addressCountry: "AE",
+        },
+        {
+          "@type": "PostalAddress",
+          streetAddress: "11, Boulevard Sébastopol",
+          postalCode: "75001",
+          addressLocality: "Paris",
+          addressCountry: "FR",
+        },
+      ],
+    });
+    document.head.appendChild(script);
+
+    return () => {
+      removeHreflangs();
+      document.getElementById(schemaId)?.remove();
+    };
+  }, [lang]);
+
   return (
     <div className="bg-[#001489] min-h-screen v2-snap-container" data-testid="home-v1-5-page">
       <HeaderV15 />

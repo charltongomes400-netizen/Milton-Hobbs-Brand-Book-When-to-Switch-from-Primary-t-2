@@ -1,0 +1,424 @@
+{
+  "$schema": "milton-hobbs-home-v1",
+  "$notes": "All text for the Milton Hobbs home page. Each user-facing string has 'en' (English) and 'fr' (French). Wire EN to the default route; FR to /fr/. Do not translate keys or change structure.",
+  "meta": {
+    "en": {
+      "title": "Milton Hobbs | Boutique Corporate Law — Dubai & Paris",
+      "description": "Milton Hobbs is a boutique corporate law firm in Dubai and Paris. Trilingual counsel for cross-border transactions across the UAE, France, and the GCC.",
+      "keywords": "boutique corporate law firm Dubai, UAE M&A, cross-border structuring UAE France, trilingual law firm Dubai, French law firm Dubai, corporate lawyer UAE, GCC corporate counsel",
+      "ogTitle": "Milton Hobbs — Reason. Rigor. Resolution.",
+      "ogDescription": "Boutique corporate law at the intersection of Europe and the Gulf. Direct partner access. Trilingual counsel. Cross-border depth."
+    },
+    "fr": {
+      "title": "Milton Hobbs | Cabinet d'Avocats Corporate — Dubaï & Paris",
+      "description": "Milton Hobbs, cabinet d'avocats corporate boutique à Dubaï et Paris. Conseil trilingue pour opérations transfrontalières entre les Émirats, la France et le CCG.",
+      "keywords": "cabinet d'avocats corporate boutique Dubaï, M&A Émirats arabes unis, structuration transfrontalière France Émirats, cabinet trilingue Dubaï, avocat français Dubaï, droit des sociétés Émirats, conseil corporate CCG",
+      "ogTitle": "Milton Hobbs — Raison. Rigueur. Résolution.",
+      "ogDescription": "Un cabinet boutique à l'intersection de l'Europe et du Golfe. Accès direct à l'associé. Conseil trilingue. Profondeur transfrontalière."
+    }
+  },
+  "whyMiltonHobbs": {
+    "eyebrow": {
+      "en": "Why Milton Hobbs",
+      "fr": "Pourquoi Milton Hobbs"
+    },
+    "h1": {
+      "en": "Reason. Rigor. Resolution.",
+      "fr": "Raison. Rigueur. Résolution."
+    },
+    "subheadline": {
+      "en": "Boutique corporate law at the intersection of Europe and the Gulf — where European precision meets Gulf-market agility.",
+      "fr": "Un cabinet d'avocats corporate boutique à l'intersection de l'Europe et du Golfe — où la précision européenne rencontre l'agilité du marché du Golfe."
+    },
+    "intro": {
+      "en": "Milton Hobbs is a boutique corporate law firm with offices in Dubai and Paris. We advise companies, entrepreneurs, and private clients on the complex legal questions that shape modern business — from cross-border transactions to regulatory strategy, from market entry to dispute resolution. Our trilingual team brings European savoir-faire and a deep working knowledge of the Gulf region, delivered through a model built on depth, discretion, and direct access to senior counsel.",
+      "fr": "Milton Hobbs est un cabinet d'avocats corporate boutique avec des bureaux à Dubaï et à Paris. Nous conseillons entreprises, entrepreneurs et clients privés sur les questions juridiques complexes qui façonnent les affaires modernes — des opérations transfrontalières à la stratégie réglementaire, de l'entrée sur de nouveaux marchés à la résolution des litiges. Notre équipe trilingue allie le savoir-faire européen à une connaissance fine du Golfe, à travers un modèle fondé sur la profondeur, la discrétion et un accès direct à un conseil senior."
+    },
+    "reasons": [
+      {
+        "number": "01",
+        "title": {
+          "en": "Direct Partner Access",
+          "fr": "Accès Direct à l'Associé"
+        },
+        "body": {
+          "en": "The boutique model means your matter is handled at the highest level — every time. No layered teams, no second-tier delegation. A senior advisor knows your business from the first conversation and stays close through resolution.",
+          "fr": "Le modèle boutique garantit que votre dossier est traité au plus haut niveau — à chaque fois. Pas d'équipes superposées, pas de délégation à un échelon secondaire. Un conseiller senior comprend votre activité dès le premier échange et reste à vos côtés jusqu'à la résolution."
+        }
+      },
+      {
+        "number": "02",
+        "title": {
+          "en": "Trilingual Fluency",
+          "fr": "Maîtrise Trilingue"
+        },
+        "body": {
+          "en": "We work natively in English, French, and Arabic — drafting, negotiating, and advising in the language your matter requires. Cross-border deals demand more than translation; they demand fluency in the legal and commercial conventions of each jurisdiction. We bring both.",
+          "fr": "Nous travaillons nativement en anglais, en français et en arabe — rédaction, négociation et conseil dans la langue qu'exige votre dossier. Les opérations transfrontalières demandent plus qu'une traduction ; elles exigent une maîtrise des conventions juridiques et commerciales de chaque juridiction. Nous offrons les deux."
+        }
+      },
+      {
+        "number": "03",
+        "title": {
+          "en": "Cross-Border Expertise",
+          "fr": "Expertise Transfrontalière"
+        },
+        "body": {
+          "en": "Transactions and structures that span the UAE, France, the European Union, and the broader GCC are our home territory. We understand how French and EU corporate law speaks to Dubai's free-zone frameworks, and how Gulf-region regulatory shifts ripple back through European holdings.",
+          "fr": "Les transactions et structures qui couvrent les Émirats arabes unis, la France, l'Union européenne et le CCG sont notre terrain de prédilection. Nous comprenons comment le droit des sociétés français et européen dialogue avec les régimes de zones franches de Dubaï, et comment les évolutions réglementaires du Golfe se répercutent sur les holdings européens."
+        }
+      },
+      {
+        "number": "04",
+        "title": {
+          "en": "Client-First by Design",
+          "fr": "Le Client au Cœur de la Démarche"
+        },
+        "body": {
+          "en": "Precision to complexity. Composure to challenge. A client-first mindset to every engagement. This is our brand promise — and it shapes how we structure our team, our communication, and our advice. You receive clear counsel, on time, with the discretion the matter deserves.",
+          "fr": "De la précision face à la complexité. De la sérénité face aux défis. Un état d'esprit client-first dans chaque mission. Telle est notre promesse — et elle façonne la composition de nos équipes, notre communication et nos conseils. Vous recevez un conseil clair, livré à temps, avec la discrétion que le dossier exige."
+        }
+      }
+    ]
+  },
+  "practiceAreas": {
+    "eyebrow": {
+      "en": "Our Expertise",
+      "fr": "Notre Expertise"
+    },
+    "heading": {
+      "en": "Practice Areas.",
+      "fr": "Domaines de Pratique."
+    },
+    "intro": {
+      "en": "Corporate counsel built around the realities of cross-border business — eight disciplines, one integrated team.",
+      "fr": "Un conseil corporate pensé pour les réalités du business transfrontalier — huit disciplines, une équipe intégrée."
+    },
+    "ctaEnquire": {
+      "en": "Enquire",
+      "fr": "Nous Consulter"
+    },
+    "ctaViewPracticeArea": {
+      "en": "View Practice Area",
+      "fr": "Voir le Domaine"
+    },
+    "areas": [
+      {
+        "number": "01",
+        "slug": "corporate",
+        "title": {
+          "en": "Corporate",
+          "fr": "Droit des Sociétés"
+        },
+        "description": {
+          "en": "Corporate structuring, governance, and commercial transactions for companies operating across multiple jurisdictions. From entity formation in DIFC and ADGM to French SAS and SARL structures, we design corporate frameworks that work in practice — not only on paper.",
+          "fr": "Structuration, gouvernance et transactions commerciales pour les entreprises opérant dans plusieurs juridictions. De la création d'entités en DIFC et ADGM aux structures françaises SAS et SARL, nous concevons des architectures juridiques qui fonctionnent dans la pratique — et pas seulement sur le papier."
+        }
+      },
+      {
+        "number": "02",
+        "slug": "tax-compliance",
+        "title": {
+          "en": "Tax & Compliance",
+          "fr": "Fiscalité & Conformité"
+        },
+        "description": {
+          "en": "Strategic international tax planning, regulatory compliance frameworks, and risk mitigation for corporations and high-net-worth individuals navigating UAE, French, and EU tax regimes.",
+          "fr": "Planification fiscale internationale stratégique, cadres de conformité réglementaire et atténuation des risques pour les entreprises et les particuliers à haut patrimoine évoluant entre les régimes fiscaux émirien, français et européen."
+        }
+      },
+      {
+        "number": "03",
+        "slug": "mergers-acquisitions",
+        "title": {
+          "en": "Mergers & Acquisitions",
+          "fr": "Fusions & Acquisitions"
+        },
+        "description": {
+          "en": "End-to-end M&A counsel — from target identification and due diligence through structuring, negotiation, and post-closing integration. We advise on cross-border transactions where French, UAE, and GCC regulatory considerations intersect.",
+          "fr": "Conseil M&A de bout en bout — de l'identification des cibles et de la due diligence à la structuration, à la négociation et à l'intégration post-closing. Nous accompagnons les opérations transfrontalières où s'entrecroisent les exigences réglementaires françaises, émiriennes et du CCG."
+        }
+      },
+      {
+        "number": "04",
+        "slug": "startups",
+        "title": {
+          "en": "Startups",
+          "fr": "Startups"
+        },
+        "description": {
+          "en": "Founder-side and investor-side counsel for early- and growth-stage companies — incorporation, shareholder agreements, fundraising, ESOPs, and the operational legal architecture that lets startups scale across the UAE, France, and beyond.",
+          "fr": "Conseil aux fondateurs et investisseurs pour les sociétés en amorçage et en croissance — constitution, pactes d'associés, levées de fonds, plans d'attribution d'actions, et l'architecture juridique opérationnelle qui permet aux startups de se déployer aux Émirats, en France et au-delà."
+        }
+      },
+      {
+        "number": "05",
+        "slug": "ip-tech",
+        "title": {
+          "en": "IP & Tech",
+          "fr": "Propriété Intellectuelle & Tech"
+        },
+        "description": {
+          "en": "Intellectual property strategy, technology contracting, and data protection counsel for businesses where IP is the core asset. Trademark and copyright protection, licensing, SaaS agreements, and compliance with UAE Personal Data Protection Law and EU GDPR.",
+          "fr": "Stratégie de propriété intellectuelle, contractualisation technologique et conseil en protection des données pour les entreprises dont la PI constitue l'actif central. Protection des marques et droits d'auteur, licences, contrats SaaS, et conformité avec la loi émirienne sur les données personnelles et le RGPD."
+        }
+      },
+      {
+        "number": "06",
+        "slug": "real-estate",
+        "title": {
+          "en": "Real Estate",
+          "fr": "Immobilier"
+        },
+        "description": {
+          "en": "Commercial and residential real estate transactions, lease structuring, and property holding strategies across Dubai, Abu Dhabi, and France. Acquisition, disposal, and structuring of cross-border property portfolios for investors and operators.",
+          "fr": "Transactions immobilières commerciales et résidentielles, structuration des baux et stratégies de détention de biens à Dubaï, Abou Dhabi et en France. Acquisition, cession et structuration de portefeuilles immobiliers transfrontaliers pour investisseurs et opérateurs."
+        }
+      },
+      {
+        "number": "07",
+        "slug": "employment",
+        "title": {
+          "en": "Employment",
+          "fr": "Droit du Travail"
+        },
+        "description": {
+          "en": "Employment counsel for employers and senior executives — drafting and negotiating contracts, advising on UAE Labour Law and French Code du travail, structuring international mobility, and managing terminations and disputes with discretion.",
+          "fr": "Conseil en droit social pour employeurs et cadres dirigeants — rédaction et négociation de contrats, conseil sur la loi émirienne du travail et le Code du travail français, structuration de la mobilité internationale, gestion des ruptures et contentieux avec discrétion."
+        }
+      },
+      {
+        "number": "08",
+        "slug": "litigation",
+        "title": {
+          "en": "Litigation",
+          "fr": "Contentieux"
+        },
+        "description": {
+          "en": "Commercial litigation, arbitration, and dispute resolution before UAE courts, DIFC and ADGM courts, French jurisdictions, and major international arbitral institutions. We resolve disputes with the same composure we bring to deal-making.",
+          "fr": "Contentieux commercial, arbitrage et règlement des litiges devant les juridictions émiriennes, les tribunaux du DIFC et de l'ADGM, les juridictions françaises et les principales institutions d'arbitrage international. Nous résolvons les litiges avec la même sérénité que nous apportons aux transactions."
+        }
+      }
+    ]
+  },
+  "getInTouch": {
+    "eyebrow": {
+      "en": "Contact",
+      "fr": "Contact"
+    },
+    "heading": {
+      "en": "Get in Touch.",
+      "fr": "Nous Contacter."
+    },
+    "body": {
+      "en": "Whether you are structuring a cross-border transaction, entering a new market, or weighing a complex matter — start the conversation. A senior member of our team will respond within one business day.",
+      "fr": "Que vous structuriez une opération transfrontalière, prépariez l'entrée sur un nouveau marché ou évaluiez un dossier complexe — engagez la conversation. Un membre senior de notre équipe vous répondra sous un jour ouvré."
+    },
+    "primaryCta": {
+      "en": "Book a Consultation",
+      "fr": "Prendre Rendez-Vous"
+    },
+    "secondaryCta": {
+      "en": "Send a Message",
+      "fr": "Envoyer un Message"
+    },
+    "form": {
+      "fields": {
+        "fullName": {
+          "label": {
+            "en": "Full Name",
+            "fr": "Nom complet"
+          },
+          "placeholder": {
+            "en": "e.g. Sophie Martin",
+            "fr": "ex. Sophie Martin"
+          },
+          "required": true
+        },
+        "email": {
+          "label": {
+            "en": "Email",
+            "fr": "Email"
+          },
+          "placeholder": {
+            "en": "you@company.com",
+            "fr": "vous@entreprise.com"
+          },
+          "required": true
+        },
+        "phone": {
+          "label": {
+            "en": "Phone",
+            "fr": "Téléphone"
+          },
+          "placeholder": {
+            "en": "+971 / +33 / international format",
+            "fr": "+971 / +33 / format international"
+          },
+          "required": true
+        },
+        "company": {
+          "label": {
+            "en": "Company",
+            "fr": "Entreprise"
+          },
+          "placeholder": {
+            "en": "Your business or organisation",
+            "fr": "Votre société ou organisation"
+          },
+          "required": true
+        },
+        "jurisdiction": {
+          "label": {
+            "en": "Jurisdiction / City",
+            "fr": "Juridiction / Ville"
+          },
+          "placeholder": {
+            "en": "e.g. Dubai, Paris, Riyadh",
+            "fr": "ex. Dubaï, Paris, Riyad"
+          },
+          "required": true
+        },
+        "practiceArea": {
+          "label": {
+            "en": "Practice Area of Interest",
+            "fr": "Domaine de Pratique"
+          },
+          "options": [
+            {
+              "value": "corporate",
+              "label": {
+                "en": "Corporate",
+                "fr": "Droit des sociétés"
+              }
+            },
+            {
+              "value": "tax-compliance",
+              "label": {
+                "en": "Tax & Compliance",
+                "fr": "Fiscalité & Conformité"
+              }
+            },
+            {
+              "value": "mergers-acquisitions",
+              "label": {
+                "en": "Mergers & Acquisitions",
+                "fr": "Fusions & Acquisitions"
+              }
+            },
+            {
+              "value": "startups",
+              "label": {
+                "en": "Startups",
+                "fr": "Startups"
+              }
+            },
+            {
+              "value": "ip-tech",
+              "label": {
+                "en": "IP & Tech",
+                "fr": "PI & Tech"
+              }
+            },
+            {
+              "value": "real-estate",
+              "label": {
+                "en": "Real Estate",
+                "fr": "Immobilier"
+              }
+            },
+            {
+              "value": "employment",
+              "label": {
+                "en": "Employment",
+                "fr": "Droit du travail"
+              }
+            },
+            {
+              "value": "litigation",
+              "label": {
+                "en": "Litigation",
+                "fr": "Contentieux"
+              }
+            },
+            {
+              "value": "other",
+              "label": {
+                "en": "Other",
+                "fr": "Autre"
+              }
+            }
+          ],
+          "required": true
+        },
+        "message": {
+          "label": {
+            "en": "Message",
+            "fr": "Message"
+          },
+          "placeholder": {
+            "en": "Tell us briefly about your matter. We treat all enquiries in strict confidence.",
+            "fr": "Décrivez brièvement votre dossier. Toutes les demandes sont traitées en toute confidentialité."
+          },
+          "required": false
+        }
+      },
+      "submitButton": {
+        "en": "Send Message",
+        "fr": "Envoyer le Message"
+      },
+      "confidentialityNotice": {
+        "en": "By submitting this form, you acknowledge that no attorney–client relationship is created until a formal engagement is in place. Please do not share sensitive or confidential information prior to engagement.",
+        "fr": "En soumettant ce formulaire, vous reconnaissez qu'aucune relation avocat–client n'est créée tant qu'un mandat formel n'est pas conclu. Merci de ne pas transmettre d'informations sensibles ou confidentielles avant l'établissement du mandat."
+      },
+      "autoReply": {
+        "en": "Thank you for contacting Milton Hobbs. Our team will review your enquiry and respond within one business day.",
+        "fr": "Merci d'avoir contacté Milton Hobbs. Notre équipe examinera votre demande et reviendra vers vous sous un jour ouvré."
+      }
+    },
+    "directContact": {
+      "dubai": {
+        "label": {
+          "en": "Dubai — Primary Office",
+          "fr": "Dubaï — Bureau principal"
+        },
+        "addressLines": [
+          "Level 2, The Offices 1, One Central",
+          "Dubai World Trade Centre",
+          {
+            "en": "Dubai, United Arab Emirates",
+            "fr": "Dubaï, Émirats arabes unis"
+          }
+        ]
+      },
+      "paris": {
+        "label": {
+          "en": "Paris — Opening Late 2025",
+          "fr": "Paris — Ouverture fin 2025"
+        },
+        "addressLines": [
+          "11, Boulevard Sébastopol",
+          "75001 Paris, France"
+        ]
+      },
+      "email": "contact@miltonhobbs.com",
+      "phone": "+971 4 523 2421",
+      "hoursLabel": {
+        "en": "Office Hours",
+        "fr": "Horaires"
+      },
+      "hours": {
+        "en": "Monday — Friday, 9:00 — 18:00 GST",
+        "fr": "Lundi — Vendredi, 9h00 — 18h00 GST"
+      },
+      "languagesLabel": {
+        "en": "Languages",
+        "fr": "Langues"
+      },
+      "languages": {
+        "en": "English  ·  French  ·  Arabic",
+        "fr": "Anglais  ·  Français  ·  Arabe"
+      }
+    }
+  }
+}

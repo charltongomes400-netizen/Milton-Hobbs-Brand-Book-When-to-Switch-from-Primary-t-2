@@ -1,0 +1,71 @@
+## 🎯 Task
+
+Update the home page copy on the Milton Hobbs website using the attached `home-page-copy.json` file. This file is the single source of truth for all home page text in both English and French.
+
+## 📁 What's in the JSON
+
+The file is structured with three top-level home-page sections plus metadata:
+
+- `meta` — page title, description, keywords, Open Graph tags
+- `whyMiltonHobbs` — eyebrow, H1, sub-headline, intro paragraph, and four reason cards (`reasons[]`)
+- `practiceAreas` — eyebrow, heading, intro, plus eight practice areas (`areas[]`) with number, slug, title, description, and shared CTAs
+- `getInTouch` — eyebrow, heading, body, CTAs, full contact form (fields, options, submit button, confidentiality notice, auto-reply), and direct contact panel
+
+Every user-facing string has `en` and `fr` properties. **Do not translate keys. Do not change structure.** Only the *values* are content.
+
+## ✅ What to do
+
+1. **Set up i18n.** If the project doesn't already have an i18n system, add one (recommend `react-i18next` for React apps, or a simple language-context provider). The language toggle must switch between EN (default) and FR.
+
+2. **Import the JSON** into the home page component(s). Map each piece of UI to the corresponding JSON path:
+   - Hero / Why Milton Hobbs section → `whyMiltonHobbs.*`
+   - Practice Areas carousel/grid → `practiceAreas.*` (iterate over `areas`)
+   - Contact section + form + contact panel → `getInTouch.*`
+   - `<head>` tags (title, meta description, meta keywords, og:title, og:description) → `meta.*`
+
+3. **Wire up the practice area CTAs.** Each area has a `slug` (e.g. `corporate`, `tax-compliance`). The "View Practice Area" button should link to `/practice/{slug}` (or `/fr/practice/{slug}` on the French route). If those pages don't exist yet, create empty placeholder pages so the links don't 404.
+
+4. **Add the hreflang tags** in the `<head>`:
+   - `<link rel="alternate" hreflang="en" href="https://miltonhobbs.com/" />`
+   - `<link rel="alternate" hreflang="fr" href="https://miltonhobbs.com/fr/" />`
+   - `<link rel="alternate" hreflang="x-default" href="https://miltonhobbs.com/" />`
+
+5. **Add LegalService schema.org JSON-LD** to the home page `<head>`:
+   ```json
+   {
+     "@context": "https://schema.org",
+     "@type": "LegalService",
+     "name": "Milton Hobbs",
+     "description": "Boutique corporate law firm in Dubai and Paris.",
+     "url": "https://miltonhobbs.com",
+     "email": "contact@miltonhobbs.com",
+     "telephone": "+971 4 523 2421",
+     "address": {
+       "@type": "PostalAddress",
+       "streetAddress": "Level 2, The Offices 1, One Central, Dubai World Trade Centre",
+       "addressLocality": "Dubai",
+       "addressCountry": "AE"
+     },
+     "areaServed": ["AE","FR","SA","QA","KW","BH","OM"],
+     "availableLanguage": ["en","fr","ar"]
+   }
+   ```
+
+## 🚫 What NOT to change
+
+- **Layout, styling, animations** — keep the existing design exactly as is. Only text content changes.
+- **Component names, file structure, routing patterns** — preserve them.
+- **JSON keys** — never rename or remove them. Only the values are the editable source.
+- **Hard-coded brand colors or fonts** — those come from the brand book and are correct.
+- **The 3D elements / interactive UI** — leave them alone.
+
+## ⚠️ Edge cases & notes
+
+- Some `addressLines` are plain strings (same in EN and FR), others are `{ en, fr }` objects. Handle both cases when rendering.
+- The `languages` field in `directContact` mentions Arabic — that's correct. It reflects the team's spoken languages, not a third site translation. The website UI itself is EN/FR only.
+- French translations use Parisian conventions (formal `vous`, « guillemets », proper accents). Don't auto-correct them.
+- Avoid using "world-renowned", "best", "leading" or similar superlatives anywhere outside this JSON — the client has explicitly prohibited unsubstantiated claims.
+
+## ✋ Before you start
+
+Reply with a short plan: which files you'll create or modify, which i18n library you'll use (or which existing one you'll plug into), and how you'll handle the EN/FR route structure. Wait for confirmation before changing code.
