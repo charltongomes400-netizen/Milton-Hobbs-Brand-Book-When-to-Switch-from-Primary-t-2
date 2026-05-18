@@ -634,7 +634,6 @@ function IPTechnologyInner() {
                 data-testid={`ip-service-card-${i}`}
                 className="group bg-white p-8 flex flex-col hover:bg-[#001489] transition-colors duration-300"
               >
-                <p className="text-[#001489] text-[16px] tracking-[0.28em] uppercase font-bold mb-3 group-hover:text-white transition-colors">{svc.num}</p>
                 <h3 className="font-heading text-[#001489] font-bold text-[1.05rem] leading-snug mb-4 group-hover:text-white transition-colors">{svc.title}</h3>
                 <div className="h-px w-8 bg-[#001489]/20 mb-4 group-hover:bg-white/30 transition-colors" />
                 <p className="text-sm leading-relaxed flex-1 text-[#001489] group-hover:text-white transition-colors">{svc.description}</p>
