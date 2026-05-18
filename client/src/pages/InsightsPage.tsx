@@ -180,7 +180,7 @@ function InsightsInner() {
             </div>
 
             {/* Content — ~42% */}
-            <div className="flex flex-col justify-center gap-5 p-10 lg:p-12">
+            <div className="flex flex-col justify-end gap-5 p-10 lg:p-12">
               <div className="flex items-center gap-2 text-[#001489] text-[11px]">
                 <span>{ct(featured.date, lang)}</span>
                 <span>·</span>
