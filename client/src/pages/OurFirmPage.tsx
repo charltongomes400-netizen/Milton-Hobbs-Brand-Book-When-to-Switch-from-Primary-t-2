@@ -708,10 +708,10 @@ export default function OurFirmPage() {
           <div
             style={{
               position: "absolute",
-              top: "-10%",
+              top: "-20%",
               left: "-5%",
               width: "110%",
-              height: "130%",
+              height: "140%",
               pointerEvents: "none",
               overflow: "hidden",
             }}
