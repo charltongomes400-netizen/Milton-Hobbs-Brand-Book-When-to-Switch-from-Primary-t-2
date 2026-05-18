@@ -841,7 +841,7 @@ function CorporateCommercialInner() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <p className="text-white/70 tracking-[0.35em] uppercase font-bold mb-4 text-[16px]">{tx.servicesEyebrow}</p>
+              <p className="tracking-[0.35em] uppercase font-bold mb-4 text-[16px] text-[#ffffff]">{tx.servicesEyebrow}</p>
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <h2 className="font-heading text-white font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight">{tx.servicesH2}</h2>
                 <p className="text-white/70 text-sm max-w-xs leading-relaxed">{tx.servicesSub}</p>
