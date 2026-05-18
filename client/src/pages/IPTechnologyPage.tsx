@@ -606,7 +606,7 @@ function IPTechnologyInner() {
       <section
         id="services"
         data-testid="ip-services"
-        className="bg-[#001489] px-8 py-24"
+        className="bg-white px-8 py-24"
       >
         <div className="max-w-[1400px] mx-auto">
           <motion.div
@@ -616,10 +616,10 @@ function IPTechnologyInner() {
             transition={{ duration: 0.6 }}
             className="mb-14"
           >
-            <p className="text-[#8099FF] text-[16px] tracking-[0.35em] uppercase font-bold mb-4">{tx.servicesEyebrow}</p>
+            <p className="text-[#001489] text-[16px] tracking-[0.35em] uppercase font-bold mb-4">{tx.servicesEyebrow}</p>
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-              <h2 className="font-heading text-white font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight">{tx.servicesH2}</h2>
-              <p className="text-white text-sm max-w-xs leading-relaxed">{tx.servicesSub}</p>
+              <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight">{tx.servicesH2}</h2>
+              <p className="text-[#001489] text-sm max-w-xs leading-relaxed">{tx.servicesSub}</p>
             </div>
           </motion.div>
 
