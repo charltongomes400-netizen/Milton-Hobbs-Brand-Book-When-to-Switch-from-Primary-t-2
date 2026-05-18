@@ -635,6 +635,58 @@ export default function OurFirmPage() {
   const valuesRef = useRef<HTMLDivElement>(null);
   const valuesInView = useInView(valuesRef, { once: true, margin: "-80px" });
 
+  const ytDivRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const LOOP_AT = 135; // 2 min 15 sec
+
+    const initPlayer = () => {
+      if (!ytDivRef.current) return;
+      const player = new (window as any).YT.Player(ytDivRef.current, {
+        videoId: "MnUh9nVYqjg",
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          controls: 0,
+          rel: 0,
+          modestbranding: 1,
+          playsinline: 1,
+          iv_load_policy: 3,
+          showinfo: 0,
+          disablekb: 1,
+          fs: 0,
+          enablejsapi: 1,
+        },
+        events: {
+          onReady: (e: any) => {
+            e.target.playVideo();
+            const interval = setInterval(() => {
+              try {
+                if (e.target.getCurrentTime() >= LOOP_AT) {
+                  e.target.seekTo(0, true);
+                }
+              } catch (_) {}
+            }, 500);
+            return () => clearInterval(interval);
+          },
+          onStateChange: (e: any) => {
+            // YT.PlayerState.ENDED = 0
+            if (e.data === 0) e.target.seekTo(0, true);
+          },
+        },
+      });
+    };
+
+    if ((window as any).YT && (window as any).YT.Player) {
+      initPlayer();
+    } else {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+      (window as any).onYouTubeIframeAPIReady = initPlayer;
+    }
+  }, []);
+
   const stats = [
     { value: 4, suffix: "+", label: "Years of Practice", labelFR: "Ans d'Exercice" },
     { value: 10, suffix: "+", label: "Practice Areas", labelFR: "Domaines d'Expertise" },
@@ -652,21 +704,23 @@ export default function OurFirmPage() {
           className="relative h-screen overflow-hidden"
           data-testid="firm-hero"
         >
-          {/* iframe oversized on all sides to crop the YT title bar and bottom bar */}
-          <iframe
-            src="https://www.youtube.com/embed/MnUh9nVYqjg?autoplay=1&mute=1&loop=1&playlist=MnUh9nVYqjg&controls=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&showinfo=0&start=0"
-            title="Milton Hobbs — Our Firm"
-            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          {/* YT IFrame API target — oversized to crop title bar and bottom bar */}
+          <div
             style={{
               position: "absolute",
               top: "-10%",
               left: "-5%",
               width: "110%",
               height: "130%",
-              border: 0,
               pointerEvents: "none",
+              overflow: "hidden",
             }}
-          />
+          >
+            <div
+              ref={ytDivRef}
+              style={{ width: "100%", height: "100%" }}
+            />
+          </div>
 
           {/* Scroll indicator */}
           <div className="absolute bottom-8 left-0 right-0 z-10 flex justify-center pointer-events-none">
