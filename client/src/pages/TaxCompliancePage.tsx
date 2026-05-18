@@ -290,6 +290,22 @@ function TaxComplianceInner() {
 
           </div>
         </div>
+
+            {/* Scroll hint */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5 }}
+              className="absolute bottom-10 left-8 flex items-center gap-3 pointer-events-none"
+            >
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 2.2, repeat: Infinity }}
+                className="w-px h-10 bg-gradient-to-b from-white to-transparent"
+              />
+              <span className="text-white text-[16px] tracking-[0.25em] uppercase">Scroll</span>
+            </motion.div>
+
       </section>
       <section id="overview" data-testid="tax-overview" data-header-theme="light" className="bg-white px-8 py-24">
         <div className="max-w-[1400px] mx-auto">
