@@ -241,7 +241,6 @@ function TaxComplianceInner() {
   return (
     <div className="bg-[#001489] min-h-screen">
       <Header />
-
       <section id="home" data-testid="tax-hero" data-header-theme="dark" className="relative min-h-screen bg-[#001489] flex items-center overflow-hidden pt-20">
         <img
           src={imgTax}
@@ -258,7 +257,7 @@ function TaxComplianceInner() {
           <div className="grid items-center">
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: "easeOut" }}>
               <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }} className="inline-flex items-center gap-3 mb-8">
-                <a href="/#expertise" className="flex items-center gap-2 text-[#8099FF] text-[10px] tracking-[0.3em] uppercase font-semibold hover:opacity-80 transition-opacity">
+                <a href="/#expertise" className="flex items-center gap-2 text-[#8099FF] tracking-[0.3em] uppercase font-semibold hover:opacity-80 transition-opacity text-[16px]">
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12"><path d="M11 6H1M6 1L1 6l5 5" stroke="currentColor" strokeWidth="1.3" /></svg>
                   {tx.breadcrumb}
                 </a>
@@ -305,7 +304,6 @@ function TaxComplianceInner() {
           <span className="text-white/30 text-[10px] tracking-[0.25em] uppercase">{tx.scroll}</span>
         </motion.div>
       </section>
-
       <section id="overview" data-testid="tax-overview" data-header-theme="light" className="bg-white px-8 py-24">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid lg:grid-cols-[1fr_400px] gap-20 items-start">
@@ -343,7 +341,6 @@ function TaxComplianceInner() {
           </div>
         </div>
       </section>
-
       <section id="services" data-testid="tax-services" className="bg-[#001489] px-8 py-24">
         <div className="max-w-[1400px] mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-14">
@@ -372,7 +369,6 @@ function TaxComplianceInner() {
           </div>
         </div>
       </section>
-
       <section data-testid="tax-differentiators" data-header-theme="light" className="bg-white px-8 py-24">
         <div className="max-w-[1400px] mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-14">
@@ -393,7 +389,6 @@ function TaxComplianceInner() {
           </div>
         </div>
       </section>
-
       <section data-testid="tax-cta-banner" className="bg-[#001489] px-8 py-20">
         <div className="max-w-[1400px] mx-auto">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
@@ -414,7 +409,6 @@ function TaxComplianceInner() {
           </div>
         </div>
       </section>
-
       <Footer />
       <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} practiceArea="Tax & Compliance" />
     </div>
