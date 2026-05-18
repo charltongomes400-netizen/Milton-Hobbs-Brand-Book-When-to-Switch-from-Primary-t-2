@@ -215,7 +215,6 @@ export function Header() {
           <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "-rotate-45 -translate-y-[3px]" : ""}`} />
         </button>
       </div>
-
       {/* ── Expertise mega-menu ── */}
       <AnimatePresence>
         {expertiseOpen && (
@@ -247,15 +246,17 @@ export function Header() {
               {/* Left: tagline + CTA */}
               <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div>
-                  <p style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: 12,
-                    fontWeight: 700,
-                    letterSpacing: "0.30em",
-                    textTransform: "uppercase",
-                    color: "#001489",
-                    marginBottom: 20,
-                  }}>
+                  <p
+                    style={{
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontSize: 12,
+                      fontWeight: 700,
+                      letterSpacing: "0.30em",
+                      textTransform: "uppercase",
+                      color: "#001489",
+                      marginBottom: 20,
+                    }}
+                    className="text-[16px]">
                     Our Expertise
                   </p>
                   <h3
@@ -369,7 +370,6 @@ export function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* ── Mobile menu ── */}
       <AnimatePresence>
         {mobileOpen && (
