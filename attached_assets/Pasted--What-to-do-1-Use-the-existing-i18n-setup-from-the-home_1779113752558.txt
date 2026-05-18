@@ -1,0 +1,39 @@
+## ✅ What to do
+
+1. **Use the existing i18n setup** from the home page update. The same EN/FR routing pattern applies — EN default, French at `/fr/cabinet`.
+
+2. **Import the JSON** into the Our Firm page component(s). Map each piece of UI to the corresponding JSON path:
+   - Section 1 layout (left column statement, right column promise card, 4-point grid below) → `ourPhilosophy.*`
+   - Section 2 (narrative + 4 brand-trait cards) → `brandStory.*`
+   - Section 3 (6-value grid) → `coreValues.*` (iterate over `values`)
+   - Section 4 (heading + body + contact + form) → `bookConsultation.*`
+   - `<head>` tags (title, meta description, og:title, og:description) → `meta.*`
+
+3. **Background colors — important.** The current design has two sections on brand-navy backgrounds with white text:
+   - `ourPhilosophy.promiseCard` — only the right-column promise card sits on navy
+   - `brandStory` — the entire Brand Story & Mission section sits on navy
+   The JSON contains `$note` annotations flagging these. The existing styling should already handle this — do not change background colors or text colors. Only swap the text content.
+
+4. **Form field — Area of Interest dropdown.** Reuse the dropdown options array from the JSON. The slugs (e.g. `corporate`, `tax-compliance`, `mergers-acquisitions`) must match the slugs used in the home page practice areas data, so form submissions can route by practice area in the CRM.
+
+5. **Hreflang tags.** Add or update the hreflang link tags on this page:
+   - `<link rel="alternate" hreflang="en" href="https://miltonhobbs.com/firm" />`
+   - `<link rel="alternate" hreflang="fr" href="https://miltonhobbs.com/fr/cabinet" />`
+   - `<link rel="alternate" hreflang="x-default" href="https://miltonhobbs.com/firm" />`
+
+6. **Schema.org markup.** Add an `AboutPage` schema JSON-LD block to the Our Firm page `<head>`:
+   ```json
+   {
+     "@context": "https://schema.org",
+     "@type": "AboutPage",
+     "name": "Our Firm — Milton Hobbs",
+     "url": "https://miltonhobbs.com/firm",
+     "inLanguage": ["en","fr"],
+     "about": {
+       "@type": "LegalService",
+       "name": "Milton Hobbs",
+       "description": "Boutique corporate law firm in Dubai and Paris.",
+       "url": "https://miltonhobbs.com"
+     }
+   }
+   ```
