@@ -198,16 +198,6 @@ function PracticeAreaPageInner() {
                 </span>
               </motion.div>
 
-              {/* Eyebrow */}
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35 }}
-                className="text-white/60 text-[16px] tracking-[0.35em] uppercase font-bold mb-6"
-              >
-                {c(pa.hero.eyebrow, effectiveLang)}
-              </motion.p>
-
               {/* H1 */}
               <motion.h1
                 initial={{ opacity: 0, y: 24 }}
