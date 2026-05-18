@@ -170,7 +170,7 @@ const translations = {
       successText: "Thank you for contacting Milton Hobbs. Our team will review your enquiry and respond within one business day.",
       officeLabel: "Our Offices",
       dubaiLabel: "Dubai — Primary Office",
-      parisLabel: "Paris — Opening Late 2025",
+      parisLabel: "Paris Office",
     },
     footer: {
       tagline:
@@ -356,7 +356,7 @@ const translations = {
       successText: "Merci d'avoir contacté Milton Hobbs. Notre équipe examinera votre demande et reviendra vers vous sous un jour ouvré.",
       officeLabel: "Nos Bureaux",
       dubaiLabel: "Dubaï — Bureau principal",
-      parisLabel: "Paris — Ouverture fin 2025",
+      parisLabel: "Bureau Paris",
     },
     footer: {
       tagline:
