@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
+import imgCorporate from "@assets/optimized/sean-pollock-PhYq704ffdA-unsplash_1776241615811.jpg";
 
 const PRACTICE_AREAS = [
   "Corporate & Commercial",
@@ -649,8 +650,17 @@ function CorporateCommercialInner() {
         data-header-theme="dark"
         className="relative min-h-screen bg-[#001489] flex items-center overflow-hidden pt-20"
       >
-
-
+        <img
+          src={imgCorporate}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ objectPosition: "center 30%", mixBlendMode: "multiply" }}
+        />
+        <div
+          className="absolute inset-x-0 bottom-0 pointer-events-none"
+          style={{ height: "70%", background: "linear-gradient(to top, rgba(0,14,80,0.80) 0%, rgba(0,14,80,0.40) 45%, transparent 100%)" }}
+        />
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-8 py-20 w-full">
           <div className="grid items-center">
