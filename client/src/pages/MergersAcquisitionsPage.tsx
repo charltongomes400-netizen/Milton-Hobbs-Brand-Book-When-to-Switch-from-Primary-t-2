@@ -607,7 +607,7 @@ function MergersAcquisitionsInner() {
               viewport={{ once: true }}
               transition={{ duration: 0.65 }}
             >
-              <p className="text-[#8099FF] text-[16px] tracking-[0.35em] uppercase font-bold mb-5">{tx.overviewEyebrow}</p>
+              <p className="text-[#001489] text-[16px] tracking-[0.35em] uppercase font-bold mb-5">{tx.overviewEyebrow}</p>
               <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.2vw,2.6rem)] tracking-tight leading-tight mb-8">{tx.overviewH2}</h2>
               <div className="h-[2px] w-16 bg-[#001489]/30 mb-8" />
               <p className="text-[#001489] text-base leading-[1.85] max-w-[58ch] mb-6">{tx.overviewP1}</p>
