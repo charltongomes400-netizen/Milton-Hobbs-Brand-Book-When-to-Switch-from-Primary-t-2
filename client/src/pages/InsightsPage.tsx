@@ -218,7 +218,7 @@ function InsightsInner() {
         <div className="max-w-[1400px] mx-auto">
           {/* Row: label + filter tabs */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-            <p className="text-[#001489] text-[10px] tracking-[0.38em] uppercase font-bold">
+            <p className="text-[#001489] tracking-[0.38em] uppercase font-bold text-[16px]">
               {isFr ? "TOUTES LES ANALYSES" : "ALL INSIGHTS"}
             </p>
             <div className="flex flex-wrap gap-2">
