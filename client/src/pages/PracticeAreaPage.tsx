@@ -7,7 +7,7 @@ import { ContactModal } from "@/components/ContactModal";
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { practiceAreas, c } from "@/data/practiceAreasCopy";
 
-import imgCorporate from "@assets/optimized/sean-pollock-PhYq704ffdA-unsplash_1776241615811.jpg";
+import imgCorporate from "@assets/kir-simakov-1y5PkTZOMbQ-unsplash_1779148053949.jpg";
 import imgTax from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
 import imgMA from "@assets/optimized/marc-olivier-jodoin--HIiNFXcbtQ-unsplash_1776241615811.jpg";
 import imgStartups from "@assets/optimized/donny-jiang-42gFAgdIUC8-unsplash_1776241615811.jpg";
