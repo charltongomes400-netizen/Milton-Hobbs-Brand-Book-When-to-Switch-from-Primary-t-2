@@ -652,21 +652,37 @@ export default function OurFirmPage() {
           className="relative h-screen overflow-hidden"
           data-testid="firm-hero"
         >
-          {/* iframe oversized to bleed outside container, cropping YT title bar & bottom UI */}
+          {/* iframe oversized on all sides to crop the YT title bar and bottom bar */}
           <iframe
             src="https://www.youtube.com/embed/MnUh9nVYqjg?autoplay=1&mute=1&loop=1&playlist=MnUh9nVYqjg&controls=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&showinfo=0&start=0"
             title="Milton Hobbs — Our Firm"
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             style={{
               position: "absolute",
-              top: "-10%",
+              top: "-8%",
               left: "-5%",
               width: "110%",
-              height: "120%",
+              height: "116%",
               border: 0,
               pointerEvents: "none",
             }}
           />
+
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-0 right-0 z-10 flex justify-center pointer-events-none">
+            <motion.div
+              animate={{ y: [0, 7, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="flex flex-col items-center gap-2"
+            >
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, letterSpacing: "0.32em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)", fontWeight: 600 }}>
+                Scroll
+              </span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M7 2v10M2 7l5 5 5-5" stroke="rgba(255,255,255,0.55)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </motion.div>
+          </div>
         </section>
 
         {/* ── PHILOSOPHY & PURPOSE ── */}
