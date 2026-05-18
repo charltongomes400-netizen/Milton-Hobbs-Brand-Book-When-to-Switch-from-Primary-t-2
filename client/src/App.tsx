@@ -24,15 +24,8 @@ import HomeObsidian from "@/pages/HomeObsidian";
 import HomeClaret from "@/pages/HomeClaret";
 import ArticlePage from "@/pages/ArticlePage";
 import ImmigrationPage from "@/pages/ImmigrationPage";
-import CorporateCommercialPage from "@/pages/CorporateCommercialPage";
-import MergersAcquisitionsPage from "@/pages/MergersAcquisitionsPage";
-import IPTechnologyPage from "@/pages/IPTechnologyPage";
+import PracticeAreaPage from "@/pages/PracticeAreaPage";
 import InsightsPage from "@/pages/InsightsPage";
-import TaxCompliancePage from "@/pages/TaxCompliancePage";
-import StartupsVentureCapitalPage from "@/pages/StartupsVentureCapitalPage";
-import RealEstatePropertyPage from "@/pages/RealEstatePropertyPage";
-import EmploymentLaborPage from "@/pages/EmploymentLaborPage";
-import LitigationDisputesPage from "@/pages/LitigationDisputesPage";
 import OurFirmPage from "@/pages/OurFirmPage";
 import CareersPage from "@/pages/CareersPage";
 import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage";
@@ -73,14 +66,8 @@ function Router() {
       <Route path="/fr/publications" component={InsightsPage} />
       <Route path="/fr/publications/:slug" component={ArticlePage} />
       <Route path="/expertise/immigration" component={ImmigrationPage} />
-      <Route path="/expertise/corporate-commercial" component={CorporateCommercialPage} />
-      <Route path="/expertise/mergers-acquisitions" component={MergersAcquisitionsPage} />
-      <Route path="/expertise/ip-technology" component={IPTechnologyPage} />
-      <Route path="/expertise/tax-compliance" component={TaxCompliancePage} />
-      <Route path="/expertise/startups-venture-capital" component={StartupsVentureCapitalPage} />
-      <Route path="/expertise/real-estate-property" component={RealEstatePropertyPage} />
-      <Route path="/expertise/employment-labor" component={EmploymentLaborPage} />
-      <Route path="/expertise/litigation-disputes" component={LitigationDisputesPage} />
+      <Route path="/expertise/:slug" component={PracticeAreaPage} />
+      <Route path="/fr/expertise/:slugFr" component={PracticeAreaPage} />
       <Route path="/privacy-policy" component={PrivacyPolicyPage} />
       <Route path="/cookies" component={CookieNoticePage} />
       <Route path="/terms-of-use" component={TermsOfUsePage} />
