@@ -37,7 +37,7 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     const id = parseInt(req.params.id);
     if (isNaN(id)) return res.status(400).json({ error: "Invalid id" });
     const job = await storage.getJob(id);
-    if (!job) return res.status(404).json({ error: "Not found" });
+    if (!job || !job.isActive) return res.status(404).json({ error: "Not found" });
     res.json(job);
   });
 
