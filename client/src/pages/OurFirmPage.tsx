@@ -831,11 +831,10 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={philosophyInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
-                  className="bg-white p-10 group hover:bg-[#001489] transition-colors duration-400"
+                  className="bg-white p-10"
                 >
-                  <p className="text-[#001489] text-xs tracking-[0.3em] font-bold mb-4">{item.num}</p>
-                  <h3 className="font-heading text-[#001489] group-hover:text-white font-bold text-xl tracking-tight mb-3 transition-colors duration-300">{item.title}</h3>
-                  <p className="text-[#001489] group-hover:text-white text-sm leading-relaxed transition-colors duration-300">{item.body}</p>
+                  <h3 className="font-heading text-[#001489] font-bold text-xl tracking-tight mb-3">{item.title}</h3>
+                  <p className="text-[#001489] text-sm leading-relaxed">{item.body}</p>
                 </motion.div>
               ))}
             </div>
