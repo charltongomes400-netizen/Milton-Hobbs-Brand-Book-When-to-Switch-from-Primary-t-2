@@ -853,7 +853,7 @@ export default function OurFirmPage() {
               initial={{ opacity: 0, x: -20 }}
               animate={missionInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-[#001489] text-[10px] tracking-[0.4em] uppercase font-bold mb-8"
+              className="text-[#001489] tracking-[0.4em] uppercase font-bold mb-8 text-[18px]"
             >
               Brand Story & Mission
             </motion.p>
