@@ -2391,7 +2391,7 @@ function FooterV15() {
 
         <p
           data-testid="footer-disclaimer"
-          style={{ color: "rgba(255,255,255,0.35)", fontSize: 9, lineHeight: 1.6, paddingBottom: 18, maxWidth: "85ch" }}
+          style={{ color: "#FFFFFF", fontSize: 9, lineHeight: 1.6, paddingBottom: 18, maxWidth: "85ch" }}
         >
           {f.disclaimer}
         </p>
