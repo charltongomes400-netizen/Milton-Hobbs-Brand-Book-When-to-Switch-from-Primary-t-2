@@ -481,7 +481,7 @@ function ValueCard({ value, lang, index }: { value: typeof coreValues[0]; lang: 
       onMouseLeave={() => setHovered(false)}
       className="group relative border border-[#001489] p-8 cursor-default overflow-hidden"
       style={{
-        background: hovered ? "linear-gradient(145deg, #001489 0%, #000A4F 100%)" : "#ffffff",
+        background: hovered ? "#001489" : "#ffffff",
         borderColor: hovered ? "transparent" : "#001489",
         transition: "background 0.4s ease, border-color 0.4s ease",
       }}
