@@ -755,7 +755,7 @@ export default function OurFirmPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={philosophyInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-white text-[10px] tracking-[0.4em] uppercase font-bold mb-8"
+                  className="text-[#001489] text-[10px] tracking-[0.4em] uppercase font-bold mb-8"
                 >
                   Our Philosophy & Purpose
                 </motion.p>
@@ -773,7 +773,7 @@ export default function OurFirmPage() {
                   initial={{ scaleX: 0 }}
                   animate={philosophyInView ? { scaleX: 1 } : {}}
                   transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                  className="w-16 h-0.5 bg-white mb-10 origin-left"
+                  className="w-16 h-0.5 bg-[#001489] mb-10 origin-left"
                 />
                 <motion.p
                   initial={{ opacity: 0, y: 16 }}
@@ -810,7 +810,7 @@ export default function OurFirmPage() {
                 >
                   <div className="w-8 h-px bg-white mb-5" />
                   <p className="text-white text-[9px] tracking-[0.35em] uppercase font-bold mb-3">This is Our Promise</p>
-                  <p className="font-heading text-white font-semibold text-lg leading-snug tracking-tight mb-4">
+                  <p className="text-white text-base leading-relaxed mb-4">
                     To Bring Precision to Complexity, Composure to Challenge, and a Client-First Mindset to Every Engagement.
                   </p>
                   <p className="text-white text-[10px] tracking-[0.35em] uppercase font-bold">Milton Hobbs — Brand Promise</p>
