@@ -731,7 +731,6 @@ function OurFirmContent() {
   return (
     <div className="bg-[#001489] min-h-screen" data-testid="our-firm-page">
       <Header />
-
       {/* ── HERO — full-screen YouTube video ── */}
       <section
         className="relative h-screen overflow-hidden"
@@ -766,7 +765,6 @@ function OurFirmContent() {
           </motion.div>
         </div>
       </section>
-
       {/* ── PHILOSOPHY & PURPOSE ── */}
       <section
         id="philosophy"
@@ -868,7 +866,6 @@ function OurFirmContent() {
           </div>
         </div>
       </section>
-
       {/* ── BRAND STORY & MISSION ── */}
       <section
         ref={missionRef}
@@ -900,7 +897,7 @@ function OurFirmContent() {
             initial={{ opacity: 0, y: 14 }}
             animate={missionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-[#001489] text-sm leading-relaxed mb-5"
+            className="text-[#001489] mb-5 text-[16px]"
           >
             {ct(copy.brandStory.openingParagraph, l)}
           </motion.p>
@@ -911,7 +908,7 @@ function OurFirmContent() {
             transition={{ duration: 0.7, delay: 0.38 }}
             className="space-y-3 mb-6 pl-4 border-l border-[#001489]"
           >
-            <p className="text-[#001489] text-sm leading-relaxed">
+            <p className="text-[#001489] text-[16px]">
               <span className="text-[#001489] font-semibold">
                 {ct(copy.brandStory.pullQuote.milton.nameBold, l)}
               </span>
@@ -964,7 +961,6 @@ function OurFirmContent() {
           </motion.div>
         </div>
       </section>
-
       {/* ── CORE VALUES ── */}
       <section
         id="values"
@@ -1023,7 +1019,6 @@ function OurFirmContent() {
           </div>
         </div>
       </section>
-
       {/* ── BOOK A CONSULTATION ── */}
       <section
         className="bg-[#F6F7FB] py-28 px-8 overflow-hidden relative"
@@ -1096,9 +1091,7 @@ function OurFirmContent() {
           </div>
         </div>
       </section>
-
       <Footer />
-
       <ConsultModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
