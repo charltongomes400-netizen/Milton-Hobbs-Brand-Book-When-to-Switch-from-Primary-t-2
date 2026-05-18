@@ -914,7 +914,7 @@ function OurFirmContent() {
               </span>
               {ct(copy.brandStory.pullQuote.milton.description, l)}
             </p>
-            <p className="text-[#001489] text-sm leading-relaxed">
+            <p className="text-[#001489] text-[16px]">
               <span className="text-[#001489] font-semibold">
                 {ct(copy.brandStory.pullQuote.hobbes.nameBold, l)}
               </span>
@@ -926,7 +926,7 @@ function OurFirmContent() {
             initial={{ opacity: 0, y: 14 }}
             animate={missionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="text-[#001489] text-sm leading-relaxed mb-10"
+            className="text-[#001489] mb-10 text-[16px]"
           >
             {ct(copy.brandStory.closingParagraph, l)}
           </motion.p>
