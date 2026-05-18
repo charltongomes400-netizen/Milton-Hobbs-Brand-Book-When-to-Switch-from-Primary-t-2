@@ -647,105 +647,25 @@ export default function OurFirmPage() {
       <div className="bg-[#001489] min-h-screen" data-testid="our-firm-page">
         <Header />
 
-        {/* ── HERO ── */}
+        {/* ── HERO — full-screen YouTube video ── */}
         <section
-          className="relative min-h-screen flex flex-col overflow-hidden bg-[#001489]"
+          className="relative h-screen overflow-hidden"
           data-testid="firm-hero"
         >
-          <div className="absolute inset-0 pointer-events-none">
-            {Array.from({ length: 20 }).map((_, i) => (
-              <div
-                key={i}
-                className="absolute border-[#8099FF]"
-                style={{
-                  left: `${(i % 5) * 25}%`,
-                  top: `${Math.floor(i / 5) * 25}%`,
-                  width: "25%",
-                  height: "25%",
-                  borderWidth: "0 0 0.5px 0.5px",
-                  opacity: 0.04,
-                }}
-              />
-            ))}
-          </div>
-
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-px"
-                style={{
-                  left: `${15 + i * 14}%`,
-                  top: 0,
-                  height: "100%",
-                  background: "linear-gradient(to bottom, transparent, rgba(128,153,255,0.08) 30%, rgba(128,153,255,0.08) 70%, transparent)",
-                }}
-                animate={{ opacity: [0.3, 0.7, 0.3] }}
-                transition={{ duration: 4 + i, repeat: Infinity, delay: i * 0.6, ease: "easeInOut" }}
-              />
-            ))}
-          </div>
-
-          {/* YouTube Video Hero */}
-          <div className="relative z-10 flex-1 flex flex-col pt-24">
-            <div className="flex-1 relative overflow-hidden" style={{ minHeight: "55vh" }}>
-              {/* Overflow-hidden wrapper crops the YouTube title bar */}
-              <div className="absolute inset-0" style={{ top: -60 }}>
-                <iframe
-                  src="https://www.youtube.com/embed/MnUh9nVYqjg?autoplay=1&mute=1&loop=1&playlist=MnUh9nVYqjg&controls=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&showinfo=0&start=0"
-                  title="Milton Hobbs — Our Firm"
-                  allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-                  className="w-full h-full"
-                  style={{ border: 0 }}
-                />
-              </div>
-              {/* Subtle overlay for depth */}
-              <div className="absolute inset-0 bg-[#001489]/20 pointer-events-none" />
-            </div>
-
-            {/* Scroll prompt */}
-            <div className="relative z-20 flex justify-center pb-6 pt-4">
-              <motion.div
-                animate={{ y: [0, 6, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                className="flex flex-col items-center gap-2 cursor-pointer"
-                onClick={() => document.getElementById('philosophy')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                <span className="text-white text-[10px] tracking-[0.3em] uppercase font-medium opacity-50">
-                  Scroll to explore
-                </span>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white opacity-50">
-                  <path d="M8 3v10M3 8l5 5 5-5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </motion.div>
-            </div>
-          </div>
-
-          <div className="relative z-10 max-w-[1400px] mx-auto px-8 w-full pb-16">
-            <div className="border-t border-white pt-12 grid grid-cols-2 lg:grid-cols-4 gap-8">
-              {stats.map((s, i) => (
-                <motion.div
-                  key={i}
-                  data-testid={`stat-${i}`}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
-                >
-                  <div className="font-heading text-white font-bold mb-1" style={{ fontSize: "clamp(2rem,3.5vw,2.8rem)", lineHeight: 1 }}>
-                    <AnimatedNumber target={s.value} suffix={s.suffix} />
-                  </div>
-                  <p className="text-white text-[10px] tracking-[0.25em] uppercase font-medium">{lang === "FR" ? s.labelFR : s.label}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <motion.div
-            className="absolute bottom-0 left-0 right-0 h-px"
-            style={{ background: "linear-gradient(to right, transparent, rgba(0,20,137,0.3) 50%, transparent)" }}
-            animate={{ opacity: [0.4, 0.8, 0.4] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          {/* iframe oversized to bleed outside container, cropping YT title bar & bottom UI */}
+          <iframe
+            src="https://www.youtube.com/embed/MnUh9nVYqjg?autoplay=1&mute=1&loop=1&playlist=MnUh9nVYqjg&controls=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&showinfo=0&start=0"
+            title="Milton Hobbs — Our Firm"
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            style={{
+              position: "absolute",
+              top: "-10%",
+              left: "-5%",
+              width: "110%",
+              height: "120%",
+              border: 0,
+              pointerEvents: "none",
+            }}
           />
         </section>
 
