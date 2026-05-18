@@ -496,7 +496,7 @@ function ValueCard({ value, lang, index }: { value: typeof coreValues[0]; lang: 
         {value.icon(hovered)}
       </div>
       <motion.p
-        className="text-[10px] tracking-[0.35em] uppercase font-bold mb-2"
+        className="tracking-[0.35em] uppercase font-bold mb-2 text-[16px]"
         animate={{ color: hovered ? "white" : "#001489" }}
         transition={{ duration: 0.3 }}
       >
