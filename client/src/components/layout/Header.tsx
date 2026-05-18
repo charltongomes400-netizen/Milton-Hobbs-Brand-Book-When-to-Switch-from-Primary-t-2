@@ -241,7 +241,7 @@ export function Header() {
           >
             <div
               className="max-w-[1400px] mx-auto"
-              style={{ padding: "52px 32px 56px", display: "grid", gridTemplateColumns: "1fr 2fr", gap: 80 }}
+              style={{ padding: "52px 32px 32px", display: "grid", gridTemplateColumns: "1fr 2fr", gap: 80 }}
             >
               {/* Left: tagline + CTA */}
               <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
