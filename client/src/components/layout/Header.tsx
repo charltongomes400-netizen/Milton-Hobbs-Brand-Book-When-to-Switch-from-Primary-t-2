@@ -249,14 +249,13 @@ export function Header() {
                   <p
                     style={{
                       fontFamily: "'Plus Jakarta Sans', sans-serif",
-                      fontSize: 12,
+                      fontSize: 16,
                       fontWeight: 700,
                       letterSpacing: "0.30em",
                       textTransform: "uppercase",
                       color: "#001489",
                       marginBottom: 20,
-                    }}
-                    className="text-[16px]">
+                    }}>
                     Our Expertise
                   </p>
                   <h3
