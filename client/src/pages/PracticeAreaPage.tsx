@@ -297,7 +297,7 @@ function PracticeAreaPageInner() {
               </h2>
               <div className="h-[2px] w-16 bg-[#001489]/30 mb-8" />
               {pa.overview.paragraphs.map((p, i) => (
-                <p key={i} className="text-[#001489] text-base leading-[1.85] max-w-[58ch] mb-6">
+                <p key={i} className="text-base leading-[1.85] max-w-[58ch] mb-6 text-[#000000]">
                   {c(p, effectiveLang)}
                 </p>
               ))}
@@ -329,7 +329,7 @@ function PracticeAreaPageInner() {
                   {pa.practiceCard.whoItems.map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <span className="w-1.5 h-1.5 flex-shrink-0 mt-[0.45em] bg-[#001489]" />
-                      <span className="text-[#001489] text-sm leading-relaxed">{c(item, effectiveLang)}</span>
+                      <span className="text-sm leading-relaxed text-[#000000]">{c(item, effectiveLang)}</span>
                     </li>
                   ))}
                 </ul>
