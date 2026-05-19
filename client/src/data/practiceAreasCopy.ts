@@ -132,7 +132,7 @@ export const practiceAreas: PracticeArea[] = [
     },
     closingCta: {
       eyebrow: { en: "SPEAK WITH A PARTNER", fr: "ÉCHANGER AVEC UN ASSOCIÉ" },
-      heading: { en: "Have a corporate matter in mind? Bring it to a partner directly.", fr: "Un dossier corporate en tête ? Adressez-vous directement à un associé." },
+      heading: { en: "Have a corporate matter in mind?\nBring it to a partner directly.", fr: "Un dossier corporate en tête ?\nAdressez-vous directement à un associé." },
       cta: { en: "Book a Consultation", fr: "Prendre Rendez-Vous" },
     },
   },
