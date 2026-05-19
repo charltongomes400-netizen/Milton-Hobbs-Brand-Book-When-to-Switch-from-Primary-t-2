@@ -642,7 +642,7 @@ export const practiceAreas: PracticeArea[] = [
     },
     closingCta: {
       eyebrow: { en: "MANAGE THE TRANSITION", fr: "PILOTER LA TRANSITION" },
-      heading: { en: "Hiring, exiting, or restructuring a team? Bring it to a partner directly.", fr: "En recrutement, en sortie ou en restructuration d'équipe ? Adressez-vous directement à un associé." },
+      heading: { en: "Hiring, exiting, or restructuring a team?\nBring it to a partner directly.", fr: "En recrutement, en sortie ou en restructuration d'équipe ?\nAdressez-vous directement à un associé." },
       cta: { en: "Book a Consultation", fr: "Prendre Rendez-Vous" },
     },
   },
