@@ -147,7 +147,6 @@ function PracticeAreaPageInner() {
   return (
     <div className="bg-[#001489] min-h-screen">
       <Header />
-
       <section
         id="home"
         data-testid="pa-hero"
@@ -276,7 +275,6 @@ function PracticeAreaPageInner() {
           </span>
         </motion.div>
       </section>
-
       <section
         id="overview"
         data-testid="pa-overview"
@@ -330,7 +328,7 @@ function PracticeAreaPageInner() {
                 <ul className="flex flex-col gap-3">
                   {pa.practiceCard.whoItems.map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 bg-[#8099FF] flex-shrink-0 mt-[0.45em]" />
+                      <span className="w-1.5 h-1.5 flex-shrink-0 mt-[0.45em] bg-[#001489]" />
                       <span className="text-[#001489] text-sm leading-relaxed">{c(item, effectiveLang)}</span>
                     </li>
                   ))}
@@ -340,7 +338,6 @@ function PracticeAreaPageInner() {
           </div>
         </div>
       </section>
-
       <section
         id="services"
         data-testid="pa-services"
@@ -409,7 +406,6 @@ function PracticeAreaPageInner() {
           </div>
         </div>
       </section>
-
       <section className="bg-[#001489] px-8 py-5">
         <div className="max-w-[1400px] mx-auto flex items-center justify-between">
           <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold">Milton Hobbs</p>
@@ -418,7 +414,6 @@ function PracticeAreaPageInner() {
           </p>
         </div>
       </section>
-
       <section
         data-testid="pa-differentiators"
         data-header-theme="light"
@@ -462,7 +457,6 @@ function PracticeAreaPageInner() {
           </div>
         </div>
       </section>
-
       <section
         data-testid="pa-cta-banner"
         className="bg-[#001489] px-8 py-20"
@@ -511,7 +505,6 @@ function PracticeAreaPageInner() {
           </div>
         </div>
       </section>
-
       <Footer />
       <ContactModal
         open={modalOpen}
