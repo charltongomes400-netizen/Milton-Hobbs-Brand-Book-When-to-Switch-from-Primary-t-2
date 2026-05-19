@@ -12,7 +12,7 @@ import imgTax from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_17762416
 import imgMA from "@assets/4_1779150173136.png";
 import imgStartups from "@assets/optimized/donny-jiang-42gFAgdIUC8-unsplash_1776241615811.jpg";
 import imgIP from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
-import imgRealEstate from "@assets/optimized/simone-hutsch-iDSfeuoxM0o-unsplash_1776241615811.jpg";
+import imgRealEstate from "@assets/4_1779150173136.png";
 import imgEmploy from "@assets/optimized/daniele-colucci-Xt48I3ps6Pg-unsplash_1776241615811.jpg";
 import imgLitigation from "@assets/5_1779150913790.png";
 
