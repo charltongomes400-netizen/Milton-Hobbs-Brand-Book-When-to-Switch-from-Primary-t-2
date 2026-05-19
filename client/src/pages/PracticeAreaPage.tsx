@@ -8,7 +8,7 @@ import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { practiceAreas, c } from "@/data/practiceAreasCopy";
 
 import imgCorporate from "@assets/expertisecorporate-commercial_2_1779148847133.png";
-import imgTax from "@assets/ricardo-gomez-angel-HT45CoenVds-unsplash_1779152488118.jpg";
+import imgTax from "@assets/test_3_1779152567137.png";
 import imgMA from "@assets/344_1779152160836.png";
 import imgStartups from "@assets/optimized/donny-jiang-42gFAgdIUC8-unsplash_1776241615811.jpg";
 import imgIP from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
