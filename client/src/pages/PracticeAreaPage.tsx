@@ -382,11 +382,11 @@ function PracticeAreaPageInner() {
                   <span className="text-[#8099FF] text-[11px] tracking-[0.3em] uppercase font-bold mb-3 group-hover:text-white/50 transition-colors">
                     {svc.num}
                   </span>
-                  <h3 className="font-heading text-[#001489] font-bold text-[1.05rem] leading-snug mb-4 group-hover:text-white transition-colors">
+                  <h3 className="font-heading text-black font-bold text-[1.05rem] leading-snug mb-4 group-hover:text-white transition-colors">
                     {c(svc.title, effectiveLang)}
                   </h3>
-                  <div className="h-px w-8 bg-[#001489]/20 mb-4 group-hover:bg-white/30 transition-colors" />
-                  <p className="text-sm leading-relaxed flex-1 text-[#001489] group-hover:text-white transition-colors">
+                  <div className="h-px w-8 bg-black/20 mb-4 group-hover:bg-white/30 transition-colors" />
+                  <p className="text-sm leading-relaxed flex-1 text-black group-hover:text-white transition-colors">
                     {c(svc.body, effectiveLang)}
                   </p>
                   <div className="mt-6 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
