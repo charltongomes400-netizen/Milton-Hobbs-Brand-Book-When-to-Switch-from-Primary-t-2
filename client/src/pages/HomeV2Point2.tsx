@@ -8,7 +8,7 @@ import miltonHobbsWordmark from "@assets/image_1776101259071.png";
 import imgCorp   from "@assets/expertisecorporate-commercial_2_1779148847133.png";
 import imgTax    from "@assets/tax_pic_1779152904015.png";
 import imgBank   from "@assets/elio-elio-8YMbLoUWO_A-unsplash_1779152263990.jpg";
-import imgTech   from "@assets/optimized/donny-jiang-42gFAgdIUC8-unsplash_1776241615811.jpg";
+import imgTech   from "@assets/kevin-bessat-GJDeN-pNtSU-unsplash_1779153303898.jpg";
 import imgIp     from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
 import imgEstate from "@assets/4_1779150173136.png";
 import imgEmploy from "@assets/optimized/daniele-colucci-Xt48I3ps6Pg-unsplash_1776241615811.jpg";
