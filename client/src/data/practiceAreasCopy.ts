@@ -302,7 +302,7 @@ export const practiceAreas: PracticeArea[] = [
     },
     closingCta: {
       eyebrow: { en: "READY TO PROCEED?", fr: "PRÊT À AVANCER ?" },
-      heading: { en: "Ready to close your next transaction? Speak directly with a partner.", fr: "Prêt à conclure votre prochaine opération ? Échangez directement avec un associé." },
+      heading: { en: "Ready to close your next transaction?\nSpeak directly with a partner.", fr: "Prêt à conclure votre prochaine opération ?\nÉchangez directement avec un associé." },
       cta: { en: "Book a Consultation", fr: "Prendre Rendez-Vous" },
     },
   },
