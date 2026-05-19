@@ -817,7 +817,7 @@ function CareersPageInner() {
             <h2 className="font-heading text-[#001489] text-3xl font-bold tracking-tight leading-tight mb-4">
               We are always open to exceptional talent.
             </h2>
-            <p className="text-gray-500 text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed text-[#001489]">
               If you are an outstanding lawyer or legal professional who believes Milton Hobbs is the right home for your career, we invite you to get in touch directly. Exceptional candidates are always welcome.
             </p>
           </div>
