@@ -379,7 +379,7 @@ function PracticeAreaPageInner() {
                   data-testid={`pa-service-card-${i}`}
                   className="group bg-white p-8 flex flex-col hover:bg-[#001489] transition-colors duration-300"
                 >
-                  <h3 className="font-heading text-black font-bold text-[1.05rem] leading-snug mb-4 group-hover:text-white transition-colors">
+                  <h3 className="font-heading text-[#001489] font-bold text-[1.05rem] leading-snug mb-4 group-hover:text-white transition-colors">
                     {c(svc.title, effectiveLang)}
                   </h3>
                   <div className="h-px w-8 bg-black/20 mb-4 group-hover:bg-white/30 transition-colors" />
