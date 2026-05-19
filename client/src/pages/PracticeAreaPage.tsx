@@ -160,7 +160,7 @@ function PracticeAreaPageInner() {
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            style={{ objectPosition: pa.slug === "mergers-acquisitions" ? "center 70%" : "center 42%", mixBlendMode: "multiply" }}
+            style={{ objectPosition: pa.slug === "mergers-acquisitions" ? "center calc(70% + 5px)" : "center 42%", mixBlendMode: "multiply" }}
           />
         )}
         <div
