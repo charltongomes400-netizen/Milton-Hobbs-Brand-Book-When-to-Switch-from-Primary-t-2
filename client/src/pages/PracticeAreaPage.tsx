@@ -14,7 +14,7 @@ import imgStartups from "@assets/optimized/donny-jiang-42gFAgdIUC8-unsplash_1776
 import imgIP from "@assets/optimized/phil-desforges-ow1mML1sOi0-unsplash_1776241615811.jpg";
 import imgRealEstate from "@assets/optimized/simone-hutsch-iDSfeuoxM0o-unsplash_1776241615811.jpg";
 import imgEmploy from "@assets/optimized/daniele-colucci-Xt48I3ps6Pg-unsplash_1776241615811.jpg";
-import imgLitigation from "@assets/optimized/alexander-abero-OypnYfdiQgg-unsplash_1776241615811.jpg";
+import imgLitigation from "@assets/5_1779150913790.png";
 
 const HERO_IMAGES: Record<string, string> = {
   "corporate-commercial": imgCorporate,
