@@ -557,7 +557,7 @@ export const practiceAreas: PracticeArea[] = [
     },
     closingCta: {
       eyebrow: { en: "MOVE ON THE PROPERTY", fr: "AGIR SUR LE BIEN" },
-      heading: { en: "Buying, leasing, or holding property? Bring it to a partner directly.", fr: "À l'achat, en location ou en détention ? Adressez-vous directement à un associé." },
+      heading: { en: "Buying, leasing, or holding property?\nBring it to a partner directly.", fr: "À l'achat, en location ou en détention ?\nAdressez-vous directement à un associé." },
       cta: { en: "Book a Consultation", fr: "Prendre Rendez-Vous" },
     },
   },
