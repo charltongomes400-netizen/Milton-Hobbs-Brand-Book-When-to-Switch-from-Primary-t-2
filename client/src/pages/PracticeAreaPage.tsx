@@ -9,7 +9,7 @@ import { practiceAreas, c } from "@/data/practiceAreasCopy";
 
 import imgCorporate from "@assets/expertisecorporate-commercial_2_1779148847133.png";
 import imgTax from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
-import imgMA from "@assets/optimized/marc-olivier-jodoin--HIiNFXcbtQ-unsplash_1776241615811.jpg";
+import imgMA from "@assets/4_1779150173136.png";
 import imgStartups from "@assets/optimized/donny-jiang-42gFAgdIUC8-unsplash_1776241615811.jpg";
 import imgIP from "@assets/optimized/phil-desforges-ow1mML1sOi0-unsplash_1776241615811.jpg";
 import imgRealEstate from "@assets/optimized/simone-hutsch-iDSfeuoxM0o-unsplash_1776241615811.jpg";
