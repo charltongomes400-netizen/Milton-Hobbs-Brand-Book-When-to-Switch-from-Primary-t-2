@@ -28,9 +28,2954 @@ function snapScrollTo(hash: string) {
   const container = document.querySelector('.v2-snap-container');
   if (container) {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    el.scrollIntoView({ behavior: "smooth" });
   }
 }
 
+/* ─── HEADER ────────────────────────────────────────────────────────────── */
+
+const EXPERTISE_MENU_ITEMS = [
+  { title: "Corporate & Commercial",         href: "/expertise/corporate-commercial" },
+  { title: "Tax & Compliance",               href: "/expertise/tax-compliance" },
+  { title: "Mergers & Acquisitions",         href: "/expertise/mergers-acquisitions" },
+  { title: "IP & Technology",               href: "/expertise/ip-technology" },
+  { title: "Startups & Venture Capital",     href: "/expertise/startups-venture-capital" },
+  { title: "Real Estate & Property",         href: "/expertise/real-estate-property" },
+  { title: "Employment & Labor",             href: "/expertise/employment-labor" },
+  { title: "Litigation & Disputes",          href: "/expertise/litigation-disputes" },
+];
+
+function HeaderV15() {
+  const { lang, setLang, t } = useLang();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [expertiseOpen, setExpertiseOpen] = useState(false);
+  const expertiseCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openExpertise  = () => { if (expertiseCloseTimer.current) clearTimeout(expertiseCloseTimer.current); setExpertiseOpen(true); };
+  const closeExpertise = () => { expertiseCloseTimer.current = setTimeout(() => setExpertiseOpen(false), 120); };
+
+  const navLinks = [
+    { label: t.nav.home,      href: "#home" },
+    { label: t.nav.firm,      href: "/firm" },
+    { label: t.nav.expertise, href: "#expertise" },
+    { label: t.nav.insights,  href: "/insights" },
+    { label: t.nav.careers,   href: "/careers" },
+    { label: t.nav.contact,   href: "#contact" },
+  ];
+
+  const mainLinks = navLinks.filter(l => l.href !== "#contact");
+  const contactLink = navLinks.find(l => l.href === "#contact")!;
+
+  const textCol   = "#001489";
+  const textHover = "#001489";
+
+  return (
+    <motion.header
+      data-testid="header"
+      initial={{ y: -72, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed top-0 left-0 right-0 z-50"
+      style={{
+        background: "#FFFFFF",
+        borderBottom: "1px solid rgba(0,20,137,0.08)",
+      }}
+    >
+      <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 92 }}>
+
+        {/* Logo */}
+        <a href="#home" data-testid="logo" className="shrink-0" style={{ transition: "filter 0.45s ease" }} onClick={e => { e.preventDefault(); snapScrollTo("#home"); }}>
+          <img
+            src={miltonHobbsLogo}
+            alt="Milton Hobbs"
+            style={{ height: 72, width: "auto", display: "block" }}
+          />
+        </a>
+
+        {/* Desktop nav */}
+        <nav data-testid="nav-desktop" className="hidden lg:flex items-center gap-10 xl:gap-12">
+          {mainLinks.map((link) => {
+            if (link.href === "#expertise") {
+              return (
+                <div
+                  key={link.href}
+                  onMouseEnter={openExpertise}
+                  onMouseLeave={closeExpertise}
+                  style={{ position: "relative", display: "flex", alignItems: "center" }}
+                >
+                  <button
+                    data-testid="nav-link-expertise"
+                    className="relative whitespace-nowrap font-bold inline-flex items-center gap-1.5"
+                    style={{
+                      color: expertiseOpen ? textHover : textCol,
+                      fontSize: 16,
+                      fontWeight: 700,
+                      letterSpacing: "0.10em",
+                      textTransform: "uppercase",
+                      textDecoration: expertiseOpen ? "underline" : "none",
+                      textUnderlineOffset: "4px",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      transition: "color 0.25s ease",
+                    }}
+                    onClick={() => { setExpertiseOpen(false); snapScrollTo("#expertise"); }}
+                  >
+                    {link.label.toUpperCase()}
+                    <motion.svg
+                      width="10" height="10" viewBox="0 0 10 10" fill="none"
+                      animate={{ rotate: expertiseOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                      style={{ marginTop: 1 }}
+                    >
+                      <path d="M2 3.5l3 3 3-3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                    </motion.svg>
+                  </button>
+                </div>
+              );
+            }
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
+                className="relative whitespace-nowrap font-bold"
+                style={{
+                  color: textCol,
+                  fontSize: 16,
+                  fontWeight: 700,
+                  letterSpacing: "0.10em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  transition: "color 0.25s ease",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                }}
+                onClick={e => { if (link.href.startsWith("#")) { e.preventDefault(); snapScrollTo(link.href); } }}
+                onMouseEnter={e => { e.currentTarget.style.color = textHover; e.currentTarget.style.textDecoration = "underline"; e.currentTarget.style.textUnderlineOffset = "4px"; }}
+                onMouseLeave={e => { e.currentTarget.style.color = textCol; e.currentTarget.style.textDecoration = "none"; }}
+              >
+                {link.label.toUpperCase()}
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* Right side */}
+        <div className="hidden lg:flex items-center gap-7 shrink-0">
+
+          {/* Language toggle */}
+          <div
+            data-testid="lang-toggle"
+            className="flex items-center"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.10em" }}
+          >
+            <button
+              onClick={() => setLang("EN")}
+              data-testid="lang-en"
+              style={{ color: lang === "EN" ? textHover : "rgba(0,20,137,0.28)", transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+            >EN</button>
+            <span style={{ color: "rgba(0,20,137,0.15)", margin: "0 8px", fontWeight: 300, fontSize: 11 }}>|</span>
+            <button
+              onClick={() => setLang("FR")}
+              data-testid="lang-fr"
+              style={{ color: lang === "FR" ? textHover : "rgba(0,20,137,0.28)", transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+            >FR</button>
+          </div>
+
+          {/* Thin divider */}
+          <div style={{ width: 1, height: 16, background: "rgba(0,20,137,0.12)" }} />
+
+          {/* Contact — solid blue */}
+          <a
+            href={contactLink.href}
+            data-testid="nav-link-contact"
+            className="inline-flex items-center whitespace-nowrap"
+            onClick={e => { e.preventDefault(); snapScrollTo(contactLink.href); }}
+            style={{
+              border: "1px solid #001489",
+              color: "#001489",
+              background: "transparent",
+              padding: "9px 22px",
+              fontSize: 10,
+              fontWeight: 700,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              transition: "background 0.25s, color 0.25s",
+            }}
+            onMouseEnter={e => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = "#001489";
+              el.style.color = "#FFFFFF";
+            }}
+            onMouseLeave={e => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = "transparent";
+              el.style.color = "#001489";
+            }}
+          >
+            {contactLink.label}
+          </a>
+        </div>
+
+        {/* Mobile hamburger */}
+        <button
+          data-testid="mobile-menu-toggle"
+          aria-label="Toggle menu"
+          className="lg:hidden flex flex-col gap-[5px] w-8 h-8 items-center justify-center focus:outline-none"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "rotate-45 translate-y-[3px]" : ""}`} />
+          <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 ${mobileOpen ? "opacity-0 scale-x-0" : ""}`} />
+          <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "-rotate-45 -translate-y-[3px]" : ""}`} />
+        </button>
+
+      </div>
+      {/* ── Expertise mega-menu ─────────────────────────────────────────── */}
+      <AnimatePresence>
+        {expertiseOpen && (
+          <motion.div
+            data-testid="expertise-megamenu"
+            onMouseEnter={openExpertise}
+            onMouseLeave={closeExpertise}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="hidden lg:block"
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: 0,
+              right: 0,
+              background: "#FFFFFF",
+              borderTop: "2px solid #001489",
+              borderBottom: "1px solid rgba(0,20,137,0.08)",
+              boxShadow: "0 16px 48px rgba(0,20,137,0.10)",
+              zIndex: 200,
+            }}
+          >
+            <div
+              className="max-w-[1400px] mx-auto"
+              style={{ padding: "52px 32px 56px", display: "grid", gridTemplateColumns: "1fr 2fr", gap: 80 }}
+            >
+              {/* Left: tagline + CTA */}
+              <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                <div>
+                  <p style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: 12,
+                    fontWeight: 700,
+                    letterSpacing: "0.30em",
+                    textTransform: "uppercase",
+                    color: "#001489",
+                    marginBottom: 20,
+                  }}>
+                    Our Expertise
+                  </p>
+                  <h3
+                    className="font-heading font-bold"
+                    style={{
+                      fontSize: "clamp(1.6rem, 2.4vw, 2.4rem)",
+                      lineHeight: 1.07,
+                      letterSpacing: "-0.03em",
+                      color: "#001489",
+                      maxWidth: "14ch",
+                      marginBottom: 32,
+                    }}
+                  >
+                    Advising across every sector and border.
+                  </h3>
+                  <div style={{ width: 40, height: 2, background: "#001489", marginBottom: 28, opacity: 0.18 }} />
+                  <p style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: 14,
+                    lineHeight: 1.75,
+                    color: "#000000",
+                    marginBottom: 36,
+                  }}>Eight practice areas. One firm with precision counsel 
+                  across the UAE, Europe and beyond.</p>
+                </div>
+                <a
+                  href="#expertise"
+                  data-testid="megamenu-view-all"
+                  onClick={e => { e.preventDefault(); setExpertiseOpen(false); snapScrollTo("#expertise"); }}
+                  className="inline-flex items-center gap-2.5 self-start"
+                  style={{
+                    border: "1px solid #001489",
+                    color: "#001489",
+                    background: "transparent",
+                    padding: "10px 22px",
+                    fontSize: 9,
+                    fontWeight: 700,
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                    textDecoration: "none",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    transition: "background 0.2s, color 0.2s",
+                  }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = "#001489"; el.style.color = "#FFFFFF"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = "transparent"; el.style.color = "#001489"; }}
+                >
+                  View All Areas
+                  <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
+                    <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Right: 2-column grid of practice areas */}
+              <div>
+                <p style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.28em",
+                  textTransform: "uppercase",
+                  color: "#001489",
+                  marginBottom: 16,
+                  paddingBottom: 14,
+                  borderBottom: "1px solid rgba(0,20,137,0.10)",
+                }}>
+                  Practice Areas
+                </p>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 48px" }}>
+                  {EXPERTISE_MENU_ITEMS.map((area, i) => (
+                    <a
+                      key={i}
+                      href={area.href ?? "#expertise"}
+                      data-testid={`megamenu-area-${i}`}
+                      onClick={e => { if (!area.href) { e.preventDefault(); setExpertiseOpen(false); snapScrollTo("#expertise"); } else { setExpertiseOpen(false); } }}
+                      className="group flex items-center gap-4"
+                      style={{
+                        padding: "15px 0",
+                        borderBottom: "1px solid rgba(0,20,137,0.06)",
+                        textDecoration: "none",
+                        transition: "background 0.15s",
+                      }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.paddingLeft = "8px"; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.paddingLeft = "0px"; }}
+                    >
+                      <span
+                        className="font-heading font-bold flex-1"
+                        style={{
+                          fontSize: "0.9375rem",
+                          letterSpacing: "-0.01em",
+                          color: "#001489",
+                          lineHeight: 1.25,
+                          transition: "color 0.2s",
+                        }}
+                      >
+                        {area.title}
+                      </span>
+                      <svg
+                        width="10" height="10" viewBox="0 0 12 12" fill="none"
+                        style={{ opacity: 0, flexShrink: 0, transition: "opacity 0.2s" }}
+                        className="group-hover:opacity-100"
+                      >
+                        <path d="M2 10L10 2M10 2H4M10 2v6" stroke="#001489" strokeWidth="1.2" strokeLinecap="round" />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            data-testid="mobile-menu"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.28, ease: "easeInOut" }}
+            className="lg:hidden overflow-hidden"
+            style={{ background: "#001489", borderTop: "1px solid rgba(255,255,255,0.07)" }}
+          >
+            <div className="px-8 py-8 flex flex-col gap-6">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  style={{
+                    color: "rgba(255,255,255,0.75)",
+                    fontSize: 12,
+                    fontWeight: 600,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    textDecoration: "none",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  }}
+                >
+                  {link.label}
+                </a>
+              ))}
+              <div className="flex items-center pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                <button
+                  onClick={() => setLang("EN")}
+                  style={{ color: lang === "EN" ? "#FFFFFF" : "rgba(255,255,255,0.30)", fontSize: 11, fontWeight: 700, letterSpacing: "0.10em", transition: "color 0.2s", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                >EN</button>
+                <span style={{ color: "rgba(255,255,255,0.15)", margin: "0 10px", fontSize: 11, fontWeight: 300 }}>|</span>
+                <button
+                  onClick={() => setLang("FR")}
+                  style={{ color: lang === "FR" ? "#FFFFFF" : "rgba(255,255,255,0.30)", fontSize: 11, fontWeight: 700, letterSpacing: "0.10em", transition: "color 0.2s", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                >FR</button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
+}
+
+/* ─── HERO ─────────────────────────────────────────────────────────────── */
+
+const HERO_CYCLE_MS = 12000;
+
+const TILE_SZ = 150;
+
+const GRID_COLS = [38, 49.5, 61, 72.5, 84];
+const GRID_ROWS = [4,  22,   40, 58,   76];
+
+const TILE_DEFS: [number, number, string, number, number][] = [
+  [0, 0, "#001489", 22.0,  0.0],
+  [3, 0, "#001050", 24.0,  6.0],
+  [2, 1, "#001489", 20.0,  3.0],
+  [3, 1, "#001050", 23.0,  9.0],
+  [4, 2, "#001489", 21.0,  5.0],
+  [1, 2, "#001050", 26.0, 12.0],
+  [1, 3, "#001489", 22.0, 14.0],
+  [3, 3, "#001050", 20.0,  7.0],
+  [4, 4, "#001489", 24.0,  2.0],
+];
+
+const ACCENT_TILES = TILE_DEFS.map(([ci, ri, col, dur, delay]) => ({
+  left:  `${GRID_COLS[ci]}%`,
+  top:   `${GRID_ROWS[ri]}%`,
+  col,
+  dur,
+  delay,
+}));
+
+function HeroV15() {
+  const { t } = useLang();
+  const ins = t.insights;
+  const totalArticles = ins.articles.length;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [timerKey, setTimerKey] = useState(0);
+
+  const bgIndex = currentIndex % HERO_BG_IMAGES.length;
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex(prev => (prev + 1) % totalArticles);
+    }, HERO_CYCLE_MS);
+    return () => clearInterval(timer);
+  }, [timerKey, totalArticles]);
+
+  function goTo(i: number) {
+    setCurrentIndex(i);
+    setTimerKey(k => k + 1);
+  }
+
+  const featuredArticle = ins.articles[currentIndex];
+  const featuredSlug = articles[currentIndex]?.slug ?? "";
+
+  return (
+    <section
+      id="home"
+      data-testid="hero-section"
+      className="relative min-h-screen overflow-hidden v2-snap-section"
+      style={{ background: "#001489" }}
+    >
+      <AnimatePresence>
+        <motion.img
+          key={bgIndex}
+          src={HERO_BG_IMAGES[bgIndex]}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ objectPosition: "center 30%", mixBlendMode: "multiply" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 2.4, ease: "easeInOut" }}
+        />
+      </AnimatePresence>
+
+      {ACCENT_TILES.map((tile, i) => (
+        <motion.div
+          key={i}
+          className="absolute pointer-events-none"
+          style={{
+            left:            tile.left,
+            top:             tile.top,
+            width:           TILE_SZ,
+            height:          TILE_SZ,
+            backgroundColor: tile.col,
+          }}
+          animate={{ opacity: [0, 0, 1, 1, 0, 0] }}
+          transition={{
+            duration: tile.dur,
+            delay:    tile.delay,
+            repeat:   Infinity,
+            ease:     "easeInOut",
+            times:    [0, 0.15, 0.40, 0.60, 0.85, 1],
+          }}
+        />
+      ))}
+
+      <div
+        className="absolute inset-x-0 bottom-0 pointer-events-none"
+        style={{
+          height: "70%",
+          background: "linear-gradient(to top, rgba(0,14,80,0.80) 0%, rgba(0,14,80,0.40) 45%, transparent 100%)",
+        }}
+      />
+
+      <div className="relative z-10 flex flex-col justify-end min-h-screen px-12 xl:px-24 pb-16 pt-28"
+        style={{ maxWidth: "1200px" }}>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -14 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div style={{ width: 24, height: 1, background: "rgba(255,255,255,0.45)", flexShrink: 0 }} />
+              <p
+                className="font-sans font-medium uppercase tracking-[0.28em]"
+                style={{ color: "rgba(255,255,255,0.55)", fontSize: 11 }}
+                data-testid="hero-eyebrow"
+              >
+                {featuredArticle?.category}
+              </p>
+            </div>
+
+            <h1
+              className="font-heading text-white font-bold mb-6"
+              style={{
+                fontSize: "clamp(2.25rem, 5.5vw, 4.75rem)",
+                lineHeight: 1.04,
+                letterSpacing: "-0.01em",
+              }}
+              data-testid="hero-headline"
+            >
+              {featuredArticle?.title}
+            </h1>
+
+            {(() => {
+              const rawLead = (articles[currentIndex]?.body.find(s => s.type === "lead") as { type: "lead"; text: string } | undefined)?.text ?? "";
+              const leadExcerpt = rawLead.length > 160 ? rawLead.slice(0, 160).replace(/\s+\S*$/, "") + "…" : rawLead;
+              return leadExcerpt ? (
+                <p
+                  data-testid="hero-excerpt"
+                  style={{
+                    color: "rgba(255,255,255,0.60)",
+                    fontSize: "1rem",
+                    lineHeight: 1.65,
+                    marginTop: "1.25rem",
+                    marginBottom: "2.25rem",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    maxWidth: "52ch",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                  }}
+                >
+                  {leadExcerpt}
+                </p>
+              ) : null;
+            })()}
+
+            <a
+              href={`/insights/${featuredSlug}`}
+              data-testid="hero-read-link"
+              className="group inline-flex items-center gap-3"
+              style={{
+                color: "rgba(255,255,255,0.65)",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                borderBottom: "1px solid rgba(255,255,255,0.25)",
+                paddingBottom: 4,
+                transition: "color 0.25s, border-color 0.25s",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.6)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)";
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.25)";
+              }}
+            >
+              <span>{ins.read}</span>
+              <svg
+                className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200"
+                fill="none" viewBox="0 0 12 12"
+              >
+                <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+              </svg>
+            </a>
+          </motion.div>
+        </AnimatePresence>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.0 }}
+          className="flex items-center gap-2 mt-10"
+          data-testid="hero-dots"
+        >
+          {ins.articles.map((_, i) => (
+            <button
+              key={i}
+              data-testid={`hero-dot-${i}`}
+              onClick={() => goTo(i)}
+              aria-label={`Article ${i + 1}`}
+              className="block focus:outline-none cursor-pointer transition-all duration-300"
+              style={{
+                width:           i === currentIndex ? 28 : 8,
+                height:          2,
+                backgroundColor: i === currentIndex ? "#FFFFFF" : "rgba(255,255,255,0.30)",
+              }}
+            />
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── DIFFERENTIATORS (Why Milton Hobbs) ───────────────────────────────── */
+
+const CYCLE_MS = 8500;
+
+function FounderVisual() {
+  const spokes = 8;
+  const cx = 160, cy = 130, innerR = 22, outerR = 100;
+  return (
+    <svg viewBox="0 0 320 260" fill="none" className="w-full h-full">
+      {Array.from({ length: spokes }).map((_, i) => {
+        const angle = (i / spokes) * 2 * Math.PI - Math.PI / 2;
+        const x1 = cx + innerR * Math.cos(angle);
+        const y1 = cy + innerR * Math.sin(angle);
+        const x2 = cx + outerR * Math.cos(angle);
+        const y2 = cy + outerR * Math.sin(angle);
+        return (
+          <motion.line
+            key={i} x1={x1} y1={y1} x2={x2} y2={y2}
+            stroke="#FFFFFF" strokeWidth={1}
+            animate={{ strokeOpacity: [0.15, 0.6, 0.15] }}
+            transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
+          />
+        );
+      })}
+      {Array.from({ length: spokes }).map((_, i) => {
+        const angle = (i / spokes) * 2 * Math.PI - Math.PI / 2;
+        const x = cx + outerR * Math.cos(angle);
+        const y = cy + outerR * Math.sin(angle);
+        return (
+          <motion.circle
+            key={i} cx={x} cy={y} r={3}
+            fill="#FFFFFF" fillOpacity={0.5}
+            animate={{ fillOpacity: [0.2, 0.8, 0.2] }}
+            transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
+          />
+        );
+      })}
+      <circle cx={cx} cy={cy} r={outerR} stroke="#FFFFFF" strokeOpacity={0.12} strokeWidth={1} fill="none" />
+      <circle cx={cx} cy={cy} r={innerR} stroke="#FFFFFF" strokeOpacity={0.22} strokeWidth={1} fill="none" />
+      <circle cx={cx} cy={cy} r={8} fill="#FFFFFF" fillOpacity={0.9} />
+      <motion.circle
+        cx={cx} cy={cy} r={innerR}
+        stroke="#FFFFFF" strokeWidth={1} fill="none"
+        animate={{ scale: [1, 1.6, 1], opacity: [0.5, 0, 0.5] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+        style={{ transformOrigin: `${cx}px ${cy}px` }}
+      />
+    </svg>
+  );
+}
+
+function PrecisionVisual() {
+  const CX = 160, CY = 130;
+  const rx = useMotionValue(0);
+  const ry = useMotionValue(0);
+  const [locked, setLocked] = useState(false);
+  const [flashKey, setFlashKey] = useState(0);
+  const running = useRef(true);
+
+  useEffect(() => {
+    running.current = true;
+    const POSITIONS: [number, number][] = [
+      [-60, -40], [50, -50], [-25, 45], [65, 30],
+      [-50, -15], [30, -55], [55, 40], [-40, 55],
+      [70, -20], [-65, 30], [20, 60], [-30, -55],
+    ];
+    let idx = 0;
+
+    async function loop() {
+      while (running.current) {
+        setLocked(false);
+        for (let s = 0; s < 4; s++) {
+          if (!running.current) return;
+          const [tx, ty] = POSITIONS[idx % POSITIONS.length];
+          idx++;
+          await Promise.all([
+            animate(rx, tx, { duration: 1.0, ease: "easeInOut" }),
+            animate(ry, ty, { duration: 1.0, ease: "easeInOut" }),
+          ]);
+          await new Promise(r => setTimeout(r, 400));
+        }
+        if (!running.current) return;
+        await Promise.all([
+          animate(rx, 0, { duration: 0.8, ease: [0.22, 1, 0.36, 1] }),
+          animate(ry, 0, { duration: 0.8, ease: [0.22, 1, 0.36, 1] }),
+        ]);
+        setLocked(true);
+        setFlashKey(k => k + 1);
+        await new Promise(r => setTimeout(r, 2400));
+      }
+    }
+
+    loop();
+    return () => { running.current = false; };
+  }, [rx, ry]);
+
+  return (
+    <svg viewBox="0 0 320 260" fill="none" className="w-full h-full">
+      {[88, 64, 44].map((r, i) => (
+        <circle
+          key={i} cx={CX} cy={CY} r={r} fill="none"
+          stroke="#FFFFFF"
+          strokeOpacity={locked ? 0.20 + i * 0.10 : 0.10 + i * 0.06}
+          strokeWidth={1}
+          style={{ transition: "stroke-opacity 0.4s" }}
+        />
+      ))}
+      <line x1={CX} y1={30} x2={CX} y2={230} stroke="#FFFFFF" strokeOpacity={0.14} strokeWidth={1} />
+      <line x1={40} y1={CY} x2={280} y2={CY} stroke="#FFFFFF" strokeOpacity={0.14} strokeWidth={1} />
+      <circle cx={CX} cy={CY} r={4}
+        fill="#FFFFFF"
+        fillOpacity={locked ? 1 : 0.65}
+        style={{ transition: "fill-opacity 0.3s" }}
+      />
+      {locked && (
+        <AnimatePresence>
+          <motion.circle
+            key={flashKey}
+            cx={CX} cy={CY} r={22}
+            stroke="#FFFFFF" strokeWidth={2} fill="none"
+            initial={{ scale: 1, opacity: 0.85 }}
+            animate={{ scale: 2.2, opacity: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            style={{ transformOrigin: `${CX}px ${CY}px` }}
+          />
+        </AnimatePresence>
+      )}
+      <motion.g style={{ x: rx, y: ry }}>
+        <circle cx={CX} cy={CY} r={22} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX-22} ${CY-9} L${CX-22} ${CY-22} L${CX-9} ${CY-22}`} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX+9} ${CY-22} L${CX+22} ${CY-22} L${CX+22} ${CY-9}`} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX+22} ${CY+9} L${CX+22} ${CY+22} L${CX+9} ${CY+22}`} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <path d={`M${CX-9} ${CY+22} L${CX-22} ${CY+22} L${CX-22} ${CY+9}`} stroke="#FFFFFF" strokeWidth={1.5} fill="none" strokeOpacity={0.7} />
+        <line x1={CX-9} y1={CY} x2={CX+9} y2={CY} stroke="#FFFFFF" strokeWidth={1} strokeOpacity={0.5} />
+        <line x1={CX} y1={CY-9} x2={CX} y2={CY+9} stroke="#FFFFFF" strokeWidth={1} strokeOpacity={0.5} />
+      </motion.g>
+      {locked && (
+        <motion.text
+          x={CX + 30} y={CY - 28}
+          fill="rgba(255,255,255,0.65)" fontSize="8" fontFamily="'Satoshi', sans-serif" letterSpacing="0.15em"
+          initial={{ opacity: 0 }} animate={{ opacity: [0, 0.8, 0.8, 0] }}
+          transition={{ duration: 2.2, times: [0, 0.15, 0.85, 1] }}
+        >
+          LOCKED
+        </motion.text>
+      )}
+    </svg>
+  );
+}
+
+function CrossBorderVisual() {
+  const nodes = [
+    { cx: 55,  cy: 100, label: "FR"  },
+    { cx: 55,  cy: 160, label: "EU"  },
+    { cx: 265, cy: 100, label: "UAE" },
+    { cx: 265, cy: 160, label: "GCC" },
+  ];
+  const paths = [
+    { d: "M60 100 Q160 70 260 100",  delay: 0   },
+    { d: "M60 160 Q160 190 260 160", delay: 0.6 },
+    { d: "M60 100 Q160 130 260 160", delay: 1.2 },
+    { d: "M60 160 Q160 130 260 100", delay: 1.8 },
+  ];
+  return (
+    <svg viewBox="0 0 320 260" fill="none" className="w-full h-full">
+      {paths.map((p, i) => (
+        <motion.path
+          key={i} d={p.d}
+          stroke="#FFFFFF"
+          strokeOpacity={i < 2 ? 0.6 : 0.3}
+          strokeWidth={i < 2 ? 1.2 : 1}
+          strokeDasharray="220"
+          animate={{ strokeDashoffset: [220, 0, -220] }}
+          transition={{ duration: 3, delay: p.delay, repeat: Infinity, ease: "linear" }}
+        />
+      ))}
+      {nodes.map((n, i) => (
+        <g key={i}>
+          <circle cx={n.cx} cy={n.cy} r={5} fill="#FFFFFF" fillOpacity={0.7} />
+          <text x={n.cx} y={n.cy + (i < 2 ? -12 : 18)}
+            fill="#FFFFFF" fillOpacity={0.5} fontSize="8"
+            fontFamily="'Plus Jakarta Sans', sans-serif" textAnchor="middle"
+          >{n.label}</text>
+        </g>
+      ))}
+      <circle cx={160} cy={130} r={7} fill="#FFFFFF" fillOpacity={0.9} />
+      <motion.circle
+        cx={160} cy={130} r={18}
+        stroke="#FFFFFF" strokeWidth={1} fill="none"
+        animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+        style={{ transformOrigin: "160px 130px" }}
+      />
+    </svg>
+  );
+}
+
+function DiscretionVisual() {
+  const cx = 160, cy = 130;
+  const rings = [95, 72, 52, 34, 18];
+  return (
+    <svg viewBox="0 0 320 260" fill="none" className="w-full h-full">
+      {rings.map((r, i) => {
+        const circumference = 2 * Math.PI * r;
+        const gap = i % 2 === 0 ? 0.15 : 0.25;
+        return (
+          <motion.circle
+            key={i} cx={cx} cy={cy} r={r}
+            stroke="#FFFFFF"
+            strokeOpacity={i === rings.length - 1 ? 0.7 : 0.12 + i * 0.07}
+            strokeWidth={1}
+            strokeDasharray={`${circumference * (1 - gap)} ${circumference * gap}`}
+            fill="none"
+            animate={{ rotate: i % 2 === 0 ? [0, 360] : [360, 0] }}
+            transition={{ duration: 10 + i * 4, repeat: Infinity, ease: "linear" }}
+            style={{ transformOrigin: `${cx}px ${cy}px` }}
+          />
+        );
+      })}
+      <motion.rect
+        x={cx - 7} y={cy - 4} width={14} height={11}
+        stroke="#FFFFFF" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.path
+        d={`M${cx-4} ${cy-4} Q${cx-4} ${cy-11} ${cx} ${cy-11} Q${cx+4} ${cy-11} ${cx+4} ${cy-4}`}
+        stroke="#FFFFFF" strokeWidth={1.2} fill="none" strokeOpacity={0.85}
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+      />
+    </svg>
+  );
+}
+
+function DiffVisual({ index }: { index: number }) {
+  const V = [FounderVisual, PrecisionVisual, CrossBorderVisual, DiscretionVisual][index];
+  return <V />;
+}
+
+function DifferentiatorsV15() {
+  const { t } = useLang();
+  const d = t.diff;
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) return;
+    const start = Date.now();
+    const tick = setInterval(() => {
+      if (Date.now() - start >= CYCLE_MS) {
+        setActive(prev => (prev + 1) % d.cards.length);
+        clearInterval(tick);
+      }
+    }, 80);
+    return () => clearInterval(tick);
+  }, [active, paused, d.cards.length]);
+
+  const VISUALS = [FounderVisual, PrecisionVisual, CrossBorderVisual, DiscretionVisual];
+
+  return (
+    <section
+      id="firm"
+      data-header-theme="light"
+      data-testid="differentiators-section"
+      className="v2-snap-section"
+      style={{ background: "#FFFFFF" }}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* ════════════════════════════════════════════════════════════
+          DESKTOP — Editorial split: white left / dark right
+      ════════════════════════════════════════════════════════════ */}
+      <div className="hidden lg:grid" style={{ gridTemplateColumns: "55% 45%", minHeight: "100dvh" }}>
+
+        {/* ── LEFT: white content column ─────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "80px 72px 80px 64px",
+            borderRight: "1px solid #E8EDF5",
+          }}
+        >
+          {/* Eyebrow */}
+          <p
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 18,
+              fontWeight: 700,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "#001489",
+              marginBottom: 20,
+            }}>
+            {d.eyebrow}
+          </p>
+
+          {/* Headline */}
+          <h2
+            className="font-heading font-bold text-[#001489]"
+            style={{
+              fontSize: "clamp(2rem, 3.2vw, 3rem)",
+              lineHeight: 1.06,
+              letterSpacing: "-0.03em",
+              marginBottom: 80,
+            }}
+          >
+            {d.headline}
+          </h2>
+
+          {/* ── Pillar rows ──────────────────────────────────────────── */}
+          <div style={{ borderTop: "1px solid #E8EDF5" }}>
+            {d.cards.map((card, i) => {
+              const isActive = active === i;
+              return (
+                <div
+                  key={i}
+                  data-testid={`diff-row-${i}`}
+                  style={{ borderBottom: "1px solid #E8EDF5", position: "relative" }}
+                >
+                  {/* Active left accent bar */}
+                  <motion.div
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: 2,
+                      background: "#001489",
+                      transformOrigin: "top",
+                    }}
+                    animate={{ scaleY: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                  />
+
+                  {/* Row header — always visible, clickable */}
+                  <button
+                    onClick={() => { setActive(i); setPaused(true); }}
+                    onMouseEnter={() => { setActive(i); setPaused(true); }}
+                    aria-expanded={isActive}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 20,
+                      width: "100%",
+                      background: "none",
+                      border: "none",
+                      textAlign: "left",
+                      cursor: "pointer",
+                      outline: "none",
+                      padding: "28px 0 28px 20px",
+                    }}
+                  >
+                    {/* Title */}
+                    <span
+                      className="font-heading font-bold"
+                      style={{
+                        fontSize: "clamp(1.25rem, 2vw, 1.75rem)",
+                        lineHeight: 1.15,
+                        letterSpacing: "-0.02em",
+                        color: isActive ? "#001489" : "rgba(0,20,137,0.28)",
+                        flex: 1,
+                        transition: "color 0.3s",
+                      }}
+                    >
+                      {card.title}
+                    </span>
+
+                    {/* Animated arrow */}
+                    <motion.div
+                      animate={{ x: isActive ? 4 : 0, opacity: isActive ? 1 : 0.3 }}
+                      transition={{ duration: 0.3 }}
+                      style={{ flexShrink: 0 }}
+                    >
+                      <svg width="16" height="16" fill="none" viewBox="0 0 16 16">
+                        <path d="M3 8h10M8 3l5 5-5 5" stroke="#001489" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </motion.div>
+                  </button>
+
+                  {/* Progress bar — thin line below the active row's title */}
+                  {isActive && (
+                    <motion.div
+                      key={`prog-${active}`}
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        height: 2,
+                        background: "#001489",
+                        opacity: 0.15,
+                      }}
+                      initial={{ width: "0%" }}
+                      animate={{ width: "100%" }}
+                      transition={{ duration: CYCLE_MS / 1000, ease: "linear" }}
+                    />
+                  )}
+
+                  {/* Description — slides in below title when active */}
+                  <AnimatePresence initial={false}>
+                    {isActive && (
+                      <motion.div
+                        key={`desc-${i}`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        <motion.p
+                          initial={{ y: 8, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          exit={{ y: -4, opacity: 0 }}
+                          transition={{ duration: 0.35, delay: 0.1 }}
+                          style={{
+                            fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            color: "#000000",
+                            fontSize: "0.9375rem",
+                            lineHeight: 1.82,
+                            padding: "0 0 28px 20px",
+                            maxWidth: 460,
+                          }}
+                        >
+                          {card.description}
+                        </motion.p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* CTA — always below all 4 rows */}
+          <div style={{ marginTop: 40 }}>
+            <a
+              href="#contact"
+              data-testid="diff-cta"
+              className="inline-flex items-center gap-3"
+              style={{
+                color: "#001489",
+                fontSize: 9,
+                fontWeight: 700,
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                border: "1px solid #001489",
+                padding: "13px 28px",
+                background: "transparent",
+                transition: "background 0.25s, color 0.25s",
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.background = "#001489";
+                el.style.color = "#FFFFFF";
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.background = "transparent";
+                el.style.color = "#001489";
+              }}
+            >
+              <span>{d.learnMore}</span>
+              <svg width="11" height="11" fill="none" viewBox="0 0 14 14">
+                <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </motion.div>
+
+        {/* ── RIGHT: fixed dark animation window ─────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.0, delay: 0.2 }}
+          style={{
+            background: "linear-gradient(145deg, #001489 0%, #001050 100%)",
+            position: "relative",
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {/* Caustic shimmer — always running */}
+          <motion.div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(125deg, rgba(255,255,255,0.07) 0%, transparent 20%, rgba(255,255,255,0.04) 45%, transparent 60%, rgba(255,255,255,0.06) 80%, transparent 95%)",
+              backgroundSize: "200% 200%",
+              pointerEvents: "none",
+            }}
+            animate={{ backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"] }}
+            transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+          />
+
+          {/* Top specular edge highlight */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: "8%",
+              right: "8%",
+              height: 1,
+              background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.28) 30%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.28) 70%, transparent)",
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* Subtle inner depth glow */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "radial-gradient(ellipse at 35% 25%, rgba(255,255,255,0.07) 0%, transparent 55%)",
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* Pillar label — fades in, anchored bottom-left */}
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={`label-${active}`}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.4 }}
+              style={{
+                position: "absolute",
+                bottom: 32,
+                left: 36,
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontSize: 8,
+                fontWeight: 700,
+                letterSpacing: "0.36em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.30)",
+                zIndex: 2,
+              }}
+            >
+              {d.cards[active].title}
+            </motion.p>
+          </AnimatePresence>
+
+          {/* The animation — cross-fades on change, always large */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              style={{
+                position: "absolute",
+                inset: "6%",
+                zIndex: 1,
+              }}
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {(() => { const V = VISUALS[active]; return <V />; })()}
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
+      </div>
+      {/* ════════════════════════════════════════════════════════════
+          MOBILE — simple accordion, white throughout
+      ════════════════════════════════════════════════════════════ */}
+      <div className="lg:hidden" style={{ padding: "100px 24px 100px" }}>
+        {/* Header */}
+        <p
+          style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontSize: 9,
+            fontWeight: 700,
+            letterSpacing: "0.40em",
+            textTransform: "uppercase",
+                      color: "#001489",
+            marginBottom: 16,
+          }}
+        >
+          {d.eyebrow}
+        </p>
+        <h2
+          className="font-heading font-bold text-[#001489]"
+          style={{
+            fontSize: "clamp(1.75rem, 7vw, 2.25rem)",
+            lineHeight: 1.1,
+            letterSpacing: "-0.03em",
+            marginBottom: 48,
+          }}
+        >
+          {d.headline}
+        </h2>
+
+        {/* Pillar accordion */}
+        <div style={{ borderTop: "1px solid #E8EDF5" }}>
+          {d.cards.map((card, i) => {
+            const isActive = active === i;
+            return (
+              <div key={i} style={{ borderBottom: "1px solid #E8EDF5" }}>
+                <button
+                  onClick={() => { setActive(i); setPaused(true); }}
+                  data-testid={`diff-mobile-${i}`}
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 14,
+                    padding: "22px 0",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    textAlign: "left",
+                    outline: "none",
+                  }}
+                >
+                  <span className="font-heading font-bold flex-1" style={{ fontSize: "1.05rem", lineHeight: 1.2, color: isActive ? "#001489" : "rgba(0,20,137,0.45)", transition: "color 0.25s" }}>
+                    {card.title}
+                  </span>
+                  <motion.svg
+                    animate={{ rotate: isActive ? 45 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    width="16" height="16" fill="none" viewBox="0 0 16 16"
+                    style={{ flexShrink: 0 }}
+                  >
+                    <path d="M8 3v10M3 8h10" stroke="#001489" strokeWidth="1.5" strokeLinecap="round" />
+                  </motion.svg>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isActive && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: "0.9rem", lineHeight: 1.8, paddingBottom: 24 }}>
+                        {card.description}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* CTA */}
+        <div style={{ marginTop: 40 }}>
+          <a
+            href="#contact"
+            data-testid="diff-cta-mobile"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              color: "#001489",
+              fontSize: 9,
+              fontWeight: 700,
+              letterSpacing: "0.28em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              border: "1px solid #001489",
+              padding: "13px 24px",
+              background: "transparent",
+              transition: "background 0.25s, color 0.25s",
+            }}
+            onMouseEnter={e => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = "#001489";
+              el.style.color = "#FFFFFF";
+            }}
+            onMouseLeave={e => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = "transparent";
+              el.style.color = "#001489";
+            }}
+          >
+            <span>{d.learnMore}</span>
+            <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
+              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── PRACTICE AREAS (CASE FILE STRIP) ──────────────────────────────────── */
+
+const CASE_FILE_ITEMS = [
+  {
+    title: "Corporate & Commercial",             tag: "Transactional",
+    brief: "Cross-border transactions, joint ventures, and commercial agreements.",
+    desc:  "Structuring complex transactions, joint ventures, and commercial agreements for businesses operating across borders and sectors. We advise on the full lifecycle of corporate matters, from entity formation to complex multi-party deals.",
+    img: imgCorp,
+    pageHref: "/expertise/corporate-commercial",
+  },
+  {
+    title: "Tax & Compliance",                   tag: "Advisory",
+    brief: "Strategic tax planning and regulatory advisory across jurisdictions.",
+    desc:  "Strategic tax planning, regulatory compliance, and advisory services to keep businesses aligned with evolving legal frameworks. Our team delivers forward-looking counsel across domestic and international tax environments.",
+    img: imgTax,
+  },
+  {
+    title: "Mergers & Acquisitions",             tag: "Strategic",
+    brief: "End-to-end M&A counsel from structuring through post-closing integration.",
+    desc:  "End-to-end counsel on acquisitions, disposals, restructurings, and due diligence for domestic and cross-border deals. We guide clients through every phase — from initial structuring to seamless post-merger integration.",
+    img: imgBank,
+  },
+  {
+    title: "Startups & Venture Capital",         tag: "Emerging",
+    brief: "Legal frameworks for founders, investors, and scaling ventures.",
+    desc:  "Legal frameworks for fundraising rounds, equity structuring, founder agreements, and scaling ventures. We partner with entrepreneurs and investors at every stage of the startup lifecycle.",
+    img: imgTech,
+  },
+  {
+    title: "Intellectual Property & Technology", tag: "Innovation",
+    brief: "Protecting IP portfolios and advising on licensing and data law.",
+    desc:  "Protecting trademarks, patents, copyrights, trade secrets, and advising on technology licensing and data regulations. We build and defend the intellectual assets that define competitive advantage.",
+    img: imgIp,
+  },
+  {
+    title: "Real Estate & Property Law",         tag: "Property",
+    brief: "Acquisitions, development projects, and portfolio management.",
+    desc:  "Advising on acquisitions, leasing, development projects, title disputes, and property portfolio management. Our practice spans residential, commercial, and mixed-use real estate across the UAE and Europe.",
+    img: imgEstate,
+  },
+  {
+    title: "Employment & Labor Law",             tag: "Workforce",
+    brief: "Navigating workforce regulations and employment dispute resolution.",
+    desc:  "Navigating workforce regulations, employment contracts, terminations, and workplace dispute resolution. We advise employers and executives on the full spectrum of employment law obligations across jurisdictions.",
+    img: imgEmploy,
+  },
+  {
+    title: "Litigation & Dispute Resolution",    tag: "Disputes",
+    brief: "Strategic advocacy in civil, commercial, and arbitration proceedings.",
+    desc:  "Representing clients in civil and commercial disputes, arbitration, and enforcement proceedings across jurisdictions. Our litigators combine rigorous strategy with efficient resolution across forums including DIFC and ICC.",
+    img: imgLitig,
+  },
+];
+
+type CaseFileItem = typeof CASE_FILE_ITEMS[0];
+
+function FolderTab({ item, isOpen, onClick }: { item: CaseFileItem; isOpen: boolean; onClick: () => void }) {
+  const [hovering, setHovering] = useState(false);
+  const lifted = isOpen || hovering;
+
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+      data-testid={`case-file-tab-${item.title}`}
+      style={{
+        flexShrink: 0,
+        width: 280,
+        background: lifted ? "#FCFCFC" : "#F9F9F9",
+        border: `1px solid ${isOpen ? "#4A58AA" : hovering ? "rgba(74,88,170,0.45)" : "rgba(132,132,132,0.2)"}`,
+        boxShadow: lifted
+          ? "0 8px 28px rgba(0,20,137,0.13), 0 2px 8px rgba(0,20,137,0.06)"
+          : "0 2px 8px rgba(0,20,137,0.06), 0 1px 3px rgba(0,20,137,0.03)",
+        transform: lifted ? "translateY(-4px)" : "translateY(0)",
+        transition: "transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease",
+        cursor: "pointer",
+        textAlign: "left",
+        padding: "28px 24px 22px",
+        position: "relative",
+        outline: "none",
+      }}
+    >
+      {/* Tab notch accent at top */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 20,
+          width: 56,
+          height: 3,
+          background: isOpen ? "#4A58AA" : hovering ? "rgba(74,88,170,0.45)" : "rgba(74,88,170,0.15)",
+          transition: "background 0.22s ease",
+        }}
+      />
+
+      {/* Practice area name */}
+      <h3
+        className="font-heading"
+        style={{
+          color: "#001489",
+          fontWeight: 700,
+          fontSize: "clamp(0.88rem, 1.05vw, 1rem)",
+          lineHeight: 1.35,
+          marginBottom: 10,
+        }}
+      >
+        {item.title}
+      </h3>
+
+      {/* One-liner brief */}
+      <p
+        style={{
+          color: "#848484",
+          fontSize: "0.775rem",
+          lineHeight: 1.65,
+        }}
+      >
+        {item.brief}
+      </p>
+
+      {/* Active bottom bar */}
+      {isOpen && (
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 2,
+            background: "#4A58AA",
+          }}
+        />
+      )}
+    </button>
+  );
+}
+
+function CaseFileStripV18() {
+  const [open, setOpen] = useState<number | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  function scrollStrip(dir: number) {
+    scrollRef.current?.scrollBy({ left: dir * 310, behavior: "smooth" });
+  }
+
+  function toggle(i: number) {
+    setOpen(prev => (prev === i ? null : i));
+  }
+
+  const activeItem = open !== null ? CASE_FILE_ITEMS[open] : null;
+
+  return (
+    <section
+      id="expertise"
+      data-testid="practice-areas-section"
+      className="py-24 overflow-hidden"
+      style={{ background: "#F9F9F9" }}
+    >
+      <div className="max-w-[1400px] mx-auto px-8 w-full">
+
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <p
+            className="uppercase font-medium mb-3"
+            style={{ color: "#4A58AA", fontSize: 16, letterSpacing: "0.3em", paddingLeft: "calc(3px + 1rem)" }}
+          >
+            Our Expertise
+          </p>
+          <h2
+            className="font-heading font-semibold text-[#001489] leading-[1.25]"
+            style={{ fontSize: "clamp(1rem, 1.8vw, 1.375rem)", paddingLeft: "calc(3px + 1rem)" }}
+          >
+            Areas of Practice
+          </h2>
+        </motion.div>
+
+        {/* Strip + arrow buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="relative"
+        >
+          {/* Left arrow */}
+          <button
+            aria-label="Scroll left"
+            onClick={() => scrollStrip(-1)}
+            data-testid="strip-scroll-left"
+            className="hidden md:flex absolute z-10 w-10 h-10 items-center justify-center"
+            style={{
+              left: -20,
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "#001489",
+              borderRadius: "50%",
+              boxShadow: "0 2px 12px rgba(0,20,137,0.22)",
+              border: "none",
+              cursor: "pointer",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = "#192B94")}
+            onMouseLeave={e => (e.currentTarget.style.background = "#001489")}
+          >
+            <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
+              <path d="M9 2L4 7l5 5" stroke="#FFFFFF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          {/* Scrollable strip */}
+          <div
+            ref={scrollRef}
+            className="flex gap-4 pb-3"
+            style={{
+              overflowX: "auto",
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {CASE_FILE_ITEMS.map((item, i) => (
+              <FolderTab
+                key={i}
+                item={item}
+                isOpen={open === i}
+                onClick={() => toggle(i)}
+              />
+            ))}
+            <div style={{ flexShrink: 0, width: 4 }} />
+          </div>
+
+          {/* Right arrow */}
+          <button
+            aria-label="Scroll right"
+            onClick={() => scrollStrip(1)}
+            data-testid="strip-scroll-right"
+            className="hidden md:flex absolute z-10 w-10 h-10 items-center justify-center"
+            style={{
+              right: -20,
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "#001489",
+              borderRadius: "50%",
+              boxShadow: "0 2px 12px rgba(0,20,137,0.22)",
+              border: "none",
+              cursor: "pointer",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = "#192B94")}
+            onMouseLeave={e => (e.currentTarget.style.background = "#001489")}
+          >
+            <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
+              <path d="M5 2l5 5-5 5" stroke="#FFFFFF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </motion.div>
+
+        {/* Expanded panel — slides down below the strip */}
+        <AnimatePresence>
+          {open !== null && activeItem && (
+            <motion.div
+              key={`panel-${open}`}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              style={{ overflow: "hidden" }}
+            >
+              <div
+                data-testid="case-file-panel"
+                className="grid grid-cols-1 md:grid-cols-[1fr_300px]"
+                style={{
+                  background: "#001489",
+                  borderTop: "2px solid #4A58AA",
+                }}
+              >
+                {/* Text content */}
+                <div style={{ padding: "48px 48px 52px" }}>
+                  <span
+                    style={{
+                      display: "block",
+                      color: "rgba(255,255,255,0.65)",
+                      fontSize: 10,
+                      fontFamily: "'Satoshi', 'Plus Jakarta Sans', sans-serif",
+                      fontWeight: 700,
+                      letterSpacing: "0.26em",
+                      marginBottom: 18,
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {activeItem.num} — {activeItem.tag}
+                  </span>
+                  <h3
+                    className="font-heading font-bold text-white mb-6"
+                    style={{ fontSize: "clamp(1.8rem, 3vw, 2.8rem)", lineHeight: 1.15 }}
+                  >
+                    {activeItem.title}
+                  </h3>
+                  <p
+                    style={{
+                      color: "rgba(255,255,255,0.62)",
+                      fontSize: "clamp(0.875rem, 1vw, 1rem)",
+                      lineHeight: 1.8,
+                      maxWidth: 520,
+                      marginBottom: 40,
+                    }}
+                  >
+                    {activeItem.desc}
+                  </p>
+                  <div style={{ display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
+                    <a
+                      href="#contact"
+                      data-testid="case-file-enquire-cta"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 10,
+                        color: "rgba(255,255,255,0.85)",
+                        fontSize: 11,
+                        fontWeight: 600,
+                        letterSpacing: "0.2em",
+                        textTransform: "uppercase",
+                        textDecoration: "none",
+                        borderBottom: "1px solid rgba(255,255,255,0.3)",
+                        paddingBottom: 2,
+                      }}
+                    >
+                      Enquire About This Area
+                      <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
+                        <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </a>
+                    {activeItem.pageHref && (
+                      <a
+                        href={activeItem.pageHref}
+                        data-testid="case-file-view-page-cta"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 8,
+                          color: "#D4AF36",
+                          fontSize: 11,
+                          fontWeight: 600,
+                          letterSpacing: "0.2em",
+                          textTransform: "uppercase",
+                          textDecoration: "none",
+                          borderBottom: "1px solid rgba(212,175,54,0.4)",
+                          paddingBottom: 2,
+                        }}
+                      >
+                        View Practice Area
+                        <svg width="12" height="12" fill="none" viewBox="0 0 12 12">
+                          <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Panel image */}
+                <div
+                  className="hidden md:block relative overflow-hidden"
+                  style={{ minHeight: 280 }}
+                >
+                  <img
+                    src={activeItem.img}
+                    alt={activeItem.title}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      opacity: 0.5,
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(to right, #001489 0%, transparent 45%)",
+                    }}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+      </div>
+    </section>
+  );
+}
+
+/* ─── CONTACT ────────────────────────────────────────────────────────────── */
+
+function ContactFormV15() {
+  const { t } = useLang();
+  const c = t.contact;
+  const f = t.footer;
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSubmitting(true);
+    await new Promise(r => setTimeout(r, 900));
+    setSubmitting(false);
+    setSubmitted(true);
+  }
+
+  return (
+    <section
+      id="contact"
+      data-header-theme="light"
+      data-testid="contact-section"
+      className="v2-snap-section lg:grid"
+      style={{ background: "#FFFFFF", gridTemplateColumns: "1fr clamp(260px, 30vw, 480px)", minHeight: "100dvh" }}
+    >
+      {/* ── Left: content ── */}
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 80, paddingBottom: 80, paddingLeft: "clamp(32px, 5vw, 80px)", paddingRight: "clamp(24px, 4vw, 64px)" }}>
+
+        {/* ── Section header ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65 }}
+          style={{ marginBottom: 88, marginLeft: -20 }}
+        >
+          <p style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontSize: 18,
+            fontWeight: 700,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: "#001489",
+            marginBottom: 20,
+          }}>
+            {c.eyebrow}
+          </p>
+          <h2
+            className="font-heading font-bold"
+            style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#001489", marginBottom: 24 }}
+          >
+            {c.headline}
+          </h2>
+          <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 15, lineHeight: 1.78, maxWidth: 520 }}>
+            {c.subtext}
+          </p>
+        </motion.div>
+
+        {/* ── Form + offices ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid grid-cols-1 lg:grid-cols-[7fr_4fr]"
+          style={{ borderTop: "1px solid rgba(0,20,137,0.10)", marginLeft: -20 }}
+        >
+          {/* ── Form — blue boxes ── */}
+          <div style={{ paddingTop: 48, paddingRight: "clamp(0px, 5vw, 72px)", paddingBottom: 0 }}>
+            {submitted ? (
+              <motion.div
+                data-testid="contact-success"
+                initial={{ opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col gap-5"
+                style={{ minHeight: 360, justifyContent: "center" }}
+              >
+                <div style={{ width: 52, height: 52, background: "#001489", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 8 }}>
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 20 20">
+                    <path d="M4 10l4 4 8-8" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <h3 className="font-heading font-bold" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)", color: "#001489" }}>
+                  {c.successTitle}
+                </h3>
+                <p style={{ color: "rgba(0,0,0,0.50)", fontSize: 14, lineHeight: 1.72 }}>{c.successText}</p>
+              </motion.div>
+            ) : (
+              <div className="w-full">
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 32 }}>
+                  Send a Message
+                </p>
+                <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <input
+                      type="text" name="name" required value={form.name} onChange={handleChange}
+                      placeholder={c.namePlaceholder} data-testid="input-name"
+                      style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      className="placeholder-[rgba(0,0,0,0.30)]"
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
+                    />
+                    <input
+                      type="email" name="email" required value={form.email} onChange={handleChange}
+                      placeholder={c.emailPlaceholder} data-testid="input-email"
+                      style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      className="placeholder-[rgba(0,0,0,0.30)]"
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
+                    />
+                  </div>
+                  <div className="relative">
+                    <select
+                      name="subject" required value={form.subject} onChange={handleChange}
+                      data-testid="select-subject"
+                      style={{ width: "100%", background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: form.subject ? "#0A0A1A" : "rgba(0,0,0,0.30)", padding: "13px 40px 13px 16px", fontSize: 14, outline: "none", appearance: "none", cursor: "pointer", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                      onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+                      onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
+                    >
+                      <option value="" disabled hidden>{c.subjectPlaceholder}</option>
+                      {c.subjectOptions.map((opt, i) => (
+                        <option key={i} value={opt}>{opt}</option>
+                      ))}
+                    </select>
+                    <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3" style={{ color: "rgba(0,20,137,0.40)" }} fill="none" viewBox="0 0 12 12">
+                      <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                    </svg>
+                  </div>
+                  <textarea
+                    name="message" required rows={5} value={form.message} onChange={handleChange}
+                    placeholder={c.messagePlaceholder} data-testid="input-message"
+                    style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", resize: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    className="placeholder-[rgba(0,0,0,0.30)]"
+                    onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+                    onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
+                  />
+                  <div className="flex items-center gap-6 mt-2">
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      data-testid="button-submit"
+                      style={{
+                        background: "#001489",
+                        color: "#FFFFFF",
+                        border: "none",
+                        padding: "15px 40px",
+                        fontSize: 11,
+                        fontWeight: 700,
+                        letterSpacing: "0.12em",
+                        textTransform: "uppercase",
+                        cursor: submitting ? "not-allowed" : "pointer",
+                        opacity: submitting ? 0.6 : 1,
+                        transition: "opacity 0.2s, background 0.2s",
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      }}
+                      onMouseEnter={e => { if (!submitting) (e.currentTarget as HTMLElement).style.background = "#0019A8"; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#001489"; }}
+                    >
+                      {submitting ? (
+                        <span className="flex items-center gap-2.5">
+                          <svg className="w-3.5 h-3.5 animate-spin" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.3" />
+                            <path d="M8 2a6 6 0 016 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                          </svg>
+                          {c.submitting}
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-2.5">
+                          {c.submit}
+                          <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+                            <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+                          </svg>
+                        </span>
+                      )}
+                    </button>
+                    <p style={{ color: "rgba(0,0,0,0.35)", fontSize: 12, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                      Typically replies within 24 hours
+                    </p>
+                  </div>
+                </form>
+              </div>
+            )}
+          </div>
+
+          {/* ── Offices — right column ── */}
+          <div
+            style={{
+              paddingTop: 48,
+              paddingLeft: "clamp(24px, 4vw, 56px)",
+              borderLeft: "1px solid rgba(0,20,137,0.10)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 0,
+            }}
+          >
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 32 }}>
+              {c.officeLabel}
+            </p>
+
+            {/* Dubai */}
+            <div style={{ marginBottom: 32 }}>
+              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
+                {c.dubaiLabel}
+              </p>
+              {f.dubaiAddr.map((line, i) => (
+                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
+              ))}
+              <a
+                href="tel:+97145232421"
+                data-testid="contact-address-phone-dubai"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 13, textDecoration: "none", display: "inline-block", marginTop: 6 }}
+              >
+                +971 4 523 2421
+              </a>
+            </div>
+
+            <div style={{ height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 32 }} />
+
+            {/* Paris */}
+            <div style={{ marginBottom: 32 }}>
+              <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
+                {c.parisLabel}
+              </p>
+              {f.parisAddr.map((line, i) => (
+                <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
+              ))}
+              <a
+                href="tel:+33180270067"
+                data-testid="contact-address-phone-paris"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 13, textDecoration: "none", display: "inline-block", marginTop: 6 }}
+              >
+                +33 1 80 27 00 67
+              </a>
+            </div>
+
+            <div style={{ height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 24 }} />
+
+            {/* Email */}
+            <div>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
+                Email
+              </p>
+              <a
+                href={`mailto:${f.email}`}
+                data-testid="contact-email"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 14, textDecoration: "none" }}
+              >
+                {f.email}
+              </a>
+            </div>
+
+            <div style={{ height: 1, background: "rgba(0,20,137,0.08)", margin: "24px 0" }} />
+
+            {/* WhatsApp */}
+            <div>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
+                WhatsApp
+              </p>
+              <a
+                href="https://wa.me/971561234567"
+                data-testid="contact-whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 14, textDecoration: "none" }}
+              >
+                +971 56 123 4567
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* ── Right: image panel with blue multiply effect ── */}
+      <div
+        className="hidden lg:block relative overflow-hidden"
+        style={{ isolation: "isolate", borderLeft: "1px solid rgba(0,20,137,0.10)" }}
+      >
+        {/* Photo */}
+        <img
+          src={imgCorp}
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+        />
+        {/* Blue multiply — exact same as Practice Areas */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "#001489",
+          mixBlendMode: "multiply",
+          pointerEvents: "none",
+        }} />
+        {/* Bottom-to-top dark vignette for depth */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to top, rgba(0,0,20,0.55) 0%, transparent 50%)",
+          pointerEvents: "none",
+        }} />
+      </div>
+    </section>
+  );
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────────────────────── */
+
+function FooterV15() {
+  const { t } = useLang();
+  const f = t.footer;
+  const navEntries = [
+    { label: t.nav.home,      href: "#home" },
+    { label: t.nav.firm,      href: "#firm" },
+    { label: t.nav.expertise, href: "#expertise" },
+    { label: t.nav.insights,  href: "/insights" },
+    { label: t.nav.careers,   href: "#careers" },
+    { label: t.nav.contact,   href: "#contact" },
+  ];
+
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const fmtTime = (tz: string) =>
+    new Intl.DateTimeFormat("en-GB", {
+      timeZone: tz,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    }).format(now);
+
+  const dubaiTime = fmtTime("Asia/Dubai");
+  const parisTime = fmtTime("Europe/Paris");
+
+  return (
+    <footer id="footer" data-testid="footer" className="v2-snap-end" style={{ background: "#001489" }}>
+      {/* ── Motto whisper — very top ── */}
+      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 20, paddingBottom: 16 }}>
+        <p style={{
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontSize: 9,
+          fontWeight: 700,
+          letterSpacing: "0.50em",
+          textTransform: "uppercase",
+          color: "#FFFFFF",
+          textAlign: "center",
+        }}>
+          Reason&ensp;·&ensp;Rigor&ensp;·&ensp;Resolution
+        </p>
+      </div>
+      {/* ── Main band: 3-column grid ── */}
+      <div className="max-w-[1400px] mx-auto px-8">
+        <div
+          className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-4"
+          style={{ paddingTop: 28, paddingBottom: 28 }}
+        >
+          {/* LEFT — Wordmark + tagline */}
+          <div className="flex flex-col gap-5">
+            <img
+              src={miltonHobbsWordmark}
+              alt="Milton Hobbs"
+              style={{
+                width: "clamp(110px, 12vw, 148px)",
+                height: "auto",
+                filter: "brightness(0) invert(1)",
+                display: "block",
+              }}
+            />
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 11,
+              color: "#FFFFFF",
+              lineHeight: 1.7,
+              maxWidth: "28ch",
+            }}>
+              A boutique international law firm headquartered in Dubai, with offices in Paris.
+            </p>
+          </div>
+
+          {/* MIDDLE — Navigation */}
+          <div className="flex flex-col gap-4">
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: "0.34em",
+              textTransform: "uppercase",
+              color: "#FFFFFF",
+              marginBottom: 4,
+            }}>
+              Navigation
+            </p>
+            <nav className="flex flex-col gap-2">
+              {navEntries.map(link => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    color: "rgba(255,255,255,0.70)",
+                    fontSize: 12,
+                    fontWeight: 500,
+                    letterSpacing: "0.02em",
+                    textDecoration: "none",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          {/* PRACTICE AREAS */}
+          <div className="flex flex-col gap-4">
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: "0.34em",
+              textTransform: "uppercase",
+              color: "#FFFFFF",
+              marginBottom: 4,
+            }}>
+              Practice Areas
+            </p>
+            <nav className="flex flex-col gap-2">
+              {[
+                "Corporate & Commercial",
+                "Tax & Compliance",
+                "Mergers & Acquisitions",
+                "Startups & Venture Capital",
+                "IP & Technology",
+                "Real Estate & Property",
+                "Employment & Labor",
+                "Litigation & Disputes",
+              ].map(area => (
+                <a
+                  key={area}
+                  href="#expertise"
+                  style={{
+                    color: "rgba(255,255,255,0.70)",
+                    fontSize: 12,
+                    fontWeight: 500,
+                    letterSpacing: "0.04em",
+                    textDecoration: "none",
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+                >
+                  {area}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          {/* RIGHT — Contact + Socials */}
+          <div className="flex flex-col gap-4">
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: "0.34em",
+              textTransform: "uppercase",
+              color: "#FFFFFF",
+              marginBottom: 4,
+            }}>
+              Contact
+            </p>
+            <div className="flex flex-col gap-2">
+              <a
+                href={`mailto:${f.email}`}
+                data-testid="footer-email"
+                style={{ color: "rgba(255,255,255,0.70)", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+              >
+                {f.email}
+              </a>
+              <a
+                href={`tel:${f.phone}`}
+                data-testid="footer-phone-dubai"
+                style={{ color: "rgba(255,255,255,0.70)", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+              >
+                {f.phone} <span style={{ color: "rgba(255,255,255,0.30)", fontSize: 10, marginLeft: 4 }}>Dubai</span>
+              </a>
+              <a
+                href="tel:+33180270067"
+                data-testid="footer-phone-paris"
+                style={{ color: "rgba(255,255,255,0.70)", fontSize: 12, textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+              >
+                +33 1 80 27 00 67 <span style={{ color: "rgba(255,255,255,0.30)", fontSize: 10, marginLeft: 4 }}>Paris</span>
+              </a>
+            </div>
+            {/* Social icons */}
+            <div className="flex items-center gap-4" style={{ marginTop: 8 }}>
+              {[
+                { href: "https://instagram.com", Icon: SiInstagram, label: "Instagram" },
+                { href: "https://linkedin.com",  Icon: SiLinkedin,  label: "LinkedIn"  },
+                { href: "https://wa.me",         Icon: SiWhatsapp,  label: "WhatsApp"  },
+              ].map(({ href, Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "rgba(255,255,255,0.40)", transition: "color 0.2s", display: "flex" }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.40)")}
+                >
+                  <Icon size={15} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* ── Bottom band: clocks · copyright · legal ── */}
+      <div className="max-w-[1400px] mx-auto px-8">
+        <div
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
+          style={{ padding: "10px 0 12px" }}
+        >
+          {/* Live clocks */}
+          <div className="flex items-center gap-5">
+            {[
+              { label: "Dubai", time: dubaiTime, dot: "#FFFFFF" },
+              { label: "Paris", time: parisTime, dot: "#FFFFFF" },
+            ].map((o, i) => (
+              <div key={o.label} className="flex items-center gap-2">
+                {i > 0 && <span style={{ width: 1, height: 10, background: "rgba(255,255,255,0.30)", marginRight: 6 }} />}
+                <span
+                  style={{ width: 5, height: 5, borderRadius: "50%", background: o.dot, flexShrink: 0 }}
+                  className="bg-[#ffffff]" />
+                <span style={{ color: "#FFFFFF", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>{o.label}</span>
+                <span style={{ color: "#FFFFFF", fontSize: 11, fontFamily: "'Plus Jakarta Sans', monospace", letterSpacing: "0.04em", minWidth: "6ch" }}>{o.time}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Legal */}
+          <div className="flex flex-col items-start sm:items-end gap-1.5">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:justify-end">
+              <a href="/privacy-policy" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>{f.privacy}</a>
+              <a href="/cookies" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>{f.cookie}</a>
+              <a href="/terms-of-use" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Terms of Use</a>
+              <a href="/not-legal-advice" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Not Legal Advice</a>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:justify-end">
+              <a href="/attorney-client-disclaimer" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Attorney-Client Disclaimer</a>
+              <a href="/jurisdictional-statements" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Jurisdictional Statements</a>
+              <a href="/conflict-checks" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Conflict Checks</a>
+              <a href="/confidentiality-notice" style={{ color: "rgba(255,255,255,0.60)", fontSize: 10, textDecoration: "none", letterSpacing: "0.04em" }}>Confidentiality Notice</a>
+            </div>
+            <span style={{ color: "#FFFFFF", fontSize: 10, letterSpacing: "0.04em" }}>{f.copyright}</span>
+          </div>
+        </div>
+
+        <p
+          data-testid="footer-disclaimer"
+          style={{ color: "#FFFFFF", fontSize: 9, lineHeight: 1.6, paddingBottom: 18, maxWidth: "85ch" }}
+        >
+          {f.disclaimer}
+        </p>
+      </div>
+    </footer>
+  );
+}
+
+/* ─── PRACTICE AREAS ────────────────────────────────────────────────────── */
+
+const EXPERTISE_ITEMS_STATIC = [
+  { short: "Corporate",   img: imgCorp,   pageHref: "/expertise/corporate-commercial" },
+  { short: "Tax",         img: imgTax,    pageHref: "/expertise/tax-compliance" },
+  { short: "M&A",         img: imgBank,   pageHref: "/expertise/mergers-acquisitions" },
+  { short: "Startups",    img: imgTech,   pageHref: "/expertise/startups-venture-capital" },
+  { short: "IP & Tech",   img: imgIp,     pageHref: "/expertise/ip-technology" },
+  { short: "Real Estate", img: imgEstate, pageHref: "/expertise/real-estate-property" },
+  { short: "Employment",  img: imgEmploy, pageHref: "/expertise/employment-labor" },
+  { short: "Litigation",  img: imgLitig,  pageHref: "/expertise/litigation-disputes" },
+];
+
+const PRACTICE_CYCLE_MS = 5000;
+
+function PracticeAreasV18() {
+  const { t } = useLang();
+  const p = t.practices;
+  const items = EXPERTISE_ITEMS_STATIC.map((s, i) => ({
+    ...s,
+    title: p.items[i]?.title ?? s.short,
+    desc:  p.items[i]?.description ?? "",
+  }));
+
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handlePanelEnter = (i: number) => {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+    hoverTimer.current = setTimeout(() => {
+      setActive(i);
+      setPaused(true);
+    }, 150);
+  };
+
+  const handlePanelLeave = () => {
+    if (hoverTimer.current) {
+      clearTimeout(hoverTimer.current);
+      hoverTimer.current = null;
+    }
+  };
+
+  useEffect(() => {
+    items.forEach(item => {
+      const img = new Image();
+      img.src = item.img;
+      if (img.decode) img.decode().catch(() => {});
+    });
+  }, []);
+
+  useEffect(() => {
+    if (paused) return;
+    const timer = setInterval(() => {
+      setActive(prev => (prev + 1) % items.length);
+    }, PRACTICE_CYCLE_MS);
+    return () => clearInterval(timer);
+  }, [active, paused]);
+
+  return (
+    <section
+      id="expertise"
+      data-testid="practice-areas-section"
+      data-header-theme="dark"
+      className="v2-snap-section"
+      style={{ background: "#001489", position: "relative", overflow: "hidden" }}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => { handlePanelLeave(); setPaused(false); }}
+    >
+      {/* ── DESKTOP: Vertical photo accordion ── */}
+      <div
+        className="hidden lg:flex"
+        style={{ height: "100dvh", minHeight: 600, flexDirection: "column" }}
+      >
+        {/* Section header — white strip above accordion */}
+        <div
+          style={{
+            paddingTop: 132,
+            paddingBottom: 40,
+            paddingLeft: 52,
+            paddingRight: 52,
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            flexShrink: 0,
+            background: "#FFFFFF",
+            borderBottom: "1px solid rgba(0,20,137,0.08)",
+          }}
+        >
+          <div>
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 18,
+              fontWeight: 700,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "#001489",
+              marginBottom: 14,
+            }}>
+              {p.eyebrow}
+            </p>
+            <h2
+              className="font-heading font-bold"
+              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#001489" }}
+            >
+              {p.headline}
+            </h2>
+          </div>
+          {/* Dot nav */}
+          <div className="flex items-center gap-1.5">
+            {items.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => { setActive(i); setPaused(true); }}
+                style={{ width: active === i ? 20 : 5, height: 2, background: active === i ? "#001489" : "rgba(0,20,137,0.18)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Panels row — fills remaining height */}
+        <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
+          {items.map((item, i) => {
+            const isActive = active === i;
+            return (
+              <div
+                key={i}
+                data-testid={`expertise-item-${i}`}
+                onMouseEnter={() => handlePanelEnter(i)}
+                onMouseLeave={handlePanelLeave}
+                onClick={() => { handlePanelLeave(); setActive(i); setPaused(true); }}
+                style={{
+                  flex: isActive ? 5 : 0.7,
+                  transition: "flex 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  position: "relative",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  borderRight: i < items.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none",
+                  background: "#001489",
+                  isolation: "isolate",
+                  contain: "layout paint",
+                }}
+              >
+                {/* Photo — renders normally, no blend mode */}
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  loading="eager"
+                  decoding="async"
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    willChange: "transform",
+                    transition: "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                    transform: isActive ? "scale(1.04)" : "scale(1)",
+                  }}
+                />
+
+                {/* Solid #001489 multiply layer — collapsed only */}
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "#001489",
+                  mixBlendMode: "multiply",
+                  opacity: isActive ? 0 : 1,
+                  transition: "opacity 0.55s ease",
+                  pointerEvents: "none",
+                }} />
+
+                {/* Bottom gradient — collapsed state */}
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to bottom, transparent 20%, rgba(0,0,20,0.72) 100%)",
+                  opacity: isActive ? 0 : 1,
+                  transition: "opacity 0.6s ease",
+                  pointerEvents: "none",
+                }} />
+                {/* White overlay — expanded state */}
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to bottom, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.82) 38%, rgba(255,255,255,0.97) 100%)",
+                  opacity: isActive ? 1 : 0,
+                  transition: "opacity 0.55s ease",
+                  pointerEvents: "none",
+                }} />
+
+                {/* Progress bar — bottom of active panel */}
+                {isActive && (
+                  <motion.div
+                    key={`pa-prog-${active}`}
+                    style={{ position: "absolute", bottom: 0, left: 0, height: 2, background: "rgba(255,255,255,0.40)", zIndex: 3 }}
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: PRACTICE_CYCLE_MS / 1000, ease: "linear" }}
+                  />
+                )}
+
+                {/* COLLAPSED LABEL — horizontal text, bottom-center */}
+                <AnimatePresence>
+                  {!isActive && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      style={{
+                        position: "absolute",
+                        bottom: 28,
+                        left: 7,
+                        right: 7,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        gap: 6,
+                        zIndex: 2,
+                      }}
+                    >
+                      <span
+                        className="font-heading font-bold"
+                        style={{
+                          fontSize: "0.65rem",
+                          color: "rgba(255,255,255,0.55)",
+                          letterSpacing: "0.04em",
+                          lineHeight: 1.2,
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                          maxWidth: "100%",
+                        }}
+                      >
+                        {item.short}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* EXPANDED CONTENT — bottom-anchored */}
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        padding: "36px 32px 40px",
+                        zIndex: 2,
+                      }}
+                    >
+                      {/* Title */}
+                      <h3
+                        className="font-heading font-bold"
+                        style={{
+                          fontSize: "clamp(1.15rem, 1.6vw, 1.6rem)",
+                          lineHeight: 1.12,
+                          letterSpacing: "-0.02em",
+                          color: "#001489",
+                          marginBottom: 18,
+                        }}
+                      >
+                        {item.title}
+                      </h3>
+
+                      {/* Thin rule */}
+                      <div style={{ width: 28, height: 1, background: "rgba(0,20,137,0.18)", marginBottom: 18 }} />
+
+                      {/* Description */}
+                      <p style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        color: "rgba(0,0,30,0.62)",
+                        fontSize: 13,
+                        lineHeight: 1.75,
+                        marginBottom: 24,
+                        maxWidth: "26ch",
+                      }}>
+                        {item.desc}
+                      </p>
+
+                      {/* Enquire + View Page CTAs */}
+                      <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+                        <a
+                          href="#contact"
+                          data-testid={`expertise-enquire-${i}`}
+                          className="inline-flex items-center gap-2"
+                          style={{
+                            color: "#001489",
+                            fontSize: 9,
+                            fontWeight: 700,
+                            letterSpacing: "0.26em",
+                            textTransform: "uppercase",
+                            textDecoration: "none",
+                            fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            border: "1px solid #001489",
+                            padding: "11px 20px",
+                            background: "transparent",
+                            transition: "background 0.25s, color 0.25s",
+                            display: "inline-flex",
+                          }}
+                          onMouseEnter={e => {
+                            const el = e.currentTarget as HTMLElement;
+                            el.style.background = "#001489";
+                            el.style.color = "#FFFFFF";
+                          }}
+                          onMouseLeave={e => {
+                            const el = e.currentTarget as HTMLElement;
+                            el.style.background = "transparent";
+                            el.style.color = "#001489";
+                          }}
+                        >
+                          {p.ctaEnquire}
+                          <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
+                            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                          </svg>
+                        </a>
+                        {item.pageHref && (
+                          <a
+                            href={item.pageHref}
+                            data-testid={`expertise-view-page-${i}`}
+                            style={{
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: 8,
+                              color: "#001489",
+                              fontSize: 10,
+                              fontWeight: 800,
+                              letterSpacing: "0.22em",
+                              textTransform: "uppercase",
+                              textDecoration: "none",
+                              fontFamily: "'Plus Jakarta Sans', sans-serif",
+                              padding: "11px 22px",
+                              border: "1.5px solid #001489",
+                              background: "transparent",
+                              transition: "background 0.25s, color 0.25s",
+                            }}
+                            onMouseEnter={e => {
+                              const el = e.currentTarget as HTMLElement;
+                              el.style.background = "#001489";
+                              el.style.color = "#FFFFFF";
+                            }}
+                            onMouseLeave={e => {
+                              const el = e.currentTarget as HTMLElement;
+                              el.style.background = "transparent";
+                              el.style.color = "#001489";
+                            }}
+                          >
+                            {p.ctaViewPracticeArea}
+                            <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
+                              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.5" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── MOBILE: Stacked photo rows ── */}
+      <div className="lg:hidden" style={{ paddingTop: 88 }}>
+        {/* Header */}
+        <div style={{ padding: "0 24px 40px" }}>
+          <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.40em", textTransform: "uppercase", color: "#7A84BE", marginBottom: 14 }}>
+            {p.eyebrow}
+          </p>
+          <h2 className="font-heading font-bold" style={{ fontSize: "clamp(1.75rem, 7vw, 2.25rem)", lineHeight: 1.08, letterSpacing: "-0.03em", color: "#FFFFFF" }}>
+            {p.headline}
+          </h2>
+        </div>
+
+        {items.map((item, i) => {
+          const isActive = active === i;
+          return (
+            <div key={i} style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+              <button
+                onClick={() => { setActive(isActive ? -1 : i); setPaused(true); }}
+                data-testid={`expertise-item-${i}`}
+                style={{
+                  width: "100%",
+                  height: 200,
+                  position: "relative",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  border: "none",
+                  background: "#001489",
+                  display: "block",
+                }}
+              >
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                />
+                <div style={{ position: "absolute", inset: 0, background: "#001489", mixBlendMode: "multiply" }} />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,20,0.75) 0%, transparent 100%)" }} />
+                <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", padding: "0 24px", gap: 16 }}>
+                  <span className="font-heading font-bold" style={{ fontSize: "clamp(1rem, 4vw, 1.25rem)", color: "#FFFFFF", flex: 1, textAlign: "left", lineHeight: 1.2 }}>
+                    {item.title}
+                  </span>
+                  <motion.div
+                    animate={{ rotate: isActive ? 45 : 0 }}
+                    transition={{ duration: 0.28 }}
+                    style={{ flexShrink: 0 }}
+                  >
+                    <svg width="18" height="18" fill="none" viewBox="0 0 18 18">
+                      <path d="M9 3v12M3 9h12" stroke="rgba(255,255,255,0.55)" strokeWidth="1.4" strokeLinecap="round" />
+                    </svg>
+                  </motion.div>
+                </div>
+              </button>
+
+              <AnimatePresence initial={false}>
+                {isActive && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                    style={{ overflow: "hidden" }}
+                  >
+                    <div style={{ padding: "20px 24px 28px" }}>
+                      <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "rgba(255,255,255,0.60)", fontSize: 14, lineHeight: 1.75, marginBottom: 20 }}>
+                        {item.desc}
+                      </p>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+                        <a
+                          href="#contact"
+                          style={{
+                            display: "inline-flex", alignItems: "center", gap: 8,
+                            color: "#FFFFFF", fontSize: 9, fontWeight: 700,
+                            letterSpacing: "0.26em", textTransform: "uppercase",
+                            textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif",
+                            border: "1px solid #FFFFFF", padding: "11px 20px",
+                            background: "transparent", transition: "background 0.25s, color 0.25s",
+                          }}
+                          onMouseEnter={e => {
+                            const el = e.currentTarget as HTMLElement;
+                            el.style.background = "#FFFFFF";
+                            el.style.color = "#001489";
+                          }}
+                          onMouseLeave={e => {
+                            const el = e.currentTarget as HTMLElement;
+                            el.style.background = "transparent";
+                            el.style.color = "#FFFFFF";
+                          }}
+                        >
+                          {p.ctaEnquire}
+                          <svg width="10" height="10" fill="none" viewBox="0 0 14 14">
+                            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                          </svg>
+                        </a>
+                        {item.pageHref && (
+                          <a
+                            href={item.pageHref}
+                            style={{
+                              display: "inline-flex", alignItems: "center", gap: 8,
+                              color: "#001489", fontSize: 10, fontWeight: 800,
+                              letterSpacing: "0.22em", textTransform: "uppercase",
+                              textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif",
+                              border: "1.5px solid #001489", padding: "11px 22px",
+                              background: "#FFFFFF", transition: "background 0.25s, color 0.25s",
+                            }}
+                            onMouseEnter={e => {
+                              const el = e.currentTarget as HTMLElement;
+                              el.style.background = "#001489";
+                              el.style.color = "#FFFFFF";
+                            }}
+                            onMouseLeave={e => {
+                              const el = e.currentTarget as HTMLElement;
+                              el.style.background = "#FFFFFF";
+                              el.style.color = "#001489";
+                            }}
+                          >
+                            {p.ctaViewPracticeArea}
+                            <svg width="10" height="10" fill="none" viewBox="0 0 12 12">
+                              <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.5" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+/* ─── PAGE ───────────────────────────────────────────────────────────────── */
+
+function HomeV2Point2Inner() {
+  const { lang } = useLang();
+
+  useEffect(() => {
+    const isEN = lang === "EN";
+
+    document.title = isEN
+      ? "Milton Hobbs | Boutique Corporate Law — Dubai & Paris"
+      : "Milton Hobbs | Cabinet d'Avocats Corporate — Dubaï & Paris";
+
+    const setMeta = (name: string, content: string, attr = "name") => {
+      let el = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
+
+    const descEN = "Milton Hobbs is a boutique corporate law firm with offices in Dubai and Paris. We provide expert counsel in corporate, M&A, tax, IP, real estate, employment, and dispute resolution across the UAE, France, and the GCC.";
+    const descFR = "Milton Hobbs est un cabinet d'avocats corporate boutique avec des bureaux à Dubaï et Paris. Conseil en droit des sociétés, fusions-acquisitions, fiscalité, PI, immobilier, droit du travail et contentieux — EAU, France et CCG.";
+    const desc = isEN ? descEN : descFR;
+
+    setMeta("description", desc);
+    setMeta("og:type", "website", "property");
+    setMeta("og:site_name", "Milton Hobbs", "property");
+    setMeta("og:title", document.title, "property");
+    setMeta("og:description", desc, "property");
+    setMeta("og:url", "https://www.miltonhobbs.com/", "property");
+    setMeta("og:locale", isEN ? "en_GB" : "fr_FR", "property");
+    setMeta("twitter:card", "summary_large_image");
+    setMeta("twitter:title", document.title);
+    setMeta("twitter:description", desc);
+
+    const removeHreflangs = () => {
+      document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
+    };
+    removeHreflangs();
+    const addHreflang = (hl: string, href: string) => {
+      const link = document.createElement("link");
+      link.setAttribute("rel", "alternate");
+      link.setAttribute("hreflang", hl);
+      link.setAttribute("href", href);
+      document.head.appendChild(link);
+    };
+    addHreflang("en", "https://www.miltonhobbs.com/");
+    addHreflang("fr", "https://www.miltonhobbs.com/fr/");
+    addHreflang("x-default", "https://www.miltonhobbs.com/");
+
+    const schemaId = "schema-json-ld-home";
+    const existing = document.getElementById(schemaId);
+    if (existing) existing.remove();
+    const script = document.createElement("script");
+    script.id = schemaId;
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LegalService",
+      name: "Milton Hobbs",
+      description: descEN,
+      url: "https://www.miltonhobbs.com",
+      telephone: "+97145232421",
+      email: "contact@miltonhobbs.com",
+      areaServed: ["AE", "FR", "EU", "GCC"],
+      availableLanguage: ["English", "French", "Arabic"],
+      knowsAbout: [
+        "Corporate Law",
+        "Mergers and Acquisitions",
+        "Tax and Compliance",
+        "Intellectual Property",
+        "Real Estate Law",
+        "Employment Law",
+        "Commercial Litigation",
+        "Startups and Venture Capital",
+      ],
+      address: [
+        {
+          "@type": "PostalAddress",
+          streetAddress: "Level 2, The Offices 1, One Central, Dubai World Trade Centre",
+          addressLocality: "Dubai",
+          addressCountry: "AE",
+        },
+        {
+          "@type": "PostalAddress",
+          streetAddress: "11, Boulevard Sébastopol",
+          postalCode: "75001",
+          addressLocality: "Paris",
+          addressCountry: "FR",
+        },
+      ],
+    });
+    document.head.appendChild(script);
+
+    return () => {
+      removeHreflangs();
+      document.getElementById(schemaId)?.remove();
+    };
+  }, [lang]);
+
+  return (
+    <div className="bg-[#001489] min-h-screen v2-snap-container" data-testid="home-v1-5-page">
+      <HeaderV15 />
+      <main>
+        <HeroV15 />
+        <DifferentiatorsV15 />
+        <PracticeAreasV18 />
+        <ContactFormV15 />
+      </main>
+      <FooterV15 />
+    </div>
+  );
+}
+
 export default function HomeV2Point2() {
-  return null;
+  return (
+    <LanguageProvider>
+      <HomeV2Point2Inner />
+    </LanguageProvider>
+  );
 }
