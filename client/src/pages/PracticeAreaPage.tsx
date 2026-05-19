@@ -472,7 +472,7 @@ function PracticeAreaPageInner() {
               <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold mb-4">
                 {c(pa.closingCta.eyebrow, effectiveLang)}
               </p>
-              <h2 className="font-heading text-white font-bold text-[clamp(1.6rem,3vw,2.4rem)] tracking-tight leading-tight mb-3">
+              <h2 className="font-heading text-white font-bold text-[clamp(1.6rem,3vw,2.4rem)] tracking-tight leading-tight mb-3 whitespace-pre-line">
                 {c(pa.closingCta.heading, effectiveLang)}
               </h2>
             </motion.div>
