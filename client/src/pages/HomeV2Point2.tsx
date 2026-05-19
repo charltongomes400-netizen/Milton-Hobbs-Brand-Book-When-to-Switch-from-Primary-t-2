@@ -2377,10 +2377,12 @@ function PracticeAreasV18() {
   }));
 
   const [active, setActive] = useState(0);
+  const [hovered, setHovered] = useState<number | null>(null);
   const [paused, setPaused] = useState(false);
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handlePanelEnter = (i: number) => {
+    setHovered(i);
     if (hoverTimer.current) clearTimeout(hoverTimer.current);
     hoverTimer.current = setTimeout(() => {
       setActive(i);
@@ -2389,6 +2391,7 @@ function PracticeAreasV18() {
   };
 
   const handlePanelLeave = () => {
+    setHovered(null);
     if (hoverTimer.current) {
       clearTimeout(hoverTimer.current);
       hoverTimer.current = null;
@@ -2499,7 +2502,7 @@ function PracticeAreasV18() {
                   alt={item.title}
                   loading="eager"
                   decoding="async"
-                  animate={{ scale: isActive ? 1.08 : 1 }}
+                  animate={{ scale: hovered === i ? 1.08 : 1 }}
                   transition={{ duration: 0.85, ease: [0.25, 0.46, 0.45, 0.94] }}
                   style={{
                     position: "absolute",
