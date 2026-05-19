@@ -451,7 +451,7 @@ function PracticeAreaPageInner() {
                   {c(card.title, effectiveLang)}
                 </h3>
                 <div className="h-px w-8 bg-[#8099FF]/45 mb-4" />
-                <p className="text-[#001489] text-sm leading-relaxed">{c(card.body, effectiveLang)}</p>
+                <p className="text-sm leading-relaxed text-[#000000]">{c(card.body, effectiveLang)}</p>
               </motion.div>
             ))}
           </div>
