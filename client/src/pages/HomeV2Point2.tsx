@@ -2494,20 +2494,19 @@ function PracticeAreasV18() {
                 }}
               >
                 {/* Photo — renders normally, no blend mode */}
-                <img
+                <motion.img
                   src={item.img}
                   alt={item.title}
                   loading="eager"
                   decoding="async"
+                  animate={{ scale: isActive ? 1.08 : 1 }}
+                  transition={{ duration: 0.85, ease: [0.25, 0.46, 0.45, 0.94] }}
                   style={{
                     position: "absolute",
                     inset: 0,
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    willChange: "transform",
-                    transition: "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-                    transform: isActive ? "scale(1.04)" : "scale(1)",
                   }}
                 />
 
