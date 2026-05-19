@@ -2491,8 +2491,6 @@ function PracticeAreasV18() {
                   cursor: "pointer",
                   borderRight: i < items.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none",
                   background: "#001489",
-                  isolation: "isolate",
-                  contain: "layout paint",
                 }}
               >
                 {/* Photo — renders normally, no blend mode */}
