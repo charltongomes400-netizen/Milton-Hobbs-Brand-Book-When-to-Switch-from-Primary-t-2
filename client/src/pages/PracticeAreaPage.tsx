@@ -11,7 +11,7 @@ import imgCorporate from "@assets/expertisecorporate-commercial_2_1779148847133.
 import imgTax from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
 import imgMA from "@assets/4_1779150173136.png";
 import imgStartups from "@assets/optimized/donny-jiang-42gFAgdIUC8-unsplash_1776241615811.jpg";
-import imgIP from "@assets/optimized/phil-desforges-ow1mML1sOi0-unsplash_1776241615811.jpg";
+import imgIP from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
 import imgRealEstate from "@assets/optimized/simone-hutsch-iDSfeuoxM0o-unsplash_1776241615811.jpg";
 import imgEmploy from "@assets/optimized/daniele-colucci-Xt48I3ps6Pg-unsplash_1776241615811.jpg";
 import imgLitigation from "@assets/5_1779150913790.png";

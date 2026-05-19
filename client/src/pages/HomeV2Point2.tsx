@@ -9,7 +9,7 @@ import imgCorp   from "@assets/expertisecorporate-commercial_2_1779148847133.png
 import imgTax    from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
 import imgBank   from "@assets/4_1779150173136.png";
 import imgTech   from "@assets/optimized/donny-jiang-42gFAgdIUC8-unsplash_1776241615811.jpg";
-import imgIp     from "@assets/optimized/simone-hutsch-iDSfeuoxM0o-unsplash_1776241615811.jpg";
+import imgIp     from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
 import imgEstate from "@assets/optimized/alexander-abero-OypnYfdiQgg-unsplash_1776241615811.jpg";
 import imgEmploy from "@assets/optimized/daniele-colucci-Xt48I3ps6Pg-unsplash_1776241615811.jpg";
 import imgLitig  from "@assets/5_1779150913790.png";
