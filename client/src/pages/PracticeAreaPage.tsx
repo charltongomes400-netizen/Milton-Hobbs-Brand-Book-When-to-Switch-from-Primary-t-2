@@ -7,7 +7,7 @@ import { ContactModal } from "@/components/ContactModal";
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { practiceAreas, c } from "@/data/practiceAreasCopy";
 
-import imgCorporate from "@assets/expertisecorporate-commercial_1779148705273.png";
+import imgCorporate from "@assets/expertisecorporate-commercial_2_1779148847133.png";
 import imgTax from "@assets/optimized/sasha-yudaev-FOYsU4uQqqM-unsplash_1776241615811.jpg";
 import imgMA from "@assets/optimized/marc-olivier-jodoin--HIiNFXcbtQ-unsplash_1776241615811.jpg";
 import imgStartups from "@assets/optimized/donny-jiang-42gFAgdIUC8-unsplash_1776241615811.jpg";
@@ -160,7 +160,7 @@ function PracticeAreaPageInner() {
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            style={{ objectPosition: "center 30%", mixBlendMode: "multiply" }}
+            style={{ objectPosition: "center 42%", mixBlendMode: "multiply" }}
           />
         )}
         <div
