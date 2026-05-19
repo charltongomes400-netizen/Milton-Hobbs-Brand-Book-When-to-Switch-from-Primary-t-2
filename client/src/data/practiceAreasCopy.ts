@@ -217,7 +217,7 @@ export const practiceAreas: PracticeArea[] = [
     },
     closingCta: {
       eyebrow: { en: "ASSESS THE EXPOSURE", fr: "ÉVALUER L'EXPOSITION" },
-      heading: { en: "Have a tax position to validate? Bring it to a partner directly.", fr: "Une position fiscale à valider ? Adressez-vous directement à un associé." },
+      heading: { en: "Have a tax position to validate?\nBring it to a partner directly.", fr: "Une position fiscale à valider ?\nAdressez-vous directement à un associé." },
       cta: { en: "Book a Consultation", fr: "Prendre Rendez-Vous" },
     },
   },
