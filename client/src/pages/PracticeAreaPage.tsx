@@ -379,9 +379,6 @@ function PracticeAreaPageInner() {
                   data-testid={`pa-service-card-${i}`}
                   className="group bg-white p-8 flex flex-col hover:bg-[#001489] transition-colors duration-300"
                 >
-                  <span className="text-[#8099FF] text-[11px] tracking-[0.3em] uppercase font-bold mb-3 group-hover:text-white/50 transition-colors">
-                    {svc.num}
-                  </span>
                   <h3 className="font-heading text-black font-bold text-[1.05rem] leading-snug mb-4 group-hover:text-white transition-colors">
                     {c(svc.title, effectiveLang)}
                   </h3>
@@ -446,7 +443,6 @@ function PracticeAreaPageInner() {
                 data-testid={`pa-differentiator-${i}`}
                 className="bg-white p-8 flex flex-col"
               >
-                <span className="text-[#8099FF] text-[11px] tracking-[0.3em] uppercase font-bold mb-3">{card.num}</span>
                 <h3 className="font-heading text-[#001489] font-bold text-base leading-snug mb-4">
                   {c(card.title, effectiveLang)}
                 </h3>
