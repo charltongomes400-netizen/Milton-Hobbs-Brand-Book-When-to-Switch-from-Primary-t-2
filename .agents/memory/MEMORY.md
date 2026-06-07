@@ -1,0 +1,1 @@
+- [Server entry module side effects](server-entry-module.md) — server/index.ts boots Express on import; standalone scripts must not import from it.
