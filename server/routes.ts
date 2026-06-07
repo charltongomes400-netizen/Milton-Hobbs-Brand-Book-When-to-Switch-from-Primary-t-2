@@ -5,7 +5,7 @@ import rateLimit from "express-rate-limit";
 import path from "path";
 import fs from "fs";
 import { storage } from "./storage";
-import { insertApplicationSchema, insertPostSchema } from "@shared/schema";
+import { insertApplicationSchema, insertPostSchema, insertJobSchema, type Application } from "@shared/schema";
 import { z } from "zod";
 import { registerAuthRoutes } from "./authRoutes";
 import { requireAdmin } from "./auth";
@@ -154,6 +154,73 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     }
     const filename = saveUploadedImage(req.file.buffer, req.file.originalname);
     res.json({ url: `/uploads/blog/${filename}` });
+  });
+
+  app.get("/api/admin/jobs", requireAdmin, async (_req, res) => {
+    const jobs = await storage.getJobs(false);
+    res.json(jobs);
+  });
+
+  app.post("/api/admin/jobs", requireAdmin, async (req, res) => {
+    const parsed = insertJobSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ error: "Invalid job data", details: parsed.error.flatten() });
+    }
+    const job = await storage.createJob(parsed.data);
+    res.status(201).json(job);
+  });
+
+  app.patch("/api/admin/jobs/:id", requireAdmin, async (req, res) => {
+    const id = parseInt(req.params.id as string, 10);
+    if (isNaN(id)) return res.status(400).json({ error: "Invalid id" });
+
+    const parsed = insertJobSchema.partial().safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ error: "Invalid job data", details: parsed.error.flatten() });
+    }
+    const updated = await storage.updateJob(id, parsed.data);
+    if (!updated) return res.status(404).json({ error: "Not found" });
+    res.json(updated);
+  });
+
+  app.delete("/api/admin/jobs/:id", requireAdmin, async (req, res) => {
+    const id = parseInt(req.params.id as string, 10);
+    if (isNaN(id)) return res.status(400).json({ error: "Invalid id" });
+    const job = await storage.getJob(id);
+    if (!job) return res.status(404).json({ error: "Not found" });
+    await storage.deleteJob(id);
+    res.json({ ok: true });
+  });
+
+  const stripCvPath = ({ cvPath, ...rest }: Application) => rest;
+
+  app.get("/api/admin/applications", requireAdmin, async (req, res) => {
+    const jobIdParam = req.query.jobId;
+    if (typeof jobIdParam === "string" && jobIdParam.length > 0) {
+      const jobId = parseInt(jobIdParam, 10);
+      if (isNaN(jobId)) return res.status(400).json({ error: "Invalid jobId" });
+      const applications = await storage.getApplicationsByJob(jobId);
+      return res.json(applications.map(stripCvPath));
+    }
+    const applications = await storage.getApplications();
+    res.json(applications.map(stripCvPath));
+  });
+
+  app.get("/api/admin/applications/:id/cv", requireAdmin, async (req, res) => {
+    const id = parseInt(req.params.id as string, 10);
+    if (isNaN(id)) return res.status(400).json({ error: "Invalid id" });
+
+    const application = await storage.getApplication(id);
+    if (!application) return res.status(404).json({ error: "Not found" });
+
+    const candidate = path.resolve(path.join(uploadsDir, application.cvFilename));
+    const resolvedUploadsDir = path.resolve(uploadsDir);
+    if (candidate !== resolvedUploadsDir && !candidate.startsWith(resolvedUploadsDir + path.sep)) {
+      return res.status(400).json({ error: "Invalid file path" });
+    }
+    if (!fs.existsSync(candidate)) return res.status(404).json({ error: "File not found" });
+
+    res.download(candidate, application.cvFilename);
   });
 
   app.get("/api/jobs", async (_req, res) => {

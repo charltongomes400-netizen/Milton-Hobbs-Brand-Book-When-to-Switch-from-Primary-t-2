@@ -12,9 +12,12 @@ export interface IStorage {
   getJob(id: number): Promise<Job | undefined>;
   createJob(job: InsertJob): Promise<Job>;
   updateJob(id: number, job: Partial<InsertJob>): Promise<Job | undefined>;
+  deleteJob(id: number): Promise<void>;
 
   createApplication(application: InsertApplication): Promise<Application>;
   getApplicationsByJob(jobId: number): Promise<Application[]>;
+  getApplications(): Promise<Application[]>;
+  getApplication(id: number): Promise<Application | undefined>;
 
   getPosts(publishedOnly?: boolean): Promise<Post[]>;
   getPostBySlug(slug: string): Promise<Post | undefined>;
@@ -62,13 +65,29 @@ export class DrizzleStorage implements IStorage {
     return updated;
   }
 
+  async deleteJob(id: number) {
+    await db.transaction(async (tx) => {
+      await tx.update(applications).set({ jobId: null }).where(eq(applications.jobId, id));
+      await tx.delete(jobs).where(eq(jobs.id, id));
+    });
+  }
+
   async createApplication(application: InsertApplication) {
     const [created] = await db.insert(applications).values(application).returning();
     return created;
   }
 
   async getApplicationsByJob(jobId: number) {
-    return db.select().from(applications).where(eq(applications.jobId, jobId));
+    return db.select().from(applications).where(eq(applications.jobId, jobId)).orderBy(desc(applications.createdAt));
+  }
+
+  async getApplications() {
+    return db.select().from(applications).orderBy(desc(applications.createdAt));
+  }
+
+  async getApplication(id: number) {
+    const [application] = await db.select().from(applications).where(eq(applications.id, id));
+    return application;
   }
 
   async getPosts(publishedOnly = false) {
