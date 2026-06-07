@@ -4,7 +4,7 @@ import multer from "multer";
 import rateLimit from "express-rate-limit";
 import path from "path";
 import fs from "fs";
-import { storage } from "./storage";
+import { storage, ReorderConflictError } from "./storage";
 import { insertApplicationSchema, insertPostSchema, insertJobSchema, type Application } from "@shared/schema";
 import { z } from "zod";
 import { registerAuthRoutes } from "./authRoutes";
@@ -155,8 +155,15 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     if (!parsed.success) {
       return res.status(400).json({ error: "Invalid order data" });
     }
-    await storage.reorderPosts(parsed.data.ids);
-    res.json({ ok: true });
+    try {
+      await storage.reorderPosts(parsed.data.ids);
+      res.json({ ok: true });
+    } catch (err) {
+      if (err instanceof ReorderConflictError) {
+        return res.status(409).json({ error: "Post list is out of date. Please refresh and try again." });
+      }
+      throw err;
+    }
   });
 
   app.post("/api/admin/posts/image", imageUploadRateLimit, requireAdmin, imageUpload.single("image"), (req, res) => {

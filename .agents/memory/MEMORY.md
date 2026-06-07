@@ -1,1 +1,2 @@
 - [Admin/light theme scope](admin-light-theme-scope.md) — site-wide shadcn tokens are dark; light surfaces must re-declare tokens in a scoped class applied to roots AND portaled Dialog/Select content.
+- [Backend has no hot reload](backend-no-hot-reload.md) — dev runs plain `tsx` (no watch); restart the workflow after any server/schema change or APIs return HTML / columns read undefined.

@@ -3,6 +3,13 @@ import { db } from "./db";
 import { users, jobs, applications, posts } from "@shared/schema";
 import type { User, InsertUser, Job, InsertJob, Application, InsertApplication, Post, InsertPost } from "@shared/schema";
 
+export class ReorderConflictError extends Error {
+  constructor() {
+    super("Submitted post IDs do not match the current set of posts.");
+    this.name = "ReorderConflictError";
+  }
+}
+
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
@@ -132,6 +139,16 @@ export class DrizzleStorage implements IStorage {
 
   async reorderPosts(ids: number[]) {
     await db.transaction(async (tx) => {
+      const existing = await tx.select({ id: posts.id }).from(posts);
+      const existingIds = existing.map((r) => r.id);
+      const submitted = new Set(ids);
+      const isPermutation =
+        ids.length === existingIds.length &&
+        submitted.size === ids.length &&
+        existingIds.every((id) => submitted.has(id));
+      if (!isPermutation) {
+        throw new ReorderConflictError();
+      }
       for (let i = 0; i < ids.length; i++) {
         await tx.update(posts).set({ sortOrder: i }).where(eq(posts.id, ids[i]));
       }
