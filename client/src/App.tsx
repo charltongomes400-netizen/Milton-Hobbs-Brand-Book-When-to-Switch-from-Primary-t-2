@@ -36,6 +36,7 @@ import AttorneyClientDisclaimerPage from "@/pages/AttorneyClientDisclaimerPage";
 import JurisdictionalStatementsPage from "@/pages/JurisdictionalStatementsPage";
 import ConflictChecksPage from "@/pages/ConflictChecksPage";
 import ConfidentialityNoticePage from "@/pages/ConfidentialityNoticePage";
+import AdminPage from "@/pages/AdminPage";
 
 function Router() {
   return (
@@ -76,6 +77,7 @@ function Router() {
       <Route path="/jurisdictional-statements" component={JurisdictionalStatementsPage} />
       <Route path="/conflict-checks" component={ConflictChecksPage} />
       <Route path="/confidentiality-notice" component={ConfidentialityNoticePage} />
+      <Route path="/admin" component={AdminPage} />
       <Route component={NotFound} />
     </Switch>
   );
