@@ -280,7 +280,7 @@ export default function BlogAdmin() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <p className="text-sm text-muted-foreground border-t-[#ffffff] border-r-[#ffffff] border-b-[#ffffff] border-l-[#ffffff]" data-testid="text-post-count">
+          <p className="text-sm border-t-[#ffffff] border-r-[#ffffff] border-b-[#ffffff] border-l-[#ffffff] text-[#ffffff]" data-testid="text-post-count">
             {posts ? `${posts.length} ${posts.length === 1 ? "post" : "posts"}` : "—"}
           </p>
           {posts && posts.length > 1 && (
