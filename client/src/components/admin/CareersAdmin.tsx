@@ -13,6 +13,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
 import {
@@ -32,7 +33,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import {
   Loader2,
@@ -42,6 +42,13 @@ import {
   Download,
   ChevronDown,
   ChevronUp,
+  Briefcase,
+  Inbox,
+  Globe,
+  Save,
+  Send,
+  Mail,
+  Phone,
 } from "lucide-react";
 
 type JobForm = {
@@ -68,13 +75,33 @@ const emptyJob: JobForm = {
   isActive: true,
 };
 
-function JobListings() {
+function StatusPill({ active }: { active: boolean }) {
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide ${
+        active ? "bg-mh-blue/10 text-mh-blue" : "bg-muted text-muted-foreground"
+      }`}
+    >
+      <span
+        className={`h-1.5 w-1.5 rounded-full ${
+          active ? "bg-mh-blue" : "bg-muted-foreground/50"
+        }`}
+      />
+      {active ? "Active" : "Inactive"}
+    </span>
+  );
+}
+
+export function JobsAdmin() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [form, setForm] = useState<JobForm>(emptyJob);
   const [deleteId, setDeleteId] = useState<number | null>(null);
+  const [confirmSave, setConfirmSave] = useState<{ active: boolean } | null>(
+    null,
+  );
 
   const { data: jobs, isLoading } = useQuery<Job[]>({
     queryKey: ["/api/admin/jobs"],
@@ -105,19 +132,28 @@ function JobListings() {
   };
 
   const saveMutation = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (isActive: boolean) => {
+      const payload = { ...form, isActive };
       if (editingId) {
-        await apiRequest("PATCH", `/api/admin/jobs/${editingId}`, form);
+        await apiRequest("PATCH", `/api/admin/jobs/${editingId}`, payload);
       } else {
-        await apiRequest("POST", "/api/admin/jobs", form);
+        await apiRequest("POST", "/api/admin/jobs", payload);
       }
     },
-    onSuccess: () => {
-      toast({ title: editingId ? "Job updated" : "Job created" });
+    onSuccess: (_data, isActive) => {
+      toast({
+        title: isActive
+          ? editingId
+            ? "Job updated & published"
+            : "Job published"
+          : "Draft saved",
+      });
       queryClient.invalidateQueries({ queryKey: ["/api/admin/jobs"] });
+      setConfirmSave(null);
       setOpen(false);
     },
     onError: () => {
+      setConfirmSave(null);
       toast({ title: "Failed to save job", variant: "destructive" });
     },
   });
@@ -165,21 +201,21 @@ function JobListings() {
     return null;
   };
 
-  const handleSave = () => {
+  const requestSave = (active: boolean) => {
     const err = validate();
     if (err) {
       toast({ title: err, variant: "destructive" });
       return;
     }
-    saveMutation.mutate();
+    setConfirmSave({ active });
   };
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="font-heading text-lg font-bold text-mh-black">
-          Job listings
-        </h3>
+      <div className="mb-6 flex items-center justify-between">
+        <p className="text-sm text-muted-foreground" data-testid="text-job-count">
+          {jobs ? `${jobs.length} ${jobs.length === 1 ? "job" : "jobs"}` : "—"}
+        </p>
         <Button
           className="rounded-none bg-mh-blue text-white hover:bg-mh-blue/90"
           onClick={openNew}
@@ -190,63 +226,66 @@ function JobListings() {
       </div>
 
       {isLoading ? (
-        <div className="flex justify-center py-12">
+        <div className="flex justify-center py-16">
           <Loader2 className="h-6 w-6 animate-spin text-mh-blue" />
         </div>
       ) : !jobs || jobs.length === 0 ? (
-        <p className="py-12 text-center text-sm text-muted-foreground">
-          No jobs yet.
-        </p>
+        <div className="flex flex-col items-center border border-dashed border-border bg-white py-16 text-center">
+          <Briefcase className="mb-3 h-8 w-8 text-muted-foreground/40" />
+          <p className="text-sm font-medium text-mh-black">No jobs yet</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Post your first open position.
+          </p>
+        </div>
       ) : (
-        <div className="border border-border bg-white">
+        <div className="divide-y divide-border border border-border bg-white">
           {jobs.map((job) => (
             <div
               key={job.id}
-              className="flex items-center gap-4 border-b border-border p-3 last:border-b-0"
+              className="group flex items-center gap-4 p-4 transition-colors hover:bg-muted/40"
               data-testid={`row-job-${job.id}`}
             >
               <div className="min-w-0 flex-1">
-                <p className="truncate font-medium text-mh-black" data-testid={`text-job-title-${job.id}`}>
+                <p
+                  className="truncate font-medium text-mh-black"
+                  data-testid={`text-job-title-${job.id}`}
+                >
                   {job.title}
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="mt-0.5 truncate text-xs text-muted-foreground">
                   {job.department} · {job.location} · {job.type}
                 </p>
               </div>
-              <Badge
-                variant={job.isActive ? "default" : "secondary"}
-                className="rounded-none"
-                data-testid={`badge-job-status-${job.id}`}
-              >
-                {job.isActive ? "Active" : "Inactive"}
-              </Badge>
-              <div className="flex items-center gap-2">
-                <Switch
-                  checked={job.isActive}
-                  onCheckedChange={(v) =>
-                    toggleMutation.mutate({ id: job.id, isActive: v })
-                  }
-                  data-testid={`switch-job-active-${job.id}`}
-                />
+              <div data-testid={`badge-job-status-${job.id}`}>
+                <StatusPill active={job.isActive} />
               </div>
-              <Button
-                variant="outline"
-                size="sm"
-                className="rounded-none"
-                onClick={() => openEdit(job)}
-                data-testid={`button-edit-job-${job.id}`}
-              >
-                <Pencil className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="rounded-none text-destructive"
-                onClick={() => setDeleteId(job.id)}
-                data-testid={`button-delete-job-${job.id}`}
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
+              <Switch
+                checked={job.isActive}
+                onCheckedChange={(v) =>
+                  toggleMutation.mutate({ id: job.id, isActive: v })
+                }
+                data-testid={`switch-job-active-${job.id}`}
+              />
+              <div className="flex items-center gap-1 opacity-70 transition-opacity group-hover:opacity-100">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-9 w-9 rounded-none hover:bg-mh-blue/10 hover:text-mh-blue"
+                  onClick={() => openEdit(job)}
+                  data-testid={`button-edit-job-${job.id}`}
+                >
+                  <Pencil className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-9 w-9 rounded-none text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+                  onClick={() => setDeleteId(job.id)}
+                  data-testid={`button-delete-job-${job.id}`}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           ))}
         </div>
@@ -255,7 +294,14 @@ function JobListings() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="admin-theme max-h-[90vh] max-w-2xl overflow-y-auto rounded-none bg-white">
           <DialogHeader>
-            <DialogTitle>{editingId ? "Edit job" : "New job"}</DialogTitle>
+            <DialogTitle className="flex items-center gap-3 font-heading">
+              {editingId ? "Edit job" : "New job"}
+              {editingId !== null && <StatusPill active={form.isActive} />}
+            </DialogTitle>
+            <DialogDescription>
+              Fill in the role details, then save as a draft or publish it to the
+              public Careers page.
+            </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">
@@ -265,6 +311,7 @@ function JobListings() {
                 id="job-title"
                 value={form.title}
                 onChange={(e) => set({ title: e.target.value })}
+                className="rounded-none"
                 data-testid="input-job-title"
               />
             </div>
@@ -275,6 +322,7 @@ function JobListings() {
                   id="job-department"
                   value={form.department}
                   onChange={(e) => set({ department: e.target.value })}
+                  className="rounded-none"
                   data-testid="input-job-department"
                 />
               </div>
@@ -284,6 +332,7 @@ function JobListings() {
                   id="job-location"
                   value={form.location}
                   onChange={(e) => set({ location: e.target.value })}
+                  className="rounded-none"
                   data-testid="input-job-location"
                 />
               </div>
@@ -293,6 +342,7 @@ function JobListings() {
                   id="job-type"
                   value={form.type}
                   onChange={(e) => set({ type: e.target.value })}
+                  className="rounded-none"
                   data-testid="input-job-type"
                 />
               </div>
@@ -302,6 +352,7 @@ function JobListings() {
                   id="job-level"
                   value={form.level}
                   onChange={(e) => set({ level: e.target.value })}
+                  className="rounded-none"
                   data-testid="input-job-level"
                 />
               </div>
@@ -312,6 +363,7 @@ function JobListings() {
                 id="job-summary"
                 value={form.summary}
                 onChange={(e) => set({ summary: e.target.value })}
+                className="rounded-none"
                 data-testid="input-job-summary"
               />
             </div>
@@ -322,6 +374,7 @@ function JobListings() {
                 rows={5}
                 value={form.description}
                 onChange={(e) => set({ description: e.target.value })}
+                className="rounded-none"
                 data-testid="input-job-description"
               />
             </div>
@@ -332,50 +385,103 @@ function JobListings() {
                 rows={5}
                 value={form.requirements}
                 onChange={(e) => set({ requirements: e.target.value })}
+                className="rounded-none"
                 data-testid="input-job-requirements"
               />
             </div>
-            <div className="flex items-center gap-3">
-              <Switch
-                checked={form.isActive}
-                onCheckedChange={(v) => set({ isActive: v })}
-                data-testid="switch-job-form-active"
-              />
-              <Label>Active</Label>
-            </div>
           </div>
 
-          <DialogFooter>
+          <DialogFooter className="gap-2 border-t border-border pt-4 sm:justify-between">
             <Button
-              variant="outline"
+              variant="ghost"
               className="rounded-none"
               onClick={() => setOpen(false)}
               data-testid="button-cancel-job"
             >
               Cancel
             </Button>
-            <Button
-              className="rounded-none bg-mh-blue text-white hover:bg-mh-blue/90"
-              onClick={handleSave}
-              disabled={saveMutation.isPending}
-              data-testid="button-save-job"
-            >
-              {saveMutation.isPending && (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              )}
-              Save
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                className="rounded-none"
+                onClick={() => requestSave(false)}
+                disabled={saveMutation.isPending}
+                data-testid="button-save-draft-job"
+              >
+                <Save className="mr-2 h-4 w-4" />
+                Save as draft
+              </Button>
+              <Button
+                className="rounded-none bg-mh-blue text-white hover:bg-mh-blue/90"
+                onClick={() => requestSave(true)}
+                disabled={saveMutation.isPending}
+                data-testid="button-save-job"
+              >
+                <Send className="mr-2 h-4 w-4" />
+                Publish
+              </Button>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
+      {/* Save confirmation */}
+      <AlertDialog
+        open={confirmSave !== null}
+        onOpenChange={(o) => !o && setConfirmSave(null)}
+      >
+        <AlertDialogContent className="admin-theme rounded-none bg-white">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              {confirmSave?.active ? (
+                <Globe className="h-5 w-5 text-mh-blue" />
+              ) : (
+                <Save className="h-5 w-5 text-muted-foreground" />
+              )}
+              {confirmSave?.active ? "Publish this job?" : "Save as draft?"}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {confirmSave?.active
+                ? "This job will be visible to the public on the Careers page."
+                : "This job will be saved as inactive and will not appear on the public Careers page."}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel
+              className="rounded-none"
+              data-testid="button-cancel-save-job"
+            >
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              className="rounded-none bg-mh-blue text-white hover:bg-mh-blue/90"
+              onClick={(e) => {
+                e.preventDefault();
+                if (confirmSave) saveMutation.mutate(confirmSave.active);
+              }}
+              disabled={saveMutation.isPending}
+              data-testid="button-confirm-save-job"
+            >
+              {saveMutation.isPending && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              {confirmSave?.active ? "Publish" : "Save draft"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Delete confirmation */}
       <AlertDialog
         open={deleteId !== null}
         onOpenChange={(o) => !o && setDeleteId(null)}
       >
         <AlertDialogContent className="admin-theme rounded-none bg-white">
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete this job?</AlertDialogTitle>
+            <AlertDialogTitle className="flex items-center gap-2">
+              <Trash2 className="h-5 w-5 text-destructive" />
+              Delete this job?
+            </AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. Existing applications will be kept but
               unlinked from this job.
@@ -388,8 +494,12 @@ function JobListings() {
             <AlertDialogAction
               className="rounded-none bg-destructive text-destructive-foreground hover:bg-destructive/90"
               onClick={() => deleteId && deleteMutation.mutate(deleteId)}
+              disabled={deleteMutation.isPending}
               data-testid="button-confirm-delete-job"
             >
+              {deleteMutation.isPending && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              )}
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>
@@ -399,7 +509,7 @@ function JobListings() {
   );
 }
 
-function ApplicationsList() {
+export function ApplicationsAdmin() {
   const [jobFilter, setJobFilter] = useState<string>("all");
   const [expanded, setExpanded] = useState<number | null>(null);
 
@@ -434,10 +544,17 @@ function ApplicationsList() {
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between gap-4">
-        <h3 className="font-heading text-lg font-bold text-mh-black">
-          Applications
-        </h3>
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <p
+          className="text-sm text-muted-foreground"
+          data-testid="text-application-count"
+        >
+          {applications
+            ? `${applications.length} ${
+                applications.length === 1 ? "application" : "applications"
+              }`
+            : "—"}
+        </p>
         <Select value={jobFilter} onValueChange={setJobFilter}>
           <SelectTrigger className="w-56 rounded-none" data-testid="select-job-filter">
             <SelectValue placeholder="Filter by job" />
@@ -454,43 +571,57 @@ function ApplicationsList() {
       </div>
 
       {isLoading ? (
-        <div className="flex justify-center py-12">
+        <div className="flex justify-center py-16">
           <Loader2 className="h-6 w-6 animate-spin text-mh-blue" />
         </div>
       ) : !applications || applications.length === 0 ? (
-        <p className="py-12 text-center text-sm text-muted-foreground">
-          No applications yet.
-        </p>
+        <div className="flex flex-col items-center border border-dashed border-border bg-white py-16 text-center">
+          <Inbox className="mb-3 h-8 w-8 text-muted-foreground/40" />
+          <p className="text-sm font-medium text-mh-black">No applications yet</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Submissions from the Careers page will appear here.
+          </p>
+        </div>
       ) : (
-        <div className="border border-border bg-white">
+        <div className="divide-y divide-border border border-border bg-white">
           {applications.map((app) => (
             <div
               key={app.id}
-              className="border-b border-border last:border-b-0"
               data-testid={`row-application-${app.id}`}
             >
-              <div className="flex items-center gap-4 p-3">
+              <div className="flex items-center gap-4 p-4 transition-colors hover:bg-muted/40">
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center bg-mh-blue/10 text-sm font-medium text-mh-blue">
+                  {app.name.charAt(0).toUpperCase()}
+                </div>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate font-medium text-mh-black" data-testid={`text-applicant-name-${app.id}`}>
+                  <p
+                    className="truncate font-medium text-mh-black"
+                    data-testid={`text-applicant-name-${app.id}`}
+                  >
                     {app.name}
                   </p>
-                  <p className="truncate text-xs text-muted-foreground">
-                    {app.email} · {app.phone}
+                  <p className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-0.5 truncate text-xs text-muted-foreground">
+                    <span className="inline-flex items-center gap-1">
+                      <Mail className="h-3 w-3" /> {app.email}
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <Phone className="h-3 w-3" /> {app.phone}
+                    </span>
                   </p>
                 </div>
-                <Badge variant="secondary" className="rounded-none">
+                <Badge variant="secondary" className="rounded-none font-normal">
                   {jobTitle(app.jobId)}
                 </Badge>
-                <span className="hidden text-xs text-muted-foreground sm:inline">
+                <span className="hidden text-xs text-muted-foreground lg:inline">
                   {app.createdAt
                     ? new Date(app.createdAt).toLocaleDateString()
                     : ""}
                 </span>
                 {app.coverLetter && (
                   <Button
-                    variant="outline"
-                    size="sm"
-                    className="rounded-none"
+                    variant="ghost"
+                    size="icon"
+                    className="h-9 w-9 rounded-none"
                     onClick={() =>
                       setExpanded(expanded === app.id ? null : app.id)
                     }
@@ -514,7 +645,10 @@ function ApplicationsList() {
                 </Button>
               </div>
               {expanded === app.id && app.coverLetter && (
-                <div className="border-t border-border bg-muted/30 px-3 py-3 text-sm text-mh-black" data-testid={`text-cover-letter-${app.id}`}>
+                <div
+                  className="border-t border-border bg-muted/30 px-4 py-4 text-sm leading-relaxed text-mh-black"
+                  data-testid={`text-cover-letter-${app.id}`}
+                >
                   {app.coverLetter}
                 </div>
               )}
@@ -523,26 +657,5 @@ function ApplicationsList() {
         </div>
       )}
     </div>
-  );
-}
-
-export default function CareersAdmin() {
-  return (
-    <Tabs defaultValue="jobs">
-      <TabsList className="rounded-none">
-        <TabsTrigger value="jobs" className="rounded-none" data-testid="subtab-jobs">
-          Job Listings
-        </TabsTrigger>
-        <TabsTrigger value="applications" className="rounded-none" data-testid="subtab-applications">
-          Applications
-        </TabsTrigger>
-      </TabsList>
-      <TabsContent value="jobs" className="mt-6">
-        <JobListings />
-      </TabsContent>
-      <TabsContent value="applications" className="mt-6">
-        <ApplicationsList />
-      </TabsContent>
-    </Tabs>
   );
 }
