@@ -522,6 +522,14 @@ export default function BlogAdmin() {
 
             <div className="space-y-1.5">
               <Label>Cover image</Label>
+              <p
+                className="text-xs text-muted-foreground"
+                data-testid="text-cover-image-hint"
+              >
+                Recommended: landscape 16:9, 1920×1080 px (min 1280×720). JPG or
+                WebP, under 10 MB. Used full-width on the article hero and as
+                cards on the Insights page.
+              </p>
               <div className="flex items-center gap-3">
                 {form.coverImage && (
                   <img
