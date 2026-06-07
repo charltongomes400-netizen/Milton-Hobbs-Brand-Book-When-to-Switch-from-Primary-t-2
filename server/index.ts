@@ -8,8 +8,10 @@ import { createServer } from "http";
 import { pool } from "./db";
 import { configurePassport } from "./auth";
 import { seedAdmin } from "./seedAdmin";
+import { seedPosts } from "./seedPosts";
 
 const app = express();
+app.set("trust proxy", 1);
 const httpServer = createServer(app)
 
 declare module "http" {
@@ -97,6 +99,7 @@ app.use(passport.session());
 
 (async () => {
   await seedAdmin();
+  await seedPosts();
   await registerRoutes(httpServer, app);
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {

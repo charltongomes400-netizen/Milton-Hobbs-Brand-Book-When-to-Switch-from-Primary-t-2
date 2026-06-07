@@ -1,1 +1,2 @@
-- [Server entry module side effects](server-entry-module.md) — server/index.ts boots Express on import; standalone scripts must not import from it.
+- [Drizzle error cause chain](drizzle-error-cause-chain.md) — pg error code (e.g. 23505 unique) is on `err.cause`, not top-level; walk the chain to map to 409.
+- [Express middleware param typing](express-middleware-param-typing.md) — routes with middleware widen `req.params.id` to `string | string[]`; cast `as string` before parseInt.

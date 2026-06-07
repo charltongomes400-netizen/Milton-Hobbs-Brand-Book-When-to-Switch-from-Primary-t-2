@@ -1,7 +1,7 @@
-import { eq, and } from "drizzle-orm";
+import { eq, and, desc } from "drizzle-orm";
 import { db } from "./db";
-import { users, jobs, applications } from "@shared/schema";
-import type { User, InsertUser, Job, InsertJob, Application, InsertApplication } from "@shared/schema";
+import { users, jobs, applications, posts } from "@shared/schema";
+import type { User, InsertUser, Job, InsertJob, Application, InsertApplication, Post, InsertPost } from "@shared/schema";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -15,6 +15,13 @@ export interface IStorage {
 
   createApplication(application: InsertApplication): Promise<Application>;
   getApplicationsByJob(jobId: number): Promise<Application[]>;
+
+  getPosts(publishedOnly?: boolean): Promise<Post[]>;
+  getPostBySlug(slug: string): Promise<Post | undefined>;
+  getPostById(id: number): Promise<Post | undefined>;
+  createPost(post: InsertPost): Promise<Post>;
+  updatePost(id: number, patch: Partial<InsertPost>): Promise<Post | undefined>;
+  deletePost(id: number): Promise<void>;
 }
 
 export class DrizzleStorage implements IStorage {
@@ -62,6 +69,41 @@ export class DrizzleStorage implements IStorage {
 
   async getApplicationsByJob(jobId: number) {
     return db.select().from(applications).where(eq(applications.jobId, jobId));
+  }
+
+  async getPosts(publishedOnly = false) {
+    if (publishedOnly) {
+      return db.select().from(posts).where(eq(posts.published, true)).orderBy(desc(posts.createdAt));
+    }
+    return db.select().from(posts).orderBy(desc(posts.createdAt));
+  }
+
+  async getPostBySlug(slug: string) {
+    const [post] = await db.select().from(posts).where(eq(posts.slug, slug));
+    return post;
+  }
+
+  async getPostById(id: number) {
+    const [post] = await db.select().from(posts).where(eq(posts.id, id));
+    return post;
+  }
+
+  async createPost(post: InsertPost) {
+    const [created] = await db.insert(posts).values(post).returning();
+    return created;
+  }
+
+  async updatePost(id: number, patch: Partial<InsertPost>) {
+    const [updated] = await db
+      .update(posts)
+      .set({ ...patch, updatedAt: new Date() })
+      .where(eq(posts.id, id))
+      .returning();
+    return updated;
+  }
+
+  async deletePost(id: number) {
+    await db.delete(posts).where(eq(posts.id, id));
   }
 }
 

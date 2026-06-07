@@ -1,7 +1,17 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, serial, boolean, timestamp, integer } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, serial, boolean, timestamp, integer, json, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+
+export const session = pgTable(
+  "session",
+  {
+    sid: varchar("sid").primaryKey(),
+    sess: json("sess").notNull(),
+    expire: timestamp("expire", { precision: 6 }).notNull(),
+  },
+  (table) => [index("IDX_session_expire").on(table.expire)],
+);
 
 export const users = pgTable("users", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -49,3 +59,25 @@ export const applications = pgTable("applications", {
 export const insertApplicationSchema = createInsertSchema(applications).omit({ id: true, createdAt: true });
 export type InsertApplication = z.infer<typeof insertApplicationSchema>;
 export type Application = typeof applications.$inferSelect;
+
+export const posts = pgTable("posts", {
+  id: serial("id").primaryKey(),
+  slug: text("slug").notNull().unique(),
+  titleEn: text("title_en").notNull(),
+  titleFr: text("title_fr").notNull(),
+  excerptEn: text("excerpt_en").notNull(),
+  excerptFr: text("excerpt_fr").notNull(),
+  bodyEn: text("body_en").notNull(),
+  bodyFr: text("body_fr").notNull(),
+  seoDescriptionEn: text("seo_description_en"),
+  seoDescriptionFr: text("seo_description_fr"),
+  category: text("category"),
+  coverImage: text("cover_image"),
+  published: boolean("published").notNull().default(false),
+  createdAt: timestamp("created_at").notNull().default(sql`now()`),
+  updatedAt: timestamp("updated_at").notNull().default(sql`now()`),
+});
+
+export const insertPostSchema = createInsertSchema(posts).omit({ id: true, createdAt: true, updatedAt: true });
+export type InsertPost = z.infer<typeof insertPostSchema>;
+export type Post = typeof posts.$inferSelect;
