@@ -1,0 +1,32 @@
+Good — you build in Replit, I plan + review. Since I've already read the real code, I'll hand you **precise prompts** to paste into the Replit AI, one at a time. One-at-a-time matters: it keeps the Replit agent from sprawling and re-breaking your git tree, and I review each push before the next.
+
+Build order: **① Auth foundation → ② Blog (posts + images) → ③ Careers admin → ④ Dashboard UI → ⑤ Security pass.**
+
+Here's **Prompt 1 — Auth foundation.** Paste this into the Replit AI:
+
+---
+
+> **Task: Add admin authentication. Do not touch any existing public routes, pages, or the careers/applications flow. This is purely additive.**
+>
+> Context (already in this repo):
+> - `shared/schema.ts` has a `users` table (`id`, `username`, `password`) but it is unused — no login exists and passwords would be plaintext.
+> - `passport`, `passport-local`, `express-session`, `connect-pg-simple`, and `memorystore` are already in `package.json`. Use them; do not add new auth dependencies.
+> - `server/index.ts` is the Express entry. `server/routes.ts` registers API routes. `server/db.ts` exports the `pg` pool + drizzle `db`. `server/storage.ts` already has `getUserByUsername` and `createUser`.
+>
+> Implement:
+> 1. **Password hashing** using Node's built-in `node:crypto` `scrypt` (no bcrypt dependency). Store as `hash.salt`. Add `hashPassword(pw)` and `verifyPassword(pw, stored)` helpers in a new file `server/auth.ts`, using `crypto.timingSafeEqual` for comparison.
+> 2. **Session middleware** in `server/index.ts`, registered **before** `registerRoutes`. Use `express-session` with `connect-pg-simple` backed by the existing `pg` pool (persist sessions in Postgres, table `session`, auto-create). `secret` must come from `process.env.SESSION_SECRET` — if it's missing, throw on startup, do not fall back to a hardcoded secret. Cookie: `httpOnly: true`, `sameSite: "lax"`, `secure` only when `NODE_ENV === "production"`, `maxAge` 7 days.
+> 3. **Passport** local strategy in `server/auth.ts` using `storage.getUserByUsername` + `verifyPassword`. Wire `serializeUser`/`deserializeUser` by user `id`. Initialize `passport` and `passport.session()` in `index.ts` after the session middleware.
+> 4. **Auth routes** in `server/routes.ts` (or a new `server/authRoutes.ts` imported by `registerRoutes`):
+>    - `POST /api/admin/login` — body `{ username, password }`, validate with zod, authenticate via passport, return `{ ok: true }` or 401.
+>    - `POST /api/admin/logout` — destroys session, returns `{ ok: true }`.
+>    - `GET /api/admin/me` — returns `{ username }` if logged in, else 401.
+>    - Apply an `express-rate-limit` (reuse the pattern already in `routes.ts`) to the login route: max 10 / 15 min.
+> 5. **`requireAdmin` middleware** in `server/auth.ts` — returns 401 if `req.isAuthenticated()` is false. Export it for later use. Do not attach it to anything yet.
+> 6. **Seed script** `server/seedAdmin.ts` (also runnable, and called once on startup if no users exist): reads `process.env.ADMIN_USERNAME` and `process.env.ADMIN_PASSWORD`, and if no user with that username exists, creates one with a hashed password. Never log the password. If the env vars are missing, skip silently.
+>
+> After implementing: tell me exactly which env vars I must set in Replit Secrets (`SESSION_SECRET`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`) and confirm `npm run dev` boots with no errors. Do not run `db:push` destructively — the `session` table should be created by connect-pg-simple, and `users` already exists.
+
+---
+
+When that's pushed, tell me and **I'll review it from the repo** before I give you Prompt 2 (Blog). Sound good?

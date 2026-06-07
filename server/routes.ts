@@ -7,6 +7,7 @@ import fs from "fs";
 import { storage } from "./storage";
 import { insertApplicationSchema } from "@shared/schema";
 import { z } from "zod";
+import { registerAuthRoutes } from "./authRoutes";
 
 const uploadsDir = path.join(process.cwd(), "uploads");
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
@@ -45,6 +46,8 @@ const bodySchema = z.object({
 });
 
 export async function registerRoutes(httpServer: Server, app: Express): Promise<Server> {
+
+  registerAuthRoutes(app);
 
   app.get("/api/jobs", async (_req, res) => {
     const jobs = await storage.getJobs(true);
