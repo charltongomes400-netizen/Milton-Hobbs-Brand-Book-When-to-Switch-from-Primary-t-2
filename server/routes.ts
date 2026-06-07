@@ -170,7 +170,7 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
   });
 
   app.post("/api/jobs/:id/apply", uploadRateLimit, upload.single("cv"), async (req, res) => {
-    const jobId = parseInt(req.params.id);
+    const jobId = parseInt(req.params.id as string);
     if (isNaN(jobId)) return res.status(400).json({ error: "Invalid job id" });
 
     const job = await storage.getJob(jobId);

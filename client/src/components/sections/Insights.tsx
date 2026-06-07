@@ -1,22 +1,19 @@
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 import { useLang } from "@/contexts/LanguageContext";
-import { articles } from "@/data/articles";
-import imgCompliance from "@assets/generated_images/insight-compliance.png";
-import imgFamilyBusiness from "@assets/generated_images/insight-family-business.png";
-import imgDigitalPrivacy from "@assets/generated_images/insight-digital-privacy.png";
-import imgMA from "@assets/generated_images/insight-ma-structuring.png";
-
-const articleImages = [imgCompliance, imgFamilyBusiness, imgDigitalPrivacy, imgMA];
+import {
+  type Post,
+  localizePost,
+  categoryLabel,
+  readingMinutes,
+  formatPostDate,
+} from "@/lib/posts";
 
 const categoryColors: Record<string, string> = {
-  Compliance:          "text-[#0096C7]",
-  Corporate:           "text-[#6B46C1]",
-  Technology:          "text-[#2D9D6E]",
-  "M&A":               "text-[#C05621]",
-  Family:              "text-[#C05621]",
-  Conformité:          "text-[#0096C7]",
-  Technologie:         "text-[#2D9D6E]",
-  "Fusions & Acquisitions": "text-[#C05621]",
+  Compliance: "text-[#0096C7]",
+  Corporate: "text-[#6B46C1]",
+  Technology: "text-[#2D9D6E]",
+  "M&A": "text-[#C05621]",
 };
 
 function ArticleCard({
@@ -25,13 +22,13 @@ function ArticleCard({
   readLabel,
   slug,
 }: {
-  article: { category: string; title: string; excerpt: string; readTime: string; date: string };
+  article: { category: string; title: string; excerpt: string; readTime: string; date: string; img: string | null };
   index: number;
   readLabel: string;
   slug: string;
 }) {
   const colorClass = categoryColors[article.category] ?? "text-[#6B7280]";
-  const img = articleImages[index];
+  const img = article.img;
 
   return (
     <motion.a
@@ -85,9 +82,45 @@ function ArticleCard({
   );
 }
 
+function CardSkeleton({ index }: { index: number }) {
+  return (
+    <div
+      data-testid={`insight-card-skeleton-${index}`}
+      className="flex flex-col rounded-sm overflow-hidden border border-[#E5EAF4] bg-white"
+    >
+      <div className="h-44 bg-[#EEF2FB] animate-pulse" />
+      <div className="flex flex-col flex-1 p-6 gap-3">
+        <div className="h-3 w-24 bg-[#EEF2FB] animate-pulse rounded-sm" />
+        <div className="h-4 w-full bg-[#EEF2FB] animate-pulse rounded-sm" />
+        <div className="h-4 w-2/3 bg-[#EEF2FB] animate-pulse rounded-sm" />
+        <div className="h-12 w-full bg-[#EEF2FB] animate-pulse rounded-sm mt-2" />
+      </div>
+    </div>
+  );
+}
+
 export function Insights() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const ins = t.insights;
+  const apiLang = lang === "FR" ? "fr" : "en";
+
+  const { data: posts, isLoading } = useQuery<Post[]>({ queryKey: ["/api/posts"] });
+
+  const cards = (posts ?? []).slice(0, 4).map((post) => {
+    const lp = localizePost(post, apiLang);
+    return {
+      slug: lp.slug,
+      img: lp.coverImage,
+      article: {
+        category: categoryLabel(lp.category, apiLang),
+        title: lp.title,
+        excerpt: lp.excerpt,
+        readTime: `${readingMinutes(lp.body)} ${lang === "FR" ? "min de lecture" : "min read"}`,
+        date: formatPostDate(lp.createdAt, apiLang),
+        img: lp.coverImage,
+      },
+    };
+  });
 
   return (
     <section
@@ -113,7 +146,7 @@ export function Insights() {
             </h2>
           </div>
           <a
-            href="#insights"
+            href="/insights"
             data-testid="view-all-insights"
             className="group flex items-center gap-2 text-[#001489] hover:text-[#D4AF36] text-xs tracking-[0.15em] uppercase font-medium transition-colors whitespace-nowrap"
           >
@@ -129,10 +162,24 @@ export function Insights() {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {ins.articles.map((article, i) => (
-            <ArticleCard key={i} article={article} index={i} readLabel={ins.read} slug={articles[i]?.slug ?? ""} />
-          ))}
+          {isLoading
+            ? [0, 1, 2, 3].map((i) => <CardSkeleton key={i} index={i} />)
+            : cards.map((card, i) => (
+                <ArticleCard
+                  key={card.slug}
+                  article={card.article}
+                  index={i}
+                  readLabel={ins.read}
+                  slug={card.slug}
+                />
+              ))}
         </div>
+
+        {!isLoading && cards.length === 0 && (
+          <p className="text-[#8099FF] text-sm py-8" data-testid="insights-empty">
+            {lang === "FR" ? "Aucune publication pour le moment." : "No insights yet."}
+          </p>
+        )}
       </div>
     </section>
   );

@@ -1,2 +1,3 @@
 - [Drizzle error cause chain](drizzle-error-cause-chain.md) — pg error code (e.g. 23505 unique) is on `err.cause`, not top-level; walk the chain to map to 409.
 - [Express middleware param typing](express-middleware-param-typing.md) — routes with middleware widen `req.params.id` to `string | string[]`; cast `as string` before parseInt.
+- [Insights/blog DB localization & routing](insights-db-localization.md) — public Insights/blog are DB-driven (/api/posts); posts have English-only slugs reused under /fr/publications; TOC parsed from <h2> in sanitized body HTML.

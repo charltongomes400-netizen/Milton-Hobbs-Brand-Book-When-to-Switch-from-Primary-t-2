@@ -1,21 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
+import { useQuery } from "@tanstack/react-query";
+import { LanguageProvider, useLang, type Lang } from "@/contexts/LanguageContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/sections/Footer";
-import { insightsCopy, ct, getInsightArticleBySlug, getRelatedInsightArticles, type InsightArticle } from "@/data/insightsCopy";
-import imgCompliance from "@assets/generated_images/insight-compliance.png";
-import imgFamilyBusiness from "@assets/generated_images/insight-family-business.png";
-import imgDigitalPrivacy from "@assets/generated_images/insight-digital-privacy.png";
-import imgMA from "@assets/generated_images/insight-ma-structuring.png";
-
-const slugImageMap: Record<string, string> = {
-  "navigating-cross-border-compliance-gulf": imgCompliance,
-  "family-business-succession-uae": imgFamilyBusiness,
-  "digital-transformation-data-privacy-gcc": imgDigitalPrivacy,
-  "strategic-ma-structuring-2026": imgMA,
-};
+import {
+  type Post,
+  localizePost,
+  categoryLabel,
+  readingMinutes,
+  formatPostDate,
+} from "@/lib/posts";
+import { sanitizeHtml } from "@/lib/sanitizeHtml";
 
 const PRACTICE_AREAS = [
   "Corporate & Commercial",
@@ -31,8 +28,33 @@ const PRACTICE_AREAS = [
   "Other",
 ];
 
-function slugify(text: string): string {
-  return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+const EXPERT_CTA = {
+  eyebrow: { en: "EXPERT COUNSEL", fr: "CONSEIL D'EXPERT" },
+  heading: { en: "Need expert counsel on this matter?", fr: "Besoin d'un conseil d'expert sur ce sujet ?" },
+  body: {
+    en: "Our partners are available for a confidential discussion across our Dubai and Paris offices.",
+    fr: "Nos associés sont à votre disposition pour un échange confidentiel entre nos bureaux de Dubaï et de Paris.",
+  },
+  cta: { en: "Speak to a Partner", fr: "Échanger avec un Associé" },
+};
+
+const SIDEBAR_CTA = {
+  eyebrow: { en: "IN THIS ARTICLE", fr: "DANS CET ARTICLE" },
+  heading: { en: "Discuss this matter with our team", fr: "Échangez avec notre équipe sur ce sujet" },
+  body: { en: "Our partners are available for a confidential discussion.", fr: "Nos associés sont disponibles pour un échange confidentiel." },
+  cta: { en: "Get in Touch", fr: "Nous Contacter" },
+};
+
+function slugify(s: string): string {
+  return s
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function articleHref(slug: string, isFr: boolean): string {
+  return isFr ? `/fr/publications/${slug}` : `/insights/${slug}`;
 }
 
 export default function ArticlePage() {
@@ -46,8 +68,16 @@ export default function ArticlePage() {
 function ArticlePageInner() {
   const { slug } = useParams<{ slug: string }>();
   const { lang } = useLang();
-  const article = getInsightArticleBySlug(slug ?? "");
+  const isFr = lang === "FR";
+  const apiLang = isFr ? "fr" : "en";
   const [modalOpen, setModalOpen] = useState(false);
+
+  const { data: post, isLoading, isError } = useQuery<Post>({
+    queryKey: ["/api/posts", slug],
+    enabled: !!slug,
+  });
+
+  const article = post ? localizePost(post, apiLang) : null;
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
@@ -56,25 +86,10 @@ function ArticlePageInner() {
     return () => { document.body.style.overflow = ""; };
   }, [modalOpen]);
 
-  if (!article) {
-    return (
-      <div className="min-h-screen bg-[#001489] flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-white text-sm mb-4">Article not found</p>
-          <a href="/insights" className="text-white text-sm hover:underline">← Publications & Insights</a>
-        </div>
-      </div>
-    );
-  }
-
-  const isFr = lang === "FR";
-  const meta = isFr ? article.meta.fr : article.meta.en;
-  const heroImg = slugImageMap[article.slug];
-  const backHref = isFr ? "/fr/publications" : "/insights";
-  const backLabel = isFr ? "Publications & Analyses" : "Publications & Insights";
-
   useEffect(() => {
-    document.title = meta.title;
+    if (!post || !article) return;
+
+    document.title = `${article.title} | Milton Hobbs`;
 
     const setMeta = (name: string, content: string) => {
       let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
@@ -87,13 +102,13 @@ function ArticlePageInner() {
       el.setAttribute("content", content);
     };
 
-    setMeta("description", meta.description);
-    setOg("og:title", meta.ogTitle);
-    setOg("og:description", meta.ogDescription);
+    setMeta("description", article.seoDescription);
+    setOg("og:title", article.title);
+    setOg("og:description", article.seoDescription);
 
     const hreflangs = [
       { hreflang: "en", href: `https://miltonhobbs.com/insights/${article.slug}` },
-      { hreflang: "fr", href: `https://miltonhobbs.com/fr/publications/${article.slugFr}` },
+      { hreflang: "fr", href: `https://miltonhobbs.com/fr/publications/${article.slug}` },
       { hreflang: "x-default", href: `https://miltonhobbs.com/insights/${article.slug}` },
     ];
     const linkEls: HTMLLinkElement[] = [];
@@ -109,9 +124,9 @@ function ArticlePageInner() {
     const jsonLd = {
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": isFr ? article.title.fr : article.title.en,
-      "description": meta.description,
-      "datePublished": "2026-05-01",
+      "headline": article.title,
+      "description": article.seoDescription,
+      "datePublished": article.createdAt,
       "author": { "@type": "Organization", "name": "Milton Hobbs" },
       "publisher": {
         "@type": "Organization",
@@ -119,7 +134,7 @@ function ArticlePageInner() {
         "logo": { "@type": "ImageObject", "url": "https://miltonhobbs.com/logo.png" },
       },
       "inLanguage": isFr ? "fr" : "en",
-      "about": article.practiceArea,
+      "about": article.category ?? undefined,
     };
     const scriptEl = document.createElement("script");
     scriptEl.type = "application/ld+json";
@@ -130,7 +145,47 @@ function ArticlePageInner() {
       linkEls.forEach(el => el.parentNode?.removeChild(el));
       scriptEl.parentNode?.removeChild(scriptEl);
     };
-  }, [lang, article.slug]);
+  }, [lang, post]);
+
+  const backHref = isFr ? "/fr/publications" : "/insights";
+  const backLabel = isFr ? "Publications & Analyses" : "Publications & Insights";
+
+  if (isLoading) {
+    return (
+      <div className="bg-white min-h-screen">
+        <Header />
+        <section className="bg-[#001489] pt-36 pb-24 px-8" data-testid="article-loading">
+          <div className="max-w-[1400px] mx-auto">
+            <div className="h-3 w-40 bg-white/20 animate-pulse mb-12" />
+            <div className="h-4 w-28 bg-white/20 animate-pulse mb-7" />
+            <div className="h-10 w-3/4 bg-white/20 animate-pulse mb-4" />
+            <div className="h-10 w-1/2 bg-white/20 animate-pulse" />
+          </div>
+        </section>
+        <section className="px-8 py-20">
+          <div className="max-w-[760px] mx-auto flex flex-col gap-4">
+            {[0, 1, 2, 3, 4].map((i) => (
+              <div key={i} className="h-4 w-full bg-[#F0F4FB] animate-pulse" />
+            ))}
+          </div>
+        </section>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (isError || !post || !article) {
+    return (
+      <div className="min-h-screen bg-[#001489] flex items-center justify-center" data-testid="article-not-found">
+        <div className="text-center">
+          <p className="text-white text-sm mb-4">{isFr ? "Article introuvable" : "Article not found"}</p>
+          <a href={backHref} className="text-white text-sm hover:underline">← {backLabel}</a>
+        </div>
+      </div>
+    );
+  }
+
+  const heroImg = article.coverImage;
 
   return (
     <div className="bg-white min-h-screen">
@@ -180,16 +235,18 @@ function ArticlePageInner() {
             className="max-w-[860px]"
           >
             <div className="flex items-center gap-4 mb-7">
-              <span className="text-[10px] font-bold tracking-[0.22em] uppercase px-3 py-1 text-[#001489] bg-white">
-                {ct(article.category, lang)}
-              </span>
-              <span className="text-white text-xs">{ct(article.date, lang)}</span>
+              {article.category && (
+                <span className="text-[10px] font-bold tracking-[0.22em] uppercase px-3 py-1 text-[#001489] bg-white">
+                  {categoryLabel(article.category, apiLang)}
+                </span>
+              )}
+              <span className="text-white text-xs">{formatPostDate(article.createdAt, apiLang)}</span>
               <span className="text-white text-xs">·</span>
-              <span className="text-white text-xs">{article.readMin} min</span>
+              <span className="text-white text-xs">{readingMinutes(article.body)} min</span>
             </div>
 
             <h1 className="font-heading text-white font-bold text-[clamp(2.4rem,4.5vw,4rem)] leading-[1.08] tracking-tight mb-9">
-              {ct(article.title, lang)}
+              {article.title}
             </h1>
 
             <motion.div
@@ -204,8 +261,8 @@ function ArticlePageInner() {
                 <span className="text-[#001489] text-xs font-bold">MH</span>
               </div>
               <div>
-                <p className="text-white text-sm font-medium">{article.author.name}</p>
-                <p className="text-white text-xs">{ct(article.author.title, lang)}</p>
+                <p className="text-white text-sm font-medium">Milton Hobbs</p>
+                <p className="text-white text-xs">{isFr ? "Dubaï · Paris" : "Dubai · Paris"}</p>
               </div>
             </div>
           </motion.div>
@@ -213,20 +270,20 @@ function ArticlePageInner() {
       </section>
 
       {/* ── BODY ── */}
-      <ArticleBody article={article} lang={lang} onContact={() => setModalOpen(true)} />
+      <ArticleBody bodyHtml={article.body} lang={lang} onContact={() => setModalOpen(true)} />
 
       {/* ── EXPERT COUNSEL CTA ── */}
       <section className="bg-[#001489] py-20 px-8">
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
             <p className="text-white text-[10px] tracking-[0.3em] uppercase font-medium mb-3">
-              {ct(article.expertCounselCta.eyebrow, lang)}
+              {EXPERT_CTA.eyebrow[apiLang]}
             </p>
             <h3 className="font-heading text-white text-[clamp(1.4rem,2.5vw,2rem)] font-bold tracking-tight max-w-lg leading-snug">
-              {ct(article.expertCounselCta.heading, lang)}
+              {EXPERT_CTA.heading[apiLang]}
             </h3>
             <p className="text-white text-sm mt-3 max-w-md leading-relaxed">
-              {ct(article.expertCounselCta.body, lang)}
+              {EXPERT_CTA.body[apiLang]}
             </p>
           </div>
           <button
@@ -234,7 +291,7 @@ function ArticlePageInner() {
             data-testid="article-cta"
             className="flex-shrink-0 inline-flex items-center gap-3 bg-white text-[#001489] text-xs tracking-[0.18em] uppercase font-bold px-8 py-4 hover:bg-white transition-colors"
           >
-            <span>{ct(article.expertCounselCta.cta, lang)}</span>
+            <span>{EXPERT_CTA.cta[apiLang]}</span>
             <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
               <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
             </svg>
@@ -246,36 +303,51 @@ function ArticlePageInner() {
       <RelatedPublications currentSlug={article.slug} lang={lang} />
 
       <Footer />
-      <ArticleContactModal open={modalOpen} onClose={() => setModalOpen(false)} articleTitle={ct(article.title, lang)} />
+      <ArticleContactModal open={modalOpen} onClose={() => setModalOpen(false)} articleTitle={article.title} />
     </div>
   );
 }
 
-function ArticleBody({ article, lang, onContact }: { article: InsightArticle; lang: "EN" | "FR"; onContact: () => void }) {
-  const sections = article.sections;
-  const [activeIdx, setActiveIdx] = useState(0);
-  const observerRef = useRef<IntersectionObserver | null>(null);
+function ArticleBody({ bodyHtml, lang, onContact }: { bodyHtml: string; lang: Lang; onContact: () => void }) {
+  const apiLang = lang === "FR" ? "fr" : "en";
+
+  const { html, headings } = useMemo(() => {
+    const clean = sanitizeHtml(bodyHtml);
+    if (typeof window === "undefined" || !clean) return { html: clean, headings: [] as { id: string; text: string }[] };
+    const doc = new DOMParser().parseFromString(clean, "text/html");
+    const hs: { id: string; text: string }[] = [];
+    const seen = new Set<string>();
+    doc.querySelectorAll("h2").forEach((el) => {
+      const text = el.textContent?.trim() ?? "";
+      if (!text) return;
+      let id = slugify(text) || "section";
+      let n = 2;
+      while (seen.has(id)) { id = `${slugify(text)}-${n++}`; }
+      seen.add(id);
+      el.setAttribute("id", id);
+      hs.push({ id, text });
+    });
+    return { html: doc.body.innerHTML, headings: hs };
+  }, [bodyHtml]);
+
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
-    observerRef.current?.disconnect();
+    if (headings.length === 0) return;
     const observer = new IntersectionObserver(
-      entries => {
+      (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const idx = sections.findIndex(s => slugify(s.h2.en) === entry.target.id);
-            if (idx !== -1) setActiveIdx(idx);
-          }
+          if (entry.isIntersecting) setActiveId(entry.target.id);
         }
       },
       { rootMargin: "-20% 0px -65% 0px" }
     );
-    sections.forEach(s => {
-      const el = document.getElementById(slugify(s.h2.en));
+    headings.forEach((h) => {
+      const el = document.getElementById(h.id);
       if (el) observer.observe(el);
     });
-    observerRef.current = observer;
     return () => observer.disconnect();
-  }, [article.slug]);
+  }, [headings]);
 
   return (
     <section className="bg-white px-8 py-20">
@@ -285,37 +357,40 @@ function ArticleBody({ article, lang, onContact }: { article: InsightArticle; la
           {/* ── Sidebar ── */}
           <aside className="hidden lg:block w-[240px] xl:w-[280px] flex-shrink-0">
             <div className="sticky top-28 flex flex-col gap-8">
-              <div>
-                <p className="text-[#001489] text-[9px] tracking-[0.3em] uppercase font-bold mb-5">
-                  {ct(article.sidebar.eyebrow, lang)}
-                </p>
-                <nav className="flex flex-col">
-                  {sections.map((s, i) => (
-                    <a
-                      key={i}
-                      href={`#${slugify(s.h2.en)}`}
-                      className="group flex items-start gap-3 py-2.5 border-b border-[#001489]/[0.06] last:border-b-0 transition-colors text-[#001489]"
-                    >
-                      <span className={`mt-1 w-0.5 h-3.5 flex-shrink-0 transition-colors ${activeIdx === i ? "bg-[#001489]" : "bg-transparent"}`} />
-                      <span className="text-sm leading-snug font-medium">{ct(s.h2, lang)}</span>
-                    </a>
-                  ))}
-                </nav>
-              </div>
+              {headings.length > 0 && (
+                <div>
+                  <p className="text-[#001489] text-[9px] tracking-[0.3em] uppercase font-bold mb-5">
+                    {SIDEBAR_CTA.eyebrow[apiLang]}
+                  </p>
+                  <nav className="flex flex-col">
+                    {headings.map((h) => (
+                      <a
+                        key={h.id}
+                        href={`#${h.id}`}
+                        data-testid={`toc-link-${h.id}`}
+                        className="group flex items-start gap-3 py-2.5 border-b border-[#001489]/[0.06] last:border-b-0 transition-colors text-[#001489]"
+                      >
+                        <span className={`mt-1 w-0.5 h-3.5 flex-shrink-0 transition-colors ${activeId === h.id ? "bg-[#001489]" : "bg-transparent"}`} />
+                        <span className="text-sm leading-snug font-medium">{h.text}</span>
+                      </a>
+                    ))}
+                  </nav>
+                </div>
+              )}
 
               <div className="border-t border-[#001489] pt-8">
                 <p className="text-[#001489] text-sm font-semibold mb-2 leading-snug">
-                  {ct(article.sidebar.heading, lang)}
+                  {SIDEBAR_CTA.heading[apiLang]}
                 </p>
                 <p className="text-[#001489] text-sm leading-relaxed mb-5">
-                  {ct(article.sidebar.body, lang)}
+                  {SIDEBAR_CTA.body[apiLang]}
                 </p>
                 <button
                   onClick={onContact}
                   data-testid="sidebar-cta"
                   className="inline-flex items-center gap-2 bg-[#001489] text-white text-[10px] tracking-[0.18em] uppercase font-semibold px-5 py-3 hover:bg-[#0028B8] transition-colors"
                 >
-                  <span>{ct(article.sidebar.cta, lang)}</span>
+                  <span>{SIDEBAR_CTA.cta[apiLang]}</span>
                   <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12">
                     <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
                   </svg>
@@ -330,53 +405,9 @@ function ArticleBody({ article, lang, onContact }: { article: InsightArticle; la
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-            >
-              {/* Lead */}
-              <p className="text-[#001489] text-[1.15rem] leading-relaxed font-medium mb-10 border-l-4 border-[#001489] pl-6">
-                {ct(article.lead, lang)}
-              </p>
-
-              {/* Sections */}
-              {sections.map((section, i) => (
-                <div key={i}>
-                  <h2
-                    id={slugify(section.h2.en)}
-                    className="font-heading text-[#001489] text-[1.35rem] font-bold tracking-tight mt-12 mb-5 scroll-mt-32"
-                  >
-                    {ct(section.h2, lang)}
-                  </h2>
-
-                  {section.paragraphs.map((p, j) => (
-                    <p key={j} className="text-[#3D4D6A] text-base leading-[1.85] mb-6">
-                      {ct(p, lang)}
-                    </p>
-                  ))}
-
-                  {section.pullQuote && (
-                    <blockquote className="my-10 pl-8 border-l-[3px] border-[#001489]">
-                      <p className="text-[#001489] text-xl font-heading font-medium leading-snug italic tracking-tight">
-                        "{ct(section.pullQuote, lang)}"
-                      </p>
-                    </blockquote>
-                  )}
-                </div>
-              ))}
-
-              {/* Callout box */}
-              <div className="my-12 p-8" style={{ background: "#F0F4FB" }}>
-                <p className="text-[#001489] text-[9px] tracking-[0.3em] uppercase font-bold mb-5">
-                  {ct(article.callout.eyebrow, lang)}
-                </p>
-                <ul className="flex flex-col gap-3.5">
-                  {article.callout.bullets.map((bullet, i) => (
-                    <li key={i} className="flex items-start gap-4">
-                      <span className="mt-[6px] w-1.5 h-1.5 flex-shrink-0 bg-[#001489]" />
-                      <span className="text-[#001489] text-sm leading-relaxed">{ct(bullet, lang)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
+              className="article-prose"
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
           </article>
 
         </div>
@@ -385,9 +416,18 @@ function ArticleBody({ article, lang, onContact }: { article: InsightArticle; la
   );
 }
 
-function RelatedPublications({ currentSlug, lang }: { currentSlug: string; lang: "EN" | "FR" }) {
-  const related = getRelatedInsightArticles(currentSlug);
+function RelatedPublications({ currentSlug, lang }: { currentSlug: string; lang: Lang }) {
   const isFr = lang === "FR";
+  const apiLang = isFr ? "fr" : "en";
+  const { data: posts } = useQuery<Post[]>({ queryKey: ["/api/posts"] });
+
+  const related = (posts ?? [])
+    .filter((p) => p.slug !== currentSlug)
+    .slice(0, 3)
+    .map((p) => localizePost(p, apiLang));
+
+  if (related.length === 0) return null;
+
   const heading = isFr ? "Publications associées" : "Related Publications";
   const eyebrow = isFr ? "CONTINUER LA LECTURE" : "CONTINUE READING";
 
@@ -398,12 +438,11 @@ function RelatedPublications({ currentSlug, lang }: { currentSlug: string; lang:
         <h3 className="font-heading text-[#001489] text-[1.5rem] font-bold tracking-tight mb-10">{heading}</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {related.map((a, i) => {
-            const href = isFr ? `/fr/publications/${a.slugFr}` : `/insights/${a.slug}`;
-            const img = slugImageMap[a.slug];
+            const img = a.coverImage;
             return (
               <motion.a
                 key={a.slug}
-                href={href}
+                href={articleHref(a.slug, isFr)}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -413,7 +452,7 @@ function RelatedPublications({ currentSlug, lang }: { currentSlug: string; lang:
               >
                 <div className="h-36 flex-shrink-0 overflow-hidden bg-[#EEF2FB]">
                   {img ? (
-                    <img src={img} alt={ct(a.title, lang)} className="w-full h-full object-cover" />
+                    <img src={img} alt={a.title} className="w-full h-full object-cover" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
                       <svg className="w-8 h-8 text-[#8099FF]" fill="none" viewBox="0 0 48 48" stroke="currentColor" strokeWidth="1.4">
@@ -426,14 +465,14 @@ function RelatedPublications({ currentSlug, lang }: { currentSlug: string; lang:
                 </div>
                 <div className="p-6 flex flex-col gap-3 flex-1">
                   <div className="flex items-center gap-3">
-                    <span className="text-[9px] font-bold tracking-[0.18em] uppercase text-[#001489]">{ct(a.category, lang)}</span>
-                    <span className="text-[#9CA3AF] text-[11px]">{a.readMin} min</span>
+                    <span className="text-[9px] font-bold tracking-[0.18em] uppercase text-[#001489]">{categoryLabel(a.category, apiLang)}</span>
+                    <span className="text-[#9CA3AF] text-[11px]">{readingMinutes(a.body)} min</span>
                   </div>
                   <h4 className="font-heading text-[#001489] text-sm font-bold leading-snug group-hover:text-[#0028B8] transition-colors">
-                    {ct(a.title, lang)}
+                    {a.title}
                   </h4>
                   <div className="mt-auto pt-3 border-t border-[#F0F4FB] flex items-center justify-between">
-                    <span className="text-[#9CA3AF] text-[11px]">{ct(a.date, lang)}</span>
+                    <span className="text-[#9CA3AF] text-[11px]">{formatPostDate(a.createdAt, apiLang)}</span>
                     <div className="flex items-center gap-1.5 text-[#001489] group-hover:text-[#0028B8] transition-colors">
                       <span className="text-[11px] font-medium">{isFr ? "Lire" : "Read"}</span>
                       <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">

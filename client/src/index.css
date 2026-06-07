@@ -195,3 +195,151 @@
 .v2-snap-container {
   -webkit-overflow-scrolling: touch;
 }
+
+/* ── Article body (DB-driven HTML) — mirrors the original structured layout ── */
+.article-prose {
+  color: #3D4D6A;
+}
+.article-prose > *:first-child {
+  margin-top: 0;
+}
+.article-prose p {
+  color: #3D4D6A;
+  font-size: 1rem;
+  line-height: 1.85;
+  margin-bottom: 1.5rem;
+}
+.article-prose .lead {
+  color: #001489;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  font-weight: 500;
+  margin-bottom: 2.5rem;
+  padding-left: 1.5rem;
+  border-left: 4px solid #001489;
+}
+.article-prose h2 {
+  font-family: var(--font-heading, "Satoshi", sans-serif);
+  color: #001489;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  scroll-margin-top: 8rem;
+}
+.article-prose h3 {
+  font-family: var(--font-heading, "Satoshi", sans-serif);
+  color: #001489;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.article-prose h4 {
+  font-family: var(--font-heading, "Satoshi", sans-serif);
+  color: #001489;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.article-prose blockquote {
+  margin: 2.5rem 0;
+  padding-left: 2rem;
+  border-left: 3px solid #001489;
+  color: #001489;
+  font-family: var(--font-heading, "Satoshi", sans-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+.article-prose blockquote p {
+  color: #001489;
+  font-size: inherit;
+  line-height: inherit;
+  margin-bottom: 0;
+}
+.article-prose a {
+  color: #001489;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.article-prose a:hover {
+  color: #0028B8;
+}
+.article-prose strong,
+.article-prose b {
+  color: #001489;
+  font-weight: 600;
+}
+.article-prose img {
+  width: 100%;
+  height: auto;
+  margin: 2rem 0;
+}
+.article-prose figure {
+  margin: 2rem 0;
+}
+.article-prose figcaption {
+  color: #6B7280;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+/* Standalone lists */
+.article-prose > ul,
+.article-prose > ol {
+  margin: 0 0 1.5rem 0;
+  padding-left: 1.25rem;
+  color: #3D4D6A;
+}
+.article-prose > ul { list-style: disc; }
+.article-prose > ol { list-style: decimal; }
+.article-prose > ul li,
+.article-prose > ol li {
+  line-height: 1.85;
+  margin-bottom: 0.5rem;
+}
+/* Callout box (aside.callout) */
+.article-prose .callout {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: #F0F4FB;
+}
+.article-prose .callout .eyebrow {
+  color: #001489;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+.article-prose .callout ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.article-prose .callout li {
+  position: relative;
+  padding-left: 1.5rem;
+  color: #001489;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+.article-prose .callout li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 6px;
+  height: 6px;
+  background: #001489;
+}
