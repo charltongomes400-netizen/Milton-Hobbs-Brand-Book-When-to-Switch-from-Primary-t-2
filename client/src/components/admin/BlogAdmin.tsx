@@ -24,6 +24,19 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import { useToast } from "@/hooks/use-toast";
 import {
   Loader2,
@@ -36,6 +49,8 @@ import {
   Send,
   Save,
   GripVertical,
+  Check,
+  ChevronsUpDown,
 } from "lucide-react";
 import RichTextEditor from "./RichTextEditor";
 
@@ -106,6 +121,16 @@ export default function BlogAdmin() {
 
   const [items, setItems] = useState<Post[]>([]);
   const [dragId, setDragId] = useState<number | null>(null);
+  const [categoryOpen, setCategoryOpen] = useState(false);
+  const [categoryQuery, setCategoryQuery] = useState("");
+
+  const categories = Array.from(
+    new Set(
+      (posts ?? [])
+        .map((p) => p.category)
+        .filter((c): c is string => !!c && c.trim() !== ""),
+    ),
+  ).sort((a, b) => a.localeCompare(b));
 
   useEffect(() => {
     if (posts) setItems(posts);
@@ -408,13 +433,90 @@ export default function BlogAdmin() {
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="post-category">Category</Label>
-                <Input
-                  id="post-category"
-                  value={form.category}
-                  onChange={(e) => set({ category: e.target.value })}
-                  className="rounded-none"
-                  data-testid="input-post-category"
-                />
+                <Popover open={categoryOpen} onOpenChange={setCategoryOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      id="post-category"
+                      type="button"
+                      variant="outline"
+                      role="combobox"
+                      aria-expanded={categoryOpen}
+                      className="w-full justify-between rounded-none font-normal"
+                      data-testid="button-post-category"
+                    >
+                      <span
+                        className={form.category ? "" : "text-muted-foreground"}
+                      >
+                        {form.category || "Select or add a category"}
+                      </span>
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    align="start"
+                    className="admin-theme w-[var(--radix-popover-trigger-width)] rounded-none p-0"
+                  >
+                    <Command>
+                      <CommandInput
+                        placeholder="Search or type a new category..."
+                        value={categoryQuery}
+                        onValueChange={setCategoryQuery}
+                        data-testid="input-post-category-search"
+                      />
+                      <CommandList>
+                        <CommandEmpty>
+                          Type to add a new category.
+                        </CommandEmpty>
+                        {categories.length > 0 && (
+                          <CommandGroup heading="Existing categories">
+                            {categories.map((c) => (
+                              <CommandItem
+                                key={c}
+                                value={c}
+                                onSelect={() => {
+                                  set({ category: c });
+                                  setCategoryQuery("");
+                                  setCategoryOpen(false);
+                                }}
+                                data-testid={`option-category-${c}`}
+                              >
+                                <Check
+                                  className={`mr-2 h-4 w-4 ${
+                                    form.category === c
+                                      ? "opacity-100"
+                                      : "opacity-0"
+                                  }`}
+                                />
+                                {c}
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        )}
+                        {categoryQuery.trim() &&
+                          !categories.some(
+                            (c) =>
+                              c.toLowerCase() ===
+                              categoryQuery.trim().toLowerCase(),
+                          ) && (
+                            <CommandGroup heading="Add new">
+                              <CommandItem
+                                value={`__add__ ${categoryQuery}`}
+                                onSelect={() => {
+                                  set({ category: categoryQuery.trim() });
+                                  setCategoryQuery("");
+                                  setCategoryOpen(false);
+                                }}
+                                data-testid="option-category-add"
+                              >
+                                <Plus className="mr-2 h-4 w-4" />
+                                Add "{categoryQuery.trim()}"
+                              </CommandItem>
+                            </CommandGroup>
+                          )}
+                      </CommandList>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
               </div>
             </div>
 
