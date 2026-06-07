@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import type { Post } from "@shared/schema";
@@ -35,6 +35,7 @@ import {
   Globe,
   Send,
   Save,
+  GripVertical,
 } from "lucide-react";
 import RichTextEditor from "./RichTextEditor";
 
@@ -102,6 +103,50 @@ export default function BlogAdmin() {
   const { data: posts, isLoading } = useQuery<Post[]>({
     queryKey: ["/api/admin/posts"],
   });
+
+  const [items, setItems] = useState<Post[]>([]);
+  const [dragId, setDragId] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (posts) setItems(posts);
+  }, [posts]);
+
+  const reorderMutation = useMutation({
+    mutationFn: async (ids: number[]) => {
+      await apiRequest("POST", "/api/admin/posts/reorder", { ids });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/posts"] });
+    },
+    onError: () => {
+      toast({ title: "Failed to reorder posts", variant: "destructive" });
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/posts"] });
+    },
+  });
+
+  const handleDragOver = (overId: number) => {
+    if (dragId === null || dragId === overId) return;
+    setItems((prev) => {
+      const from = prev.findIndex((p) => p.id === dragId);
+      const to = prev.findIndex((p) => p.id === overId);
+      if (from === -1 || to === -1) return prev;
+      const next = [...prev];
+      const [moved] = next.splice(from, 1);
+      next.splice(to, 0, moved);
+      return next;
+    });
+  };
+
+  const handleDragEnd = () => {
+    if (dragId !== null) {
+      const ids = items.map((p) => p.id);
+      const original = (posts ?? []).map((p) => p.id);
+      if (ids.join(",") !== original.join(",")) {
+        reorderMutation.mutate(ids);
+      }
+    }
+    setDragId(null);
+  };
 
   const set = (patch: Partial<PostForm>) =>
     setForm((f) => ({ ...f, ...patch }));
@@ -234,9 +279,16 @@ export default function BlogAdmin() {
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <p className="text-sm text-muted-foreground" data-testid="text-post-count">
-          {posts ? `${posts.length} ${posts.length === 1 ? "post" : "posts"}` : "—"}
-        </p>
+        <div>
+          <p className="text-sm text-muted-foreground border-t-[#ffffff] border-r-[#ffffff] border-b-[#ffffff] border-l-[#ffffff]" data-testid="text-post-count">
+            {posts ? `${posts.length} ${posts.length === 1 ? "post" : "posts"}` : "—"}
+          </p>
+          {posts && posts.length > 1 && (
+            <p className="mt-0.5 text-xs text-[#ffffff]">
+              Drag the handle to reorder how posts appear on the site.
+            </p>
+          )}
+        </div>
         <Button
           className="rounded-none bg-mh-blue text-white hover:bg-mh-blue/90"
           onClick={openNew}
@@ -245,7 +297,6 @@ export default function BlogAdmin() {
           <Plus className="mr-2 h-4 w-4" /> New post
         </Button>
       </div>
-
       {isLoading ? (
         <div className="flex justify-center py-16">
           <Loader2 className="h-6 w-6 animate-spin text-mh-blue" />
@@ -260,12 +311,29 @@ export default function BlogAdmin() {
         </div>
       ) : (
         <div className="divide-y divide-border border border-border bg-white">
-          {posts.map((post) => (
+          {items.map((post) => (
             <div
               key={post.id}
-              className="group flex items-center gap-4 p-4 transition-colors hover:bg-muted/40"
+              onDragOver={(e) => {
+                e.preventDefault();
+                handleDragOver(post.id);
+              }}
+              onDrop={(e) => e.preventDefault()}
+              className={`group flex items-center gap-3 p-4 transition-colors hover:bg-muted/40 ${
+                dragId === post.id ? "opacity-50 ring-1 ring-mh-blue" : ""
+              }`}
               data-testid={`row-post-${post.id}`}
             >
+              <div
+                draggable
+                onDragStart={() => setDragId(post.id)}
+                onDragEnd={handleDragEnd}
+                className="flex-shrink-0 cursor-grab text-muted-foreground/50 transition-colors hover:text-mh-blue active:cursor-grabbing"
+                title="Drag to reorder"
+                data-testid={`drag-handle-post-${post.id}`}
+              >
+                <GripVertical className="h-5 w-5" />
+              </div>
               <div className="h-14 w-20 flex-shrink-0 overflow-hidden bg-muted">
                 {post.coverImage && (
                   <img
@@ -313,7 +381,6 @@ export default function BlogAdmin() {
           ))}
         </div>
       )}
-
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="admin-theme max-h-[90vh] max-w-3xl overflow-y-auto rounded-none bg-white">
           <DialogHeader>
@@ -509,7 +576,6 @@ export default function BlogAdmin() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
       {/* Save confirmation */}
       <AlertDialog
         open={confirmSave !== null}
@@ -555,7 +621,6 @@ export default function BlogAdmin() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-
       {/* Delete confirmation */}
       <AlertDialog
         open={deleteId !== null}

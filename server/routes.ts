@@ -148,6 +148,17 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     res.json({ ok: true });
   });
 
+  app.post("/api/admin/posts/reorder", requireAdmin, async (req, res) => {
+    const parsed = z
+      .object({ ids: z.array(z.number().int().positive()) })
+      .safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ error: "Invalid order data" });
+    }
+    await storage.reorderPosts(parsed.data.ids);
+    res.json({ ok: true });
+  });
+
   app.post("/api/admin/posts/image", imageUploadRateLimit, requireAdmin, imageUpload.single("image"), (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: "A valid image file (.jpg, .jpeg, .png, .webp) is required" });

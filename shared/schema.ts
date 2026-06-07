@@ -74,6 +74,7 @@ export const posts = pgTable("posts", {
   category: text("category"),
   coverImage: text("cover_image"),
   published: boolean("published").notNull().default(false),
+  sortOrder: integer("sort_order").notNull().default(0),
   createdAt: timestamp("created_at").notNull().default(sql`now()`),
   updatedAt: timestamp("updated_at").notNull().default(sql`now()`),
 });

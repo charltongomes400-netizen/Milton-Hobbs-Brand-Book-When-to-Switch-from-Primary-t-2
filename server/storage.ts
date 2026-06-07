@@ -1,4 +1,4 @@
-import { eq, and, desc } from "drizzle-orm";
+import { eq, and, desc, asc } from "drizzle-orm";
 import { db } from "./db";
 import { users, jobs, applications, posts } from "@shared/schema";
 import type { User, InsertUser, Job, InsertJob, Application, InsertApplication, Post, InsertPost } from "@shared/schema";
@@ -25,6 +25,7 @@ export interface IStorage {
   createPost(post: InsertPost): Promise<Post>;
   updatePost(id: number, patch: Partial<InsertPost>): Promise<Post | undefined>;
   deletePost(id: number): Promise<void>;
+  reorderPosts(ids: number[]): Promise<void>;
 }
 
 export class DrizzleStorage implements IStorage {
@@ -92,9 +93,13 @@ export class DrizzleStorage implements IStorage {
 
   async getPosts(publishedOnly = false) {
     if (publishedOnly) {
-      return db.select().from(posts).where(eq(posts.published, true)).orderBy(desc(posts.createdAt));
+      return db
+        .select()
+        .from(posts)
+        .where(eq(posts.published, true))
+        .orderBy(asc(posts.sortOrder), desc(posts.createdAt));
     }
-    return db.select().from(posts).orderBy(desc(posts.createdAt));
+    return db.select().from(posts).orderBy(asc(posts.sortOrder), desc(posts.createdAt));
   }
 
   async getPostBySlug(slug: string) {
@@ -123,6 +128,14 @@ export class DrizzleStorage implements IStorage {
 
   async deletePost(id: number) {
     await db.delete(posts).where(eq(posts.id, id));
+  }
+
+  async reorderPosts(ids: number[]) {
+    await db.transaction(async (tx) => {
+      for (let i = 0; i < ids.length; i++) {
+        await tx.update(posts).set({ sortOrder: i }).where(eq(posts.id, ids[i]));
+      }
+    });
   }
 }
 
