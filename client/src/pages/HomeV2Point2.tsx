@@ -287,9 +287,7 @@ function HeaderV15() {
                       maxWidth: "14ch",
                       marginBottom: 32,
                     }}
-                  >
-                    Advising across every sector and border.
-                  </h3>
+                  >Advising Across Every Sector and Border.</h3>
                   <div style={{ width: 40, height: 2, background: "#001489", marginBottom: 28, opacity: 0.18 }} />
                   <p style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -511,7 +509,6 @@ function HeroV15() {
           transition={{ duration: 2.4, ease: "easeInOut" }}
         />
       </AnimatePresence>
-
       {ACCENT_TILES.map((tile, i) => (
         <motion.div
           key={i}
@@ -533,7 +530,6 @@ function HeroV15() {
           }}
         />
       ))}
-
       <div
         className="absolute inset-x-0 bottom-0 pointer-events-none"
         style={{
@@ -541,7 +537,6 @@ function HeroV15() {
           background: "linear-gradient(to top, rgba(0,14,80,0.80) 0%, rgba(0,14,80,0.40) 45%, transparent 100%)",
         }}
       />
-
       <div className="relative z-10 flex flex-col justify-end min-h-screen px-12 xl:px-24 pb-16 pt-28"
         style={{ maxWidth: "1200px" }}>
 
