@@ -29,7 +29,7 @@ const translations = {
         {
           title: "Direct Partner Access",
           description:
-            "The boutique model means your matter is handled at the highest level — every time. No layered teams, no second-tier delegation. A senior advisor knows your business from the first conversation and stays close through resolution.",
+            "The boutique model means your matter is handled at the highest level every time. No layered teams, no second-tier delegation. A senior advisor knows your business from the first conversation and stays close through resolution.",
         },
         {
           title: "Trilingual Fluency",
