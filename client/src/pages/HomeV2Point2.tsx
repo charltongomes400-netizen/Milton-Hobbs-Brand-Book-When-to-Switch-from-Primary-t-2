@@ -2105,20 +2105,6 @@ function FooterV15() {
 
  return (
  <footer id="footer" data-testid="footer" className="v2-snap-end" style={{ background: "#001489" }}>
- {/* ── Motto whisper — very top ── */}
- <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 20, paddingBottom: 16 }}>
- <p style={{
- fontFamily: "'Plus Jakarta Sans', sans-serif",
- fontSize: 9,
- fontWeight: 700,
- letterSpacing: "0.50em",
- textTransform: "uppercase",
- color: "#FFFFFF",
- textAlign: "center",
- }}>
- Reason&ensp;·&ensp;Rigor&ensp;·&ensp;Resolution
- </p>
- </div>
  {/* ── Main band: 3-column grid ── */}
  <div className="max-w-[1400px] mx-auto px-8">
  <div

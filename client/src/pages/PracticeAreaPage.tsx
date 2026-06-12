@@ -406,9 +406,6 @@ function PracticeAreaPageInner() {
       <section className="bg-[#001489] px-8 py-5">
         <div className="max-w-[1400px] mx-auto flex items-center justify-between">
           <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold">Milton Hobbs</p>
-          <p className="text-sm tracking-[0.2em] uppercase hidden sm:block bg-[#00000000] text-[#ffffff]">
-            {effectiveLang === "FR" ? "Raison. Rigueur. Résolution." : "Reason. Rigor. Resolution."}
-          </p>
         </div>
       </section>
       <section

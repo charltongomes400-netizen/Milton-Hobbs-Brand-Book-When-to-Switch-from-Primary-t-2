@@ -295,7 +295,6 @@ function EmploymentLaborInner() {
  <section className="bg-[#001489] px-8 py-5">
  <div className="max-w-[1400px] mx-auto flex items-center justify-between">
  <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold">Milton Hobbs</p>
- <p className="text-white/70 text-sm tracking-[0.2em] uppercase hidden sm:block">Reason. Rigor. Resolution.</p>
  </div>
  </section>
  <section data-testid="employment-differentiators" data-header-theme="light" className="bg-white px-8 py-24">
