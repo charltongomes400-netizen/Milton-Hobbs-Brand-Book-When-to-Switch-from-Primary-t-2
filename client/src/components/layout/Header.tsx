@@ -269,7 +269,7 @@ export function Header() {
                       marginBottom: 32,
                     }}
                   >
-                    Advising across every sector and border.
+                    Advising Across Every Sector and Border.
                   </h3>
                   <div style={{ width: 40, height: 2, background: "#001489", marginBottom: 28, opacity: 0.18 }} />
                   <p style={{

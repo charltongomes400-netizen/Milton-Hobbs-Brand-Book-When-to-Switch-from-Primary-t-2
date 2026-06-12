@@ -311,7 +311,7 @@ function HeaderV15() {
  marginBottom: 32,
  }}
  >
- Advising across every sector and border.
+ Advising Across Every Sector and Border.
  </h3>
  <div style={{ width: 40, height: 2, background: "rgba(255,255,255,0.18)", marginBottom: 28 }} />
  <p style={{
