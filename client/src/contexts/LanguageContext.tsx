@@ -44,7 +44,7 @@ const translations = {
         {
           title: "Client-First by Design",
           description:
-            "Precision to complexity. Composure to challenge. A client-first mindset to every engagement. This is our brand promise — and it shapes how we structure our team, our communication, and our advice. You receive clear counsel, on time, with the discretion the matter deserves.",
+            "Precision to complexity. Composure to challenge. A client-first mindset to every engagement. This is our brand promise and it shapes how we structure our team, our communication, and our advice. You receive clear counsel, on time, with the discretion the matter deserves.",
         },
       ],
     },
