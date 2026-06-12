@@ -148,7 +148,7 @@ const translations = {
       eyebrow: "Contact",
       headline: "Get in Touch.",
       subtext:
-        "Whether you are structuring a cross-border transaction, entering a new market, or weighing a complex matter — start the conversation. A senior member of our team will respond within one business day.",
+        "Whether you are structuring a cross-border transaction, entering a new market, or weighing a complex matter start the conversation. A senior member of our team will respond within one business day.",
       namePlaceholder: "e.g. Sophie Martin",
       emailPlaceholder: "you@company.com",
       subjectPlaceholder: "Practice Area of Interest",
