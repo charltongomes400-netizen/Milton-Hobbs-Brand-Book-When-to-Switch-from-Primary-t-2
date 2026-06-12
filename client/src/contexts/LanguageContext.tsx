@@ -34,7 +34,7 @@ const translations = {
         {
           title: "Trilingual Fluency",
           description:
-            "We work natively in English, French, and Arabic — drafting, negotiating, and advising in the language your matter requires. Cross-border deals demand more than translation; they demand fluency in the legal and commercial conventions of each jurisdiction. We bring both.",
+            "We work natively in English, French, and Arabic drafting, negotiating, and advising in the language your matter requires. Cross-border deals demand more than translation; they demand fluency in the legal and commercial conventions of each jurisdiction. We bring both.",
         },
         {
           title: "Cross-Border Expertise",
