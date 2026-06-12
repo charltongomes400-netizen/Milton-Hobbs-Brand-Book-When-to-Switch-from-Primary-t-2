@@ -48,21 +48,6 @@ export function Footer() {
 
   return (
     <footer id="footer" data-testid="footer" style={{ background: "#001489" }}>
-      {/* ── Tagline whisper ── */}
-      <div className="max-w-[1400px] mx-auto px-8" style={{ paddingTop: 20, paddingBottom: 16 }}>
-        <p style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontSize: 9,
-          fontWeight: 700,
-          letterSpacing: "0.50em",
-          textTransform: "uppercase",
-          color: "#FFFFFF",
-          textAlign: "center",
-        }}>
-          {ct(f.tagline, lang)}
-        </p>
-      </div>
-
       {/* ── Main 4-column grid ── */}
       <div className="max-w-[1400px] mx-auto px-8">
         <div
