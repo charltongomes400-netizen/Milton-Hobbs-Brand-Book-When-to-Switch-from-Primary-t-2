@@ -841,9 +841,6 @@ function OurFirmContent() {
                 <p className="text-white mb-4 text-[18px]">
                   {ct(copy.ourPhilosophy.promiseCard.body, l)}
                 </p>
-                <p className="text-white tracking-[0.35em] uppercase font-bold text-[12px]">
-                  {ct(copy.ourPhilosophy.promiseCard.sourceLine, l)}
-                </p>
               </motion.blockquote>
             </div>
           </div>
