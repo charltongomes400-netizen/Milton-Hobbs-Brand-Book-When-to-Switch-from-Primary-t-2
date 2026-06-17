@@ -276,7 +276,7 @@ function ArticlePageInner() {
       <section className="bg-[#001489] py-20 px-8">
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <p className="text-white text-[10px] tracking-[0.3em] uppercase font-medium mb-3">
+            <p className="text-white tracking-[0.12em] uppercase font-bold text-[18px] font-sans mb-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
               {EXPERT_CTA.eyebrow[apiLang]}
             </p>
             <h3 className="font-heading text-white text-[clamp(1.4rem,2.5vw,2rem)] font-bold tracking-tight max-w-lg leading-snug">
@@ -359,7 +359,7 @@ function ArticleBody({ bodyHtml, lang, onContact }: { bodyHtml: string; lang: La
             <div className="sticky top-28 flex flex-col gap-8">
               {headings.length > 0 && (
                 <div>
-                  <p className="text-[#001489] text-[9px] tracking-[0.3em] uppercase font-bold mb-5">
+                  <p className="text-[#001489] tracking-[0.12em] uppercase font-bold text-[18px] font-sans mb-5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                     {SIDEBAR_CTA.eyebrow[apiLang]}
                   </p>
                   <nav className="flex flex-col">
@@ -434,7 +434,7 @@ function RelatedPublications({ currentSlug, lang }: { currentSlug: string; lang:
   return (
     <section className="bg-white py-20 px-8 border-t border-[#001489]/[0.06]">
       <div className="max-w-[1400px] mx-auto">
-        <p className="text-[#8099FF] text-[10px] tracking-[0.3em] uppercase font-semibold mb-3">{eyebrow}</p>
+        <p className="text-[#001489] tracking-[0.12em] uppercase font-bold text-[18px] font-sans mb-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{eyebrow}</p>
         <h3 className="font-heading text-[#001489] text-[1.5rem] font-bold tracking-tight mb-10">{heading}</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {related.map((a, i) => {

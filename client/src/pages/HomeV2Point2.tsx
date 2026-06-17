@@ -551,8 +551,8 @@ function HeroV15() {
  <div className="flex items-center gap-3 mb-6">
  <div style={{ width: 24, height: 1, background: "rgba(255,255,255,0.45)", flexShrink: 0 }} />
  <p
- className="font-sans font-medium uppercase tracking-[0.28em]"
- style={{ color: "rgba(255,255,255,0.55)", fontSize: 11 }}
+ className="uppercase tracking-[0.12em] font-bold text-[18px] font-sans"
+ style={{ color: "#FFFFFF", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
  data-testid="hero-eyebrow"
  >
  {featuredArticle?.category}
@@ -1237,9 +1237,9 @@ function DifferentiatorsV15() {
  <p
  style={{
  fontFamily: "'Plus Jakarta Sans', sans-serif",
- fontSize: 9,
+ fontSize: 18,
  fontWeight: 700,
- letterSpacing: "0.40em",
+ letterSpacing: "0.12em",
  textTransform: "uppercase",
  color: "#001489",
  marginBottom: 16,
@@ -1526,8 +1526,8 @@ function CaseFileStripV18() {
  className="mb-12"
  >
  <p
- className="uppercase font-medium mb-3"
- style={{ color: "#4A58AA", fontSize: 16, letterSpacing: "0.3em", paddingLeft: "calc(3px + 1rem)" }}
+ className="uppercase font-bold mb-3"
+ style={{ color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", fontFamily: "'Plus Jakarta Sans', sans-serif", paddingLeft: "calc(3px + 1rem)" }}
  >
  Our Expertise
  </p>
@@ -2707,7 +2707,7 @@ function PracticeAreasV18() {
  <div className="lg:hidden" style={{ paddingTop: 88 }}>
  {/* Header */}
  <div style={{ padding: "0 24px 40px" }}>
- <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.40em", textTransform: "uppercase", color: "#7A84BE", marginBottom: 14 }}>
+ <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#FFFFFF", marginBottom: 14 }}>
  {p.eyebrow}
  </p>
  <h2 className="font-heading font-bold" style={{ fontSize: "clamp(1.75rem, 7vw, 2.25rem)", lineHeight: 1.08, letterSpacing: "-0.03em", color: "#FFFFFF" }}>

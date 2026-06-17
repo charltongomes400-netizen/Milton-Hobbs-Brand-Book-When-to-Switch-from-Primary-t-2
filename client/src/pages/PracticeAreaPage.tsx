@@ -289,7 +289,7 @@ function PracticeAreaPageInner() {
               viewport={{ once: true }}
               transition={{ duration: 0.65 }}
             >
-              <p className="text-[#001489] tracking-[0.35em] uppercase font-bold mb-5 text-[18px]">
+              <p className="text-[#001489] tracking-[0.12em] uppercase font-bold text-[18px] font-sans mb-5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                 {c(pa.overview.eyebrow, effectiveLang)}
               </p>
               <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.2vw,2.6rem)] tracking-tight leading-tight mb-8">
@@ -351,7 +351,7 @@ function PracticeAreaPageInner() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <p className="tracking-[0.35em] uppercase font-bold mb-4 text-[16px] text-white">
+              <p className="text-white tracking-[0.12em] uppercase font-bold text-[18px] font-sans mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                 {c(pa.services.eyebrow, effectiveLang)}
               </p>
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -421,7 +421,7 @@ function PracticeAreaPageInner() {
             transition={{ duration: 0.6 }}
             className="mb-14"
           >
-            <p className="text-[#001489] text-[16px] tracking-[0.35em] uppercase font-bold mb-4">
+            <p className="text-[#001489] tracking-[0.12em] uppercase font-bold text-[18px] font-sans mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
               {c(pa.whatSetsApart.eyebrow, effectiveLang)}
             </p>
             <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight">
@@ -462,7 +462,7 @@ function PracticeAreaPageInner() {
               viewport={{ once: true }}
               transition={{ duration: 0.65 }}
             >
-              <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold mb-4">
+              <p className="text-white tracking-[0.12em] uppercase font-bold text-[18px] font-sans mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                 {c(pa.closingCta.eyebrow, effectiveLang)}
               </p>
               <h2 className="font-heading text-white font-bold text-[clamp(1.6rem,3vw,2.4rem)] tracking-tight leading-tight mb-3 whitespace-pre-line">

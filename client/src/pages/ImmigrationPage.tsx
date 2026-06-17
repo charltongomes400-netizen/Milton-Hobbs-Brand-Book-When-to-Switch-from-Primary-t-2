@@ -718,7 +718,7 @@ export default function ImmigrationPage() {
  transition={{ duration: 0.6 }}
  className="mb-14"
  >
- <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold mb-4">What We Do</p>
+ <p className="text-[#001489] tracking-[0.12em] uppercase font-bold text-[18px] font-sans mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>What We Do</p>
  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
  <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight">
  Immigration services.
@@ -778,7 +778,7 @@ export default function ImmigrationPage() {
  transition={{ duration: 0.6 }}
  className="mb-14"
  >
- <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold mb-4">How We Work</p>
+ <p className="text-white tracking-[0.12em] uppercase font-bold text-[18px] font-sans mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>How We Work</p>
  <h2 className="font-heading text-white font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight">
  Your path to residency.
  </h2>
@@ -823,7 +823,7 @@ export default function ImmigrationPage() {
  viewport={{ once: true }}
  className="mb-14"
  >
- <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold mb-4">Where We Practice</p>
+ <p className="text-white tracking-[0.12em] uppercase font-bold text-[18px] font-sans mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Where We Practice</p>
  <h2 className="font-heading text-white font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight">
  Two jurisdictions. One team.
  </h2>
@@ -892,7 +892,7 @@ export default function ImmigrationPage() {
  whileInView={{ opacity: 1, y: 0 }}
  viewport={{ once: true }}
  >
- <p className="text-white text-[16px] tracking-[0.35em] uppercase font-bold mb-5">Our Commitment</p>
+ <p className="text-[#001489] tracking-[0.12em] uppercase font-bold text-[18px] font-sans mb-5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Our Commitment</p>
  <h2 className="font-heading text-[#001489] font-bold text-[clamp(1.8rem,3.5vw,2.8rem)] tracking-tight leading-tight mb-6">
  Immigration handled with the same rigour as a corporate deal.
  </h2>
@@ -962,7 +962,7 @@ export default function ImmigrationPage() {
  <div className="max-w-[1400px] mx-auto relative z-10">
  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
  <div>
- <p className="text-white text-[10px] tracking-[0.3em] uppercase font-medium mb-3">Begin Today</p>
+ <p className="text-white tracking-[0.12em] uppercase font-bold text-[18px] font-sans mb-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Begin Today</p>
  <h3 className="font-heading text-white font-bold text-[clamp(1.6rem,3vw,2.4rem)] tracking-tight leading-snug max-w-lg">
  Ready to start your immigration matter?
  </h3>
