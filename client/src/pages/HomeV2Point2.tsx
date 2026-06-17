@@ -1785,7 +1785,7 @@ function ContactFormV15() {
  style={{ background: "#FFFFFF", gridTemplateColumns: "1fr clamp(260px, 30vw, 480px)", minHeight: "100dvh" }}
  >
  {/* ── Left: content ── */}
- <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 80, paddingBottom: 80, paddingLeft: "clamp(32px, 5vw, 80px)", paddingRight: "clamp(24px, 4vw, 64px)" }}>
+ <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 130, paddingBottom: 80, paddingLeft: "clamp(32px, 5vw, 80px)", paddingRight: "clamp(24px, 4vw, 64px)" }}>
 
  {/* ── Section header ── */}
  <motion.div
