@@ -942,7 +942,7 @@ function DifferentiatorsV15() {
  display: "flex",
  flexDirection: "column",
  justifyContent: "center",
- padding: "80px 72px 80px 64px",
+ padding: "130px 72px 80px 64px",
  borderRight: "1px solid #E8EDF5",
  }}
  >
