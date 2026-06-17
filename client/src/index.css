@@ -337,10 +337,11 @@
 }
 .article-prose .callout .eyebrow {
   color: #001489;
-  font-size: 9px;
-  letter-spacing: 0.3em;
+  font-size: 18px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   margin-bottom: 1.25rem;
 }
 .article-prose .callout ul {
