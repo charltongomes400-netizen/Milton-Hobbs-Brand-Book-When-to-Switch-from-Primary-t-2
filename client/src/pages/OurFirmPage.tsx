@@ -772,8 +772,8 @@ function OurFirmContent() {
                 className="text-white text-base leading-relaxed max-w-[500px] mb-10"
               >
                 {l === "fr"
-                  ? "Chez Milton Hobbs, chaque mandat est conduit par les associés eux-mêmes — avec clarté, rigueur et un engagement client sans compromis, à Dubaï comme à Paris."
-                  : "At Milton Hobbs, every mandate is led by the partners themselves — with clarity, rigour, and an uncompromising client-first commitment, across Dubai and Paris."}
+                  ? "Chez Milton Hobbs, chaque mandat est conduit par les associés eux-mêmes avec clarté, rigueur et un engagement client sans compromis."
+                  : "At Milton Hobbs, every mandate is led by the partners themselves with clarity, rigour, and an uncompromising client-first commitment."}
               </motion.p>
 
               <motion.div
