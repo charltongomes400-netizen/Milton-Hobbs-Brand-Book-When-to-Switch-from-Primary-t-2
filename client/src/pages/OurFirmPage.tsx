@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type CSSProperties } from "react";
 import { motion, AnimatePresence, useInView, useMotionValue, useSpring, useAnimationFrame } from "framer-motion";
+import firmHeroBg from "@assets/verne-ho-0LAJfSNa-xQ-unsplash_1775562755413.jpg";
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { ourFirmCopy, ct, type OurFirmLang } from "@/data/ourFirmCopy";
 import { Header } from "@/components/layout/Header";
@@ -615,7 +616,7 @@ function OurFirmContent() {
   const valuesRef = useRef<HTMLDivElement>(null);
   const valuesInView = useInView(valuesRef, { once: true, margin: "-80px" });
 
-  const ytDivRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     const meta = copy.meta[l];
@@ -686,40 +687,6 @@ function OurFirmContent() {
     };
   }, [l]);
 
-  useEffect(() => {
-    const LOOP_AT = 135;
-
-    const initPlayer = () => {
-      if (!ytDivRef.current) return;
-      new (window as any).YT.Player(ytDivRef.current, {
-        videoId: "MnUh9nVYqjg",
-        playerVars: {
-          autoplay: 1, mute: 1, controls: 0, rel: 0,
-          modestbranding: 1, playsinline: 1,
-          iv_load_policy: 3, showinfo: 0, disablekb: 1, fs: 0, enablejsapi: 1,
-        },
-        events: {
-          onReady: (e: any) => {
-            e.target.playVideo();
-            const interval = setInterval(() => {
-              try { if (e.target.getCurrentTime() >= LOOP_AT) e.target.seekTo(0, true); } catch (_) {}
-            }, 500);
-            return () => clearInterval(interval);
-          },
-          onStateChange: (e: any) => { if (e.data === 0) e.target.seekTo(0, true); },
-        },
-      });
-    };
-
-    if ((window as any).YT && (window as any).YT.Player) {
-      initPlayer();
-    } else {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.head.appendChild(tag);
-      (window as any).onYouTubeIframeAPIReady = initPlayer;
-    }
-  }, []);
 
   const stats = [
     { value: 4, suffix: "+", label: "Years of Practice", labelFR: "Ans d'Exercice" },
@@ -731,39 +698,127 @@ function OurFirmContent() {
   return (
     <div className="bg-[#001489] min-h-screen" data-testid="our-firm-page">
       <Header />
-      {/* ── HERO — full-screen YouTube video ── */}
+      {/* ── HERO ── */}
       <section
-        className="relative h-screen overflow-hidden"
+        id="home"
         data-testid="firm-hero"
+        data-header-theme="dark"
+        className="relative min-h-screen bg-[#001489] flex items-center overflow-hidden pt-20"
       >
+        <img
+          src={firmHeroBg}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ objectPosition: "center 42%", mixBlendMode: "multiply" }}
+        />
         <div
-          style={{
-            position: "absolute",
-            top: "-20%",
-            left: "-5%",
-            width: "110%",
-            height: "140%",
-            pointerEvents: "none",
-            overflow: "hidden",
-          }}
-        >
-          <div ref={ytDivRef} style={{ width: "100%", height: "100%" }} />
+          className="absolute inset-x-0 bottom-0 pointer-events-none"
+          style={{ height: "70%", background: "linear-gradient(to top, rgba(0,14,80,0.80) 0%, rgba(0,14,80,0.40) 45%, transparent 100%)" }}
+        />
+
+        <div className="relative z-10 max-w-[1400px] mx-auto px-8 py-20 w-full">
+          <div className="grid items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: "easeOut" }}
+            >
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                className="inline-flex items-center gap-3 mb-8"
+              >
+                <a
+                  href="/"
+                  className="flex items-center gap-2 text-white text-[16px] tracking-[0.3em] uppercase font-semibold hover:opacity-80 transition-opacity"
+                >
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+                    <path d="M11 6H1M6 1L1 6l5 5" stroke="currentColor" strokeWidth="1.3" />
+                  </svg>
+                  {l === "fr" ? "Accueil" : "Home"}
+                </a>
+                <span className="text-white/20">-</span>
+                <span className="text-white text-[16px] tracking-[0.3em] uppercase font-medium">
+                  {l === "fr" ? "Notre Cabinet" : "Our Firm"}
+                </span>
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="font-heading text-white font-bold text-[clamp(2.6rem,5vw,4.5rem)] leading-[1.06] tracking-tight mb-8"
+              >
+                {l === "fr" ? "La complexité" : "Complexity"}
+                <br />
+                <span className="text-white whitespace-nowrap">
+                  {l === "fr" ? "exige la clarté." : "demands clarity."}
+                </span>
+              </motion.h1>
+
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: "64px" }}
+                transition={{ delay: 0.8, duration: 0.7 }}
+                className="h-[2px] bg-white mb-8"
+              />
+
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9 }}
+                className="text-white text-base leading-relaxed max-w-[500px] mb-10"
+              >
+                {l === "fr"
+                  ? "Un cabinet d'avocats corporate boutique avec des bureaux à Dubaï et Paris. Conseil trilingue. Accès direct à l'associé. Expertise transfrontalière."
+                  : "A boutique corporate law firm with offices in Dubai and Paris. Trilingual counsel. Direct partner access. Cross-border depth across the UAE, France, and the GCC."}
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.1 }}
+                className="flex flex-wrap gap-4 mb-14"
+              >
+                <button
+                  onClick={() => setModalOpen(true)}
+                  data-testid="firm-hero-cta-primary"
+                  className="inline-flex items-center gap-3 bg-white text-[#001489] text-xs font-bold tracking-[0.18em] uppercase px-8 py-4 hover:bg-white/90 transition-colors cursor-pointer"
+                >
+                  <span>{l === "fr" ? "Prendre Rendez-Vous" : "Book a Consultation"}</span>
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+                    <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.3" />
+                  </svg>
+                </button>
+                <a
+                  href="#philosophy"
+                  data-testid="firm-hero-cta-secondary"
+                  className="inline-flex items-center gap-3 border border-white/25 text-white text-xs font-semibold tracking-[0.18em] uppercase px-8 py-4 hover:border-white/50 transition-colors"
+                >
+                  {l === "fr" ? "Notre Philosophie" : "Our Philosophy"}
+                </a>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
 
-        <div className="absolute bottom-8 left-0 right-0 z-10 flex justify-center pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-10 left-8 flex items-center gap-3 pointer-events-none"
+        >
           <motion.div
-            animate={{ y: [0, 7, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-2"
-          >
-            <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 9, letterSpacing: "0.32em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)", fontWeight: 600 }}>
-              Scroll
-            </span>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M7 2v10M2 7l5 5 5-5" stroke="rgba(255,255,255,0.55)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </motion.div>
-        </div>
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity }}
+            className="w-px h-10 bg-gradient-to-b from-white to-transparent"
+          />
+          <span className="text-white text-[16px] tracking-[0.25em] uppercase">
+            {l === "fr" ? "Défiler" : "Scroll"}
+          </span>
+        </motion.div>
       </section>
       {/* ── PHILOSOPHY & PURPOSE ── */}
       <section
