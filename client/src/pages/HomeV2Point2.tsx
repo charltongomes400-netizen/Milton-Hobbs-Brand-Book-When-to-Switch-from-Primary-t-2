@@ -20,6 +20,8 @@ import heroBg2 from "@assets/joakim-nadell-K67sBVqLLuw-unsplash_1775562755414.jp
 import heroBg3 from "@assets/maarten-deckers-T5nXYXCf50I-unsplash_1775562755414.jpg";
 import heroBg4 from "@assets/anders-jilden-Sc5RKXLBjGg-unsplash_1775562755415.jpg";
 
+import turquo_cabbit_raf8zBWukJE_unsplash from "@assets/turquo-cabbit-raf8zBWukJE-unsplash.png";
+
 const HERO_BG_IMAGES = [heroBg0, heroBg1, heroBg2, heroBg3, heroBg4];
 
 function snapScrollTo(hash: string) {
@@ -72,367 +74,367 @@ function HeaderV15() {
  const textHover = "#001489";
 
  return (
- <motion.header
- data-testid="header"
- initial={{ y: -72, opacity: 0 }}
- animate={{ y: 0, opacity: 1 }}
- transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
- className="fixed top-0 left-0 right-0 z-50"
- style={{
- background: "#FFFFFF",
- borderBottom: "1px solid rgba(0,20,137,0.08)",
- }}
- >
- <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 92 }}>
+  <motion.header
+  data-testid="header"
+  initial={{ y: -72, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+  className="fixed top-0 left-0 right-0 z-50"
+  style={{
+  background: "#FFFFFF",
+  borderBottom: "1px solid rgba(0,20,137,0.08)",
+  }}
+  >
+   <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between" style={{ height: 92 }}>
 
- {/* Logo */}
- <a href="#home" data-testid="logo" className="shrink-0" style={{ transition: "filter 0.45s ease" }} onClick={e => { e.preventDefault(); snapScrollTo("#home"); }}>
- <img
- src={miltonHobbsLogo}
- alt="Milton Hobbs"
- style={{ height: 72, width: "auto", display: "block" }}
- />
- </a>
+   {/* Logo */}
+   <a href="#home" data-testid="logo" className="shrink-0" style={{ transition: "filter 0.45s ease" }} onClick={e => { e.preventDefault(); snapScrollTo("#home"); }}>
+   <img
+   src={miltonHobbsLogo}
+   alt="Milton Hobbs"
+   style={{ height: 72, width: "auto", display: "block" }}
+   />
+   </a>
 
- {/* Desktop nav */}
- <nav data-testid="nav-desktop" className="hidden lg:flex items-center gap-10 xl:gap-12">
- {mainLinks.map((link) => {
- if (link.href === "#expertise") {
- return (
- <div
- key={link.href}
- onMouseEnter={openExpertise}
- onMouseLeave={closeExpertise}
- style={{ position: "relative", display: "flex", alignItems: "center" }}
- >
- <button
- data-testid="nav-link-expertise"
- className="relative whitespace-nowrap font-bold inline-flex items-center gap-1.5"
- style={{
- color: expertiseOpen ? textHover : textCol,
- fontSize: 16,
- fontWeight: 700,
- letterSpacing: "0.10em",
- textTransform: "uppercase",
- textDecoration: expertiseOpen ? "underline" : "none",
- textUnderlineOffset: "4px",
- background: "none",
- border: "none",
- cursor: "pointer",
- padding: 0,
- fontFamily: "'Plus Jakarta Sans', sans-serif",
- transition: "color 0.25s ease",
- }}
- onClick={() => { setExpertiseOpen(false); snapScrollTo("#expertise"); }}
- >
- {link.label.toUpperCase()}
- <motion.svg
- width="10" height="10" viewBox="0 0 10 10" fill="none"
- animate={{ rotate: expertiseOpen ? 180 : 0 }}
- transition={{ duration: 0.2 }}
- style={{ marginTop: 1 }}
- >
- <path d="M2 3.5l3 3 3-3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
- </motion.svg>
- </button>
- </div>
- );
- }
- return (
- <a
- key={link.href}
- href={link.href}
- data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
- className="relative whitespace-nowrap font-bold"
- style={{
- color: textCol,
- fontSize: 16,
- fontWeight: 700,
- letterSpacing: "0.10em",
- textTransform: "uppercase",
- textDecoration: "none",
- transition: "color 0.25s ease",
- fontFamily: "'Plus Jakarta Sans', sans-serif",
- }}
- onClick={e => { if (link.href.startsWith("#")) { e.preventDefault(); snapScrollTo(link.href); } }}
- onMouseEnter={e => { e.currentTarget.style.color = textHover; e.currentTarget.style.textDecoration = "underline"; e.currentTarget.style.textUnderlineOffset = "4px"; }}
- onMouseLeave={e => { e.currentTarget.style.color = textCol; e.currentTarget.style.textDecoration = "none"; }}
- >
- {link.label.toUpperCase()}
- </a>
- );
- })}
- </nav>
+   {/* Desktop nav */}
+   <nav data-testid="nav-desktop" className="hidden lg:flex items-center gap-10 xl:gap-12">
+   {mainLinks.map((link) => {
+   if (link.href === "#expertise") {
+   return (
+   <div
+   key={link.href}
+   onMouseEnter={openExpertise}
+   onMouseLeave={closeExpertise}
+   style={{ position: "relative", display: "flex", alignItems: "center" }}
+   >
+   <button
+   data-testid="nav-link-expertise"
+   className="relative whitespace-nowrap font-bold inline-flex items-center gap-1.5"
+   style={{
+   color: expertiseOpen ? textHover : textCol,
+   fontSize: 16,
+   fontWeight: 700,
+   letterSpacing: "0.10em",
+   textTransform: "uppercase",
+   textDecoration: expertiseOpen ? "underline" : "none",
+   textUnderlineOffset: "4px",
+   background: "none",
+   border: "none",
+   cursor: "pointer",
+   padding: 0,
+   fontFamily: "'Plus Jakarta Sans', sans-serif",
+   transition: "color 0.25s ease",
+   }}
+   onClick={() => { setExpertiseOpen(false); snapScrollTo("#expertise"); }}
+   >
+   {link.label.toUpperCase()}
+   <motion.svg
+   width="10" height="10" viewBox="0 0 10 10" fill="none"
+   animate={{ rotate: expertiseOpen ? 180 : 0 }}
+   transition={{ duration: 0.2 }}
+   style={{ marginTop: 1 }}
+   >
+   <path d="M2 3.5l3 3 3-3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+   </motion.svg>
+   </button>
+   </div>
+   );
+   }
+   return (
+    <a
+    key={link.href}
+    href={link.href}
+    data-testid={`nav-link-${link.href.replace(/[#/]/g, "")}`}
+    className="relative whitespace-nowrap font-bold"
+    style={{
+    color: textCol,
+    fontSize: 16,
+    fontWeight: 700,
+    letterSpacing: "0.10em",
+    textTransform: "uppercase",
+    textDecoration: "none",
+    transition: "color 0.25s ease",
+    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    }}
+    onClick={e => { if (link.href.startsWith("#")) { e.preventDefault(); snapScrollTo(link.href); } }}
+    onMouseEnter={e => { e.currentTarget.style.color = textHover; e.currentTarget.style.textDecoration = "underline"; e.currentTarget.style.textUnderlineOffset = "4px"; }}
+    onMouseLeave={e => { e.currentTarget.style.color = textCol; e.currentTarget.style.textDecoration = "none"; }}
+    >
+     {link.label.toUpperCase()}
+    </a>
+   );
+   })}
+   </nav>
 
- {/* Right side */}
- <div className="hidden lg:flex items-center gap-7 shrink-0">
+   {/* Right side */}
+   <div className="hidden lg:flex items-center gap-7 shrink-0">
 
- {/* Language toggle */}
- <div
- data-testid="lang-toggle"
- className="flex items-center"
- style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.10em" }}
- >
- <button
- onClick={() => setLang("EN")}
- data-testid="lang-en"
- style={{ color: lang === "EN" ? textHover : "rgba(0,20,137,0.28)", transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
- >EN</button>
- <span style={{ color: "rgba(0,20,137,0.15)", margin: "0 8px", fontWeight: 300, fontSize: 11 }}>|</span>
- <button
- onClick={() => setLang("FR")}
- data-testid="lang-fr"
- style={{ color: lang === "FR" ? textHover : "rgba(0,20,137,0.28)", transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
- >FR</button>
- </div>
+   {/* Language toggle */}
+   <div
+   data-testid="lang-toggle"
+   className="flex items-center"
+   style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.10em" }}
+   >
+   <button
+   onClick={() => setLang("EN")}
+   data-testid="lang-en"
+   style={{ color: lang === "EN" ? textHover : "rgba(0,20,137,0.28)", transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+   >EN</button>
+   <span style={{ color: "rgba(0,20,137,0.15)", margin: "0 8px", fontWeight: 300, fontSize: 11 }}>|</span>
+   <button
+   onClick={() => setLang("FR")}
+   data-testid="lang-fr"
+   style={{ color: lang === "FR" ? textHover : "rgba(0,20,137,0.28)", transition: "color 0.25s", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+   >FR</button>
+   </div>
 
- {/* Thin divider */}
- <div style={{ width: 1, height: 16, background: "rgba(0,20,137,0.12)" }} />
+   {/* Thin divider */}
+   <div style={{ width: 1, height: 16, background: "rgba(0,20,137,0.12)" }} />
 
- {/* Contact — solid blue */}
- <a
- href={contactLink.href}
- data-testid="nav-link-contact"
- className="inline-flex items-center whitespace-nowrap"
- onClick={e => { e.preventDefault(); snapScrollTo(contactLink.href); }}
- style={{
- border: "1px solid #001489",
- color: "#001489",
- background: "transparent",
- padding: "9px 22px",
- fontSize: 10,
- fontWeight: 700,
- letterSpacing: "0.12em",
- textTransform: "uppercase",
- textDecoration: "none",
- fontFamily: "'Plus Jakarta Sans', sans-serif",
- transition: "background 0.25s, color 0.25s",
- }}
- onMouseEnter={e => {
- const el = e.currentTarget as HTMLElement;
- el.style.background = "#001489";
- el.style.color = "#FFFFFF";
- }}
- onMouseLeave={e => {
- const el = e.currentTarget as HTMLElement;
- el.style.background = "transparent";
- el.style.color = "#001489";
- }}
- >
- {contactLink.label}
- </a>
- </div>
+   {/* Contact — solid blue */}
+   <a
+   href={contactLink.href}
+   data-testid="nav-link-contact"
+   className="inline-flex items-center whitespace-nowrap"
+   onClick={e => { e.preventDefault(); snapScrollTo(contactLink.href); }}
+   style={{
+   border: "1px solid #001489",
+   color: "#001489",
+   background: "transparent",
+   padding: "9px 22px",
+   fontSize: 10,
+   fontWeight: 700,
+   letterSpacing: "0.12em",
+   textTransform: "uppercase",
+   textDecoration: "none",
+   fontFamily: "'Plus Jakarta Sans', sans-serif",
+   transition: "background 0.25s, color 0.25s",
+   }}
+   onMouseEnter={e => {
+   const el = e.currentTarget as HTMLElement;
+   el.style.background = "#001489";
+   el.style.color = "#FFFFFF";
+   }}
+   onMouseLeave={e => {
+   const el = e.currentTarget as HTMLElement;
+   el.style.background = "transparent";
+   el.style.color = "#001489";
+   }}
+   >
+   {contactLink.label}
+   </a>
+   </div>
 
- {/* Mobile hamburger */}
- <button
- data-testid="mobile-menu-toggle"
- aria-label="Toggle menu"
- className="lg:hidden flex flex-col gap-[5px] w-8 h-8 items-center justify-center focus:outline-none"
- onClick={() => setMobileOpen(!mobileOpen)}
- >
- <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "rotate-45 translate-y-[3px]" : ""}`} />
- <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 ${mobileOpen ? "opacity-0 scale-x-0" : ""}`} />
- <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "-rotate-45 -translate-y-[3px]" : ""}`} />
- </button>
+   {/* Mobile hamburger */}
+   <button
+   data-testid="mobile-menu-toggle"
+   aria-label="Toggle menu"
+   className="lg:hidden flex flex-col gap-[5px] w-8 h-8 items-center justify-center focus:outline-none"
+   onClick={() => setMobileOpen(!mobileOpen)}
+   >
+   <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "rotate-45 translate-y-[3px]" : ""}`} />
+   <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 ${mobileOpen ? "opacity-0 scale-x-0" : ""}`} />
+   <span style={{ background: "#001489" }} className={`block w-5 h-px transition-all duration-300 origin-center ${mobileOpen ? "-rotate-45 -translate-y-[3px]" : ""}`} />
+   </button>
 
- </div>
- {/* ── Expertise mega-menu ─────────────────────────────────────────── */}
- <AnimatePresence>
- {expertiseOpen && (
- <motion.div
- data-testid="expertise-megamenu"
- onMouseEnter={openExpertise}
- onMouseLeave={closeExpertise}
- initial={{ opacity: 0, y: -6 }}
- animate={{ opacity: 1, y: 0 }}
- exit={{ opacity: 0, y: -6 }}
- transition={{ duration: 0.18, ease: "easeOut" }}
- className="hidden lg:block"
- style={{
- position: "absolute",
- top: "100%",
- left: 0,
- right: 0,
- background: "#FFFFFF",
- borderTop: "2px solid #001489",
- borderBottom: "1px solid rgba(0,20,137,0.08)",
- boxShadow: "0 16px 48px rgba(0,20,137,0.10)",
- zIndex: 200,
- }}
- >
- <div
- className="max-w-[1400px] mx-auto"
- style={{ padding: "52px 32px 56px", display: "grid", gridTemplateColumns: "1fr 2fr", gap: 80 }}
- >
- {/* Left: tagline + CTA */}
- <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
- <div>
- <p style={{
- fontFamily: "'Plus Jakarta Sans', sans-serif",
- fontSize: 12,
- fontWeight: 700,
- letterSpacing: "0.30em",
- textTransform: "uppercase",
- color: "#001489",
- marginBottom: 20,
- }}>
- Our Expertise
- </p>
- <h3
- className="font-heading font-bold"
- style={{
- fontSize: "clamp(1.6rem, 2.4vw, 2.4rem)",
- lineHeight: 1.07,
- letterSpacing: "-0.03em",
- color: "#001489",
- maxWidth: "14ch",
- marginBottom: 32,
- }}
- >Advising Across Every Sector and Border.</h3>
- <div style={{ width: 40, height: 2, background: "#001489", marginBottom: 28, opacity: 0.18 }} />
- <p style={{
- fontFamily: "'Plus Jakarta Sans', sans-serif",
- fontSize: 14,
- lineHeight: 1.75,
- color: "#000000",
- marginBottom: 36,
- }}>Eight practice areas. One firm with precision counsel 
- across the UAE, Europe and beyond.</p>
- </div>
- <a
- href="#expertise"
- data-testid="megamenu-view-all"
- onClick={e => { e.preventDefault(); setExpertiseOpen(false); snapScrollTo("#expertise"); }}
- className="inline-flex items-center gap-2.5 self-start"
- style={{
- border: "1px solid #001489",
- color: "#001489",
- background: "transparent",
- padding: "10px 22px",
- fontSize: 9,
- fontWeight: 700,
- letterSpacing: "0.18em",
- textTransform: "uppercase",
- textDecoration: "none",
- fontFamily: "'Plus Jakarta Sans', sans-serif",
- transition: "background 0.2s, color 0.2s",
- }}
- onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = "#001489"; el.style.color = "#FFFFFF"; }}
- onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = "transparent"; el.style.color = "#001489"; }}
- >
- View All Areas
- <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
- <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
- </svg>
- </a>
- </div>
+   </div>
+   {/* ── Expertise mega-menu ─────────────────────────────────────────── */}
+   <AnimatePresence>
+   {expertiseOpen && (
+   <motion.div
+   data-testid="expertise-megamenu"
+   onMouseEnter={openExpertise}
+   onMouseLeave={closeExpertise}
+   initial={{ opacity: 0, y: -6 }}
+   animate={{ opacity: 1, y: 0 }}
+   exit={{ opacity: 0, y: -6 }}
+   transition={{ duration: 0.18, ease: "easeOut" }}
+   className="hidden lg:block"
+   style={{
+   position: "absolute",
+   top: "100%",
+   left: 0,
+   right: 0,
+   background: "#FFFFFF",
+   borderTop: "2px solid #001489",
+   borderBottom: "1px solid rgba(0,20,137,0.08)",
+   boxShadow: "0 16px 48px rgba(0,20,137,0.10)",
+   zIndex: 200,
+   }}
+   >
+   <div
+   className="max-w-[1400px] mx-auto"
+   style={{ padding: "52px 32px 56px", display: "grid", gridTemplateColumns: "1fr 2fr", gap: 80 }}
+   >
+   {/* Left: tagline + CTA */}
+   <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+   <div>
+   <p style={{
+   fontFamily: "'Plus Jakarta Sans', sans-serif",
+   fontSize: 12,
+   fontWeight: 700,
+   letterSpacing: "0.30em",
+   textTransform: "uppercase",
+   color: "#001489",
+   marginBottom: 20,
+   }}>
+   Our Expertise
+   </p>
+   <h3
+   className="font-heading font-bold"
+   style={{
+   fontSize: "clamp(1.6rem, 2.4vw, 2.4rem)",
+   lineHeight: 1.07,
+   letterSpacing: "-0.03em",
+   color: "#001489",
+   maxWidth: "14ch",
+   marginBottom: 32,
+   }}
+   >Advising Across Every Sector and Border.</h3>
+   <div style={{ width: 40, height: 2, background: "#001489", marginBottom: 28, opacity: 0.18 }} />
+   <p style={{
+   fontFamily: "'Plus Jakarta Sans', sans-serif",
+   fontSize: 14,
+   lineHeight: 1.75,
+   color: "#000000",
+   marginBottom: 36,
+   }}>Eight practice areas. One firm with precision counsel 
+   across the UAE, Europe and beyond.</p>
+   </div>
+   <a
+   href="#expertise"
+   data-testid="megamenu-view-all"
+   onClick={e => { e.preventDefault(); setExpertiseOpen(false); snapScrollTo("#expertise"); }}
+   className="inline-flex items-center gap-2.5 self-start"
+   style={{
+   border: "1px solid #001489",
+   color: "#001489",
+   background: "transparent",
+   padding: "10px 22px",
+   fontSize: 9,
+   fontWeight: 700,
+   letterSpacing: "0.18em",
+   textTransform: "uppercase",
+   textDecoration: "none",
+   fontFamily: "'Plus Jakarta Sans', sans-serif",
+   transition: "background 0.2s, color 0.2s",
+   }}
+   onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = "#001489"; el.style.color = "#FFFFFF"; }}
+   onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = "transparent"; el.style.color = "#001489"; }}
+   >
+   View All Areas
+   <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
+   <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+   </svg>
+   </a>
+   </div>
 
- {/* Right: 2-column grid of practice areas */}
- <div>
- <p style={{
- fontFamily: "'Plus Jakarta Sans', sans-serif",
- fontSize: 12,
- fontWeight: 700,
- letterSpacing: "0.28em",
- textTransform: "uppercase",
- color: "#001489",
- marginBottom: 16,
- paddingBottom: 14,
- borderBottom: "1px solid rgba(0,20,137,0.10)",
- }}>
- Practice Areas
- </p>
- <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 48px" }}>
- {EXPERTISE_MENU_ITEMS.map((area, i) => (
- <a
- key={i}
- href={area.href ?? "#expertise"}
- data-testid={`megamenu-area-${i}`}
- onClick={e => { if (!area.href) { e.preventDefault(); setExpertiseOpen(false); snapScrollTo("#expertise"); } else { setExpertiseOpen(false); } }}
- className="group flex items-center gap-4"
- style={{
- padding: "15px 0",
- borderBottom: "1px solid rgba(0,20,137,0.06)",
- textDecoration: "none",
- transition: "background 0.15s",
- }}
- onMouseEnter={e => { (e.currentTarget as HTMLElement).style.paddingLeft = "8px"; }}
- onMouseLeave={e => { (e.currentTarget as HTMLElement).style.paddingLeft = "0px"; }}
- >
- <span
- className="font-heading font-bold flex-1"
- style={{
- fontSize: "0.9375rem",
- letterSpacing: "-0.01em",
- color: "#001489",
- lineHeight: 1.25,
- transition: "color 0.2s",
- }}
- >
- {area.title}
- </span>
- <svg
- width="10" height="10" viewBox="0 0 12 12" fill="none"
- style={{ opacity: 0, flexShrink: 0, transition: "opacity 0.2s" }}
- className="group-hover:opacity-100"
- >
- <path d="M2 10L10 2M10 2H4M10 2v6" stroke="#001489" strokeWidth="1.2" strokeLinecap="round" />
- </svg>
- </a>
- ))}
- </div>
- </div>
- </div>
- </motion.div>
- )}
- </AnimatePresence>
- {/* Mobile menu */}
- <AnimatePresence>
- {mobileOpen && (
- <motion.div
- data-testid="mobile-menu"
- initial={{ height: 0, opacity: 0 }}
- animate={{ height: "auto", opacity: 1 }}
- exit={{ height: 0, opacity: 0 }}
- transition={{ duration: 0.28, ease: "easeInOut" }}
- className="lg:hidden overflow-hidden"
- style={{ background: "#001489", borderTop: "1px solid rgba(255,255,255,0.07)" }}
- >
- <div className="px-8 py-8 flex flex-col gap-6">
- {navLinks.map((link) => (
- <a
- key={link.href}
- href={link.href}
- onClick={() => setMobileOpen(false)}
- style={{
- color: "rgba(255,255,255,0.75)",
- fontSize: 12,
- fontWeight: 600,
- letterSpacing: "0.12em",
- textTransform: "uppercase",
- textDecoration: "none",
- fontFamily: "'Plus Jakarta Sans', sans-serif",
- }}
- >
- {link.label}
- </a>
- ))}
- <div className="flex items-center pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
- <button
- onClick={() => setLang("EN")}
- style={{ color: lang === "EN" ? "#FFFFFF" : "rgba(255,255,255,0.30)", fontSize: 11, fontWeight: 700, letterSpacing: "0.10em", transition: "color 0.2s", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
- >EN</button>
- <span style={{ color: "rgba(255,255,255,0.15)", margin: "0 10px", fontSize: 11, fontWeight: 300 }}>|</span>
- <button
- onClick={() => setLang("FR")}
- style={{ color: lang === "FR" ? "#FFFFFF" : "rgba(255,255,255,0.30)", fontSize: 11, fontWeight: 700, letterSpacing: "0.10em", transition: "color 0.2s", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
- >FR</button>
- </div>
- </div>
- </motion.div>
- )}
- </AnimatePresence>
- </motion.header>
+   {/* Right: 2-column grid of practice areas */}
+   <div>
+   <p style={{
+   fontFamily: "'Plus Jakarta Sans', sans-serif",
+   fontSize: 12,
+   fontWeight: 700,
+   letterSpacing: "0.28em",
+   textTransform: "uppercase",
+   color: "#001489",
+   marginBottom: 16,
+   paddingBottom: 14,
+   borderBottom: "1px solid rgba(0,20,137,0.10)",
+   }}>
+   Practice Areas
+   </p>
+   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 48px" }}>
+   {EXPERTISE_MENU_ITEMS.map((area, i) => (
+   <a
+   key={i}
+   href={area.href ?? "#expertise"}
+   data-testid={`megamenu-area-${i}`}
+   onClick={e => { if (!area.href) { e.preventDefault(); setExpertiseOpen(false); snapScrollTo("#expertise"); } else { setExpertiseOpen(false); } }}
+   className="group flex items-center gap-4"
+   style={{
+   padding: "15px 0",
+   borderBottom: "1px solid rgba(0,20,137,0.06)",
+   textDecoration: "none",
+   transition: "background 0.15s",
+   }}
+   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.paddingLeft = "8px"; }}
+   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.paddingLeft = "0px"; }}
+   >
+   <span
+   className="font-heading font-bold flex-1"
+   style={{
+   fontSize: "0.9375rem",
+   letterSpacing: "-0.01em",
+   color: "#001489",
+   lineHeight: 1.25,
+   transition: "color 0.2s",
+   }}
+   >
+   {area.title}
+   </span>
+   <svg
+   width="10" height="10" viewBox="0 0 12 12" fill="none"
+   style={{ opacity: 0, flexShrink: 0, transition: "opacity 0.2s" }}
+   className="group-hover:opacity-100"
+   >
+   <path d="M2 10L10 2M10 2H4M10 2v6" stroke="#001489" strokeWidth="1.2" strokeLinecap="round" />
+   </svg>
+   </a>
+   ))}
+   </div>
+   </div>
+   </div>
+   </motion.div>
+   )}
+   </AnimatePresence>
+   {/* Mobile menu */}
+   <AnimatePresence>
+   {mobileOpen && (
+   <motion.div
+   data-testid="mobile-menu"
+   initial={{ height: 0, opacity: 0 }}
+   animate={{ height: "auto", opacity: 1 }}
+   exit={{ height: 0, opacity: 0 }}
+   transition={{ duration: 0.28, ease: "easeInOut" }}
+   className="lg:hidden overflow-hidden"
+   style={{ background: "#001489", borderTop: "1px solid rgba(255,255,255,0.07)" }}
+   >
+   <div className="px-8 py-8 flex flex-col gap-6">
+   {navLinks.map((link) => (
+   <a
+   key={link.href}
+   href={link.href}
+   onClick={() => setMobileOpen(false)}
+   style={{
+   color: "rgba(255,255,255,0.75)",
+   fontSize: 12,
+   fontWeight: 600,
+   letterSpacing: "0.12em",
+   textTransform: "uppercase",
+   textDecoration: "none",
+   fontFamily: "'Plus Jakarta Sans', sans-serif",
+   }}
+   >
+   {link.label}
+   </a>
+   ))}
+   <div className="flex items-center pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+   <button
+   onClick={() => setLang("EN")}
+   style={{ color: lang === "EN" ? "#FFFFFF" : "rgba(255,255,255,0.30)", fontSize: 11, fontWeight: 700, letterSpacing: "0.10em", transition: "color 0.2s", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+   >EN</button>
+   <span style={{ color: "rgba(255,255,255,0.15)", margin: "0 10px", fontSize: 11, fontWeight: 300 }}>|</span>
+   <button
+   onClick={() => setLang("FR")}
+   style={{ color: lang === "FR" ? "#FFFFFF" : "rgba(255,255,255,0.30)", fontSize: 11, fontWeight: 700, letterSpacing: "0.10em", transition: "color 0.2s", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+   >FR</button>
+   </div>
+   </div>
+   </motion.div>
+   )}
+   </AnimatePresence>
+  </motion.header>
  );
 }
 
@@ -490,172 +492,172 @@ function HeroV15() {
  const featuredSlug = articles[currentIndex]?.slug ?? "";
 
  return (
- <section
- id="home"
- data-testid="hero-section"
- className="relative min-h-screen overflow-hidden v2-snap-section"
- style={{ background: "#001489" }}
- >
- <AnimatePresence>
- <motion.img
- key={bgIndex}
- src={HERO_BG_IMAGES[bgIndex]}
- alt=""
- aria-hidden="true"
- className="absolute inset-0 w-full h-full object-cover pointer-events-none"
- style={{ objectPosition: "center 30%", mixBlendMode: "multiply" }}
- initial={{ opacity: 0 }}
- animate={{ opacity: 1 }}
- exit={{ opacity: 0 }}
- transition={{ duration: 2.4, ease: "easeInOut" }}
- />
- </AnimatePresence>
- {ACCENT_TILES.map((tile, i) => (
- <motion.div
- key={i}
- className="absolute pointer-events-none"
- style={{
- left: tile.left,
- top: tile.top,
- width: TILE_SZ,
- height: TILE_SZ,
- backgroundColor: tile.col,
- }}
- animate={{ opacity: [0, 0, 1, 1, 0, 0] }}
- transition={{
- duration: tile.dur,
- delay: tile.delay,
- repeat: Infinity,
- ease: "easeInOut",
- times: [0, 0.15, 0.40, 0.60, 0.85, 1],
- }}
- />
- ))}
- <div
- className="absolute inset-x-0 bottom-0 pointer-events-none"
- style={{
- height: "70%",
- background: "linear-gradient(to top, rgba(0,14,80,0.80) 0%, rgba(0,14,80,0.40) 45%, transparent 100%)",
- }}
- />
- <div className="relative z-10 flex flex-col justify-end min-h-screen px-12 xl:px-24 pb-16 pt-28"
- style={{ maxWidth: "1200px" }}>
+  <section
+  id="home"
+  data-testid="hero-section"
+  className="relative min-h-screen overflow-hidden v2-snap-section"
+  style={{ background: "#001489" }}
+  >
+   <AnimatePresence>
+   <motion.img
+   key={bgIndex}
+   src={HERO_BG_IMAGES[bgIndex]}
+   alt=""
+   aria-hidden="true"
+   className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+   style={{ objectPosition: "center 30%", mixBlendMode: "multiply" }}
+   initial={{ opacity: 0 }}
+   animate={{ opacity: 1 }}
+   exit={{ opacity: 0 }}
+   transition={{ duration: 2.4, ease: "easeInOut" }}
+   />
+   </AnimatePresence>
+   {ACCENT_TILES.map((tile, i) => (
+   <motion.div
+   key={i}
+   className="absolute pointer-events-none"
+   style={{
+   left: tile.left,
+   top: tile.top,
+   width: TILE_SZ,
+   height: TILE_SZ,
+   backgroundColor: tile.col,
+   }}
+   animate={{ opacity: [0, 0, 1, 1, 0, 0] }}
+   transition={{
+   duration: tile.dur,
+   delay: tile.delay,
+   repeat: Infinity,
+   ease: "easeInOut",
+   times: [0, 0.15, 0.40, 0.60, 0.85, 1],
+   }}
+   />
+   ))}
+   <div
+   className="absolute inset-x-0 bottom-0 pointer-events-none"
+   style={{
+   height: "70%",
+   background: "linear-gradient(to top, rgba(0,14,80,0.80) 0%, rgba(0,14,80,0.40) 45%, transparent 100%)",
+   }}
+   />
+   <div className="relative z-10 flex flex-col justify-end min-h-screen px-12 xl:px-24 pb-16 pt-28"
+   style={{ maxWidth: "1200px" }}>
 
- <AnimatePresence mode="wait">
- <motion.div
- key={currentIndex}
- initial={{ opacity: 0, y: 22 }}
- animate={{ opacity: 1, y: 0 }}
- exit={{ opacity: 0, y: -14 }}
- transition={{ duration: 0.9, ease: "easeOut" }}
- >
- <div className="flex items-center gap-3 mb-6">
- <div style={{ width: 24, height: 1, background: "rgba(255,255,255,0.45)", flexShrink: 0 }} />
- <p
- className="uppercase tracking-[0.12em] font-bold text-[18px] font-sans"
- style={{ color: "#FFFFFF", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
- data-testid="hero-eyebrow"
- >
- {featuredArticle?.category}
- </p>
- </div>
+   <AnimatePresence mode="wait">
+   <motion.div
+   key={currentIndex}
+   initial={{ opacity: 0, y: 22 }}
+   animate={{ opacity: 1, y: 0 }}
+   exit={{ opacity: 0, y: -14 }}
+   transition={{ duration: 0.9, ease: "easeOut" }}
+   >
+   <div className="flex items-center gap-3 mb-6">
+   <div style={{ width: 24, height: 1, background: "rgba(255,255,255,0.45)", flexShrink: 0 }} />
+   <p
+   className="uppercase tracking-[0.12em] font-bold text-[18px] font-sans"
+   style={{ color: "#FFFFFF", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+   data-testid="hero-eyebrow"
+   >
+   {featuredArticle?.category}
+   </p>
+   </div>
 
- <h1
- className="font-heading text-white font-bold mb-6"
- style={{
- fontSize: "clamp(2.25rem, 5.5vw, 4.75rem)",
- lineHeight: 1.04,
- letterSpacing: "-0.01em",
- }}
- data-testid="hero-headline"
- >
- {featuredArticle?.title}
- </h1>
+   <h1
+   className="font-heading text-white font-bold mb-6"
+   style={{
+   fontSize: "clamp(2.25rem, 5.5vw, 4.75rem)",
+   lineHeight: 1.04,
+   letterSpacing: "-0.01em",
+   }}
+   data-testid="hero-headline"
+   >
+   {featuredArticle?.title}
+   </h1>
 
- {(() => {
- const rawLead = (articles[currentIndex]?.body.find(s => s.type === "lead") as { type: "lead"; text: string } | undefined)?.text ?? "";
- const leadExcerpt = rawLead.length > 160 ? rawLead.slice(0, 160).replace(/\s+\S*$/, "") + "…" : rawLead;
- return leadExcerpt ? (
- <p
- data-testid="hero-excerpt"
- style={{
- color: "rgba(255,255,255,0.60)",
- fontSize: "1rem",
- lineHeight: 1.65,
- marginTop: "1.25rem",
- marginBottom: "2.25rem",
- fontFamily: "'Plus Jakarta Sans', sans-serif",
- maxWidth: "52ch",
- display: "-webkit-box",
- WebkitLineClamp: 2,
- WebkitBoxOrient: "vertical",
- overflow: "hidden",
- }}
- >
- {leadExcerpt}
- </p>
- ) : null;
- })()}
+   {(() => {
+   const rawLead = (articles[currentIndex]?.body.find(s => s.type === "lead") as { type: "lead"; text: string } | undefined)?.text ?? "";
+   const leadExcerpt = rawLead.length > 160 ? rawLead.slice(0, 160).replace(/\s+\S*$/, "") + "…" : rawLead;
+   return leadExcerpt ? (
+   <p
+   data-testid="hero-excerpt"
+   style={{
+   color: "rgba(255,255,255,0.60)",
+   fontSize: "1rem",
+   lineHeight: 1.65,
+   marginTop: "1.25rem",
+   marginBottom: "2.25rem",
+   fontFamily: "'Plus Jakarta Sans', sans-serif",
+   maxWidth: "52ch",
+   display: "-webkit-box",
+   WebkitLineClamp: 2,
+   WebkitBoxOrient: "vertical",
+   overflow: "hidden",
+   }}
+   >
+   {leadExcerpt}
+   </p>
+   ) : null;
+   })()}
 
- <a
- href={`/insights/${featuredSlug}`}
- data-testid="hero-read-link"
- className="group inline-flex items-center gap-3"
- style={{
- color: "rgba(255,255,255,0.65)",
- fontSize: 11,
- fontWeight: 600,
- letterSpacing: "0.18em",
- textTransform: "uppercase",
- textDecoration: "none",
- borderBottom: "1px solid rgba(255,255,255,0.25)",
- paddingBottom: 4,
- transition: "color 0.25s, border-color 0.25s",
- }}
- onMouseEnter={e => {
- (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
- (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.6)";
- }}
- onMouseLeave={e => {
- (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)";
- (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.25)";
- }}
- >
- <span>{ins.read}</span>
- <svg
- className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200"
- fill="none" viewBox="0 0 12 12"
- >
- <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
- </svg>
- </a>
- </motion.div>
- </AnimatePresence>
+   <a
+   href={`/insights/${featuredSlug}`}
+   data-testid="hero-read-link"
+   className="group inline-flex items-center gap-3"
+   style={{
+   color: "rgba(255,255,255,0.65)",
+   fontSize: 11,
+   fontWeight: 600,
+   letterSpacing: "0.18em",
+   textTransform: "uppercase",
+   textDecoration: "none",
+   borderBottom: "1px solid rgba(255,255,255,0.25)",
+   paddingBottom: 4,
+   transition: "color 0.25s, border-color 0.25s",
+   }}
+   onMouseEnter={e => {
+   (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
+   (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.6)";
+   }}
+   onMouseLeave={e => {
+   (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)";
+   (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.25)";
+   }}
+   >
+   <span>{ins.read}</span>
+   <svg
+   className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200"
+   fill="none" viewBox="0 0 12 12"
+   >
+   <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+   </svg>
+   </a>
+   </motion.div>
+   </AnimatePresence>
 
- <motion.div
- initial={{ opacity: 0 }}
- animate={{ opacity: 1 }}
- transition={{ duration: 0.8, delay: 1.0 }}
- className="flex items-center gap-2 mt-10"
- data-testid="hero-dots"
- >
- {ins.articles.map((_, i) => (
- <button
- key={i}
- data-testid={`hero-dot-${i}`}
- onClick={() => goTo(i)}
- aria-label={`Article ${i + 1}`}
- className="block focus:outline-none cursor-pointer transition-all duration-300"
- style={{
- width: i === currentIndex ? 28 : 8,
- height: 2,
- backgroundColor: i === currentIndex ? "#FFFFFF" : "rgba(255,255,255,0.30)",
- }}
- />
- ))}
- </motion.div>
- </div>
- </section>
+   <motion.div
+   initial={{ opacity: 0 }}
+   animate={{ opacity: 1 }}
+   transition={{ duration: 0.8, delay: 1.0 }}
+   className="flex items-center gap-2 mt-10"
+   data-testid="hero-dots"
+   >
+   {ins.articles.map((_, i) => (
+   <button
+   key={i}
+   data-testid={`hero-dot-${i}`}
+   onClick={() => goTo(i)}
+   aria-label={`Article ${i + 1}`}
+   className="block focus:outline-none cursor-pointer transition-all duration-300"
+   style={{
+   width: i === currentIndex ? 28 : 8,
+   height: 2,
+   backgroundColor: i === currentIndex ? "#FFFFFF" : "rgba(255,255,255,0.30)",
+   }}
+   />
+   ))}
+   </motion.div>
+   </div>
+  </section>
  );
 }
 
@@ -1778,289 +1780,288 @@ function ContactFormV15() {
  }
 
  return (
- <section
- id="contact"
- data-header-theme="light"
- data-testid="contact-section"
- className="v2-snap-section lg:grid"
- style={{ background: "#FFFFFF", gridTemplateColumns: "1fr clamp(260px, 30vw, 480px)", minHeight: "100dvh" }}
- >
- {/* ── Left: content ── */}
- <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 130, paddingBottom: 80, paddingLeft: "clamp(32px, 5vw, 80px)", paddingRight: "clamp(24px, 4vw, 64px)" }}>
+  <section
+  id="contact"
+  data-header-theme="light"
+  data-testid="contact-section"
+  className="v2-snap-section lg:grid"
+  style={{ background: "#FFFFFF", gridTemplateColumns: "1fr clamp(260px, 30vw, 480px)", minHeight: "100dvh" }}
+  >
+   {/* ── Left: content ── */}
+   <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 130, paddingBottom: 80, paddingLeft: "clamp(32px, 5vw, 80px)", paddingRight: "clamp(24px, 4vw, 64px)" }}>
 
- {/* ── Section header ── */}
- <motion.div
- initial={{ opacity: 0, y: 24 }}
- whileInView={{ opacity: 1, y: 0 }}
- viewport={{ once: true }}
- transition={{ duration: 0.65 }}
- style={{ marginBottom: 48, marginLeft: -20 }}
- >
- <p style={{
- fontFamily: "'Plus Jakarta Sans', sans-serif",
- fontSize: 18,
- fontWeight: 700,
- letterSpacing: "0.12em",
- textTransform: "uppercase",
- color: "#001489",
- marginBottom: 20,
- }}>
- {c.eyebrow}
- </p>
- <h2
- className="font-heading font-bold"
- style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#001489", marginBottom: 24 }}
- >
- {c.headline}
- </h2>
- <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 15, lineHeight: 1.78, maxWidth: 520 }}>
- {c.subtext}
- </p>
- </motion.div>
+   {/* ── Section header ── */}
+   <motion.div
+   initial={{ opacity: 0, y: 24 }}
+   whileInView={{ opacity: 1, y: 0 }}
+   viewport={{ once: true }}
+   transition={{ duration: 0.65 }}
+   style={{ marginBottom: 48, marginLeft: -20 }}
+   >
+   <p style={{
+   fontFamily: "'Plus Jakarta Sans', sans-serif",
+   fontSize: 18,
+   fontWeight: 700,
+   letterSpacing: "0.12em",
+   textTransform: "uppercase",
+   color: "#001489",
+   marginBottom: 20,
+   }}>
+   {c.eyebrow}
+   </p>
+   <h2
+   className="font-heading font-bold"
+   style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#001489", marginBottom: 24 }}
+   >
+   {c.headline}
+   </h2>
+   <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 15, lineHeight: 1.78, maxWidth: 520 }}>
+   {c.subtext}
+   </p>
+   </motion.div>
 
- {/* ── Form + offices ── */}
- <motion.div
- initial={{ opacity: 0, y: 28 }}
- whileInView={{ opacity: 1, y: 0 }}
- viewport={{ once: true }}
- transition={{ duration: 0.6, delay: 0.1 }}
- className="grid grid-cols-1 lg:grid-cols-[7fr_4fr]"
- style={{ borderTop: "1px solid rgba(0,20,137,0.10)", marginLeft: -20 }}
- >
- {/* ── Form — blue boxes ── */}
- <div style={{ paddingTop: 48, paddingRight: "clamp(0px, 5vw, 72px)", paddingBottom: 0 }}>
- {submitted ? (
- <motion.div
- data-testid="contact-success"
- initial={{ opacity: 0, scale: 0.97 }}
- animate={{ opacity: 1, scale: 1 }}
- transition={{ duration: 0.4 }}
- className="flex flex-col gap-5"
- style={{ minHeight: 360, justifyContent: "center" }}
- >
- <div style={{ width: 52, height: 52, background: "#001489", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 8 }}>
- <svg className="w-6 h-6" fill="none" viewBox="0 0 20 20">
- <path d="M4 10l4 4 8-8" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
- </svg>
- </div>
- <h3 className="font-heading font-bold" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)", color: "#001489" }}>
- {c.successTitle}
- </h3>
- <p style={{ color: "rgba(0,0,0,0.50)", fontSize: 14, lineHeight: 1.72 }}>{c.successText}</p>
- </motion.div>
- ) : (
- <div className="w-full">
- <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 32 }}>
- Send a Message
- </p>
- <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-3">
- <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
- <input
- type="text" name="name" required value={form.name} onChange={handleChange}
- placeholder={c.namePlaceholder} data-testid="input-name"
- style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
- className="placeholder-[rgba(0,0,0,0.30)]"
- onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
- onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
- />
- <input
- type="email" name="email" required value={form.email} onChange={handleChange}
- placeholder={c.emailPlaceholder} data-testid="input-email"
- style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
- className="placeholder-[rgba(0,0,0,0.30)]"
- onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
- onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
- />
- </div>
- <div className="relative">
- <select
- name="subject" required value={form.subject} onChange={handleChange}
- data-testid="select-subject"
- style={{ width: "100%", background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: form.subject ? "#0A0A1A" : "rgba(0,0,0,0.30)", padding: "13px 40px 13px 16px", fontSize: 14, outline: "none", appearance: "none", cursor: "pointer", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
- onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
- onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
- >
- <option value="" disabled hidden>{c.subjectPlaceholder}</option>
- {c.subjectOptions.map((opt, i) => (
- <option key={i} value={opt}>{opt}</option>
- ))}
- </select>
- <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3" style={{ color: "rgba(0,20,137,0.40)" }} fill="none" viewBox="0 0 12 12">
- <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
- </svg>
- </div>
- <textarea
- name="message" required rows={5} value={form.message} onChange={handleChange}
- placeholder={c.messagePlaceholder} data-testid="input-message"
- style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", resize: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
- className="placeholder-[rgba(0,0,0,0.30)]"
- onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
- onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
- />
- <div className="flex items-center gap-6 mt-2">
- <button
- type="submit"
- disabled={submitting}
- data-testid="button-submit"
- style={{
- background: "#001489",
- color: "#FFFFFF",
- border: "none",
- padding: "15px 40px",
- fontSize: 11,
- fontWeight: 700,
- letterSpacing: "0.12em",
- textTransform: "uppercase",
- cursor: submitting ? "not-allowed" : "pointer",
- opacity: submitting ? 0.6 : 1,
- transition: "opacity 0.2s, background 0.2s",
- fontFamily: "'Plus Jakarta Sans', sans-serif",
- }}
- onMouseEnter={e => { if (!submitting) (e.currentTarget as HTMLElement).style.background = "#0019A8"; }}
- onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#001489"; }}
- >
- {submitting ? (
- <span className="flex items-center gap-2.5">
- <svg className="w-3.5 h-3.5 animate-spin" viewBox="0 0 16 16" fill="none">
- <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.3" />
- <path d="M8 2a6 6 0 016 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
- </svg>
- {c.submitting}
- </span>
- ) : (
- <span className="flex items-center gap-2.5">
- {c.submit}
- <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
- <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
- </svg>
- </span>
- )}
- </button>
- <p style={{ color: "rgba(0,0,0,0.35)", fontSize: 12, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
- Typically replies within 24 hours
- </p>
- </div>
- </form>
- </div>
- )}
- </div>
+   {/* ── Form + offices ── */}
+   <motion.div
+   initial={{ opacity: 0, y: 28 }}
+   whileInView={{ opacity: 1, y: 0 }}
+   viewport={{ once: true }}
+   transition={{ duration: 0.6, delay: 0.1 }}
+   className="grid grid-cols-1 lg:grid-cols-[7fr_4fr]"
+   style={{ borderTop: "1px solid rgba(0,20,137,0.10)", marginLeft: -20 }}
+   >
+   {/* ── Form — blue boxes ── */}
+   <div style={{ paddingTop: 48, paddingRight: "clamp(0px, 5vw, 72px)", paddingBottom: 0 }}>
+   {submitted ? (
+   <motion.div
+   data-testid="contact-success"
+   initial={{ opacity: 0, scale: 0.97 }}
+   animate={{ opacity: 1, scale: 1 }}
+   transition={{ duration: 0.4 }}
+   className="flex flex-col gap-5"
+   style={{ minHeight: 360, justifyContent: "center" }}
+   >
+   <div style={{ width: 52, height: 52, background: "#001489", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 8 }}>
+   <svg className="w-6 h-6" fill="none" viewBox="0 0 20 20">
+   <path d="M4 10l4 4 8-8" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+   </svg>
+   </div>
+   <h3 className="font-heading font-bold" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)", color: "#001489" }}>
+   {c.successTitle}
+   </h3>
+   <p style={{ color: "rgba(0,0,0,0.50)", fontSize: 14, lineHeight: 1.72 }}>{c.successText}</p>
+   </motion.div>
+   ) : (
+   <div className="w-full">
+   <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 32 }}>
+   Send a Message
+   </p>
+   <form onSubmit={handleSubmit} data-testid="contact-form" className="flex flex-col gap-3">
+   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+   <input
+   type="text" name="name" required value={form.name} onChange={handleChange}
+   placeholder={c.namePlaceholder} data-testid="input-name"
+   style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+   className="placeholder-[rgba(0,0,0,0.30)]"
+   onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+   onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
+   />
+   <input
+   type="email" name="email" required value={form.email} onChange={handleChange}
+   placeholder={c.emailPlaceholder} data-testid="input-email"
+   style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+   className="placeholder-[rgba(0,0,0,0.30)]"
+   onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+   onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
+   />
+   </div>
+   <div className="relative">
+   <select
+   name="subject" required value={form.subject} onChange={handleChange}
+   data-testid="select-subject"
+   style={{ width: "100%", background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: form.subject ? "#0A0A1A" : "rgba(0,0,0,0.30)", padding: "13px 40px 13px 16px", fontSize: 14, outline: "none", appearance: "none", cursor: "pointer", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+   onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+   onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
+   >
+   <option value="" disabled hidden>{c.subjectPlaceholder}</option>
+   {c.subjectOptions.map((opt, i) => (
+   <option key={i} value={opt}>{opt}</option>
+   ))}
+   </select>
+   <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3" style={{ color: "rgba(0,20,137,0.40)" }} fill="none" viewBox="0 0 12 12">
+   <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+   </svg>
+   </div>
+   <textarea
+   name="message" required rows={5} value={form.message} onChange={handleChange}
+   placeholder={c.messagePlaceholder} data-testid="input-message"
+   style={{ background: "#FFFFFF", border: "1px solid rgba(0,20,137,0.18)", color: "#0A0A1A", padding: "13px 16px", fontSize: 14, outline: "none", resize: "none", transition: "border-color 0.2s", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+   className="placeholder-[rgba(0,0,0,0.30)]"
+   onFocus={e => (e.currentTarget as HTMLElement).style.borderColor = "#001489"}
+   onBlur={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,20,137,0.18)"}
+   />
+   <div className="flex items-center gap-6 mt-2">
+   <button
+   type="submit"
+   disabled={submitting}
+   data-testid="button-submit"
+   style={{
+   background: "#001489",
+   color: "#FFFFFF",
+   border: "none",
+   padding: "15px 40px",
+   fontSize: 11,
+   fontWeight: 700,
+   letterSpacing: "0.12em",
+   textTransform: "uppercase",
+   cursor: submitting ? "not-allowed" : "pointer",
+   opacity: submitting ? 0.6 : 1,
+   transition: "opacity 0.2s, background 0.2s",
+   fontFamily: "'Plus Jakarta Sans', sans-serif",
+   }}
+   onMouseEnter={e => { if (!submitting) (e.currentTarget as HTMLElement).style.background = "#0019A8"; }}
+   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#001489"; }}
+   >
+   {submitting ? (
+   <span className="flex items-center gap-2.5">
+   <svg className="w-3.5 h-3.5 animate-spin" viewBox="0 0 16 16" fill="none">
+   <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.3" />
+   <path d="M8 2a6 6 0 016 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+   </svg>
+   {c.submitting}
+   </span>
+   ) : (
+   <span className="flex items-center gap-2.5">
+   {c.submit}
+   <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12">
+   <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
+   </svg>
+   </span>
+   )}
+   </button>
+   <p style={{ color: "rgba(0,0,0,0.35)", fontSize: 12, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+   Typically replies within 24 hours
+   </p>
+   </div>
+   </form>
+   </div>
+   )}
+   </div>
 
- {/* ── Offices — right column ── */}
- <div
- style={{
- paddingTop: 48,
- paddingLeft: "clamp(24px, 4vw, 56px)",
- borderLeft: "1px solid rgba(0,20,137,0.10)",
- display: "flex",
- flexDirection: "column",
- gap: 0,
- }}
- >
- <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 32 }}>
- {c.officeLabel}
- </p>
+   {/* ── Offices — right column ── */}
+   <div
+   style={{
+   paddingTop: 48,
+   paddingLeft: "clamp(24px, 4vw, 56px)",
+   borderLeft: "1px solid rgba(0,20,137,0.10)",
+   display: "flex",
+   flexDirection: "column",
+   gap: 0,
+   }}
+   >
+   <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 32 }}>
+   {c.officeLabel}
+   </p>
 
- {/* Dubai */}
- <div style={{ marginBottom: 32 }}>
- <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
- {c.dubaiLabel}
- </p>
- {f.dubaiAddr.map((line, i) => (
- <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
- ))}
- <a
- href="tel:+97145232421"
- data-testid="contact-address-phone-dubai"
- style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 13, textDecoration: "none", display: "inline-block", marginTop: 6 }}
- >
- +971 4 523 2421
- </a>
- </div>
+   {/* Dubai */}
+   <div style={{ marginBottom: 32 }}>
+   <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
+   {c.dubaiLabel}
+   </p>
+   {f.dubaiAddr.map((line, i) => (
+   <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
+   ))}
+   <a
+   href="tel:+97145232421"
+   data-testid="contact-address-phone-dubai"
+   style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 13, textDecoration: "none", display: "inline-block", marginTop: 6 }}
+   >
+   +971 4 523 2421
+   </a>
+   </div>
 
- <div style={{ height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 32 }} />
+   <div style={{ height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 32 }} />
 
- {/* Paris */}
- <div style={{ marginBottom: 32 }}>
- <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
- {c.parisLabel}
- </p>
- {f.parisAddr.map((line, i) => (
- <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
- ))}
- <a
- href="tel:+33180270067"
- data-testid="contact-address-phone-paris"
- style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 13, textDecoration: "none", display: "inline-block", marginTop: 6 }}
- >
- +33 1 80 27 00 67
- </a>
- </div>
+   {/* Paris */}
+   <div style={{ marginBottom: 32 }}>
+   <p className="font-heading font-semibold" style={{ fontSize: 14, color: "#001489", marginBottom: 10 }}>
+   {c.parisLabel}
+   </p>
+   {f.parisAddr.map((line, i) => (
+   <p key={i} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#000000", fontSize: 13, lineHeight: 1.7, marginBottom: 2 }}>{line}</p>
+   ))}
+   <a
+   href="tel:+33180270067"
+   data-testid="contact-address-phone-paris"
+   style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 13, textDecoration: "none", display: "inline-block", marginTop: 6 }}
+   >
+   +33 1 80 27 00 67
+   </a>
+   </div>
 
- <div style={{ height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 24 }} />
+   <div style={{ height: 1, background: "rgba(0,20,137,0.08)", marginBottom: 24 }} />
 
- {/* Email */}
- <div>
- <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
- Email
- </p>
- <a
- href={`mailto:${f.email}`}
- data-testid="contact-email"
- style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 14, textDecoration: "none" }}
- >
- {f.email}
- </a>
- </div>
+   {/* Email */}
+   <div>
+   <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
+   Email
+   </p>
+   <a
+   href={`mailto:${f.email}`}
+   data-testid="contact-email"
+   style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 14, textDecoration: "none" }}
+   >
+   {f.email}
+   </a>
+   </div>
 
- <div style={{ height: 1, background: "rgba(0,20,137,0.08)", margin: "24px 0" }} />
+   <div style={{ height: 1, background: "rgba(0,20,137,0.08)", margin: "24px 0" }} />
 
- {/* WhatsApp */}
- <div>
- <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
- WhatsApp
- </p>
- <a
- href="https://wa.me/971561234567"
- data-testid="contact-whatsapp"
- target="_blank"
- rel="noopener noreferrer"
- style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 14, textDecoration: "none" }}
- >
- +971 56 123 4567
- </a>
- </div>
- </div>
- </motion.div>
- </div>
-
- {/* ── Right: image panel with blue multiply effect ── */}
- <div
- className="hidden lg:block relative overflow-hidden"
- style={{ isolation: "isolate", borderLeft: "1px solid rgba(0,20,137,0.10)" }}
- >
- {/* Photo */}
- <img
- src={imgContact}
- alt=""
- aria-hidden="true"
- style={{
- position: "absolute",
- inset: 0,
- width: "100%",
- height: "100%",
- objectFit: "cover",
- objectPosition: "center",
- }}
- />
- {/* Bottom-to-top dark vignette for depth */}
- <div style={{
- position: "absolute",
- inset: 0,
- background: "linear-gradient(to top, rgba(0,0,20,0.55) 0%, transparent 50%)",
- pointerEvents: "none",
- }} />
- </div>
- </section>
+   {/* WhatsApp */}
+   <div>
+   <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 18, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
+   WhatsApp
+   </p>
+   <a
+   href="https://wa.me/971561234567"
+   data-testid="contact-whatsapp"
+   target="_blank"
+   rel="noopener noreferrer"
+   style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", color: "#001489", fontSize: 14, textDecoration: "none" }}
+   >
+   +971 56 123 4567
+   </a>
+   </div>
+   </div>
+   </motion.div>
+   </div>
+   {/* ── Right: image panel with blue multiply effect ── */}
+   <div
+   className="hidden lg:block relative overflow-hidden"
+   style={{ isolation: "isolate", borderLeft: "1px solid rgba(0,20,137,0.10)" }}
+   >
+   {/* Photo */}
+   <img
+   src={turquo_cabbit_raf8zBWukJE_unsplash}
+   alt=""
+   aria-hidden="true"
+   style={{
+   position: "absolute",
+   inset: 0,
+   width: "100%",
+   height: "100%",
+   objectFit: "cover",
+   objectPosition: "center",
+   }}
+   />
+   {/* Bottom-to-top dark vignette for depth */}
+   <div style={{
+   position: "absolute",
+   inset: 0,
+   background: "linear-gradient(to top, rgba(0,0,20,0.55) 0%, transparent 50%)",
+   pointerEvents: "none",
+   }} />
+   </div>
+  </section>
  );
 }
 
