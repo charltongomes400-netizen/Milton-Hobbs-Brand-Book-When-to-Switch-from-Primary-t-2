@@ -1793,7 +1793,7 @@ function ContactFormV15() {
  whileInView={{ opacity: 1, y: 0 }}
  viewport={{ once: true }}
  transition={{ duration: 0.65 }}
- style={{ marginBottom: 88, marginLeft: -20 }}
+ style={{ marginBottom: 48, marginLeft: -20 }}
  >
  <p style={{
  fontFamily: "'Plus Jakarta Sans', sans-serif",
