@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type CSSProperties } from "react";
 import { motion, AnimatePresence, useInView, useMotionValue, useSpring, useAnimationFrame } from "framer-motion";
-import firmHeroBg from "@assets/verne-ho-0LAJfSNa-xQ-unsplash_1775562755413.jpg";
+import firmHeroBg from "@assets/building_1781737106409.png";
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { ourFirmCopy, ct, type OurFirmLang } from "@/data/ourFirmCopy";
 import { Header } from "@/components/layout/Header";
