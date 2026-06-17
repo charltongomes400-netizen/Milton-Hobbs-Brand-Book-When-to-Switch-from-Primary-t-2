@@ -2052,14 +2052,6 @@ function ContactFormV15() {
  objectPosition: "center",
  }}
  />
- {/* Blue multiply — exact same as Practice Areas */}
- <div style={{
- position: "absolute",
- inset: 0,
- background: "#001489",
- mixBlendMode: "multiply",
- pointerEvents: "none",
- }} />
  {/* Bottom-to-top dark vignette for depth */}
  <div style={{
  position: "absolute",
