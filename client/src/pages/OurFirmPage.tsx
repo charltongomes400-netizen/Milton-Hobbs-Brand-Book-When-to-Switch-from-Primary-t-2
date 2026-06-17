@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type CSSProperties } from "react";
 import { motion, AnimatePresence, useInView, useMotionValue, useSpring, useAnimationFrame } from "framer-motion";
 import firmHeroBg from "@assets/building_1781737106409.png";
+import missionImg from "@assets/photo-1527576539890-dfa815648363_1781737412445.png";
 import { LanguageProvider, useLang } from "@/contexts/LanguageContext";
 import { ourFirmCopy, ct, type OurFirmLang } from "@/data/ourFirmCopy";
 import { Header } from "@/components/layout/Header";
@@ -1003,16 +1004,15 @@ function OurFirmContent() {
           </div>
         </div>
 
-        {/* Right — blue panel */}
-        <div className="w-full lg:w-1/2 bg-[#001489] flex items-center justify-center py-32 px-12 xl:px-20">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={missionInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.9, delay: 0.4 }}
-            className="relative w-full h-[360px] overflow-hidden"
-          >
-            <MissionOrbit />
-          </motion.div>
+        {/* Right — photo panel */}
+        <div className="w-full lg:w-1/2 relative overflow-hidden min-h-[480px] lg:min-h-0">
+          <img
+            src={missionImg}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: "center center" }}
+          />
         </div>
       </section>
       {/* ── CORE VALUES ── */}
