@@ -781,7 +781,8 @@ function OurFirmContent() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={philosophyInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-[#001489] tracking-[0.4em] uppercase font-bold mb-8 text-[18px]"
+                className="text-[#001489] tracking-[0.12em] uppercase font-bold mb-8 text-[18px] font-sans"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               >
                 {ct(copy.ourPhilosophy.eyebrow, l)}
               </motion.p>
@@ -878,7 +879,8 @@ function OurFirmContent() {
             initial={{ opacity: 0, x: -20 }}
             animate={missionInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-[#001489] tracking-[0.4em] uppercase font-bold mb-8 text-[18px]"
+            className="text-[#001489] tracking-[0.12em] uppercase font-bold mb-8 text-[18px] font-sans"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
           >
             {ct(copy.brandStory.eyebrow, l)}
           </motion.p>
@@ -976,7 +978,8 @@ function OurFirmContent() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={valuesInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6 }}
-                className="tracking-[0.4em] uppercase font-bold mb-6 text-[#001489] text-[18px]"
+                className="tracking-[0.12em] uppercase font-bold mb-6 text-[#001489] text-[18px] font-sans"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               >
                 {ct(copy.coreValues.eyebrow, l)}
               </motion.p>
@@ -1033,7 +1036,8 @@ function OurFirmContent() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="text-[#001489] tracking-[0.4em] uppercase font-bold mb-6 text-[18px]"
+                className="text-[#001489] tracking-[0.12em] uppercase font-bold mb-6 text-[18px] font-sans"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               >
                 {ct(copy.bookConsultation.eyebrow, l)}
               </motion.p>
