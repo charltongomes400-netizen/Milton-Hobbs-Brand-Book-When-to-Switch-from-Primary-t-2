@@ -125,7 +125,8 @@ function InsightsInner() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-white tracking-[0.38em] uppercase font-bold mb-4 text-[16px]"
+              className="text-white tracking-[0.12em] uppercase font-bold mb-4 text-[18px] font-sans"
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
             >
               {ct(indexPage.hero.eyebrow, lang)}
             </motion.p>
@@ -188,7 +189,7 @@ function InsightsInner() {
       {!isLoading && featured && (
         <section data-testid="insights-featured" className="px-8 pt-12 pb-6">
           <div className="max-w-[1400px] mx-auto">
-            <p className="text-[#001489] tracking-[0.38em] uppercase font-bold mb-6 text-[16px]">
+            <p className="text-[#001489] tracking-[0.12em] uppercase font-bold mb-6 text-[18px] font-sans" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
               {isFr ? "À LA UNE" : "FEATURED"}
             </p>
             <a
@@ -256,7 +257,7 @@ function InsightsInner() {
           <div className="max-w-[1400px] mx-auto">
             {/* Row: label + filter tabs */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-              <p className="text-[#001489] tracking-[0.38em] uppercase font-bold text-[16px]">
+              <p className="text-[#001489] tracking-[0.12em] uppercase font-bold text-[18px] font-sans" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                 {isFr ? "TOUTES LES ANALYSES" : "ALL INSIGHTS"}
               </p>
               <div className="flex flex-wrap gap-2">
@@ -348,7 +349,7 @@ function InsightsInner() {
       <section className="bg-[#001489] px-8 py-16">
         <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
           <div>
-            <p className="text-white tracking-[0.35em] uppercase font-bold mb-3 text-[15px]">
+            <p className="text-white tracking-[0.12em] uppercase font-bold mb-3 text-[18px] font-sans" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
               {ct(indexPage.speakWithPartner.eyebrow, lang)}
             </p>
             <p className="text-white font-heading font-bold text-[clamp(1.1rem,2vw,1.4rem)] leading-snug max-w-[52ch]">
