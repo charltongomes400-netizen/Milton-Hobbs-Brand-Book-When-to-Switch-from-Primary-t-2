@@ -6,6 +6,7 @@ import { articles } from "@/data/articles";
 import miltonHobbsLogo from "@assets/Milton_hobbs_logo_1775554832004.png";
 import miltonHobbsWordmark from "@assets/image_1776101259071.png";
 import imgCorp from "@assets/expertisecorporate-commercial_2_1779148847133.png";
+import imgContact from "@assets/turquo-cabbit-raf8zBWukJE-unsplash_1781736189122.png";
 import imgTax from "@assets/tax_pic_1779152904015.png";
 import imgBank from "@assets/elio-elio-8YMbLoUWO_A-unsplash_1779152263990.jpg";
 import imgTech from "@assets/kevin-bessat-GJDeN-pNtSU-unsplash_1779153303898.jpg";
@@ -2039,7 +2040,7 @@ function ContactFormV15() {
  >
  {/* Photo */}
  <img
- src={imgCorp}
+ src={imgContact}
  alt=""
  aria-hidden="true"
  style={{
