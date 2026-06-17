@@ -20,7 +20,6 @@ import heroBg2 from "@assets/joakim-nadell-K67sBVqLLuw-unsplash_1775562755414.jp
 import heroBg3 from "@assets/maarten-deckers-T5nXYXCf50I-unsplash_1775562755414.jpg";
 import heroBg4 from "@assets/anders-jilden-Sc5RKXLBjGg-unsplash_1775562755415.jpg";
 
-import turquo_cabbit_raf8zBWukJE_unsplash from "@assets/turquo-cabbit-raf8zBWukJE-unsplash.png";
 
 const HERO_BG_IMAGES = [heroBg0, heroBg1, heroBg2, heroBg3, heroBg4];
 
