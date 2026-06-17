@@ -751,10 +751,10 @@ function OurFirmContent() {
                 transition={{ delay: 0.4, duration: 0.8 }}
                 className="font-heading text-white font-bold text-[clamp(2.6rem,5vw,4.5rem)] leading-[1.06] tracking-tight mb-8"
               >
-                {l === "fr" ? "La complexité" : "Complexity"}
+                {l === "fr" ? "Raison. Rigueur." : "Reason. Rigor."}
                 <br />
                 <span className="text-white whitespace-nowrap">
-                  {l === "fr" ? "exige la clarté." : "demands clarity."}
+                  {l === "fr" ? "Résolution." : "Resolution."}
                 </span>
               </motion.h1>
 
@@ -772,8 +772,8 @@ function OurFirmContent() {
                 className="text-white text-base leading-relaxed max-w-[500px] mb-10"
               >
                 {l === "fr"
-                  ? "Un cabinet d'avocats corporate boutique avec des bureaux à Dubaï et Paris. Conseil trilingue. Accès direct à l'associé. Expertise transfrontalière."
-                  : "A boutique corporate law firm with offices in Dubai and Paris. Trilingual counsel. Direct partner access. Cross-border depth across the UAE, France, and the GCC."}
+                  ? "Chez Milton Hobbs, chaque mandat est conduit par les associés eux-mêmes — avec clarté, rigueur et un engagement client sans compromis, à Dubaï comme à Paris."
+                  : "At Milton Hobbs, every mandate is led by the partners themselves — with clarity, rigour, and an uncompromising client-first commitment, across Dubai and Paris."}
               </motion.p>
 
               <motion.div
