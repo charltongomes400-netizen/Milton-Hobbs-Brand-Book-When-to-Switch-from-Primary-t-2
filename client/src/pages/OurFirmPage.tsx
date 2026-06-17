@@ -835,7 +835,7 @@ function OurFirmContent() {
                 className="bg-[#001489] p-8"
               >
                 <div className="w-8 h-px bg-white mb-5" />
-                <p className="text-white tracking-[0.35em] uppercase font-bold mb-3 text-[16px]">
+                <p className="text-white tracking-[0.12em] uppercase font-bold mb-3 text-[18px] font-sans" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                   {ct(copy.ourPhilosophy.promiseCard.eyebrow, l)}
                 </p>
                 <p className="text-white mb-4 text-[18px]">
